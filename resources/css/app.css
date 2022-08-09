@@ -1,0 +1,20 @@
+.el-form-item__label {
+    width: 100% !important;
+    text-align: left !important;
+}
+
+.el-form-item__content label {
+    color: #606266 !important;
+}
+
+.el-form-item__content {
+    margin-left: 0px !important;
+}
+
+.el-form-item {
+    /* margin-bottom: 13px; */
+}
+
+.el-select {
+    width: 100%;
+}
