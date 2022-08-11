@@ -1,8 +1,8 @@
 <template>
     <div class="text-center">
         <canvas id="barcode"></canvas>
-        <small class="text-description">Registration Reference</small>
-        <h3>{{ uuid }}</h3>
+        <small class="text-description d-block">Registration Reference</small>
+        <h3 class="d-block">{{ uuid }}</h3>
     </div>
 </template>
 

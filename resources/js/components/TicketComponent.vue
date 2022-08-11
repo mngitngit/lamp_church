@@ -3,7 +3,7 @@
         <el-col :span="!isMobile() ? 12 : 24" :offset="!isMobile() ? 6 : 0">
             <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                    <span>AWTA 2022</span>
+                    <span>LAMP WORLDWIDE AWTA 2022</span>
                 </div>
                 <div>
                     <el-row :gutter="12">
@@ -78,9 +78,6 @@ export default {
             type: Object
         },
     },
-    mounted() {
-        this.open()
-    },
     methods: {
         capitalizeString(str) { 
             return str.toLowerCase().split(' ').map(function(word) {
@@ -96,21 +93,7 @@ export default {
         },
         goToRegistration() {
             window.location.href = `/registration`;
-        },
-        open() {
-            const h = this.$createElement;
-            this.$msgbox({
-                title: 'Your registration is now complete!',
-                message: h('p', null, [
-                    h('span', this.capitalizeString(this.registration.firstname) + ', '),
-                    h('span', null, 'please screenshot or print this ticket. This will be your gate pass to the event place.')
-                ]),
-                showCancelButton: false,
-                closeOnPressEscape: false,
-                confirmButtonText: 'OK',
-                cancelButtonText: 'Cancel',
-            })
-        },
+        }
     }
 }
 </script>

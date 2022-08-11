@@ -3,24 +3,13 @@
         <!-- <el-col :span="14" :offset="5">
             <img height="203" class="mb-2" src="/images/banner.png">
         </el-col> -->
-        <el-col :span="!isMobile() ? 12 : 24" :offset="!isMobile() ? 6 : 0">
-            <el-card shadow="hover" class="mb-3 pb-0">
-                <h2>LAMP WORLDWIDE AWTA 2022</h2>
-                <p>
-                    BE BLESSED PHYSICALLY, MATERIALLY & SPIRITUALLY <br/>
-                    Event Timing: DECEMBER 27-30, 2022 <br/>
-                    Event Place: Calamba Tent <br/>
-                </p>
-
-                <p>
-                    Chosen people of God in the old testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where "offering made by fire unto the Lord" are given to celebrate God. But with Christ's death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. <br/><br/>
-
-                    Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!
-                </p>
-            </el-card>
+        <el-col :span="!isMobile ? 12 : 24" :offset="!isMobile ? 6 : 0">
+            <banner-component />
         </el-col>
-        <el-col :span="!isMobile() ? 12 : 24" :offset="!isMobile() ? 6 : 0">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
+        <el-col :span="!isMobile ? 12 : 24" :offset="!isMobile ? 6 : 0">
+            <find-data-component @next="nextStep" v-if="step === 1" />
+
+            <el-form v-else :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                 <el-card shadow="hover" class="mb-4 pt-3">
                     <el-row :gutter="20">
                         <el-col :span="24">
@@ -45,17 +34,22 @@
                         </el-col>
                         <el-col :span="12">
                             <el-form-item label="Registration type" prop="registrationType" required>
-                                <el-select v-model="ruleForm.registrationType" placeholder="please select">
+                                <el-select v-model="ruleForm.registrationType" placeholder="Choose">
                                     <el-option label="Member" value="Member"></el-option>
                                     <el-option label="Guest" value="Guest"></el-option>
                                 </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col v-if="ruleForm.registrationType === 'Member'" :span="12">
+                            <el-form-item label="AWTA Card" prop="awtaCardNumber" :required="ruleForm.registrationType === 'Member'">
+                                <el-input v-model="ruleForm.awtaCardNumber" :readonly="ruleForm.registrationType === 'Member'"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>
                     <el-row :gutter="20">
                         <el-col :span="12">
                             <el-form-item label="Local Church" prop="localChurch" required>
-                                <el-select v-model="ruleForm.localChurch" placeholder="please select">
+                                <el-select v-model="ruleForm.localChurch" placeholder="Choose">
                                     <el-option label="Binan" value="Binan"></el-option>
                                     <el-option label="Cadiz" value="Cadiz"></el-option>
                                     <el-option label="Canlubang" value="Canlubang"></el-option>
@@ -74,7 +68,7 @@
                         </el-col>
                         <el-col :span="12">
                             <el-form-item label="Country" prop="country" required>
-                                <el-select v-model="ruleForm.country" placeholder="please select">
+                                <el-select v-model="ruleForm.country" placeholder="Choose">
                                     <el-option label="Philippines" value="Philippines"></el-option>
                                 </el-select>
                             </el-form-item>
@@ -103,7 +97,9 @@
                     facebookName: '',
                     registrationType: 'Member',
                     localChurch: '',
-                    country: 'Philippines'
+                    country: 'Philippines',
+                    awtaCardNumber: '',
+                    category: 'Adult'
                 },
                 rules: {
                     email: [
@@ -126,9 +122,13 @@
                     ],
                     country: [
                         { required: true, message: 'Please select Country', trigger: 'change'}
-                    ]
+                    ],
+                    awtaCardNumber: [
+                        { required: true, message: 'Please input AWTA Card Number', trigger: 'change'}
+                    ],
                 },
-                fullscreenLoading: false,
+                step: 1,
+                isMobile: this.$func.isMobileView()
             }
         },
         mounted() {
@@ -141,19 +141,19 @@
                         const loading = this.$loading({
                             lock: true,
                             text: 'Loading',
-                            spinner: 'el-icon-loading',
                             background: 'rgba(0, 0, 0, 0.7)'
                         });
 
-                        this.fullscreenLoading = true
+                        setTimeout(async () => {
+                            await axios.post("/registration", this.ruleForm)
+                            .then(async (response) => {
+                                loading.close()
+                                
+                                this.showTicket(response.data.uuid)
 
-                        await axios.post("/registration", this.ruleForm)
-                        .then(async (response) => {
-                            loading.close()
-                            this.showTicket(response.data.uuid)
-                            this.fullscreenLoading = false
-                            this.resetForm('ruleForm')
-                        });
+                                this.$refs[formName].resetFields();
+                            });
+                        }, 1000);
                     } else {
                         return false;
                     }
@@ -163,14 +163,38 @@
                 window.location.href = `registration/${uuid}`;
             },
             resetForm(formName) {
-                this.$refs[formName].resetFields();
+                this.$confirm('This will remove your answers from all questions, and cannot be undone.', 'Clear form?', {
+                    confirmButtonText: 'Clear Form',
+                    cancelButtonText: 'Cancel'
+                }).then(() => {
+                    this.$refs[formName].resetFields();
+                    this.step = 1
+                });  
             },
-            isMobile() {
-                if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                    return true
+            async nextStep(data) {
+                if (data) {
+                    this.ruleForm.email = data.email
+                    this.ruleForm.firstName = data.firstname
+                    this.ruleForm.lastName = data.lastname
+                    this.ruleForm.facebookName = data.facebook_name
+                    this.ruleForm.registrationType = data.registration_type
+                    this.ruleForm.localChurch = data.local_church
+                    this.ruleForm.country = data.country
+                    this.ruleForm.awtaCardNumber = data.awta_card_number
+                    this.ruleForm.category = data.category
                 } else {
-                    return false
+                    this.ruleForm.email = '',
+                    this.ruleForm.firstName = '',
+                    this.ruleForm.lastName = '',
+                    this.ruleForm.facebookName = '',
+                    this.ruleForm.registrationType = 'Member',
+                    this.ruleForm.localChurch = '',
+                    this.ruleForm.country = 'Philippines'
+                    this.ruleForm.awtaCardNumber = ''
+                    this.ruleForm.category = 'Adult'
                 }
+
+                this.step = 2
             }
         }
     }

@@ -18,6 +18,7 @@ class Registration extends Model
         'registration_type',
         'local_church',
         'country',
+        'category',
         'other_details'
     ];
 

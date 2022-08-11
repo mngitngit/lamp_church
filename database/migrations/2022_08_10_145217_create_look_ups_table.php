@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegistrationsTable extends Migration
+class CreateLookUpsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateRegistrationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('registrations', function (Blueprint $table) {
-            $table->id();
-            $table->string('uuid')->unique();
+        Schema::create('look_ups', function (Blueprint $table) {
+            $table->string('awta_card_number')->primary();
             $table->string('email');
             $table->string('firstname');
             $table->string('lastname');
@@ -24,7 +23,6 @@ class CreateRegistrationsTable extends Migration
             $table->string('local_church');
             $table->string('country');
             $table->string('category');
-            $table->json('other_details');
             $table->timestamps();
         });
     }
@@ -36,6 +34,6 @@ class CreateRegistrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registrations');
+        Schema::dropIfExists('look_ups');
     }
 }

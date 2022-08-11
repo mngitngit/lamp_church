@@ -41,7 +41,8 @@ class RegistrationController extends Controller
     public function store(Request $request)
     {
         return Registration::create([
-            'uuid' => strtoupper($this->generateRandomString(6)),
+            // 'uuid' => strtoupper($this->generateRandomString(6)),
+            'uuid' => $request->awtaCardNumber ?: strtoupper($this->generateRandomString(6)),
             'email' => $request->email,
             'firstname' => $request->firstName,
             'lastname' => $request->lastName,
@@ -49,6 +50,7 @@ class RegistrationController extends Controller
             'registration_type' => $request->registrationType,
             'local_church' => $request->localChurch,
             'country' => $request->country,
+            'category' => $request->category,
             'other_details' => '{}',
         ]);
     }
