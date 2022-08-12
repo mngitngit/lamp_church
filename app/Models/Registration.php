@@ -23,16 +23,10 @@ class Registration extends Model
     ];
 
     /**
-     * The "booted" method of the model.
-     *
-     * @return void
+     * Get the payments for the delegate.
      */
-    // protected static function booted()
-    // {
-    //     // This code will be called every time a new user is inserted into the system
-    //     static::created(function ($registration) {
-    //         $registration->uuid = '1';
-    //         $registration->save();
-    //     });
-    // }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'registration_uuid', 'uuid');
+    }
 }

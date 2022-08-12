@@ -8,11 +8,16 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+// registration page
 Vue.component('registration-component', require('./components/RegistrationComponent.vue').default);
 Vue.component('barcode-component', require('./components/BarcodeComponent.vue').default);
 Vue.component('ticket-component', require('./components/TicketComponent.vue').default);
 Vue.component('banner-component', require('./components/BannerComponent.vue').default);
 Vue.component('find-data-component', require('./components/FindDataComponent.vue').default);
+
+// admin portal
+Vue.component('registration-table', require('./components/RegistrationsTableComponent.vue').default);
+Vue.component('payments-table', require('./components/PaymentsTableComponent.vue').default);
 
 import Vue from 'vue';
 import ElementUI from 'element-ui';
@@ -20,13 +25,17 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '../css/app.css';
 import { Loading } from 'element-ui';
 
-import {func} from '../js/func.js'
+import {func} from '../js/func.js';
+
+import locale from 'element-ui/lib/locale/lang/en'
 
 Vue.prototype.$func = func
 
 // Loading.service({ fullscreen: true })
 
-Vue.use(ElementUI);
+Vue.config.lang = 'en'
+
+Vue.use(ElementUI, {locale});
 
 var JsBarcode = require('jsbarcode');
 

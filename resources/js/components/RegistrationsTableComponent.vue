@@ -1,0 +1,106 @@
+<template>
+  <el-table
+    :data="registrations"
+    border
+    style="width: 100%">
+    <el-table-column
+      prop="created_at"
+      label="Date"
+      width="230">
+    </el-table-column>
+    <el-table-column
+      prop="uuid"
+      label="ID"
+      width="100">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Name"
+      width="200">
+      <template slot-scope="scope">
+          {{ scope.row.firstname }} {{ scope.row.lastname }}
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="facebook_name"
+      label="Facebook Name"
+      width="200">
+    </el-table-column>
+    <el-table-column
+      prop="registration_type"
+      label="Registration Type"
+      align="center"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      prop="category"
+      label="Category"
+      align="center"
+      width="100">
+    </el-table-column>
+    <el-table-column
+      prop="local_church"
+      label="Local Church"
+      align="center"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      prop="country"
+      label="Country"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      fixed="right"
+      prop="is_paid"
+      label="Status"
+      align="center"
+      width="125">
+        <template slot-scope="scope">
+            <el-alert
+                class="py-1 text-xs d-inline"
+                v-if="scope.row.is_paid"
+                title="Paid"
+                type="success"
+                :closable="false">
+            </el-alert>
+            <el-alert
+                class="py-1 text-xs d-inline"
+                v-else
+                title="Unsettled"
+                type="warning"
+                :closable="false">
+            </el-alert>
+        </template>
+    </el-table-column>
+    <el-table-column
+      fixed="right"
+      label="Operations"
+      align="center"
+      width="120">
+      <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row.uuid)" type="text" size="small">View Payments</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    props: {
+        registrations: {
+            required: true,
+            type: Array
+        },
+    },
+    data() {
+      return {
+        
+      }
+    },
+    methods: {
+        handleClick(id) {
+            window.location.href = `/payments/${id}`;
+        }
+    }
+  }
+</script>

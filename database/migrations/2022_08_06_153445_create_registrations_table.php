@@ -24,6 +24,7 @@ class CreateRegistrationsTable extends Migration
             $table->string('local_church');
             $table->string('country');
             $table->string('category');
+            $table->boolean('is_paid')->default(false);
             $table->json('other_details');
             $table->timestamps();
         });
