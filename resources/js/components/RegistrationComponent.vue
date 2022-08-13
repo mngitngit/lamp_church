@@ -40,9 +40,9 @@
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col v-if="ruleForm.registrationType === 'Member'" :span="12">
-                            <el-form-item label="AWTA Card" prop="awtaCardNumber" :required="ruleForm.registrationType === 'Member'">
-                                <el-input v-model="ruleForm.awtaCardNumber" :readonly="ruleForm.registrationType === 'Member'"></el-input>
+                        <el-col v-if="ruleForm.registrationType == 'Member'" :span="12">
+                            <el-form-item label="AWTA Card" prop="awtaCardNumber" :required="ruleForm.registrationType == 'Member'">
+                                <el-input v-model="ruleForm.awtaCardNumber" :readonly="ruleForm.registrationType == 'Member'"></el-input>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -124,7 +124,7 @@
                         { required: true, message: 'Please select Country', trigger: 'change'}
                     ],
                     awtaCardNumber: [
-                        { required: true, message: 'Please input AWTA Card Number', trigger: 'change'}
+                        { required: true, message: 'Please input AWTA Card Number', trigger: 'blur'},
                     ],
                 },
                 step: 1,
@@ -187,7 +187,7 @@
                     this.ruleForm.firstName = '',
                     this.ruleForm.lastName = '',
                     this.ruleForm.facebookName = '',
-                    this.ruleForm.registrationType = 'Member',
+                    this.ruleForm.registrationType = 'Guest',
                     this.ruleForm.localChurch = '',
                     this.ruleForm.country = 'Philippines'
                     this.ruleForm.awtaCardNumber = ''

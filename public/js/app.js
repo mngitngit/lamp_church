@@ -7187,7 +7187,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         awtaCardNumber: [{
           required: true,
           message: 'Please input AWTA Card Number',
-          trigger: 'change'
+          trigger: 'blur'
         }]
       },
       step: 1,
@@ -7307,7 +7307,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.ruleForm.awtaCardNumber = data.awta_card_number;
                   _this3.ruleForm.category = data.category;
                 } else {
-                  _this3.ruleForm.email = '', _this3.ruleForm.firstName = '', _this3.ruleForm.lastName = '', _this3.ruleForm.facebookName = '', _this3.ruleForm.registrationType = 'Member', _this3.ruleForm.localChurch = '', _this3.ruleForm.country = 'Philippines';
+                  _this3.ruleForm.email = '', _this3.ruleForm.firstName = '', _this3.ruleForm.lastName = '', _this3.ruleForm.facebookName = '', _this3.ruleForm.registrationType = 'Guest', _this3.ruleForm.localChurch = '', _this3.ruleForm.country = 'Philippines';
                   _this3.ruleForm.awtaCardNumber = '';
                   _this3.ruleForm.category = 'Adult';
                 }
@@ -7769,7 +7769,7 @@ var render = function render() {
       label: "Guest",
       value: "Guest"
     }
-  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType === "Member" ? _c("el-col", {
+  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("el-col", {
     attrs: {
       span: 12
     }
@@ -7777,11 +7777,11 @@ var render = function render() {
     attrs: {
       label: "AWTA Card",
       prop: "awtaCardNumber",
-      required: _vm.ruleForm.registrationType === "Member"
+      required: _vm.ruleForm.registrationType == "Member"
     }
   }, [_c("el-input", {
     attrs: {
-      readonly: _vm.ruleForm.registrationType === "Member"
+      readonly: _vm.ruleForm.registrationType == "Member"
     },
     model: {
       value: _vm.ruleForm.awtaCardNumber,
