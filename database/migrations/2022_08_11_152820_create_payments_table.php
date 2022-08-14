@@ -17,6 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->increments('id');
             $table->string('registration_uuid');
             $table->decimal('amount', 9, 3);
+            $table->date('date_paid')->nullable();
             $table->integer('user_id');
             $table->timestamps();
             $table->foreign('registration_uuid')->references('uuid')->on('registrations')->onDelete('cascade');
