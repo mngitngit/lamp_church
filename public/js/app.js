@@ -8605,11 +8605,6 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
     return {
       visible: false
     };
-  },
-  methods: {
-    callFormSubmit: function callFormSubmit() {
-      this.$refs.child.formSubmit();
-    }
   }
 });
 

@@ -51,10 +51,5 @@ const app = new Vue({
     el: '#app',
     data: function() {
         return { visible: false }
-    },
-    methods: {
-        callFormSubmit: function() {
-            this.$refs.child.formSubmit()
-        }
     }
 });
