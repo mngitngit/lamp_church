@@ -13,16 +13,6 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        
-    }
-
-    /**
      * Show the form for creating a new registration.
      *
      * @return \Illuminate\Http\Response
@@ -41,7 +31,6 @@ class RegistrationController extends Controller
     public function store(Request $request)
     {
         return Registration::create([
-            // 'uuid' => strtoupper($this->generateRandomString(6)),
             'uuid' => $request->awtaCardNumber ?: strtoupper($this->generateRandomString(6)),
             'email' => $request->email,
             'firstname' => $request->firstName,

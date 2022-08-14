@@ -191,7 +191,7 @@
                     this.ruleForm.localChurch = '',
                     this.ruleForm.country = 'Philippines'
                     this.ruleForm.awtaCardNumber = ''
-                    this.ruleForm.category = 'Adult'
+                    this.ruleForm.category = 'Free'
                 }
 
                 this.step = 2
@@ -199,7 +199,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

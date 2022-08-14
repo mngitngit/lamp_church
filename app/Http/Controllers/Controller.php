@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Registration;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -19,5 +20,20 @@ class Controller extends BaseController
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    function updatePaymentStatus($uuid) {
+        $registration = Registration::where('uuid', $uuid)->first();
+
+        $balance = floatval($registration->rate);
+        $balance-= floatval(array_sum(array_column($registration->payments->toArray(), 'amount')));
+
+        if ($balance <= 0.0) {
+            $registration->update([
+                'is_paid' => true
+            ]);
+        }
+
+        return $registration;
     }
 }

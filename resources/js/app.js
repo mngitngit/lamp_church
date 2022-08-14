@@ -18,6 +18,7 @@ Vue.component('find-data-component', require('./components/FindDataComponent.vue
 // admin portal
 Vue.component('registration-table', require('./components/RegistrationsTableComponent.vue').default);
 Vue.component('payments-table', require('./components/PaymentsTableComponent.vue').default);
+Vue.component('add-payment', require('./components/AddPaymentComponent.vue').default);
 
 import Vue from 'vue';
 import ElementUI from 'element-ui';
@@ -39,9 +40,21 @@ Vue.use(ElementUI, {locale});
 
 var JsBarcode = require('jsbarcode');
 
+Vue.prototype.$dateWithTime = function(date) {
+    var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric' };
+    var today  = new Date();
+
+    return today.toLocaleDateString("en-US", options);
+}
+
 const app = new Vue({
     el: '#app',
     data: function() {
         return { visible: false }
+    },
+    methods: {
+        callFormSubmit: function() {
+            this.$refs.child.formSubmit()
+        }
     }
 });

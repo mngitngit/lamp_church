@@ -19,8 +19,26 @@ class Registration extends Model
         'local_church',
         'country',
         'category',
+        'is_paid',
         'other_details'
     ];
+
+    /**
+     * Append custom columns to the model
+     * 
+     * @var array
+     */
+    protected $appends = ['rate'];
+
+        /**
+     * Define the type column to every Item object instance
+     * 
+     * @return string
+     */
+    public function getRateAttribute()
+    {
+        return Rates::where('category', $this->category)->first()->rate;
+    }
 
     /**
      * Get the payments for the delegate.
@@ -28,5 +46,10 @@ class Registration extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class, 'registration_uuid', 'uuid');
+    }
+
+    public function rate()
+    {
+        return $this->hasOne(Rates::class, 'category', 'category');
     }
 }

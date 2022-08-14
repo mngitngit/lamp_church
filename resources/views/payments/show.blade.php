@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <small>Date Registered</small>
-                            <span class="text-lg font-bold d-block">{{ $registration->created_at }}</span>
+                            <span class="text-lg font-bold d-block">{{ date("M d, Y h:i A", strtotime($registration->created_at)) }}</span>
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -46,15 +46,15 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <small>Payment Status</small>
-                            <span class="text-md font-bold d-block">{{ $registration->status ? 'Paid' : 'Unsettled' }}</span>
+                            <span class="text-md font-bold d-block">{{ $registration->is_paid ? 'Paid' : 'Unsettled' }}</span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <small>Rate</small>
+                            <span class="text-lg font-bold d-block">{{ number_format(floatval($registration->rate), 2, ',', ' ') }}</span>
                         </div>
                         <div class="col-md-4 mb-3">
                             <small>Balance</small>
-                            <span class="text-md font-bold d-block">{{ $balance }}</span>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <small>Recent Payment</small>
-                            <span class="text-lg font-bold d-block">{{ $registration->created_at }}</span>
+                            <span class="text-md font-bold d-block">{{ number_format(floatval($balance), 2, ',', ' ') }}</span>
                         </div>
                     </div>
                     
@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            @if (!$registration->status)
+            @if (!$registration->is_paid)
             <div class="row justify-content-end">
                 <div class="col-md-4 mb-3 text-right">
                     <a href="/payments/{{ $uuid }}/create">

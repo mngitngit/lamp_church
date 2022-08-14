@@ -12,7 +12,8 @@ class Payment extends Model
     protected $fillable = [
         'registration_uuid',
         'amount',
-        'user_id'
+        'user_id',
+        'date_paid'
     ];
 
     /**
@@ -38,5 +39,16 @@ class Payment extends Model
     public function registration()
     {
         return $this->belongsTo(Registration::class);
+    }
+
+    /**
+     * Get the payment's date.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getDatePaidAttribute($value)
+    {
+        return date_format(date_create($value), "M d, Y");
     }
 }

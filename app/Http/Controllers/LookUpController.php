@@ -8,16 +8,20 @@ use Illuminate\Http\Request;
 
 class LookUpController extends Controller
 {
+    /**
+     * Methods to bypass authentication.
+     * Methods: Show
+     */ 
     public function __construct()
     {
         $this->middleware('auth',['except'=>['show']]);
     }
 
     /**
-     * Display the specified resource.
+     * Return delagate record.
      *
-     * @param  \App\Models\LookUp  $lookUp
-     * @return \Illuminate\Http\Response
+     * @param  String $awtaNumber
+     * @return \App\Models\LookUp
      */
     public function show($awtaNumber)
     {
