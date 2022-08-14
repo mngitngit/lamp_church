@@ -19,7 +19,7 @@
         </el-card>
         <el-row>
             <el-col :span="24">
-                <el-button :loading="isLoading" type="primary" @click="getDelagateData('ruleForm')">Next</el-button>
+                <el-button :loading="isLoading" type="primary" @click="getDelegateData('ruleForm')">Next</el-button>
             </el-col>
         </el-row>
     </el-form>
@@ -67,7 +67,7 @@ export default {
         }
     },
     methods: {
-        getDelagateData(formName) {
+        getDelegateData(formName) {
             this.$refs[formName].validate(async (valid) => {
                 if (valid) {    
                     if (this.ruleForm.registrationType === 'Guest')

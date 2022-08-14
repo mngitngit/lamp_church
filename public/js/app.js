@@ -7242,7 +7242,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    getDelagateData: function getDelagateData(formName) {
+    getDelegateData: function getDelegateData(formName) {
       var _this2 = this;
 
       this.$refs[formName].validate( /*#__PURE__*/function () {
@@ -7872,7 +7872,7 @@ var render = function render() {
     },
     on: {
       click: function click($event) {
-        return _vm.getDelagateData("ruleForm");
+        return _vm.getDelegateData("ruleForm");
       }
     }
   }, [_vm._v("Next")])], 1)], 1)], 1);
@@ -8529,7 +8529,7 @@ var render = function render() {
         return _vm.goToRegistration();
       }
     }
-  }, [_vm._v("Register Another Delagate")])], 1)], 1)], 1)], 1);
+  }, [_vm._v("Register Another Delegate")])], 1)], 1)], 1)], 1);
 };
 
 var staticRenderFns = [];

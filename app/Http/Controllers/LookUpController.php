@@ -18,7 +18,7 @@ class LookUpController extends Controller
     }
 
     /**
-     * Return delagate record.
+     * Return delegate record.
      *
      * @param  String $awtaNumber
      * @return \App\Models\LookUp

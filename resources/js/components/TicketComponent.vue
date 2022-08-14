@@ -63,7 +63,7 @@
 
             <el-row class="my-4">
                 <el-col :span="24">
-                    <el-link type="primary" class="float-end" @click="goToRegistration()">Register Another Delagate</el-link>
+                    <el-link type="primary" class="float-end" @click="goToRegistration()">Register Another Delegate</el-link>
                 </el-col>
             </el-row>
         </el-col>
