@@ -6945,6 +6945,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
+    registration: {
+      required: true,
+      type: Object
+    },
     uuid: {
       required: true,
       type: String
@@ -7009,6 +7013,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }]
       },
+      data: JSON.parse(this.registration),
       ruleForm: {
         date: '',
         amount: null
@@ -7070,7 +7075,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                                             center: true,
                                             type: 'success',
                                             callback: function callback(action) {
-                                              if (response.data.is_paid) window.location.href = "/payments/".concat(_this2.uuid);else window.location.reload();
+                                              window.location.reload();
                                             }
                                           });
 
@@ -7540,7 +7545,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     handleClick: function handleClick(id) {
-      window.location.href = "/payments/".concat(id);
+      window.location.href = "/payments/".concat(id, "/create");
     }
   }
 });
@@ -7602,7 +7607,33 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("el-form", {
+  return _c("div", {
+    staticClass: "col-md-9"
+  }, [_c("div", {
+    staticClass: "card mb-3"
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-4 mb-3"
+  }, [_c("small", [_vm._v("Payment Status")]), _vm._v(" "), _c("span", {
+    staticClass: "text-md font-bold d-block"
+  }, [_vm._v(_vm._s(_vm.data.is_paid ? "Paid" : "Unsettled"))])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-4 mb-3"
+  }, [_c("small", [_vm._v("Rate")]), _vm._v(" "), _c("span", {
+    staticClass: "text-lg font-bold d-block"
+  }, [_vm._v(_vm._s(_vm.data["rate"]))])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-4 mb-3"
+  }, [_c("small", [_vm._v("Balance")]), _vm._v(" "), _c("span", {
+    staticClass: "text-md font-bold d-block"
+  }, [_vm._v(_vm._s(_vm.balance))])])]), _vm._v(" "), _c("payments-table", {
+    attrs: {
+      registration: _vm.data
+    }
+  })], 1), _vm._v(" "), !_vm.data.is_paid ? _c("div", {
+    staticClass: "card-body border-top pb-0"
+  }, [_c("el-form", {
     ref: "ruleForm",
     attrs: {
       model: _vm.ruleForm,
@@ -7666,7 +7697,16 @@ var render = function render() {
       },
       expression: "user.name"
     }
-  })], 1)], 1)])]);
+  })], 1)], 1)])])], 1) : _vm._e()]), _vm._v(" "), !_vm.data.is_paid ? _c("el-button", {
+    attrs: {
+      type: "primary"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.formSubmit();
+      }
+    }
+  }, [_vm._v("Save Payment")]) : _vm._e()], 1);
 };
 
 var staticRenderFns = [];

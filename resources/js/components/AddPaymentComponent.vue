@@ -1,28 +1,59 @@
 <template>
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <el-form-item label="Payment Date" prop="date" required>
-                    <el-date-picker v-model="ruleForm.date" type="date" placeholder="Pick a day" :picker-options="pickerOptions"></el-date-picker>
-                </el-form-item>
+<div class="col-md-9">
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <small>Payment Status</small>
+                    <span class="text-md font-bold d-block">{{ data.is_paid ? 'Paid' : 'Unsettled' }}</span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <small>Rate</small>
+                    <span class="text-lg font-bold d-block">{{ data['rate'] }}</span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <small>Balance</small>
+                    <span class="text-md font-bold d-block">{{ balance }}</span>
+                </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <el-form-item label="Amount Paid" prop="amount" required>
-                    <el-input v-model="ruleForm.amount"></el-input>
-                </el-form-item>
-            </div>
-            <div class="col-md-4 mb-3">
-                <el-form-item label="Local Coordinator" prop="user">
-                    <el-input v-model="user.name" readonly></el-input>
-                </el-form-item>
-            </div>
+
+            <payments-table :registration="data" />
         </div>
-    </el-form>
+
+        <div v-if="!data.is_paid" class="card-body border-top pb-0">
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <el-form-item label="Payment Date" prop="date" required>
+                            <el-date-picker v-model="ruleForm.date" type="date" placeholder="Pick a day" :picker-options="pickerOptions"></el-date-picker>
+                        </el-form-item>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <el-form-item label="Amount Paid" prop="amount" required>
+                            <el-input v-model="ruleForm.amount"></el-input>
+                        </el-form-item>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <el-form-item label="Local Coordinator" prop="user">
+                            <el-input v-model="user.name" readonly></el-input>
+                        </el-form-item>
+                    </div>
+                </div>
+            </el-form>
+        </div>
+    </div>
+
+    <el-button v-if="!data.is_paid" type="primary" @click="formSubmit()">Save Payment</el-button>
+</div>
 </template>
 
 <script>
 export default {
     props: {
+        registration: {
+            required: true,
+            type: Object
+        },
         uuid: {
             required: true,
             type: String
@@ -84,6 +115,7 @@ export default {
                     }
                 }]
             },
+            data: JSON.parse(this.registration),
             ruleForm: {
                 date: '',
                 amount: null
@@ -125,10 +157,7 @@ export default {
                                 center: true,
                                 type: 'success',
                                 callback: action => {
-                                    if (response.data.is_paid)
-                                        window.location.href = `/payments/${this.uuid}`;
-                                    else
-                                        window.location.reload();
+                                    window.location.reload();
                                 }
                             });
                         });

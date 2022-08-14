@@ -6,8 +6,7 @@
         <div class="col-md-9">
             <el-breadcrumb class="mb-3" separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item><a href="/home">All Registrations</a></el-breadcrumb-item>
-                <el-breadcrumb-item><a href="/payments/{{ $uuid }}">Payments</a></el-breadcrumb-item>
-                <el-breadcrumb-item>Add</el-breadcrumb-item>
+                <el-breadcrumb-item>Payments</el-breadcrumb-item>
             </el-breadcrumb>
 
             <div class="card mb-3">
@@ -43,37 +42,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body border-top">
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <small>Payment Status</small>
-                            <span class="text-md font-bold d-block">{{ $registration->is_paid ? 'Paid' : 'Unsettled' }}</span>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <small>Rate</small>
-                            <span class="text-lg font-bold d-block">{{ number_format(floatval($registration->rate), 2, ',', ' ') }}</span>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <small>Balance</small>
-                            <span class="text-md font-bold d-block">{{ number_format(floatval($balance), 2, ',', ' ') }}</span>
-                        </div>
-                    </div>
-
-                    <payments-table :registration="{{ $registration }}" />
-                </div>
-                @if (!$registration->is_paid)
-                <div class="card-body border-top pb-0">
-                    <div class="row">
-                        <add-payment ref="child" uuid="{{ $uuid}}" :user="{{ $user }}" :balance="{{ floatval($balance) }}"/>
-                    </div>
-                </div>
-                @endif
             </div>
-
-            @if (!$registration->is_paid)
-            <el-button type="primary" @click="callFormSubmit">Save Payment</el-button>
-            @endif
         </div>
+
+        <add-payment ref="child" registration="{{ $registration }}" uuid="{{ $uuid}}" :user="{{ $user }}" :balance="{{ floatval($balance) }}"/>
     </div>
 </div>
 @endsection

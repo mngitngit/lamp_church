@@ -99,7 +99,7 @@
     },
     methods: {
         handleClick(id) {
-            window.location.href = `/payments/${id}`;
+            window.location.href = `/payments/${id}/create`;
         }
     }
   }
