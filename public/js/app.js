@@ -8291,7 +8291,7 @@ var render = function render() {
     attrs: {
       prop: "uuid",
       label: "ID",
-      width: "100"
+      width: "120"
     }
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {

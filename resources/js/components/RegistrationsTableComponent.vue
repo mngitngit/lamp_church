@@ -11,7 +11,7 @@
     <el-table-column
       prop="uuid"
       label="ID"
-      width="100">
+      width="120">
     </el-table-column>
     <el-table-column
       prop="name"
