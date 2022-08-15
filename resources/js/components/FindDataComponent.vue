@@ -1,27 +1,27 @@
 <template>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
         <el-card shadow="hover" class="mb-4 pt-3">
-            <el-row :gutter="20">
-                <el-col :span="isMobile ? 24 : 12">
+            <div class="row">
+                <div class="col-md-6">
                     <el-form-item label="Are you a guest or a member?" prop="registrationType" required>
                         <el-select v-model="ruleForm.registrationType" placeholder="Choose">
                             <el-option label="Member" value="Member"></el-option>
                             <el-option label="Guest" value="Guest"></el-option>
                         </el-select>
                     </el-form-item>
-                </el-col>
-                <el-col v-if="ruleForm.registrationType === 'Member'" :span="isMobile ? 24 : 12">
+                </div>
+                <div v-if="ruleForm.registrationType === 'Member'" class="col-md-6">
                     <el-form-item label="Please enter your AWTA Card Number" prop="awtaCardNumber" :required="ruleForm.registrationType === 'Member'">
                         <el-input v-model="ruleForm.awtaCardNumber"></el-input>
                     </el-form-item>
-                </el-col>
-            </el-row>
+                </div>
+            </div>
         </el-card>
-        <el-row>
-            <el-col :span="24">
+        <div class="row">
+            <div class="col-md-12">
                 <el-button :loading="isLoading" type="primary" @click="getDelegateData('ruleForm')">Next</el-button>
-            </el-col>
-        </el-row>
+            </div>
+        </div>
     </el-form>
 </template>
 
@@ -62,7 +62,6 @@ export default {
                     { validator: checkAwtaCardNumber, trigger: 'blur' }
                 ],
             },
-            isMobile: this.$func.isMobileView(),
             isLoading: false
         }
     },

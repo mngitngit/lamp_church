@@ -7237,7 +7237,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           trigger: 'blur'
         }]
       },
-      isMobile: this.$func.isMobileView(),
       isLoading: false
     };
   },
@@ -7385,8 +7384,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           trigger: 'blur'
         }]
       },
-      step: 1,
-      isMobile: this.$func.isMobileView()
+      step: 1
     };
   },
   mounted: function mounted() {},
@@ -7575,13 +7573,6 @@ __webpack_require__.r(__webpack_exports__);
       return str.toLowerCase().split(' ').map(function (word) {
         return word.replace(word[0], word[0].toUpperCase());
       }).join(' ');
-    },
-    isMobile: function isMobile() {
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        return true;
-      } else {
-        return false;
-      }
     },
     goToRegistration: function goToRegistration() {
       window.location.href = "/registration";
@@ -7808,14 +7799,10 @@ var render = function render() {
     attrs: {
       shadow: "hover"
     }
-  }, [_c("el-row", {
-    attrs: {
-      gutter: 20
-    }
-  }, [_c("el-col", {
-    attrs: {
-      span: _vm.isMobile ? 24 : 12
-    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "Are you a guest or a member?",
@@ -7843,10 +7830,8 @@ var render = function render() {
       label: "Guest",
       value: "Guest"
     }
-  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType === "Member" ? _c("el-col", {
-    attrs: {
-      span: _vm.isMobile ? 24 : 12
-    }
+  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType === "Member" ? _c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "Please enter your AWTA Card Number",
@@ -7861,10 +7846,10 @@ var render = function render() {
       },
       expression: "ruleForm.awtaCardNumber"
     }
-  })], 1)], 1) : _vm._e()], 1)], 1), _vm._v(" "), _c("el-row", [_c("el-col", {
-    attrs: {
-      span: 24
-    }
+  })], 1)], 1) : _vm._e()])]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
       loading: _vm.isLoading,
@@ -7875,7 +7860,7 @@ var render = function render() {
         return _vm.getDelegateData("ruleForm");
       }
     }
-  }, [_vm._v("Next")])], 1)], 1)], 1);
+  }, [_vm._v("Next")])], 1)])], 1);
 };
 
 var staticRenderFns = [];
@@ -7948,20 +7933,14 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("el-row", {
-    attrs: {
-      gutter: 12
-    }
-  }, [_c("el-col", {
-    attrs: {
-      span: !_vm.isMobile ? 12 : 24,
-      offset: !_vm.isMobile ? 6 : 0
-    }
-  }, [_c("banner-component")], 1), _vm._v(" "), _c("el-col", {
-    attrs: {
-      span: !_vm.isMobile ? 12 : 24,
-      offset: !_vm.isMobile ? 6 : 0
-    }
+  return _c("div", [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+    staticClass: "col-md-6"
+  }, [_c("banner-component")], 1)]), _vm._v(" "), _c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+    staticClass: "col-md-6"
   }, [_vm.step === 1 ? _c("find-data-component", {
     on: {
       next: _vm.nextStep
@@ -7978,14 +7957,10 @@ var render = function render() {
     attrs: {
       shadow: "hover"
     }
-  }, [_c("el-row", {
-    attrs: {
-      gutter: 20
-    }
-  }, [_c("el-col", {
-    attrs: {
-      span: 24
-    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-12"
   }, [_c("el-form-item", {
     attrs: {
       label: "Email Address",
@@ -8000,10 +7975,8 @@ var render = function render() {
       },
       expression: "ruleForm.email"
     }
-  })], 1)], 1), _vm._v(" "), _c("el-col", {
-    attrs: {
-      span: 12
-    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "First Name",
@@ -8018,10 +7991,8 @@ var render = function render() {
       },
       expression: "ruleForm.firstName"
     }
-  })], 1)], 1), _vm._v(" "), _c("el-col", {
-    attrs: {
-      span: 12
-    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "Last Name",
@@ -8036,10 +8007,8 @@ var render = function render() {
       },
       expression: "ruleForm.lastName"
     }
-  })], 1)], 1), _vm._v(" "), _c("el-col", {
-    attrs: {
-      span: 24
-    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-12"
   }, [_c("el-form-item", {
     attrs: {
       label: "Facebook Name",
@@ -8057,10 +8026,8 @@ var render = function render() {
       },
       expression: "ruleForm.facebookName"
     }
-  })], 1)], 1), _vm._v(" "), _c("el-col", {
-    attrs: {
-      span: 12
-    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "Registration type",
@@ -8088,10 +8055,8 @@ var render = function render() {
       label: "Guest",
       value: "Guest"
     }
-  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("el-col", {
-    attrs: {
-      span: 12
-    }
+  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "AWTA Card",
@@ -8109,14 +8074,10 @@ var render = function render() {
       },
       expression: "ruleForm.awtaCardNumber"
     }
-  })], 1)], 1) : _vm._e()], 1), _vm._v(" "), _c("el-row", {
-    attrs: {
-      gutter: 20
-    }
-  }, [_c("el-col", {
-    attrs: {
-      span: 12
-    }
+  })], 1)], 1) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "Local Church",
@@ -8199,10 +8160,8 @@ var render = function render() {
       label: "Villamar/Maao",
       value: "Villamar/Maao"
     }
-  })], 1)], 1)], 1), _vm._v(" "), _c("el-col", {
-    attrs: {
-      span: 12
-    }
+  })], 1)], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "Country",
@@ -8225,10 +8184,8 @@ var render = function render() {
       label: "Philippines",
       value: "Philippines"
     }
-  })], 1)], 1)], 1)], 1)], 1), _vm._v(" "), _c("el-row", [_c("el-col", {
-    attrs: {
-      span: 24
-    }
+  })], 1)], 1)], 1)])]), _vm._v(" "), _c("el-row", [_c("div", {
+    staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
       type: "primary"
@@ -8248,10 +8205,25 @@ var render = function render() {
         return _vm.resetForm("ruleForm");
       }
     }
-  }, [_vm._v("Clear Form")])], 1)], 1)], 1)], 1)], 1);
+  }, [_vm._v("Clear Form")])], 1)])], 1)], 1)])]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+    staticClass: "col-md-6"
+  }, [_c("img", {
+    staticClass: "mb-2",
+    attrs: {
+      width: "100%",
+      src: "/images/banner.png"
+    }
+  })])]);
+}];
 render._withStripped = true;
 
 
@@ -8414,15 +8386,10 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("el-row", {
-    attrs: {
-      gutter: 12
-    }
-  }, [_c("el-col", {
-    attrs: {
-      span: !_vm.isMobile() ? 12 : 24,
-      offset: !_vm.isMobile() ? 6 : 0
-    }
+  return _c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-card", {
     staticClass: "box-card"
   }, [_c("div", {
@@ -8431,89 +8398,59 @@ var render = function render() {
       slot: "header"
     },
     slot: "header"
-  }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA 2022")])]), _vm._v(" "), _c("div", [_c("el-row", {
-    attrs: {
-      gutter: 12
-    }
-  }, [_c("el-col", {
-    attrs: {
-      span: _vm.isMobile() ? 24 : 10
-    }
+  }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA 2022")])]), _vm._v(" "), _c("div", [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6"
   }, [_c("barcode-component", {
     attrs: {
       uuid: _vm.registration.uuid
     }
-  })], 1), _vm._v(" "), _c("el-col", {
-    attrs: {
-      span: _vm.isMobile() ? 24 : 14
-    }
-  }, [_c("el-row", {
-    staticClass: "mb-3"
-  }, [_c("el-col", {
-    attrs: {
-      span: 24
-    }
+  })], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("div", {
+    staticClass: "row mb-3"
+  }, [_c("div", {
+    staticClass: "col-md-12"
   }, [_c("small", [_vm._v("Name")]), _vm._v(" "), _c("span", {
     staticClass: "text-lg font-bold d-block text-uppercase"
-  }, [_vm._v(_vm._s(_vm.registration.firstname) + " " + _vm._s(_vm.registration.lastname))])])], 1), _vm._v(" "), _c("el-row", {
-    staticClass: "mb-3"
-  }, [_c("el-col", {
-    attrs: {
-      span: 24
-    }
+  }, [_vm._v(_vm._s(_vm.registration.firstname) + " " + _vm._s(_vm.registration.lastname))])])]), _vm._v(" "), _c("div", {
+    staticClass: "row mb-3"
+  }, [_c("div", {
+    staticClass: "col-md-12"
   }, [_c("small", [_vm._v("Facebook Name")]), _vm._v(" "), _c("span", {
     staticClass: "text-lg font-bold d-block text-uppercase"
-  }, [_vm._v(_vm._s(_vm.registration.facebook_name))])])], 1), _vm._v(" "), _c("el-row", [_c("el-col", {
-    staticClass: "mb-3",
-    attrs: {
-      span: 24
-    }
+  }, [_vm._v(_vm._s(_vm.registration.facebook_name))])])]), _vm._v(" "), _c("div", {
+    staticClass: "row mb-3"
+  }, [_c("div", {
+    staticClass: "col-md-12"
   }, [_c("small", [_vm._v("Email Address")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
-  }, [_vm._v(_vm._s(_vm.registration.email))])])], 1)], 1)], 1), _vm._v(" "), _c("el-row", {
-    attrs: {
-      gutter: 12
-    }
-  }, [_c("el-col", {
-    staticClass: "mb-3",
-    attrs: {
-      span: _vm.isMobile() ? 24 : 6
-    }
+  }, [_vm._v(_vm._s(_vm.registration.email))])])])])]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-4 mb-3"
   }, [_c("small", [_vm._v("Registration Type")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
-  }, [_vm._v(_vm._s(_vm.registration.registration_type))])]), _vm._v(" "), _c("el-col", {
-    staticClass: "mb-3",
-    attrs: {
-      span: _vm.isMobile() ? 24 : 4
-    }
+  }, [_vm._v(_vm._s(_vm.registration.registration_type))])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-2 mb-3"
   }, [_c("small", [_vm._v("Seat")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
-  }, [_c("u", [_vm._v("None")])])]), _vm._v(" "), _c("el-col", {
-    staticClass: "mb-3",
-    attrs: {
-      span: _vm.isMobile() ? 24 : 7
-    }
+  }, [_c("u", [_vm._v("None")])])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-3 mb-3"
   }, [_c("small", [_vm._v("Local Church")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
-  }, [_vm._v(_vm._s(_vm.registration.local_church))])]), _vm._v(" "), _c("el-col", {
-    staticClass: "mb-3",
-    attrs: {
-      span: _vm.isMobile() ? 24 : 7
-    }
+  }, [_vm._v(_vm._s(_vm.registration.local_church))])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-3 mb-3"
   }, [_c("small", [_vm._v("Country")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
-  }, [_vm._v(_vm._s(_vm.registration.country))])])], 1), _vm._v(" "), _c("el-row", {
-    attrs: {
-      gutter: 12
-    }
-  }, [_c("el-col", {
-    staticClass: "mb-3",
-    attrs: {
-      span: 24
-    }
+  }, [_vm._v(_vm._s(_vm.registration.country))])])]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-12"
   }, [_c("small", [_vm._v("Note")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
-  }, [_vm._v("**Please screenshot this ticket. This will be your gate pass to the event place.")])])], 1)], 1)]), _vm._v(" "), _c("el-row", {
+  }, [_vm._v("**Please screenshot this ticket. This will be your gate pass to the event place.")])])])])]), _vm._v(" "), _c("el-row", {
     staticClass: "my-4"
   }, [_c("el-col", {
     attrs: {
@@ -8529,7 +8466,7 @@ var render = function render() {
         return _vm.goToRegistration();
       }
     }
-  }, [_vm._v("Register Another Delegate")])], 1)], 1)], 1)], 1);
+  }, [_vm._v("Register Another Delegate")])], 1)], 1)], 1)]);
 };
 
 var staticRenderFns = [];
@@ -8657,14 +8594,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "func": () => (/* binding */ func)
 /* harmony export */ });
-var func = {
-  isMobileView: function isMobileView(data) {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+var func = {// isMobileView: (data) => {
+  //    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  //       return true
+  //    } else {
+  //       return false
+  //    }
+  //  }
 };
 
 /***/ }),
