@@ -7974,7 +7974,7 @@ var render = function render() {
       "label-width": "160px"
     }
   }, [_c("el-card", {
-    staticClass: "mb-4 pt-3",
+    staticClass: "mb-4",
     attrs: {
       shadow: "hover"
     }

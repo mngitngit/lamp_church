@@ -10,7 +10,10 @@
             <find-data-component @next="nextStep" v-if="step === 1" />
 
             <el-form v-else :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-                <el-card shadow="hover" class="mb-4 pt-3">
+                <el-card shadow="hover" class="mb-4">
+                    <!-- <div slot="header" class="clearfix">
+                        <span>Please review your details before clicking "Submit".</span>
+                    </div> -->
                     <el-row :gutter="20">
                         <el-col :span="24">
                             <el-form-item label="Email Address" prop="email" required>
