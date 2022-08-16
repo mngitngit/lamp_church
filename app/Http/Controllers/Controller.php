@@ -26,8 +26,11 @@ class Controller extends BaseController
     function generateGuestId() {
         $lastGuestId = Registration::select('uuid')->where('registration_type', RegistrationType::Guest)->orderBy('id','desc')->first();
         
-        $number = last(explode("GUEST",$lastGuestId['uuid'])); //explode the string to get the number part, last is a laravel helper
-        
+        if ($lastGuestId) {
+            $number = last(explode("GUEST",$lastGuestId['uuid'])); //explode the string to get the number part, last is a laravel helper
+        } else {
+            $number = 0;
+        }
         $new = str_pad(intval($number) + 1, 4, 0, STR_PAD_LEFT); //increment the number by 1 and pad with 0 in left.
 
         $prefix = "GUEST";
