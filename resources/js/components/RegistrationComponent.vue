@@ -2,7 +2,7 @@
     <div>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <img width="100%" class="mb-2" src="/images/banner.png">
+                <img width="100%" class="mb-3" src="/images/banner.jpg">
             </div>
         </div>
         <div class="row justify-content-center">
@@ -50,8 +50,6 @@
                                     <el-input v-model="ruleForm.awtaCardNumber" :readonly="ruleForm.registrationType == 'Member'"></el-input>
                                 </el-form-item>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <el-form-item label="Local Church" prop="localChurch" required>
                                     <el-select v-model="ruleForm.localChurch" placeholder="Choose">
@@ -78,11 +76,19 @@
                                     </el-select>
                                 </el-form-item>
                             </div>
+                            <div class="col-md-6">
+                                <el-form-item label="How will you attend the AWTA?" prop="attendingOption" required>
+                                    <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
+                                        <el-option label="Physical" value="Will attend physically."></el-option>
+                                        <el-option label="Online" value="Will attend virtually."></el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </div>
                         </div>
                     </el-card>
                     <el-row>
                         <div class="col-md-12">
-                            <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+                            <el-button type="warning" @click="submitForm('ruleForm')">Submit</el-button>
                             <el-link type="primary" class="float-end" @click="resetForm('ruleForm')">Clear Form</el-link>
                         </div>
                     </el-row>
@@ -105,7 +111,8 @@
                     localChurch: '',
                     country: 'Philippines',
                     awtaCardNumber: '',
-                    category: 'Adult'
+                    category: 'Adult',
+                    attendingOption: ''
                 },
                 rules: {
                     email: [
@@ -132,6 +139,9 @@
                     awtaCardNumber: [
                         { required: true, message: 'Please input AWTA Card Number', trigger: 'blur'},
                     ],
+                    attendingOption: [
+                        { required: true, message: 'Please select your attending option', trigger: 'blur'},
+                    ]
                 },
                 step: 1
             }

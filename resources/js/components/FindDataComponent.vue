@@ -1,6 +1,6 @@
 <template>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-        <el-card shadow="hover" class="mb-4 pt-3">
+        <el-card shadow="hover" class="mb-3 pt-3">
             <div class="row">
                 <div class="col-md-6">
                     <el-form-item label="Are you a guest or a member?" prop="registrationType" required>
@@ -19,7 +19,7 @@
         </el-card>
         <div class="row">
             <div class="col-md-12">
-                <el-button :loading="isLoading" type="primary" @click="getDelegateData('ruleForm')">Next</el-button>
+                <el-button :loading="isLoading" type="warning" @click="getDelegateData('ruleForm')">Next</el-button>
             </div>
         </div>
     </el-form>

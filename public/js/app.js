@@ -7340,7 +7340,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         localChurch: '',
         country: 'Philippines',
         awtaCardNumber: '',
-        category: 'Adult'
+        category: 'Adult',
+        attendingOption: ''
       },
       rules: {
         email: [{
@@ -7381,6 +7382,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         awtaCardNumber: [{
           required: true,
           message: 'Please input AWTA Card Number',
+          trigger: 'blur'
+        }],
+        attendingOption: [{
+          required: true,
+          message: 'Please select your attending option',
           trigger: 'blur'
         }]
       },
@@ -7724,6 +7730,9 @@ var render = function render() {
 
   return _c("el-card", {
     staticClass: "mb-3 pb-0",
+    staticStyle: {
+      "border-top": "10px solid #e9c843"
+    },
     attrs: {
       shadow: "hover"
     }
@@ -7795,7 +7804,7 @@ var render = function render() {
       "label-width": "160px"
     }
   }, [_c("el-card", {
-    staticClass: "mb-4 pt-3",
+    staticClass: "mb-3 pt-3",
     attrs: {
       shadow: "hover"
     }
@@ -7853,7 +7862,7 @@ var render = function render() {
   }, [_c("el-button", {
     attrs: {
       loading: _vm.isLoading,
-      type: "primary"
+      type: "warning"
     },
     on: {
       click: function click($event) {
@@ -8074,9 +8083,7 @@ var render = function render() {
       },
       expression: "ruleForm.awtaCardNumber"
     }
-  })], 1)], 1) : _vm._e()]), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }, [_c("div", {
+  })], 1)], 1) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
@@ -8184,11 +8191,40 @@ var render = function render() {
       label: "Philippines",
       value: "Philippines"
     }
+  })], 1)], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "How will you attend the AWTA?",
+      prop: "attendingOption",
+      required: ""
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.attendingOption,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "attendingOption", $$v);
+      },
+      expression: "ruleForm.attendingOption"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      label: "Physical",
+      value: "Will attend physically."
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Online",
+      value: "Will attend virtually."
+    }
   })], 1)], 1)], 1)])]), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
-      type: "primary"
+      type: "warning"
     },
     on: {
       click: function click($event) {
@@ -8217,10 +8253,10 @@ var staticRenderFns = [function () {
   }, [_c("div", {
     staticClass: "col-md-6"
   }, [_c("img", {
-    staticClass: "mb-2",
+    staticClass: "mb-3",
     attrs: {
       width: "100%",
-      src: "/images/banner.png"
+      src: "/images/banner.jpg"
     }
   })])]);
 }];
