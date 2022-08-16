@@ -12,7 +12,7 @@
                 </div>
                 <div v-if="ruleForm.registrationType === 'Member'" class="col-md-6">
                     <el-form-item label="Please enter your AWTA Card Number" prop="awtaCardNumber" :required="ruleForm.registrationType === 'Member'">
-                        <el-input v-model="ruleForm.awtaCardNumber"></el-input>
+                        <el-input v-model="ruleForm.awtaCardNumber" :clearable="true"></el-input>
                     </el-form-item>
                 </div>
             </div>
@@ -59,7 +59,7 @@ export default {
                     { required: true, message: 'Please select Registration Type', trigger: 'change'}
                 ],
                 awtaCardNumber: [
-                    { validator: checkAwtaCardNumber, trigger: 'blur' }
+                    { validator: checkAwtaCardNumber, trigger: ['blur', 'change'] }
                 ],
             },
             isLoading: false

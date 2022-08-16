@@ -40,6 +40,7 @@ class RegistrationController extends Controller
             'local_church' => $request->localChurch,
             'country' => $request->country,
             'category' => $request->category,
+            'attending_option' => $request->attendingOption,
             'other_details' => '{}',
         ]);
     }

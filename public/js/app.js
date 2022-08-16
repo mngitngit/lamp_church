@@ -7234,7 +7234,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }],
         awtaCardNumber: [{
           validator: checkAwtaCardNumber,
-          trigger: 'blur'
+          trigger: ['blur', 'change']
         }]
       },
       isLoading: false
@@ -7347,22 +7347,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         email: [{
           required: true,
           message: 'Please input Email Address',
-          trigger: 'blur'
+          trigger: ['blur', 'change']
         }],
         firstName: [{
           required: true,
           message: 'Please input First Name',
-          trigger: 'blur'
+          trigger: ['blur', 'change']
         }],
         lastName: [{
           required: true,
           message: 'Please input Last Name',
-          trigger: 'blur'
+          trigger: ['blur', 'change']
         }],
         facebookName: [{
           required: true,
           message: 'Please input Facebook Name',
-          trigger: 'blur'
+          trigger: ['blur', 'change']
         }],
         registrationType: [{
           required: true,
@@ -7382,7 +7382,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         awtaCardNumber: [{
           required: true,
           message: 'Please input AWTA Card Number',
-          trigger: 'blur'
+          trigger: ['blur', 'change']
         }],
         attendingOption: [{
           required: true,
@@ -7505,10 +7505,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.ruleForm.country = data.country;
                   _this3.ruleForm.awtaCardNumber = data.awta_card_number;
                   _this3.ruleForm.category = data.category;
+                  _this3.ruleForm.attendingOption = '';
                 } else {
                   _this3.ruleForm.email = '', _this3.ruleForm.firstName = '', _this3.ruleForm.lastName = '', _this3.ruleForm.facebookName = '', _this3.ruleForm.registrationType = 'Guest', _this3.ruleForm.localChurch = '', _this3.ruleForm.country = 'Philippines';
                   _this3.ruleForm.awtaCardNumber = '';
                   _this3.ruleForm.category = 'Free';
+                  _this3.ruleForm.attendingOption = '';
                 }
 
                 _this3.step = 2;
@@ -7614,17 +7616,35 @@ var render = function render() {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-4 mb-3"
-  }, [_c("small", [_vm._v("Payment Status")]), _vm._v(" "), _c("span", {
-    staticClass: "text-md font-bold d-block"
-  }, [_vm._v(_vm._s(_vm.data.is_paid ? "Paid" : "Unsettled"))])]), _vm._v(" "), _c("div", {
+  }, [_c("small", [_vm._v("Payment Status")]), _vm._v(" "), _vm.data.is_paid ? _c("el-alert", {
+    staticClass: "py-1 text-xs d-inline d-block",
+    staticStyle: {
+      width: "80px !important"
+    },
+    attrs: {
+      title: "Paid",
+      type: "success",
+      closable: false
+    }
+  }) : _c("el-alert", {
+    staticClass: "py-1 text-xs d-inline d-block",
+    staticStyle: {
+      width: "110px !important"
+    },
+    attrs: {
+      title: "Unsettled",
+      type: "warning",
+      closable: false
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-4 mb-3"
   }, [_c("small", [_vm._v("Rate")]), _vm._v(" "), _c("span", {
     staticClass: "text-lg font-bold d-block"
-  }, [_vm._v(_vm._s(_vm.data["rate"]))])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.$func.formatAmount(_vm.data["rate"])))])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-4 mb-3"
   }, [_c("small", [_vm._v("Balance")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
-  }, [_vm._v(_vm._s(_vm.balance))])])]), _vm._v(" "), _c("payments-table", {
+  }, [_vm._v(_vm._s(_vm.$func.formatAmount(_vm.balance)))])])]), _vm._v(" "), _c("payments-table", {
     attrs: {
       registration: _vm.data
     }
@@ -7848,6 +7868,9 @@ var render = function render() {
       required: _vm.ruleForm.registrationType === "Member"
     }
   }, [_c("el-input", {
+    attrs: {
+      clearable: true
+    },
     model: {
       value: _vm.ruleForm.awtaCardNumber,
       callback: function callback($$v) {
@@ -7911,7 +7934,13 @@ var render = function render() {
     attrs: {
       prop: "amount",
       label: "Amount Paid"
-    }
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n          " + _vm._s(_vm.$func.formatAmount(scope.row.amount)) + "\n      ")];
+      }
+    }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "user_name",
@@ -8074,7 +8103,8 @@ var render = function render() {
     }
   }, [_c("el-input", {
     attrs: {
-      readonly: _vm.ruleForm.registrationType == "Member"
+      readonly: _vm.ruleForm.registrationType == "Member",
+      clearable: true
     },
     model: {
       value: _vm.ruleForm.awtaCardNumber,
@@ -8294,7 +8324,13 @@ var render = function render() {
       prop: "created_at",
       label: "Date",
       width: "230"
-    }
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n        " + _vm._s(_vm.$func.formatToDateTime(scope.row.created_at)) + "\n    ")];
+      }
+    }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "uuid",
@@ -8346,6 +8382,26 @@ var render = function render() {
       label: "Country",
       width: "150"
     }
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "attending_option",
+      label: "Attending Option",
+      align: "center",
+      width: "130"
+    }
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "rate",
+      label: "Rate",
+      align: "center",
+      width: "100"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n        " + _vm._s(_vm.$func.formatAmount(scope.row.rate)) + "\n    ")];
+      }
+    }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       fixed: "right",
@@ -8437,13 +8493,13 @@ var render = function render() {
   }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA 2022")])]), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-6"
+    staticClass: "col-md-5"
   }, [_c("barcode-component", {
     attrs: {
       uuid: _vm.registration.uuid
     }
   })], 1), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6"
+    staticClass: "col-md-7"
   }, [_c("div", {
     staticClass: "row mb-3"
   }, [_c("div", {
@@ -8463,17 +8519,21 @@ var render = function render() {
   }, [_c("small", [_vm._v("Email Address")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
   }, [_vm._v(_vm._s(_vm.registration.email))])])])])]), _vm._v(" "), _c("div", {
-    staticClass: "row"
+    staticClass: "row mb-3"
   }, [_c("div", {
-    staticClass: "col-md-4 mb-3"
+    staticClass: "col-md-3 mb-3"
   }, [_c("small", [_vm._v("Registration Type")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
   }, [_vm._v(_vm._s(_vm.registration.registration_type))])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-2 mb-3"
+  }, [_c("small", [_vm._v("Rate")]), _vm._v(" "), _c("small", [_vm._v("(" + _vm._s(_vm.registration.attending_option) + ")")]), _vm._v(" "), _c("span", {
+    staticClass: "text-md font-bold d-block"
+  }, [_vm._v(_vm._s(_vm.$func.formatAmount(_vm.registration.rate)))])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-2 mb-3"
   }, [_c("small", [_vm._v("Seat")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
   }, [_c("u", [_vm._v("None")])])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3 mb-3"
+    staticClass: "col-md-2 mb-3"
   }, [_c("small", [_vm._v("Local Church")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
   }, [_vm._v(_vm._s(_vm.registration.local_church))])]), _vm._v(" "), _c("div", {
@@ -8484,9 +8544,7 @@ var render = function render() {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
-  }, [_c("small", [_vm._v("Note")]), _vm._v(" "), _c("span", {
-    staticClass: "text-md font-bold d-block"
-  }, [_vm._v("**Please screenshot this ticket. This will be your gate pass to the event place.")])])])])]), _vm._v(" "), _c("el-row", {
+  }, [_c("small", [_vm._v("*** Please screenshot this ticket. This will be your gate pass to the event place.")])])])])]), _vm._v(" "), _c("el-row", {
     staticClass: "my-4"
   }, [_c("el-col", {
     attrs: {
@@ -8560,18 +8618,6 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use((element_ui__WEBPACK_IMPORTED_MO
 
 var JsBarcode = __webpack_require__(/*! jsbarcode */ "./node_modules/jsbarcode/bin/JsBarcode.js");
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.$dateWithTime = function (date) {
-  var options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric'
-  };
-  var today = new Date();
-  return today.toLocaleDateString("en-US", options);
-};
-
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#app',
   data: function data() {
@@ -8630,13 +8676,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "func": () => (/* binding */ func)
 /* harmony export */ });
-var func = {// isMobileView: (data) => {
+var func = {
+  // isMobileView: (data) => {
   //    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   //       return true
   //    } else {
   //       return false
   //    }
   //  }
+  formatAmount: function formatAmount(amount) {
+    if (typeof amount === 'string') amount = parseFloat(amount);
+    return amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  },
+  formatToDateTime: function formatToDateTime(date) {
+    var options = {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric'
+    };
+    var today = new Date(date);
+    return today.toLocaleDateString("en-US", options);
+  }
 };
 
 /***/ }),

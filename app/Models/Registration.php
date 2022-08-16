@@ -20,7 +20,8 @@ class Registration extends Model
         'country',
         'category',
         'is_paid',
-        'other_details'
+        'other_details',
+        'attending_option'
     ];
 
     /**
@@ -37,7 +38,10 @@ class Registration extends Model
      */
     public function getRateAttribute()
     {
-        return Rates::where('category', $this->category)->first()->rate;
+        return Rates::where('category', $this->category)
+                ->where('attending_option', $this->attending_option)
+                ->first()
+                ->rate;
     }
 
     /**

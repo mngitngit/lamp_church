@@ -10,6 +10,9 @@
             <el-table-column
             prop="amount"
             label="Amount Paid">
+            <template slot-scope="scope">
+                {{ $func.formatAmount(scope.row.amount) }}
+            </template>
             </el-table-column>
             <el-table-column
             prop="user_name"

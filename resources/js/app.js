@@ -38,14 +38,7 @@ Vue.config.lang = 'en'
 
 Vue.use(ElementUI, {locale});
 
-var JsBarcode = require('jsbarcode');
-
-Vue.prototype.$dateWithTime = function(date) {
-    var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric' };
-    var today  = new Date();
-
-    return today.toLocaleDateString("en-US", options);
-}
+var JsBarcode = require('jsbarcode')
 
 const app = new Vue({
     el: '#app',

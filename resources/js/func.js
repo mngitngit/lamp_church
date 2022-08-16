@@ -6,4 +6,15 @@ export const func = {
    //       return false
    //    }
    //  }
+   formatAmount(amount) {
+      if (typeof amount === 'string')
+         amount = parseFloat(amount)
+      return amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   },
+   formatToDateTime(date) {
+      var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric' };
+      var today  = new Date(date);
+
+      return today.toLocaleDateString("en-US", options);
+   },
 }

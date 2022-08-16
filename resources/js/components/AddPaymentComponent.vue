@@ -5,15 +5,30 @@
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <small>Payment Status</small>
-                    <span class="text-md font-bold d-block">{{ data.is_paid ? 'Paid' : 'Unsettled' }}</span>
+                    <el-alert
+                        class="py-1 text-xs d-inline d-block"
+                        style="width: 80px !important;"
+                        v-if="data.is_paid"
+                        title="Paid"
+                        type="success"
+                        :closable="false">
+                    </el-alert>
+                    <el-alert
+                        class="py-1 text-xs d-inline d-block"
+                        style="width: 110px !important;"
+                        v-else
+                        title="Unsettled"
+                        type="warning"
+                        :closable="false">
+                    </el-alert>
                 </div>
                 <div class="col-md-4 mb-3">
                     <small>Rate</small>
-                    <span class="text-lg font-bold d-block">{{ data['rate'] }}</span>
+                    <span class="text-lg font-bold d-block">{{ $func.formatAmount(data['rate']) }}</span>
                 </div>
                 <div class="col-md-4 mb-3">
                     <small>Balance</small>
-                    <span class="text-md font-bold d-block">{{ balance }}</span>
+                    <span class="text-md font-bold d-block">{{ $func.formatAmount(balance) }}</span>
                 </div>
             </div>
 

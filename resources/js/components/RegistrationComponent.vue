@@ -47,7 +47,7 @@
                             </div>
                             <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
                                 <el-form-item label="AWTA Card" prop="awtaCardNumber" :required="ruleForm.registrationType == 'Member'">
-                                    <el-input v-model="ruleForm.awtaCardNumber" :readonly="ruleForm.registrationType == 'Member'"></el-input>
+                                    <el-input v-model="ruleForm.awtaCardNumber" :readonly="ruleForm.registrationType == 'Member'" :clearable="true"></el-input>
                                 </el-form-item>
                             </div>
                             <div class="col-md-6">
@@ -116,16 +116,16 @@
                 },
                 rules: {
                     email: [
-                        { required: true, message: 'Please input Email Address', trigger: 'blur'}
+                        { required: true, message: 'Please input Email Address', trigger: ['blur', 'change']}
                     ],
                     firstName: [
-                        { required: true, message: 'Please input First Name', trigger: 'blur'}
+                        { required: true, message: 'Please input First Name', trigger: ['blur', 'change']}
                     ],
                     lastName: [
-                        { required: true, message: 'Please input Last Name', trigger: 'blur'}
+                        { required: true, message: 'Please input Last Name', trigger: ['blur', 'change']}
                     ],
                     facebookName: [
-                        { required: true, message: 'Please input Facebook Name', trigger: 'blur'}
+                        { required: true, message: 'Please input Facebook Name', trigger: ['blur', 'change']}
                     ],
                     registrationType: [
                         { required: true, message: 'Please select Registration Type', trigger: 'change'}
@@ -137,7 +137,7 @@
                         { required: true, message: 'Please select Country', trigger: 'change'}
                     ],
                     awtaCardNumber: [
-                        { required: true, message: 'Please input AWTA Card Number', trigger: 'blur'},
+                        { required: true, message: 'Please input AWTA Card Number', trigger: ['blur', 'change']},
                     ],
                     attendingOption: [
                         { required: true, message: 'Please select your attending option', trigger: 'blur'},
@@ -197,6 +197,7 @@
                     this.ruleForm.country = data.country
                     this.ruleForm.awtaCardNumber = data.awta_card_number
                     this.ruleForm.category = data.category
+                    this.ruleForm.attendingOption = ''
                 } else {
                     this.ruleForm.email = '',
                     this.ruleForm.firstName = '',
@@ -207,6 +208,7 @@
                     this.ruleForm.country = 'Philippines'
                     this.ruleForm.awtaCardNumber = ''
                     this.ruleForm.category = 'Free'
+                    this.ruleForm.attendingOption = ''
                 }
 
                 this.step = 2

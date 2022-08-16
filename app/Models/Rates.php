@@ -11,6 +11,7 @@ class Rates extends Model
 
     protected $fillable = [
         'category',
+        'attending_option',
         'rate'
     ];
 }

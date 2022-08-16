@@ -7,6 +7,9 @@
       prop="created_at"
       label="Date"
       width="230">
+      <template slot-scope="scope">
+          {{ $func.formatToDateTime(scope.row.created_at) }}
+      </template>
     </el-table-column>
     <el-table-column
       prop="uuid"
@@ -48,6 +51,21 @@
       prop="country"
       label="Country"
       width="150">
+    </el-table-column>
+    <el-table-column
+      prop="attending_option"
+      label="Attending Option"
+      align="center"
+      width="130">
+    </el-table-column>
+    <el-table-column
+      prop="rate"
+      label="Rate"
+      align="center"
+      width="100">
+      <template slot-scope="scope">
+          {{ $func.formatAmount(scope.row.rate) }}
+      </template>
     </el-table-column>
     <el-table-column
       fixed="right"
