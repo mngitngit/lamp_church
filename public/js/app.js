@@ -8212,13 +8212,13 @@ var render = function render() {
     }
   }, [_c("el-option", {
     attrs: {
-      label: "Physical",
-      value: "Will attend physically."
+      value: "Physical",
+      label: "Physical"
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
-      label: "Online",
-      value: "Will attend virtually."
+      value: "Online",
+      label: "Online"
     }
   })], 1)], 1)], 1)])]), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"

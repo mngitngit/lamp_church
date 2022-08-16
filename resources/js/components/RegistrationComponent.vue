@@ -79,8 +79,8 @@
                             <div class="col-md-6">
                                 <el-form-item label="How will you attend the AWTA?" prop="attendingOption" required>
                                     <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
-                                        <el-option label="Physical" value="Will attend physically."></el-option>
-                                        <el-option label="Online" value="Will attend virtually."></el-option>
+                                        <el-option value="Physical" label="Physical"></el-option>
+                                        <el-option value="Online" label="Online"></el-option>
                                     </el-select>
                                 </el-form-item>
                             </div>
