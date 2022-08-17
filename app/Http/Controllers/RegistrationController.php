@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportRegistration;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RegistrationController extends Controller
 {
@@ -55,5 +57,9 @@ class RegistrationController extends Controller
         return view('registration.show', [
             'registration' => Registration::where('uuid', $uuid)->first()
         ]);
+    }
+
+    public function export(){
+        return Excel::download(new ExportRegistration, 'registrations_'.TIME().'.csv');
     }
 }

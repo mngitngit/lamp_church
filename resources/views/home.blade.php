@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container">
+    <div class="row mb-3">
+        <div class="col-md-24">
+            <a href="/registrations/export">
+            <el-button type="success" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
+            </a>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-24">
             <div class="card">
