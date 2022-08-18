@@ -71,6 +71,15 @@
       </template>
     </el-table-column>
     <el-table-column
+      prop="payments_sum_amount"
+      label="Total Paid"
+      align="center"
+      width="100">
+      <template slot-scope="scope">
+          {{ $func.formatAmount(scope.row.payments_sum_amount) }}
+      </template>
+    </el-table-column>
+    <el-table-column
       fixed="right"
       prop="payment_status"
       label="Status"

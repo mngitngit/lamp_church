@@ -8406,6 +8406,19 @@ var render = function render() {
     }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
+      prop: "payments_sum_amount",
+      label: "Total Paid",
+      align: "center",
+      width: "100"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n        " + _vm._s(_vm.$func.formatAmount(scope.row.payments_sum_amount)) + "\n    ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
       fixed: "right",
       prop: "payment_status",
       label: "Status",

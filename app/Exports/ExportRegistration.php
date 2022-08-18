@@ -27,7 +27,6 @@ class ExportRegistration implements FromCollection, WithHeadings
             'attending_option',
             'payment_status'
         ))
-        ->with('rate')
         ->withSum('payments', 'amount')
         ->get();
     }
@@ -47,8 +46,8 @@ class ExportRegistration implements FromCollection, WithHeadings
             'Category',
             'Attending Option',
             'Payment Status',
-            'Rate',
-            'Total Amount Paid'
+            'Total Amount Paid',
+            'Rate'
         );
     }
 }
