@@ -8414,7 +8414,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_vm._v("\n        " + _vm._s(_vm.$func.formatAmount(scope.row.payments_sum_amount)) + "\n    ")];
+        return [_vm._v("\n        " + _vm._s(_vm.$func.formatAmount(scope.row.payments_sum_amount || 0)) + "\n    ")];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {

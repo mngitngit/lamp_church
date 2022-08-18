@@ -76,7 +76,7 @@
       align="center"
       width="100">
       <template slot-scope="scope">
-          {{ $func.formatAmount(scope.row.payments_sum_amount) }}
+          {{ $func.formatAmount(scope.row.payments_sum_amount || 0) }}
       </template>
     </el-table-column>
     <el-table-column
