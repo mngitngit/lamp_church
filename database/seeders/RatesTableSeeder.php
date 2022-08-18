@@ -17,7 +17,7 @@ class RatesTableSeeder extends Seeder
         Rates::insert([
             [
                 'category' => 'Adult',
-                'attending_option' => 'Physical',
+                'attending_option' => 'Hybrid',
                 'rate' => 1000
             ], [
                 'category' => 'Adult',
@@ -25,7 +25,7 @@ class RatesTableSeeder extends Seeder
                 'rate' => 100
             ], [
                 'category' => 'Kids',
-                'attending_option' => 'Physical',
+                'attending_option' => 'Hybrid',
                 'rate' => 500
             ], [
                 'category' => 'Kids',
@@ -33,7 +33,7 @@ class RatesTableSeeder extends Seeder
                 'rate' => 50
             ], [
                 'category' => 'Free',
-                'attending_option' => 'Physical',
+                'attending_option' => 'Hybrid',
                 'rate' => 0
             ], [
                 'category' => 'Free',

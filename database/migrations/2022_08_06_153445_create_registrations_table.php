@@ -19,13 +19,14 @@ class CreateRegistrationsTable extends Migration
             $table->string('email');
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('fullname');
             $table->string('facebook_name');
             $table->string('registration_type');
             $table->string('local_church');
             $table->string('country');
             $table->string('category');
             $table->string('attending_option');
-            $table->boolean('is_paid')->default(false);
+            $table->string('payment_status')->default('Unsettled');
             $table->json('other_details');
             $table->timestamps();
         });

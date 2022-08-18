@@ -24,8 +24,12 @@ class ExportRegistration implements FromCollection, WithHeadings
             'local_church',
             'country',
             'category',
-            'attending_option'
-        ))->with('rate')->get();
+            'attending_option',
+            'payment_status'
+        ))
+        ->with('rate')
+        ->withSum('payments', 'amount')
+        ->get();
     }
 
     public function headings(): array
@@ -42,7 +46,9 @@ class ExportRegistration implements FromCollection, WithHeadings
             'Country',
             'Category',
             'Attending Option',
+            'Payment Status',
             'Rate',
+            'Total Amount Paid'
         );
     }
 }

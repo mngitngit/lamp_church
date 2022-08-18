@@ -32,11 +32,12 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        return Registration::create([
+        $registration = Registration::create([
             'uuid' => $request->awtaCardNumber ?: $this->generateGuestId(),
             'email' => $request->email,
             'firstname' => $request->firstName,
             'lastname' => $request->lastName,
+            'fullname' => $request->firstName . ' ' . $request->lastName,
             'facebook_name' => $request->facebookName,
             'registration_type' => $request->registrationType,
             'local_church' => $request->localChurch,
@@ -45,6 +46,10 @@ class RegistrationController extends Controller
             'attending_option' => $request->attendingOption,
             'other_details' => '{}',
         ]);
+
+        $this->updatePaymentStatus($registration->uuid);
+
+        return $registration;
     }
 
     /**

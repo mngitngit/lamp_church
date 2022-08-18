@@ -7,17 +7,17 @@
                     <small>Payment Status</small>
                     <el-alert
                         class="py-1 text-xs d-inline d-block"
-                        style="width: 80px !important;"
-                        v-if="data.is_paid"
+                        style="width: fit-content;"
+                        v-if="data.payment_status === 'Paid'"
                         title="Paid"
                         type="success"
                         :closable="false">
                     </el-alert>
                     <el-alert
                         class="py-1 text-xs d-inline d-block"
-                        style="width: 110px !important;"
+                        style="width: fit-content;"
                         v-else
-                        title="Unsettled"
+                        :title="data.payment_status"
                         type="warning"
                         :closable="false">
                     </el-alert>
@@ -35,7 +35,7 @@
             <payments-table :registration="data" />
         </div>
 
-        <div v-if="!data.is_paid" class="card-body border-top pb-0">
+        <div v-if="data.payment_status != 'Paid'" class="card-body border-top pb-0">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                 <div class="row">
                     <div class="col-md-4 mb-3">
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <el-button v-if="!data.is_paid" type="primary" @click="formSubmit()">Save Payment</el-button>
+    <el-button v-if="data.payment_status != 'Paid'" type="primary" @click="formSubmit()">Save Payment</el-button>
 </div>
 </template>
 
@@ -67,7 +67,7 @@ export default {
     props: {
         registration: {
             required: true,
-            type: Object
+            type: String
         },
         uuid: {
             required: true,
@@ -158,7 +158,6 @@ export default {
                     setTimeout(async () => {
                         await axios.post(`/payments/${this.uuid}`, this.ruleForm)
                         .then(async (response) => {
-                            console.log(response.data.is_paid)
                             loading.close()
                             
                             this.$refs['ruleForm'].resetFields();

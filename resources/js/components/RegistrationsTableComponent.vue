@@ -5,7 +5,8 @@
     style="width: 100%">
     <el-table-column
       prop="created_at"
-      label="Date"
+      label="Date Registered"
+      align="center"
       width="230">
       <template slot-scope="scope">
           {{ $func.formatToDateTime(scope.row.created_at) }}
@@ -14,6 +15,7 @@
     <el-table-column
       prop="uuid"
       label="ID"
+      align="center"
       width="120">
     </el-table-column>
     <el-table-column
@@ -50,6 +52,7 @@
     <el-table-column
       prop="country"
       label="Country"
+      align="center"
       width="150">
     </el-table-column>
     <el-table-column
@@ -69,14 +72,14 @@
     </el-table-column>
     <el-table-column
       fixed="right"
-      prop="is_paid"
+      prop="payment_status"
       label="Status"
       align="center"
       width="125">
         <template slot-scope="scope">
             <el-alert
                 class="py-1 text-xs d-inline"
-                v-if="scope.row.is_paid"
+                v-if="scope.row.payment_status === 'Paid'"
                 title="Paid"
                 type="success"
                 :closable="false">
@@ -84,7 +87,7 @@
             <el-alert
                 class="py-1 text-xs d-inline"
                 v-else
-                title="Unsettled"
+                :title="scope.row.payment_status"
                 type="warning"
                 :closable="false">
             </el-alert>

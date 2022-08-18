@@ -6947,7 +6947,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: {
     registration: {
       required: true,
-      type: Object
+      type: String
     },
     uuid: {
       required: true,
@@ -7061,7 +7061,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                                     while (1) {
                                       switch (_context.prev = _context.next) {
                                         case 0:
-                                          console.log(response.data.is_paid);
                                           loading.close();
 
                                           _this2.$refs['ruleForm'].resetFields();
@@ -7079,7 +7078,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                                             }
                                           });
 
-                                        case 4:
+                                        case 3:
                                         case "end":
                                           return _context.stop();
                                       }
@@ -7510,7 +7509,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.ruleForm.email = '', _this3.ruleForm.firstName = '', _this3.ruleForm.lastName = '', _this3.ruleForm.facebookName = '', _this3.ruleForm.registrationType = 'Guest', _this3.ruleForm.localChurch = '', _this3.ruleForm.country = 'Philippines';
                   _this3.ruleForm.awtaCardNumber = '';
                   _this3.ruleForm.category = 'Free';
-                  _this3.ruleForm.attendingOption = '';
+                  _this3.ruleForm.attendingOption = 'Online';
                 }
 
                 _this3.step = 2;
@@ -7616,10 +7615,10 @@ var render = function render() {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-4 mb-3"
-  }, [_c("small", [_vm._v("Payment Status")]), _vm._v(" "), _vm.data.is_paid ? _c("el-alert", {
+  }, [_c("small", [_vm._v("Payment Status")]), _vm._v(" "), _vm.data.payment_status === "Paid" ? _c("el-alert", {
     staticClass: "py-1 text-xs d-inline d-block",
     staticStyle: {
-      width: "80px !important"
+      width: "fit-content"
     },
     attrs: {
       title: "Paid",
@@ -7629,10 +7628,10 @@ var render = function render() {
   }) : _c("el-alert", {
     staticClass: "py-1 text-xs d-inline d-block",
     staticStyle: {
-      width: "110px !important"
+      width: "fit-content"
     },
     attrs: {
-      title: "Unsettled",
+      title: _vm.data.payment_status,
       type: "warning",
       closable: false
     }
@@ -7648,7 +7647,7 @@ var render = function render() {
     attrs: {
       registration: _vm.data
     }
-  })], 1), _vm._v(" "), !_vm.data.is_paid ? _c("div", {
+  })], 1), _vm._v(" "), _vm.data.payment_status != "Paid" ? _c("div", {
     staticClass: "card-body border-top pb-0"
   }, [_c("el-form", {
     ref: "ruleForm",
@@ -7714,7 +7713,7 @@ var render = function render() {
       },
       expression: "user.name"
     }
-  })], 1)], 1)])])], 1) : _vm._e()]), _vm._v(" "), !_vm.data.is_paid ? _c("el-button", {
+  })], 1)], 1)])])], 1) : _vm._e()]), _vm._v(" "), _vm.data.payment_status != "Paid" ? _c("el-button", {
     attrs: {
       type: "primary"
     },
@@ -8221,13 +8220,13 @@ var render = function render() {
       label: "Philippines",
       value: "Philippines"
     }
-  })], 1)], 1)], 1), _vm._v(" "), _c("div", {
+  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "How will you attend the AWTA?",
       prop: "attendingOption",
-      required: ""
+      required: _vm.ruleForm.registrationType == "Member"
     }
   }, [_c("el-select", {
     attrs: {
@@ -8242,15 +8241,15 @@ var render = function render() {
     }
   }, [_c("el-option", {
     attrs: {
-      value: "Physical",
-      label: "Physical"
+      value: "Hybrid",
+      label: "Hybrid"
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1)])]), _vm._v(" "), _c("el-row", [_c("div", {
+  })], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
@@ -8322,7 +8321,8 @@ var render = function render() {
   }, [_c("el-table-column", {
     attrs: {
       prop: "created_at",
-      label: "Date",
+      label: "Date Registered",
+      align: "center",
       width: "230"
     },
     scopedSlots: _vm._u([{
@@ -8335,6 +8335,7 @@ var render = function render() {
     attrs: {
       prop: "uuid",
       label: "ID",
+      align: "center",
       width: "120"
     }
   }), _vm._v(" "), _c("el-table-column", {
@@ -8380,6 +8381,7 @@ var render = function render() {
     attrs: {
       prop: "country",
       label: "Country",
+      align: "center",
       width: "150"
     }
   }), _vm._v(" "), _c("el-table-column", {
@@ -8405,7 +8407,7 @@ var render = function render() {
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       fixed: "right",
-      prop: "is_paid",
+      prop: "payment_status",
       label: "Status",
       align: "center",
       width: "125"
@@ -8413,7 +8415,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [scope.row.is_paid ? _c("el-alert", {
+        return [scope.row.payment_status === "Paid" ? _c("el-alert", {
           staticClass: "py-1 text-xs d-inline",
           attrs: {
             title: "Paid",
@@ -8423,7 +8425,7 @@ var render = function render() {
         }) : _c("el-alert", {
           staticClass: "py-1 text-xs d-inline",
           attrs: {
-            title: "Unsettled",
+            title: scope.row.payment_status,
             type: "warning",
             closable: false
           }

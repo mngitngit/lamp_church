@@ -43,13 +43,19 @@ class Controller extends BaseController
 
         $balance = floatval($registration->rate);
         $balance-= floatval(array_sum(array_column($registration->payments->toArray(), 'amount')));
-
+        // dd($balance);
         if ($balance <= 0.0) {
             $registration->update([
-                'is_paid' => true
+                'payment_status' => 'Paid'
             ]);
         }
 
+        if ($balance > 0.0) {
+            $registration->update([
+                'payment_status' => 'Partial'
+            ]);
+        }
+        // dd($registration);
         return $registration;
     }
 }

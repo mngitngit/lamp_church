@@ -15,12 +15,13 @@ class Registration extends Model
         'email',
         'firstname',
         'lastname',
+        'fullname',
         'facebook_name',
         'registration_type',
         'local_church',
         'country',
         'category',
-        'is_paid',
+        'payment_status',
         'other_details',
         'attending_option'
     ];

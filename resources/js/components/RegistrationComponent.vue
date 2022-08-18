@@ -76,10 +76,10 @@
                                     </el-select>
                                 </el-form-item>
                             </div>
-                            <div class="col-md-6">
-                                <el-form-item label="How will you attend the AWTA?" prop="attendingOption" required>
+                            <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
+                                <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType == 'Member'">
                                     <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
-                                        <el-option value="Physical" label="Physical"></el-option>
+                                        <el-option value="Hybrid" label="Hybrid"></el-option>
                                         <el-option value="Online" label="Online"></el-option>
                                     </el-select>
                                 </el-form-item>
@@ -208,7 +208,7 @@
                     this.ruleForm.country = 'Philippines'
                     this.ruleForm.awtaCardNumber = ''
                     this.ruleForm.category = 'Free'
-                    this.ruleForm.attendingOption = ''
+                    this.ruleForm.attendingOption = 'Online'
                 }
 
                 this.step = 2
