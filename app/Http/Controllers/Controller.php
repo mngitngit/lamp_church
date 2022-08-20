@@ -40,7 +40,6 @@ class Controller extends BaseController
 
     function updatePaymentStatus($uuid) {
         $registration = Registration::where('uuid', $uuid)->first();
-
         $balance = floatval($registration->rate);
         $balance-= floatval(array_sum(array_column($registration->payments->toArray(), 'amount')));
         // dd($balance);

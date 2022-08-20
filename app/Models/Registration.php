@@ -33,7 +33,20 @@ class Registration extends Model
      */
     protected $appends = ['rate'];
 
-        /**
+    public static function boot() {
+        parent::boot();
+        
+        self::creating(function ($model) {
+
+            $model->rate = Rates::where('category', $model->category)
+            ->where('attending_option', $model->attending_option)
+            ->first()
+            ->rate;
+        });
+    
+    }
+
+    /**
      * Define the type column to every Item object instance
      * 
      * @return string
@@ -52,10 +65,5 @@ class Registration extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class, 'registration_uuid', 'uuid');
-    }
-
-    public function rate()
-    {
-        return $this->hasOne(Rates::class, 'category', 'category');
     }
 }

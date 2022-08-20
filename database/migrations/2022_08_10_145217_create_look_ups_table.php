@@ -23,6 +23,7 @@ class CreateLookUpsTable extends Migration
             $table->string('local_church');
             $table->string('country');
             $table->string('category');
+            $table->boolean('is_registered')->default(false);
             $table->timestamps();
         });
     }

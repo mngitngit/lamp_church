@@ -26,8 +26,8 @@ class CreateRegistrationsTable extends Migration
             $table->string('country');
             $table->string('category');
             $table->string('attending_option');
+            $table->decimal('rate', 9, 3)->default(0.000);
             $table->string('payment_status')->default('Unsettled');
-            $table->json('other_details');
             $table->timestamps();
         });
     }

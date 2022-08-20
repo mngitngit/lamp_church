@@ -14,7 +14,26 @@ class LookUpController extends Controller
      */ 
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['show']]);
+        $this->middleware('auth',['except'=>['show', 'index']]);
+    }
+
+    public function index(Request $request) {
+        $lookUp = LookUp::select();
+
+        if ($request->lastname) {
+            $lookUp = $lookUp->where('lastname', 'LIKE', "%$request->lastname%");
+        }
+
+        if ($request->localChurch) {
+            $lookUp = $lookUp->where('local_church', $request->localChurch);
+        }
+
+        if ($lookUp->count() === 0) {
+            return response()->json(['error' => 'Data not found. Please reach out to your local coordinator.'], 500);
+        }
+
+
+        return $lookUp->orderBy('firstname', 'ASC')->get();
     }
 
     /**

@@ -45,9 +45,9 @@
                                     </el-select>
                                 </el-form-item>
                             </div>
-                            <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
-                                <el-form-item label="AWTA Card" prop="awtaCardNumber" :required="ruleForm.registrationType == 'Member'">
-                                    <el-input v-model="ruleForm.awtaCardNumber" :readonly="ruleForm.registrationType == 'Member'" :clearable="true"></el-input>
+                            <div v-if="ruleForm.registrationType == 'Member' && ruleForm.withAwtaCard != 'none'" class="col-md-6">
+                                <el-form-item label="AWTA Card Number" prop="awtaCardNumber" :required="ruleForm.registrationType == 'Member' && ruleForm.withAwtaCard != 'none'">
+                                    <el-input v-model="ruleForm.awtaCardNumber" :readonly="ruleForm.registrationType == 'Member' && ruleForm.withAwtaCard != 'none'" :clearable="true"></el-input>
                                 </el-form-item>
                             </div>
                             <div class="col-md-6">
@@ -112,7 +112,8 @@
                     country: 'Philippines',
                     awtaCardNumber: '',
                     category: 'Adult',
-                    attendingOption: ''
+                    attendingOption: '',
+                    withAwtaCard: ''
                 },
                 rules: {
                     email: [
@@ -187,30 +188,18 @@
                 });  
             },
             async nextStep(data) {
-                if (data) {
-                    this.ruleForm.email = data.email
-                    this.ruleForm.firstName = data.firstname
-                    this.ruleForm.lastName = data.lastname
-                    this.ruleForm.facebookName = data.facebook_name
-                    this.ruleForm.registrationType = data.registration_type
-                    this.ruleForm.localChurch = data.local_church
-                    this.ruleForm.country = data.country
-                    this.ruleForm.awtaCardNumber = data.awta_card_number
-                    this.ruleForm.category = data.category
-                    this.ruleForm.attendingOption = ''
-                } else {
-                    this.ruleForm.email = '',
-                    this.ruleForm.firstName = '',
-                    this.ruleForm.lastName = '',
-                    this.ruleForm.facebookName = '',
-                    this.ruleForm.registrationType = 'Guest',
-                    this.ruleForm.localChurch = '',
-                    this.ruleForm.country = 'Philippines'
-                    this.ruleForm.awtaCardNumber = ''
-                    this.ruleForm.category = 'Free'
-                    this.ruleForm.attendingOption = 'Online'
-                }
-
+                this.ruleForm.email = data.email
+                this.ruleForm.firstName = data.firstName
+                this.ruleForm.lastName = data.lastName
+                this.ruleForm.facebookName = data.facebookName
+                this.ruleForm.registrationType = data.registrationType
+                this.ruleForm.localChurch = data.localChurch
+                this.ruleForm.country = data.country
+                this.ruleForm.awtaCardNumber = data.awtaCardNumber
+                this.ruleForm.category = data.category
+                this.ruleForm.attendingOption = data.attendingOption
+                this.ruleForm.withAwtaCard = data.withAwtaCard
+                console.log(data.withAwtaCard)
                 this.step = 2
             }
         }

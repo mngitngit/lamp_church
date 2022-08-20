@@ -9,6 +9,12 @@ class LookUp extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'awta_card_number';
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     protected $fillable = [
         'awta_card_number',
         'email',
@@ -18,6 +24,7 @@ class LookUp extends Model
         'registration_type',
         'local_church',
         'category',
-        'country'
+        'country',
+        'is_registered'
     ];
 }

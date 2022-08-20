@@ -7169,33 +7169,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     var _this = this;
 
-    var checkAwtaCardNumber = function checkAwtaCardNumber(rule, value, callback) {
-      if (!value) {
-        return callback(new Error('Please input your AWTA Card Number'));
-      }
-
-      _this.isLoading = true;
-      setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var checkAwtaCardNumber = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(rule, value, callback) {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                if (!(!value && _this.ruleForm.withAwtaCard === 'yes')) {
+                  _context2.next = 2;
+                  break;
+                }
+
+                return _context2.abrupt("return", callback(new Error('Please input your AWTA Card Number')));
+
+              case 2:
+                _this.resetData();
+
+                _this.isLoading = true;
+                _context2.next = 6;
                 return axios.get("/lookup/".concat(_this.ruleForm.awtaCardNumber)).then( /*#__PURE__*/function () {
                   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
                     return _regeneratorRuntime().wrap(function _callee$(_context) {
                       while (1) {
                         switch (_context.prev = _context.next) {
                           case 0:
+                            _this.data.email = response.data.email;
+                            _this.data.firstName = response.data.firstname;
+                            _this.data.lastName = response.data.lastname;
+                            _this.data.facebookName = response.data.facebook_name;
+                            _this.data.registrationType = response.data.registration_type;
+                            _this.data.localChurch = response.data.local_church;
+                            _this.data.country = response.data.country;
+                            _this.data.awtaCardNumber = response.data.awta_card_number;
+                            _this.data.category = response.data.category;
+                            _this.data.attendingOption = _this.ruleForm.attendingOption;
+                            _this.data.withAwtaCard = 'yes';
                             _this.isLoading = false;
-
-                            _this.$emit('next', response.data);
-
-                            _this.resetForm('ruleForm');
-
                             callback();
 
-                          case 4:
+                          case 13:
                           case "end":
                             return _context.stop();
                         }
@@ -7203,7 +7215,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     }, _callee);
                   }));
 
-                  return function (_x) {
+                  return function (_x4) {
                     return _ref2.apply(this, arguments);
                   };
                 }())["catch"](function (error) {
@@ -7211,19 +7223,92 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   callback(new Error(error.response.data.error));
                 });
 
-              case 2:
+              case 6:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
-      })), 1000);
-    };
+      }));
+
+      return function checkAwtaCardNumber(_x, _x2, _x3) {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    var checkLastname = /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(rule, value, callback) {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this.isLoading = true;
+                _this.tableData = [];
+
+                if (value) {
+                  _context4.next = 5;
+                  break;
+                }
+
+                _this.isLoading = false;
+                return _context4.abrupt("return", callback(new Error('Please input your Last Name')));
+
+              case 5:
+                _context4.next = 7;
+                return axios.get("/lookup", {
+                  params: _this.ruleForm
+                }).then( /*#__PURE__*/function () {
+                  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(response) {
+                    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+                      while (1) {
+                        switch (_context3.prev = _context3.next) {
+                          case 0:
+                            _this.tableData = response.data;
+                            _this.isLoading = false;
+
+                          case 2:
+                          case "end":
+                            return _context3.stop();
+                        }
+                      }
+                    }, _callee3);
+                  }));
+
+                  return function (_x8) {
+                    return _ref4.apply(this, arguments);
+                  };
+                }())["catch"](function (error) {
+                  _this.isLoading = false;
+                  callback(new Error(error.response.data.error));
+                });
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }));
+
+      return function checkLastname(_x5, _x6, _x7) {
+        return _ref3.apply(this, arguments);
+      };
+    }();
 
     return {
+      tableData: [],
       ruleForm: {
-        registrationType: '',
-        awtaCardNumber: ''
+        registrationType: 'Member',
+        withAwtaCard: '',
+        lastname: '',
+        localChurch: '',
+        attendingOption: '' // awtaCardNumber: ''
+        // registrationType: 'Member',
+        // withAwtaCard: 'lost',
+        // lastname: 'Ngitngit',
+        // localChurch: 'Muntinlupa',
+        // awtaCardNumber: ''
+
       },
       rules: {
         registrationType: [{
@@ -7231,51 +7316,212 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           message: 'Please select Registration Type',
           trigger: 'change'
         }],
+        withAwtaCard: [{
+          required: true,
+          message: 'Please select an answer',
+          trigger: ['blur', 'change']
+        }],
+        lastname: [{
+          validator: checkLastname,
+          trigger: ['submit']
+        }, {
+          required: true,
+          message: 'Please input your Last Name',
+          trigger: ['blur', 'change']
+        }],
+        localChurch: [{
+          required: true,
+          message: 'Please select your Local Church',
+          trigger: ['blur', 'change']
+        }],
+        attendingOption: [{
+          required: true,
+          message: 'Please select your attending option',
+          trigger: 'blur'
+        }],
         awtaCardNumber: [{
           validator: checkAwtaCardNumber,
-          trigger: ['blur', 'change']
+          trigger: ['submit']
+        }, {
+          required: true,
+          message: 'Please input your AWTA Card Number',
+          trigger: 'change'
         }]
+      },
+      data: {
+        email: '',
+        firstName: '',
+        lastName: '',
+        facebookName: '',
+        registrationType: 'Member',
+        localChurch: '',
+        country: 'Philippines',
+        awtaCardNumber: '',
+        category: 'Adult',
+        attendingOption: '',
+        withAwtaCard: ''
       },
       isLoading: false
     };
+  },
+  watch: {
+    ruleForm: {
+      handler: function handler(newValue) {
+        this.rules.lastname[0].required = this.ruleForm.withAwtaCard === 'lost';
+        this.rules.localChurch[0].required = this.ruleForm.withAwtaCard === 'lost';
+        this.tableData = [];
+      },
+      deep: true
+    }
   },
   methods: {
     getDelegateData: function getDelegateData(formName) {
       var _this2 = this;
 
       this.$refs[formName].validate( /*#__PURE__*/function () {
-        var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(valid) {
-          return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(valid) {
+          return _regeneratorRuntime().wrap(function _callee5$(_context5) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context5.prev = _context5.next) {
                 case 0:
                   if (!valid) {
-                    _context3.next = 4;
+                    _context5.next = 4;
                     break;
                   }
 
-                  if (_this2.ruleForm.registrationType === 'Guest') _this2.$emit('next', null);
-                  _context3.next = 5;
+                  if (_this2.ruleForm.registrationType === 'Member' && _this2.ruleForm.withAwtaCard === 'yes') {
+                    _this2.$confirm("Please click continue if you are ".concat(_this2.data.firstName, " ").concat(_this2.data.lastName, "."), 'Warning', {
+                      confirmButtonText: 'Continue',
+                      cancelButtonText: 'Cancel',
+                      type: 'warning'
+                    }).then(function () {
+                      _this2.submitForm();
+                    });
+                  } else if (_this2.ruleForm.registrationType === 'Member' && _this2.ruleForm.withAwtaCard === 'lost') {} else if (_this2.ruleForm.registrationType === 'Member' && _this2.ruleForm.withAwtaCard === 'none') {
+                    _this2.data.withAwtaCard = 'none';
+                    _this2.data.registrationType = 'Member';
+                    _this2.data.category = 'Adult';
+                    _this2.data.attendingOption = _this2.ruleForm.attendingOption;
+
+                    _this2.$emit('next', _this2.data);
+                  } else if (_this2.ruleForm.registrationType === 'Guest') {
+                    _this2.data.registrationType = 'Guest';
+                    _this2.data.category = 'Free';
+                    _this2.data.attendingOption = 'Online';
+
+                    _this2.$emit('next', _this2.data);
+                  }
+
+                  _context5.next = 5;
                   break;
 
                 case 4:
-                  return _context3.abrupt("return", false);
+                  return _context5.abrupt("return", false);
 
                 case 5:
                 case "end":
-                  return _context3.stop();
+                  return _context5.stop();
               }
             }
-          }, _callee3);
+          }, _callee5);
         }));
 
-        return function (_x2) {
-          return _ref3.apply(this, arguments);
+        return function (_x9) {
+          return _ref5.apply(this, arguments);
         };
       }());
     },
     resetForm: function resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    resetData: function resetData() {
+      this.data.email = '';
+      this.data.firstName = '';
+      this.data.lastName = '';
+      this.data.facebookName = '';
+      this.data.registrationType = 'Member';
+      this.data.localChurch = '';
+      this.data.country = 'Philippines';
+      this.data.awtaCardNumber = '';
+      this.data.category = 'Adult';
+      this.data.attendingOption = '';
+      this.data.withAwtaCard = '';
+    },
+    handleRowClick: function handleRowClick(val) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                if (!val.is_registered) {
+                  _this3.$confirm("Are you sure you are ".concat(val.firstname, " ").concat(val.lastname, "?"), 'Warning', {
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel',
+                    type: 'warning'
+                  }).then(function () {
+                    _this3.data.email = val.email;
+                    _this3.data.firstName = val.firstname;
+                    _this3.data.lastName = val.lastname;
+                    _this3.data.facebookName = val.facebook_name;
+                    _this3.data.registrationType = val.registration_type;
+                    _this3.data.localChurch = val.local_church;
+                    _this3.data.country = val.country;
+                    _this3.data.awtaCardNumber = val.awta_card_number;
+                    _this3.data.category = val.category;
+                    _this3.data.attendingOption = _this3.ruleForm.attendingOption;
+                    _this3.data.withAwtaCard = 'yes';
+
+                    _this3.submitForm();
+                  });
+                } else {
+                  _this3.$message.error("Oops, ".concat(val.firstname, " ").concat(val.lastname, " is already registered."));
+                }
+
+              case 1:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    submitForm: function submitForm() {
+      var _this4 = this;
+
+      var loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      axios.post("/registration", this.data).then( /*#__PURE__*/function () {
+        var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(response) {
+          return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+            while (1) {
+              switch (_context7.prev = _context7.next) {
+                case 0:
+                  loading.close();
+
+                  _this4.showTicket(response.data.uuid);
+
+                  _this4.$refs['ruleForm'].resetFields();
+
+                case 3:
+                case "end":
+                  return _context7.stop();
+              }
+            }
+          }, _callee7);
+        }));
+
+        return function (_x10) {
+          return _ref6.apply(this, arguments);
+        };
+      }());
+    },
+    showTicket: function showTicket(uuid) {
+      window.location.href = "registration/".concat(uuid);
     }
   }
 });
@@ -7340,7 +7586,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         country: 'Philippines',
         awtaCardNumber: '',
         category: 'Adult',
-        attendingOption: ''
+        attendingOption: '',
+        withAwtaCard: ''
       },
       rules: {
         email: [{
@@ -7494,27 +7741,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                if (data) {
-                  _this3.ruleForm.email = data.email;
-                  _this3.ruleForm.firstName = data.firstname;
-                  _this3.ruleForm.lastName = data.lastname;
-                  _this3.ruleForm.facebookName = data.facebook_name;
-                  _this3.ruleForm.registrationType = data.registration_type;
-                  _this3.ruleForm.localChurch = data.local_church;
-                  _this3.ruleForm.country = data.country;
-                  _this3.ruleForm.awtaCardNumber = data.awta_card_number;
-                  _this3.ruleForm.category = data.category;
-                  _this3.ruleForm.attendingOption = '';
-                } else {
-                  _this3.ruleForm.email = '', _this3.ruleForm.firstName = '', _this3.ruleForm.lastName = '', _this3.ruleForm.facebookName = '', _this3.ruleForm.registrationType = 'Guest', _this3.ruleForm.localChurch = '', _this3.ruleForm.country = 'Philippines';
-                  _this3.ruleForm.awtaCardNumber = '';
-                  _this3.ruleForm.category = 'Free';
-                  _this3.ruleForm.attendingOption = 'Online';
-                }
-
+                _this3.ruleForm.email = data.email;
+                _this3.ruleForm.firstName = data.firstName;
+                _this3.ruleForm.lastName = data.lastName;
+                _this3.ruleForm.facebookName = data.facebookName;
+                _this3.ruleForm.registrationType = data.registrationType;
+                _this3.ruleForm.localChurch = data.localChurch;
+                _this3.ruleForm.country = data.country;
+                _this3.ruleForm.awtaCardNumber = data.awtaCardNumber;
+                _this3.ruleForm.category = data.category;
+                _this3.ruleForm.attendingOption = data.attendingOption;
+                _this3.ruleForm.withAwtaCard = data.withAwtaCard;
+                console.log(data.withAwtaCard);
                 _this3.step = 2;
 
-              case 2:
+              case 13:
               case "end":
                 return _context4.stop();
             }
@@ -7799,10 +8040,10 @@ render._withStripped = true;
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -7862,9 +8103,86 @@ var render = function render() {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
-      label: "Please enter your AWTA Card Number",
+      label: "Do you have an awta card?",
+      prop: "withAwtaCard",
+      required: ""
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.withAwtaCard,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "withAwtaCard", $$v);
+      },
+      expression: "ruleForm.withAwtaCard"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      label: "none, I’m a new member.",
+      value: "none"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "yes, but I lost it.",
+      value: "lost"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "yes, and I still have it.",
+      value: "yes"
+    }
+  })], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_vm.ruleForm.registrationType == "Member" ? _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "How will you attend the AWTA?",
+      prop: "attendingOption",
+      required: _vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost"
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.attendingOption,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "attendingOption", $$v);
+      },
+      expression: "ruleForm.attendingOption"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      value: "Hybrid",
+      label: "Hybrid"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "Online",
+      label: "Online"
+    }
+  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "What is your AWTA card number?",
       prop: "awtaCardNumber",
-      required: _vm.ruleForm.registrationType === "Member"
+      required: _vm.ruleForm.withAwtaCard === "yes"
     }
   }, [_c("el-input", {
     attrs: {
@@ -7877,7 +8195,164 @@ var render = function render() {
       },
       expression: "ruleForm.awtaCardNumber"
     }
-  })], 1)], 1) : _vm._e()])]), _vm._v(" "), _c("div", {
+  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "lost" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "What is your last name?",
+      prop: "lastname",
+      required: _vm.ruleForm.withAwtaCard === "lost"
+    }
+  }, [_c("el-input", {
+    attrs: {
+      clearable: true
+    },
+    model: {
+      value: _vm.ruleForm.lastname,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "lastname", $$v);
+      },
+      expression: "ruleForm.lastname"
+    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "From which local church are you?",
+      prop: "localChurch",
+      required: _vm.ruleForm.withAwtaCard === "lost"
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.localChurch,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "localChurch", $$v);
+      },
+      expression: "ruleForm.localChurch"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      label: "Binan",
+      value: "Binan"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Cadiz",
+      value: "Cadiz"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Canlubang",
+      value: "Canlubang"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Dasmarinas",
+      value: "Dasmarinas"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "DC Cruz",
+      value: "DC Cruz"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Granada",
+      value: "Granada"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Iloilo",
+      value: "Iloilo"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Isabela",
+      value: "Isabela"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Muntinlupa",
+      value: "Muntinlupa"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Pateros",
+      value: "Pateros"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Tarlac",
+      value: "Tarlac"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Valenzuela",
+      value: "Valenzuela"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Villamar/Maao",
+      value: "Villamar/Maao"
+    }
+  })], 1)], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.tableData.length > 0 ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("div", {
+    staticClass: "el-form-item is-success is-required mb-0"
+  }, [_c("label", {
+    staticClass: "el-form-item__label",
+    staticStyle: {
+      width: "160px"
+    },
+    attrs: {
+      "for": "lastname"
+    }
+  }, [_vm._v("Select your name below")])]), _vm._v(" "), _c("el-table", {
+    staticStyle: {
+      width: "100%"
+    },
+    attrs: {
+      data: _vm.tableData,
+      border: ""
+    },
+    on: {
+      "row-click": _vm.handleRowClick
+    }
+  }, [_c("el-table-column", {
+    attrs: {
+      prop: "lastname",
+      label: "Name"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n                            " + _vm._s(scope.row.firstname) + " " + _vm._s(scope.row.lastname) + "\n                        ")];
+      }
+    }], null, false, 2737929440)
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "local_church",
+      label: "Local Church",
+      width: "120"
+    }
+  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -8092,17 +8567,17 @@ var render = function render() {
       label: "Guest",
       value: "Guest"
     }
-  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("div", {
+  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.withAwtaCard != "none" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
-      label: "AWTA Card",
+      label: "AWTA Card Number",
       prop: "awtaCardNumber",
-      required: _vm.ruleForm.registrationType == "Member"
+      required: _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.withAwtaCard != "none"
     }
   }, [_c("el-input", {
     attrs: {
-      readonly: _vm.ruleForm.registrationType == "Member",
+      readonly: _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.withAwtaCard != "none",
       clearable: true
     },
     model: {
@@ -15801,6 +16276,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.text-description[data-v-2f0a0048] {\n    position: relative;\n    top: -15px;\n}\nh3[data-v-2f0a0048] {\n    position: relative;\n    top: -17px;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.el-table tr[data-v-4d8e0942] {\n    cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -97407,6 +97906,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_style_index_0_id_4d8e0942_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_style_index_0_id_4d8e0942_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_style_index_0_id_4d8e0942_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -97965,23 +98494,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _FindDataComponent_vue_vue_type_template_id_4d8e0942___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FindDataComponent.vue?vue&type=template&id=4d8e0942& */ "./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&");
+/* harmony import */ var _FindDataComponent_vue_vue_type_template_id_4d8e0942_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FindDataComponent.vue?vue&type=template&id=4d8e0942&scoped=true& */ "./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&scoped=true&");
 /* harmony import */ var _FindDataComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FindDataComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/FindDataComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _FindDataComponent_vue_vue_type_style_index_0_id_4d8e0942_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css& */ "./resources/js/components/FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _FindDataComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _FindDataComponent_vue_vue_type_template_id_4d8e0942___WEBPACK_IMPORTED_MODULE_0__.render,
-  _FindDataComponent_vue_vue_type_template_id_4d8e0942___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _FindDataComponent_vue_vue_type_template_id_4d8e0942_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FindDataComponent_vue_vue_type_template_id_4d8e0942_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "4d8e0942",
   null
   
 )
@@ -98312,19 +98843,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&scoped=true& ***!
+  \**************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_template_id_4d8e0942___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_template_id_4d8e0942___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_template_id_4d8e0942_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_template_id_4d8e0942_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_template_id_4d8e0942___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindDataComponent.vue?vue&type=template&id=4d8e0942& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_template_id_4d8e0942_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindDataComponent.vue?vue&type=template&id=4d8e0942&scoped=true& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=template&id=4d8e0942&scoped=true&");
 
 
 /***/ }),
@@ -98419,6 +98950,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BarcodeComponent_vue_vue_type_style_index_0_id_2f0a0048_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BarcodeComponent.vue?vue&type=style&index=0&id=2f0a0048&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BarcodeComponent.vue?vue&type=style&index=0&id=2f0a0048&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css& ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FindDataComponent_vue_vue_type_style_index_0_id_4d8e0942_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=style&index=0&id=4d8e0942&scoped=true&lang=css&");
 
 
 /***/ }),
