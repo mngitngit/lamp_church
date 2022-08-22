@@ -7,6 +7,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <meta property="og:image" content="https://lampawta.online/images/banner.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lampawta.online/registration"/>
+    <meta property="og:title" content="Annual Worship and Thanksgiving 2022" />
+    <meta property="og:description" content="Lift up your eyes, the field is ripe unto harvest!"/>
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
