@@ -226,6 +226,10 @@ export default {
             deep: true
         }
     },
+    mounted() {
+        // var data = {"email":"melanie.ngitngit@yahoo.com","firstName":"Melanie","lastName":"Ngitngit","facebookName":"Melanie Ngitngit","registrationType":"Guest","localChurch":"Muntinlupa","country":"Philippines","awtaCardNumber":"","category":"Free","attendingOption":"Online","withAwtaCard":""}
+        // this.$emit('next', data);  
+    },
     methods: {
         getDelegateData(formName) {
             this.$refs[formName].validate(async (valid) => {

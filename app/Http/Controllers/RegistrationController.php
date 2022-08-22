@@ -18,6 +18,18 @@ class RegistrationController extends Controller
         $this->middleware('auth',['except'=>['index','create','store','show']]);
     }
 
+    public function index(Request $request)
+    {
+        $registration = Registration::where('firstname', $request->firstName)
+        ->where('lastname', $request->lastName)
+        ->where('local_church', $request->localChurch)
+        ->first();
+        
+        if ($registration) {
+            return response()->json(['error' => 'This delegate from '. $request->localChurch .' is already registered.'], 500);
+        }
+    }
+
     /**
      * Show the form for creating a new registration.
      *

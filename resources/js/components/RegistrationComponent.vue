@@ -23,12 +23,12 @@
                                 </el-form-item>
                             </div>
                             <div class="col-md-6">
-                                <el-form-item label="First Name" prop="firstName" required>
+                                <el-form-item class="check-name" label="First Name" prop="firstName" required>
                                     <el-input v-model="ruleForm.firstName"></el-input>
                                 </el-form-item>
                             </div>
                             <div class="col-md-6">
-                                <el-form-item label="Last Name" prop="lastName" required>
+                                <el-form-item class="check-name" label="Last Name" prop="lastName" required>
                                     <el-input v-model="ruleForm.lastName"></el-input>
                                 </el-form-item>
                             </div>
@@ -101,6 +101,38 @@
 <script>
     export default {
         data() {
+            var checkName = async (rule, value, callback) => {
+                var fields = document.querySelectorAll(".check-name");
+                for (var i = 0; i < fields.length; i++) {
+                    var str = fields[i].classList.remove("is-error")
+                }
+
+                const loading = this.$loading({
+                            lock: true,
+                            text: 'Loading',
+                            background: 'rgba(0, 0, 0, 0.7)'
+                        });
+
+                await axios.get(`/registration/validate`, {
+                    params: {
+                        firstName: this.ruleForm.firstName,
+                        lastName: this.ruleForm.lastName,
+                        localChurch: this.ruleForm.localChurch
+                    }
+                })
+                .then(async (response) => {
+                    loading.close()
+                }).catch((error) => {
+                    loading.close()
+
+                    var fields = document.querySelectorAll(".check-name");
+                    for (var i = 0; i < fields.length; i++) {
+                        var str = fields[i].classList.add("is-error")
+                    }
+
+                    callback(new Error(error.response.data.error))
+                });
+            };
             return {
                 ruleForm: {
                     email: '',
@@ -120,6 +152,7 @@
                         { required: true, message: 'Please input Email Address', trigger: ['blur', 'change']}
                     ],
                     firstName: [
+                        { validator: checkName, trigger: ['submit'] },
                         { required: true, message: 'Please input First Name', trigger: ['blur', 'change']}
                     ],
                     lastName: [

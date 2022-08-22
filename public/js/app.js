@@ -7374,6 +7374,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       deep: true
     }
   },
+  mounted: function mounted() {// var data = {"email":"melanie.ngitngit@yahoo.com","firstName":"Melanie","lastName":"Ngitngit","facebookName":"Melanie Ngitngit","registrationType":"Guest","localChurch":"Muntinlupa","country":"Philippines","awtaCardNumber":"","category":"Free","attendingOption":"Online","withAwtaCard":""}
+    // this.$emit('next', data);  
+  },
   methods: {
     getDelegateData: function getDelegateData(formName) {
       var _this2 = this;
@@ -7575,6 +7578,76 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
+    var _this = this;
+
+    var checkName = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(rule, value, callback) {
+        var fields, i, str, loading;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                fields = document.querySelectorAll(".check-name");
+
+                for (i = 0; i < fields.length; i++) {
+                  str = fields[i].classList.remove("is-error");
+                }
+
+                loading = _this.$loading({
+                  lock: true,
+                  text: 'Loading',
+                  background: 'rgba(0, 0, 0, 0.7)'
+                });
+                _context2.next = 5;
+                return axios.get("/registration/validate", {
+                  params: {
+                    firstName: _this.ruleForm.firstName,
+                    lastName: _this.ruleForm.lastName,
+                    localChurch: _this.ruleForm.localChurch
+                  }
+                }).then( /*#__PURE__*/function () {
+                  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
+                    return _regeneratorRuntime().wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            loading.close();
+
+                          case 1:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee);
+                  }));
+
+                  return function (_x4) {
+                    return _ref2.apply(this, arguments);
+                  };
+                }())["catch"](function (error) {
+                  loading.close();
+                  var fields = document.querySelectorAll(".check-name");
+
+                  for (var i = 0; i < fields.length; i++) {
+                    var str = fields[i].classList.add("is-error");
+                  }
+
+                  callback(new Error(error.response.data.error));
+                });
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function checkName(_x, _x2, _x3) {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
     return {
       ruleForm: {
         email: '',
@@ -7596,6 +7669,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           trigger: ['blur', 'change']
         }],
         firstName: [{
+          validator: checkName,
+          trigger: ['submit']
+        }, {
           required: true,
           message: 'Please input First Name',
           trigger: ['blur', 'change']
@@ -7642,79 +7718,79 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {},
   methods: {
     submitForm: function submitForm(formName) {
-      var _this = this;
+      var _this2 = this;
 
       this.$refs[formName].validate( /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(valid) {
+        var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(valid) {
           var loading;
-          return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          return _regeneratorRuntime().wrap(function _callee5$(_context5) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context5.prev = _context5.next) {
                 case 0:
                   if (!valid) {
-                    _context3.next = 5;
+                    _context5.next = 5;
                     break;
                   }
 
-                  loading = _this.$loading({
+                  loading = _this2.$loading({
                     lock: true,
                     text: 'Loading',
                     background: 'rgba(0, 0, 0, 0.7)'
                   });
-                  setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-                    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                  setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+                    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
                       while (1) {
-                        switch (_context2.prev = _context2.next) {
+                        switch (_context4.prev = _context4.next) {
                           case 0:
-                            _context2.next = 2;
-                            return axios.post("/registration", _this.ruleForm).then( /*#__PURE__*/function () {
-                              var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
-                                return _regeneratorRuntime().wrap(function _callee$(_context) {
+                            _context4.next = 2;
+                            return axios.post("/registration", _this2.ruleForm).then( /*#__PURE__*/function () {
+                              var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(response) {
+                                return _regeneratorRuntime().wrap(function _callee3$(_context3) {
                                   while (1) {
-                                    switch (_context.prev = _context.next) {
+                                    switch (_context3.prev = _context3.next) {
                                       case 0:
                                         loading.close();
 
-                                        _this.showTicket(response.data.uuid);
+                                        _this2.showTicket(response.data.uuid);
 
-                                        _this.$refs[formName].resetFields();
+                                        _this2.$refs[formName].resetFields();
 
                                       case 3:
                                       case "end":
-                                        return _context.stop();
+                                        return _context3.stop();
                                     }
                                   }
-                                }, _callee);
+                                }, _callee3);
                               }));
 
-                              return function (_x2) {
-                                return _ref3.apply(this, arguments);
+                              return function (_x6) {
+                                return _ref5.apply(this, arguments);
                               };
                             }());
 
                           case 2:
                           case "end":
-                            return _context2.stop();
+                            return _context4.stop();
                         }
                       }
-                    }, _callee2);
+                    }, _callee4);
                   })), 1000);
-                  _context3.next = 6;
+                  _context5.next = 6;
                   break;
 
                 case 5:
-                  return _context3.abrupt("return", false);
+                  return _context5.abrupt("return", false);
 
                 case 6:
                 case "end":
-                  return _context3.stop();
+                  return _context5.stop();
               }
             }
-          }, _callee3);
+          }, _callee5);
         }));
 
-        return function (_x) {
-          return _ref.apply(this, arguments);
+        return function (_x5) {
+          return _ref3.apply(this, arguments);
         };
       }());
     },
@@ -7722,45 +7798,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       window.location.href = "registration/".concat(uuid);
     },
     resetForm: function resetForm(formName) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$confirm('This will remove your answers from all questions, and cannot be undone.', 'Clear form?', {
         confirmButtonText: 'Clear Form',
         cancelButtonText: 'Cancel'
       }).then(function () {
-        _this2.$refs[formName].resetFields();
+        _this3.$refs[formName].resetFields();
 
-        _this2.step = 1;
+        _this3.step = 1;
       });
     },
     nextStep: function nextStep(data) {
-      var _this3 = this;
+      var _this4 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _this3.ruleForm.email = data.email;
-                _this3.ruleForm.firstName = data.firstName;
-                _this3.ruleForm.lastName = data.lastName;
-                _this3.ruleForm.facebookName = data.facebookName;
-                _this3.ruleForm.registrationType = data.registrationType;
-                _this3.ruleForm.localChurch = data.localChurch;
-                _this3.ruleForm.country = data.country;
-                _this3.ruleForm.awtaCardNumber = data.awtaCardNumber;
-                _this3.ruleForm.category = data.category;
-                _this3.ruleForm.attendingOption = data.attendingOption;
-                _this3.ruleForm.withAwtaCard = data.withAwtaCard;
+                _this4.ruleForm.email = data.email;
+                _this4.ruleForm.firstName = data.firstName;
+                _this4.ruleForm.lastName = data.lastName;
+                _this4.ruleForm.facebookName = data.facebookName;
+                _this4.ruleForm.registrationType = data.registrationType;
+                _this4.ruleForm.localChurch = data.localChurch;
+                _this4.ruleForm.country = data.country;
+                _this4.ruleForm.awtaCardNumber = data.awtaCardNumber;
+                _this4.ruleForm.category = data.category;
+                _this4.ruleForm.attendingOption = data.attendingOption;
+                _this4.ruleForm.withAwtaCard = data.withAwtaCard;
                 console.log(data.withAwtaCard);
-                _this3.step = 2;
+                _this4.step = 2;
 
               case 13:
               case "end":
-                return _context4.stop();
+                return _context6.stop();
             }
           }
-        }, _callee4);
+        }, _callee6);
       }))();
     }
   }
@@ -8490,6 +8566,7 @@ var render = function render() {
   })], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
+    staticClass: "check-name",
     attrs: {
       label: "First Name",
       prop: "firstName",
@@ -8506,6 +8583,7 @@ var render = function render() {
   })], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
+    staticClass: "check-name",
     attrs: {
       label: "Last Name",
       prop: "lastName",
