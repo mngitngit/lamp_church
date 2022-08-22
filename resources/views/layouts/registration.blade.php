@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lampawta.online/"/>
     <meta property="og:title" content="Annual Worship and Thanksgiving 2022" />
-    <meta property="og:description" content="Chosen people of God in the old testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where &quot;offering made by fire unto the Lord&quot;&quot; are given to celebrate God. But with Christ's death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!"/>
+    <meta property="og:description" content="Lift up your eyes, the field is ripe unto harvest!"/>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
