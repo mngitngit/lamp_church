@@ -11,7 +11,7 @@ class AvailableUUIDsTableSeeder extends Seeder
 {
     public function run()
     {
-        AvailableUUID::insert([
+        AvailableUuid::insert([
             [
                 'local_church' => 'Binan',
                 'prefix' => 'LPBI',
