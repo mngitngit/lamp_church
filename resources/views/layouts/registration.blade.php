@@ -9,7 +9,7 @@
 
     <meta property="og:image" content="https://lampawta.online/images/banner.jpg" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://lampawta.online/"/>
+    <meta property="og:url" content="https://lampawta.online/registration"/>
     <meta property="og:title" content="Annual Worship and Thanksgiving 2022" />
     <meta property="og:description" content="Lift up your eyes, the field is ripe unto harvest!"/>
 
