@@ -46,6 +46,9 @@ var JsBarcode = require('jsbarcode')
 const app = new Vue({
     el: '#app',
     data: function() {
-        return { visible: false }
+        return { 
+            visible: false,
+            search: null
+        }
     }
 });

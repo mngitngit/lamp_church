@@ -7864,11 +7864,20 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
-    return {};
+    return {
+      tableData: []
+    };
+  },
+  mounted: function mounted() {
+    this.tableData = this.registrations;
   },
   methods: {
     handleClick: function handleClick(id) {
       window.location.href = "/payments/".concat(id, "/create");
+    },
+    filterHandler: function filterHandler(value, row, column) {
+      var property = column['property'];
+      return row[property] === value;
     }
   }
 });
@@ -8858,11 +8867,12 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("el-table", {
+    ref: "filterTable",
     staticStyle: {
       width: "100%"
     },
     attrs: {
-      data: _vm.registrations,
+      data: _vm.tableData,
       border: ""
     }
   }, [_c("el-table-column", {
@@ -8922,6 +8932,49 @@ var render = function render() {
       prop: "local_church",
       label: "Local Church",
       align: "center",
+      "column-key": "date",
+      filters: [{
+        text: "Binan",
+        value: "Binan"
+      }, {
+        text: "Cadiz",
+        value: "Cadiz"
+      }, {
+        text: "Canlubang",
+        value: "Canlubang"
+      }, {
+        text: "Dasmarinas",
+        value: "Dasmarinas"
+      }, {
+        text: "DC Cruz",
+        value: "DC Cruz"
+      }, {
+        text: "Granada",
+        value: "Granada"
+      }, {
+        text: "Iloilo",
+        value: "Iloilo"
+      }, {
+        text: "Isabela",
+        value: "Isabela"
+      }, {
+        text: "Muntinlupa",
+        value: "Muntinlupa"
+      }, {
+        text: "Pateros",
+        value: "Pateros"
+      }, {
+        text: "Tarlac",
+        value: "Tarlac"
+      }, {
+        text: "Valenzuela",
+        value: "Valenzuela"
+      }, {
+        text: "Villamar/Maao",
+        value: "Villamar/Maao"
+      }],
+      "filter-method": _vm.filterHandler,
+      "filter-placement": "bottom-end",
       width: "150"
     }
   }), _vm._v(" "), _c("el-table-column", {
@@ -9180,7 +9233,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#app',
   data: function data() {
     return {
-      visible: false
+      visible: false,
+      search: null
     };
   }
 });

@@ -1,6 +1,7 @@
 <template>
   <el-table
-    :data="registrations"
+    ref="filterTable"
+    :data="tableData"
     border
     style="width: 100%">
     <el-table-column
@@ -47,6 +48,10 @@
       prop="local_church"
       label="Local Church"
       align="center"
+      column-key="date"
+      :filters="[{text: 'Binan', value: 'Binan'},{text: 'Cadiz', value: 'Cadiz'},{text: 'Canlubang', value: 'Canlubang'},{text: 'Dasmarinas', value: 'Dasmarinas'},{text: 'DC Cruz', value: 'DC Cruz'},{text: 'Granada', value: 'Granada'},{text: 'Iloilo', value: 'Iloilo'},{text: 'Isabela', value: 'Isabela'},{text: 'Muntinlupa', value: 'Muntinlupa'},{text: 'Pateros', value: 'Pateros'},{text: 'Tarlac', value: 'Tarlac'},{text: 'Valenzuela', value: 'Valenzuela'},{text: 'Villamar/Maao', value: 'Villamar/Maao'}]"
+      :filter-method="filterHandler"
+      filter-placement="bottom-end"
       width="150">
     </el-table-column>
     <el-table-column
@@ -116,13 +121,20 @@
     },
     data() {
       return {
-        
+        tableData: []
       }
+    },
+    mounted() {
+      this.tableData = this.registrations
     },
     methods: {
         handleClick(id) {
-            window.location.href = `/payments/${id}/create`;
-        }
+          window.location.href = `/payments/${id}/create`;
+        },
+        filterHandler(value, row, column) {
+          const property = column['property'];
+          return row[property] === value;
+        },
     }
   }
 </script>

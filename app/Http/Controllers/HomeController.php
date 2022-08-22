@@ -17,10 +17,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        $registration = Registration::withSum('payments', 'amount');
+        
+        if ($request->search) {
+            $registration
+            ->where('fullname', 'LIKE', "%$request->search%")
+            ->orWhere('uuid', 'LIKE', "%$request->search%");
+        }
+
         return view('home', [
-            'registrations' => Registration::withSum('payments', 'amount')->get()
+            'registrations' => $registration->get(),
+            'search' => $request->search
         ]);
     }
 }
