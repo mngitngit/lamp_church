@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\AvailableUUID;
+use App\Models\AvailableUuid;
 use App\Models\LookUp;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
