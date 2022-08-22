@@ -7,6 +7,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <meta property="og:image" content="/images/banner.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lampawta.online/"/>
+    <meta property="og:title" content="Annual Worship and Thanksgiving 2022" />
+    <meta property="og:description" content="Chosen people of God in the old testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where &quot;offering made by fire unto the Lord&quot;&quot; are given to celebrate God. But with Christ's death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!"/>
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
@@ -19,12 +25,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <meta property="og:image" content="/images/banner.jpg" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://lampawta.online/"/>
-    <meta property="og:title" content="Annual Worship and Thanksgiving 2022" />
-    <meta property="og:description" content="Chosen people of God in the old testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where "offering made by fire unto the Lord" are given to celebrate God. But with Christ's death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!"/>
 </head>
 <body>
     <div id="app">
