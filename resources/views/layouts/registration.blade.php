@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta property="og:image" content="/images/banner.jpg" />
+    <meta property="og:image" content="https://lampawta.online/images/banner.jpg" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lampawta.online/"/>
     <meta property="og:title" content="Annual Worship and Thanksgiving 2022" />
