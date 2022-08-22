@@ -22,10 +22,10 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost'" shadow="hover" class="mb-3">
+        <el-card v-if="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3">
             <div class="row">
                 <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
-                    <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost'">
+                    <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'">
                         <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
                             <el-option value="Hybrid" label="Hybrid"></el-option>
                             <el-option value="Online" label="Online"></el-option>
@@ -35,28 +35,28 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.withAwtaCard === 'yes'" shadow="hover" class="mb-3">
+        <el-card v-if="ruleForm.withAwtaCard === 'yes' && ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3">
             <div class="row">
                 <div class="col-md-6">
-                    <el-form-item label="What is your AWTA card number?" prop="awtaCardNumber" :required="ruleForm.withAwtaCard === 'yes'">
+                    <el-form-item label="What is your AWTA card number?" prop="awtaCardNumber" :required="ruleForm.withAwtaCard === 'yes' && ruleForm.registrationType === 'Member'">
                         <el-input v-model="ruleForm.awtaCardNumber" :clearable="true"></el-input>
                     </el-form-item>
                 </div>
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.withAwtaCard === 'lost'" shadow="hover" class="mb-3">
+        <el-card v-if="ruleForm.withAwtaCard === 'lost' && ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3">
             <div class="row">
                 <!-- Please enter your Last Name -->
                 <div class="col-md-6">
-                    <el-form-item label="What is your last name?" prop="lastname" :required="ruleForm.withAwtaCard === 'lost'">
+                    <el-form-item label="What is your last name?" prop="lastname" :required="ruleForm.withAwtaCard === 'lost' && ruleForm.registrationType === 'Member'">
                         <el-input v-model="ruleForm.lastname" :clearable="true"></el-input>
                     </el-form-item>
                 </div>
 
                 <!-- Local Church -->
                 <div class="col-md-6">
-                    <el-form-item label="From which local church are you?" prop="localChurch" :required="ruleForm.withAwtaCard === 'lost'">
+                    <el-form-item label="From which local church are you?" prop="localChurch" :required="ruleForm.withAwtaCard === 'lost' && ruleForm.registrationType === 'Member'">
                         <el-select v-model="ruleForm.localChurch" placeholder="Choose">
                             <el-option label="Binan" value="Binan"></el-option>
                             <el-option label="Cadiz" value="Cadiz"></el-option>
@@ -77,7 +77,7 @@
             </div>
         </el-card>
 
-        <el-card shadow="hover" v-if="tableData.length > 0" class="mb-3">
+        <el-card shadow="hover" v-if="tableData.length > 0 && ruleForm.registrationType === 'Member'" class="mb-3">
             <div class="row">
                 <div class="col-md-12">
                     <div class="el-form-item is-success is-required mb-0">

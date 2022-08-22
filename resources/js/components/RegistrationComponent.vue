@@ -72,7 +72,7 @@
                             <div class="col-md-6">
                                 <el-form-item label="Country" prop="country" required>
                                     <el-select v-model="ruleForm.country" placeholder="Choose">
-                                        <el-option label="Philippines" value="Philippines"></el-option>
+                                        <el-option v-for="country in countries" v-bind:key="country" :label="country" :value="country"></el-option>
                                     </el-select>
                                 </el-form-item>
                             </div>
@@ -177,7 +177,8 @@
                         { required: true, message: 'Please select your attending option', trigger: 'blur'},
                     ]
                 },
-                step: 1
+                step: 1,
+                countries: this.$allCountries
             }
         },
         mounted() {

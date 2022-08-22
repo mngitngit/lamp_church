@@ -30,6 +30,9 @@ import {func} from '../js/func.js';
 
 import locale from 'element-ui/lib/locale/lang/en'
 
+import { allCountries } from '../js/countries';
+Vue.prototype.$allCountries = allCountries
+
 Vue.prototype.$func = func
 
 // Loading.service({ fullscreen: true })

@@ -21,6 +21,7 @@ class Registration extends Model
         'local_church',
         'country',
         'category',
+        'rate',
         'payment_status',
         'other_details',
         'attending_option'

@@ -88,16 +88,8 @@
         <template slot-scope="scope">
             <el-alert
                 class="py-1 text-xs d-inline"
-                v-if="scope.row.payment_status === 'Paid'"
-                title="Paid"
-                type="success"
-                :closable="false">
-            </el-alert>
-            <el-alert
-                class="py-1 text-xs d-inline"
-                v-else
                 :title="scope.row.payment_status"
-                type="warning"
+                :type="scope.row.payment_status === 'Paid' || scope.row.payment_status === 'Free' ? 'success' : 'warning'"
                 :closable="false">
             </el-alert>
         </template>

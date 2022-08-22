@@ -7712,7 +7712,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           trigger: 'blur'
         }]
       },
-      step: 1
+      step: 1,
+      countries: this.$allCountries
     };
   },
   mounted: function mounted() {},
@@ -7932,24 +7933,14 @@ var render = function render() {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-4 mb-3"
-  }, [_c("small", [_vm._v("Payment Status")]), _vm._v(" "), _vm.data.payment_status === "Paid" ? _c("el-alert", {
-    staticClass: "py-1 text-xs d-inline d-block",
-    staticStyle: {
-      width: "fit-content"
-    },
-    attrs: {
-      title: "Paid",
-      type: "success",
-      closable: false
-    }
-  }) : _c("el-alert", {
+  }, [_c("small", [_vm._v("Payment Status")]), _vm._v(" "), _c("el-alert", {
     staticClass: "py-1 text-xs d-inline d-block",
     staticStyle: {
       width: "fit-content"
     },
     attrs: {
       title: _vm.data.payment_status,
-      type: "warning",
+      type: _vm.data.payment_status === "Paid" || _vm.data.payment_status === "Free" ? "success" : "warning",
       closable: false
     }
   })], 1), _vm._v(" "), _c("div", {
@@ -7964,7 +7955,7 @@ var render = function render() {
     attrs: {
       registration: _vm.data
     }
-  })], 1), _vm._v(" "), _vm.data.payment_status != "Paid" ? _c("div", {
+  })], 1), _vm._v(" "), _vm.data.payment_status != "Paid" && _vm.data.payment_status != "Free" ? _c("div", {
     staticClass: "card-body border-top pb-0"
   }, [_c("el-form", {
     ref: "ruleForm",
@@ -8030,7 +8021,7 @@ var render = function render() {
       },
       expression: "user.name"
     }
-  })], 1)], 1)])])], 1) : _vm._e()]), _vm._v(" "), _vm.data.payment_status != "Paid" ? _c("el-button", {
+  })], 1)], 1)])])], 1) : _vm._e()]), _vm._v(" "), _vm.data.payment_status != "Paid" && _vm.data.payment_status != "Free" ? _c("el-button", {
     attrs: {
       type: "primary"
     },
@@ -8209,7 +8200,7 @@ var render = function render() {
       label: "yes, and I still have it.",
       value: "yes"
     }
-  })], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost" ? _c("el-card", {
+  })], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
@@ -8222,7 +8213,7 @@ var render = function render() {
     attrs: {
       label: "How will you attend the AWTA?",
       prop: "attendingOption",
-      required: _vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost"
+      required: (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member"
     }
   }, [_c("el-select", {
     attrs: {
@@ -8245,7 +8236,7 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" ? _c("el-card", {
+  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
@@ -8258,7 +8249,7 @@ var render = function render() {
     attrs: {
       label: "What is your AWTA card number?",
       prop: "awtaCardNumber",
-      required: _vm.ruleForm.withAwtaCard === "yes"
+      required: _vm.ruleForm.withAwtaCard === "yes" && _vm.ruleForm.registrationType === "Member"
     }
   }, [_c("el-input", {
     attrs: {
@@ -8271,7 +8262,7 @@ var render = function render() {
       },
       expression: "ruleForm.awtaCardNumber"
     }
-  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "lost" ? _c("el-card", {
+  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "lost" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
@@ -8284,7 +8275,7 @@ var render = function render() {
     attrs: {
       label: "What is your last name?",
       prop: "lastname",
-      required: _vm.ruleForm.withAwtaCard === "lost"
+      required: _vm.ruleForm.withAwtaCard === "lost" && _vm.ruleForm.registrationType === "Member"
     }
   }, [_c("el-input", {
     attrs: {
@@ -8303,7 +8294,7 @@ var render = function render() {
     attrs: {
       label: "From which local church are you?",
       prop: "localChurch",
-      required: _vm.ruleForm.withAwtaCard === "lost"
+      required: _vm.ruleForm.withAwtaCard === "lost" && _vm.ruleForm.registrationType === "Member"
     }
   }, [_c("el-select", {
     attrs: {
@@ -8381,7 +8372,7 @@ var render = function render() {
       label: "Villamar/Maao",
       value: "Villamar/Maao"
     }
-  })], 1)], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.tableData.length > 0 ? _c("el-card", {
+  })], 1)], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.tableData.length > 0 && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
@@ -8768,12 +8759,15 @@ var render = function render() {
       },
       expression: "ruleForm.country"
     }
-  }, [_c("el-option", {
-    attrs: {
-      label: "Philippines",
-      value: "Philippines"
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("div", {
+  }, _vm._l(_vm.countries, function (country) {
+    return _c("el-option", {
+      key: country,
+      attrs: {
+        label: country,
+        value: country
+      }
+    });
+  }), 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
@@ -8981,18 +8975,11 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [scope.row.payment_status === "Paid" ? _c("el-alert", {
-          staticClass: "py-1 text-xs d-inline",
-          attrs: {
-            title: "Paid",
-            type: "success",
-            closable: false
-          }
-        }) : _c("el-alert", {
+        return [_c("el-alert", {
           staticClass: "py-1 text-xs d-inline",
           attrs: {
             title: scope.row.payment_status,
-            type: "warning",
+            type: scope.row.payment_status === "Paid" || scope.row.payment_status === "Free" ? "success" : "warning",
             closable: false
           }
         })];
@@ -9152,6 +9139,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/app.css */ "./resources/css/app.css");
 /* harmony import */ var _js_func_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/func.js */ "./resources/js/func.js");
 /* harmony import */ var element_ui_lib_locale_lang_en__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! element-ui/lib/locale/lang/en */ "./node_modules/element-ui/lib/locale/lang/en.js");
+/* harmony import */ var _js_countries__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../js/countries */ "./resources/js/countries.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -9177,6 +9165,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('add-payment', (__webpack_
 
 
 
+
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.$allCountries = _js_countries__WEBPACK_IMPORTED_MODULE_6__.allCountries;
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.$func = _js_func_js__WEBPACK_IMPORTED_MODULE_4__.func; // Loading.service({ fullscreen: true })
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].config.lang = 'en';
@@ -9230,6 +9220,21 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/countries.js":
+/*!***********************************!*\
+  !*** ./resources/js/countries.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "allCountries": () => (/* binding */ allCountries)
+/* harmony export */ });
+var allCountries = ['Philippines', 'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic (CAR)', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo, Democratic Republic of the', 'Congo, Republic of the', 'Costa Rica', 'Cote dIvoire', 'Croatia', 'Cuba', 'Cyprus', 'Czechia', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates (UAE)', 'United Kingdom (UK)', 'United States of America (USA)', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City (Holy See)', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'];
 
 /***/ }),
 

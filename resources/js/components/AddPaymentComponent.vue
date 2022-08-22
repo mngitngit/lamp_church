@@ -8,17 +8,8 @@
                     <el-alert
                         class="py-1 text-xs d-inline d-block"
                         style="width: fit-content;"
-                        v-if="data.payment_status === 'Paid'"
-                        title="Paid"
-                        type="success"
-                        :closable="false">
-                    </el-alert>
-                    <el-alert
-                        class="py-1 text-xs d-inline d-block"
-                        style="width: fit-content;"
-                        v-else
                         :title="data.payment_status"
-                        type="warning"
+                        :type="data.payment_status === 'Paid' || data.payment_status === 'Free' ? 'success' : 'warning'"
                         :closable="false">
                     </el-alert>
                 </div>
@@ -35,7 +26,7 @@
             <payments-table :registration="data" />
         </div>
 
-        <div v-if="data.payment_status != 'Paid'" class="card-body border-top pb-0">
+        <div v-if="data.payment_status != 'Paid' && data.payment_status != 'Free'" class="card-body border-top pb-0">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                 <div class="row">
                     <div class="col-md-4 mb-3">
@@ -58,7 +49,7 @@
         </div>
     </div>
 
-    <el-button v-if="data.payment_status != 'Paid'" type="primary" @click="formSubmit()">Save Payment</el-button>
+    <el-button v-if="data.payment_status != 'Paid' && data.payment_status != 'Free'" type="primary" @click="formSubmit()">Save Payment</el-button>
 </div>
 </template>
 
