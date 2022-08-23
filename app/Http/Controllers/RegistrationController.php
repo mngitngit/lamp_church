@@ -52,7 +52,7 @@ class RegistrationController extends Controller
             $uuid = UUID::issue($request->localChurch);
         }
         
-        if ($request->withAwtaCard === 'yes') {
+        if ($request->withAwtaCard === 'yes' || $request->withAwtaCard === 'lost') {
             $uuid = $request->awtaCardNumber;
         }
 
@@ -71,7 +71,8 @@ class RegistrationController extends Controller
             'local_church' => $request->localChurch,
             'country' => $request->country,
             'category' => $request->category,
-            'attending_option' => $request->attendingOption
+            'attending_option' => $request->attendingOption,
+            'with_awta_card' => $request->withAwtaCard
         ]);
 
         $lookup = LookUp::where('awta_card_number', $request->awtaCardNumber)->first();

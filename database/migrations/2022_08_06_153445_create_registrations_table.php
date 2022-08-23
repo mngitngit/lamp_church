@@ -28,6 +28,7 @@ class CreateRegistrationsTable extends Migration
             $table->string('attending_option');
             $table->decimal('rate', 9, 3)->default(0.000);
             $table->string('payment_status')->default('Unsettled');
+            $table->string('with_awta_card')->default('none');
             $table->timestamps();
         });
     }

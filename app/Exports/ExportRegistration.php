@@ -25,7 +25,9 @@ class ExportRegistration implements FromCollection, WithHeadings
             'country',
             'category',
             'attending_option',
-            'payment_status'
+            'with_awta_card',
+            'rate',
+            'payment_status',
         ))
         ->withSum('payments', 'amount')
         ->get();
@@ -45,9 +47,10 @@ class ExportRegistration implements FromCollection, WithHeadings
             'Country',
             'Category',
             'Attending Option',
+            'with AWTA Card number?',
+            'Rate',
             'Payment Status',
-            'Total Amount Paid',
-            'Rate'
+            'Total Amount Paid'
         );
     }
 }

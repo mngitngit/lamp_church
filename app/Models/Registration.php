@@ -24,7 +24,8 @@ class Registration extends Model
         'rate',
         'payment_status',
         'other_details',
-        'attending_option'
+        'attending_option',
+        'with_awta_card'
     ];
 
     /**

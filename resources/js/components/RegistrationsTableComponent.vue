@@ -67,6 +67,12 @@
       width="130">
     </el-table-column>
     <el-table-column
+      prop="with_awta_card"
+      label="with AWTA card number?"
+      align="center"
+      width="130">
+    </el-table-column>
+    <el-table-column
       prop="rate"
       label="Rate"
       align="center"

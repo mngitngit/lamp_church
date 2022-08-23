@@ -13,9 +13,9 @@
                 <div v-if="ruleForm.registrationType === 'Member'" class="col-md-6">
                     <el-form-item label="Do you have an awta card?" prop="withAwtaCard" required>
                         <el-select v-model="ruleForm.withAwtaCard" placeholder="Choose">
-                            <el-option label="none, I’m a new member." value="none"></el-option>
-                            <el-option label="yes, but I lost it." value="lost"></el-option>
-                            <el-option label="yes, and I still have it." value="yes"></el-option>
+                            <el-option label="None, I’m a new member." value="none"></el-option>
+                            <el-option label="Yes, but I lost it." value="lost"></el-option>
+                            <el-option label="Yes, and I still have it." value="yes"></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
@@ -38,7 +38,7 @@
         <el-card v-if="ruleForm.withAwtaCard === 'yes' && ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3">
             <div class="row">
                 <div class="col-md-6">
-                    <el-form-item label="What is your AWTA card number?" prop="awtaCardNumber" :required="ruleForm.withAwtaCard === 'yes' && ruleForm.registrationType === 'Member'">
+                    <el-form-item class="transform-uppercase" label="What is your AWTA card number?" prop="awtaCardNumber" :required="ruleForm.withAwtaCard === 'yes' && ruleForm.registrationType === 'Member'">
                         <el-input v-model="ruleForm.awtaCardNumber" :clearable="true"></el-input>
                     </el-form-item>
                 </div>
@@ -197,7 +197,7 @@ export default {
                 ],
                 awtaCardNumber: [
                     { validator: checkAwtaCardNumber, trigger: ['submit'] },
-                    { required: true, message: 'Please input your AWTA Card Number', trigger: 'change'}
+                    { required: true, message: 'Please input your AWTA Card Number', trigger: ['blur', 'change']}
                 ]
             },
             data: {
@@ -222,14 +222,17 @@ export default {
                 this.rules.lastname[0].required = this.ruleForm.withAwtaCard === 'lost'
                 this.rules.localChurch[0].required = this.ruleForm.withAwtaCard === 'lost'
                 this.tableData = []
+
+                if (this.ruleForm.withAwtaCard === 'yes') {
+                    setTimeout(() => {
+                        document.getElementsByClassName('transform-uppercase')[0].getElementsByClassName('el-form-item__content')[0].getElementsByClassName('el-input')[0].getElementsByTagName('input')[0].style = 'text-transform: uppercase !important'
+                    }, 500);
+                }
             },
             deep: true
         }
     },
-    mounted() {
-        // var data = {"email":"melanie.ngitngit@yahoo.com","firstName":"Melanie","lastName":"Ngitngit","facebookName":"Melanie Ngitngit","registrationType":"Guest","localChurch":"Muntinlupa","country":"Philippines","awtaCardNumber":"","category":"Free","attendingOption":"Online","withAwtaCard":""}
-        // this.$emit('next', data);  
-    },
+    mounted() {},
     methods: {
         getDelegateData(formName) {
             this.$refs[formName].validate(async (valid) => {
@@ -297,7 +300,7 @@ export default {
                     this.data.awtaCardNumber = val.awta_card_number
                     this.data.category = val.category
                     this.data.attendingOption = this.ruleForm.attendingOption
-                    this.data.withAwtaCard = 'yes'
+                    this.data.withAwtaCard = 'lost'
                     
                     this.submitForm()
                 })
@@ -331,5 +334,9 @@ export default {
 <style scoped>
 .el-table tr {
     cursor: pointer;
+}
+
+.el-input--suffix .el-input__inner{
+    text-transform: uppercase !important;
 }
 </style>
