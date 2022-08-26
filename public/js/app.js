@@ -7308,13 +7308,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         attendingOption: '',
         withAccommodation: '',
         modeOfTranspo: '',
-        priorityDates: [] // awtaCardNumber: ''
-        // registrationType: 'Member',
-        // withAwtaCard: 'lost',
-        // lastname: 'Ngitngit',
-        // localChurch: 'Muntinlupa',
-        // awtaCardNumber: ''
-
+        priorityDates: []
       },
       rules: {
         registrationType: [{

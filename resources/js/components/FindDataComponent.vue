@@ -209,12 +209,6 @@ export default {
                 withAccommodation: '',
                 modeOfTranspo: '',
                 priorityDates: []
-                // awtaCardNumber: ''
-                // registrationType: 'Member',
-                // withAwtaCard: 'lost',
-                // lastname: 'Ngitngit',
-                // localChurch: 'Muntinlupa',
-                // awtaCardNumber: ''
             },
             rules: {
                 registrationType: [
