@@ -25,7 +25,10 @@ class Registration extends Model
         'payment_status',
         'other_details',
         'attending_option',
-        'with_awta_card'
+        'with_awta_card',
+        'with_accommodation',
+        'mode_of_transpo',
+        'priority_dates'
     ];
 
     /**

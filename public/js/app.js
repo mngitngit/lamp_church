@@ -7203,11 +7203,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             _this.data.awtaCardNumber = response.data.awta_card_number;
                             _this.data.category = response.data.category;
                             _this.data.attendingOption = _this.ruleForm.attendingOption;
+                            _this.data.withAccommodation = _this.ruleForm.withAccommodation;
+                            _this.data.modeOfTranspo = _this.ruleForm.modeOfTranspo;
+                            _this.data.priorityDates = _this.ruleForm.priorityDates;
                             _this.data.withAwtaCard = 'yes';
                             _this.isLoading = false;
                             callback();
 
-                          case 13:
+                          case 16:
                           case "end":
                             return _context.stop();
                         }
@@ -7302,7 +7305,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         withAwtaCard: '',
         lastname: '',
         localChurch: '',
-        attendingOption: '' // awtaCardNumber: ''
+        attendingOption: '',
+        withAccommodation: '',
+        modeOfTranspo: '',
+        priorityDates: [] // awtaCardNumber: ''
         // registrationType: 'Member',
         // withAwtaCard: 'lost',
         // lastname: 'Ngitngit',
@@ -7314,6 +7320,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         registrationType: [{
           required: true,
           message: 'Please select Registration Type',
+          trigger: ['blur', 'change']
+        }],
+        withAccommodation: [{
+          required: true,
+          message: 'Please select an answer',
+          trigger: ['blur', 'change']
+        }],
+        modeOfTranspo: [{
+          required: true,
+          message: 'Please select your mode of transportation',
+          trigger: ['blur', 'change']
+        }],
+        priorityDates: [{
+          required: true,
+          message: 'Please select atleast one day',
           trigger: 'change'
         }],
         withAwtaCard: [{
@@ -7337,7 +7358,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         attendingOption: [{
           required: true,
           message: 'Please select your attending option',
-          trigger: 'blur'
+          trigger: ['blur', 'change']
         }],
         awtaCardNumber: [{
           validator: checkAwtaCardNumber,
@@ -7359,7 +7380,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         awtaCardNumber: '',
         category: 'Adult',
         attendingOption: '',
-        withAwtaCard: ''
+        withAwtaCard: '',
+        withAccommodation: '',
+        modeOfTranspo: '',
+        priorityDates: []
       },
       isLoading: false
     };
@@ -7378,6 +7402,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       },
       deep: true
+    },
+    'ruleForm.attendingOption': function ruleFormAttendingOption(data) {
+      this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : '';
+      this.ruleForm.modeOfTranspo = '';
+      this.ruleForm.priorityDates = [];
+    },
+    'ruleForm.withAwtaCard': function ruleFormWithAwtaCard(data) {
+      this.ruleForm.lastname = '';
+      this.ruleForm.localChurch = '';
+      this.ruleForm.attendingOption = '';
+      this.ruleForm.withAccommodation = '';
+      this.ruleForm.modeOfTranspo = '';
+      this.ruleForm.priorityDates = [];
     }
   },
   mounted: function mounted() {},
@@ -7409,12 +7446,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.data.registrationType = 'Member';
                     _this2.data.category = 'Adult';
                     _this2.data.attendingOption = _this2.ruleForm.attendingOption;
+                    _this2.data.withAccommodation = 'none';
+                    _this2.data.modeOfTranspo = _this2.ruleForm.modeOfTranspo;
+                    _this2.data.priorityDates = _this2.ruleForm.priorityDates;
 
                     _this2.$emit('next', _this2.data);
                   } else if (_this2.ruleForm.registrationType === 'Guest') {
                     _this2.data.registrationType = 'Guest';
                     _this2.data.category = 'Free';
                     _this2.data.attendingOption = 'Online';
+                    _this2.data.withAccommodation = 'none';
+                    _this2.data.withAwtaCard = 'none';
 
                     _this2.$emit('next', _this2.data);
                   }
@@ -7453,6 +7495,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.data.category = 'Adult';
       this.data.attendingOption = '';
       this.data.withAwtaCard = '';
+      this.data.withAccommodation = 'none';
+      this.data.modeOfTranspo = '';
+      this.data.priorityDates = [];
     },
     handleRowClick: function handleRowClick(val) {
       var _this3 = this;
@@ -7479,6 +7524,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this3.data.category = val.category;
                     _this3.data.attendingOption = _this3.ruleForm.attendingOption;
                     _this3.data.withAwtaCard = 'lost';
+                    _this3.data.withAccommodation = _this3.ruleForm.withAccommodation;
+                    _this3.data.modeOfTranspo = _this3.ruleForm.modeOfTranspo;
+                    _this3.data.priorityDates = _this3.ruleForm.priorityDates;
 
                     _this3.submitForm();
                   });
@@ -7497,6 +7545,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     submitForm: function submitForm() {
       var _this4 = this;
 
+      console.log(this.data);
       var loading = this.$loading({
         lock: true,
         text: 'Loading',
@@ -7664,14 +7713,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         awtaCardNumber: '',
         category: 'Adult',
         attendingOption: '',
-        withAwtaCard: ''
+        withAwtaCard: '',
+        withAccommodation: '',
+        modeOfTranspo: '',
+        priorityDates: []
       },
       rules: {
-        email: [{
-          required: true,
-          message: 'Please input Email Address',
-          trigger: ['blur', 'change']
-        }],
         firstName: [{
           validator: checkName,
           trigger: ['submit']
@@ -7714,13 +7761,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           required: true,
           message: 'Please select your attending option',
           trigger: 'blur'
+        }],
+        withAccommodation: [{
+          required: true,
+          message: 'Please select an answer',
+          trigger: ['blur', 'change']
+        }],
+        modeOfTranspo: [{
+          required: true,
+          message: 'Please select your mode of transportation',
+          trigger: ['blur', 'change']
+        }],
+        priorityDates: [{
+          required: true,
+          message: 'Please select atleast one day',
+          trigger: 'change'
         }]
       },
       step: 1,
       countries: this.$allCountries
     };
   },
-  mounted: function mounted() {},
+  watch: {
+    'ruleForm.attendingOption': function ruleFormAttendingOption(data) {
+      this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : '';
+      this.ruleForm.modeOfTranspo = '';
+      this.ruleForm.priorityDates = [];
+    }
+  },
   methods: {
     submitForm: function submitForm(formName) {
       var _this2 = this;
@@ -7833,10 +7901,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.ruleForm.category = data.category;
                 _this4.ruleForm.attendingOption = data.attendingOption;
                 _this4.ruleForm.withAwtaCard = data.withAwtaCard;
-                console.log(data.withAwtaCard);
+                _this4.ruleForm.withAccommodation = data.withAccommodation;
+                _this4.ruleForm.modeOfTranspo = data.modeOfTranspo;
+                _this4.ruleForm.priorityDates = data.priorityDates;
                 _this4.step = 2;
 
-              case 13:
+              case 15:
               case "end":
                 return _context6.stop();
             }
@@ -8144,7 +8214,7 @@ var render = function render() {
       "label-width": "160px"
     }
   }, [_c("el-card", {
-    staticClass: "mb-3 pt-3",
+    staticClass: "mb-3",
     attrs: {
       shadow: "hover"
     }
@@ -8249,7 +8319,106 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "What is your primary mode of transportation?",
+      prop: "modeOfTranspo",
+      required: (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.modeOfTranspo,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "modeOfTranspo", $$v);
+      },
+      expression: "ruleForm.modeOfTranspo"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      value: "Private Vehicle",
+      label: "Private Vehicle"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "Carpool",
+      label: "Carpool"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "Public Transportation",
+      label: "Public Transportation"
+    }
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Will you book a hotel or any accommodation nearby?",
+      prop: "withAccommodation",
+      required: (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
+    }
+  }, [_c("el-radio-group", {
+    model: {
+      value: _vm.ruleForm.withAccommodation,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "withAccommodation", $$v);
+      },
+      expression: "ruleForm.withAccommodation"
+    }
+  }, [_c("el-radio", {
+    attrs: {
+      label: "yes"
+    }
+  }, [_vm._v("Yes")]), _vm._v(" "), _c("el-radio", {
+    attrs: {
+      label: "none"
+    }
+  }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)",
+      prop: "priorityDates",
+      required: (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
+    }
+  }, [_c("el-checkbox-group", {
+    model: {
+      value: _vm.ruleForm.priorityDates,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "priorityDates", $$v);
+      },
+      expression: "ruleForm.priorityDates"
+    }
+  }, [_c("el-checkbox", {
+    attrs: {
+      label: "December 27",
+      name: "priorityDates"
+    }
+  }), _vm._v(" "), _c("el-checkbox", {
+    attrs: {
+      label: "December 28",
+      name: "priorityDates"
+    }
+  }), _vm._v(" "), _c("el-checkbox", {
+    attrs: {
+      label: "December 29",
+      name: "priorityDates"
+    }
+  }), _vm._v(" "), _c("el-checkbox", {
+    attrs: {
+      label: "December 30",
+      name: "priorityDates"
+    }
+  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
@@ -8557,8 +8726,7 @@ var render = function render() {
   }, [_c("el-form-item", {
     attrs: {
       label: "Email Address",
-      prop: "email",
-      required: ""
+      prop: "email"
     }
   }, [_c("el-input", {
     model: {
@@ -8781,13 +8949,20 @@ var render = function render() {
         value: country
       }
     });
-  }), 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("div", {
+  }), 1)], 1)], 1)])]), _vm._v(" "), _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_vm.ruleForm.registrationType == "Member" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "How will you attend the AWTA?",
       prop: "attendingOption",
-      required: _vm.ruleForm.registrationType == "Member"
+      required: _vm.ruleForm.registrationType === "Member"
     }
   }, [_c("el-select", {
     attrs: {
@@ -8810,7 +8985,106 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), _c("el-row", [_c("div", {
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "What is your primary mode of transportation?",
+      prop: "modeOfTranspo",
+      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.modeOfTranspo,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "modeOfTranspo", $$v);
+      },
+      expression: "ruleForm.modeOfTranspo"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      value: "Private Vehicle",
+      label: "Private Vehicle"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "Carpool",
+      label: "Carpool"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "Public Transportation",
+      label: "Public Transportation"
+    }
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Will you book a hotel or any accommodation nearby?",
+      prop: "withAccommodation",
+      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
+    }
+  }, [_c("el-radio-group", {
+    model: {
+      value: _vm.ruleForm.withAccommodation,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "withAccommodation", $$v);
+      },
+      expression: "ruleForm.withAccommodation"
+    }
+  }, [_c("el-radio", {
+    attrs: {
+      label: "yes"
+    }
+  }, [_vm._v("Yes")]), _vm._v(" "), _c("el-radio", {
+    attrs: {
+      label: "none"
+    }
+  }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)",
+      prop: "priorityDates",
+      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
+    }
+  }, [_c("el-checkbox-group", {
+    model: {
+      value: _vm.ruleForm.priorityDates,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "priorityDates", $$v);
+      },
+      expression: "ruleForm.priorityDates"
+    }
+  }, [_c("el-checkbox", {
+    attrs: {
+      label: "December 27",
+      name: "priorityDates"
+    }
+  }), _vm._v(" "), _c("el-checkbox", {
+    attrs: {
+      label: "December 28",
+      name: "priorityDates"
+    }
+  }), _vm._v(" "), _c("el-checkbox", {
+    attrs: {
+      label: "December 29",
+      name: "priorityDates"
+    }
+  }), _vm._v(" "), _c("el-checkbox", {
+    attrs: {
+      label: "December 30",
+      name: "priorityDates"
+    }
+  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
@@ -16376,7 +16650,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

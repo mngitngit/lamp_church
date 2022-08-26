@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            LookUpTableSeeder::class,
             RatesTableSeeder::class,
-            AvailableUUIDsTableSeeder::class
+            AvailableUUIDsTableSeeder::class,
+            LookUpTableSeeder::class
         ]);
     }
 }

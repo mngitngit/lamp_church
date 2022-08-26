@@ -1,6 +1,9 @@
 .el-form-item__label {
     width: 100% !important;
     text-align: left !important;
+    line-height: 25px !important;
+    margin: 15px 0px 15px !important;
+    padding: 0;
 }
 
 .el-form-item__content label {

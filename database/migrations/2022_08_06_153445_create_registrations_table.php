@@ -16,11 +16,11 @@ class CreateRegistrationsTable extends Migration
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('firstname');
             $table->string('lastname');
             $table->string('fullname');
-            $table->string('facebook_name');
+            $table->string('facebook_name')->nullable();
             $table->string('registration_type');
             $table->string('local_church');
             $table->string('country');
@@ -29,6 +29,9 @@ class CreateRegistrationsTable extends Migration
             $table->decimal('rate', 9, 3)->default(0.000);
             $table->string('payment_status')->default('Unsettled');
             $table->string('with_awta_card')->default('none');
+            $table->string('with_accommodation')->default('none');
+            $table->string('mode_of_transpo')->nullable();
+            $table->json('priority_dates')->nullable();
             $table->timestamps();
         });
     }

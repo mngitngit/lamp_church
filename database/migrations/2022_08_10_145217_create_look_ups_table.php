@@ -15,10 +15,10 @@ class CreateLookUpsTable extends Migration
     {
         Schema::create('look_ups', function (Blueprint $table) {
             $table->string('awta_card_number')->primary();
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('firstname');
-            $table->string('lastname');
-            $table->string('facebook_name');
+            $table->string('lastname')->nullable();
+            $table->string('facebook_name')->nullable();
             $table->string('registration_type');
             $table->string('local_church');
             $table->string('country');

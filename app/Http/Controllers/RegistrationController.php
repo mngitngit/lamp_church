@@ -72,7 +72,10 @@ class RegistrationController extends Controller
             'country' => $request->country,
             'category' => $request->category,
             'attending_option' => $request->attendingOption,
-            'with_awta_card' => $request->withAwtaCard
+            'with_awta_card' => $request->withAwtaCard,
+            'with_accommodation' => $request->withAccommodation,
+            'mode_of_transpo' => $request->modeOfTranspo,
+            'priority_dates' => json_encode($request->priorityDates)
         ]);
 
         $lookup = LookUp::where('awta_card_number', $request->awtaCardNumber)->first();

@@ -1,6 +1,6 @@
 <template>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-        <el-card shadow="hover" class="mb-3 pt-3">
+        <el-card shadow="hover" class="mb-3                                                                                                                               ">
             <div class="row">
                 <div class="col-md-6">
                     <el-form-item label="Are you a guest or a member?" prop="registrationType" required>
@@ -22,7 +22,7 @@
             </div>
         </el-card>
 
-        <el-card v-if="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3">
+        <el-card v-if="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3                                                                                                                               ">
             <div class="row">
                 <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
                     <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'">
@@ -32,6 +32,38 @@
                         </el-select>
                     </el-form-item>
                 </div>
+
+                <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
+                    <el-form-item label="What is your primary mode of transportation?" prop="modeOfTranspo" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
+                        <el-select v-model="ruleForm.modeOfTranspo" placeholder="Choose">
+                            <el-option value="Private Vehicle" label="Private Vehicle"></el-option>
+                            <el-option value="Carpool" label="Carpool"></el-option>
+                            <el-option value="Public Transportation" label="Public Transportation"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </div>
+
+                <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-12">
+                    <el-form-item label="Will you book a hotel or any accommodation nearby?" prop="withAccommodation" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
+                        <el-radio-group v-model="ruleForm.withAccommodation">
+                            <el-radio label="yes">Yes</el-radio>
+                            <el-radio label="none">No</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                </div>
+            </div>
+        </el-card>
+
+        <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3                                                                                                                               ">
+            <div class="col-md-12">
+                <el-form-item label="In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)" prop="priorityDates" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
+                    <el-checkbox-group v-model="ruleForm.priorityDates">
+                    <el-checkbox label="December 27" name="priorityDates"></el-checkbox>
+                    <el-checkbox label="December 28" name="priorityDates"></el-checkbox>
+                    <el-checkbox label="December 29" name="priorityDates"></el-checkbox>
+                    <el-checkbox label="December 30" name="priorityDates"></el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
             </div>
         </el-card>
 
@@ -77,7 +109,7 @@
             </div>
         </el-card>
 
-        <el-card shadow="hover" v-if="tableData.length > 0 && ruleForm.registrationType === 'Member'" class="mb-3">
+        <el-card shadow="hover" v-if="tableData.length > 0 && ruleForm.registrationType === 'Member' " class="mb-3">
             <div class="row">
                 <div class="col-md-12">
                     <div class="el-form-item is-success is-required mb-0">
@@ -135,6 +167,9 @@ export default {
                     this.data.awtaCardNumber = response.data.awta_card_number
                     this.data.category = response.data.category
                     this.data.attendingOption = this.ruleForm.attendingOption
+                    this.data.withAccommodation = this.ruleForm.withAccommodation
+                    this.data.modeOfTranspo = this.ruleForm.modeOfTranspo
+                    this.data.priorityDates = this.ruleForm.priorityDates
                     this.data.withAwtaCard = 'yes'
                     this.isLoading = false
                     callback();
@@ -170,7 +205,10 @@ export default {
                 withAwtaCard: '',
                 lastname: '',
                 localChurch: '',
-                attendingOption: ''
+                attendingOption: '',
+                withAccommodation: '',
+                modeOfTranspo: '',
+                priorityDates: []
                 // awtaCardNumber: ''
                 // registrationType: 'Member',
                 // withAwtaCard: 'lost',
@@ -180,7 +218,16 @@ export default {
             },
             rules: {
                 registrationType: [
-                    { required: true, message: 'Please select Registration Type', trigger: 'change'}
+                    { required: true, message: 'Please select Registration Type', trigger: ['blur', 'change']}
+                ],
+                withAccommodation: [
+                    {required: true, message: 'Please select an answer', trigger: ['blur', 'change']}
+                ],
+                modeOfTranspo: [
+                    {required: true, message: 'Please select your mode of transportation', trigger: ['blur', 'change']}
+                ],
+                priorityDates: [
+                    {required: true, message: 'Please select atleast one day', trigger: 'change'}
                 ],
                 withAwtaCard: [
                     { required: true, message: 'Please select an answer', trigger: ['blur', 'change']}
@@ -193,7 +240,7 @@ export default {
                     { required: true, message: 'Please select your Local Church', trigger: ['blur', 'change']}
                 ],
                 attendingOption: [
-                    { required: true, message: 'Please select your attending option', trigger: 'blur'},
+                    { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
                 ],
                 awtaCardNumber: [
                     { validator: checkAwtaCardNumber, trigger: ['submit'] },
@@ -211,7 +258,10 @@ export default {
                 awtaCardNumber: '',
                 category: 'Adult',
                 attendingOption: '',
-                withAwtaCard: ''
+                withAwtaCard: '',
+                withAccommodation: '',
+                modeOfTranspo: '',
+                priorityDates: []
             },
             isLoading: false
         }
@@ -230,13 +280,26 @@ export default {
                 }
             },
             deep: true
+        },
+        'ruleForm.attendingOption'(data) {
+            this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : ''
+            this.ruleForm.modeOfTranspo = ''
+            this.ruleForm.priorityDates = []
+        },
+        'ruleForm.withAwtaCard'(data) {
+            this.ruleForm.lastname =''
+            this.ruleForm.localChurch =''
+            this.ruleForm.attendingOption =''
+            this.ruleForm.withAccommodation =''
+            this.ruleForm.modeOfTranspo =''
+            this.ruleForm.priorityDates =[]
         }
     },
     mounted() {},
     methods: {
         getDelegateData(formName) {
             this.$refs[formName].validate(async (valid) => {
-                if (valid) {   
+                if (valid) { 
                     if (this.ruleForm.registrationType === 'Member' && this.ruleForm.withAwtaCard === 'yes') {
                         this.$confirm(`Please click continue if you are ${this.data.firstName} ${this.data.lastName}.`, 'Warning', {
                             confirmButtonText: 'Continue',
@@ -252,6 +315,9 @@ export default {
                         this.data.registrationType = 'Member'
                         this.data.category = 'Adult'
                         this.data.attendingOption = this.ruleForm.attendingOption
+                        this.data.withAccommodation = 'none'
+                        this.data.modeOfTranspo = this.ruleForm.modeOfTranspo
+                        this.data.priorityDates = this.ruleForm.priorityDates
 
                         this.$emit('next', this.data);  
                     }
@@ -259,6 +325,8 @@ export default {
                         this.data.registrationType = 'Guest'
                         this.data.category = 'Free'
                         this.data.attendingOption = 'Online'
+                        this.data.withAccommodation = 'none'
+                        this.data.withAwtaCard = 'none'
 
                         this.$emit('next', this.data);  
                     }            
@@ -282,6 +350,9 @@ export default {
             this.data.category = 'Adult'
             this.data.attendingOption = ''
             this.data.withAwtaCard = ''
+            this.data.withAccommodation = 'none'
+            this.data.modeOfTranspo = ''
+            this.data.priorityDates = []
         },
         async handleRowClick(val) {
             if (!val.is_registered) {
@@ -301,6 +372,9 @@ export default {
                     this.data.category = val.category
                     this.data.attendingOption = this.ruleForm.attendingOption
                     this.data.withAwtaCard = 'lost'
+                    this.data.withAccommodation = this.ruleForm.withAccommodation
+                    this.data.modeOfTranspo = this.ruleForm.modeOfTranspo
+                    this.data.priorityDates = this.ruleForm.priorityDates
                     
                     this.submitForm()
                 })
@@ -309,6 +383,7 @@ export default {
             }
         },
         submitForm() {
+            console.log(this.data)
             const loading = this.$loading({
                 lock: true,
                 text: 'Loading',

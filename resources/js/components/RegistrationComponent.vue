@@ -18,7 +18,7 @@
                     <el-card shadow="hover" class="mb-4">
                         <div class="row">
                             <div class="col-md-12">
-                                <el-form-item label="Email Address" prop="email" required>
+                                <el-form-item label="Email Address" prop="email">
                                     <el-input v-model="ruleForm.email"></el-input>
                                 </el-form-item>
                             </div>
@@ -76,16 +76,55 @@
                                     </el-select>
                                 </el-form-item>
                             </div>
+                        </div>
+                    </el-card> 
+
+
+                    <el-card v-if="ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3                                                                                                                               ">
+                        <div class="row">
                             <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
-                                <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType == 'Member'">
+                                <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType === 'Member'">
                                     <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
                                         <el-option value="Hybrid" label="Hybrid"></el-option>
                                         <el-option value="Online" label="Online"></el-option>
                                     </el-select>
                                 </el-form-item>
                             </div>
+
+                            <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
+                                <el-form-item label="What is your primary mode of transportation?" prop="modeOfTranspo" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
+                                    <el-select v-model="ruleForm.modeOfTranspo" placeholder="Choose">
+                                        <el-option value="Private Vehicle" label="Private Vehicle"></el-option>
+                                        <el-option value="Carpool" label="Carpool"></el-option>
+                                        <el-option value="Public Transportation" label="Public Transportation"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </div>
+
+                            <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-12">
+                                <el-form-item label="Will you book a hotel or any accommodation nearby?" prop="withAccommodation" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
+                                    <el-radio-group v-model="ruleForm.withAccommodation">
+                                        <el-radio label="yes">Yes</el-radio>
+                                        <el-radio label="none">No</el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+                            </div>
                         </div>
                     </el-card>
+
+                    <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3                                                                                                                               ">
+                        <div class="col-md-12">
+                            <el-form-item label="In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)" prop="priorityDates" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
+                                <el-checkbox-group v-model="ruleForm.priorityDates">
+                                <el-checkbox label="December 27" name="priorityDates"></el-checkbox>
+                                <el-checkbox label="December 28" name="priorityDates"></el-checkbox>
+                                <el-checkbox label="December 29" name="priorityDates"></el-checkbox>
+                                <el-checkbox label="December 30" name="priorityDates"></el-checkbox>
+                                </el-checkbox-group>
+                            </el-form-item>
+                        </div>
+                    </el-card>
+
                     <el-row>
                         <div class="col-md-12">
                             <el-button type="warning" @click="submitForm('ruleForm')">Submit</el-button>
@@ -145,12 +184,12 @@
                     awtaCardNumber: '',
                     category: 'Adult',
                     attendingOption: '',
-                    withAwtaCard: ''
+                    withAwtaCard: '',
+                    withAccommodation: '',
+                    modeOfTranspo: '',
+                    priorityDates: []
                 },
                 rules: {
-                    email: [
-                        { required: true, message: 'Please input Email Address', trigger: ['blur', 'change']}
-                    ],
                     firstName: [
                         { validator: checkName, trigger: ['submit'] },
                         { required: true, message: 'Please input First Name', trigger: ['blur', 'change']}
@@ -175,14 +214,27 @@
                     ],
                     attendingOption: [
                         { required: true, message: 'Please select your attending option', trigger: 'blur'},
-                    ]
+                    ],
+                    withAccommodation: [
+                        {required: true, message: 'Please select an answer', trigger: ['blur', 'change']}
+                    ],
+                    modeOfTranspo: [
+                        {required: true, message: 'Please select your mode of transportation', trigger: ['blur', 'change']}
+                    ],
+                    priorityDates: [
+                        {required: true, message: 'Please select atleast one day', trigger: 'change'}
+                    ],
                 },
                 step: 1,
                 countries: this.$allCountries
             }
         },
-        mounted() {
-            
+        watch: {
+            'ruleForm.attendingOption'(data) {
+                this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : ''
+                this.ruleForm.modeOfTranspo = ''
+                this.ruleForm.priorityDates = []
+            }
         },
         methods: {
             submitForm(formName) {
@@ -233,7 +285,9 @@
                 this.ruleForm.category = data.category
                 this.ruleForm.attendingOption = data.attendingOption
                 this.ruleForm.withAwtaCard = data.withAwtaCard
-                console.log(data.withAwtaCard)
+                this.ruleForm.withAccommodation = data.withAccommodation
+                this.ruleForm.modeOfTranspo = data.modeOfTranspo
+                this.ruleForm.priorityDates = data.priorityDates
                 this.step = 2
             }
         }
