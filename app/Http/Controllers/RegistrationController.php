@@ -28,6 +28,15 @@ class RegistrationController extends Controller
         if ($registration) {
             return response()->json(['error' => 'This delegate from '. $request->localChurch .' is already registered.'], 500);
         }
+
+        $lookup = LookUp::where('firstname', $request->firstName)
+        ->where('lastname', $request->lastName)
+        ->where('local_church', $request->localChurch)
+        ->first();
+
+        if ($lookup) {
+            return response()->json(['error' => 'This delegate has already been issued with an AWTA card number. Please reach out to your local coordinator.'], 500);
+        }
     }
 
     /**
