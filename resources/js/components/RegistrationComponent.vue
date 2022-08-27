@@ -33,16 +33,8 @@
                                 </el-form-item>
                             </div>
                             <div class="col-md-12">
-                                <el-form-item label="Facebook Name" prop="facebookName" required>
+                                <el-form-item label="Facebook Name" prop="facebookName">
                                     <el-input v-model="ruleForm.facebookName" placeholder="If none, kindly type in the Facebook name of your event companion"></el-input>
-                                </el-form-item>
-                            </div>
-                            <div class="col-md-6">
-                                <el-form-item label="Registration type" prop="registrationType" required>
-                                    <el-select v-model="ruleForm.registrationType" placeholder="Choose">
-                                        <el-option label="Member" value="Member"></el-option>
-                                        <el-option label="Guest" value="Guest"></el-option>
-                                    </el-select>
                                 </el-form-item>
                             </div>
                             <div v-if="ruleForm.registrationType == 'Member' && ruleForm.withAwtaCard != 'none'" class="col-md-6">
@@ -193,12 +185,6 @@
                     ],
                     lastName: [
                         { required: true, message: 'Please input Last Name', trigger: ['blur', 'change']}
-                    ],
-                    facebookName: [
-                        { required: true, message: 'Please input Facebook Name', trigger: ['blur', 'change']}
-                    ],
-                    registrationType: [
-                        { required: true, message: 'Please select Registration Type', trigger: 'change'}
                     ],
                     localChurch: [
                         { required: true, message: 'Please select Local Church', trigger: 'change'}

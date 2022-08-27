@@ -7726,16 +7726,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           message: 'Please input Last Name',
           trigger: ['blur', 'change']
         }],
-        facebookName: [{
-          required: true,
-          message: 'Please input Facebook Name',
-          trigger: ['blur', 'change']
-        }],
-        registrationType: [{
-          required: true,
-          message: 'Please select Registration Type',
-          trigger: 'change'
-        }],
         localChurch: [{
           required: true,
           message: 'Please select Local Church',
@@ -8754,8 +8744,7 @@ var render = function render() {
   }, [_c("el-form-item", {
     attrs: {
       label: "Facebook Name",
-      prop: "facebookName",
-      required: ""
+      prop: "facebookName"
     }
   }, [_c("el-input", {
     attrs: {
@@ -8768,36 +8757,7 @@ var render = function render() {
       },
       expression: "ruleForm.facebookName"
     }
-  })], 1)], 1), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "Registration type",
-      prop: "registrationType",
-      required: ""
-    }
-  }, [_c("el-select", {
-    attrs: {
-      placeholder: "Choose"
-    },
-    model: {
-      value: _vm.ruleForm.registrationType,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "registrationType", $$v);
-      },
-      expression: "ruleForm.registrationType"
-    }
-  }, [_c("el-option", {
-    attrs: {
-      label: "Member",
-      value: "Member"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Guest",
-      value: "Guest"
-    }
-  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.withAwtaCard != "none" ? _c("div", {
+  })], 1)], 1), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.withAwtaCard != "none" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
