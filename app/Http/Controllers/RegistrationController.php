@@ -35,7 +35,7 @@ class RegistrationController extends Controller
         ->first();
 
         if ($lookup) {
-            return response()->json(['error' => 'This delegate has already been issued with an AWTA card number.'], 500);
+            return response()->json(['error' => 'This delegate from '. $request->localChurch .' has already been issued with an AWTA card number.'], 500);
         }
     }
 
