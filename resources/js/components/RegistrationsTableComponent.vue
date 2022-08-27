@@ -73,6 +73,24 @@
       width="130">
     </el-table-column>
     <el-table-column
+      prop="with_accommodation"
+      label="with accommodation?"
+      align="center"
+      width="130">
+    </el-table-column>
+    <el-table-column
+      prop="mode_of_transpo"
+      label="Mode of transpo"
+      align="center"
+      width="130">
+    </el-table-column>
+    <el-table-column
+      prop="priority_dates"
+      label="Preferred dates"
+      align="center"
+      width="200">
+    </el-table-column>
+    <el-table-column
       prop="rate"
       label="Rate"
       align="center"

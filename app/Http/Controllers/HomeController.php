@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use App\Http\Resources\RegistrationResource;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,7 @@ class HomeController extends Controller
         }
 
         return view('home', [
-            'registrations' => $registration->get(),
+            'registrations' => RegistrationResource::collection($registration->get())->all(),
             'search' => $request->search
         ]);
     }

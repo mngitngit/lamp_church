@@ -9273,6 +9273,27 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
+      prop: "with_accommodation",
+      label: "with accommodation?",
+      align: "center",
+      width: "130"
+    }
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "mode_of_transpo",
+      label: "Mode of transpo",
+      align: "center",
+      width: "130"
+    }
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "priority_dates",
+      label: "Preferred dates",
+      align: "center",
+      width: "200"
+    }
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
       prop: "rate",
       label: "Rate",
       align: "center",

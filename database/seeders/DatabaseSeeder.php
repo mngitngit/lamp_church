@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RatesTableSeeder::class,
             AvailableUUIDsTableSeeder::class,
-            LookUpTableSeeder::class
+            LookUpTableSeeder::class,
+            UserTableSeeder::class
         ]);
     }
 }

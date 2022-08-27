@@ -31,13 +31,6 @@ class Registration extends Model
         'priority_dates'
     ];
 
-    /**
-     * Append custom columns to the model
-     * 
-     * @var array
-     */
-    protected $appends = ['rate'];
-
     public static function boot() {
         parent::boot();
         
@@ -49,19 +42,6 @@ class Registration extends Model
             ->rate;
         });
     
-    }
-
-    /**
-     * Define the type column to every Item object instance
-     * 
-     * @return string
-     */
-    public function getRateAttribute()
-    {
-        return Rates::where('category', $this->category)
-                ->where('attending_option', $this->attending_option)
-                ->first()
-                ->rate;
     }
 
     /**

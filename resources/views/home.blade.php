@@ -33,7 +33,7 @@
                         </div>
                     @endif
 
-                    <registration-table :registrations="{{ $registrations }}" />
+                    <registration-table :registrations="{{ json_encode($registrations) }}" />
                 </div>
             </div>
         </div>
