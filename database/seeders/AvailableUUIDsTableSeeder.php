@@ -20,13 +20,6 @@ class AvailableUUIDsTableSeeder extends Seeder
                 'cursor' => 214
             ],
             [
-                'local_church' => 'Cadiz',
-                'prefix' => 'LPCD',
-                'start' => 1000,
-                'end' => 10000,
-                'cursor' => 1000
-            ],
-            [
                 'local_church' => 'Canlubang',
                 'prefix' => 'LPCA',
                 'start' => 433,
@@ -53,13 +46,6 @@ class AvailableUUIDsTableSeeder extends Seeder
                 'start' => 92,
                 'end' => 10000,
                 'cursor' => 92
-            ],
-            [
-                'local_church' => 'Iloilo',
-                'prefix' => 'LPIL',
-                'start' => 1000,
-                'end' => 10000,
-                'cursor' => 1000
             ],
             [
                 'local_church' => 'Isabela',

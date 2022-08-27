@@ -8491,11 +8491,6 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
-      label: "Cadiz",
-      value: "Cadiz"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
       label: "Canlubang",
       value: "Canlubang"
     }
@@ -8513,11 +8508,6 @@ var render = function render() {
     attrs: {
       label: "Granada",
       value: "Granada"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Iloilo",
-      value: "Iloilo"
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
@@ -8543,11 +8533,6 @@ var render = function render() {
     attrs: {
       label: "Valenzuela",
       value: "Valenzuela"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Villamar/Maao",
-      value: "Villamar/Maao"
     }
   })], 1)], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.tableData.length > 0 && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
@@ -8689,7 +8674,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_vm._m(0), _vm._v(" "), _c("div", {
+  return _c("div", [_c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
     staticClass: "col-md-6"
@@ -8858,11 +8843,6 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
-      label: "Cadiz",
-      value: "Cadiz"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
       label: "Canlubang",
       value: "Canlubang"
     }
@@ -8880,11 +8860,6 @@ var render = function render() {
     attrs: {
       label: "Granada",
       value: "Granada"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Iloilo",
-      value: "Iloilo"
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
@@ -8910,11 +8885,6 @@ var render = function render() {
     attrs: {
       label: "Valenzuela",
       value: "Valenzuela"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Villamar/Maao",
-      value: "Villamar/Maao"
     }
   })], 1)], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
@@ -9102,22 +9072,7 @@ var render = function render() {
   }, [_vm._v("Clear Form")])], 1)])], 1)], 1)])]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "row justify-content-center"
-  }, [_c("div", {
-    staticClass: "col-md-6"
-  }, [_c("img", {
-    staticClass: "mb-3",
-    attrs: {
-      width: "100%",
-      src: "/images/banner.jpg"
-    }
-  })])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -9210,9 +9165,6 @@ var render = function render() {
         text: "Binan",
         value: "Binan"
       }, {
-        text: "Cadiz",
-        value: "Cadiz"
-      }, {
         text: "Canlubang",
         value: "Canlubang"
       }, {
@@ -9224,9 +9176,6 @@ var render = function render() {
       }, {
         text: "Granada",
         value: "Granada"
-      }, {
-        text: "Iloilo",
-        value: "Iloilo"
       }, {
         text: "Isabela",
         value: "Isabela"
@@ -9243,8 +9192,7 @@ var render = function render() {
         text: "Valenzuela",
         value: "Valenzuela"
       }, {
-        text: "Villamar/Maao",
-        value: "Villamar/Maao"
+        text: "Villamar/Maao"
       }],
       "filter-method": _vm.filterHandler,
       "filter-placement": "bottom-end",
