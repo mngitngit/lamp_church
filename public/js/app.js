@@ -9310,13 +9310,13 @@ var render = function render() {
   }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA 2022")])]), _vm._v(" "), _c("div", [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-5"
+    staticClass: "col-md-6"
   }, [_c("barcode-component", {
     attrs: {
       uuid: _vm.registration.uuid
     }
   })], 1), _vm._v(" "), _c("div", {
-    staticClass: "col-md-7"
+    staticClass: "col-md-6"
   }, [_c("div", {
     staticClass: "row mb-3"
   }, [_c("div", {
@@ -9342,15 +9342,11 @@ var render = function render() {
   }, [_c("small", [_vm._v("Registration Type")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
   }, [_vm._v(_vm._s(_vm.registration.registration_type))])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-2 mb-3"
+    staticClass: "col-md-3 mb-3"
   }, [_c("small", [_vm._v("Rate")]), _vm._v(" "), _c("small", [_vm._v("(" + _vm._s(_vm.registration.attending_option) + ")")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
   }, [_vm._v(_vm._s(_vm.$func.formatAmount(_vm.registration.rate)))])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-2 mb-3"
-  }, [_c("small", [_vm._v("Seat")]), _vm._v(" "), _c("span", {
-    staticClass: "text-md font-bold d-block"
-  }, [_c("u", [_vm._v("None")])])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-2 mb-3"
+    staticClass: "col-md-3 mb-3"
   }, [_c("small", [_vm._v("Local Church")]), _vm._v(" "), _c("span", {
     staticClass: "text-md font-bold d-block"
   }, [_vm._v(_vm._s(_vm.registration.local_church))])]), _vm._v(" "), _c("div", {

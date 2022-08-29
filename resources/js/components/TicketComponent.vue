@@ -7,10 +7,10 @@
                 </div>
                 <div>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <barcode-component :uuid="registration.uuid" />
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-6">
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <small>Name</small>
@@ -37,15 +37,11 @@
                             <small>Registration Type</small>
                             <span class="text-md font-bold d-block">{{ registration.registration_type }}</span>
                         </div>
-                        <div class="col-md-2 mb-3">
+                        <div class="col-md-3 mb-3">
                             <small>Rate</small> <small>({{registration.attending_option}})</small>
                             <span class="text-md font-bold d-block">{{ $func.formatAmount(registration.rate) }}</span>
                         </div>
-                        <div class="col-md-2 mb-3">
-                            <small>Seat</small>
-                            <span class="text-md font-bold d-block"><u>None</u></span>
-                        </div>
-                        <div class="col-md-2 mb-3">
+                        <div class="col-md-3 mb-3">
                             <small>Local Church</small>
                             <span class="text-md font-bold d-block">{{ registration.local_church }}</span>
                         </div>
