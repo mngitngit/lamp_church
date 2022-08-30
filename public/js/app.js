@@ -7146,6 +7146,224 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    registration: {
+      required: true,
+      type: Object
+    }
+  },
+  data: function data() {
+    return {
+      ruleForm: _defineProperty({
+        email: '',
+        firstName: '',
+        lastName: '',
+        facebookName: '',
+        registrationType: 'Member',
+        localChurch: '',
+        country: 'Philippines',
+        awtaCardNumber: '',
+        category: 'Adult',
+        attendingOption: '',
+        withAwtaCard: '',
+        withAccommodation: '',
+        modeOfTranspo: '',
+        priorityDates: []
+      }, "category", ''),
+      rules: {
+        firstName: [{
+          required: true,
+          message: 'Please input First Name',
+          trigger: ['blur', 'change']
+        }],
+        lastName: [{
+          required: true,
+          message: 'Please input Last Name',
+          trigger: ['blur', 'change']
+        }],
+        localChurch: [{
+          required: true,
+          message: 'Please select Local Church',
+          trigger: 'change'
+        }],
+        country: [{
+          required: true,
+          message: 'Please select Country',
+          trigger: 'change'
+        }],
+        awtaCardNumber: [{
+          required: true,
+          message: 'Please input AWTA Card Number',
+          trigger: ['blur', 'change']
+        }],
+        attendingOption: [{
+          required: true,
+          message: 'Please select your attending option',
+          trigger: 'blur'
+        }],
+        withAccommodation: [{
+          required: true,
+          message: 'Please select an answer',
+          trigger: ['blur', 'change']
+        }],
+        modeOfTranspo: [{
+          required: true,
+          message: 'Please select your mode of transportation',
+          trigger: ['blur', 'change']
+        }],
+        priorityDates: [{
+          required: true,
+          message: 'Please select atleast one day',
+          trigger: 'change'
+        }]
+      },
+      countries: this.$allCountries
+    };
+  },
+  watch: {
+    'ruleForm.attendingOption': function ruleFormAttendingOption(data) {// this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : ''
+      // this.ruleForm.modeOfTranspo = ''
+      // this.ruleForm.priorityDates = []
+    },
+    'ruleForm.withAwtaCard': function ruleFormWithAwtaCard(data) {// this.ruleForm.lastname =''
+      // this.ruleForm.localChurch =''
+      // this.ruleForm.attendingOption =''
+      // this.ruleForm.withAccommodation =''
+      // this.ruleForm.modeOfTranspo =''
+      // this.ruleForm.priorityDates =[]
+    }
+  },
+  mounted: function mounted() {
+    this.ruleForm = _defineProperty({
+      email: this.registration.email,
+      firstName: this.registration.firstname,
+      lastName: this.registration.lastname,
+      facebookName: this.registration.facebook_name,
+      registrationType: this.registration.registration_type,
+      localChurch: this.registration.local_church,
+      country: this.registration.country,
+      category: this.registration.category,
+      attendingOption: this.registration.attending_option,
+      withAwtaCard: this.registration.with_awta_card,
+      withAccommodation: this.registration.with_accommodation,
+      modeOfTranspo: this.registration.mode_of_transpo,
+      priorityDates: JSON.parse(this.registration.priority_dates)
+    }, "category", this.registration.category);
+  },
+  methods: {
+    submitForm: function submitForm(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(valid) {
+          var loading;
+          return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  if (!valid) {
+                    _context3.next = 5;
+                    break;
+                  }
+
+                  loading = _this.$loading({
+                    lock: true,
+                    text: 'Loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                  });
+                  setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+                    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            _context2.next = 2;
+                            return axios.post("/registration/".concat(_this.registration.uuid, "/update"), _this.ruleForm).then( /*#__PURE__*/function () {
+                              var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
+                                return _regeneratorRuntime().wrap(function _callee$(_context) {
+                                  while (1) {
+                                    switch (_context.prev = _context.next) {
+                                      case 0:
+                                        loading.close();
+
+                                        _this.$alert('', 'Details Successfully Updated!', {
+                                          confirmButtonText: 'OK',
+                                          showCancelButton: false,
+                                          closeOnPressEscape: false,
+                                          closeOnClickModal: false,
+                                          showClose: false,
+                                          center: true,
+                                          type: 'success',
+                                          callback: function callback(action) {
+                                            window.location.reload();
+                                          }
+                                        });
+
+                                      case 2:
+                                      case "end":
+                                        return _context.stop();
+                                    }
+                                  }
+                                }, _callee);
+                              }));
+
+                              return function (_x2) {
+                                return _ref3.apply(this, arguments);
+                              };
+                            }());
+
+                          case 2:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  })), 1000);
+                  _context3.next = 6;
+                  break;
+
+                case 5:
+                  return _context3.abrupt("return", false);
+
+                case 6:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }());
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FindDataComponent.vue?vue&type=script&lang=js& ***!
@@ -7368,7 +7586,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         firstName: '',
         lastName: '',
         facebookName: '',
-        registrationType: 'Member',
+        registrationType: '',
         localChurch: '',
         country: 'Philippines',
         awtaCardNumber: '',
@@ -8166,6 +8384,422 @@ var render = function render() {
   }, [_vm._v("Registration Reference")]), _vm._v(" "), _c("h3", {
     staticClass: "d-block"
   }, [_vm._v(_vm._s(_vm.uuid))])]);
+};
+
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditRegistrationComponent.vue?vue&type=template&id=6609337f&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditRegistrationComponent.vue?vue&type=template&id=6609337f& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("el-form", {
+    ref: "ruleForm",
+    attrs: {
+      model: _vm.ruleForm,
+      rules: _vm.rules,
+      "label-width": "160px"
+    }
+  }, [_c("el-card", {
+    staticClass: "mb-4",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Email Address",
+      prop: "email"
+    }
+  }, [_c("el-input", {
+    model: {
+      value: _vm.ruleForm.email,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "email", $$v);
+      },
+      expression: "ruleForm.email"
+    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    staticClass: "check-name",
+    attrs: {
+      label: "First Name",
+      prop: "firstName",
+      required: ""
+    }
+  }, [_c("el-input", {
+    model: {
+      value: _vm.ruleForm.firstName,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "firstName", $$v);
+      },
+      expression: "ruleForm.firstName"
+    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    staticClass: "check-name",
+    attrs: {
+      label: "Last Name",
+      prop: "lastName",
+      required: ""
+    }
+  }, [_c("el-input", {
+    model: {
+      value: _vm.ruleForm.lastName,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "lastName", $$v);
+      },
+      expression: "ruleForm.lastName"
+    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Facebook Name",
+      prop: "facebookName"
+    }
+  }, [_c("el-input", {
+    attrs: {
+      placeholder: "If none, kindly type in the Facebook name of your event companion"
+    },
+    model: {
+      value: _vm.ruleForm.facebookName,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "facebookName", $$v);
+      },
+      expression: "ruleForm.facebookName"
+    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Local Church",
+      prop: "localChurch",
+      required: ""
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.localChurch,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "localChurch", $$v);
+      },
+      expression: "ruleForm.localChurch"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      label: "Binan",
+      value: "Binan"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Canlubang",
+      value: "Canlubang"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Dasmarinas",
+      value: "Dasmarinas"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "DC Cruz",
+      value: "DC Cruz"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Granada",
+      value: "Granada"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Isabela",
+      value: "Isabela"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Muntinlupa",
+      value: "Muntinlupa"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Pateros",
+      value: "Pateros"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Tarlac",
+      value: "Tarlac"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Valenzuela",
+      value: "Valenzuela"
+    }
+  })], 1)], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Country",
+      prop: "country",
+      required: ""
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.country,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "country", $$v);
+      },
+      expression: "ruleForm.country"
+    }
+  }, _vm._l(_vm.countries, function (country) {
+    return _c("el-option", {
+      key: country,
+      attrs: {
+        label: country,
+        value: country
+      }
+    });
+  }), 1)], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Rate Category",
+      prop: "category",
+      required: ""
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.category,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "category", $$v);
+      },
+      expression: "ruleForm.category"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      label: "Adult",
+      value: "Adult"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Kids",
+      value: "Kids"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Free",
+      value: "Free"
+    }
+  })], 1)], 1)], 1)])]), _vm._v(" "), _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_vm.ruleForm.registrationType === "Member" ? _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Do you have an awta card?",
+      prop: "withAwtaCard",
+      required: ""
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.withAwtaCard,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "withAwtaCard", $$v);
+      },
+      expression: "ruleForm.withAwtaCard"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      label: "None, I’m a new member.",
+      value: "none"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Yes, but I lost it.",
+      value: "lost"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Yes, and I still have it.",
+      value: "yes"
+    }
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "How will you attend the AWTA?",
+      prop: "attendingOption",
+      required: _vm.ruleForm.registrationType === "Member"
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.attendingOption,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "attendingOption", $$v);
+      },
+      expression: "ruleForm.attendingOption"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      value: "Hybrid",
+      label: "Hybrid"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "Online",
+      label: "Online"
+    }
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "What is your primary mode of transportation?",
+      prop: "modeOfTranspo",
+      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.modeOfTranspo,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "modeOfTranspo", $$v);
+      },
+      expression: "ruleForm.modeOfTranspo"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      value: "Private Vehicle",
+      label: "Private Vehicle"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "Carpool",
+      label: "Carpool"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "Public Transportation",
+      label: "Public Transportation"
+    }
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Will you book a hotel or any accommodation nearby?",
+      prop: "withAccommodation",
+      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
+    }
+  }, [_c("el-radio-group", {
+    model: {
+      value: _vm.ruleForm.withAccommodation,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "withAccommodation", $$v);
+      },
+      expression: "ruleForm.withAccommodation"
+    }
+  }, [_c("el-radio", {
+    attrs: {
+      label: "yes"
+    }
+  }, [_vm._v("Yes")]), _vm._v(" "), _c("el-radio", {
+    attrs: {
+      label: "none"
+    }
+  }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)",
+      prop: "priorityDates",
+      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
+    }
+  }, [_c("el-checkbox-group", {
+    model: {
+      value: _vm.ruleForm.priorityDates,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "priorityDates", $$v);
+      },
+      expression: "ruleForm.priorityDates"
+    }
+  }, [_c("el-checkbox", {
+    attrs: {
+      label: "December 27",
+      name: "priorityDates"
+    }
+  }), _vm._v(" "), _c("el-checkbox", {
+    attrs: {
+      label: "December 28",
+      name: "priorityDates"
+    }
+  }), _vm._v(" "), _c("el-checkbox", {
+    attrs: {
+      label: "December 29",
+      name: "priorityDates"
+    }
+  }), _vm._v(" "), _c("el-checkbox", {
+    attrs: {
+      label: "December 30",
+      name: "priorityDates"
+    }
+  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-button", {
+    attrs: {
+      type: "warning"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.submitForm("ruleForm");
+      }
+    }
+  }, [_vm._v("Update")])], 1)])], 1);
 };
 
 var staticRenderFns = [];
@@ -9267,7 +9901,16 @@ var render = function render() {
               return _vm.handleClick(scope.row.uuid);
             }
           }
-        }, [_vm._v("View Payments")])];
+        }, [_vm._v("View Payments")]), _vm._v(" "), _c("a", {
+          attrs: {
+            href: "/registration/".concat(scope.row.uuid, "/edit")
+          }
+        }, [_c("el-button", {
+          attrs: {
+            type: "text",
+            size: "small"
+          }
+        }, [_vm._v("Edit Details")])], 1)];
       }
     }])
   })], 1);
@@ -9408,6 +10051,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]); // registration page
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('registration-component', (__webpack_require__(/*! ./components/RegistrationComponent.vue */ "./resources/js/components/RegistrationComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('edit-registration-component', (__webpack_require__(/*! ./components/EditRegistrationComponent.vue */ "./resources/js/components/EditRegistrationComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('barcode-component', (__webpack_require__(/*! ./components/BarcodeComponent.vue */ "./resources/js/components/BarcodeComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('ticket-component', (__webpack_require__(/*! ./components/TicketComponent.vue */ "./resources/js/components/TicketComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('banner-component', (__webpack_require__(/*! ./components/BannerComponent.vue */ "./resources/js/components/BannerComponent.vue")["default"]));
@@ -98825,6 +99469,45 @@ component.options.__file = "resources/js/components/BarcodeComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/EditRegistrationComponent.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/EditRegistrationComponent.vue ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EditRegistrationComponent_vue_vue_type_template_id_6609337f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditRegistrationComponent.vue?vue&type=template&id=6609337f& */ "./resources/js/components/EditRegistrationComponent.vue?vue&type=template&id=6609337f&");
+/* harmony import */ var _EditRegistrationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditRegistrationComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditRegistrationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditRegistrationComponent_vue_vue_type_template_id_6609337f___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EditRegistrationComponent_vue_vue_type_template_id_6609337f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditRegistrationComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/FindDataComponent.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/FindDataComponent.vue ***!
@@ -99054,6 +99737,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditRegistrationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditRegistrationComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditRegistrationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/FindDataComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************!*\
   !*** ./resources/js/components/FindDataComponent.vue?vue&type=script&lang=js& ***!
@@ -99181,6 +99880,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BarcodeComponent_vue_vue_type_template_id_2f0a0048_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BarcodeComponent_vue_vue_type_template_id_2f0a0048_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BarcodeComponent.vue?vue&type=template&id=2f0a0048&scoped=true& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BarcodeComponent.vue?vue&type=template&id=2f0a0048&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EditRegistrationComponent.vue?vue&type=template&id=6609337f&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/EditRegistrationComponent.vue?vue&type=template&id=6609337f& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EditRegistrationComponent_vue_vue_type_template_id_6609337f___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EditRegistrationComponent_vue_vue_type_template_id_6609337f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EditRegistrationComponent_vue_vue_type_template_id_6609337f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EditRegistrationComponent.vue?vue&type=template&id=6609337f& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditRegistrationComponent.vue?vue&type=template&id=6609337f&");
 
 
 /***/ }),

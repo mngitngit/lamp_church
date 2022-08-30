@@ -22,6 +22,8 @@ Route::get('/registration', [App\Http\Controllers\RegistrationController::class,
 Route::get('/registration/validate', [App\Http\Controllers\RegistrationController::class, 'index'])->name('registration.validate');
 Route::post('/registration', [App\Http\Controllers\RegistrationController::class, 'store'])->name('registration.store');
 Route::get('/registration/{id}', [App\Http\Controllers\RegistrationController::class, 'show'])->name('registration.show');
+Route::get('/registration/{id}/edit', [App\Http\Controllers\RegistrationController::class, 'edit'])->name('registration.edit');
+Route::post('/registration/{id}/update', [App\Http\Controllers\RegistrationController::class, 'update'])->name('registration.update');
 Route::get('/registrations/export', [App\Http\Controllers\RegistrationController::class, 'export'])->name('registration.export');
 
 Route::get('/lookup', [App\Http\Controllers\LookUpController::class, 'index'])->name('lookup.index');

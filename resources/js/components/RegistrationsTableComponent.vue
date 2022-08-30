@@ -130,6 +130,7 @@
       width="120">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row.uuid)" type="text" size="small">View Payments</el-button>
+        <a :href="`/registration/${scope.row.uuid}/edit`"><el-button type="text" size="small">Edit Details</el-button></a>
       </template>
     </el-table-column>
   </el-table>

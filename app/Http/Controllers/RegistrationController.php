@@ -111,6 +111,32 @@ class RegistrationController extends Controller
         ]);
     }
 
+    public function update($uuid, Request $request) {
+        $registration = Registration::where('uuid', $uuid)->first();
+
+        return $registration->update([
+            'email' => $request->email,
+            'firstname' => $request->firstName,
+            'lastname' => $request->lastName,
+            'fullname' => $request->firstName . ' ' . $request->lastName,
+            'facebook_name' => $request->facebookName,
+            'local_church' => $request->localChurch,
+            'country' => $request->country,
+            'category' => $request->category,
+            'attending_option' => $request->attendingOption,
+            'with_awta_card' => $request->withAwtaCard,
+            'with_accommodation' => $request->withAccommodation,
+            'mode_of_transpo' => $request->modeOfTranspo,
+            'priority_dates' => json_encode($request->priorityDates)
+        ]);
+    }
+
+    public function edit($uuid) {
+        return view('registration.edit', [
+            'registration' => Registration::where('uuid', $uuid)->first()
+        ]);
+    }
+
     public function export(){
         return Excel::download(new ExportRegistration, 'registrations_'.TIME().'.csv');
     }

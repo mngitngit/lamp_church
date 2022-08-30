@@ -18,26 +18,32 @@ class RatesTableSeeder extends Seeder
             [
                 'category' => 'Adult',
                 'attending_option' => 'Hybrid',
+                'description' => 'Member (Hybrid)',
                 'rate' => 1000
             ], [
                 'category' => 'Adult',
                 'attending_option' => 'Online',
+                'description' => 'Member (Online)',
                 'rate' => 100
             ], [
                 'category' => 'Kids',
                 'attending_option' => 'Hybrid',
+                'description' => 'Member age 5 - 8 yrs old (Hybrid)',
                 'rate' => 500
             ], [
                 'category' => 'Kids',
                 'attending_option' => 'Online',
+                'description' => 'Member age 5 - 8 yrs old (Online)',
                 'rate' => 50
             ], [
                 'category' => 'Free',
                 'attending_option' => 'Hybrid',
+                'description' => 'Visitor & Member 0 - 4 yrs old (Hybrid)',
                 'rate' => 0
             ], [
                 'category' => 'Free',
                 'attending_option' => 'Online',
+                'description' => 'Visitor & Member 0 - 4 yrs old (Online)',
                 'rate' => 0
             ]
         ]);

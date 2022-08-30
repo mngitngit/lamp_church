@@ -243,7 +243,7 @@ export default {
                 firstName: '',
                 lastName: '',
                 facebookName: '',
-                registrationType: 'Member',
+                registrationType: '',
                 localChurch: '',
                 country: 'Philippines',
                 awtaCardNumber: '',
