@@ -140,4 +140,8 @@ class RegistrationController extends Controller
     public function export(){
         return Excel::download(new ExportRegistration, 'registrations_'.TIME().'.csv');
     }
+
+    public function destroy($uuid) {
+        return Registration::where('uuid', $uuid)->first()->delete();
+    }
 }
