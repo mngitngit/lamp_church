@@ -42,7 +42,7 @@ class Controller extends BaseController
         $registration = Registration::where('uuid', $uuid)->first();
         $balance = floatval($registration->rate);
         $balance-= floatval(array_sum(array_column($registration->payments->toArray(), 'amount')));
-        // dd($balance);
+
         if ($balance <= 0.0 && count($registration->payments) > 0) {
             $registration->update([
                 'payment_status' => 'Paid'

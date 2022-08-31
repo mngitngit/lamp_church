@@ -35,13 +35,18 @@ class Registration extends Model
         parent::boot();
         
         self::creating(function ($model) {
-
             $model->rate = Rates::where('category', $model->category)
             ->where('attending_option', $model->attending_option)
             ->first()
             ->rate;
         });
-    
+
+        self::updating(function ($model) {
+            $model->rate = Rates::where('category', $model->category)
+            ->where('attending_option', $model->attending_option)
+            ->first()
+            ->rate;
+        });
     }
 
     /**
