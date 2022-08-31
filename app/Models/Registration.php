@@ -62,4 +62,11 @@ class Registration extends Model
     {
         return $this->hasMany(Payment::class, 'registration_uuid', 'uuid');
     }
+
+    private function logActivity($description, $delegate_name) {
+        auth()->user()->activities()->create([
+            'description' => $description,
+            'delegate_name' => $delegate_name 
+        ]);
+    }
 }

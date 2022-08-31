@@ -61,4 +61,11 @@ class Payment extends Model
     {
         return date_format(date_create($value), "M d, Y");
     }
+
+    private function logActivity($description, $delegate_name) {
+        auth()->user()->activities()->create([
+            'description' => $description,
+            'delegate_name' => $delegate_name 
+        ]);
+    }
 }
