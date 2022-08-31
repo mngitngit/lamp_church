@@ -16,6 +16,16 @@ class Payment extends Model
         'date_paid'
     ];
 
+    public static function boot() {
+        parent::boot();
+        
+        self::deleting(function ($model) {
+            $registration = Registration::where('uuid', $model->registration_uuid)->first();
+
+            self::logActivity('deleted a payment of ' . $registration->fullname, $registration->fullname);
+        });
+    }
+
     /**
      * Append custom columns to the model
      * 

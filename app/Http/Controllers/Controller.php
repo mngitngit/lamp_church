@@ -61,6 +61,12 @@ class Controller extends BaseController
             ]);
         }
 
+        if ($balance > 0.0 && count($registration->payments) == 0) {
+            $registration->update([
+                'payment_status' => 'Pending'
+            ]);
+        }
+
         return $registration;
     }
 }

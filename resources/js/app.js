@@ -20,6 +20,7 @@ Vue.component('find-data-component', require('./components/FindDataComponent.vue
 Vue.component('registration-table', require('./components/RegistrationsTableComponent.vue').default);
 Vue.component('payments-table', require('./components/PaymentsTableComponent.vue').default);
 Vue.component('add-payment', require('./components/AddPaymentComponent.vue').default);
+Vue.component('activites-table', require('./components/ActivitiesTableComponent.vue').default);
 
 import Vue from 'vue';
 import ElementUI from 'element-ui';

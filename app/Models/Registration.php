@@ -46,6 +46,12 @@ class Registration extends Model
             ->where('attending_option', $model->attending_option)
             ->first()
             ->rate;
+
+            self::logActivity('updated the registration details of ' . $model->fullname, $model->fullname);
+        });
+
+        self::deleting(function ($model) {
+            self::logActivity('deleted the registration details of ' . $model->fullname, $model->fullname);
         });
     }
 

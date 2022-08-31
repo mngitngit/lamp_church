@@ -30,4 +30,7 @@ Route::get('/registrations/export', [App\Http\Controllers\RegistrationController
 Route::get('/lookup', [App\Http\Controllers\LookUpController::class, 'index'])->name('lookup.index');
 Route::get('/lookup/{id}', [App\Http\Controllers\LookUpController::class, 'show'])->name('lookup.show');
 Route::get('/payments/{id}/create', [App\Http\Controllers\PaymentController::class, 'create'])->name('payments.create');
+Route::delete('/payments/{id}/delete', [App\Http\Controllers\PaymentController::class, 'destroy'])->name('payments.delete');
 Route::post('/payments/{id}', [App\Http\Controllers\PaymentController::class, 'store'])->name('payments.store');
+
+Route::get('/activites', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities');

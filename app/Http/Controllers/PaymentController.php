@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PaymentResource;
+use App\Models\Payment;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,5 +46,13 @@ class PaymentController extends Controller
         ]);
         
         return $this->updatePaymentStatus($uuid);
+    }
+
+    public function destroy($id) {
+        $payment = Payment::find($id);
+        
+        $payment->delete();
+
+        return $this->updatePaymentStatus($payment->registration_uuid);
     }
 }

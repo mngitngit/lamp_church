@@ -18,6 +18,15 @@
             prop="user_name"
             label="Assisted by">
             </el-table-column>
+            <el-table-column
+              fixed="right"
+              label="Operations"
+              align="center"
+              width="120">
+              <template slot-scope="scope">
+                <el-button v-if="permissions.can_delete_payment" type="text" size="small" @click="deletePayment(scope.row.id)">Delete</el-button>
+              </template>
+            </el-table-column>
       </el-table>
 </template>
 
@@ -31,11 +40,43 @@
     },
     data() {
       return {
-        
+        permissions: window.auth_user.permissions
       }
     },
     methods: {
-        
+      deletePayment(id) {
+        this.$confirm(`Are you sure you want to delete this payment?`, 'Warning', {
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel',
+            type: 'warning'
+        }).then(async () => {
+          const loading = this.$loading({
+              lock: true,
+              text: 'Loading',
+              background: 'rgba(0, 0, 0, 0.7)'
+          });
+
+          setTimeout(async () => {
+            await axios.delete(`/payments/${id}/delete`)
+            .then(async (response) => {
+              loading.close()
+              
+              this.$alert('', 'Payment Successfully Deleted!', {
+                  confirmButtonText: 'OK',
+                  showCancelButton: false,
+                  closeOnPressEscape: false,
+                  closeOnClickModal: false,
+                  showClose: false,
+                  center: true,
+                  type: 'success',
+                  callback: action => {
+                      window.location.reload();
+                  }
+              });
+            })
+          }, 1000);
+        })
+      }
     }
   }
 </script>
