@@ -18,7 +18,7 @@ class ActivityResource extends JsonResource
 
         return [
             'content' => $this->user->name . ' ' . $this->description,
-            'timestamp' => date('M d, Y H:i A', strtotime($this->created_at)),
+            'timestamp' => date('M d, Y h:i A', strtotime($this->created_at)),
             'size' => 'large',
             'type' => 'primary',
             'color' => $isDeleted ? 'red' : '#0bbd87'
