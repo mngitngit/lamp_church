@@ -7541,7 +7541,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       tableData: [],
       ruleForm: {
-        registrationType: 'Member',
+        registrationType: '',
         withAwtaCard: '',
         lastname: '',
         localChurch: '',

@@ -198,7 +198,7 @@ export default {
         return {
             tableData: [],
             ruleForm: {
-                registrationType: 'Member',
+                registrationType: '',
                 withAwtaCard: '',
                 lastname: '',
                 localChurch: '',
