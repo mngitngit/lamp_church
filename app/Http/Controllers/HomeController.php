@@ -20,6 +20,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // dd(auth()->user()->load(['permissions']));
         $registration = Registration::withSum('payments', 'amount');
         
         if ($request->search) {

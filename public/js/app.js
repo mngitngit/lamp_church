@@ -8149,7 +8149,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      tableData: []
+      tableData: [],
+      permissions: window.auth_user.permissions
     };
   },
   mounted: function mounted() {
@@ -9983,7 +9984,7 @@ var render = function render() {
               return _vm.handleClick(scope.row.uuid);
             }
           }
-        }, [_vm._v("View Payments")]), _vm._v(" "), _c("a", {
+        }, [_vm._v("View Payments")]), _vm._v(" "), _vm.permissions.can_edit_delegate ? _c("a", {
           attrs: {
             href: "/registration/".concat(scope.row.uuid, "/edit")
           }
@@ -9992,7 +9993,7 @@ var render = function render() {
             type: "text",
             size: "small"
           }
-        }, [_vm._v("Edit Details")])], 1), _vm._v(" "), _c("el-button", {
+        }, [_vm._v("Edit Details")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_delete_delegate ? _c("el-button", {
           attrs: {
             type: "text",
             size: "small"
@@ -10002,7 +10003,7 @@ var render = function render() {
               return _vm.deleteRegistration(scope.row.uuid);
             }
           }
-        }, [_vm._v("Delete")])];
+        }, [_vm._v("Delete")]) : _vm._e()];
       }
     }])
   })], 1);

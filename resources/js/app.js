@@ -49,7 +49,7 @@ const app = new Vue({
     data: function() {
         return { 
             visible: false,
-            search: null
+            search: null,
         }
     }
 });

@@ -15,6 +15,12 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    @if (auth()->check())
+    <script>
+        window.auth_user = {!! json_encode(auth()->user()->load(['permissions'])); !!};
+    </script>
+    @endif
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js?time=') }}{{ time() }}" defer></script>
 

@@ -130,8 +130,8 @@
       width="120">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row.uuid)" type="text" size="small">View Payments</el-button>
-        <a :href="`/registration/${scope.row.uuid}/edit`"><el-button type="text" size="small">Edit Details</el-button></a>
-        <el-button type="text" size="small" @click="deleteRegistration(scope.row.uuid)">Delete</el-button>
+        <a v-if="permissions.can_edit_delegate" :href="`/registration/${scope.row.uuid}/edit`"><el-button type="text" size="small">Edit Details</el-button></a>
+        <el-button v-if="permissions.can_delete_delegate" type="text" size="small" @click="deleteRegistration(scope.row.uuid)">Delete</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -147,7 +147,8 @@
     },
     data() {
       return {
-        tableData: []
+        tableData: [],
+        permissions: window.auth_user.permissions
       }
     },
     mounted() {
