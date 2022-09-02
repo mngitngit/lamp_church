@@ -22,7 +22,7 @@ class HomeController extends Controller
     {
         // dd(auth()->user()->load(['permissions']));
         $registration = Registration::withSum('payments', 'amount');
-        
+        // dd($registration->get()[0]);
         if ($request->search) {
             $registration
             ->where('fullname', 'LIKE', "%$request->search%")

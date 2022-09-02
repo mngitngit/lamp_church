@@ -32,7 +32,8 @@ class RegistrationResource extends JsonResource
             'with_awta_card' => $this->with_awta_card,
             'with_accommodation' => $this->with_accommodation,
             'mode_of_transpo' => $this->mode_of_transpo,
-            'priority_dates' => implode(', ', json_decode($this->priority_dates))
+            'priority_dates' => implode(', ', json_decode($this->priority_dates)),
+            'payments_sum_amount' => $this->payments_sum_amount
         ];
     }
 }
