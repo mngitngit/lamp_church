@@ -7134,6 +7134,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           return _ref.apply(this, arguments);
         };
       }());
+    },
+    viewDetails: function viewDetails() {
+      window.location.href = "/registration/".concat(this.uuid, "/edit");
     }
   }
 });
@@ -7228,12 +7231,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         localChurch: [{
           required: true,
           message: 'Please select Local Church',
-          trigger: 'change'
+          trigger: ['blur', 'change']
         }],
         country: [{
           required: true,
           message: 'Please select Country',
-          trigger: 'change'
+          trigger: ['blur', 'change']
         }],
         awtaCardNumber: [{
           required: true,
@@ -7243,7 +7246,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         attendingOption: [{
           required: true,
           message: 'Please select your attending option',
-          trigger: 'blur'
+          trigger: ['blur', 'change']
         }],
         withAccommodation: [{
           required: true,
@@ -7265,16 +7268,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   watch: {
-    'ruleForm.attendingOption': function ruleFormAttendingOption(data) {// this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : ''
-      // this.ruleForm.modeOfTranspo = ''
-      // this.ruleForm.priorityDates = []
+    'ruleForm.attendingOption': function ruleFormAttendingOption(newData, oldData) {
+      if (oldData != newData && oldData != '' && newData != '') {
+        this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : '';
+        this.ruleForm.modeOfTranspo = '';
+        this.ruleForm.priorityDates = [];
+      }
     },
-    'ruleForm.withAwtaCard': function ruleFormWithAwtaCard(data) {// this.ruleForm.lastname =''
-      // this.ruleForm.localChurch =''
-      // this.ruleForm.attendingOption =''
-      // this.ruleForm.withAccommodation =''
-      // this.ruleForm.modeOfTranspo =''
-      // this.ruleForm.priorityDates =[]
+    'ruleForm.withAwtaCard': function ruleFormWithAwtaCard(newData, oldData) {
+      if (oldData != newData && oldData != '' && newData != '') {
+        this.ruleForm.attendingOption = '';
+        this.ruleForm.withAccommodation = '';
+        this.ruleForm.modeOfTranspo = '';
+        this.ruleForm.priorityDates = [];
+      }
     }
   },
   mounted: function mounted() {
@@ -7380,6 +7387,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return _ref.apply(this, arguments);
         };
       }());
+    },
+    viewPayments: function viewPayments() {
+      window.location.href = "/payments/".concat(this.registration.uuid, "/create");
     }
   }
 });
@@ -8541,7 +8551,17 @@ var render = function render() {
         return _vm.formSubmit();
       }
     }
-  }, [_vm._v("Save Payment")]) : _vm._e()], 1);
+  }, [_vm._v("Save Payment")]) : _vm._e(), _vm._v(" "), _c("el-link", {
+    staticClass: "float-end",
+    attrs: {
+      type: "primary"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.viewDetails();
+      }
+    }
+  }, [_vm._v("Edit Delegate Details")])], 1);
 };
 
 var staticRenderFns = [];
@@ -9025,7 +9045,17 @@ var render = function render() {
         return _vm.submitForm("ruleForm");
       }
     }
-  }, [_vm._v("Update")])], 1)])], 1);
+  }, [_vm._v("Update")]), _vm._v(" "), _c("el-link", {
+    staticClass: "float-end",
+    attrs: {
+      type: "primary"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.viewPayments();
+      }
+    }
+  }, [_vm._v("View Payments")])], 1)])], 1);
 };
 
 var staticRenderFns = [];

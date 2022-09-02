@@ -50,6 +50,7 @@
     </div>
 
     <el-button v-if="data.payment_status != 'Paid' && data.payment_status != 'Free'" type="primary" @click="formSubmit()">Save Payment</el-button>
+    <el-link type="primary" class="float-end" @click="viewDetails()">Edit Delegate Details</el-link>
 </div>
 </template>
 
@@ -170,7 +171,10 @@ export default {
                 } else 
                     loading.close()
             })
-        }
+        },
+        viewDetails() {
+          window.location.href = `/registration/${this.uuid}/edit`;
+        },
     }
 }
 </script>

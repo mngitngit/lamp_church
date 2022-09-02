@@ -116,6 +116,7 @@
         <el-row>
             <div class="col-md-12">
                 <el-button type="warning" @click="submitForm('ruleForm')">Update</el-button>
+                <el-link type="primary" class="float-end" @click="viewPayments()">View Payments</el-link>
             </div>
         </el-row>
     </el-form>
@@ -156,16 +157,16 @@ export default {
                     { required: true, message: 'Please input Last Name', trigger: ['blur', 'change']}
                 ],
                 localChurch: [
-                    { required: true, message: 'Please select Local Church', trigger: 'change'}
+                    { required: true, message: 'Please select Local Church', trigger: ['blur', 'change']}
                 ],
                 country: [
-                    { required: true, message: 'Please select Country', trigger: 'change'}
+                    { required: true, message: 'Please select Country', trigger: ['blur', 'change']}
                 ],
                 awtaCardNumber: [
                     { required: true, message: 'Please input AWTA Card Number', trigger: ['blur', 'change']},
                 ],
                 attendingOption: [
-                    { required: true, message: 'Please select your attending option', trigger: 'blur'},
+                    { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
                 ],
                 withAccommodation: [
                     {required: true, message: 'Please select an answer', trigger: ['blur', 'change']}
@@ -181,18 +182,20 @@ export default {
         }
     },
     watch: {
-        'ruleForm.attendingOption'(data) {
-            // this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : ''
-            // this.ruleForm.modeOfTranspo = ''
-            // this.ruleForm.priorityDates = []
+        'ruleForm.attendingOption'(newData, oldData) {
+            if (oldData != newData && oldData != '' && newData != '') {
+                this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : ''
+                this.ruleForm.modeOfTranspo = ''
+                this.ruleForm.priorityDates = []
+            }
         },
-        'ruleForm.withAwtaCard'(data) {
-            // this.ruleForm.lastname =''
-            // this.ruleForm.localChurch =''
-            // this.ruleForm.attendingOption =''
-            // this.ruleForm.withAccommodation =''
-            // this.ruleForm.modeOfTranspo =''
-            // this.ruleForm.priorityDates =[]
+        'ruleForm.withAwtaCard'(newData, oldData) {
+            if (oldData != newData && oldData != '' && newData != '') {
+                this.ruleForm.attendingOption =''
+                this.ruleForm.withAccommodation =''
+                this.ruleForm.modeOfTranspo =''
+                this.ruleForm.priorityDates =[]
+            }
         }
     },
     mounted() {
@@ -246,6 +249,9 @@ export default {
                     return false;
                 }
             });
+        },
+        viewPayments() {
+          window.location.href = `/payments/${this.registration.uuid}/create`;
         },
     }
 }

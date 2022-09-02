@@ -114,7 +114,7 @@ class RegistrationController extends Controller
     public function update($uuid, Request $request) {
         $registration = Registration::where('uuid', $uuid)->first();
 
-        return $registration->update([
+        $registration->update([
             'email' => $request->email,
             'firstname' => $request->firstName,
             'lastname' => $request->lastName,
@@ -129,6 +129,8 @@ class RegistrationController extends Controller
             'mode_of_transpo' => $request->modeOfTranspo,
             'priority_dates' => json_encode($request->priorityDates)
         ]);
+
+        return $this->updatePaymentStatus($uuid);
     }
 
     public function edit($uuid) {
