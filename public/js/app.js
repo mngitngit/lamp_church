@@ -10082,6 +10082,8 @@ var render = function render() {
     attrs: {
       prop: "attending_option",
       label: "Attending Option",
+      filters: "[{text: 'Hybrid', value: 'Hybrid'},{text: 'Online', value: 'Online'}]",
+      "filter-method": _vm.filterHandler,
       align: "center",
       width: "130"
     }

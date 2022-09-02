@@ -63,6 +63,8 @@
     <el-table-column
       prop="attending_option"
       label="Attending Option"
+      filters="[{text: 'Hybrid', value: 'Hybrid'},{text: 'Online', value: 'Online'}]"
+      :filter-method="filterHandler"
       align="center"
       width="130">
     </el-table-column>
