@@ -66,7 +66,7 @@
       :filters="[{text: 'Hybrid', value: 'Hybrid'},{text: 'Online', value: 'Online'}]"
       :filter-method="filterHandler"
       align="center"
-      width="130">
+      width="140">
     </el-table-column>
     <el-table-column
       prop="with_awta_card"

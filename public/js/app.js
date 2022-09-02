@@ -10091,7 +10091,7 @@ var render = function render() {
       }],
       "filter-method": _vm.filterHandler,
       align: "center",
-      width: "130"
+      width: "140"
     }
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
