@@ -9981,7 +9981,7 @@ var render = function render() {
       prop: "count",
       label: "#",
       align: "center",
-      width: "40"
+      width: "50"
     },
     scopedSlots: _vm._u([{
       key: "default",

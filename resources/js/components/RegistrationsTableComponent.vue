@@ -8,7 +8,7 @@
       prop="count"
       label="#"
       align="center"
-      width="40">
+      width="50">
       <template slot-scope="scope">
           {{ scope.$index + registrations.from }}
       </template>
