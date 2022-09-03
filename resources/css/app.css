@@ -21,3 +21,27 @@
 .el-select {
     width: 100%;
 }
+
+.page-link.active, .active > .page-link {
+    background-color: #409eff !important;
+    border-color: #409eff !important;
+}
+
+.page-link {
+    color: #409eff;
+}
+
+.pagination li {
+    margin-right: 10px;
+    border-radius: 20px;
+    width: 37px;
+    text-align: center;
+}
+
+.pagination li span {
+    border-radius: 4px;
+}
+
+.pagination li a {
+    border-radius: 4px;
+}
