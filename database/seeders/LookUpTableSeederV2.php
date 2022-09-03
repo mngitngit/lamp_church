@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\LookUp;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class LookUpTableSeederV2 extends Seeder
