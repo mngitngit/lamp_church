@@ -8261,7 +8261,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: {
     registrations: {
       required: true,
-      type: Array
+      type: Object
     }
   },
   data: function data() {
@@ -8271,7 +8271,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    this.tableData = this.registrations;
+    this.tableData = this.registrations.data;
   },
   methods: {
     handleClick: function handleClick(id) {
@@ -9977,6 +9977,19 @@ var render = function render() {
       border: ""
     }
   }, [_c("el-table-column", {
+    attrs: {
+      prop: "count",
+      label: "#",
+      align: "center",
+      width: "40"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n        " + _vm._s(scope.$index + _vm.registrations.from) + "\n    ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "created_at",
       label: "Date Registered",

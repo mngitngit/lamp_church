@@ -35,6 +35,10 @@
 
                     <registration-table :registrations="{{ json_encode($registrations) }}" />
                 </div>
+
+                <div class="card-body p-0 px-3">
+                    {{ $registrations->links() }}
+                </div>
             </div>
         </div>
     </div>

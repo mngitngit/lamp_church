@@ -29,8 +29,14 @@ class HomeController extends Controller
             ->orWhere('uuid', 'LIKE', "%$request->search%");
         }
 
+        $registration = $registration->paginate(10);
+
+        $registration->map(function($item) {
+            $item->priority_dates = implode(', ', json_decode($item->priority_dates));
+        });
+
         return view('home', [
-            'registrations' => RegistrationResource::collection($registration->get())->all(),
+            'registrations' => $registration,
             'search' => $request->search
         ]);
     }

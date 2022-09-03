@@ -5,6 +5,15 @@
     border
     style="width: 100%">
     <el-table-column
+      prop="count"
+      label="#"
+      align="center"
+      width="40">
+      <template slot-scope="scope">
+          {{ scope.$index + registrations.from }}
+      </template>
+    </el-table-column>
+    <el-table-column
       prop="created_at"
       label="Date Registered"
       align="center"
@@ -144,7 +153,7 @@
     props: {
         registrations: {
             required: true,
-            type: Array
+            type: Object
         },
     },
     data() {
@@ -154,7 +163,7 @@
       }
     },
     mounted() {
-      this.tableData = this.registrations
+      this.tableData = this.registrations.data
     },
     methods: {
         handleClick(id) {
