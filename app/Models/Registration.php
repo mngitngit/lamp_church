@@ -64,9 +64,11 @@ class Registration extends Model
     }
 
     private function logActivity($description, $delegate_name) {
-        auth()->user()->activities()->create([
-            'description' => $description,
-            'delegate_name' => $delegate_name 
-        ]);
+        if (auth()->user()) {
+            auth()->user()->activities()->create([
+                'description' => $description,
+                'delegate_name' => $delegate_name 
+            ]);
+        }
     }
 }
