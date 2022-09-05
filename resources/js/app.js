@@ -17,8 +17,6 @@ Vue.component('banner-component', require('./components/BannerComponent.vue').de
 Vue.component('find-data-component', require('./components/FindDataComponent.vue').default);
 
 // admin portal
-Vue.component('payments-table', require('./components/PaymentsTableComponent.vue').default);
-Vue.component('add-payment', require('./components/AddPaymentComponent.vue').default);
 Vue.component('activites-table', require('./components/ActivitiesTableComponent.vue').default);
 
 import Vue from 'vue';

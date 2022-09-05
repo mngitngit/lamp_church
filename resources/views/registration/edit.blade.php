@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('scripts')
+<script src="{{ asset('js/app.js?time=') }}{{ time() }}" defer></script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
