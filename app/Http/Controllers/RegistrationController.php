@@ -144,6 +144,14 @@ class RegistrationController extends Controller
     }
 
     public function destroy($uuid) {
+        $lookup = LookUp::where('awta_card_number', $uuid)->first();
+
+        if ($lookup) {
+            $lookup->update([
+                'is_registered' => false
+            ]);
+        }
+        
         return Registration::where('uuid', $uuid)->first()->delete();
     }
 }
