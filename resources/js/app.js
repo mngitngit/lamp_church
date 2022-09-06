@@ -16,9 +16,6 @@ Vue.component('ticket-component', require('./components/TicketComponent.vue').de
 Vue.component('banner-component', require('./components/BannerComponent.vue').default);
 Vue.component('find-data-component', require('./components/FindDataComponent.vue').default);
 
-// admin portal
-Vue.component('activites-table', require('./components/ActivitiesTableComponent.vue').default);
-
 import Vue from 'vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
