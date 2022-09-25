@@ -1,14 +1,14 @@
 <template>
 <div class="w-full">
     <div v-if="! validated" class="row">
-        <div class="col-md-5">
+        <!-- <div class="col-md-5">
             <el-card shadow="hover" class="mb-3 pb-0">
                 <p class="c-booking-subheader mb-2">Reminders:</p>
                 <p class="c-booking-subheader mb-1"><span class="el-icon-check text-success">&nbsp;&nbsp;</span>Book up to 2 days.</p>
                 <p class="c-booking-subheader mb-1"><span class="el-icon-check text-success">&nbsp;&nbsp;</span>Pay minimum of 500 to book.</p>
             </el-card>
-        </div>
-        <div class="col-md-7">
+        </div> -->
+        <div class="col-md-12">
             <el-card shadow="hover" class="mb-3 pb-0">
                 <h3>Manage Booking</h3>
                 <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>

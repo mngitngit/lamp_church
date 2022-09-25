@@ -11,6 +11,10 @@ class Slots extends Model
 
     protected $appends = ['available'];
 
+    protected $casts = [
+        'event_date'  => 'date:F d',
+    ];
+
     public function getAvailableAttribute() {
         $taken = Booking::where('slot_id', $this->id)->count();
         return $this->seat_count - $taken;

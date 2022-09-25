@@ -107,6 +107,14 @@
       </template>
     </el-table-column>
     <el-table-column
+      label="Booked dates"
+      align="center"
+      width="150">
+      <template slot-scope="scope">
+          <div v-html="transformPrioDates(scope.row.booked_dates)"></div>
+      </template>
+    </el-table-column>
+    <el-table-column
       prop="rate"
       label="Rate"
       align="center"
@@ -213,7 +221,7 @@
           })
         },
         transformPrioDates(dates) {
-          var arr = dates.split(", ")
+          var arr = typeof dates === 'object' ? dates : dates.split(", ")
           var html = "";
 
           arr.forEach(element => {

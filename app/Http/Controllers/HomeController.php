@@ -20,9 +20,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // dd(auth()->user()->load(['permissions']));
         $registration = Registration::withSum('payments', 'amount');
-        // dd($registration->get()[0]);
+
         if ($request->search) {
             $registration
             ->where('fullname', 'LIKE', "%$request->search%")
@@ -33,6 +32,12 @@ class HomeController extends Controller
 
         $registration->map(function($item) {
             $item->priority_dates = implode(', ', json_decode($item->priority_dates));
+
+            $dates = $item->bookings()->with('slot')->get()->toArray();
+
+            $item->booked_dates = array_map(function($date) {
+               return $date['slot']['event_date'];
+            }, $dates);
         });
 
         return view('home', [

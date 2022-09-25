@@ -7378,24 +7378,7 @@ var render = function render() {
   }, [!_vm.validated ? _c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-5"
-  }, [_c("el-card", {
-    staticClass: "mb-3 pb-0",
-    attrs: {
-      shadow: "hover"
-    }
-  }, [_c("p", {
-    staticClass: "c-booking-subheader mb-2"
-  }, [_vm._v("Reminders:")]), _vm._v(" "), _c("p", {
-    staticClass: "c-booking-subheader mb-1"
-  }, [_c("span", {
-    staticClass: "el-icon-check text-success"
-  }, [_vm._v("  ")]), _vm._v("Book up to 2 days.")]), _vm._v(" "), _c("p", {
-    staticClass: "c-booking-subheader mb-1"
-  }, [_c("span", {
-    staticClass: "el-icon-check text-success"
-  }, [_vm._v("  ")]), _vm._v("Pay minimum of 500 to book.")])])], 1), _vm._v(" "), _c("div", {
-    staticClass: "col-md-7"
+    staticClass: "col-md-12"
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",
     attrs: {
