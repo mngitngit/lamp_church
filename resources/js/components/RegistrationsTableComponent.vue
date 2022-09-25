@@ -40,6 +40,9 @@
       prop="facebook_name"
       label="Facebook Name"
       width="200">
+      <template slot-scope="scope">
+          {{ scope.row.facebook_name || '--' }}
+      </template>
     </el-table-column>
     <el-table-column
       prop="registration_type"
@@ -96,10 +99,12 @@
       width="130">
     </el-table-column>
     <el-table-column
-      prop="priority_dates"
       label="Preferred dates"
       align="center"
-      width="200">
+      width="150">
+      <template slot-scope="scope">
+          <div v-html="transformPrioDates(scope.row.priority_dates)"></div>
+      </template>
     </el-table-column>
     <el-table-column
       prop="rate"
@@ -140,8 +145,9 @@
       align="center"
       width="120">
       <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row.uuid)" type="text" size="small">View Payments</el-button>
+        <el-button @click="handleClick(scope.row.uuid)" type="text" size="small">Payments</el-button>
         <a v-if="permissions.can_edit_delegate" :href="`/registration/${scope.row.uuid}/edit`"><el-button type="text" size="small">Edit Details</el-button></a>
+        <a v-if="permissions.can_edit_delegate && scope.row.can_book" :href="`/booking/${scope.row.uuid}`"><el-button type="text" size="small">Booking</el-button></a> <br />
         <el-button v-if="permissions.can_delete_delegate" type="text" size="small" @click="deleteRegistration(scope.row.uuid)">Delete</el-button>
       </template>
     </el-table-column>
@@ -205,6 +211,16 @@
               })
             }, 1000);
           })
+        },
+        transformPrioDates(dates) {
+          var arr = dates.split(", ")
+          var html = "";
+
+          arr.forEach(element => {
+            html += "<div>"+element+"</div>";
+          });
+
+          return html;
         }
     }
   }

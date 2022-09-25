@@ -6981,8 +6981,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   data: function data() {
+    var _ruleForm;
+
     return {
-      ruleForm: _defineProperty({
+      ruleForm: (_ruleForm = {
         email: '',
         firstName: '',
         lastName: '',
@@ -6997,7 +6999,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         withAccommodation: '',
         modeOfTranspo: '',
         priorityDates: []
-      }, "category", ''),
+      }, _defineProperty(_ruleForm, "category", ''), _defineProperty(_ruleForm, "canBook", false), _ruleForm),
       rules: {
         firstName: [{
           required: true,
@@ -7066,7 +7068,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   mounted: function mounted() {
-    this.ruleForm = _defineProperty({
+    var _this$ruleForm;
+
+    this.ruleForm = (_this$ruleForm = {
       email: this.registration.email,
       firstName: this.registration.firstname,
       lastName: this.registration.lastname,
@@ -7080,7 +7084,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       withAccommodation: this.registration.with_accommodation,
       modeOfTranspo: this.registration.mode_of_transpo,
       priorityDates: JSON.parse(this.registration.priority_dates)
-    }, "category", this.registration.category);
+    }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBook", this.registration.can_book === 1), _this$ruleForm);
   },
   methods: {
     submitForm: function submitForm(formName) {
@@ -7171,6 +7175,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     viewPayments: function viewPayments() {
       window.location.href = "/payments/".concat(this.registration.uuid, "/create");
+    },
+    warnUser: function warnUser() {
+      if (!this.ruleForm.canBook) {
+        this.$notify({
+          title: 'Warning',
+          type: 'warning',
+          message: 'Turning off the `allowed to book` will lose all the booked dates of the delegate.',
+          duration: 0
+        });
+      }
     }
   }
 });
@@ -8404,7 +8418,42 @@ var render = function render() {
       label: "December 30",
       name: "priorityDates"
     }
-  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
+  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+    staticClass: "col-md-6 pb-3"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Turn on if delegate is allowed to book",
+      required: ""
+    }
+  }, [_c("el-switch", {
+    staticStyle: {
+      display: "block"
+    },
+    attrs: {
+      "active-color": "#13ce66",
+      "active-text": "can book",
+      "inactive-text": ""
+    },
+    on: {
+      change: function change($event) {
+        return _vm.warnUser();
+      }
+    },
+    model: {
+      value: _vm.ruleForm.canBook,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "canBook", $$v);
+      },
+      expression: "ruleForm.canBook"
+    }
+  })], 1)], 1) : _vm._e()])]), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
@@ -16531,7 +16580,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

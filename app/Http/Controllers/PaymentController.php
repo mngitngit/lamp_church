@@ -45,7 +45,7 @@ class PaymentController extends Controller
             'date_paid' => date("Y-m-d", strtotime($request->date))
         ]);
         
-        return $this->updatePaymentStatus($uuid);
+        return $this->updatePaymentStatus($uuid, true);
     }
 
     public function destroy($id) {
@@ -53,6 +53,6 @@ class PaymentController extends Controller
         
         $payment->delete();
 
-        return $this->updatePaymentStatus($payment->registration_uuid);
+        return $this->updatePaymentStatus($payment->registration_uuid, false);
     }
 }

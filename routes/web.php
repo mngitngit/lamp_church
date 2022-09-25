@@ -20,17 +20,31 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/registration', [App\Http\Controllers\RegistrationController::class, 'create'])->name('registration');
 Route::get('/registration/validate', [App\Http\Controllers\RegistrationController::class, 'index'])->name('registration.validate');
+
+// registration
 Route::post('/registration', [App\Http\Controllers\RegistrationController::class, 'store'])->name('registration.store');
 Route::get('/registration/{id}', [App\Http\Controllers\RegistrationController::class, 'show'])->name('registration.show');
 Route::get('/registration/{id}/edit', [App\Http\Controllers\RegistrationController::class, 'edit'])->name('registration.edit');
 Route::post('/registration/{id}/update', [App\Http\Controllers\RegistrationController::class, 'update'])->name('registration.update');
 Route::delete('/registration/{id}/delete', [App\Http\Controllers\RegistrationController::class, 'destroy'])->name('registration.delete');
+
+// export
 Route::get('/registrations/export', [App\Http\Controllers\RegistrationController::class, 'export'])->name('registration.export');
 
+// lookup
 Route::get('/lookup', [App\Http\Controllers\LookUpController::class, 'index'])->name('lookup.index');
 Route::get('/lookup/{id}', [App\Http\Controllers\LookUpController::class, 'show'])->name('lookup.show');
+
+// payments
 Route::get('/payments/{id}/create', [App\Http\Controllers\PaymentController::class, 'create'])->name('payments.create');
 Route::delete('/payments/{id}/delete', [App\Http\Controllers\PaymentController::class, 'destroy'])->name('payments.delete');
 Route::post('/payments/{id}', [App\Http\Controllers\PaymentController::class, 'store'])->name('payments.store');
 
+// activities
 Route::get('/activites', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities');
+
+// booking
+Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking.create');
+Route::get('/booking/validate', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
+Route::get('/booking/{id}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking.show');
+Route::post('/booking/{id}/update', [App\Http\Controllers\BookingController::class, 'update'])->name('booking.update');

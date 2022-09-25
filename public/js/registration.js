@@ -7040,6 +7040,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee3);
       })));
+    },
+    transformPrioDates: function transformPrioDates(dates) {
+      var arr = dates.split(", ");
+      var html = "";
+      arr.forEach(function (element) {
+        html += "<div>" + element + "</div>";
+      });
+      return html;
     }
   }
 });
@@ -7121,7 +7129,13 @@ var render = function render() {
       prop: "facebook_name",
       label: "Facebook Name",
       width: "200"
-    }
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n        " + _vm._s(scope.row.facebook_name || "--") + "\n    ")];
+      }
+    }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "registration_type",
@@ -7224,11 +7238,20 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
-      prop: "priority_dates",
       label: "Preferred dates",
       align: "center",
-      width: "200"
-    }
+      width: "150"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_c("div", {
+          domProps: {
+            innerHTML: _vm._s(_vm.transformPrioDates(scope.row.priority_dates))
+          }
+        })];
+      }
+    }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "rate",
@@ -7296,7 +7319,7 @@ var render = function render() {
               return _vm.handleClick(scope.row.uuid);
             }
           }
-        }, [_vm._v("View Payments")]), _vm._v(" "), _vm.permissions.can_edit_delegate ? _c("a", {
+        }, [_vm._v("Payments")]), _vm._v(" "), _vm.permissions.can_edit_delegate ? _c("a", {
           attrs: {
             href: "/registration/".concat(scope.row.uuid, "/edit")
           }
@@ -7305,7 +7328,16 @@ var render = function render() {
             type: "text",
             size: "small"
           }
-        }, [_vm._v("Edit Details")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_delete_delegate ? _c("el-button", {
+        }, [_vm._v("Edit Details")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_edit_delegate && scope.row.can_book ? _c("a", {
+          attrs: {
+            href: "/booking/".concat(scope.row.uuid)
+          }
+        }, [_c("el-button", {
+          attrs: {
+            type: "text",
+            size: "small"
+          }
+        }, [_vm._v("Booking")])], 1) : _vm._e(), _vm._v(" "), _c("br"), _vm._v(" "), _vm.permissions.can_delete_delegate ? _c("el-button", {
           attrs: {
             type: "text",
             size: "small"
@@ -14435,7 +14467,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

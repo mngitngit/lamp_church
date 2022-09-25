@@ -31,6 +31,41 @@
     color: #409eff;
 }
 
+.el-badge__content.is-fixed {
+    right: 40px !important;
+}
+
+.c-booking-date label {
+    line-height: 8px !important;
+    padding-top: 15px !important;
+    padding-bottom: 30px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+.c-booking-date .el-checkbox__label {
+    font-size: 15px !important;
+    padding: 0 !important;
+}
+
+.c-booking-date .el-checkbox__input {
+    display: none !important;
+}
+
+.c-booking-date .el-badge__content {
+    height: 23px !important;
+    /* line-height: 18px !important; */
+    padding: 2px 6px !important;
+}
+
+.c-booking-date .is-checked {
+    background-color: #409eff38 !important;
+}
+
+.c-booking-subheader {
+    font-size: 14px !important;
+    color: #606266 !important;
+}
 /* .pagination li {
     margin-right: 10px;
     border-radius: 20px;

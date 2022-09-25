@@ -44,6 +44,6 @@ class PaymentController extends Controller
             'date_paid' => date("Y-m-d", strtotime($request->date))
         ]);
         
-        return $this->updatePaymentStatus($uuid);
+        return $this->updatePaymentStatus($uuid, true);
     }
 }

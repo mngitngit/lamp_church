@@ -58,7 +58,7 @@
             </div>
         </el-card> 
 
-        <el-card v-if="ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3                                                                                                                               ">
+        <el-card v-if="ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3">
             <div class="row">
                 <div v-if="ruleForm.registrationType === 'Member'" class="col-md-6">
                     <el-form-item label="Do you have an awta card?" prop="withAwtaCard" required>
@@ -100,7 +100,7 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3                                                                                                                               ">
+        <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3">
             <div class="col-md-12">
                 <el-form-item label="In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)" prop="priorityDates" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
                     <el-checkbox-group v-model="ruleForm.priorityDates">
@@ -110,6 +110,23 @@
                     <el-checkbox label="December 30" name="priorityDates"></el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
+            </div>
+        </el-card>
+
+        <el-card shadow="hover" class="mb-3">
+            <div class="row">
+                <div v-if="ruleForm.attendingOption == 'Hybrid'" class="col-md-6 pb-3">
+                    <el-form-item label="Turn on if delegate is allowed to book" required>
+                        <el-switch
+                            @change="warnUser()"
+                            style="display: block"
+                            v-model="ruleForm.canBook"
+                            active-color="#13ce66"
+                            active-text="can book"
+                            inactive-text="">
+                        </el-switch>
+                    </el-form-item>
+                </div>
             </div>
         </el-card>
 
@@ -147,7 +164,8 @@ export default {
                 withAccommodation: '',
                 modeOfTranspo: '',
                 priorityDates: [],
-                category: ''
+                category: '',
+                canBook: false
             },
             rules: {
                 firstName: [
@@ -213,7 +231,8 @@ export default {
                 withAccommodation: this.registration.with_accommodation,
                 modeOfTranspo: this.registration.mode_of_transpo,
                 priorityDates: JSON.parse(this.registration.priority_dates),
-                category: this.registration.category
+                category: this.registration.category,
+                canBook: this.registration.can_book === 1
             }
     },
     methods: {
@@ -253,6 +272,16 @@ export default {
         viewPayments() {
           window.location.href = `/payments/${this.registration.uuid}/create`;
         },
+        warnUser() {
+            if (! this.ruleForm.canBook) {
+                this.$notify({
+                    title: 'Warning',
+                    type: 'warning',
+                    message: 'Turning off the `allowed to book` will lose all the booked dates of the delegate.',
+                    duration: 0
+                });
+            }
+        }
     }
 }
 </script>

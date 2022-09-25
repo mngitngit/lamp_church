@@ -94,7 +94,7 @@ class RegistrationController extends Controller
             ]);
         }
 
-        $this->updatePaymentStatus($registration->uuid);
+        $this->updatePaymentStatus($registration->uuid, false);
 
         return $registration;
     }
@@ -127,10 +127,15 @@ class RegistrationController extends Controller
             'with_awta_card' => $request->withAwtaCard,
             'with_accommodation' => $request->withAccommodation,
             'mode_of_transpo' => $request->modeOfTranspo,
-            'priority_dates' => json_encode($request->priorityDates)
+            'priority_dates' => json_encode($request->priorityDates),
+            'can_book' => $request->canBook
         ]);
 
-        return $this->updatePaymentStatus($uuid);
+        if (! $request->canBook) {
+            $registration->bookings()->delete();
+        }
+
+        return $this->updatePaymentStatus($uuid, false);
     }
 
     public function edit($uuid) {

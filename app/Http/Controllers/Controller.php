@@ -15,7 +15,9 @@ class Controller extends BaseController
 
     function generateRandomString($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
         $charactersLength = strlen($characters);
+
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
@@ -38,34 +40,42 @@ class Controller extends BaseController
         return $prefix . $new;
     }
 
-    function updatePaymentStatus($uuid) {
+    function updatePaymentStatus($uuid, $auto_enable_booking) {
         $registration = Registration::where('uuid', $uuid)->first();
+
         $balance = floatval($registration->rate);
-        $balance-= floatval(array_sum(array_column($registration->payments->toArray(), 'amount')));
+
+        $canBookRate = floatval($registration->can_book_rate);
+
+        $totalAmountPaid = floatval(array_sum(array_column($registration->payments->toArray(), 'amount')));
+
+        $balance-= $totalAmountPaid;
+
+        $parameters = array();
 
         if ($balance <= 0.0 && count($registration->payments) > 0) {
-            $registration->update([
-                'payment_status' => 'Paid'
-            ]);
+            $parameters['payment_status'] = 'Paid';
         }
 
         if ($balance > 0.0 && count($registration->payments) > 0) {
-            $registration->update([
-                'payment_status' => 'Partial'
-            ]);
+            $parameters['payment_status'] = 'Partial';
         }
 
         if ($balance == 0.0 && count($registration->payments) == 0) {
-            $registration->update([
-                'payment_status' => 'Free'
-            ]);
+            $parameters['payment_status'] = 'Free';
         }
 
         if ($balance > 0.0 && count($registration->payments) == 0) {
-            $registration->update([
-                'payment_status' => 'Pending'
-            ]);
+            $parameters['payment_status'] = 'Unsettled';
         }
+
+        if ($auto_enable_booking) {
+            if ($totalAmountPaid >= $canBookRate) {
+                $parameters['can_book'] = true; 
+            }
+        }
+
+        $registration->update($parameters);
 
         return $registration;
     }

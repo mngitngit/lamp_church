@@ -28,24 +28,31 @@ class Registration extends Model
         'with_awta_card',
         'with_accommodation',
         'mode_of_transpo',
-        'priority_dates'
+        'priority_dates',
+        'can_book',
+        'can_book_rate',
+        'can_book_days'
     ];
 
     public static function boot() {
         parent::boot();
         
         self::creating(function ($model) {
-            $model->rate = Rates::where('category', $model->category)
-            ->where('attending_option', $model->attending_option)
-            ->first()
-            ->rate;
+            $payment_config = Rates::where('category', $model->category)
+                ->where('attending_option', $model->attending_option)
+                ->first();
+
+            $model->rate = $payment_config->rate;
+            $model->can_book_rate = $payment_config->can_book_rate;
         });
 
         self::updating(function ($model) {
-            $model->rate = Rates::where('category', $model->category)
-            ->where('attending_option', $model->attending_option)
-            ->first()
-            ->rate;
+            $payment_config = Rates::where('category', $model->category)
+                ->where('attending_option', $model->attending_option)
+                ->first();
+
+            $model->rate = $payment_config->rate;
+            $model->can_book_rate = $payment_config->can_book_rate;
 
             self::logActivity('updated the registration details of ' . $model->fullname, $model->fullname);
         });
@@ -61,6 +68,14 @@ class Registration extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class, 'registration_uuid', 'uuid');
+    }
+
+    /**
+     * Get the booking for the delegate.
+     */
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'registration_uuid', 'uuid');
     }
 
     private function logActivity($description, $delegate_name) {
