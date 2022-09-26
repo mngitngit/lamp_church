@@ -7001,12 +7001,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.max = this.can_book_days;
   },
   methods: {
-    formatDate: function formatDate(date) {
-      var newDate = new Date(date);
-      return newDate.toLocaleString('default', {
-        month: 'long'
-      }) + " " + newDate.getUTCDate();
-    },
     submitForm: function submitForm(formName) {
       var _this = this;
 

@@ -75,10 +75,6 @@ export default {
         this.max = this.can_book_days
     },
     methods: {
-        formatDate(date) {
-            var newDate = new Date(date)
-            return (newDate.toLocaleString('default', { month: 'long' })) + " " + newDate.getUTCDate();
-        },
         submitForm(formName) {
             this.$refs[formName].validate(async (valid) => {
                 this.$confirm(`Are you sure you want to continue?`, 'Warning', {
