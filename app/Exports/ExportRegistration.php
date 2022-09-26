@@ -58,6 +58,7 @@ class ExportRegistration implements FromCollection, WithHeadings
             'with Accommodation?',
             'Mode of Transportation',
             'Preffered Dates for',
+            'Booked Dates',
             'Rate',
             'Payment Status',
             'Total Amount Paid'
