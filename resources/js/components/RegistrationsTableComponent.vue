@@ -31,6 +31,7 @@
     <el-table-column
       prop="name"
       label="Name"
+      align="center"
       width="200">
       <template slot-scope="scope">
           {{ scope.row.firstname }} {{ scope.row.lastname }}
@@ -39,6 +40,7 @@
     <el-table-column
       prop="facebook_name"
       label="Facebook Name"
+      align="center"
       width="200">
       <template slot-scope="scope">
           {{ scope.row.facebook_name || '--' }}
@@ -111,7 +113,8 @@
       align="center"
       width="150">
       <template slot-scope="scope">
-          <div v-html="transformPrioDates(scope.row.booked_dates)"></div>
+          <div v-if="scope.row.booked_dates.length > 0" v-html="transformPrioDates(scope.row.booked_dates)"></div>
+          <span v-else>--</span>
       </template>
     </el-table-column>
     <el-table-column

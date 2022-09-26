@@ -7116,6 +7116,7 @@ var render = function render() {
     attrs: {
       prop: "name",
       label: "Name",
+      align: "center",
       width: "200"
     },
     scopedSlots: _vm._u([{
@@ -7128,6 +7129,7 @@ var render = function render() {
     attrs: {
       prop: "facebook_name",
       label: "Facebook Name",
+      align: "center",
       width: "200"
     },
     scopedSlots: _vm._u([{
@@ -7261,11 +7263,11 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_c("div", {
+        return [scope.row.booked_dates.length > 0 ? _c("div", {
           domProps: {
             innerHTML: _vm._s(_vm.transformPrioDates(scope.row.booked_dates))
           }
-        })];
+        }) : _c("span", [_vm._v("--")])];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {
