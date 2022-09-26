@@ -14,7 +14,7 @@
                                             border
                                             :disabled="(!ruleForm.booked.includes(date.id) && ruleForm.booked.length === max) || (date.available === 0 && !ruleForm.booked.includes(date.id) && !initial.includes(date.id))"
                                             @change="onChangeProcessed($event,date.id)">
-                                            {{ formatDate(date.event_date) }}
+                                            {{ date.event_date }}
                                         </el-checkbox>
                                     </el-badge>
                                 </div>

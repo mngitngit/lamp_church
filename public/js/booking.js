@@ -7336,7 +7336,7 @@ var render = function render() {
           return _vm.onChangeProcessed($event, date.id);
         }
       }
-    }, [_vm._v("\n                                        " + _vm._s(_vm.formatDate(date.event_date)) + "\n                                    ")])], 1)], 1);
+    }, [_vm._v("\n                                        " + _vm._s(date.event_date) + "\n                                    ")])], 1)], 1);
   }), 0)])], 1)], 1)])]), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
