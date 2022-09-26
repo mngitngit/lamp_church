@@ -113,9 +113,9 @@
             </div>
         </el-card>
 
-        <el-card shadow="hover" class="mb-3">
+        <el-card v-if="ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3">
             <div class="row">
-                <div v-if="ruleForm.attendingOption == 'Hybrid'" class="col-md-6 pb-3">
+                <div class="col-md-6 pb-3">
                     <el-form-item label="Turn on if delegate is allowed to book" required>
                         <el-switch
                             @change="warnUser()"

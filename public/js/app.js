@@ -8418,14 +8418,14 @@ var render = function render() {
       label: "December 30",
       name: "priorityDates"
     }
-  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _c("el-card", {
+  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
     }
   }, [_c("div", {
     staticClass: "row"
-  }, [_vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+  }, [_c("div", {
     staticClass: "col-md-6 pb-3"
   }, [_c("el-form-item", {
     attrs: {
@@ -8453,7 +8453,7 @@ var render = function render() {
       },
       expression: "ruleForm.canBook"
     }
-  })], 1)], 1) : _vm._e()])]), _vm._v(" "), _c("el-row", [_c("div", {
+  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
