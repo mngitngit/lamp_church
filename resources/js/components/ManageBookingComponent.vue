@@ -1,26 +1,19 @@
 <template>
 <div class="w-full">
-    <div v-if="! validated" class="row">
-        <!-- <div class="col-md-5">
-            <el-card shadow="hover" class="mb-3 pb-0">
-                <p class="c-booking-subheader mb-2">Reminders:</p>
-                <p class="c-booking-subheader mb-1"><span class="el-icon-check text-success">&nbsp;&nbsp;</span>Book up to 2 days.</p>
-                <p class="c-booking-subheader mb-1"><span class="el-icon-check text-success">&nbsp;&nbsp;</span>Pay minimum of 500 to book.</p>
+    <div v-if="! validated" class="row justify-content-center">
+        <!-- <div class="col-md-7">
+            <el-card shadow="hover" class="mb-3 p-1">
+                <div style="height 400px !important"></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></div>
             </el-card>
         </div> -->
-        <div class="col-md-12">
+        <div class="col-md-5">
             <el-card shadow="hover" class="mb-3 pb-0">
                 <h3>Manage Booking</h3>
                 <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>
 
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                     <div class="row">
-                        <div class="col-md-6">
-                            <el-form-item label="First Name" prop="firstName" required :error="fieldErrors">
-                                <el-input v-model="ruleForm.firstName"></el-input>
-                            </el-form-item>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <el-form-item label="Last Name" prop="lastName" required :error="fieldErrors">
                                 <el-input v-model="ruleForm.lastName"></el-input>
                             </el-form-item>
@@ -46,7 +39,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <el-form-item label="AWTA Card Number / Guest Number" prop="referenceNumber" required :error="fieldErrors">
+                            <el-form-item class="transform-uppercase" label="AWTA Card Number / Guest Number" prop="referenceNumber" required :error="fieldErrors">
                                 <el-input v-model="ruleForm.referenceNumber"></el-input>
                             </el-form-item>
                         </div>
@@ -81,15 +74,11 @@ export default {
     data () {
       return {
         ruleForm: {
-            firstName: '',
             lastName: '',
             localChurch: '',
             referenceNumber: ''
         },
         rules: {
-            firstName: [
-                { required: true, message: 'Please input First Name', trigger: ['blur', 'change']}
-            ],
             lastName: [
                 { required: true, message: 'Please input Last Name', trigger: ['blur', 'change']}
             ],
@@ -112,6 +101,9 @@ export default {
             can_book_days: null
         }
       }
+    },
+    mounted() {
+        document.getElementsByClassName('transform-uppercase')[0].getElementsByClassName('el-form-item__content')[0].getElementsByClassName('el-input')[0].getElementsByTagName('input')[0].style = 'text-transform: uppercase !important';
     },
     methods: {
         validateDelegate(formName) {

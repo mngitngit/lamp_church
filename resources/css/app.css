@@ -66,6 +66,10 @@
     font-size: 14px !important;
     color: #606266 !important;
 }
+
+.ticket-header .el-card__header {
+    background-color: aliceblue !important;
+}
 /* .pagination li {
     margin-right: 10px;
     border-radius: 20px;

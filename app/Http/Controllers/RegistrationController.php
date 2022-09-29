@@ -106,8 +106,17 @@ class RegistrationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($uuid) {
+        $registration = Registration::where('uuid', $uuid)->first();
+
+        $dates = $registration->bookings()->with('slot')->get()->toArray();
+
+        $booked_dates = array_map(function($date) {
+            return $date['slot']['event_date'];
+        }, $dates);
+
         return view('registration.show', [
-            'registration' => Registration::where('uuid', $uuid)->first()
+            'registration' => $registration,
+            'booked_dates' => $booked_dates
         ]);
     }
 

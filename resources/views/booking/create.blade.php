@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="px-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+    {{-- <div class="row justify-content-center">
+        <div class="col-md-8">
             <img width="100%" class="mb-3" src="/images/banner.jpg">
         </div>
-    </div>
+    </div> --}}
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <manage-booking />
         </div>
     </div>

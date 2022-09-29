@@ -57,7 +57,6 @@ class BookingController extends Controller
 
     public function index(Request $request) {
         $registration = Registration::where('uuid', $request->referenceNumber)
-            ->where('firstname', $request->firstName)
             ->where('lastname', $request->lastName)
             ->where('local_church', $request->localChurch)
             ->withSum('payments', 'amount')

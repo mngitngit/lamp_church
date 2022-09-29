@@ -105,7 +105,7 @@
       align="center"
       width="150">
       <template slot-scope="scope">
-          <div v-html="transformPrioDates(scope.row.priority_dates)"></div>
+          <div v-html="transformDates(scope.row.priority_dates)"></div>
       </template>
     </el-table-column>
     <el-table-column
@@ -113,7 +113,7 @@
       align="center"
       width="150">
       <template slot-scope="scope">
-          <div v-if="scope.row.booked_dates.length > 0" v-html="transformPrioDates(scope.row.booked_dates)"></div>
+          <div v-if="scope.row.booked_dates.length > 0" v-html="transformDates(scope.row.booked_dates)"></div>
           <span v-else>--</span>
       </template>
     </el-table-column>
@@ -223,7 +223,7 @@
             }, 1000);
           })
         },
-        transformPrioDates(dates) {
+        transformDates(dates) {
           var arr = typeof dates === 'object' ? dates : dates.split(", ")
           var html = "";
 

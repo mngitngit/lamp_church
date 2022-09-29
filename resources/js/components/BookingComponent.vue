@@ -103,7 +103,7 @@ export default {
                             center: true,
                             type: 'success',
                             callback: action => {
-                                window.location.reload();
+                                window.location.href = `registration/${this.uuid}`;
                             }
                         });
                     }).catch((error) => {

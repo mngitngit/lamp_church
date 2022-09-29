@@ -1,7 +1,7 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <el-card class="box-card">
+            <el-card class="box-card ticket-header">
                 <div slot="header" class="clearfix">
                     <span>LAMP WORLDWIDE AWTA 2022</span>
                 </div>
@@ -20,7 +20,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <small>Facebook Name</small>
-                                    <span class="text-lg font-bold d-block text-uppercase">{{ registration.facebook_name }}</span>
+                                    <span class="text-lg font-bold d-block text-uppercase">{{ registration.facebook_name || '--' }}</span>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -51,7 +51,15 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div v-if="registration.attending_option === 'Hybrid'" class="row mb-3">
+                        <div class="col-md-12">
+                            <small>Booked Dates</small>
+                            <span class="text-md font-bold d-block" v-if="booked_dates.length > 0" v-html="booked_dates.join([separator = ',  '])"></span>
+                            <span class="d-block font-bold text-black-50 text-md" v-else>Not yet booked. Please reach out to your local coordinater to book your schedule.</span>
+                        </div>
+                    </div>
+
+                    <div v-if="registration.attending_option === 'Hybrid'" class="row">
                         <div class="col-md-12">
                             <small>*** Please screenshot this ticket. This will be your gate pass to the event place.</small>
                         </div>
@@ -75,6 +83,10 @@ export default {
             required: true,
             type: Object
         },
+        booked_dates: {
+            required: false,
+            type: Array
+        }
     },
     methods: {
         capitalizeString(str) { 
@@ -84,7 +96,17 @@ export default {
         },
         goToRegistration() {
             window.location.href = `/registration`;
+        },
+        transformDates(dates) {
+          var arr = typeof dates === 'object' ? dates : dates.split(", ")
+          var html = "";
+
+          arr.forEach(element => {
+            html += "<div>"+element+"</div>";
+          });
+
+          return html;
         }
-    }
+    }   
 }
 </script>

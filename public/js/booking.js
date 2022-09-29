@@ -7045,7 +7045,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                                           center: true,
                                           type: 'success',
                                           callback: function callback(action) {
-                                            window.location.reload();
+                                            window.location.href = "registration/".concat(_this.uuid);
                                           }
                                         });
 
@@ -7137,17 +7137,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       ruleForm: {
-        firstName: '',
         lastName: '',
         localChurch: '',
         referenceNumber: ''
       },
       rules: {
-        firstName: [{
-          required: true,
-          message: 'Please input First Name',
-          trigger: ['blur', 'change']
-        }],
         lastName: [{
           required: true,
           message: 'Please input Last Name',
@@ -7176,6 +7170,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         can_book_days: null
       }
     };
+  },
+  mounted: function mounted() {
+    document.getElementsByClassName('transform-uppercase')[0].getElementsByClassName('el-form-item__content')[0].getElementsByClassName('el-input')[0].getElementsByTagName('input')[0].style = 'text-transform: uppercase !important';
   },
   methods: {
     validateDelegate: function validateDelegate(formName) {
@@ -7370,9 +7367,9 @@ var render = function render() {
   return _c("div", {
     staticClass: "w-full"
   }, [!_vm.validated ? _c("div", {
-    staticClass: "row"
+    staticClass: "row justify-content-center"
   }, [_c("div", {
-    staticClass: "col-md-12"
+    staticClass: "col-md-5"
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",
     attrs: {
@@ -7390,24 +7387,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "First Name",
-      prop: "firstName",
-      required: "",
-      error: _vm.fieldErrors
-    }
-  }, [_c("el-input", {
-    model: {
-      value: _vm.ruleForm.firstName,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "firstName", $$v);
-      },
-      expression: "ruleForm.firstName"
-    }
-  })], 1)], 1), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6"
+    staticClass: "col-md-12"
   }, [_c("el-form-item", {
     attrs: {
       label: "Last Name",
@@ -7500,6 +7480,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-form-item", {
+    staticClass: "transform-uppercase",
     attrs: {
       label: "AWTA Card Number / Guest Number",
       prop: "referenceNumber",
@@ -14663,7 +14644,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n\n.ticket-header .el-card__header {\n    background-color: aliceblue !important;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
