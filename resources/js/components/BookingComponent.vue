@@ -103,7 +103,7 @@ export default {
                             center: true,
                             type: 'success',
                             callback: action => {
-                                window.location.href = `registration/${this.uuid}`;
+                                window.location.href = `booking/${this.uuid}`;
                             }
                         });
                     }).catch((error) => {

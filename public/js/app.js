@@ -9323,11 +9323,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", {
-    staticClass: "row justify-content-center"
-  }, [_c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-card", {
+  return _c("el-card", {
     staticClass: "box-card ticket-header"
   }, [_c("div", {
     staticClass: "clearfix",
@@ -9392,27 +9388,11 @@ var render = function render() {
     }
   }) : _c("span", {
     staticClass: "d-block font-bold text-black-50 text-md"
-  }, [_vm._v("Not yet booked. Please reach out to your local coordinater to book your schedule.")])])]) : _vm._e(), _vm._v(" "), _vm.registration.attending_option === "Hybrid" ? _c("div", {
+  }, [_vm._v("Not yet booked. Please reach out to your local coordinator to book your schedule.")])])]) : _vm._e(), _vm._v(" "), _vm.registration.attending_option === "Hybrid" ? _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
-  }, [_c("small", [_vm._v("*** Please screenshot this ticket. This will be your gate pass to the event place.")])])]) : _vm._e()])]), _vm._v(" "), _c("el-row", {
-    staticClass: "my-4"
-  }, [_c("el-col", {
-    attrs: {
-      span: 24
-    }
-  }, [_c("el-link", {
-    staticClass: "float-end",
-    attrs: {
-      type: "primary"
-    },
-    on: {
-      click: function click($event) {
-        return _vm.goToRegistration();
-      }
-    }
-  }, [_vm._v("Register Another Delegate")])], 1)], 1)], 1)]);
+  }, [_c("small", [_vm._v("*** Please screenshot this ticket. This will be your gate pass to the event place.")])])]) : _vm._e()])]);
 };
 
 var staticRenderFns = [];

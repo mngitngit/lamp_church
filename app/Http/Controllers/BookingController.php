@@ -20,15 +20,36 @@ class BookingController extends Controller
         return view('booking.create');
     }
 
-    public function show($uuid)
+    public function edit($uuid)
     {
         $registration = Registration::where('uuid', $uuid)->first();
 
-        return view('booking.show', [
+        return view('booking.edit', [
             'booked_dates' => $registration->bookings()->with(['slot'])->get(),
             'slots' => Slots::all(),
             'uuid' => $uuid,
             'can_book_days' => $registration->can_book_days
+        ]);
+    }
+
+    /**
+     * show booking ticket.
+     *
+     * @param  String $uuid
+     * @return \Illuminate\Http\Response
+     */
+    public function show($uuid) {
+        $registration = Registration::where('uuid', $uuid)->first();
+
+        $dates = $registration->bookings()->with('slot')->get()->toArray();
+
+        $booked_dates = array_map(function($date) {
+            return $date['slot']['event_date'];
+        }, $dates);
+
+        return view('booking.show', [
+            'registration' => $registration,
+            'booked_dates' => $booked_dates
         ]);
     }
 

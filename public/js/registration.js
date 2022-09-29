@@ -7348,7 +7348,7 @@ var render = function render() {
           }
         }, [_vm._v("Edit Details")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_edit_delegate && scope.row.can_book ? _c("a", {
           attrs: {
-            href: "/booking/".concat(scope.row.uuid)
+            href: "/booking/".concat(scope.row.uuid, "/edit")
           }
         }, [_c("el-button", {
           attrs: {
