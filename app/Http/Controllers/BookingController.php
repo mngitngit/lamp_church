@@ -56,6 +56,15 @@ class BookingController extends Controller
     public function update($uuid, Request $request)
     {
         $registration = Registration::where('uuid', $uuid)->first();
+
+        $new_booked_dates = $request->all()['dates'];
+
+        $old_booked_dates = array_column($registration->bookings()->get()->toArray(), 'slot_id');
+
+        $limit = $registration->rebooking_limit;
+
+        $registration->rebooking_limit = $new_booked_dates == $old_booked_dates ? $limit : $limit -1;
+
         $registration->bookings()->delete();
 
         foreach($request->dates as $date) {
@@ -73,6 +82,8 @@ class BookingController extends Controller
             }
         }
 
+        $registration->save();
+
         return $registration->bookings()->with(['slot'])->get();
     }
 
@@ -85,6 +96,10 @@ class BookingController extends Controller
         
         if (! $registration) {
             return response()->json(['error' => 'Not found. Please check the details and try again.'], 500);
+        }
+
+        if ($registration->rebooking_limit <= 0) {
+            return response()->json(['error' => 'Already reached rebooking limit.'], 500);
         }
 
         if ($registration->attending_option !== 'Hybrid') {

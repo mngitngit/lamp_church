@@ -46,6 +46,9 @@ Route::get('/activites', [App\Http\Controllers\ActivityController::class, 'index
 // booking
 Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking.create');
 Route::get('/booking/validate', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
-Route::get('/booking/{id}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking.show');
+Route::get('/booking/{id}', [App\Http\Controllers\Booki\ngController::class, 'show'])->name('booking.show');
 Route::get('/booking/{id}/edit', [App\Http\Controllers\BookingController::class, 'edit'])->name('booking.edit');
 Route::post('/booking/{id}/update', [App\Http\Controllers\BookingController::class, 'update'])->name('booking.update');
+
+// config
+Route::get('/config', [App\Http\Controllers\ConfigurationController::class, 'show'])->name('configurations');
