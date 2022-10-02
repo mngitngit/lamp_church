@@ -122,7 +122,7 @@ class RegistrationController extends Controller
 
     public function update($uuid, Request $request) {
         $registration = Registration::where('uuid', $uuid)->first();
-
+        
         $registration->update([
             'email' => $request->email,
             'firstname' => $request->firstName,
@@ -137,7 +137,10 @@ class RegistrationController extends Controller
             'with_accommodation' => $request->withAccommodation,
             'mode_of_transpo' => $request->modeOfTranspo,
             'priority_dates' => json_encode($request->priorityDates),
-            'can_book' => $request->canBook
+            'can_book' => $request->canBook,
+            'can_book_rate' => $request->bookingRate,
+            'can_book_days' => $request->canBookDays,
+            'rebooking_limit' => $request->rebookingLimit
         ]);
 
         if (! $request->canBook) {

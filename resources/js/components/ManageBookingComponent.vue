@@ -61,7 +61,7 @@
         </div>
     </div>
     <div v-else class="row">
-        <booking :booked_dates="retrieved.booked_dates" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days"/>
+        <booking :booked_dates="retrieved.booked_dates" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false"/>
     </div>
 </div>
 </template>

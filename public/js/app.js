@@ -6998,8 +6998,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         withAwtaCard: '',
         withAccommodation: '',
         modeOfTranspo: '',
-        priorityDates: []
-      }, _defineProperty(_ruleForm, "category", ''), _defineProperty(_ruleForm, "canBook", false), _ruleForm),
+        priorityDates: [],
+        canBookDays: 0,
+        rebookingLimit: 0
+      }, _defineProperty(_ruleForm, "category", ''), _defineProperty(_ruleForm, "canBook", false), _defineProperty(_ruleForm, "bookingRate", 0), _ruleForm),
       rules: {
         firstName: [{
           required: true,
@@ -7047,7 +7049,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           trigger: 'change'
         }]
       },
-      countries: this.$allCountries
+      countries: this.$allCountries,
+      permissions: window.auth_user.permissions
     };
   },
   watch: {
@@ -7084,7 +7087,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       withAccommodation: this.registration.with_accommodation,
       modeOfTranspo: this.registration.mode_of_transpo,
       priorityDates: JSON.parse(this.registration.priority_dates)
-    }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBook", this.registration.can_book === 1), _this$ruleForm);
+    }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBook", this.registration.can_book === 1), _defineProperty(_this$ruleForm, "canBookDays", this.registration.can_book_days), _defineProperty(_this$ruleForm, "rebookingLimit", this.registration.rebooking_limit), _defineProperty(_this$ruleForm, "bookingRate", this.registration.can_book_rate), _this$ruleForm);
   },
   methods: {
     submitForm: function submitForm(formName) {
@@ -8432,7 +8435,7 @@ var render = function render() {
       label: "December 30",
       name: "priorityDates"
     }
-  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
+  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" && _vm.permissions.can_edit_delegate_config ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
@@ -8440,7 +8443,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-6 pb-3"
+    staticClass: "col-md-5"
   }, [_c("el-form-item", {
     attrs: {
       label: "Turn on if delegate is allowed to book",
@@ -8466,6 +8469,51 @@ var render = function render() {
         _vm.$set(_vm.ruleForm, "canBook", $$v);
       },
       expression: "ruleForm.canBook"
+    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-2"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Days can book",
+      required: ""
+    }
+  }, [_c("el-input", {
+    model: {
+      value: _vm.ruleForm.canBookDays,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "canBookDays", $$v);
+      },
+      expression: "ruleForm.canBookDays"
+    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-2"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Rebooking Limit",
+      required: ""
+    }
+  }, [_c("el-input", {
+    model: {
+      value: _vm.ruleForm.rebookingLimit,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "rebookingLimit", $$v);
+      },
+      expression: "ruleForm.rebookingLimit"
+    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-2"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Booking Rate",
+      required: ""
+    }
+  }, [_c("el-input", {
+    model: {
+      value: _vm.ruleForm.bookingRate,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "bookingRate", $$v);
+      },
+      expression: "ruleForm.bookingRate"
     }
   })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"

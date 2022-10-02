@@ -69,7 +69,7 @@ class Controller extends BaseController
             $parameters['payment_status'] = 'Unsettled';
         }
 
-        if ($auto_enable_booking) {
+        if ($auto_enable_booking && $registration->attending_option === 'Hybrid') {
             if ($totalAmountPaid >= $canBookRate) {
                 $parameters['can_book'] = true; 
             }

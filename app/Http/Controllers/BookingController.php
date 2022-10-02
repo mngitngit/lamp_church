@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RebookingActivityResource;
 use App\Models\Booking;
 use App\Models\Rates;
+use App\Models\RebookingActivities;
 use App\Models\Registration;
 use App\Models\Slots;
 use Illuminate\Http\Request;
@@ -28,7 +30,8 @@ class BookingController extends Controller
             'booked_dates' => $registration->bookings()->with(['slot'])->get(),
             'slots' => Slots::all(),
             'uuid' => $uuid,
-            'can_book_days' => $registration->can_book_days
+            'can_book_days' => $registration->can_book_days,
+            'rebooking_activities' => $registration->rebooking_activities,
         ]);
     }
 
@@ -41,7 +44,7 @@ class BookingController extends Controller
     public function show($uuid) {
         $registration = Registration::where('uuid', $uuid)->first();
 
-        $dates = $registration->bookings()->with('slot')->get()->toArray();
+        $dates = $registration->bookings()->with(['slot'])->get()->toArray();
 
         $booked_dates = array_map(function($date) {
             return $date['slot']['event_date'];
@@ -63,7 +66,9 @@ class BookingController extends Controller
 
         $limit = $registration->rebooking_limit;
 
-        $registration->rebooking_limit = $new_booked_dates == $old_booked_dates ? $limit : $limit -1;
+        $hasPermission = auth()->user() ? auth()->user()->permissions->can_edit_delegate : false;
+
+        $registration->rebooking_limit = $new_booked_dates == $old_booked_dates || $hasPermission ? $limit : $limit -1;
 
         $registration->bookings()->delete();
 
@@ -83,6 +88,8 @@ class BookingController extends Controller
         }
 
         $registration->save();
+
+        $this->logActivity($old_booked_dates, $new_booked_dates, $uuid);
 
         return $registration->bookings()->with(['slot'])->get();
     }
@@ -128,5 +135,28 @@ class BookingController extends Controller
         }
 
         return response()->json(['error' => 'An error occured. Please report this issue to your local coordinator for other details.'], 500);
+    }
+
+    public function logActivity($old_booked_dates, $new_booked_dates, $uuid) {
+        if ($new_booked_dates != $old_booked_dates) {
+            $registration = Registration::where('uuid', $uuid)->first();
+
+            $dates = array_map(function ($item) {
+                return $item['slot']['event_date'];
+            }, $registration->bookings()->with('slot')->get()->toArray());
+
+            if (count($old_booked_dates) > 0 && count($new_booked_dates) > 0) {
+                $message = "This delegate " . (auth()->user() ? "was rebooked by " . auth()->user()->name : "rebooked") . " to " . implode(', ', $dates) . ".";
+            } elseif (count($old_booked_dates) === 0 && count($new_booked_dates) > 0) {
+                $message = "This delegate " . (auth()->user() ? "booked by " . auth()->user()->name : "booked") . " for " . implode(', ', $dates) . ".";
+            }elseif (count($old_booked_dates) > 0 && count($new_booked_dates) === 0) {
+                $message = "This delegate's " . (auth()->user() ? "booked dates were removed by " . auth()->user()->name : "booked dates were removed.");
+            }
+            
+            RebookingActivities::create([
+                'registration_uuid' => $uuid,
+                'description' => $message
+            ]);
+        }
     }
 }

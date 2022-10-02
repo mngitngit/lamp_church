@@ -11,6 +11,7 @@
  // admin portal
  Vue.component('booking', require('./components/BookingComponent.vue').default);
  Vue.component('manage-booking', require('./components/ManageBookingComponent.vue').default);
+ Vue.component('rebooking-activity', require('./components/RebookingActivitiesComponent.vue').default);
  
  import Vue from 'vue';
  import ElementUI from 'element-ui';

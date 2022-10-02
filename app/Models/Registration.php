@@ -31,7 +31,8 @@ class Registration extends Model
         'priority_dates',
         'can_book',
         'can_book_rate',
-        'can_book_days'
+        'can_book_days',
+        'rebooking_limit'
     ];
 
     public static function boot() {
@@ -76,6 +77,14 @@ class Registration extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class, 'registration_uuid', 'uuid');
+    }
+
+    /**
+     * Get the rebooking activities for the delegate.
+     */
+    public function rebooking_activities()
+    {
+        return $this->hasMany(RebookingActivities::class, 'registration_uuid', 'uuid');
     }
 
     private function logActivity($description, $delegate_name) {

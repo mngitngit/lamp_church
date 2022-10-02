@@ -6960,6 +6960,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     can_book_days: {
       required: true,
       type: Number
+    },
+    self_redirect: {
+      required: true,
+      type: Boolean
     }
   },
   data: function data() {
@@ -7045,7 +7049,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                                           center: true,
                                           type: 'success',
                                           callback: function callback(action) {
-                                            window.location.href = "booking/".concat(_this.uuid);
+                                            if (_this.self_redirect) window.location.reload();else window.location.href = "booking/".concat(_this.uuid);
                                           }
                                         });
 
@@ -7524,7 +7528,8 @@ var render = function render() {
       booked_dates: _vm.retrieved.booked_dates,
       slots: _vm.retrieved.slots,
       uuid: _vm.retrieved.uuid,
-      can_book_days: _vm.retrieved.can_book_days
+      can_book_days: _vm.retrieved.can_book_days,
+      self_redirect: false
     }
   })], 1)]);
 };
@@ -108866,6 +108871,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('booking', (__webpack_require__(/*! ./components/BookingComponent.vue */ "./resources/js/components/BookingComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('manage-booking', (__webpack_require__(/*! ./components/ManageBookingComponent.vue */ "./resources/js/components/ManageBookingComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('rebooking-activity', Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/RebookingActivitiesComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 
 

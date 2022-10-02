@@ -13,6 +13,7 @@ class Permission extends Model
         'can_edit_delegate',
         'can_delete_delegate',
         'can_delete_payment',
-        'can_export_registrations'
+        'can_export_registrations',
+        'can_edit_delegate_config'
     ];
 }

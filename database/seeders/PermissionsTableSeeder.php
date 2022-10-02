@@ -27,7 +27,8 @@ class PermissionsTableSeeder extends Seeder
             'Jake Patrick Imperial',
             'Abram Frianeza',
             'John Michael Robles',
-            'Klaud-Cuasay Laureano'
+            'Klaud-Cuasay Laureano',
+            'Bryan Sta Rosa'
         ];
 
         foreach ($users as $user) {
@@ -37,6 +38,7 @@ class PermissionsTableSeeder extends Seeder
                 'can_edit_delegate' => $isAdmin,
                 'can_delete_delegate' => $isAdmin,
                 'can_delete_payment' => $isAdmin,
+                'can_edit_delegate_config' => $isAdmin,
                 'can_export_registrations' => true,
                 'can_view_registrations' => true
             ]);

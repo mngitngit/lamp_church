@@ -40,6 +40,7 @@ class UserTableSeeder extends Seeder
             ['name' => 'Jake Patrick Imperial', 'email' => 'jimperial@lampawta.online', 'password' => Hash::make('admin123')],
             ['name' => 'Abram Frianeza', 'email' => 'afrianeza@lampawta.online', 'password' => Hash::make('admin123')],
             ['name' => 'John Michael Robles', 'email' => 'jrobles@lampawta.online', 'password' => Hash::make('admin123')],
+            ['name' => 'Bryan Sta Rosa', 'email' => 'bstarosa@lampawta.online', 'password' => Hash::make('admin123')],
             ['name' => 'Klaud-Cuasay Laureano', 'email' => 'klaureano@lampawta.online', 'password' => Hash::make('admin123')],
         ]);
     }

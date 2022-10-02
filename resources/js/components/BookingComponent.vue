@@ -51,6 +51,10 @@ export default {
         can_book_days: {
             required: true,
             type: Number
+        },
+        self_redirect: {
+            required: true,
+            type: Boolean
         }
     },
     data () {
@@ -103,7 +107,10 @@ export default {
                             center: true,
                             type: 'success',
                             callback: action => {
-                                window.location.href = `booking/${this.uuid}`;
+                                if (this.self_redirect)
+                                    window.location.reload();
+                                else
+                                    window.location.href = `booking/${this.uuid}`;
                             }
                         });
                     }).catch((error) => {

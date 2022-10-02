@@ -113,9 +113,9 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3">
+        <el-card v-if="ruleForm.attendingOption == 'Hybrid' && permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
             <div class="row">
-                <div class="col-md-6 pb-3">
+                <div class="col-md-5">
                     <el-form-item label="Turn on if delegate is allowed to book" required>
                         <el-switch
                             @change="warnUser()"
@@ -125,6 +125,21 @@
                             active-text="can book"
                             inactive-text="">
                         </el-switch>
+                    </el-form-item>
+                </div>
+                <div class="col-md-2">
+                    <el-form-item label="Days can book" required>
+                        <el-input v-model="ruleForm.canBookDays"></el-input>
+                    </el-form-item>
+                </div>
+                <div class="col-md-2">
+                    <el-form-item label="Rebooking Limit" required>
+                        <el-input v-model="ruleForm.rebookingLimit"></el-input>
+                    </el-form-item>
+                </div>
+                <div class="col-md-2">
+                    <el-form-item label="Booking Rate" required>
+                        <el-input v-model="ruleForm.bookingRate"></el-input>
                     </el-form-item>
                 </div>
             </div>
@@ -164,8 +179,11 @@ export default {
                 withAccommodation: '',
                 modeOfTranspo: '',
                 priorityDates: [],
+                canBookDays: 0,
+                rebookingLimit: 0,
                 category: '',
-                canBook: false
+                canBook: false,
+                bookingRate: 0
             },
             rules: {
                 firstName: [
@@ -196,7 +214,8 @@ export default {
                     {required: true, message: 'Please select atleast one day', trigger: 'change'}
                 ],
             },
-            countries: this.$allCountries
+            countries: this.$allCountries,
+            permissions: window.auth_user.permissions
         }
     },
     watch: {
@@ -232,7 +251,10 @@ export default {
                 modeOfTranspo: this.registration.mode_of_transpo,
                 priorityDates: JSON.parse(this.registration.priority_dates),
                 category: this.registration.category,
-                canBook: this.registration.can_book === 1
+                canBook: this.registration.can_book === 1,
+                canBookDays: this.registration.can_book_days,
+                rebookingLimit: this.registration.rebooking_limit,
+                bookingRate: this.registration.can_book_rate
             }
     },
     methods: {
