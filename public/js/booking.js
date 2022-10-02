@@ -108871,7 +108871,6 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('booking', (__webpack_require__(/*! ./components/BookingComponent.vue */ "./resources/js/components/BookingComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('manage-booking', (__webpack_require__(/*! ./components/ManageBookingComponent.vue */ "./resources/js/components/ManageBookingComponent.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('rebooking-activity', Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/RebookingActivitiesComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 
 
