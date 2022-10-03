@@ -28,7 +28,7 @@
 </head>
 <body>
     <div id="app">
-        <main style="min-height: 100vh;" class="py-4">
+        <main style="min-height: 100vh; background-color: #ebebeb" class="py-4">
             @yield('content')
         </main>
     </div>

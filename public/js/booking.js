@@ -7372,9 +7372,12 @@ var render = function render() {
   }, [!_vm.validated ? _c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
-    staticClass: "col-md-5"
+    staticClass: "col-md-12"
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",
+    staticStyle: {
+      "border-top": "10px solid #e9c843"
+    },
     attrs: {
       shadow: "always"
     }
@@ -7390,7 +7393,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-12"
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "Last Name",
@@ -7406,10 +7409,8 @@ var render = function render() {
       },
       expression: "ruleForm.lastName"
     }
-  })], 1)], 1)]), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-md-12"
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "Local Church",

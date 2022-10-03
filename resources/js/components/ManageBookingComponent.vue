@@ -6,21 +6,21 @@
                 <div style="height 400px !important"></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></div>
             </el-card>
         </div> -->
-        <div class="col-md-5">
-            <el-card shadow="always" class="mb-3 pb-0">
+        <div class="col-md-12">
+            <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid #e9c843">
                 <h3>Manage Booking</h3>
                 <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>
 
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <el-form-item label="Last Name" prop="lastName" required :error="fieldErrors">
                                 <el-input v-model="ruleForm.lastName"></el-input>
                             </el-form-item>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
+                    <!-- </div>
+                    <div class="row"> -->
+                        <div class="col-md-6">
                             <el-form-item label="Local Church" prop="localChurch" required :error="fieldErrors">
                                 <el-select v-model="ruleForm.localChurch" placeholder="Choose">
                                     <el-option label="Binan" value="Binan"></el-option>
