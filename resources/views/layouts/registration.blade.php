@@ -7,11 +7,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta property="og:image" content="https://lampawta.online/images/banner.jpg" />
+    <meta property="og:image" content="https://lampawta.online/images/upon_this_rock_banner.jpg" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lampawta.online/registration"/>
     <meta property="og:title" content="Annual Worship and Thanksgiving 2022" />
-    <meta property="og:description" content="Lift up your eyes, the field is ripe unto harvest!"/>
+    <meta property="og:description" content="Upon this rock of revelation, I will build my kingdom."/>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -28,7 +28,7 @@
 </head>
 <body>
     <div id="app">
-        <main style="min-height: 100vh;" class="py-4">
+        <main style="min-height: 100vh; background-color: #ebebeb" class="py-4">
             @yield('content')
         </main>
     </div>

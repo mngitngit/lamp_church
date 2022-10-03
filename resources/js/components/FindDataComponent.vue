@@ -1,6 +1,6 @@
 <template>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-        <el-card shadow="hover" class="mb-3                                                                                                                               ">
+        <el-card shadow="always" class="mb-3                                                                                                                               ">
             <div class="row">
                 <div class="col-md-6">
                     <el-form-item label="Are you a guest or a member?" prop="registrationType" required>
@@ -22,7 +22,7 @@
             </div>
         </el-card>
 
-        <el-card v-if="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3                                                                                                                               ">
+        <el-card v-if="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'" shadow="always" class="mb-3                                                                                                                               ">
             <div class="row">
                 <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
                     <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'">
@@ -54,7 +54,7 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3                                                                                                                               ">
+        <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="always" class="mb-3                                                                                                                               ">
             <div class="col-md-12">
                 <el-form-item label="In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)" prop="priorityDates" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
                     <el-checkbox-group v-model="ruleForm.priorityDates">
@@ -67,7 +67,7 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.withAwtaCard === 'yes' && ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3">
+        <el-card v-if="ruleForm.withAwtaCard === 'yes' && ruleForm.registrationType === 'Member'" shadow="always" class="mb-3">
             <div class="row">
                 <div class="col-md-6">
                     <el-form-item class="transform-uppercase" label="What is your AWTA card number?" prop="awtaCardNumber" :required="ruleForm.withAwtaCard === 'yes' && ruleForm.registrationType === 'Member'">
@@ -77,7 +77,7 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.withAwtaCard === 'lost' && ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3">
+        <el-card v-if="ruleForm.withAwtaCard === 'lost' && ruleForm.registrationType === 'Member'" shadow="always" class="mb-3">
             <div class="row">
                 <!-- Please enter your Last Name -->
                 <div class="col-md-6">
@@ -106,7 +106,7 @@
             </div>
         </el-card>
 
-        <el-card shadow="hover" v-if="tableData.length > 0 && ruleForm.registrationType === 'Member' " class="mb-3">
+        <el-card shadow="always" v-if="tableData.length > 0 && ruleForm.registrationType === 'Member' " class="mb-3">
             <div class="row">
                 <div class="col-md-12">
                     <div class="el-form-item is-success is-required mb-0">

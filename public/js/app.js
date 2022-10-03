@@ -7993,7 +7993,7 @@ var render = function render() {
       "border-top": "10px solid #e9c843"
     },
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("h2", [_vm._v("LAMP WORLDWIDE AWTA 2022")]), _vm._v(" "), _c("p", [_vm._v("\n        BE BLESSED PHYSICALLY, MATERIALLY & SPIRITUALLY "), _c("br"), _vm._v("\n        Event Timing: DECEMBER 27-30, 2022 "), _c("br"), _vm._v("\n        Event Place: Calamba Tent "), _c("br")]), _vm._v(" "), _c("p", [_vm._v('\n        Chosen people of God in the old testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where "offering made by fire unto the Lord" are given to celebrate God. But with Christ\'s death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. '), _c("br"), _c("br"), _vm._v("\n\n        Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!\n    ")])]);
 };
@@ -8571,7 +8571,7 @@ var render = function render() {
   }, [_c("el-card", {
     staticClass: "mb-3",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("div", {
     staticClass: "row"
@@ -8641,7 +8641,7 @@ var render = function render() {
   })], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("div", {
     staticClass: "row"
@@ -8735,7 +8735,7 @@ var render = function render() {
   }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -8776,7 +8776,7 @@ var render = function render() {
   })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("div", {
     staticClass: "row"
@@ -8803,7 +8803,7 @@ var render = function render() {
   })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "lost" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("div", {
     staticClass: "row"
@@ -8898,7 +8898,7 @@ var render = function render() {
   })], 1)], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.tableData.length > 0 && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("div", {
     staticClass: "row"
@@ -8981,7 +8981,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("div", {
+  return _c("div", [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
     staticClass: "col-md-6"
@@ -9003,7 +9003,7 @@ var render = function render() {
   }, [_c("el-card", {
     staticClass: "mb-4",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("div", {
     staticClass: "row"
@@ -9193,7 +9193,7 @@ var render = function render() {
   }), 1)], 1)], 1)])]), _vm._v(" "), _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("div", {
     staticClass: "row"
@@ -9287,7 +9287,7 @@ var render = function render() {
   }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -9349,7 +9349,22 @@ var render = function render() {
   }, [_vm._v("Clear Form")])], 1)])], 1)], 1)])]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+    staticClass: "col-md-6"
+  }, [_c("img", {
+    staticClass: "mb-3 rounded shadow",
+    attrs: {
+      width: "100%",
+      src: "/images/upon_this_rock_banner.jpg"
+    }
+  })])]);
+}];
 render._withStripped = true;
 
 

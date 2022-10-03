@@ -7376,7 +7376,7 @@ var render = function render() {
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",
     attrs: {
-      shadow: "hover"
+      shadow: "always"
     }
   }, [_c("h3", [_vm._v("Manage Booking")]), _vm._v(" "), _c("p", {
     staticClass: "mt-2 c-booking-subheader"

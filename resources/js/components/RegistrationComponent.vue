@@ -1,10 +1,10 @@
 <template>
     <div>
-        <!-- <div class="row justify-content-center">
+        <div class="row justify-content-center">
             <div class="col-md-6">
-                <img width="100%" class="mb-3" src="/images/banner.jpg">
+                <img width="100%" class="mb-3 rounded shadow" src="/images/upon_this_rock_banner.jpg">
             </div>
-        </div> -->
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <banner-component />
@@ -15,7 +15,7 @@
                 <find-data-component @next="nextStep" v-if="step === 1" />
 
                 <el-form v-else :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-                    <el-card shadow="hover" class="mb-4">
+                    <el-card shadow="always" class="mb-4">
                         <div class="row">
                             <div class="col-md-12">
                                 <el-form-item label="Email Address" prop="email">
@@ -69,7 +69,7 @@
                     </el-card> 
 
 
-                    <el-card v-if="ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3                                                                                                                               ">
+                    <el-card v-if="ruleForm.registrationType === 'Member'" shadow="always" class="mb-3                                                                                                                               ">
                         <div class="row">
                             <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
                                 <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType === 'Member'">
@@ -101,7 +101,7 @@
                         </div>
                     </el-card>
 
-                    <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3                                                                                                                               ">
+                    <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="always" class="mb-3">
                         <div class="col-md-12">
                             <el-form-item label="In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)" prop="priorityDates" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
                                 <el-checkbox-group v-model="ruleForm.priorityDates">

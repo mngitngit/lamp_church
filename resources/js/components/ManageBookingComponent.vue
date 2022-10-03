@@ -2,12 +2,12 @@
 <div class="w-full">
     <div v-if="! validated" class="row justify-content-center">
         <!-- <div class="col-md-7">
-            <el-card shadow="hover" class="mb-3 p-1">
+            <el-card shadow="always" class="mb-3 p-1">
                 <div style="height 400px !important"></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></div>
             </el-card>
         </div> -->
         <div class="col-md-5">
-            <el-card shadow="hover" class="mb-3 pb-0">
+            <el-card shadow="always" class="mb-3 pb-0">
                 <h3>Manage Booking</h3>
                 <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>
 
