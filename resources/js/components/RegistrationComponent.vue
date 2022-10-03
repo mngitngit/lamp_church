@@ -2,7 +2,7 @@
     <div>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <img width="100%" class="mb-3 rounded shadow" src="/images/upon_this_rock_banner.jpg">
+                <img width="100%" class="mb-3 rounded shadow" src="/images/upon_this_rock_of_revelation_banner.jpg">
             </div>
         </div>
         <div class="row justify-content-center">

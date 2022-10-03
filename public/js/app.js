@@ -9361,7 +9361,7 @@ var staticRenderFns = [function () {
     staticClass: "mb-3 rounded shadow",
     attrs: {
       width: "100%",
-      src: "/images/upon_this_rock_banner.jpg"
+      src: "/images/upon_this_rock_of_revelation_banner.jpg"
     }
   })])]);
 }];
