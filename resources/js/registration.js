@@ -10,6 +10,7 @@
  
  // admin portal
  Vue.component('registration-table', require('./components/RegistrationsTableComponent.vue').default);
+ Vue.component('booking-table', require('./components/BookingTableComponent.vue').default);
  
  import Vue from 'vue';
  import ElementUI from 'element-ui';

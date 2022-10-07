@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 use App\Http\Resources\RegistrationResource;
+use App\Models\Slots;
 
 class HomeController extends Controller
 {
@@ -40,9 +41,20 @@ class HomeController extends Controller
             }, $dates);
         });
 
+        $slot = Slots::with('bookings')->get()->map(function ($slot) {
+            $booked = $slot->bookings->groupBy('local_church')->map(function($lc) {
+                return $lc->count();
+            });
+
+            $slot['booked_per_church'] = $booked;
+            
+            return $slot;
+        });
+
         return view('home', [
             'registrations' => $registration,
-            'search' => $request->search
+            'search' => $request->search,
+            'slots' => $slot
         ]);
     }
 }

@@ -80,7 +80,8 @@ class BookingController extends Controller
             if ($remaining > 0) {
                 $registration->bookings()->create([
                     'registration_uuid' => $registration->uuid,
-                    'slot_id' => $date
+                    'slot_id' => $date,
+                    'local_church' => $registration->local_church
                 ]);
             } else {
                 return response()->json(['error' => 'Sorry, no remaining seats left. Please refresh the page and try again.'], 500);
