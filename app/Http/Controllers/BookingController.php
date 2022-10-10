@@ -60,6 +60,10 @@ class BookingController extends Controller
     {
         $registration = Registration::where('uuid', $uuid)->first();
 
+        if ($registration->is_booking_bypassed) {
+            return response()->json(['error' => 'This delegate is a church worker and is already booked for the entire AWTA days.'], 500);
+        }
+
         $new_booked_dates = $request->all()['dates'];
 
         $old_booked_dates = array_column($registration->bookings()->get()->toArray(), 'slot_id');
@@ -104,6 +108,10 @@ class BookingController extends Controller
         
         if (! $registration) {
             return response()->json(['error' => 'Not found. Please check the details and try again.'], 500);
+        }
+
+        if ($registration->is_booking_bypassed) {
+            return response()->json(['error' => 'This delegate is a church worker and is already booked for the entire AWTA days.'], 500);
         }
 
         if ($registration->rebooking_limit <= 0) {
