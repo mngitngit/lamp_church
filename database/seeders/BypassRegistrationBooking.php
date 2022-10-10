@@ -249,7 +249,10 @@ class BypassRegistrationBooking extends Seeder
 
             if ($registration) {
                 $registration->is_booking_bypassed = true;
+                $registration->can_book = false;
                 $registration->save();
+
+                $registration->bookings()->delete();
             }
         }
     }

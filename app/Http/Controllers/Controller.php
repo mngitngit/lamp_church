@@ -70,8 +70,8 @@ class Controller extends BaseController
         }
 
         if ($auto_enable_booking && $registration->attending_option === 'Hybrid') {
-            if ($totalAmountPaid >= $canBookRate) {
-                $parameters['can_book'] = true; 
+            if ($totalAmountPaid >= $canBookRate && !$registration->is_booking_bypassed) {
+                $parameters['can_book'] = true;
             }
         }
 
