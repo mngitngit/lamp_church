@@ -1,12 +1,25 @@
 <template>
 <div class="w-full">
     <div v-if="! validated" class="row justify-content-center">
-        <!-- <div class="col-md-7">
-            <el-card shadow="always" class="mb-3 p-1">
-                <div style="height 400px !important"></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></div>
+        <div class="col-md-6">
+            <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843">
+                <div class="small" style="height 400px !important; margin-bottom: 11px">
+                    <h6 class="fw-bolder">LAMP AWTA 2022</h6>
+                    Timeline: December 27, 28, 29 and 30<br/>
+                    Venue: Calamba Tent<br/>
+                    Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Kingdom<br/>
+                    <br/>
+
+                    Guidelines: <br/>
+                    Both members and visitors will be able to start booking their seats on October 9, 2022 until November 25 for Hybrid Attendees.<br/><br/>
+
+                    Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings.<br/><br/>
+
+                    For any booking isues, please report to your AWTA local coordinators.<br/>
+                </div>
             </el-card>
-        </div> -->
-        <div class="col-md-12">
+        </div>
+        <div class="col-md-6">
             <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid #e9c843">
                 <h3>Manage Booking</h3>
                 <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>

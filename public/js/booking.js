@@ -7372,7 +7372,24 @@ var render = function render() {
   }, [!_vm.validated ? _c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
-    staticClass: "col-md-12"
+    staticClass: "col-md-6"
+  }, [_c("el-card", {
+    staticClass: "mb-3 p-1",
+    staticStyle: {
+      "border-top": "10px solid #e9c843"
+    },
+    attrs: {
+      shadow: "always"
+    }
+  }, [_c("div", {
+    staticClass: "small",
+    staticStyle: {
+      "margin-bottom": "11px"
+    }
+  }, [_c("h6", {
+    staticClass: "fw-bolder"
+  }, [_vm._v("LAMP AWTA 2022")]), _vm._v("\n                    Timeline: December 27, 28, 29 and 30"), _c("br"), _vm._v("\n                    Venue: Calamba Tent"), _c("br"), _vm._v("\n                    Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Kingdom"), _c("br"), _vm._v(" "), _c("br"), _vm._v("\n\n                    Guidelines: "), _c("br"), _vm._v("\n                    Both members and visitors will be able to start booking their seats on October 9, 2022 until November 25 for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                    Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                    For any booking isues, please report to your AWTA local coordinators."), _c("br")])])], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",
     staticStyle: {
