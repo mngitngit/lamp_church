@@ -116,7 +116,7 @@
           <el-alert
               v-if="scope.row.is_booking_bypassed"
               class="py-1 text-xs d-inline"
-              title="Volunteer Pass"
+              title="All Days Pass"
               type="info"
               :closable="false">
           </el-alert>

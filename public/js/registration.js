@@ -7392,7 +7392,7 @@ var render = function render() {
         return [scope.row.is_booking_bypassed ? _c("el-alert", {
           staticClass: "py-1 text-xs d-inline",
           attrs: {
-            title: "Volunteer Pass",
+            title: "All Days Pass",
             type: "info",
             closable: false
           }
