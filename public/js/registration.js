@@ -7384,12 +7384,19 @@ var render = function render() {
     attrs: {
       label: "Booked dates",
       align: "center",
-      width: "150"
+      width: "170"
     },
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [scope.row.booked_dates.length > 0 ? _c("div", {
+        return [scope.row.is_booking_bypassed ? _c("el-alert", {
+          staticClass: "py-1 text-xs d-inline",
+          attrs: {
+            title: "Volunteer Pass",
+            type: "info",
+            closable: false
+          }
+        }) : scope.row.booked_dates.length > 0 ? _c("div", {
           domProps: {
             innerHTML: _vm._s(_vm.transformDates(scope.row.booked_dates))
           }

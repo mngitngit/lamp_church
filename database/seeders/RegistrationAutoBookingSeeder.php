@@ -23,12 +23,11 @@ class RegistrationAutoBookingSeeder extends Seeder
 
             $registration->can_book = false; 
             $registration->can_book_rate = 0;
-            $registration->can_book_days = 0; 
+            $registration->can_book_days = 2; 
 
             if ($totalAmountPaid >= $canBookRate) {
                 $registration->can_book = true; 
                 $registration->can_book_rate = $canBookRate; 
-                $registration->can_book_days = 2; 
             }
 
             $registration->save();

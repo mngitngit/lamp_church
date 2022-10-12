@@ -167,7 +167,7 @@ class BypassRegistrationBooking extends Seeder
             ['uuid' => 'LPMU00094', 'name' => 'JONNA SALUMBIDES'],
             ['uuid' => 'LPMU00017', 'name' => 'EDSON BERNARDO'],
             ['uuid' => 'LPMU00016', 'name' => 'AIZELLE BERNARDO'],
-            ['uuid' => 'LPMUN0052', 'name' => 'STEPHANY EVANGELISTA'],
+            ['uuid' => 'LPMU00052', 'name' => 'STEPHANY EVANGELISTA'],
             ['uuid' => 'LPMU00081', 'name' => 'KELVI PASCUAL'],
             ['uuid' => 'LPMU00051', 'name' => 'PIA EVANGELISTA'],
             ['uuid' => 'LPMU00199', 'name' => 'MELANIE NGITNGIT'],

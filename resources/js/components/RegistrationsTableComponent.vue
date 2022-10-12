@@ -111,9 +111,16 @@
     <el-table-column
       label="Booked dates"
       align="center"
-      width="150">
+      width="170">
       <template slot-scope="scope">
-          <div v-if="scope.row.booked_dates.length > 0" v-html="transformDates(scope.row.booked_dates)"></div>
+          <el-alert
+              v-if="scope.row.is_booking_bypassed"
+              class="py-1 text-xs d-inline"
+              title="Volunteer Pass"
+              type="info"
+              :closable="false">
+          </el-alert>
+          <div v-else-if="scope.row.booked_dates.length > 0" v-html="transformDates(scope.row.booked_dates)"></div>
           <span v-else>--</span>
       </template>
     </el-table-column>
