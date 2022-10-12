@@ -3,19 +3,26 @@
     <div v-if="! validated" class="row justify-content-center">
         <div class="col-md-6">
             <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843">
-                <div class="small" style="height 400px !important; margin-bottom: 11px">
-                    <h6 class="fw-bolder">LAMP AWTA 2022</h6>
+                <div class="text-black" style="height 400px !important;">
+                    <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2022</h6>
+                    <small>
                     Timeline: December 27, 28, 29 and 30<br/>
                     Venue: Calamba Tent<br/>
-                    Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Kingdom<br/>
+                    Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church<br/>
                     <br/>
+                    </small>
 
-                    Guidelines: <br/>
-                    Both members and visitors will be able to start booking their seats on October 9, 2022 until November 25 for Hybrid Attendees.<br/><br/>
+                    <h6 class="fw-bolder text-muted">GUIDELINES: </h6>
+                    <small>
+                    Both members and visitors will be able to start booking their seats on October 9 until November 25, 2022 for Hybrid Attendees.<br/><br/>
 
                     Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings.<br/><br/>
 
-                    For any booking isues, please report to your AWTA local coordinators.<br/>
+                    Rebooking is until November 25, 2022 only. <br/><br/>
+                    For any booking isues, please report to your AWTA local coordinators.<br/><br/>
+
+                    Book now — hurry while seats last!
+                    </small>
                 </div>
             </el-card>
         </div>
@@ -25,15 +32,15 @@
                 <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>
 
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="row mb-1">
+                        <div class="col-md-12">
                             <el-form-item label="Last Name" prop="lastName" required :error="fieldErrors">
                                 <el-input v-model="ruleForm.lastName"></el-input>
                             </el-form-item>
                         </div>
-                    <!-- </div>
-                    <div class="row"> -->
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-12">
                             <el-form-item label="Local Church" prop="localChurch" required :error="fieldErrors">
                                 <el-select v-model="ruleForm.localChurch" placeholder="Choose">
                                     <el-option label="Binan" value="Binan"></el-option>
@@ -50,7 +57,7 @@
                             </el-form-item>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mb-1">
                         <div class="col-md-12">
                             <el-form-item class="transform-uppercase" label="AWTA Card Number / Guest Number" prop="referenceNumber" required :error="fieldErrors">
                                 <el-input v-model="ruleForm.referenceNumber"></el-input>
