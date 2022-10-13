@@ -2,8 +2,8 @@
 <div class="w-full">
     <div v-if="! validated" class="row justify-content-center">
         <div class="col-md-6">
-            <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843">
-                <div class="text-black" style="height 400px !important;">
+            <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843; height 100% !important;">
+                <div class="text-black">
                     <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2022</h6>
                     <small>
                     Timeline: December 27, 28, 29 and 30<br/>

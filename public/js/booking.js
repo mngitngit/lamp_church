@@ -7382,8 +7382,7 @@ var render = function render() {
       shadow: "always"
     }
   }, [_c("div", {
-    staticClass: "text-black",
-    staticStyle: {}
+    staticClass: "text-black"
   }, [_c("h6", {
     staticClass: "fw-bolder text-muted"
   }, [_vm._v("LAMP WORLDWIDE AWTA 2022")]), _vm._v(" "), _c("small", [_vm._v("\n                    Timeline: December 27, 28, 29 and 30"), _c("br"), _vm._v("\n                    Venue: Calamba Tent"), _c("br"), _vm._v("\n                    Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church"), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
