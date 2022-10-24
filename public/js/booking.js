@@ -7376,7 +7376,8 @@ var render = function render() {
   }, [_c("el-card", {
     staticClass: "mb-3 p-1",
     staticStyle: {
-      "border-top": "10px solid #e9c843"
+      "border-top": "10px solid #e9c843",
+      height: "100% !important"
     },
     attrs: {
       shadow: "always"
@@ -7387,7 +7388,7 @@ var render = function render() {
     staticClass: "fw-bolder text-muted"
   }, [_vm._v("LAMP WORLDWIDE AWTA 2022")]), _vm._v(" "), _c("small", [_vm._v("\n                    Timeline: December 27, 28, 29 and 30"), _c("br"), _vm._v("\n                    Venue: Calamba Tent"), _c("br"), _vm._v("\n                    Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church"), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
     staticClass: "fw-bolder text-muted"
-  }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                    Both members and visitors will be able to start booking their seats on October 9 until November 25, 2022 for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                    Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                    Rebooking is until November 25, 2022 only. "), _c("br"), _c("br"), _vm._v("\n                    For any booking isues, please report to your AWTA local coordinators."), _c("br"), _c("br"), _vm._v("\n\n                    Book now — hurry while seats last!\n                    ")])])])], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                    Both members and visitors will be able to start booking their seats on October 9 until November 30, 2022 for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                    Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                    Rebooking is until November 30, 2022 only. "), _c("br"), _c("br"), _vm._v("\n                    For any booking isues, please report to your AWTA local coordinators."), _c("br"), _c("br"), _vm._v("\n\n                    Book now — hurry while seats last!\n                    ")])])])], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",

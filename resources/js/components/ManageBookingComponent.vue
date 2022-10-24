@@ -2,7 +2,7 @@
 <div class="w-full">
     <div v-if="! validated" class="row justify-content-center">
         <div class="col-md-6">
-            <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843; height 100% !important;">
+            <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843; height: 100% !important;">
                 <div class="text-black">
                     <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2022</h6>
                     <small>
@@ -14,11 +14,11 @@
 
                     <h6 class="fw-bolder text-muted">GUIDELINES: </h6>
                     <small>
-                    Both members and visitors will be able to start booking their seats on October 9 until November 25, 2022 for Hybrid Attendees.<br/><br/>
+                    Both members and visitors will be able to start booking their seats on October 9 until November 30, 2022 for Hybrid Attendees.<br/><br/>
 
                     Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings.<br/><br/>
 
-                    Rebooking is until November 25, 2022 only. <br/><br/>
+                    Rebooking is until November 30, 2022 only. <br/><br/>
                     For any booking isues, please report to your AWTA local coordinators.<br/><br/>
 
                     Book now — hurry while seats last!
