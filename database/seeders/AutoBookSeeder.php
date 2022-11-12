@@ -12,7 +12,6 @@ class AutoBookSeeder extends Seeder
     {
         \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $bookMe = array(
-            ['uuid'=>'LPDA00007', 'name'=>'Maila Gomez', 'local_church'=>'Dasmarinas', 'day_1'=>'N', 'day_2'=>'N', 'day_3'=>'Y', 'day_4'=>'Y'],
             ['uuid'=>'LPDA00008', 'name'=>'Sheena mae Neri', 'local_church'=>'Dasmarinas', 'day_1'=>'N', 'day_2'=>'N', 'day_3'=>'Y', 'day_4'=>'Y'],
             ['uuid'=>'LPDA00012', 'name'=>'Elmer Navarro', 'local_church'=>'Dasmarinas', 'day_1'=>'N', 'day_2'=>'N', 'day_3'=>'Y', 'day_4'=>'Y'],
             ['uuid'=>'LPDA00013', 'name'=>'Edith Navarro', 'local_church'=>'Dasmarinas', 'day_1'=>'N', 'day_2'=>'N', 'day_3'=>'Y', 'day_4'=>'Y'],
@@ -175,35 +174,39 @@ class AutoBookSeeder extends Seeder
         );
 
         foreach ($bookMe as $data) {
-            $this->command->info('-------- booking member ----------');
-            
-            Booking::where('registration_uuid', $data['uuid'])->delete();
+            $is_booking_bypassed = Registration::where('uuid', $data['uuid'])->where('is_booking_bypassed', true)->first();
 
-            $registration = Registration::where('uuid', $data['uuid'])->where('attending_option', 'Online')->first();
+            if (! $is_booking_bypassed) {
+                $this->command->info('-------- booking member ----------');
+                
+                Booking::where('registration_uuid', $data['uuid'])->delete();
 
-            if ($registration) {
-                $registration->update(['attending_option' => 'Hybrid', 'can_book' => true]);
-            }
+                $registration = Registration::where('uuid', $data['uuid'])->where('attending_option', 'Online')->first();
 
-            $this->command->info('Guest #: ' . $data['uuid'] . ' Full Name: ' . $data['name']);
-
-            $dateToBeBooked = [];
-            $booked_log = 'Booked Day(s): ';
-            for ($x = 1; $x <= 4; $x++) {
-                if ($data['day_' . $x] === 'Y') {
-                    $booked_log .= 'Day ' . $x . ' ';
-                    array_push($dateToBeBooked, [
-                        'registration_uuid' => $data['uuid'],
-                        'slot_id' => $x,
-                        'local_church' => $data['local_church']
-                    ]);
+                if ($registration) {
+                    $registration->update(['attending_option' => 'Hybrid', 'can_book' => true]);
                 }
+
+                $this->command->info('Guest #: ' . $data['uuid'] . ' Full Name: ' . $data['name']);
+
+                $dateToBeBooked = [];
+                $booked_log = 'Booked Day(s): ';
+                for ($x = 1; $x <= 4; $x++) {
+                    if ($data['day_' . $x] === 'Y') {
+                        $booked_log .= 'Day ' . $x . ' ';
+                        array_push($dateToBeBooked, [
+                            'registration_uuid' => $data['uuid'],
+                            'slot_id' => $x,
+                            'local_church' => $data['local_church']
+                        ]);
+                    }
+                }
+
+                Booking::insert($dateToBeBooked);
+
+                $this->command->info('Booked Day(s): ' . $booked_log);
+                $this->command->info('------------- done ---------------');
             }
-
-            Booking::insert($dateToBeBooked);
-
-            $this->command->info('Booked Day(s): ' . $booked_log);
-            $this->command->info('------------- done ---------------');
         }
         \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
