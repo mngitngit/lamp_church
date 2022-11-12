@@ -41,7 +41,17 @@ class HomeController extends Controller
             }, $dates);
         });
 
-        $slot = Slots::with('bookings')->get()->map(function ($slot) {
+        $slots_members = Slots::where('registration_type', 'Member')->with('bookings')->get()->map(function ($slot) {
+            $booked = $slot->bookings->groupBy('local_church')->map(function($lc) {
+                return $lc->count();
+            });
+
+            $slot['booked_per_church'] = $booked;
+            
+            return $slot;
+        });
+
+        $slots_guests = Slots::where('registration_type', 'Guest')->with('bookings')->get()->map(function ($slot) {
             $booked = $slot->bookings->groupBy('local_church')->map(function($lc) {
                 return $lc->count();
             });
@@ -54,7 +64,10 @@ class HomeController extends Controller
         return view('home', [
             'registrations' => $registration,
             'search' => $request->search,
-            'slots' => $slot
+            'slots' => [
+                'members' => $slots_members,
+                'guests' => $slots_guests
+            ]
         ]);
     }
 }

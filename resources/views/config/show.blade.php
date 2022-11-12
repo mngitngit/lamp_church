@@ -167,6 +167,7 @@
                             <colgroup>
                                 <col name="el-table_26_column_102" width="250">
                                 <col name="el-table_26_column_103" width="250">
+                                <col name="el-table_26_column_104" width="250">
                             </colgroup>
                             <thead class="">
                                 <tr class="">
@@ -175,6 +176,9 @@
                                     </th>
                                     <th colspan="1" rowspan="1" class="el-table_26_column_103 is-leaf el-table__cell">
                                         <div class="cell text-center">Seat Count</div>
+                                    </th>
+                                    <th colspan="1" rowspan="1" class="el-table_26_column_104 is-leaf el-table__cell">
+                                        <div class="cell text-center">Registration Type</div>
                                     </th>
                                 </tr>
                             </thead>
@@ -185,6 +189,7 @@
                             <colgroup>
                                 <col name="el-table_26_column_102" width="250">
                                 <col name="el-table_26_column_103" width="250">
+                                <col name="el-table_26_column_104" width="250">
                             </colgroup>
                             <tbody>
                                 @foreach($slots as $slot)
@@ -194,6 +199,9 @@
                                     </td>
                                     <td rowspan="1" colspan="1" class="el-table_26_column_103 el-table__cell">
                                         <div class="cell text-center">{{ $slot->seat_count }}</div>
+                                    </td>
+                                    <td rowspan="1" colspan="1" class="el-table_26_column_104 el-table__cell">
+                                        <div class="cell text-center">{{ $slot->registration_type }}</div>
                                     </td>
                                 </tr>
                                 @endforeach

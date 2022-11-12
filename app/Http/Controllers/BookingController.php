@@ -128,7 +128,7 @@ class BookingController extends Controller
             return [
                 'delegate' => $registration,
                 'bookings' => $registration->bookings()->with(['slot'])->get(),
-                'slots' => Slots::all(),
+                'slots' => Slots::where('registration_type', $registration->registration_type)->get(),
             ];
         }
 

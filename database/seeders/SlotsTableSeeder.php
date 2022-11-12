@@ -11,6 +11,10 @@ class SlotsTableSeeder extends Seeder
     {
         Slots::insert([
             [
+                'event_date' => date("Y-m-d", strtotime("12/26/2022")),
+                'seat_count' => 500
+            ],
+            [
                 'event_date' => date("Y-m-d", strtotime("12/27/2022")),
                 'seat_count' => 500
             ],
@@ -20,10 +24,6 @@ class SlotsTableSeeder extends Seeder
             ],
             [
                 'event_date' => date("Y-m-d", strtotime("12/29/2022")),
-                'seat_count' => 500
-            ],
-            [
-                'event_date' => date("Y-m-d", strtotime("12/30/2022")),
                 'seat_count' => 500
             ]
         ]);

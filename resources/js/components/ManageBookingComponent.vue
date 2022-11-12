@@ -91,9 +91,9 @@ export default {
     data () {
       return {
         ruleForm: {
-            lastName: '',
-            localChurch: '',
-            referenceNumber: ''
+            lastName: 'Tiamsing',
+            localChurch: 'Canlubang',
+            referenceNumber: 'GUEST0002'
         },
         rules: {
             lastName: [

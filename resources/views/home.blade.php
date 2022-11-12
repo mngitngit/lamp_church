@@ -43,6 +43,7 @@
             </div>
         </el-tab-pane>
         <el-tab-pane label="Bookings">
+            <!-- {{json_encode($slots)}} -->
             <booking-table :slots="{{ json_encode($slots) }}" />
         </el-tab-pane>
     </el-tabs>
