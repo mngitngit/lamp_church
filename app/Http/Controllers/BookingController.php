@@ -28,7 +28,7 @@ class BookingController extends Controller
 
         return view('booking.edit', [
             'booked_dates' => $registration->bookings()->with(['slot'])->get(),
-            'slots' => Slots::all(),
+            'slots' => Slots::where('registration_type', $registration->registration_type)->get(),
             'uuid' => $uuid,
             'can_book_days' => $registration->can_book_days,
             'rebooking_activities' => $registration->rebooking_activities,

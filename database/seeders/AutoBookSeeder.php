@@ -10,6 +10,7 @@ class AutoBookSeeder extends Seeder
 {
     public function run()
     {
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $bookMe = array(
             ['uuid'=>'LPDA00007', 'name'=>'Maila Gomez', 'local_church'=>'Dasmarinas', 'day_1'=>'N', 'day_2'=>'N', 'day_3'=>'Y', 'day_4'=>'Y'],
             ['uuid'=>'LPDA00008', 'name'=>'Sheena mae Neri', 'local_church'=>'Dasmarinas', 'day_1'=>'N', 'day_2'=>'N', 'day_3'=>'Y', 'day_4'=>'Y'],
@@ -199,8 +200,11 @@ class AutoBookSeeder extends Seeder
                 }
             }
 
+            Booking::insert($dateToBeBooked);
+
             $this->command->info('Booked Day(s): ' . $booked_log);
             $this->command->info('------------- done ---------------');
         }
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
