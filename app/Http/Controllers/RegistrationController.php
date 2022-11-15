@@ -134,7 +134,7 @@ class RegistrationController extends Controller
             'category' => $request->category,
             'attending_option' => $request->attendingOption,
             'with_awta_card' => $request->withAwtaCard,
-            'with_accommodation' => $request->withAccommodation,
+            'with_accommodation' => $request->withAccommodation ?? false,
             'mode_of_transpo' => $request->modeOfTranspo,
             'priority_dates' => json_encode($request->priorityDates),
             'can_book' => $request->canBook,
