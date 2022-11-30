@@ -8644,6 +8644,14 @@ var render = function render() {
       shadow: "always"
     }
   }, [_c("div", {
+    staticClass: "px-2 row"
+  }, [_c("el-alert", {
+    attrs: {
+      title: "All registration after November 30, 2022 is considered online. For further inquiries, please reach out to your Local Church's Coordinators.",
+      type: "warning",
+      "show-icon": ""
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_vm.ruleForm.registrationType == "Member" ? _c("div", {
     staticClass: "col-md-6"
@@ -8667,7 +8675,8 @@ var render = function render() {
   }, [_c("el-option", {
     attrs: {
       value: "Hybrid",
-      label: "Hybrid"
+      label: "Hybrid",
+      disabled: ""
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
@@ -9196,6 +9205,14 @@ var render = function render() {
       shadow: "always"
     }
   }, [_c("div", {
+    staticClass: "px-2 row"
+  }, [_c("el-alert", {
+    attrs: {
+      title: "All registration after November 30, 2022 is considered online. For further inquiries, please reach out to your Local Church's Coordinators.",
+      type: "warning",
+      "show-icon": ""
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_vm.ruleForm.registrationType == "Member" ? _c("div", {
     staticClass: "col-md-6"

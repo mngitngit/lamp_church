@@ -23,11 +23,18 @@
         </el-card>
 
         <el-card v-if="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'" shadow="always" class="mb-3                                                                                                                               ">
+            <div class="px-2 row">
+                <el-alert
+                    title="All registration after November 30, 2022 is considered online. For further inquiries, please reach out to your Local Church's Coordinators."
+                    type="warning"
+                    show-icon>
+                </el-alert>
+            </div>
             <div class="row">
                 <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
                     <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'">
                         <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
-                            <el-option value="Hybrid" label="Hybrid"></el-option>
+                            <el-option value="Hybrid" label="Hybrid" disabled></el-option>
                             <el-option value="Online" label="Online"></el-option>
                         </el-select>
                     </el-form-item>

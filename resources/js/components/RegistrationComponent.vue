@@ -69,7 +69,14 @@
                     </el-card> 
 
 
-                    <el-card v-if="ruleForm.registrationType === 'Member'" shadow="always" class="mb-3                                                                                                                               ">
+                    <el-card v-if="ruleForm.registrationType === 'Member'" shadow="always" class="mb-3">
+                        <div class="px-2 row">
+                            <el-alert
+                                title="All registration after November 30, 2022 is considered online. For further inquiries, please reach out to your Local Church's Coordinators."
+                                type="warning"
+                                show-icon>
+                            </el-alert>
+                        </div>
                         <div class="row">
                             <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
                                 <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType === 'Member'">
