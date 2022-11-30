@@ -58,7 +58,7 @@
             </div>
         </el-card> 
 
-        <el-card v-if="ruleForm.registrationType === 'Member'" shadow="hover" class="mb-3">
+        <el-card shadow="hover" class="mb-3">
             <div class="row">
                 <div v-if="ruleForm.registrationType === 'Member'" class="col-md-6">
                     <el-form-item label="Do you have an awta card?" prop="withAwtaCard" required>
@@ -70,7 +70,7 @@
                     </el-form-item>
                 </div>
 
-                <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
+                <div class="col-md-6">
                     <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType === 'Member'">
                         <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
                             <el-option value="Hybrid" label="Hybrid"></el-option>
@@ -79,7 +79,7 @@
                     </el-form-item>
                 </div>
 
-                <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
+                <div v-if="ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
                     <el-form-item label="What is your primary mode of transportation?" prop="modeOfTranspo" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
                         <el-select v-model="ruleForm.modeOfTranspo" placeholder="Choose">
                             <el-option value="Private Vehicle" label="Private Vehicle"></el-option>
@@ -89,7 +89,7 @@
                     </el-form-item>
                 </div>
 
-                <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
+                <div v-if="ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
                     <el-form-item label="Will you book a hotel or any accommodation nearby?" prop="withAccommodation" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
                         <el-radio-group v-model="ruleForm.withAccommodation">
                             <el-radio label="yes">Yes</el-radio>
@@ -100,7 +100,7 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3">
+        <el-card v-if="ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3">
             <div class="col-md-12">
                 <el-form-item label="In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)" prop="priorityDates" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
                     <el-checkbox-group v-model="ruleForm.priorityDates">

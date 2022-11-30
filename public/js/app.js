@@ -8266,7 +8266,7 @@ var render = function render() {
       label: "Free",
       value: "Free"
     }
-  })], 1)], 1)], 1)])]), _vm._v(" "), _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
+  })], 1)], 1)], 1)])]), _vm._v(" "), _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
@@ -8307,7 +8307,7 @@ var render = function render() {
       label: "Yes, and I still have it.",
       value: "yes"
     }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" ? _c("div", {
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
@@ -8336,7 +8336,7 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
@@ -8370,7 +8370,7 @@ var render = function render() {
       value: "Public Transportation",
       label: "Public Transportation"
     }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
@@ -8394,7 +8394,7 @@ var render = function render() {
     attrs: {
       label: "none"
     }
-  }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
+  }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
