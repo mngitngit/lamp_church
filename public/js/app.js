@@ -9219,7 +9219,8 @@ var render = function render() {
   }, [_c("el-option", {
     attrs: {
       value: "Hybrid",
-      label: "Hybrid"
+      label: "Hybrid",
+      disabled: ""
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
