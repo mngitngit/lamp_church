@@ -82,7 +82,7 @@
     </div>
     <div v-else class="row justify-content-center">
         <div class="col-md-12">
-            <el-tabs type="border-card" class="p-0">
+            <el-tabs v-if="(retrieved.booked_dates.length > 0)" type="border-card" class="p-0">
                 <el-tab-pane label="Ticket">
                     <el-alert
                         class="mb-3"
@@ -105,6 +105,7 @@
                     <booking :booked_dates="retrieved.booked_dates" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
                 </el-tab-pane>
             </el-tabs>
+            <booking v-else :booked_dates="retrieved.booked_dates" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
         </div>
     </div>
 </div>

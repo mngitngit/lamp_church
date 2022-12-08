@@ -7010,7 +7010,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         booked: [{
           required: true,
           message: 'Please select atleast one day',
-          trigger: 'change'
+          trigger: ['blur', 'change']
         }]
       },
       max: 2
@@ -7664,7 +7664,7 @@ var render = function render() {
     staticClass: "row justify-content-center"
   }, [_c("div", {
     staticClass: "col-md-12"
-  }, [_c("el-tabs", {
+  }, [_vm.retrieved.booked_dates.length > 0 ? _c("el-tabs", {
     staticClass: "p-0",
     attrs: {
       type: "border-card"
@@ -7707,7 +7707,16 @@ var render = function render() {
       self_redirect: false,
       hide_button: _vm.retrieved.details.rebooking_limit === 0
     }
-  })], 1)], 1)], 1)])]);
+  })], 1)], 1) : _c("booking", {
+    attrs: {
+      booked_dates: _vm.retrieved.booked_dates,
+      slots: _vm.retrieved.slots,
+      uuid: _vm.retrieved.uuid,
+      can_book_days: _vm.retrieved.can_book_days,
+      self_redirect: false,
+      hide_button: _vm.retrieved.details.rebooking_limit === 0
+    }
+  })], 1)])]);
 };
 
 var staticRenderFns = [];

@@ -72,7 +72,7 @@ export default {
         },
         rules: {
             booked: [
-                {required: true, message: 'Please select atleast one day', trigger: 'change'}
+                {required: true, message: 'Please select atleast one day', trigger: ['blur', 'change']},
             ],
         },
         max: 2
