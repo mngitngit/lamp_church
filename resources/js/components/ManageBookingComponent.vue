@@ -80,8 +80,32 @@
             </div>
         </div>
     </div>
-    <div v-else class="row">
-        <booking :booked_dates="retrieved.booked_dates" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false"/>
+    <div v-else class="row justify-content-center">
+        <div class="col-md-12">
+            <el-tabs type="border-card" class="p-0">
+                <el-tab-pane label="Ticket">
+                    <el-alert
+                        class="mb-3"
+                        title="Congratulations! You are already booked for the AWTA 2022."
+                        type="success"
+                        description="Please do screenshot this ticket if your AWTA card is lost, this will be your gate pass to the event place."
+                        :closable="false"
+                        show-icon>
+                    </el-alert>
+                    <ticket-component :registration="retrieved.details" :booked_dates="retrieved.booked_dates_plucked" />
+                </el-tab-pane>
+                <el-tab-pane label="Booking">
+                    <el-alert
+                        v-if="(retrieved.details.rebooking_limit === 0)"
+                        class="mb-3"
+                        title="You already reached your rebooking limit. Delegates can only rebook 3x."
+                        type="warning"
+                        :closable="false">
+                    </el-alert>
+                    <booking :booked_dates="retrieved.booked_dates" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
     </div>
 </div>
 </template>
@@ -112,6 +136,7 @@ export default {
         fieldErrors: null,
         retrieved: {
             booked_dates: [],
+            booked_dates_plucked: [],
             slots: [],
             uuid: null,
             details: {},
@@ -128,6 +153,7 @@ export default {
 
             this.retrieved = {
                 booked_dates: [],
+                booked_dates_plucked: [],
                 slots: [],
                 uuid: null,
                 details: {}
@@ -153,6 +179,7 @@ export default {
 
                         this.retrieved = {
                             booked_dates: data.bookings,
+                            booked_dates_plucked: data.booked_dates,
                             slots: data.slots,
                             uuid: data.delegate.uuid,
                             details: data.delegate,

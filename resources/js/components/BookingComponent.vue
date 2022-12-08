@@ -1,20 +1,21 @@
 <template>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-        <div class="card mb-3">
+        <div class="card">
             <div class="card-body pt-0">
                 <div class="row justify-content-center">
-                    <el-form-item class="check-dates" :label="`Choose the dates you would like to attend physically. Please select at least 1 day (maximum of ${max} days)`" prop="booked" required>
+                    <el-form-item class="check-dates" :label="`Choose the dates you would like to attend physically. Please select at least 1 day, maximum of ${max} days.`" prop="booked" required>
+                        <!-- <el-tag v-if="(ruleForm.booked.length > 0)" class="bg-white border-0"><i class="el-icon-date"></i>&nbsp;&nbsp;You are booked on<span v-for="(value, index) in ruleForm.booked" :key="index"> {{ dates[value-1]['event_date'] }}&nbsp;</span></el-tag> -->
                         <el-checkbox-group v-model="ruleForm.booked" size="small">
                             <div class="row">
                                 <div v-for="(date, index) in dates" :key="index" class="col-md-3 text-center">
-                                    <el-badge :value="`${date.available} left!`" class="item m-3 c-booking-date" :type="date.available <= 10 ? 'danger' : (date.available <= 100 ? 'warning' : 'success')">
+                                    <el-badge :value="`${date.available} left!`" class="item my-3 c-booking-date" :type="date.available <= 10 ? 'danger' : (date.available <= 100 ? 'warning' : 'success')">
                                         <el-checkbox
                                             :label="date.id"
                                             name="booked"
                                             border
-                                            :disabled="(!ruleForm.booked.includes(date.id) && ruleForm.booked.length === max) || (date.available === 0 && !ruleForm.booked.includes(date.id) && !initial.includes(date.id))"
+                                            :disabled="((!ruleForm.booked.includes(date.id) && ruleForm.booked.length === max) || (date.available === 0 && !ruleForm.booked.includes(date.id) && !initial.includes(date.id)) || hide_button)"
                                             @change="onChangeProcessed($event,date.id)">
-                                            {{ date.event_date }}
+                                            <span v-if="ruleForm.booked.includes(date.id)">&#10003;&nbsp;</span>{{ date.event_date }}
                                         </el-checkbox>
                                     </el-badge>
                                 </div>
@@ -25,7 +26,7 @@
             </div>
         </div>
 
-        <el-row>
+        <el-row class="mt-3" v-if="!hide_button">
             <div class="col-md-12">
                 <el-button type="warning" @click="submitForm('ruleForm')">Continue</el-button>
             </div>
@@ -55,6 +56,11 @@ export default {
         self_redirect: {
             required: true,
             type: Boolean
+        },
+        hide_button: {
+            required: false,
+            type: Boolean,
+            default: false
         }
     },
     data () {

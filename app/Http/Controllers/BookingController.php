@@ -114,9 +114,9 @@ class BookingController extends Controller
             return response()->json(['error' => 'This delegate is a church worker and is already booked for the entire AWTA days.'], 500);
         }
 
-        if ($registration->rebooking_limit <= 0) {
-            return response()->json(['error' => 'Already reached rebooking limit.'], 500);
-        }
+        // if ($registration->rebooking_limit <= 0) {
+        //     return response()->json(['error' => 'Already reached rebooking limit.'], 500);
+        // }
 
         if ($registration->attending_option !== 'Hybrid') {
             return response()->json(['error' => 'Delegate is not registered for hybrid.'], 500);
@@ -125,9 +125,14 @@ class BookingController extends Controller
         $rate = Rates::where('category', $registration->category)->where('attending_option', $registration->attending_option)->first();
 
         if ($registration->can_book) {
+            $dates = $registration->bookings()->with(['slot'])->get()->pluck('slot');
+
+            $booked_dates = array_column($dates->toArray(), 'event_date');
+
             return [
                 'delegate' => $registration,
                 'bookings' => $registration->bookings()->with(['slot'])->get(),
+                'booked_dates' => $booked_dates,
                 'slots' => Slots::where('registration_type', $registration->registration_type)->get(),
             ];
         }
