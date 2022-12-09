@@ -50,5 +50,10 @@ Route::get('/booking/{id}', [App\Http\Controllers\BookingController::class, 'sho
 Route::get('/booking/{id}/edit', [App\Http\Controllers\BookingController::class, 'edit'])->name('booking.edit');
 Route::post('/booking/{id}/update', [App\Http\Controllers\BookingController::class, 'update'])->name('booking.update');
 
+// attendance
+Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'index'])->name('attendance.index');
+Route::get('/attendance/{id}', [App\Http\Controllers\AttendanceController::class, 'show'])->name('attendance.show');
+Route::post('/attendance', [App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store');
+
 // config
 Route::get('/config', [App\Http\Controllers\ConfigurationController::class, 'show'])->name('configurations');

@@ -70,6 +70,10 @@
 .ticket-header .el-card__header {
     background-color: aliceblue !important;
 }
+
+.text-xxs {
+    font-size: 13px !important;
+}
 /* .pagination li {
     margin-right: 10px;
     border-radius: 20px;

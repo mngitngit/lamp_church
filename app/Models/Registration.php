@@ -80,6 +80,14 @@ class Registration extends Model
     }
 
     /**
+     * Get the attendance for the delegate.
+     */
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'registration_uuid', 'uuid');
+    }
+
+    /**
      * Get the rebooking activities for the delegate.
      */
     public function rebooking_activities()
