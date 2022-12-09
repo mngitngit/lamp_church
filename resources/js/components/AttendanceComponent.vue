@@ -98,7 +98,7 @@ export default {
           slot_id: this.slot_id
         })
         .then(async (response) => {
-          this.$alert('Already recorded!', 'Attendance', {
+          this.$alert('Attendance already recorded!', '', {
             confirmButtonText: 'OK',
             callback: action => {
               location.reload();
@@ -106,7 +106,7 @@ export default {
           });
         });
       } else {
-        this.$alert('Already recorded!', 'Attendance', {
+        this.$alert('Attendance already recorded!', '', {
           confirmButtonText: 'OK',
           callback: action => {
             location.reload();
