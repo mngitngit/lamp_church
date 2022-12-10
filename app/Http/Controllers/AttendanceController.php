@@ -49,16 +49,15 @@ class AttendanceController extends Controller
     }
 
     public function store(Request $request) {
-        $data = (Object) $request->details;
         dd([
-            'registration_uuid' => $data->uuid,
+            'registration_uuid' => $request->details['uuid'],
             'slot_id' => $request->slot_id,
-            'local_church' => $data->local_church
+            'local_church' => $request->details['local_church']
         ]);
         return Attendance::create([
-            'registration_uuid' => $data->uuid,
+            'registration_uuid' => $request->details['uuid'],
             'slot_id' => $request->slot_id,
-            'local_church' => $data->local_church
+            'local_church' => $request->details['local_church']
         ]);
     }
 }
