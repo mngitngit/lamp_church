@@ -7018,7 +7018,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
 
                 _context4.next = 3;
-                return axios.post("/attendance/", {
+                return axios.post("/attendance", {
                   details: _this2.retrieved.delegate,
                   slot_id: _this2.slot_id
                 }).then( /*#__PURE__*/function () {

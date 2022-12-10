@@ -93,7 +93,7 @@ export default {
     },
     async attendance() {
       if (! this.retrieved.attended) {
-        await axios.post(`/attendance/`, {
+        await axios.post(`/attendance`, {
           details: this.retrieved.delegate,
           slot_id: this.slot_id
         })
