@@ -55,5 +55,10 @@ Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'in
 Route::get('/attendance/{id}', [App\Http\Controllers\AttendanceController::class, 'show'])->name('attendance.show');
 Route::post('/attendance', [App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store');
 
+Route::get('/testing', function () {
+    dd("hey");
+});
+
+
 // config
 Route::get('/config', [App\Http\Controllers\ConfigurationController::class, 'show'])->name('configurations');
