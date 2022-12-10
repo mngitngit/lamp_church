@@ -51,7 +51,9 @@ Route::get('/booking/{id}/edit', [App\Http\Controllers\BookingController::class,
 Route::post('/booking/{id}/update', [App\Http\Controllers\BookingController::class, 'update'])->name('booking.update');
 
 // attendance
-Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'index'])->name('attendance.index');
+Route::get('/attendance', function () {
+    dd("test");
+})->name('attendance.index');
 Route::get('/attendance/{id}', [App\Http\Controllers\AttendanceController::class, 'show'])->name('attendance.show');
 Route::post('/attendance', [App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store');
 
