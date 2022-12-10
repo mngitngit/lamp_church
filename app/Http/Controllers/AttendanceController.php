@@ -10,7 +10,7 @@ class AttendanceController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['store', 'index', 'show', 'update']]);
+        $this->middleware('auth',['except'=>['store', 'index', 'show']]);
     }
 
     public function index(Request $request) {
