@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExportRegistration;
+use App\Models\Attendance;
 use App\Models\AvailableUuid;
+use App\Models\Booking;
 use App\Models\LookUp;
+use App\Models\Payment;
 use App\Models\Rates;
+use App\Models\RebookingActivities;
 use App\Models\Registration;
 use App\Models\UUID;
 use Illuminate\Http\Request;
@@ -168,6 +172,14 @@ class RegistrationController extends Controller
                 'is_registered' => false
             ]);
         }
+
+        Booking::where('registration_uuid', $uuid)->delete();
+
+        RebookingActivities::where('registration_uuid', $uuid)->delete();
+
+        Payment::where('registration_uuid', $uuid)->delete();
+
+        Attendance::where('registration_uuid', $uuid)->delete();
         
         return Registration::where('uuid', $uuid)->first()->delete();
     }
