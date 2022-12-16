@@ -2,6 +2,7 @@
 
 git pull origin master
 
+nvm install 16.15.1
 npm run prod
 
 rm ../public_html/js/app.js
