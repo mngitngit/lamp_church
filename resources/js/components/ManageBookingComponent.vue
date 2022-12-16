@@ -75,7 +75,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <el-button :loading="isLoading" type="warning" @click="validateDelegate('ruleForm')">Continue</el-button>
+                    <el-button :loading="isLoading" :autofocus="true" type="warning" @click="validateDelegate('ruleForm')">Continue</el-button>
                 </div>
             </div>
         </div>

@@ -7454,7 +7454,8 @@ var render = function render() {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
-      type: "warning"
+      type: "warning",
+      autofocus: true
     },
     on: {
       click: function click($event) {
@@ -7653,6 +7654,7 @@ var render = function render() {
   }, [_c("el-button", {
     attrs: {
       loading: _vm.isLoading,
+      autofocus: true,
       type: "warning"
     },
     on: {

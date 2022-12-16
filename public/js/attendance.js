@@ -6979,8 +6979,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                           case 0:
                             _this.loading = false;
                             _this.retrieved = response.data;
+                            setTimeout(function () {
+                              return document.getElementById('btn-continue').focus();
+                            }, 500);
 
-                          case 2:
+                          case 3:
                           case "end":
                             return _context.stop();
                         }
@@ -6992,6 +6995,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     return _ref.apply(this, arguments);
                   };
                 }())["catch"](function (error) {
+                  console.log(error);
                   _this.loading = false;
                   _this.error = error.response.data.error;
                 });
@@ -7027,10 +7031,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       while (1) {
                         switch (_context3.prev = _context3.next) {
                           case 0:
-                            _this2.$alert('Attendance already recorded!', '', {
+                            _this2.$alert('', 'Attendance already recorded!', {
                               confirmButtonText: 'OK',
+                              showCancelButton: false,
+                              closeOnPressEscape: false,
+                              closeOnClickModal: false,
+                              showClose: false,
+                              center: true,
+                              type: 'success',
                               callback: function callback(action) {
-                                location.reload();
+                                window.location.reload();
                               }
                             });
 
@@ -7052,10 +7062,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 break;
 
               case 5:
-                _this2.$alert('Attendance already recorded!', '', {
+                _this2.$alert('', 'Attendance already recorded!', {
                   confirmButtonText: 'OK',
+                  showCancelButton: false,
+                  closeOnPressEscape: false,
+                  closeOnClickModal: false,
+                  showClose: false,
+                  center: true,
+                  type: 'success',
                   callback: function callback(action) {
-                    location.reload();
+                    window.location.reload();
                   }
                 });
 
@@ -7258,6 +7274,7 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v("NOT YET PRESENT")])])])])]), _vm._v(" "), _c("el-button", {
     attrs: {
+      id: "btn-continue",
       autofocus: true,
       type: "primary"
     },

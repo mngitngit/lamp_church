@@ -28,7 +28,7 @@
 
         <el-row class="mt-3" v-if="!hide_button">
             <div class="col-md-12">
-                <el-button type="warning" @click="submitForm('ruleForm')">Continue</el-button>
+                <el-button type="warning" :autofocus="true" @click="submitForm('ruleForm')">Continue</el-button>
             </div>
         </el-row>
     </el-form>

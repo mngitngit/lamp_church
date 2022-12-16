@@ -54,7 +54,7 @@
           </div>
       </div>
 
-      <el-button :autofocus="true" type="primary" @click="attendance()">{{ retrieved.attended ? 'Continue' : 'MARK AS PRESENT' }}</el-button>
+      <el-button id="btn-continue" :autofocus="true" type="primary" @click="attendance()">{{ retrieved.attended ? 'Continue' : 'MARK AS PRESENT' }}</el-button>
     </div>
 </template>
 
@@ -86,7 +86,10 @@ export default {
       .then(async (response) => {
         this.loading = false;
         this.retrieved = response.data
+        setTimeout(() => document.getElementById('btn-continue').focus(), 500);
+        
       }).catch((error) => {
+        console.log(error)
         this.loading = false;
         this.error = error.response.data.error;
       });
@@ -98,19 +101,31 @@ export default {
           slot_id: this.slot_id
         })
         .then(async (response) => {
-          this.$alert('Attendance already recorded!', '', {
-            confirmButtonText: 'OK',
-            callback: action => {
-              location.reload();
-            }
+          this.$alert('', 'Attendance already recorded!', {
+              confirmButtonText: 'OK',
+              showCancelButton: false,
+              closeOnPressEscape: false,
+              closeOnClickModal: false,
+              showClose: false,
+              center: true,
+              type: 'success',
+              callback: action => {
+                window.location.reload();
+              }
           });
         });
       } else {
-        this.$alert('Attendance already recorded!', '', {
-          confirmButtonText: 'OK',
-          callback: action => {
-            location.reload();
-          }
+        this.$alert('', 'Attendance already recorded!', {
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+            closeOnPressEscape: false,
+            closeOnClickModal: false,
+            showClose: false,
+            center: true,
+            type: 'success',
+            callback: action => {
+              window.location.reload();
+            }
         });
       }
     }

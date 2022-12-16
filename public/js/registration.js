@@ -7214,6 +7214,7 @@ var render = function render() {
     attrs: {
       prop: "count",
       label: "#",
+      fixed: "left",
       align: "center",
       width: "50"
     },
@@ -7404,6 +7405,23 @@ var render = function render() {
         }) : scope.row.booked_dates.length > 0 ? _c("div", {
           domProps: {
             innerHTML: _vm._s(_vm.transformDates(scope.row.booked_dates))
+          }
+        }) : _c("span", [_vm._v("--")])];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      label: "Date Attended",
+      align: "center",
+      fixed: "right",
+      width: "170"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [scope.row.attended_dates.length > 0 ? _c("div", {
+          domProps: {
+            innerHTML: _vm._s(_vm.transformDates(scope.row.attended_dates))
           }
         }) : _c("span", [_vm._v("--")])];
       }

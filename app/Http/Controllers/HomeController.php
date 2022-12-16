@@ -34,11 +34,17 @@ class HomeController extends Controller
         $registration->map(function($item) {
             $item->priority_dates = implode(', ', json_decode($item->priority_dates));
 
-            $dates = $item->bookings()->with('slot')->get()->toArray();
+            $booked_dates = $item->bookings()->with('slot')->get()->toArray();
 
             $item->booked_dates = array_map(function($date) {
                return $date['slot']['event_date'];
-            }, $dates);
+            }, $booked_dates);
+
+            $attended_dates = $item->attendances()->with('slot')->get()->toArray();
+
+            $item->attended_dates = array_map(function($date) {
+                return $date['slot']['event_date'];
+             }, $attended_dates);
         });
 
         $slots_members = Slots::where('registration_type', 'Member')->with('bookings')->get()->map(function ($slot) {

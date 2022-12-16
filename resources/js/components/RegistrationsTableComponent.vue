@@ -7,6 +7,7 @@
     <el-table-column
       prop="count"
       label="#"
+      fixed="left"
       align="center"
       width="50">
       <template slot-scope="scope">
@@ -121,6 +122,16 @@
               :closable="false">
           </el-alert>
           <div v-else-if="scope.row.booked_dates.length > 0" v-html="transformDates(scope.row.booked_dates)"></div>
+          <span v-else>--</span>
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="Date Attended"
+      align="center"
+      fixed="right"
+      width="170">
+      <template slot-scope="scope">
+          <div v-if="scope.row.attended_dates.length > 0" v-html="transformDates(scope.row.attended_dates)"></div>
           <span v-else>--</span>
       </template>
     </el-table-column>
