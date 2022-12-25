@@ -6,8 +6,8 @@
                   <div class="col-md-12">
                     <p class="mb-0 text-black-50 text-center mt-2 text-xxs">Align the barcode within the <br/>reader to scan</p>
                   </div>
-                  <div class="col-md-6">
-                    <img width="100%" class="mb-3" src="/images/barcode.png">
+                  <div class="col-md-6 text-center">
+                    <img width="180px" class="mb-3" src="/images/barcode.png">
                   </div>
                 </div>
               <div class="row" style="border-top: 2px dashed #dee2e6;">
@@ -69,6 +69,13 @@ export default {
       slot_id: 1
     }
   }, 
+  watch: {
+    input(val) {
+      if (val.length >= 9) {
+        this.submit();
+      }
+    }
+  },
   methods: {
     async submit() {
       this.error = null;

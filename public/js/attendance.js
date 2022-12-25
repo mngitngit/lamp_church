@@ -6953,6 +6953,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       slot_id: 1
     };
   },
+  watch: {
+    input: function input(val) {
+      if (val.length >= 9) {
+        this.submit();
+      }
+    }
+  },
   methods: {
     submit: function submit() {
       var _this = this;
@@ -7297,11 +7304,11 @@ var staticRenderFns = [function () {
   }, [_c("p", {
     staticClass: "mb-0 text-black-50 text-center mt-2 text-xxs"
   }, [_vm._v("Align the barcode within the "), _c("br"), _vm._v("reader to scan")])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6"
+    staticClass: "col-md-6 text-center"
   }, [_c("img", {
     staticClass: "mb-3",
     attrs: {
-      width: "100%",
+      width: "180px",
       src: "/images/barcode.png"
     }
   })])]);

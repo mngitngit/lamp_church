@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Booking;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,14 @@ class AttendanceController extends Controller
             return response()->json(['error' => 'Not found. Please check the number and try again.'], 500);
         }
 
+        $isBooked = $registration->bookings()->where('slot_id', $request->slot_id)->first();
+
+        if (!$isBooked) {
+            return response()->json(['error' => 'This delegate is not booked for today.'], 500);
+        }
+
         if ($registration->attending_option !== 'Hybrid') {
-            return response()->json(['error' => 'Delegate is not registered for hybrid.'], 500);
+            return response()->json(['error' => 'This delegate is not registered for hybrid.'], 500);
         }
 
         if ($registration->payment_status != 'Paid' && $registration->payment_status != 'Free') {
