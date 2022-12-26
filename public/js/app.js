@@ -8574,6 +8574,14 @@ var render = function render() {
       shadow: "always"
     }
   }, [_c("div", {
+    staticClass: "px-2 row"
+  }, [_c("el-alert", {
+    attrs: {
+      title: "Member registration is already closed. For other concerns, please reach out to your local coordinators.",
+      type: "warning",
+      "show-icon": ""
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-6"
@@ -8597,7 +8605,8 @@ var render = function render() {
   }, [_c("el-option", {
     attrs: {
       label: "Member",
-      value: "Member"
+      value: "Member",
+      disabled: ""
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {

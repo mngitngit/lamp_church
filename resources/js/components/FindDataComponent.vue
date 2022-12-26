@@ -1,11 +1,18 @@
 <template>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-        <el-card shadow="always" class="mb-3                                                                                                                               ">
+        <el-card shadow="always" class="mb-3">
+            <div class="px-2 row">
+                <el-alert
+                    title="Member registration is already closed. For other concerns, please reach out to your local coordinators."
+                    type="warning"
+                    show-icon>
+                </el-alert>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <el-form-item label="Are you a guest or a member?" prop="registrationType" required>
                         <el-select v-model="ruleForm.registrationType" placeholder="Choose">
-                            <el-option label="Member" value="Member"></el-option>
+                            <el-option label="Member" value="Member" disabled></el-option>
                             <el-option label="Guest" value="Guest"></el-option>
                         </el-select>
                     </el-form-item>

@@ -31,18 +31,27 @@
                 <h3>Manage Booking</h3>
                 <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>
 
+                <div class="px-2 row">
+                    <el-alert
+                        title="Member booking/rebooking is already closed. For other concerns, please reach out to your local coordinators."
+                        type="warning"
+                        :closable="false"
+                        show-icon>
+                    </el-alert>
+                </div>
+
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                     <div class="row mb-1">
                         <div class="col-md-12">
                             <el-form-item label="Last Name" prop="lastName" required :error="fieldErrors">
-                                <el-input v-model="ruleForm.lastName"></el-input>
+                                <el-input :disabled="disabled" v-model="ruleForm.lastName"></el-input>
                             </el-form-item>
                         </div>
                     </div>
                     <div class="row mb-1">
                         <div class="col-md-12">
                             <el-form-item label="Local Church" prop="localChurch" required :error="fieldErrors">
-                                <el-select v-model="ruleForm.localChurch" placeholder="Choose">
+                                <el-select :disabled="disabled" v-model="ruleForm.localChurch" placeholder="Choose">
                                     <el-option label="Binan" value="Binan"></el-option>
                                     <el-option label="Canlubang" value="Canlubang"></el-option>
                                     <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
@@ -60,7 +69,7 @@
                     <div class="row mb-1">
                         <div class="col-md-12">
                             <el-form-item class="transform-uppercase" label="AWTA Card Number / Guest Number" prop="referenceNumber" required :error="fieldErrors">
-                                <el-input v-model="ruleForm.referenceNumber"></el-input>
+                                <el-input :disabled="disabled" v-model="ruleForm.referenceNumber"></el-input>
                             </el-form-item>
                         </div>
                     </div>
@@ -75,7 +84,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <el-button :loading="isLoading" :autofocus="true" type="warning" @click="validateDelegate('ruleForm')">Continue</el-button>
+                    <el-button :loading="isLoading" :autofocus="true" type="warning" @click="validateDelegate('ruleForm')" :disabled="disabled">Continue</el-button>
                 </div>
             </div>
         </div>
@@ -120,6 +129,7 @@ export default {
             localChurch: '',
             referenceNumber: ''
         },
+        disabled: true,
         rules: {
             lastName: [
                 { required: true, message: 'Please input Last Name', trigger: ['blur', 'change']}

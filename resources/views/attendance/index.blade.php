@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <attendance-component />
+        <attendance-component :count="{{ $count }}" />
     </div>
 </div>
 @endsection

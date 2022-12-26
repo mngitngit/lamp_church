@@ -21,6 +21,31 @@
               </div>
           </div>
       </div>
+      <!-- <div class="border-0 mt-4 card shadow">
+          <div class="card-body">
+                <table class="border">
+                   <tr>
+                      <td></td>
+                      <td colspan="2" class="border text-center">Day 1</td>
+                      <td colspan="2" class="border text-center">Day 2</td>
+                      <td colspan="2" class="border text-center">Day 3</td>
+                      <td colspan="2" class="border text-center">Day 4</td>
+                    </tr>
+                    <tr>
+                      <template v-for="(item, index) in count">
+                        <td v-if="index === 0"></td>
+                        <td class="border">{{ item.registration_type }}</td>
+                      </template>
+                    </tr>
+                    <template v-for="(item, index) in count">
+                      <tr v-for="(item2, index2) in item.data">
+                        <td class="border" v-if="index === 0">{{ item2.local_church }}</td>
+                        <td class="border">{{ item2.total }}</td>
+                      </tr>
+                    </template>
+                </table>
+          </div>
+      </div> -->
     </div>
     <div v-else class="col-md-5">
       <div class="border-0 card shadow mb-3">
@@ -60,6 +85,12 @@
 
 <script>
 export default {
+  props: {
+    count: {
+        required: true,
+        type: Array
+    },
+  },
   data() {
     return {
       input: '',

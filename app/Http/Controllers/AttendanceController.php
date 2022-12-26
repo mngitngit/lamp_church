@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\Booking;
 use App\Models\Registration;
+use App\Models\Slots;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
@@ -15,7 +17,15 @@ class AttendanceController extends Controller
     }
 
     public function index(Request $request) {
-        return view('attendance.index');
+        $count = Slots::orderBy('event_date', 'asc')->get()->map(function($slot) {
+            $slot->data = $slot->bookings()->groupBy('local_church')->select('local_church', DB::raw('count(*) as total'))->get();
+
+            return $slot;
+        });
+
+        return view('attendance.index', [
+            'count' => $count
+        ]);
     }
 
     public function show($uuid, Request $request) {

@@ -9,7 +9,7 @@ rm ../public_html/js/app.js
 rm ../public_html/js/activities.js
 rm ../public_html/js/registration.js
 rm ../public_html/js/payment.js
-rm ../public_html/js/activities.js
+rm ../public_html/js/attendance.js
 rm ../public_html/js/booking.js
 
 mv public/js/app.js ../public_html/js
