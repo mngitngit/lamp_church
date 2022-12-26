@@ -7255,12 +7255,7 @@ var render = function render() {
       attrs: {
         colspan: "4"
       }
-    }, [_vm._v(_vm._s(item.event_date))])]), _vm._v(" "), _c("tr", [_c("td", {
-      staticClass: "border px-2 py-1",
-      attrs: {
-        colspan: "4"
-      }
-    }, [_vm._v(_vm._s(item.registration_type))])]), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._l(item.count, function (lc) {
+    }, [_vm._v(_vm._s(item.event_date))])]), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._l(item.count, function (lc) {
       return _c("tr", [_c("td", {
         staticClass: "border px-2 py-1"
       }, [_vm._v(_vm._s(lc.local_church))]), _vm._v(" "), _c("td", {

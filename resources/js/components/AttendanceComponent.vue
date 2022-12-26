@@ -33,9 +33,6 @@
                         <td class="border px-2 py-1" colspan="4">{{ item.event_date }}</td>
                       </tr>
                       <tr>
-                        <td class="border px-2 py-1" colspan="4">{{ item.registration_type }}</td>
-                      </tr>
-                      <tr>
                         <td class="border px-2 py-1"></td>
                         <td class="border px-2 py-1">Member</td>
                         <td class="border px-2 py-1">Guest</td>
