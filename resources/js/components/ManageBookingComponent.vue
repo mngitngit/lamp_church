@@ -33,7 +33,7 @@
 
                 <div class="px-2 row">
                     <el-alert
-                        title="Member booking/rebooking is already closed. For other concerns, please reach out to your local coordinators."
+                        title="Members' booking & rebooking is already closed. For other concerns, please reach out to your local coordinators."
                         type="warning"
                         :closable="false"
                         show-icon>

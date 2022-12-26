@@ -3,7 +3,7 @@
         <el-card shadow="always" class="mb-3">
             <div class="px-2 row">
                 <el-alert
-                    title="Member registration is already closed. For other concerns, please reach out to your local coordinators."
+                    title="Members' registration is already closed. For other concerns, please reach out to your local coordinators."
                     type="warning"
                     show-icon>
                 </el-alert>
