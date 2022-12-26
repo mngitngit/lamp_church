@@ -8579,6 +8579,7 @@ var render = function render() {
     attrs: {
       title: "Members' registration is already closed. For other concerns, please reach out to your local coordinators.",
       type: "warning",
+      closable: false,
       "show-icon": ""
     }
   })], 1), _vm._v(" "), _c("div", {

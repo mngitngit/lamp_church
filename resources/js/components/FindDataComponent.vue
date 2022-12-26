@@ -5,6 +5,7 @@
                 <el-alert
                     title="Members' registration is already closed. For other concerns, please reach out to your local coordinators."
                     type="warning"
+                    :closable="false"
                     show-icon>
                 </el-alert>
             </div>

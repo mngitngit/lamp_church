@@ -8,6 +8,7 @@ use App\Models\Registration;
 use App\Models\Slots;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class AttendanceController extends Controller
 {
@@ -17,14 +18,57 @@ class AttendanceController extends Controller
     }
 
     public function index(Request $request) {
-        $count = Slots::orderBy('event_date', 'asc')->get()->map(function($slot) {
-            $slot->data = $slot->bookings()->groupBy('local_church')->select('local_church', DB::raw('count(*) as total'))->get();
+        $local_churches = explode(',', env('LOCAL_CHURCHES'));
 
-            return $slot;
-        });
+        $slots = Slots::where('registration_type', 'Member')->where('id', env('SLOT_ID_TODAY_MEMBER'))->get();
+        $attendance_count = [];
+
+        foreach ($slots as $slot) {
+            $slot = (Object) $slot;
+            $count = [];
+            
+            $member = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Member')->first();
+            $guest = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Guest')->first();
+
+            foreach ($local_churches as $local_church) {
+                $array = [];
+
+                $array['local_church'] = $local_church;
+                $array['count'] = array(
+                    'member' => array(
+                        'total' => DB::table('bookings')
+                                ->where('local_church', $local_church)
+                                ->where('slot_id', $member->id)
+                                ->count(),
+                        'attended' => DB::table('attendances')
+                                ->where('local_church', $local_church)
+                                ->where('slot_id', $member->id)
+                                ->count(),
+                    ),
+                    'guest' => array(
+                        'total' => DB::table('bookings')
+                                ->where('local_church', $local_church)
+                                ->where('slot_id', $guest->id)
+                                ->count(),
+                        'attended' => DB::table('attendances')
+                                ->where('local_church', $local_church)
+                                ->where('slot_id', $guest->id)
+                                ->count(),
+                    )
+                );
+
+                array_push($count, $array);
+            }
+
+            $slot['count'] = $count;
+
+            $slot['event_date'] = date_format($slot['event_date'], 'F d');
+
+            array_push($attendance_count, $slot);
+        }
 
         return view('attendance.index', [
-            'count' => $count
+            'count' => json_encode($attendance_count)
         ]);
     }
 
@@ -39,7 +83,9 @@ class AttendanceController extends Controller
             return response()->json(['error' => 'Not found. Please check the number and try again.'], 500);
         }
 
-        $isBooked = $registration->bookings()->where('slot_id', $request->slot_id)->first();
+        $slot_id = $registration->registration_type === 'Member' ? env('SLOT_ID_TODAY_MEMBER') : env('SLOT_ID_TODAY_GUEST');
+
+        $isBooked = $registration->bookings()->where('slot_id', $slot_id)->first();
 
         if (!$isBooked) {
             return response()->json(['error' => 'This delegate is not booked for today.'], 500);
@@ -61,14 +107,18 @@ class AttendanceController extends Controller
             'delegate' => $registration,
             'bookings' => $registration->bookings()->with(['slot'])->get(),
             'booked_dates' => $booked_dates,
-            'attended' => !empty($registration->attendances()->where('slot_id', $request->slot_id)->first())
+            'attended' => !empty($registration->attendances()->where('slot_id', $slot_id)->first())
         ];
     }
 
     public function store(Request $request) {
+        $registration = Registration::where('uuid', $request->details['uuid'])->first();
+
+        $slot_id = $registration->registration_type === 'Member' ? env('SLOT_ID_TODAY_MEMBER') : env('SLOT_ID_TODAY_GUEST');
+
         return Attendance::create([
             'registration_uuid' => $request->details['uuid'],
-            'slot_id' => $request->slot_id,
+            'slot_id' => $slot_id,
             'local_church' => $request->details['local_church']
         ]);
     }

@@ -6924,6 +6924,28 @@ function mergeFn (a, b) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AttendanceTableComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AttendanceTableComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    count: {
+      required: true,
+      type: Array
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingTableComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingTableComponent.vue?vue&type=script&lang=js& ***!
@@ -7097,6 +7119,79 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AttendanceTableComponent.vue?vue&type=template&id=9546e0fa&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AttendanceTableComponent.vue?vue&type=template&id=9546e0fa& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "row"
+  }, [_vm._l(_vm.count, function (item, index) {
+    return [_c("div", {
+      staticClass: "col-md-6"
+    }, [_c("div", {
+      staticClass: "border-0 m-4 card shadow"
+    }, [_c("div", {
+      staticClass: "card-body"
+    }, [_c("table", {
+      staticClass: "border text-center w-full",
+      staticStyle: {
+        width: "100%"
+      }
+    }, [_c("tr", [_c("td", {
+      staticClass: "border px-2 py-1",
+      attrs: {
+        colspan: "4"
+      }
+    }, [_vm._v(_vm._s(item.event_date))])]), _vm._v(" "), _c("tr", [_c("td", {
+      staticClass: "border px-2 py-1",
+      attrs: {
+        colspan: "4"
+      }
+    }, [_vm._v(_vm._s(item.registration_type))])]), _vm._v(" "), _vm._m(0, true), _vm._v(" "), _vm._l(item.count, function (lc) {
+      return _c("tr", [_c("td", {
+        staticClass: "border px-2 py-1"
+      }, [_vm._v(_vm._s(lc.local_church))]), _vm._v(" "), _c("td", {
+        staticClass: "border px-2 py-1"
+      }, [_vm._v(_vm._s(lc.count.member.attended) + " / " + _vm._s(lc.count.member.total))]), _vm._v(" "), _c("td", {
+        staticClass: "border px-2 py-1"
+      }, [_vm._v(_vm._s(lc.count.guest.attended) + " / " + _vm._s(lc.count.guest.total))]), _vm._v(" "), _c("td", {
+        staticClass: "border px-2 py-1"
+      }, [_vm._v(_vm._s(lc.count.guest.attended + lc.count.member.attended) + " / " + _vm._s(lc.count.guest.total + lc.count.member.total))])]);
+    })], 2)])])])];
+  })], 2);
+};
+
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", [_c("td", {
+    staticClass: "border px-2 py-1"
+  }), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Member")]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Guest")]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Total")])]);
+}];
+render._withStripped = true;
+
 
 /***/ }),
 
@@ -96603,6 +96698,45 @@ module.exports = function ( delay, noTrailing, callback, debounceMode ) {
 
 /***/ }),
 
+/***/ "./resources/js/components/AttendanceTableComponent.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/AttendanceTableComponent.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AttendanceTableComponent_vue_vue_type_template_id_9546e0fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AttendanceTableComponent.vue?vue&type=template&id=9546e0fa& */ "./resources/js/components/AttendanceTableComponent.vue?vue&type=template&id=9546e0fa&");
+/* harmony import */ var _AttendanceTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AttendanceTableComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AttendanceTableComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AttendanceTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AttendanceTableComponent_vue_vue_type_template_id_9546e0fa___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AttendanceTableComponent_vue_vue_type_template_id_9546e0fa___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AttendanceTableComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/BookingTableComponent.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/BookingTableComponent.vue ***!
@@ -96681,6 +96815,22 @@ component.options.__file = "resources/js/components/RegistrationsTableComponent.
 
 /***/ }),
 
+/***/ "./resources/js/components/AttendanceTableComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/AttendanceTableComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AttendanceTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AttendanceTableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AttendanceTableComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AttendanceTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/BookingTableComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************!*\
   !*** ./resources/js/components/BookingTableComponent.vue?vue&type=script&lang=js& ***!
@@ -96710,6 +96860,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RegistrationsTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RegistrationsTableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RegistrationsTableComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RegistrationsTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AttendanceTableComponent.vue?vue&type=template&id=9546e0fa&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/AttendanceTableComponent.vue?vue&type=template&id=9546e0fa& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AttendanceTableComponent_vue_vue_type_template_id_9546e0fa___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AttendanceTableComponent_vue_vue_type_template_id_9546e0fa___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AttendanceTableComponent_vue_vue_type_template_id_9546e0fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AttendanceTableComponent.vue?vue&type=template&id=9546e0fa& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AttendanceTableComponent.vue?vue&type=template&id=9546e0fa&");
+
 
 /***/ }),
 
@@ -108864,6 +109031,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('registration-table', (__webpack_require__(/*! ./components/RegistrationsTableComponent.vue */ "./resources/js/components/RegistrationsTableComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('booking-table', (__webpack_require__(/*! ./components/BookingTableComponent.vue */ "./resources/js/components/BookingTableComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('attendance-table', (__webpack_require__(/*! ./components/AttendanceTableComponent.vue */ "./resources/js/components/AttendanceTableComponent.vue")["default"]));
 
 
 

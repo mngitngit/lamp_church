@@ -6,6 +6,7 @@ use App\Models\Registration;
 use Illuminate\Http\Request;
 use App\Http\Resources\RegistrationResource;
 use App\Models\Slots;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -67,13 +68,63 @@ class HomeController extends Controller
             return $slot;
         });
 
+        $local_churches = explode(',', env('LOCAL_CHURCHES'));
+
+        $slots = Slots::where('registration_type', 'Member')->get();
+        $attendance_count = [];
+
+        foreach ($slots as $slot) {
+            $slot = (Object) $slot;
+            $count = [];
+            
+            $member = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Member')->first();
+            $guest = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Guest')->first();
+
+            foreach ($local_churches as $local_church) {
+                $array = [];
+
+                $array['local_church'] = $local_church;
+                $array['count'] = array(
+                    'member' => array(
+                        'total' => DB::table('bookings')
+                                ->where('local_church', $local_church)
+                                ->where('slot_id', $member->id)
+                                ->count(),
+                        'attended' => DB::table('attendances')
+                                ->where('local_church', $local_church)
+                                ->where('slot_id', $member->id)
+                                ->count(),
+                    ),
+                    'guest' => array(
+                        'total' => DB::table('bookings')
+                                ->where('local_church', $local_church)
+                                ->where('slot_id', $guest->id)
+                                ->count(),
+                        'attended' => DB::table('attendances')
+                                ->where('local_church', $local_church)
+                                ->where('slot_id', $guest->id)
+                                ->count(),
+                    )
+                );
+
+                array_push($count, $array);
+            }
+
+            $slot['count'] = $count;
+
+            $slot['event_date'] = date_format($slot['event_date'], 'F d');
+
+            array_push($attendance_count, $slot);
+        }
+
         return view('home', [
             'registrations' => $registration,
             'search' => $request->search,
             'slots' => [
                 'members' => $slots_members,
                 'guests' => $slots_guests
-            ]
+            ],
+            'count' => json_encode($attendance_count)
         ]);
     }
 }

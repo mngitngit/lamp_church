@@ -6955,8 +6955,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       input: '',
       loading: false,
       error: null,
-      retrieved: null,
-      slot_id: 1
+      retrieved: null
     };
   },
   watch: {
@@ -6980,11 +6979,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.retrieved = null;
                 if (!_this.input) _this.error = 'Please enter AWTA Card/Guest number.';
                 _context2.next = 6;
-                return axios.get("/attendance/" + _this.input, {
-                  params: {
-                    slot_id: _this.slot_id
-                  }
-                }).then( /*#__PURE__*/function () {
+                return axios.get("/attendance/" + _this.input).then( /*#__PURE__*/function () {
                   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
                     return _regeneratorRuntime().wrap(function _callee$(_context) {
                       while (1) {
@@ -7036,8 +7031,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _context4.next = 3;
                 return axios.post("/attendance", {
-                  details: _this2.retrieved.delegate,
-                  slot_id: _this2.slot_id
+                  details: _this2.retrieved.delegate
                 }).then( /*#__PURE__*/function () {
                   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(response) {
                     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -7192,7 +7186,11 @@ var render = function render() {
       _c = _vm._self._c;
 
   return !_vm.retrieved ? _c("div", {
-    staticClass: "col-md-4"
+    staticClass: "col-md-8"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-5"
   }, [_c("div", {
     staticClass: "border-0 card shadow"
   }, [_c("div", {
@@ -7240,7 +7238,40 @@ var render = function render() {
     slot: "append"
   }, [_vm._v("Validate")])], 2), _vm._v(" "), _vm.error ? _c("p", {
     staticClass: "text-danger"
-  }, [_vm._v(_vm._s(_vm.error))]) : _vm._e()], 1)])])])]) : _c("div", {
+  }, [_vm._v(_vm._s(_vm.error))]) : _vm._e()], 1)])])])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-7"
+  }, [_c("div", {
+    staticClass: "border-0 card shadow"
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_vm._l(_vm.count, function (item, index) {
+    return [_c("table", {
+      staticClass: "border text-center w-full",
+      staticStyle: {
+        width: "100%"
+      }
+    }, [_c("tr", [_c("td", {
+      staticClass: "border px-2 py-1",
+      attrs: {
+        colspan: "4"
+      }
+    }, [_vm._v(_vm._s(item.event_date))])]), _vm._v(" "), _c("tr", [_c("td", {
+      staticClass: "border px-2 py-1",
+      attrs: {
+        colspan: "4"
+      }
+    }, [_vm._v(_vm._s(item.registration_type))])]), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._l(item.count, function (lc) {
+      return _c("tr", [_c("td", {
+        staticClass: "border px-2 py-1"
+      }, [_vm._v(_vm._s(lc.local_church))]), _vm._v(" "), _c("td", {
+        staticClass: "border px-2 py-1"
+      }, [_vm._v(_vm._s(lc.count.member.attended) + " / " + _vm._s(lc.count.member.total))]), _vm._v(" "), _c("td", {
+        staticClass: "border px-2 py-1"
+      }, [_vm._v(_vm._s(lc.count.guest.attended) + " / " + _vm._s(lc.count.guest.total))]), _vm._v(" "), _c("td", {
+        staticClass: "border px-2 py-1"
+      }, [_vm._v(_vm._s(lc.count.guest.attended + lc.count.member.attended) + " / " + _vm._s(lc.count.guest.total + lc.count.member.total))])]);
+    })], 2)];
+  })], 2)])])])]) : _c("div", {
     staticClass: "col-md-5"
   }, [_c("div", {
     staticClass: "border-0 card shadow mb-3"
@@ -7318,6 +7349,19 @@ var staticRenderFns = [function () {
       src: "/images/barcode.png"
     }
   })])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", [_c("td", {
+    staticClass: "border px-2 py-1"
+  }), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Member")]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Guest")]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Total")])]);
 }];
 render._withStripped = true;
 

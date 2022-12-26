@@ -1,51 +1,58 @@
 <template>
-    <div v-if="!retrieved" class="col-md-4">
-      <div class="border-0 card shadow">
-          <div class="card-body">
-                <div class="row justify-content-center">
+    <div v-if="!retrieved" class="col-md-8">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="border-0 card shadow">
+            <div class="card-body">
+                  <div class="row justify-content-center">
+                    <div class="col-md-12">
+                      <p class="mb-0 text-black-50 text-center mt-2 text-xxs">Align the barcode within the <br/>reader to scan</p>
+                    </div>
+                    <div class="col-md-6 text-center">
+                      <img width="180px" class="mb-3" src="/images/barcode.png">
+                    </div>
+                  </div>
+                <div class="row" style="border-top: 2px dashed #dee2e6;">
                   <div class="col-md-12">
-                    <p class="mb-0 text-black-50 text-center mt-2 text-xxs">Align the barcode within the <br/>reader to scan</p>
-                  </div>
-                  <div class="col-md-6 text-center">
-                    <img width="180px" class="mb-3" src="/images/barcode.png">
+                    <p class="mb-0 text-black-50 text-center mt-2 text-xxs">Or enter your code below</p>
+                    <el-input placeholder="Your code" class="mt-2" @change="submit()" v-model="input" :autofocus="true">
+                      <template style="cursor: pointer" type="primary" plain slot="append" @click="submit()">Validate</template>
+                    </el-input>
+                    <p v-if="error" class="text-danger">{{ error }}</p>
                   </div>
                 </div>
-              <div class="row" style="border-top: 2px dashed #dee2e6;">
-                <div class="col-md-12">
-                  <p class="mb-0 text-black-50 text-center mt-2 text-xxs">Or enter your code below</p>
-                  <el-input placeholder="Your code" class="mt-2" @change="submit()" v-model="input" :autofocus="true">
-                    <template style="cursor: pointer" type="primary" plain slot="append" @click="submit()">Validate</template>
-                  </el-input>
-                  <p v-if="error" class="text-danger">{{ error }}</p>
-                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="border-0  card shadow">
+              <div class="card-body">
+                  <template v-for="(item, index) in count">
+                    <table class="border text-center w-full" style="width: 100%">
+                      <tr>
+                        <td class="border px-2 py-1" colspan="4">{{ item.event_date }}</td>
+                      </tr>
+                      <tr>
+                        <td class="border px-2 py-1" colspan="4">{{ item.registration_type }}</td>
+                      </tr>
+                      <tr>
+                        <td class="border px-2 py-1"></td>
+                        <td class="border px-2 py-1">Member</td>
+                        <td class="border px-2 py-1">Guest</td>
+                        <td class="border px-2 py-1">Total</td>
+                      </tr>
+                      <tr v-for="lc in item.count">
+                        <td class="border px-2 py-1">{{ lc.local_church }}</td>
+                        <td class="border px-2 py-1">{{ lc.count.member.attended }} / {{ lc.count.member.total }}</td>
+                        <td class="border px-2 py-1">{{ lc.count.guest.attended }} / {{ lc.count.guest.total }}</td>
+                        <td class="border px-2 py-1">{{ lc.count.guest.attended + lc.count.member.attended }} / {{ lc.count.guest.total + lc.count.member.total }}</td>
+                      </tr>
+                    </table>
+                  </template>
               </div>
           </div>
+        </div>
       </div>
-      <!-- <div class="border-0 mt-4 card shadow">
-          <div class="card-body">
-                <table class="border">
-                   <tr>
-                      <td></td>
-                      <td colspan="2" class="border text-center">Day 1</td>
-                      <td colspan="2" class="border text-center">Day 2</td>
-                      <td colspan="2" class="border text-center">Day 3</td>
-                      <td colspan="2" class="border text-center">Day 4</td>
-                    </tr>
-                    <tr>
-                      <template v-for="(item, index) in count">
-                        <td v-if="index === 0"></td>
-                        <td class="border">{{ item.registration_type }}</td>
-                      </template>
-                    </tr>
-                    <template v-for="(item, index) in count">
-                      <tr v-for="(item2, index2) in item.data">
-                        <td class="border" v-if="index === 0">{{ item2.local_church }}</td>
-                        <td class="border">{{ item2.total }}</td>
-                      </tr>
-                    </template>
-                </table>
-          </div>
-      </div> -->
     </div>
     <div v-else class="col-md-5">
       <div class="border-0 card shadow mb-3">
@@ -96,8 +103,7 @@ export default {
       input: '',
       loading: false,
       error: null,
-      retrieved: null,
-      slot_id: 1
+      retrieved: null
     }
   }, 
   watch: {
@@ -116,11 +122,7 @@ export default {
       if (! this.input)
         this.error = 'Please enter AWTA Card/Guest number.'
 
-      await axios.get(`/attendance/` + this.input, {
-        params: {
-          slot_id: this.slot_id
-        }
-      })
+      await axios.get(`/attendance/` + this.input)
       .then(async (response) => {
         this.loading = false;
         this.retrieved = response.data
@@ -135,8 +137,7 @@ export default {
     async attendance() {
       if (! this.retrieved.attended) {
         await axios.post(`/attendance`, {
-          details: this.retrieved.delegate,
-          slot_id: this.slot_id
+          details: this.retrieved.delegate
         })
         .then(async (response) => {
           this.$alert('', 'Attendance already recorded!', {
