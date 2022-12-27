@@ -33,6 +33,7 @@ class HomeController extends Controller
         $registration = $registration->paginate(10);
 
         $registration->map(function($item) {
+            dd($item->priority_dates);
             $item->priority_dates = implode(', ', json_decode($item->priority_dates));
 
             $booked_dates = $item->bookings()->with('slot')->get()->toArray();
