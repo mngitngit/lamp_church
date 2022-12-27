@@ -3,6 +3,7 @@
         <el-card shadow="always" class="mb-3">
             <div class="px-2 row">
                 <el-alert
+                    v-if="closeRegForMember"
                     title="Members' registration is already closed. For other concerns, please reach out to your local coordinators."
                     type="warning"
                     :closable="false"
@@ -13,7 +14,7 @@
                 <div class="col-md-6">
                     <el-form-item label="Are you a guest or a member?" prop="registrationType" required>
                         <el-select v-model="ruleForm.registrationType" placeholder="Choose">
-                            <el-option label="Member" value="Member" disabled></el-option>
+                            <el-option label="Member" value="Member" :disabled="closeRegForMember"></el-option>
                             <el-option label="Guest" value="Guest"></el-option>
                         </el-select>
                     </el-form-item>
@@ -267,9 +268,10 @@ export default {
                 withAwtaCard: '',
                 withAccommodation: '',
                 modeOfTranspo: '',
-                priorityDates: []
+                priorityDates: [],
             },
-            isLoading: false
+            isLoading: false,
+            closeRegForMember: false
         }
     },
     watch: {

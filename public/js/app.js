@@ -7427,7 +7427,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         modeOfTranspo: '',
         priorityDates: []
       },
-      isLoading: false
+      isLoading: false,
+      closeRegForMember: false
     };
   },
   watch: {
@@ -8575,14 +8576,14 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "px-2 row"
-  }, [_c("el-alert", {
+  }, [_vm.closeRegForMember ? _c("el-alert", {
     attrs: {
       title: "Members' registration is already closed. For other concerns, please reach out to your local coordinators.",
       type: "warning",
       closable: false,
       "show-icon": ""
     }
-  })], 1), _vm._v(" "), _c("div", {
+  }) : _vm._e()], 1), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-6"
@@ -8607,7 +8608,7 @@ var render = function render() {
     attrs: {
       label: "Member",
       value: "Member",
-      disabled: ""
+      disabled: _vm.closeRegForMember
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
