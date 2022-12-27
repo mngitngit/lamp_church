@@ -6955,13 +6955,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       input: '',
       loading: false,
       error: null,
-      retrieved: null
+      retrieved: null,
+      dialogVisible: false
     };
   },
   watch: {
     input: function input(val) {
       if (val.length >= 9) {
         this.submit();
+      }
+    },
+    dialogVisible: function dialogVisible(val) {
+      if (val) {
+        this.test();
       }
     }
   },
@@ -7038,18 +7044,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       while (1) {
                         switch (_context3.prev = _context3.next) {
                           case 0:
-                            _this2.$alert('', 'Attendance confirmed!', {
-                              confirmButtonText: 'OK',
-                              showCancelButton: false,
-                              closeOnPressEscape: false,
-                              closeOnClickModal: false,
-                              showClose: false,
-                              center: true,
-                              type: 'success',
-                              callback: function callback(action) {
-                                window.location.reload();
-                              }
-                            });
+                            _this2.dialogVisible = true;
 
                           case 1:
                           case "end":
@@ -7069,18 +7064,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 break;
 
               case 5:
-                _this2.$alert('', 'Attendance confirmed!', {
-                  confirmButtonText: 'OK',
-                  showCancelButton: false,
-                  closeOnPressEscape: false,
-                  closeOnClickModal: false,
-                  showClose: false,
-                  center: true,
-                  type: 'success',
-                  callback: function callback(action) {
-                    window.location.reload();
-                  }
-                });
+                _this2.dialogVisible = true;
 
               case 6:
               case "end":
@@ -7089,6 +7073,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }))();
+    },
+    isMobile: function isMobile() {
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    reload: function reload() {
+      window.location.reload();
+    },
+    test: function test() {
+      setTimeout(function () {
+        return document.getElementById('btn-confirm').focus();
+      }, 500);
     }
   }
 });
@@ -7185,7 +7184,9 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return !_vm.retrieved ? _c("div", {
+  return _c("div", {
+    staticClass: "row justify-content-center"
+  }, [!_vm.retrieved ? _c("div", {
     staticClass: "col-md-8"
   }, [_c("div", {
     staticClass: "row"
@@ -7322,7 +7323,87 @@ var render = function render() {
         return _vm.attendance();
       }
     }
-  }, [_vm._v(_vm._s(_vm.retrieved.attended ? "Continue" : "MARK AS PRESENT"))])], 1);
+  }, [_vm._v(_vm._s(_vm.retrieved.attended ? "Continue" : "MARK AS PRESENT"))])], 1), _vm._v(" "), _c("el-dialog", {
+    attrs: {
+      visible: _vm.dialogVisible,
+      width: "350px",
+      "show-close": false
+    },
+    on: {
+      "update:visible": function updateVisible($event) {
+        _vm.dialogVisible = $event;
+      }
+    }
+  }, [_c("span", {
+    attrs: {
+      slot: "title"
+    },
+    slot: "title"
+  }, [_c("h5", {
+    staticClass: "text-success text-center mt-4"
+  }, [_c("i", {
+    staticClass: "el-icon-success"
+  }), _vm._v(" Attendance Confirmed!")]), _vm._v(" "), _c("label", {
+    staticClass: "px-4 text-black-50 text-center"
+  }, [_vm._v("Congratulations! Your attendance is now confirmed. For your convenience, please screenshot this confirmation and present as your gate pass. ")])]), _vm._v(" "), _c("span", [_c("div", {
+    staticClass: "row"
+  }, [_vm.retrieved ? _c("div", {
+    staticClass: "col-md-12"
+  }, [_c("table", {
+    staticClass: "border text-center w-full",
+    staticStyle: {
+      width: "100%"
+    }
+  }, [_c("tr", {
+    staticClass: "border"
+  }, [_c("td", {
+    staticClass: "px-2 py-1"
+  }, [_c("i", {
+    staticClass: "el-icon-user"
+  })]), _vm._v(" "), _c("td", {
+    staticClass: "px-2 py-1 text-start",
+    attrs: {
+      width: "100px"
+    }
+  }, [_vm._v("Name")]), _vm._v(" "), _c("td", {
+    staticClass: "px-2 py-1 text-start"
+  }, [_vm._v(_vm._s(_vm.retrieved.delegate.firstname) + " " + _vm._s(_vm.retrieved.delegate.lastname))])]), _vm._v(" "), _c("tr", {
+    staticClass: "border"
+  }, [_c("td", {
+    staticClass: "px-2 py-1"
+  }, [_c("i", {
+    staticClass: "el-icon-date"
+  })]), _vm._v(" "), _c("td", {
+    staticClass: "px-2 py-1 text-start"
+  }, [_vm._v("Date")]), _vm._v(" "), _c("td", {
+    staticClass: "px-2 py-1 text-start"
+  }, [_vm._v("December 27")])]), _vm._v(" "), _c("tr", {
+    staticClass: "border"
+  }, [_c("td", {
+    staticClass: "px-2 py-1"
+  }, [_c("i", {
+    staticClass: "el-icon-place"
+  })]), _vm._v(" "), _c("td", {
+    staticClass: "px-2 py-1 text-start"
+  }, [_vm._v("Local Church")]), _vm._v(" "), _c("td", {
+    staticClass: "px-2 py-1 text-start"
+  }, [_vm._v(_vm._s(_vm.retrieved.delegate.local_church) + ", " + _vm._s(_vm.retrieved.delegate.country))])])])]) : _vm._e()])]), _vm._v(" "), _c("span", {
+    staticClass: "dialog-footer",
+    attrs: {
+      slot: "footer"
+    },
+    slot: "footer"
+  }, [_c("el-button", {
+    attrs: {
+      type: "primary",
+      id: "btn-confirm"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.reload();
+      }
+    }
+  }, [_vm._v("OK")])], 1)])], 1);
 };
 
 var staticRenderFns = [function () {

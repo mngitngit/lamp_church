@@ -6,8 +6,6 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <attendance-component :count="{{ $count }}" />
-    </div>
+    <attendance-component :count="{{ $count }}" />
 </div>
 @endsection
