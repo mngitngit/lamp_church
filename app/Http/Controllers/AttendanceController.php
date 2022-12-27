@@ -18,7 +18,7 @@ class AttendanceController extends Controller
     }
 
     public function index(Request $request) {
-        $local_churches = explode(',', env('LOCAL_CHURCHES'));
+        $local_churches = explode('|', env('LOCAL_CHURCHES'));
 
         $slots = Slots::where('registration_type', 'Member')->where('id', env('SLOT_ID_TODAY_MEMBER'))->get();
         $attendance_count = [];
