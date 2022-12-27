@@ -7185,6 +7185,8 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
     staticClass: "row justify-content-center"
   }, [!_vm.retrieved ? _c("div", {
     staticClass: "col-md-8"
@@ -7323,7 +7325,7 @@ var render = function render() {
         return _vm.attendance();
       }
     }
-  }, [_vm._v(_vm._s(_vm.retrieved.attended ? "Continue" : "MARK AS PRESENT"))])], 1), _vm._v(" "), _c("el-dialog", {
+  }, [_vm._v(_vm._s(_vm.retrieved.attended ? "Continue" : "MARK AS PRESENT"))])], 1)]), _vm._v(" "), _c("el-dialog", {
     attrs: {
       visible: _vm.dialogVisible,
       width: "350px",

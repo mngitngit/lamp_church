@@ -5,7 +5,5 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <attendance-component :count="{{ $count }}" />
-</div>
+<attendance-component :count="{{ $count }}" />
 @endsection

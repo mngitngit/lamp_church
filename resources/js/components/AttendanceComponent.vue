@@ -1,4 +1,5 @@
 <template>
+<div class="container">
   <div class="row justify-content-center">
     <div v-if="!retrieved" class="col-md-8">
       <div class="row">
@@ -86,45 +87,47 @@
 
       <el-button id="btn-continue" :autofocus="true" type="primary" @click="attendance()">{{ retrieved.attended ? 'Continue' : 'MARK AS PRESENT' }}</el-button>
     </div>
-
-    <el-dialog
-      :visible.sync="dialogVisible"
-      width="350px"
-      :show-close="false">
-      <span slot="title">
-        <!--  -->
-        <h5 class="text-success text-center mt-4"> <i class="el-icon-success"></i> Attendance Confirmed!</h5>
-
-        <label class="px-4 text-black-50 text-center">Congratulations! Your attendance is now confirmed. For your convenience, please screenshot this confirmation and present as your gate pass. </label>
-      </span>
-      <span>
-        <div class="row">
-            <div class="col-md-12" v-if="retrieved">
-              <table class="border text-center w-full" style="width: 100%">
-                  <tr class="border">
-                      <td class="px-2 py-1"><i class="el-icon-user"></i></td>
-                      <td class="px-2 py-1 text-start" width="100px">Name</td>
-                      <td class="px-2 py-1 text-start">{{ retrieved.delegate.firstname }} {{ retrieved.delegate.lastname }}</td>
-                  </tr>
-                  <tr class="border">
-                      <td class="px-2 py-1"><i class="el-icon-date"></i></td>
-                      <td class="px-2 py-1 text-start">Date</td>
-                      <td class="px-2 py-1 text-start">December 27</td>
-                  </tr>
-                  <tr class="border">
-                      <td class="px-2 py-1"><i class="el-icon-place"></i></td>
-                      <td class="px-2 py-1 text-start">Local Church</td>
-                      <td class="px-2 py-1 text-start">{{ retrieved.delegate.local_church }}, {{ retrieved.delegate.country }}</td>
-                  </tr>
-              </table>
-            </div>
-        </div>
-      </span>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" id="btn-confirm" @click="reload()">OK</el-button>
-      </span>
-    </el-dialog>
   </div>
+
+
+  <el-dialog
+    :visible.sync="dialogVisible"
+    width="350px"
+    :show-close="false">
+    <span slot="title">
+      <!--  -->
+      <h5 class="text-success text-center mt-4"> <i class="el-icon-success"></i> Attendance Confirmed!</h5>
+
+      <label class="px-4 text-black-50 text-center">Congratulations! Your attendance is now confirmed. For your convenience, please screenshot this confirmation and present as your gate pass. </label>
+    </span>
+    <span>
+      <div class="row">
+          <div class="col-md-12" v-if="retrieved">
+            <table class="border text-center w-full" style="width: 100%">
+                <tr class="border">
+                    <td class="px-2 py-1"><i class="el-icon-user"></i></td>
+                    <td class="px-2 py-1 text-start" width="100px">Name</td>
+                    <td class="px-2 py-1 text-start">{{ retrieved.delegate.firstname }} {{ retrieved.delegate.lastname }}</td>
+                </tr>
+                <tr class="border">
+                    <td class="px-2 py-1"><i class="el-icon-date"></i></td>
+                    <td class="px-2 py-1 text-start">Date</td>
+                    <td class="px-2 py-1 text-start">December 27</td>
+                </tr>
+                <tr class="border">
+                    <td class="px-2 py-1"><i class="el-icon-place"></i></td>
+                    <td class="px-2 py-1 text-start">Local Church</td>
+                    <td class="px-2 py-1 text-start">{{ retrieved.delegate.local_church }}, {{ retrieved.delegate.country }}</td>
+                </tr>
+            </table>
+          </div>
+      </div>
+    </span>
+    <span slot="footer" class="dialog-footer">
+      <el-button type="primary" id="btn-confirm" @click="reload()">OK</el-button>
+    </span>
+  </el-dialog>
+</div>
 </template>
 
 <script>
