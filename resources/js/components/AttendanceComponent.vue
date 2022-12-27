@@ -11,7 +11,7 @@
                       <p class="mb-0 text-black-50 text-center mt-2 text-xxs">Align the barcode within the <br/>reader to scan</p>
                     </div>
                     <div class="col-md-6 text-center">
-                      <img width="180px" class="mb-3" src="/images/barcode.png">
+                      <img width="90%" class="mb-3" src="/images/barcode.png">
                     </div>
                   </div>
                 <div class="row" style="border-top: 2px dashed #dee2e6;">

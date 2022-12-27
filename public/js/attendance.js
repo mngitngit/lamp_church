@@ -7423,7 +7423,7 @@ var staticRenderFns = [function () {
   }, [_c("img", {
     staticClass: "mb-3",
     attrs: {
-      width: "180px",
+      width: "90%",
       src: "/images/barcode.png"
     }
   })])]);
