@@ -46,6 +46,12 @@
                         <td class="border px-2 py-1">{{ lc.count.guest.attended }} / {{ lc.count.guest.total }}</td>
                         <td class="border px-2 py-1">{{ lc.count.guest.attended + lc.count.member.attended }} / {{ lc.count.guest.total + lc.count.member.total }}</td>
                       </tr>
+                      <tr>
+                        <td class="border px-2 py-1">Total</td>
+                        <td class="border px-2 py-1">{{ totals.member.attended }} / {{ totals.member.total }}</td>
+                        <td class="border px-2 py-1">{{ totals.guest.attended }} / {{ totals.guest.total }}</td>
+                        <td class="border px-2 py-1">{{ totals.member.attended + totals.guest.attended }} / {{ totals.member.total + totals.guest.total }}</td>
+                      </tr>
                     </table>
                   </template>
               </div>
@@ -144,7 +150,17 @@ export default {
       loading: false,
       error: null,
       retrieved: null,
-      dialogVisible: false
+      dialogVisible: false,
+      totals: {
+        member: {
+          total: 0,
+          attended: 0
+        },
+        guest: {
+          total: 0,
+          attended: 0
+        }
+      }
     }
   }, 
   watch: {
@@ -155,10 +171,18 @@ export default {
     },
     dialogVisible(val) {
       if (val) {
-        this.test();
+        this.autoFocus();
       }
     }
   },
+  mounted() {
+    this.count[0].count.forEach(item => {
+      this.totals.member.attended = parseFloat(this.totals.member.attended) + parseFloat(item.count.member.attended)
+      this.totals.member.total = parseFloat(this.totals.member.total) + parseFloat(item.count.member.total)
+      this.totals.guest.attended = parseFloat(this.totals.guest.attended) + parseFloat(item.count.guest.attended)
+      this.totals.guest.total = parseFloat(this.totals.guest.total) + parseFloat(item.count.guest.total)
+    });
+  }, 
   methods: {
     async submit() {
       this.error = null;
@@ -202,7 +226,7 @@ export default {
     reload() {
       window.location.reload();
     },
-    test() {
+    autoFocus() {
       setTimeout(() => document.getElementById('btn-confirm').focus(), 500);
     }
   }

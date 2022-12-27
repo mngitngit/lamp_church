@@ -6956,7 +6956,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loading: false,
       error: null,
       retrieved: null,
-      dialogVisible: false
+      dialogVisible: false,
+      totals: {
+        member: {
+          total: 0,
+          attended: 0
+        },
+        guest: {
+          total: 0,
+          attended: 0
+        }
+      }
     };
   },
   watch: {
@@ -6967,32 +6977,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     dialogVisible: function dialogVisible(val) {
       if (val) {
-        this.test();
+        this.autoFocus();
       }
     }
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.count[0].count.forEach(function (item) {
+      _this.totals.member.attended = parseFloat(_this.totals.member.attended) + parseFloat(item.count.member.attended);
+      _this.totals.member.total = parseFloat(_this.totals.member.total) + parseFloat(item.count.member.total);
+      _this.totals.guest.attended = parseFloat(_this.totals.guest.attended) + parseFloat(item.count.guest.attended);
+      _this.totals.guest.total = parseFloat(_this.totals.guest.total) + parseFloat(item.count.guest.total);
+    });
+  },
   methods: {
     submit: function submit() {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _this.error = null;
-                _this.loading = true;
-                _this.retrieved = null;
-                if (!_this.input) _this.error = 'Please enter AWTA Card/Guest number.';
+                _this2.error = null;
+                _this2.loading = true;
+                _this2.retrieved = null;
+                if (!_this2.input) _this2.error = 'Please enter AWTA Card/Guest number.';
                 _context2.next = 6;
-                return axios.get("/attendance/" + _this.input).then( /*#__PURE__*/function () {
+                return axios.get("/attendance/" + _this2.input).then( /*#__PURE__*/function () {
                   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
                     return _regeneratorRuntime().wrap(function _callee$(_context) {
                       while (1) {
                         switch (_context.prev = _context.next) {
                           case 0:
-                            _this.loading = false;
-                            _this.retrieved = response.data;
+                            _this2.loading = false;
+                            _this2.retrieved = response.data;
                             setTimeout(function () {
                               return document.getElementById('btn-continue').focus();
                             }, 500);
@@ -7010,8 +7030,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   };
                 }())["catch"](function (error) {
                   console.log(error);
-                  _this.loading = false;
-                  _this.error = error.response.data.error;
+                  _this2.loading = false;
+                  _this2.error = error.response.data.error;
                 });
 
               case 6:
@@ -7023,28 +7043,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     attendance: function attendance() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                if (_this2.retrieved.attended) {
+                if (_this3.retrieved.attended) {
                   _context4.next = 5;
                   break;
                 }
 
                 _context4.next = 3;
                 return axios.post("/attendance", {
-                  details: _this2.retrieved.delegate
+                  details: _this3.retrieved.delegate
                 }).then( /*#__PURE__*/function () {
                   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(response) {
                     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
                       while (1) {
                         switch (_context3.prev = _context3.next) {
                           case 0:
-                            _this2.dialogVisible = true;
+                            _this3.dialogVisible = true;
 
                           case 1:
                           case "end":
@@ -7064,7 +7084,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 break;
 
               case 5:
-                _this2.dialogVisible = true;
+                _this3.dialogVisible = true;
 
               case 6:
               case "end":
@@ -7084,7 +7104,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     reload: function reload() {
       window.location.reload();
     },
-    test: function test() {
+    autoFocus: function autoFocus() {
       setTimeout(function () {
         return document.getElementById('btn-confirm').focus();
       }, 500);
@@ -7268,7 +7288,15 @@ var render = function render() {
       }, [_vm._v(_vm._s(lc.count.guest.attended) + " / " + _vm._s(lc.count.guest.total))]), _vm._v(" "), _c("td", {
         staticClass: "border px-2 py-1"
       }, [_vm._v(_vm._s(lc.count.guest.attended + lc.count.member.attended) + " / " + _vm._s(lc.count.guest.total + lc.count.member.total))])]);
-    })], 2)];
+    }), _vm._v(" "), _c("tr", [_c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v("Total")]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(_vm.totals.member.attended) + " / " + _vm._s(_vm.totals.member.total))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(_vm.totals.guest.attended) + " / " + _vm._s(_vm.totals.guest.total))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(_vm.totals.member.attended + _vm.totals.guest.attended) + " / " + _vm._s(_vm.totals.member.total + _vm.totals.guest.total))])])], 2)];
   })], 2)])])])]) : _c("div", {
     staticClass: "col-md-5"
   }, [_c("div", {

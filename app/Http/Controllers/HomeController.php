@@ -80,30 +80,49 @@ class HomeController extends Controller
             $member = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Member')->first();
             $guest = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Guest')->first();
 
+            $guest_overall_total = 0;
+            $guest_overall_attended = 0;
+            $member_overall_total = 0;
+            $member_overall_attended = 0;
+
             foreach ($local_churches as $local_church) {
                 $array = [];
+
+                $member_total = DB::table('bookings')
+                    ->where('local_church', $local_church)
+                    ->where('slot_id', $member->id)
+                    ->count();
+                
+                $member_attended = DB::table('attendances')
+                    ->where('local_church', $local_church)
+                    ->where('slot_id', $member->id)
+                    ->count();
+
+                $guest_total = DB::table('bookings')
+                    ->where('local_church', $local_church)
+                    ->where('slot_id', $guest->id)
+                    ->count();
+
+                $guest_attended = DB::table('attendances')
+                    ->where('local_church', $local_church)
+                    ->where('slot_id', $guest->id)
+                    ->count();
+
+                $guest_overall_total += $guest_total;
+                $guest_overall_attended += $guest_attended;
+
+                $member_overall_total += $member_total;
+                $member_overall_attended += $member_attended;
 
                 $array['local_church'] = $local_church;
                 $array['count'] = array(
                     'member' => array(
-                        'total' => DB::table('bookings')
-                                ->where('local_church', $local_church)
-                                ->where('slot_id', $member->id)
-                                ->count(),
-                        'attended' => DB::table('attendances')
-                                ->where('local_church', $local_church)
-                                ->where('slot_id', $member->id)
-                                ->count(),
+                        'total' => $member_total,
+                        'attended' => $member_attended,
                     ),
                     'guest' => array(
-                        'total' => DB::table('bookings')
-                                ->where('local_church', $local_church)
-                                ->where('slot_id', $guest->id)
-                                ->count(),
-                        'attended' => DB::table('attendances')
-                                ->where('local_church', $local_church)
-                                ->where('slot_id', $guest->id)
-                                ->count(),
+                        'total' => $guest_total,
+                        'attended' => $guest_attended,
                     )
                 );
 
@@ -111,6 +130,16 @@ class HomeController extends Controller
             }
 
             $slot['count'] = $count;
+            $slot['overall'] = [
+                'member' => [
+                    'attended' => $member_overall_attended,
+                    'total' => $member_overall_total
+                ],
+                'guest' => [
+                    'attended' => $guest_overall_attended,
+                    'total' => $guest_overall_total
+                ]
+            ];
 
             $slot['event_date'] = date_format($slot['event_date'], 'F d');
 
