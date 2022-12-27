@@ -7038,7 +7038,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       while (1) {
                         switch (_context3.prev = _context3.next) {
                           case 0:
-                            _this2.$alert('', 'Attendance already recorded!', {
+                            _this2.$alert('', 'Attendance confirmed!', {
                               confirmButtonText: 'OK',
                               showCancelButton: false,
                               closeOnPressEscape: false,
@@ -7069,7 +7069,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 break;
 
               case 5:
-                _this2.$alert('', 'Attendance already recorded!', {
+                _this2.$alert('', 'Attendance confirmed!', {
                   confirmButtonText: 'OK',
                   showCancelButton: false,
                   closeOnPressEscape: false,

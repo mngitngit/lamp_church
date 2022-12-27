@@ -15,11 +15,11 @@ class ChangeUUIDTable2Seeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $toChange = array(
-            // ['old'=>'LPCA00532', 'new'=>'LPCA00315'], --> used by Heramar Gigi Absalon
+            ['old'=>'LPCA00532', 'new'=>'LPCA00397'],
             ['old'=>'LPCA00702', 'new'=>'LPCA00320'],
             ['old'=>'LPCA00714', 'new'=>'LPCA00412'],
             ['old'=>'LPCA00772', 'new'=>'LPCA00418'],
-            // ['old'=>'LPCA00775', 'new'=>'LPCA00334'], --> Ma. Victoria Geral
+            ['old'=>'LPCA00775', 'new'=>'LPCA00396'],
             ['old'=>'LPCA00810', 'new'=>'LPCA00422'],
             ['old'=>'LPCA00811', 'new'=>'LPCA00423'],
             ['old'=>'LPCA00864', 'new'=>'LPCA00425']

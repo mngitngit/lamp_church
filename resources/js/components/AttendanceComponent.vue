@@ -137,7 +137,7 @@ export default {
           details: this.retrieved.delegate
         })
         .then(async (response) => {
-          this.$alert('', 'Attendance already recorded!', {
+          this.$alert('', 'Attendance confirmed!', {
               confirmButtonText: 'OK',
               showCancelButton: false,
               closeOnPressEscape: false,
@@ -151,7 +151,7 @@ export default {
           });
         });
       } else {
-        this.$alert('', 'Attendance already recorded!', {
+        this.$alert('', 'Attendance confirmed!', {
             confirmButtonText: 'OK',
             showCancelButton: false,
             closeOnPressEscape: false,

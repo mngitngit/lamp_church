@@ -126,7 +126,7 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="Date Attended"
+      label="Dates Attended"
       align="center"
       fixed="right"
       width="170">

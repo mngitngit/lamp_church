@@ -7501,7 +7501,7 @@ var render = function render() {
     }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
-      label: "Date Attended",
+      label: "Dates Attended",
       align: "center",
       fixed: "right",
       width: "170"
