@@ -271,7 +271,7 @@ export default {
                 priorityDates: [],
             },
             isLoading: false,
-            closeRegForMember: false
+            closeRegForMember: true
         }
     },
     watch: {

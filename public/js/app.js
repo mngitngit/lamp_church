@@ -7428,7 +7428,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         priorityDates: []
       },
       isLoading: false,
-      closeRegForMember: false
+      closeRegForMember: true
     };
   },
   watch: {
