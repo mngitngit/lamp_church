@@ -146,6 +146,56 @@ class HomeController extends Controller
             array_push($attendance_count, $slot);
         }
 
+        $overall = [];
+
+        foreach ($local_churches as $local_church) {
+            $count = [];
+            $count['local_church'] = $local_church;
+            $count['count'] = [
+                'member' => [
+                    'attended' => DB::table('attendances')
+                        ->whereIn('slot_id', array(1, 2, 3, 4))
+                        ->where('local_church', $local_church)
+                        ->count(DB::raw('DISTINCT registration_uuid')),
+                    'total' => DB::table('bookings')
+                        ->whereIn('slot_id', array(1, 2, 3, 4))
+                        ->where('local_church', $local_church)
+                        ->count(DB::raw('DISTINCT registration_uuid'))
+                ],
+                'guest' => [
+                    'attended' => DB::table('attendances')
+                        ->whereIn('slot_id', array(5, 6, 7, 8))
+                        ->where('local_church', $local_church)
+                        ->count(DB::raw('DISTINCT registration_uuid')),
+                    'total' => DB::table('bookings')
+                        ->whereIn('slot_id', array(5, 6, 7, 8))
+                        ->where('local_church', $local_church)
+                        ->count(DB::raw('DISTINCT registration_uuid'))
+                ]
+            ];
+
+            $overall[] = $count;
+        }
+
+        $overall_total = [
+            'member' => [
+                'attended' => DB::table('attendances')
+                    ->whereIn('slot_id', array(1, 2, 3, 4))
+                    ->count(DB::raw('DISTINCT registration_uuid')),
+                'total' => DB::table('bookings')
+                    ->whereIn('slot_id', array(1, 2, 3, 4))
+                    ->count(DB::raw('DISTINCT registration_uuid'))
+            ],
+            'guest' => [
+                'attended' => DB::table('attendances')
+                    ->whereIn('slot_id', array(5, 6, 7, 8))
+                    ->count(DB::raw('DISTINCT registration_uuid')),
+                'total' => DB::table('bookings')
+                    ->whereIn('slot_id', array(5, 6, 7, 8))
+                    ->count(DB::raw('DISTINCT registration_uuid'))
+            ]
+        ];
+
         return view('home', [
             'registrations' => $registration,
             'search' => $request->search,
@@ -153,7 +203,9 @@ class HomeController extends Controller
                 'members' => $slots_members,
                 'guests' => $slots_guests
             ],
-            'count' => json_encode($attendance_count)
+            'count' => json_encode($attendance_count),
+            'overall' => json_encode($overall),
+            'overall_total' => json_encode($overall_total)
         ]);
     }
 }

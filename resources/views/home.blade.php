@@ -47,7 +47,7 @@
             <booking-table :slots="{{ json_encode($slots) }}" />
         </el-tab-pane>
         <el-tab-pane label="Attendance">
-            <attendance-table :count="{{ $count }}" />
+            <attendance-table :count="{{ $count }}" :overall="{{ $overall }}" :overall_total="{{ $overall_total }}" />
         </el-tab-pane>
     </el-tabs>
 </div>

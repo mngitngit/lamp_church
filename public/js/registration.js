@@ -6940,6 +6940,14 @@ __webpack_require__.r(__webpack_exports__);
     count: {
       required: true,
       type: Array
+    },
+    overall: {
+      required: true,
+      type: Array
+    },
+    overall_total: {
+      required: true,
+      type: Array
     }
   }
 });
@@ -7138,7 +7146,40 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", {
+  return _c("div", [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6"
+  }, [_c("div", {
+    staticClass: "border-0 m-4 card shadow"
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_c("table", {
+    staticClass: "border text-center w-full",
+    staticStyle: {
+      width: "100%"
+    }
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._l(_vm.overall, function (lc) {
+    return _c("tr", [_c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(lc.local_church))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(lc.count.member.attended) + " / " + _vm._s(lc.count.member.total))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(lc.count.guest.attended) + " / " + _vm._s(lc.count.guest.total))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(lc.count.guest.attended + lc.count.member.attended) + " / " + _vm._s(lc.count.guest.total + lc.count.member.total))])]);
+  }), _vm._v(" "), _c("tr", [_c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Total")]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v(_vm._s(_vm.overall_total.member.attended) + " / " + _vm._s(_vm.overall_total.member.total))]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v(_vm._s(_vm.overall_total.guest.attended) + " / " + _vm._s(_vm.overall_total.guest.total))]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v(_vm._s(_vm.overall_total.guest.attended + _vm.overall_total.member.attended) + " / " + _vm._s(_vm.overall_total.guest.total + _vm.overall_total.member.total))])])], 2)])])])]), _vm._v(" "), _c("hr", {
+    staticClass: "mb-0 text-black-50"
+  }), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_vm._l(_vm.count, function (item, index) {
     return [_c("div", {
@@ -7157,7 +7198,7 @@ var render = function render() {
       attrs: {
         colspan: "4"
       }
-    }, [_vm._v(_vm._s(item.event_date))])]), _vm._v(" "), _vm._m(0, true), _vm._v(" "), _vm._l(item.count, function (lc) {
+    }, [_vm._v(_vm._s(item.event_date))])]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _vm._l(item.count, function (lc) {
       return _c("tr", [_c("td", {
         staticClass: "border px-2 py-1"
       }, [_vm._v(_vm._s(lc.local_church))]), _vm._v(" "), _c("td", {
@@ -7176,10 +7217,33 @@ var render = function render() {
     }, [_vm._v(_vm._s(item.overall.member.attended) + " / " + _vm._s(item.overall.member.total))]), _vm._v(" "), _c("td", {
       staticClass: "border px-2 py-1"
     }, [_vm._v(_vm._s(item.overall.guest.attended + item.overall.member.attended) + " / " + _vm._s(item.overall.guest.total + item.overall.member.total))])])], 2)])])])];
-  })], 2);
+  })], 2)]);
 };
 
 var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", [_c("td", {
+    staticClass: "border px-2 py-1",
+    attrs: {
+      colspan: "4"
+    }
+  }, [_vm._v("Overall Unique Count")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("tr", [_c("td", {
+    staticClass: "border px-2 py-1"
+  }), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Member")]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Guest")]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Total")])]);
+}, function () {
   var _vm = this,
       _c = _vm._self._c;
 
