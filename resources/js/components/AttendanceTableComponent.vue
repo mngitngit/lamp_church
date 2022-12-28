@@ -55,8 +55,8 @@
                                 </tr>
                                 <tr>
                                     <td class="border px-2 py-1">Total</td>
-                                    <td class="border px-2 py-1">{{ item.overall.guest.attended }} / {{ item.overall.guest.total }}</td>
                                     <td class="border px-2 py-1">{{ item.overall.member.attended }} / {{ item.overall.member.total }}</td>
+                                    <td class="border px-2 py-1">{{ item.overall.guest.attended }} / {{ item.overall.guest.total }}</td>
                                     <td class="border px-2 py-1">{{ item.overall.guest.attended + item.overall.member.attended }} / {{ item.overall.guest.total + item.overall.member.total }}</td>
                                 </tr>
                             </table>

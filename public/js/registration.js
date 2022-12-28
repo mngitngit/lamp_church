@@ -7212,9 +7212,9 @@ var render = function render() {
       staticClass: "border px-2 py-1"
     }, [_vm._v("Total")]), _vm._v(" "), _c("td", {
       staticClass: "border px-2 py-1"
-    }, [_vm._v(_vm._s(item.overall.guest.attended) + " / " + _vm._s(item.overall.guest.total))]), _vm._v(" "), _c("td", {
-      staticClass: "border px-2 py-1"
     }, [_vm._v(_vm._s(item.overall.member.attended) + " / " + _vm._s(item.overall.member.total))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(item.overall.guest.attended) + " / " + _vm._s(item.overall.guest.total))]), _vm._v(" "), _c("td", {
       staticClass: "border px-2 py-1"
     }, [_vm._v(_vm._s(item.overall.guest.attended + item.overall.member.attended) + " / " + _vm._s(item.overall.guest.total + item.overall.member.total))])])], 2)])])])];
   })], 2)]);
