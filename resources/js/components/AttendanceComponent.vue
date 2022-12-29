@@ -52,6 +52,19 @@
                         <td class="border px-2 py-1">{{ totals.guest.attended }} / {{ totals.guest.total }}</td>
                         <td class="border px-2 py-1">{{ totals.member.attended + totals.guest.attended }} / {{ totals.member.total + totals.guest.total }}</td>
                       </tr>
+
+                      <tr style="border-top: 2px solid lightgray;">
+                          <td class="border px-2 py-1">Present</td>
+                          <td class="border px-2 py-1">{{ totals.member.attended }}</td>
+                          <td class="border px-2 py-1">{{ totals.guest.attended }}</td>
+                          <td class="border px-2 py-1">{{ totals.guest.attended + totals.member.attended }}</td>
+                      </tr>
+                      <tr>
+                          <td class="border px-2 py-1">Not Yet Present</td>
+                          <td class="border px-2 py-1">{{ totals.member.total - totals.member.attended }}</td>
+                          <td class="border px-2 py-1">{{ totals.guest.total - totals.guest.attended }}</td>
+                          <td class="border px-2 py-1">{{ (totals.guest.total + totals.member.total) - (totals.guest.attended + totals.member.attended) }}</td>
+                      </tr>
                     </table>
                   </template>
               </div>

@@ -7296,7 +7296,27 @@ var render = function render() {
       staticClass: "border px-2 py-1"
     }, [_vm._v(_vm._s(_vm.totals.guest.attended) + " / " + _vm._s(_vm.totals.guest.total))]), _vm._v(" "), _c("td", {
       staticClass: "border px-2 py-1"
-    }, [_vm._v(_vm._s(_vm.totals.member.attended + _vm.totals.guest.attended) + " / " + _vm._s(_vm.totals.member.total + _vm.totals.guest.total))])])], 2)];
+    }, [_vm._v(_vm._s(_vm.totals.member.attended + _vm.totals.guest.attended) + " / " + _vm._s(_vm.totals.member.total + _vm.totals.guest.total))])]), _vm._v(" "), _c("tr", {
+      staticStyle: {
+        "border-top": "2px solid lightgray"
+      }
+    }, [_c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v("Present")]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(_vm.totals.member.attended))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(_vm.totals.guest.attended))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(_vm.totals.guest.attended + _vm.totals.member.attended))])]), _vm._v(" "), _c("tr", [_c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v("Not Yet Present")]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(_vm.totals.member.total - _vm.totals.member.attended))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(_vm.totals.guest.total - _vm.totals.guest.attended))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(_vm.totals.guest.total + _vm.totals.member.total - (_vm.totals.guest.attended + _vm.totals.member.attended)))])])], 2)];
   })], 2)])])])]) : _c("div", {
     staticClass: "col-md-5"
   }, [_c("div", {

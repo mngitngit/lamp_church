@@ -7177,7 +7177,27 @@ var render = function render() {
     staticClass: "border px-2 py-1"
   }, [_vm._v(_vm._s(_vm.overall_total.guest.attended) + " / " + _vm._s(_vm.overall_total.guest.total))]), _vm._v(" "), _c("td", {
     staticClass: "border px-2 py-1"
-  }, [_vm._v(_vm._s(_vm.overall_total.guest.attended + _vm.overall_total.member.attended) + " / " + _vm._s(_vm.overall_total.guest.total + _vm.overall_total.member.total))])])], 2)])])])]), _vm._v(" "), _c("hr", {
+  }, [_vm._v(_vm._s(_vm.overall_total.guest.attended + _vm.overall_total.member.attended) + " / " + _vm._s(_vm.overall_total.guest.total + _vm.overall_total.member.total))])]), _vm._v(" "), _c("tr", {
+    staticStyle: {
+      "border-top": "2px solid lightgray"
+    }
+  }, [_c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Present")]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v(_vm._s(_vm.overall_total.member.attended))]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v(_vm._s(_vm.overall_total.guest.attended))]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v(_vm._s(_vm.overall_total.guest.attended + _vm.overall_total.member.attended))])]), _vm._v(" "), _c("tr", [_c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v("Not Yet Present")]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v(_vm._s(_vm.overall_total.member.total - _vm.overall_total.member.attended))]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v(_vm._s(_vm.overall_total.guest.total - _vm.overall_total.guest.attended))]), _vm._v(" "), _c("td", {
+    staticClass: "border px-2 py-1"
+  }, [_vm._v(_vm._s(_vm.overall_total.guest.total + _vm.overall_total.member.total - (_vm.overall_total.guest.attended + _vm.overall_total.member.attended)))])])], 2)])])])]), _vm._v(" "), _c("hr", {
     staticClass: "mb-0 text-black-50"
   }), _vm._v(" "), _c("div", {
     staticClass: "row"
@@ -7216,7 +7236,27 @@ var render = function render() {
       staticClass: "border px-2 py-1"
     }, [_vm._v(_vm._s(item.overall.guest.attended) + " / " + _vm._s(item.overall.guest.total))]), _vm._v(" "), _c("td", {
       staticClass: "border px-2 py-1"
-    }, [_vm._v(_vm._s(item.overall.guest.attended + item.overall.member.attended) + " / " + _vm._s(item.overall.guest.total + item.overall.member.total))])])], 2)])])])];
+    }, [_vm._v(_vm._s(item.overall.guest.attended + item.overall.member.attended) + " / " + _vm._s(item.overall.guest.total + item.overall.member.total))])]), _vm._v(" "), _c("tr", {
+      staticStyle: {
+        "border-top": "2px solid lightgray"
+      }
+    }, [_c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v("Present")]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(item.overall.member.attended))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(item.overall.guest.attended))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(item.overall.guest.attended + item.overall.member.attended))])]), _vm._v(" "), _c("tr", [_c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v("Not Yet Present")]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(item.overall.member.total - item.overall.member.attended))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(item.overall.guest.total - item.overall.guest.attended))]), _vm._v(" "), _c("td", {
+      staticClass: "border px-2 py-1"
+    }, [_vm._v(_vm._s(item.overall.guest.total + item.overall.member.total - (item.overall.guest.attended + item.overall.member.attended)))])])], 2)])])])];
   })], 2)]);
 };
 
