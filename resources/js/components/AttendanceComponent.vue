@@ -131,7 +131,7 @@
                 <tr class="border">
                     <td class="px-2 py-1"><i class="el-icon-date"></i></td>
                     <td class="px-2 py-1 text-start">Date</td>
-                    <td class="px-2 py-1 text-start">December 29</td>
+                    <td class="px-2 py-1 text-start">December 30</td>
                 </tr>
                 <tr class="border">
                     <td class="px-2 py-1"><i class="el-icon-place"></i></td>

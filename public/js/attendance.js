@@ -7427,7 +7427,7 @@ var render = function render() {
     staticClass: "px-2 py-1 text-start"
   }, [_vm._v("Date")]), _vm._v(" "), _c("td", {
     staticClass: "px-2 py-1 text-start"
-  }, [_vm._v("December 29")])]), _vm._v(" "), _c("tr", {
+  }, [_vm._v("December 30")])]), _vm._v(" "), _c("tr", {
     staticClass: "border"
   }, [_c("td", {
     staticClass: "px-2 py-1"
