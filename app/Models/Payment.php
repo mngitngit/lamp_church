@@ -16,9 +16,10 @@ class Payment extends Model
         'date_paid'
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
-        
+
         self::deleting(function ($model) {
             $registration = Registration::where('uuid', $model->registration_uuid)->first();
 
@@ -62,10 +63,11 @@ class Payment extends Model
         return date_format(date_create($value), "M d, Y");
     }
 
-    private function logActivity($description, $delegate_name) {
+    private static function logActivity($description, $delegate_name)
+    {
         auth()->user()->activities()->create([
             'description' => $description,
-            'delegate_name' => $delegate_name 
+            'delegate_name' => $delegate_name
         ]);
     }
 }

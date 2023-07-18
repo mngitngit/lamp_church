@@ -35,9 +35,10 @@ class Registration extends Model
         'rebooking_limit'
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
-        
+
         self::creating(function ($model) {
             $payment_config = Rates::where('category', $model->category)
                 ->where('attending_option', $model->attending_option)
@@ -95,11 +96,12 @@ class Registration extends Model
         return $this->hasMany(RebookingActivities::class, 'registration_uuid', 'uuid');
     }
 
-    private function logActivity($description, $delegate_name) {
+    private static function logActivity($description, $delegate_name)
+    {
         if (auth()->user()) {
             auth()->user()->activities()->create([
                 'description' => $description,
-                'delegate_name' => $delegate_name 
+                'delegate_name' => $delegate_name
             ]);
         }
     }

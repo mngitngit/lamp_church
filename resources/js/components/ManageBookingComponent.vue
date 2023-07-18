@@ -31,14 +31,14 @@
                 <h3>Manage Booking</h3>
                 <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>
 
-                <div class="px-2 row">
+                <!-- <div class="px-2 row">
                     <el-alert
                         title="Members' booking & rebooking is already closed. For other concerns, please reach out to your local coordinators."
                         type="warning"
                         :closable="false"
                         show-icon>
                     </el-alert>
-                </div>
+                </div> -->
 
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                     <div class="row mb-1">
@@ -129,7 +129,7 @@ export default {
             localChurch: '',
             referenceNumber: ''
         },
-        disabled: true,
+        disabled: false,
         rules: {
             lastName: [
                 { required: true, message: 'Please input Last Name', trigger: ['blur', 'change']}

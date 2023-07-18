@@ -7428,7 +7428,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         priorityDates: []
       },
       isLoading: false,
-      closeRegForMember: true
+      closeRegForMember: false
     };
   },
   watch: {
@@ -8686,8 +8686,7 @@ var render = function render() {
   }, [_c("el-option", {
     attrs: {
       value: "Hybrid",
-      label: "Hybrid",
-      disabled: ""
+      label: "Hybrid"
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
@@ -9247,8 +9246,7 @@ var render = function render() {
   }, [_c("el-option", {
     attrs: {
       value: "Hybrid",
-      label: "Hybrid",
-      disabled: ""
+      label: "Hybrid"
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {

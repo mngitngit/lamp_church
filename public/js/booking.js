@@ -7177,7 +7177,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         localChurch: '',
         referenceNumber: ''
       },
-      disabled: true,
+      disabled: false,
       rules: {
         lastName: [{
           required: true,
@@ -7521,16 +7521,7 @@ var render = function render() {
     }
   }, [_c("h3", [_vm._v("Manage Booking")]), _vm._v(" "), _c("p", {
     staticClass: "mt-2 c-booking-subheader"
-  }, [_vm._v("Type in your details to manage your booking")]), _vm._v(" "), _c("div", {
-    staticClass: "px-2 row"
-  }, [_c("el-alert", {
-    attrs: {
-      title: "Members' booking & rebooking is already closed. For other concerns, please reach out to your local coordinators.",
-      type: "warning",
-      closable: false,
-      "show-icon": ""
-    }
-  })], 1), _vm._v(" "), _c("el-form", {
+  }, [_vm._v("Type in your details to manage your booking")]), _vm._v(" "), _c("el-form", {
     ref: "ruleForm",
     attrs: {
       model: _vm.ruleForm,

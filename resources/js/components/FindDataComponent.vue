@@ -43,7 +43,7 @@
                 <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
                     <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member'">
                         <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
-                            <el-option value="Hybrid" label="Hybrid" disabled></el-option>
+                            <el-option value="Hybrid" label="Hybrid"></el-option>
                             <el-option value="Online" label="Online"></el-option>
                         </el-select>
                     </el-form-item>
@@ -271,7 +271,7 @@ export default {
                 priorityDates: [],
             },
             isLoading: false,
-            closeRegForMember: true
+            closeRegForMember: false
         }
     },
     watch: {
