@@ -48,25 +48,6 @@
                         </el-select>
                     </el-form-item>
                 </div>
-
-                <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
-                    <el-form-item label="What is your primary mode of transportation?" prop="modeOfTranspo" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
-                        <el-select v-model="ruleForm.modeOfTranspo" placeholder="Choose">
-                            <el-option value="Private Vehicle" label="Private Vehicle"></el-option>
-                            <el-option value="Carpool" label="Carpool"></el-option>
-                            <el-option value="Public Transportation" label="Public Transportation"></el-option>
-                        </el-select>
-                    </el-form-item>
-                </div>
-
-                <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-12">
-                    <el-form-item label="Will you book a hotel or any accommodation nearby?" prop="withAccommodation" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
-                        <el-radio-group v-model="ruleForm.withAccommodation">
-                            <el-radio label="yes">Yes</el-radio>
-                            <el-radio label="none">No</el-radio>
-                        </el-radio-group>
-                    </el-form-item>
-                </div>
             </div>
         </el-card>
 
@@ -177,11 +158,9 @@ export default {
                     this.data.registrationType = response.data.registration_type
                     this.data.localChurch = response.data.local_church
                     this.data.country = response.data.country
-                    this.data.awtaCardNumber = response.data.awta_card_number
+                    this.data.awtaCardNumber = response.data.lamp_card_number
                     this.data.category = response.data.category
                     this.data.attendingOption = this.ruleForm.attendingOption
-                    this.data.withAccommodation = this.ruleForm.withAccommodation
-                    this.data.modeOfTranspo = this.ruleForm.modeOfTranspo
                     this.data.priorityDates = this.ruleForm.priorityDates
                     this.data.withAwtaCard = 'yes'
                     this.isLoading = false
@@ -219,19 +198,11 @@ export default {
                 lastname: '',
                 localChurch: '',
                 attendingOption: '',
-                withAccommodation: '',
-                modeOfTranspo: '',
                 priorityDates: []
             },
             rules: {
                 registrationType: [
                     { required: true, message: 'Please select Registration Type', trigger: ['blur', 'change']}
-                ],
-                withAccommodation: [
-                    {required: true, message: 'Please select an answer', trigger: ['blur', 'change']}
-                ],
-                modeOfTranspo: [
-                    {required: true, message: 'Please select your mode of transportation', trigger: ['blur', 'change']}
                 ],
                 priorityDates: [
                     {required: true, message: 'Please select atleast one day', trigger: 'change'}
@@ -266,8 +237,6 @@ export default {
                 category: 'Adult',
                 attendingOption: '',
                 withAwtaCard: '',
-                withAccommodation: '',
-                modeOfTranspo: '',
                 priorityDates: [],
             },
             isLoading: false,
@@ -290,16 +259,12 @@ export default {
             deep: true
         },
         'ruleForm.attendingOption'(data) {
-            this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : ''
-            this.ruleForm.modeOfTranspo = ''
             this.ruleForm.priorityDates = []
         },
         'ruleForm.withAwtaCard'(data) {
             this.ruleForm.lastname =''
             this.ruleForm.localChurch =''
             this.ruleForm.attendingOption =''
-            this.ruleForm.withAccommodation =''
-            this.ruleForm.modeOfTranspo =''
             this.ruleForm.priorityDates =[]
         }
     },
@@ -323,8 +288,6 @@ export default {
                         this.data.registrationType = 'Member'
                         this.data.category = 'Adult'
                         this.data.attendingOption = this.ruleForm.attendingOption
-                        this.data.withAccommodation = 'none'
-                        this.data.modeOfTranspo = this.ruleForm.modeOfTranspo
                         this.data.priorityDates = this.ruleForm.priorityDates
 
                         this.$emit('next', this.data);  
@@ -333,7 +296,6 @@ export default {
                         this.data.registrationType = 'Guest'
                         this.data.category = 'Free'
                         this.data.attendingOption = 'Online'
-                        this.data.withAccommodation = 'none'
                         this.data.withAwtaCard = 'none'
 
                         this.$emit('next', this.data);  
@@ -358,8 +320,6 @@ export default {
             this.data.category = 'Adult'
             this.data.attendingOption = ''
             this.data.withAwtaCard = ''
-            this.data.withAccommodation = 'none'
-            this.data.modeOfTranspo = ''
             this.data.priorityDates = []
         },
         async handleRowClick(val) {
@@ -376,12 +336,10 @@ export default {
                     this.data.registrationType = val.registration_type
                     this.data.localChurch = val.local_church
                     this.data.country = val.country
-                    this.data.awtaCardNumber = val.awta_card_number
+                    this.data.awtaCardNumber = val.lamp_card_number
                     this.data.category = val.category
                     this.data.attendingOption = this.ruleForm.attendingOption
                     this.data.withAwtaCard = 'lost'
-                    this.data.withAccommodation = this.ruleForm.withAccommodation
-                    this.data.modeOfTranspo = this.ruleForm.modeOfTranspo
                     this.data.priorityDates = this.ruleForm.priorityDates
                     
                     this.submitForm()

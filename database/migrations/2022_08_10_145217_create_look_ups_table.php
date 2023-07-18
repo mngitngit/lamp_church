@@ -14,7 +14,8 @@ class CreateLookUpsTable extends Migration
     public function up()
     {
         Schema::create('look_ups', function (Blueprint $table) {
-            $table->string('awta_card_number')->primary();
+            $table->string('lamp_card_number')->primary();
+            $table->string('old_lamp_card_number')->nullable();
             $table->string('email')->nullable();
             $table->string('firstname');
             $table->string('lastname')->nullable();

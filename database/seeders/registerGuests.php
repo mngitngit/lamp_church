@@ -651,8 +651,6 @@ class registerGuests extends Seeder
                 'category' => $data['category'],
                 'attending_option' => 'Hybrid',
                 'with_awta_card' => 'none',
-                'with_accommodation' => 'none',
-                'mode_of_transpo' => 'Private Vehicle',
                 'priority_dates' => json_encode([])
             ]);
 
@@ -660,11 +658,12 @@ class registerGuests extends Seeder
         }
     }
 
-    function generateGuestId() {
-        $lastGuestId = Registration::select('uuid')->where('registration_type', RegistrationType::Guest)->orderBy('id','desc')->first();
-        
+    function generateGuestId()
+    {
+        $lastGuestId = Registration::select('uuid')->where('registration_type', RegistrationType::Guest)->orderBy('id', 'desc')->first();
+
         if ($lastGuestId) {
-            $number = last(explode("GUEST",$lastGuestId['uuid'])); //explode the string to get the number part, last is a laravel helper
+            $number = last(explode("GUEST", $lastGuestId['uuid'])); //explode the string to get the number part, last is a laravel helper
         } else {
             $number = 0;
         }

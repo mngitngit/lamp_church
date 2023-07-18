@@ -62,8 +62,6 @@ class RegisterGuests2 extends Seeder
                 'category' => $data['category'],
                 'attending_option' => 'Hybrid',
                 'with_awta_card' => 'none',
-                'with_accommodation' => 'none',
-                'mode_of_transpo' => 'Private Vehicle',
                 'priority_dates' => json_encode([]),
                 'can_book' => true
             ]);
@@ -72,15 +70,16 @@ class RegisterGuests2 extends Seeder
         }
     }
 
-    function generateGuestId() {
-        $lastGuestId = Registration::select('uuid')->where('registration_type', RegistrationType::Guest)->orderBy('id','desc')->first();
-        
+    function generateGuestId()
+    {
+        $lastGuestId = Registration::select('uuid')->where('registration_type', RegistrationType::Guest)->orderBy('id', 'desc')->first();
+
         if ($lastGuestId) {
-            $number = last(explode("GUEST",$lastGuestId['uuid'])); //explode the string to get the number part, last is a laravel helper
+            $number = last(explode("GUEST", $lastGuestId['uuid'])); //explode the string to get the number part, last is a laravel helper
         } else {
             $number = 0;
         }
-        
+
         $new = str_pad(intval($number) + 1, 4, 0, STR_PAD_LEFT); //increment the number by 1 and pad with 0 in left.
 
         $prefix = "GUEST";

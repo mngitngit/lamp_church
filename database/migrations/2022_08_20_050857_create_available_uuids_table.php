@@ -15,7 +15,7 @@ class CreateAvailableUuidsTable extends Migration
     {
         Schema::create('available_uuids', function (Blueprint $table) {
             $table->id();
-            $table->string('local_church');
+            $table->string('year');
             $table->char('prefix', 5);
             $table->integer('start');
             $table->integer('end');

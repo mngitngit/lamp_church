@@ -26,8 +26,6 @@ class Registration extends Model
         'other_details',
         'attending_option',
         'with_awta_card',
-        'with_accommodation',
-        'mode_of_transpo',
         'priority_dates',
         'can_book',
         'can_book_rate',

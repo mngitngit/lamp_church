@@ -6996,8 +6996,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         category: 'Adult',
         attendingOption: '',
         withAwtaCard: '',
-        withAccommodation: '',
-        modeOfTranspo: '',
         priorityDates: [],
         canBookDays: 0,
         rebookingLimit: 0
@@ -7033,16 +7031,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           message: 'Please select your attending option',
           trigger: ['blur', 'change']
         }],
-        withAccommodation: [{
-          required: true,
-          message: 'Please select an answer',
-          trigger: ['blur', 'change']
-        }],
-        modeOfTranspo: [{
-          required: true,
-          message: 'Please select your mode of transportation',
-          trigger: ['blur', 'change']
-        }],
         priorityDates: [{
           required: true,
           message: 'Please select atleast one day',
@@ -7056,16 +7044,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     'ruleForm.attendingOption': function ruleFormAttendingOption(newData, oldData) {
       if (oldData != newData && oldData != '' && newData != '') {
-        this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : '';
-        this.ruleForm.modeOfTranspo = '';
         this.ruleForm.priorityDates = [];
       }
     },
     'ruleForm.withAwtaCard': function ruleFormWithAwtaCard(newData, oldData) {
       if (oldData != newData && oldData != '' && newData != '') {
         this.ruleForm.attendingOption = '';
-        this.ruleForm.withAccommodation = '';
-        this.ruleForm.modeOfTranspo = '';
         this.ruleForm.priorityDates = [];
       }
     }
@@ -7084,8 +7068,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       category: this.registration.category,
       attendingOption: this.registration.attending_option,
       withAwtaCard: this.registration.with_awta_card,
-      withAccommodation: this.registration.with_accommodation,
-      modeOfTranspo: this.registration.mode_of_transpo,
       priorityDates: JSON.parse(this.registration.priority_dates)
     }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBook", this.registration.can_book === 1), _defineProperty(_this$ruleForm, "canBookDays", this.registration.can_book_days), _defineProperty(_this$ruleForm, "rebookingLimit", this.registration.rebooking_limit), _defineProperty(_this$ruleForm, "bookingRate", this.registration.can_book_rate), _this$ruleForm);
   },
@@ -7248,17 +7230,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             _this.data.registrationType = response.data.registration_type;
                             _this.data.localChurch = response.data.local_church;
                             _this.data.country = response.data.country;
-                            _this.data.awtaCardNumber = response.data.awta_card_number;
+                            _this.data.awtaCardNumber = response.data.lamp_card_number;
                             _this.data.category = response.data.category;
                             _this.data.attendingOption = _this.ruleForm.attendingOption;
-                            _this.data.withAccommodation = _this.ruleForm.withAccommodation;
-                            _this.data.modeOfTranspo = _this.ruleForm.modeOfTranspo;
                             _this.data.priorityDates = _this.ruleForm.priorityDates;
                             _this.data.withAwtaCard = 'yes';
                             _this.isLoading = false;
                             callback();
 
-                          case 16:
+                          case 14:
                           case "end":
                             return _context.stop();
                         }
@@ -7354,24 +7334,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         lastname: '',
         localChurch: '',
         attendingOption: '',
-        withAccommodation: '',
-        modeOfTranspo: '',
         priorityDates: []
       },
       rules: {
         registrationType: [{
           required: true,
           message: 'Please select Registration Type',
-          trigger: ['blur', 'change']
-        }],
-        withAccommodation: [{
-          required: true,
-          message: 'Please select an answer',
-          trigger: ['blur', 'change']
-        }],
-        modeOfTranspo: [{
-          required: true,
-          message: 'Please select your mode of transportation',
           trigger: ['blur', 'change']
         }],
         priorityDates: [{
@@ -7423,8 +7391,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         category: 'Adult',
         attendingOption: '',
         withAwtaCard: '',
-        withAccommodation: '',
-        modeOfTranspo: '',
         priorityDates: []
       },
       isLoading: false,
@@ -7447,16 +7413,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       deep: true
     },
     'ruleForm.attendingOption': function ruleFormAttendingOption(data) {
-      this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : '';
-      this.ruleForm.modeOfTranspo = '';
       this.ruleForm.priorityDates = [];
     },
     'ruleForm.withAwtaCard': function ruleFormWithAwtaCard(data) {
       this.ruleForm.lastname = '';
       this.ruleForm.localChurch = '';
       this.ruleForm.attendingOption = '';
-      this.ruleForm.withAccommodation = '';
-      this.ruleForm.modeOfTranspo = '';
       this.ruleForm.priorityDates = [];
     }
   },
@@ -7489,8 +7451,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.data.registrationType = 'Member';
                     _this2.data.category = 'Adult';
                     _this2.data.attendingOption = _this2.ruleForm.attendingOption;
-                    _this2.data.withAccommodation = 'none';
-                    _this2.data.modeOfTranspo = _this2.ruleForm.modeOfTranspo;
                     _this2.data.priorityDates = _this2.ruleForm.priorityDates;
 
                     _this2.$emit('next', _this2.data);
@@ -7498,7 +7458,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.data.registrationType = 'Guest';
                     _this2.data.category = 'Free';
                     _this2.data.attendingOption = 'Online';
-                    _this2.data.withAccommodation = 'none';
                     _this2.data.withAwtaCard = 'none';
 
                     _this2.$emit('next', _this2.data);
@@ -7538,8 +7497,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.data.category = 'Adult';
       this.data.attendingOption = '';
       this.data.withAwtaCard = '';
-      this.data.withAccommodation = 'none';
-      this.data.modeOfTranspo = '';
       this.data.priorityDates = [];
     },
     handleRowClick: function handleRowClick(val) {
@@ -7563,12 +7520,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this3.data.registrationType = val.registration_type;
                     _this3.data.localChurch = val.local_church;
                     _this3.data.country = val.country;
-                    _this3.data.awtaCardNumber = val.awta_card_number;
+                    _this3.data.awtaCardNumber = val.lamp_card_number;
                     _this3.data.category = val.category;
                     _this3.data.attendingOption = _this3.ruleForm.attendingOption;
                     _this3.data.withAwtaCard = 'lost';
-                    _this3.data.withAccommodation = _this3.ruleForm.withAccommodation;
-                    _this3.data.modeOfTranspo = _this3.ruleForm.modeOfTranspo;
                     _this3.data.priorityDates = _this3.ruleForm.priorityDates;
 
                     _this3.submitForm();
@@ -7731,8 +7686,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         category: 'Adult',
         attendingOption: '',
         withAwtaCard: '',
-        withAccommodation: '',
-        modeOfTranspo: '',
         priorityDates: []
       },
       rules: {
@@ -7769,16 +7722,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           message: 'Please select your attending option',
           trigger: 'blur'
         }],
-        withAccommodation: [{
-          required: true,
-          message: 'Please select an answer',
-          trigger: ['blur', 'change']
-        }],
-        modeOfTranspo: [{
-          required: true,
-          message: 'Please select your mode of transportation',
-          trigger: ['blur', 'change']
-        }],
         priorityDates: [{
           required: true,
           message: 'Please select atleast one day',
@@ -7791,8 +7734,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   watch: {
     'ruleForm.attendingOption': function ruleFormAttendingOption(data) {
-      this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : '';
-      this.ruleForm.modeOfTranspo = '';
       this.ruleForm.priorityDates = [];
     }
   },
@@ -7908,12 +7849,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.ruleForm.category = data.category;
                 _this4.ruleForm.attendingOption = data.attendingOption;
                 _this4.ruleForm.withAwtaCard = data.withAwtaCard;
-                _this4.ruleForm.withAccommodation = data.withAccommodation;
-                _this4.ruleForm.modeOfTranspo = data.modeOfTranspo;
                 _this4.ruleForm.priorityDates = data.priorityDates;
                 _this4.step = 2;
 
-              case 15:
+              case 13:
               case "end":
                 return _context6.stop();
             }
@@ -8337,106 +8276,7 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "What is your primary mode of transportation?",
-      prop: "modeOfTranspo",
-      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
-    }
-  }, [_c("el-select", {
-    attrs: {
-      placeholder: "Choose"
-    },
-    model: {
-      value: _vm.ruleForm.modeOfTranspo,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "modeOfTranspo", $$v);
-      },
-      expression: "ruleForm.modeOfTranspo"
-    }
-  }, [_c("el-option", {
-    attrs: {
-      value: "Private Vehicle",
-      label: "Private Vehicle"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      value: "Carpool",
-      label: "Carpool"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      value: "Public Transportation",
-      label: "Public Transportation"
-    }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "Will you book a hotel or any accommodation nearby?",
-      prop: "withAccommodation",
-      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
-    }
-  }, [_c("el-radio-group", {
-    model: {
-      value: _vm.ruleForm.withAccommodation,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "withAccommodation", $$v);
-      },
-      expression: "ruleForm.withAccommodation"
-    }
-  }, [_c("el-radio", {
-    attrs: {
-      label: "yes"
-    }
-  }, [_vm._v("Yes")]), _vm._v(" "), _c("el-radio", {
-    attrs: {
-      label: "none"
-    }
-  }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
-    staticClass: "mb-3",
-    attrs: {
-      shadow: "hover"
-    }
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)",
-      prop: "priorityDates",
-      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
-    }
-  }, [_c("el-checkbox-group", {
-    model: {
-      value: _vm.ruleForm.priorityDates,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "priorityDates", $$v);
-      },
-      expression: "ruleForm.priorityDates"
-    }
-  }, [_c("el-checkbox", {
-    attrs: {
-      label: "December 27",
-      name: "priorityDates"
-    }
-  }), _vm._v(" "), _c("el-checkbox", {
-    attrs: {
-      label: "December 28",
-      name: "priorityDates"
-    }
-  }), _vm._v(" "), _c("el-checkbox", {
-    attrs: {
-      label: "December 29",
-      name: "priorityDates"
-    }
-  }), _vm._v(" "), _c("el-checkbox", {
-    attrs: {
-      label: "December 30",
-      name: "priorityDates"
-    }
-  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" && _vm.permissions.can_edit_delegate_config ? _c("el-card", {
+  })], 1)], 1)], 1)])]), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" && _vm.permissions.can_edit_delegate_config ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
@@ -8693,65 +8533,7 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "What is your primary mode of transportation?",
-      prop: "modeOfTranspo",
-      required: (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
-    }
-  }, [_c("el-select", {
-    attrs: {
-      placeholder: "Choose"
-    },
-    model: {
-      value: _vm.ruleForm.modeOfTranspo,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "modeOfTranspo", $$v);
-      },
-      expression: "ruleForm.modeOfTranspo"
-    }
-  }, [_c("el-option", {
-    attrs: {
-      value: "Private Vehicle",
-      label: "Private Vehicle"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      value: "Carpool",
-      label: "Carpool"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      value: "Public Transportation",
-      label: "Public Transportation"
-    }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "Will you book a hotel or any accommodation nearby?",
-      prop: "withAccommodation",
-      required: (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
-    }
-  }, [_c("el-radio-group", {
-    model: {
-      value: _vm.ruleForm.withAccommodation,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "withAccommodation", $$v);
-      },
-      expression: "ruleForm.withAccommodation"
-    }
-  }, [_c("el-radio", {
-    attrs: {
-      label: "yes"
-    }
-  }, [_vm._v("Yes")]), _vm._v(" "), _c("el-radio", {
-    attrs: {
-      label: "none"
-    }
-  }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
+  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "always"
@@ -9253,65 +9035,7 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "What is your primary mode of transportation?",
-      prop: "modeOfTranspo",
-      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
-    }
-  }, [_c("el-select", {
-    attrs: {
-      placeholder: "Choose"
-    },
-    model: {
-      value: _vm.ruleForm.modeOfTranspo,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "modeOfTranspo", $$v);
-      },
-      expression: "ruleForm.modeOfTranspo"
-    }
-  }, [_c("el-option", {
-    attrs: {
-      value: "Private Vehicle",
-      label: "Private Vehicle"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      value: "Carpool",
-      label: "Carpool"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      value: "Public Transportation",
-      label: "Public Transportation"
-    }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "Will you book a hotel or any accommodation nearby?",
-      prop: "withAccommodation",
-      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
-    }
-  }, [_c("el-radio-group", {
-    model: {
-      value: _vm.ruleForm.withAccommodation,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "withAccommodation", $$v);
-      },
-      expression: "ruleForm.withAccommodation"
-    }
-  }, [_c("el-radio", {
-    attrs: {
-      label: "yes"
-    }
-  }, [_vm._v("Yes")]), _vm._v(" "), _c("el-radio", {
-    attrs: {
-      label: "none"
-    }
-  }, [_vm._v("No")])], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
+  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "always"

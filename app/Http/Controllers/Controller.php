@@ -13,7 +13,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    function generateRandomString($length = 10) {
+    function generateRandomString($length = 10)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         $charactersLength = strlen($characters);
@@ -25,11 +26,12 @@ class Controller extends BaseController
         return $randomString;
     }
 
-    function generateGuestId() {
-        $lastGuestId = Registration::select('uuid')->where('registration_type', RegistrationType::Guest)->orderBy('id','desc')->first();
-        
+    function generateGuestId()
+    {
+        $lastGuestId = Registration::select('uuid')->where('registration_type', RegistrationType::Guest)->orderBy('id', 'desc')->first();
+
         if ($lastGuestId) {
-            $number = last(explode("GUEST",$lastGuestId['uuid'])); //explode the string to get the number part, last is a laravel helper
+            $number = last(explode("GUEST", $lastGuestId['uuid'])); //explode the string to get the number part, last is a laravel helper
         } else {
             $number = 0;
         }
@@ -40,7 +42,8 @@ class Controller extends BaseController
         return $prefix . $new;
     }
 
-    function updatePaymentStatus($uuid, $auto_enable_booking) {
+    function updatePaymentStatus($uuid, $auto_enable_booking)
+    {
         $registration = Registration::where('uuid', $uuid)->first();
 
         $balance = floatval($registration->rate);
@@ -49,7 +52,7 @@ class Controller extends BaseController
 
         $totalAmountPaid = floatval(array_sum(array_column($registration->payments->toArray(), 'amount')));
 
-        $balance-= $totalAmountPaid;
+        $balance -= $totalAmountPaid;
 
         $parameters = array();
 

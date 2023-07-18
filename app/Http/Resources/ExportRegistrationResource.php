@@ -16,13 +16,13 @@ class ExportRegistrationResource extends JsonResource
     {
         $booked = $this->bookings()->with('slot')->get()->toArray();
 
-        $booked_dates = array_map(function($date) {
+        $booked_dates = array_map(function ($date) {
             return $date['slot']['event_date'];
         }, $booked);
 
         $attendances = $this->attendances()->with('slot')->get()->toArray();
 
-        $attended_dates = array_map(function($date) {
+        $attended_dates = array_map(function ($date) {
             return $date['slot']['event_date'];
         }, $attendances);
 
@@ -39,8 +39,6 @@ class ExportRegistrationResource extends JsonResource
             'category' => $this->category,
             'attending_option' => $this->attending_option,
             'with_awta_card' => $this->with_awta_card,
-            'with_accommodation' => $this->with_accommodation,
-            'mode_of_transpo' => $this->mode_of_transpo,
             'priority_dates' => implode(', ', json_decode($this->priority_dates)),
             'booked_dates' => implode(', ', $booked_dates),
             'attended_dates' => implode(',', $attended_dates),

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             RatesTableSeeder::class,
             AvailableUUIDsTableSeeder::class,
             LookUpTableSeeder::class,
-            UserTableSeeder::class
+            UserTableSeeder::class,
             PermissionsTableSeeder::class,
             SlotsTableSeeder::class
         ]);

@@ -29,8 +29,6 @@ class CreateRegistrationsTable extends Migration
             $table->decimal('rate', 9, 3)->default(0.000);
             $table->string('payment_status')->default('Unsettled');
             $table->string('with_awta_card')->default('none');
-            $table->string('with_accommodation')->default('none');
-            $table->string('mode_of_transpo')->nullable();
             $table->json('priority_dates')->nullable();
             $table->timestamps();
         });

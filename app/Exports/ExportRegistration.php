@@ -10,31 +10,29 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class ExportRegistration implements FromCollection, WithHeadings
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
 
         return ExportRegistrationResource::collection(
-                Registration::select(array(
-                    'created_at',
-                    'uuid',
-                    'email',
-                    'firstname',
-                    'lastname',
-                    'facebook_name',
-                    'registration_type',
-                    'local_church',
-                    'country',
-                    'category',
-                    'attending_option',
-                    'with_awta_card',
-                    'with_accommodation',
-                    'mode_of_transpo',
-                    'priority_dates',
-                    'rate',
-                    'payment_status',
-                ))
+            Registration::select(array(
+                'created_at',
+                'uuid',
+                'email',
+                'firstname',
+                'lastname',
+                'facebook_name',
+                'registration_type',
+                'local_church',
+                'country',
+                'category',
+                'attending_option',
+                'with_awta_card',
+                'priority_dates',
+                'rate',
+                'payment_status',
+            ))
                 ->withSum('payments', 'amount')
                 ->get()
         );
@@ -55,8 +53,6 @@ class ExportRegistration implements FromCollection, WithHeadings
             'Category',
             'Attending Option',
             'with AWTA Card number?',
-            'with Accommodation?',
-            'Mode of Transportation',
             'Preffered Dates for',
             'Booked Dates',
             'Attended Dates',

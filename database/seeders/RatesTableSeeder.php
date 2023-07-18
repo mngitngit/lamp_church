@@ -19,7 +19,7 @@ class RatesTableSeeder extends Seeder
                 'category' => 'Adult',
                 'attending_option' => 'Hybrid',
                 'description' => 'Member (Hybrid)',
-                'rate' => 1000,
+                'rate' => 900,
                 'can_book_rate' => 500
             ], [
                 'category' => 'Adult',

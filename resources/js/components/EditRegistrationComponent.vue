@@ -78,38 +78,6 @@
                         </el-select>
                     </el-form-item>
                 </div>
-
-                <div v-if="ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
-                    <el-form-item label="What is your primary mode of transportation?" prop="modeOfTranspo" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
-                        <el-select v-model="ruleForm.modeOfTranspo" placeholder="Choose">
-                            <el-option value="Private Vehicle" label="Private Vehicle"></el-option>
-                            <el-option value="Carpool" label="Carpool"></el-option>
-                            <el-option value="Public Transportation" label="Public Transportation"></el-option>
-                        </el-select>
-                    </el-form-item>
-                </div>
-
-                <div v-if="ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
-                    <el-form-item label="Will you book a hotel or any accommodation nearby?" prop="withAccommodation" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
-                        <el-radio-group v-model="ruleForm.withAccommodation">
-                            <el-radio label="yes">Yes</el-radio>
-                            <el-radio label="none">No</el-radio>
-                        </el-radio-group>
-                    </el-form-item>
-                </div>
-            </div>
-        </el-card>
-
-        <el-card v-if="ruleForm.attendingOption == 'Hybrid'" shadow="hover" class="mb-3">
-            <div class="col-md-12">
-                <el-form-item label="In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)" prop="priorityDates" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
-                    <el-checkbox-group v-model="ruleForm.priorityDates">
-                    <el-checkbox label="December 27" name="priorityDates"></el-checkbox>
-                    <el-checkbox label="December 28" name="priorityDates"></el-checkbox>
-                    <el-checkbox label="December 29" name="priorityDates"></el-checkbox>
-                    <el-checkbox label="December 30" name="priorityDates"></el-checkbox>
-                    </el-checkbox-group>
-                </el-form-item>
             </div>
         </el-card>
 
@@ -176,8 +144,6 @@ export default {
                 category: 'Adult',
                 attendingOption: '',
                 withAwtaCard: '',
-                withAccommodation: '',
-                modeOfTranspo: '',
                 priorityDates: [],
                 canBookDays: 0,
                 rebookingLimit: 0,
@@ -204,12 +170,6 @@ export default {
                 attendingOption: [
                     { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
                 ],
-                withAccommodation: [
-                    {required: true, message: 'Please select an answer', trigger: ['blur', 'change']}
-                ],
-                modeOfTranspo: [
-                    {required: true, message: 'Please select your mode of transportation', trigger: ['blur', 'change']}
-                ],
                 priorityDates: [
                     {required: true, message: 'Please select atleast one day', trigger: 'change'}
                 ],
@@ -221,16 +181,12 @@ export default {
     watch: {
         'ruleForm.attendingOption'(newData, oldData) {
             if (oldData != newData && oldData != '' && newData != '') {
-                this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : ''
-                this.ruleForm.modeOfTranspo = ''
                 this.ruleForm.priorityDates = []
             }
         },
         'ruleForm.withAwtaCard'(newData, oldData) {
             if (oldData != newData && oldData != '' && newData != '') {
                 this.ruleForm.attendingOption =''
-                this.ruleForm.withAccommodation =''
-                this.ruleForm.modeOfTranspo =''
                 this.ruleForm.priorityDates =[]
             }
         }
@@ -247,8 +203,6 @@ export default {
                 category: this.registration.category,
                 attendingOption: this.registration.attending_option,
                 withAwtaCard: this.registration.with_awta_card,
-                withAccommodation: this.registration.with_accommodation,
-                modeOfTranspo: this.registration.mode_of_transpo,
                 priorityDates: JSON.parse(this.registration.priority_dates),
                 category: this.registration.category,
                 canBook: this.registration.can_book === 1,

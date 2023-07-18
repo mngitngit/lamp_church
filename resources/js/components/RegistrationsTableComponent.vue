@@ -90,18 +90,6 @@
       width="130">
     </el-table-column>
     <el-table-column
-      prop="with_accommodation"
-      label="with accommodation?"
-      align="center"
-      width="130">
-    </el-table-column>
-    <el-table-column
-      prop="mode_of_transpo"
-      label="Mode of transpo"
-      align="center"
-      width="130">
-    </el-table-column>
-    <el-table-column
       label="Preferred dates"
       align="center"
       width="150">

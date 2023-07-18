@@ -86,25 +86,6 @@
                                     </el-select>
                                 </el-form-item>
                             </div>
-
-                            <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-6">
-                                <el-form-item label="What is your primary mode of transportation?" prop="modeOfTranspo" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
-                                    <el-select v-model="ruleForm.modeOfTranspo" placeholder="Choose">
-                                        <el-option value="Private Vehicle" label="Private Vehicle"></el-option>
-                                        <el-option value="Carpool" label="Carpool"></el-option>
-                                        <el-option value="Public Transportation" label="Public Transportation"></el-option>
-                                    </el-select>
-                                </el-form-item>
-                            </div>
-
-                            <div v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" class="col-md-12">
-                                <el-form-item label="Will you book a hotel or any accommodation nearby?" prop="withAccommodation" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
-                                    <el-radio-group v-model="ruleForm.withAccommodation">
-                                        <el-radio label="yes">Yes</el-radio>
-                                        <el-radio label="none">No</el-radio>
-                                    </el-radio-group>
-                                </el-form-item>
-                            </div>
                         </div>
                     </el-card>
 
@@ -181,8 +162,6 @@
                     category: 'Adult',
                     attendingOption: '',
                     withAwtaCard: '',
-                    withAccommodation: '',
-                    modeOfTranspo: '',
                     priorityDates: []
                 },
                 rules: {
@@ -205,12 +184,6 @@
                     attendingOption: [
                         { required: true, message: 'Please select your attending option', trigger: 'blur'},
                     ],
-                    withAccommodation: [
-                        {required: true, message: 'Please select an answer', trigger: ['blur', 'change']}
-                    ],
-                    modeOfTranspo: [
-                        {required: true, message: 'Please select your mode of transportation', trigger: ['blur', 'change']}
-                    ],
                     priorityDates: [
                         {required: true, message: 'Please select atleast one day', trigger: 'change'}
                     ],
@@ -221,8 +194,6 @@
         },
         watch: {
             'ruleForm.attendingOption'(data) {
-                this.ruleForm.withAccommodation = this.ruleForm.attendingOption === 'Online' ? 'none' : ''
-                this.ruleForm.modeOfTranspo = ''
                 this.ruleForm.priorityDates = []
             }
         },
@@ -275,8 +246,6 @@
                 this.ruleForm.category = data.category
                 this.ruleForm.attendingOption = data.attendingOption
                 this.ruleForm.withAwtaCard = data.withAwtaCard
-                this.ruleForm.withAccommodation = data.withAccommodation
-                this.ruleForm.modeOfTranspo = data.modeOfTranspo
                 this.ruleForm.priorityDates = data.priorityDates
                 this.step = 2
             }
