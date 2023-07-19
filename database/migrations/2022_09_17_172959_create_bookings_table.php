@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\BookingStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,6 +21,7 @@ class CreateBookingsTable extends Migration
             $table->foreign('registration_uuid')->references('uuid')->on('registrations')->onDelete('cascade');
             $table->foreign('slot_id')->references('id')->on('slots')->onDelete('cascade');
             $table->string('local_church');
+            $table->string('status')->default(BookingStatus::Pending);
             $table->timestamps();
         });
     }

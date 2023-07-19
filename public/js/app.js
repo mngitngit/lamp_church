@@ -6996,7 +6996,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         category: 'Adult',
         attendingOption: '',
         withAwtaCard: '',
-        priorityDates: [],
         canBookDays: 0,
         rebookingLimit: 0
       }, _defineProperty(_ruleForm, "category", ''), _defineProperty(_ruleForm, "canBook", false), _defineProperty(_ruleForm, "bookingRate", 0), _ruleForm),
@@ -7030,11 +7029,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           required: true,
           message: 'Please select your attending option',
           trigger: ['blur', 'change']
-        }],
-        priorityDates: [{
-          required: true,
-          message: 'Please select atleast one day',
-          trigger: 'change'
         }]
       },
       countries: this.$allCountries,
@@ -7042,15 +7036,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   watch: {
-    'ruleForm.attendingOption': function ruleFormAttendingOption(newData, oldData) {
-      if (oldData != newData && oldData != '' && newData != '') {
-        this.ruleForm.priorityDates = [];
-      }
-    },
     'ruleForm.withAwtaCard': function ruleFormWithAwtaCard(newData, oldData) {
       if (oldData != newData && oldData != '' && newData != '') {
         this.ruleForm.attendingOption = '';
-        this.ruleForm.priorityDates = [];
       }
     }
   },
@@ -7067,8 +7055,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       country: this.registration.country,
       category: this.registration.category,
       attendingOption: this.registration.attending_option,
-      withAwtaCard: this.registration.with_awta_card,
-      priorityDates: JSON.parse(this.registration.priority_dates)
+      withAwtaCard: this.registration.with_awta_card
     }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBook", this.registration.can_book === 1), _defineProperty(_this$ruleForm, "canBookDays", this.registration.can_book_days), _defineProperty(_this$ruleForm, "rebookingLimit", this.registration.rebooking_limit), _defineProperty(_this$ruleForm, "bookingRate", this.registration.can_book_rate), _this$ruleForm);
   },
   methods: {
@@ -7233,12 +7220,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             _this.data.awtaCardNumber = response.data.lamp_card_number;
                             _this.data.category = response.data.category;
                             _this.data.attendingOption = _this.ruleForm.attendingOption;
-                            _this.data.priorityDates = _this.ruleForm.priorityDates;
                             _this.data.withAwtaCard = 'yes';
                             _this.isLoading = false;
                             callback();
 
-                          case 14:
+                          case 13:
                           case "end":
                             return _context.stop();
                         }
@@ -7333,19 +7319,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         withAwtaCard: '',
         lastname: '',
         localChurch: '',
-        attendingOption: '',
-        priorityDates: []
+        attendingOption: ''
       },
       rules: {
         registrationType: [{
           required: true,
           message: 'Please select Registration Type',
           trigger: ['blur', 'change']
-        }],
-        priorityDates: [{
-          required: true,
-          message: 'Please select atleast one day',
-          trigger: 'change'
         }],
         withAwtaCard: [{
           required: true,
@@ -7390,8 +7370,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         awtaCardNumber: '',
         category: 'Adult',
         attendingOption: '',
-        withAwtaCard: '',
-        priorityDates: []
+        withAwtaCard: ''
       },
       isLoading: false,
       closeRegForMember: false
@@ -7412,14 +7391,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       deep: true
     },
-    'ruleForm.attendingOption': function ruleFormAttendingOption(data) {
-      this.ruleForm.priorityDates = [];
-    },
     'ruleForm.withAwtaCard': function ruleFormWithAwtaCard(data) {
       this.ruleForm.lastname = '';
       this.ruleForm.localChurch = '';
       this.ruleForm.attendingOption = '';
-      this.ruleForm.priorityDates = [];
     }
   },
   mounted: function mounted() {},
@@ -7451,7 +7426,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.data.registrationType = 'Member';
                     _this2.data.category = 'Adult';
                     _this2.data.attendingOption = _this2.ruleForm.attendingOption;
-                    _this2.data.priorityDates = _this2.ruleForm.priorityDates;
 
                     _this2.$emit('next', _this2.data);
                   } else if (_this2.ruleForm.registrationType === 'Guest') {
@@ -7497,7 +7471,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.data.category = 'Adult';
       this.data.attendingOption = '';
       this.data.withAwtaCard = '';
-      this.data.priorityDates = [];
     },
     handleRowClick: function handleRowClick(val) {
       var _this3 = this;
@@ -7524,7 +7497,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this3.data.category = val.category;
                     _this3.data.attendingOption = _this3.ruleForm.attendingOption;
                     _this3.data.withAwtaCard = 'lost';
-                    _this3.data.priorityDates = _this3.ruleForm.priorityDates;
 
                     _this3.submitForm();
                   });
@@ -7685,8 +7657,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         awtaCardNumber: '',
         category: 'Adult',
         attendingOption: '',
-        withAwtaCard: '',
-        priorityDates: []
+        withAwtaCard: ''
       },
       rules: {
         firstName: [{
@@ -7721,21 +7692,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           required: true,
           message: 'Please select your attending option',
           trigger: 'blur'
-        }],
-        priorityDates: [{
-          required: true,
-          message: 'Please select atleast one day',
-          trigger: 'change'
         }]
       },
       step: 1,
       countries: this.$allCountries
     };
-  },
-  watch: {
-    'ruleForm.attendingOption': function ruleFormAttendingOption(data) {
-      this.ruleForm.priorityDates = [];
-    }
   },
   methods: {
     submitForm: function submitForm(formName) {
@@ -7849,10 +7810,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.ruleForm.category = data.category;
                 _this4.ruleForm.attendingOption = data.attendingOption;
                 _this4.ruleForm.withAwtaCard = data.withAwtaCard;
-                _this4.ruleForm.priorityDates = data.priorityDates;
                 _this4.step = 2;
 
-              case 13:
+              case 12:
               case "end":
                 return _context6.stop();
             }
@@ -8533,48 +8493,7 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
-    staticClass: "mb-3",
-    attrs: {
-      shadow: "always"
-    }
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)",
-      prop: "priorityDates",
-      required: (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
-    }
-  }, [_c("el-checkbox-group", {
-    model: {
-      value: _vm.ruleForm.priorityDates,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "priorityDates", $$v);
-      },
-      expression: "ruleForm.priorityDates"
-    }
-  }, [_c("el-checkbox", {
-    attrs: {
-      label: "December 27",
-      name: "priorityDates"
-    }
-  }), _vm._v(" "), _c("el-checkbox", {
-    attrs: {
-      label: "December 28",
-      name: "priorityDates"
-    }
-  }), _vm._v(" "), _c("el-checkbox", {
-    attrs: {
-      label: "December 29",
-      name: "priorityDates"
-    }
-  }), _vm._v(" "), _c("el-checkbox", {
-    attrs: {
-      label: "December 30",
-      name: "priorityDates"
-    }
-  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
+  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "always"
@@ -9035,48 +8954,7 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Member" && _vm.ruleForm.attendingOption == "Hybrid" ? _c("el-card", {
-    staticClass: "mb-3",
-    attrs: {
-      shadow: "always"
-    }
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)",
-      prop: "priorityDates",
-      required: _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.attendingOption === "Hybrid"
-    }
-  }, [_c("el-checkbox-group", {
-    model: {
-      value: _vm.ruleForm.priorityDates,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "priorityDates", $$v);
-      },
-      expression: "ruleForm.priorityDates"
-    }
-  }, [_c("el-checkbox", {
-    attrs: {
-      label: "December 27",
-      name: "priorityDates"
-    }
-  }), _vm._v(" "), _c("el-checkbox", {
-    attrs: {
-      label: "December 28",
-      name: "priorityDates"
-    }
-  }), _vm._v(" "), _c("el-checkbox", {
-    attrs: {
-      label: "December 29",
-      name: "priorityDates"
-    }
-  }), _vm._v(" "), _c("el-checkbox", {
-    attrs: {
-      label: "December 30",
-      name: "priorityDates"
-    }
-  })], 1)], 1)], 1)]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
+  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {

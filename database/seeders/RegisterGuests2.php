@@ -62,7 +62,6 @@ class RegisterGuests2 extends Seeder
                 'category' => $data['category'],
                 'attending_option' => 'Hybrid',
                 'with_awta_card' => 'none',
-                'priority_dates' => json_encode([]),
                 'can_book' => true
             ]);
 

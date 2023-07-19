@@ -51,19 +51,6 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="always" class="mb-3                                                                                                                               ">
-            <div class="col-md-12">
-                <el-form-item label="In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)" prop="priorityDates" :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'lost') && ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
-                    <el-checkbox-group v-model="ruleForm.priorityDates">
-                    <el-checkbox label="December 27" name="priorityDates"></el-checkbox>
-                    <el-checkbox label="December 28" name="priorityDates"></el-checkbox>
-                    <el-checkbox label="December 29" name="priorityDates"></el-checkbox>
-                    <el-checkbox label="December 30" name="priorityDates"></el-checkbox>
-                    </el-checkbox-group>
-                </el-form-item>
-            </div>
-        </el-card>
-
         <el-card v-if="ruleForm.withAwtaCard === 'yes' && ruleForm.registrationType === 'Member'" shadow="always" class="mb-3">
             <div class="row">
                 <div class="col-md-6">
@@ -161,7 +148,6 @@ export default {
                     this.data.awtaCardNumber = response.data.lamp_card_number
                     this.data.category = response.data.category
                     this.data.attendingOption = this.ruleForm.attendingOption
-                    this.data.priorityDates = this.ruleForm.priorityDates
                     this.data.withAwtaCard = 'yes'
                     this.isLoading = false
                     callback();
@@ -198,14 +184,10 @@ export default {
                 lastname: '',
                 localChurch: '',
                 attendingOption: '',
-                priorityDates: []
             },
             rules: {
                 registrationType: [
                     { required: true, message: 'Please select Registration Type', trigger: ['blur', 'change']}
-                ],
-                priorityDates: [
-                    {required: true, message: 'Please select atleast one day', trigger: 'change'}
                 ],
                 withAwtaCard: [
                     { required: true, message: 'Please select an answer', trigger: ['blur', 'change']}
@@ -237,7 +219,6 @@ export default {
                 category: 'Adult',
                 attendingOption: '',
                 withAwtaCard: '',
-                priorityDates: [],
             },
             isLoading: false,
             closeRegForMember: false
@@ -258,14 +239,10 @@ export default {
             },
             deep: true
         },
-        'ruleForm.attendingOption'(data) {
-            this.ruleForm.priorityDates = []
-        },
         'ruleForm.withAwtaCard'(data) {
             this.ruleForm.lastname =''
             this.ruleForm.localChurch =''
             this.ruleForm.attendingOption =''
-            this.ruleForm.priorityDates =[]
         }
     },
     mounted() {},
@@ -288,7 +265,6 @@ export default {
                         this.data.registrationType = 'Member'
                         this.data.category = 'Adult'
                         this.data.attendingOption = this.ruleForm.attendingOption
-                        this.data.priorityDates = this.ruleForm.priorityDates
 
                         this.$emit('next', this.data);  
                     }
@@ -320,7 +296,6 @@ export default {
             this.data.category = 'Adult'
             this.data.attendingOption = ''
             this.data.withAwtaCard = ''
-            this.data.priorityDates = []
         },
         async handleRowClick(val) {
             if (!val.is_registered) {
@@ -340,7 +315,6 @@ export default {
                     this.data.category = val.category
                     this.data.attendingOption = this.ruleForm.attendingOption
                     this.data.withAwtaCard = 'lost'
-                    this.data.priorityDates = this.ruleForm.priorityDates
                     
                     this.submitForm()
                 })

@@ -89,19 +89,6 @@
                         </div>
                     </el-card>
 
-                    <el-card v-if="ruleForm.registrationType == 'Member' && ruleForm.attendingOption == 'Hybrid'" shadow="always" class="mb-3">
-                        <div class="col-md-12">
-                            <el-form-item label="In case optimization or scheduling is needed due to limited seating capacity, What day/s are you most likely to attend? (Choose all that apply)" prop="priorityDates" :required="ruleForm.registrationType === 'Member' && ruleForm.attendingOption === 'Hybrid'">
-                                <el-checkbox-group v-model="ruleForm.priorityDates">
-                                <el-checkbox label="December 27" name="priorityDates"></el-checkbox>
-                                <el-checkbox label="December 28" name="priorityDates"></el-checkbox>
-                                <el-checkbox label="December 29" name="priorityDates"></el-checkbox>
-                                <el-checkbox label="December 30" name="priorityDates"></el-checkbox>
-                                </el-checkbox-group>
-                            </el-form-item>
-                        </div>
-                    </el-card>
-
                     <el-row>
                         <div class="col-md-12">
                             <el-button type="warning" @click="submitForm('ruleForm')">Submit</el-button>
@@ -162,7 +149,6 @@
                     category: 'Adult',
                     attendingOption: '',
                     withAwtaCard: '',
-                    priorityDates: []
                 },
                 rules: {
                     firstName: [
@@ -184,17 +170,9 @@
                     attendingOption: [
                         { required: true, message: 'Please select your attending option', trigger: 'blur'},
                     ],
-                    priorityDates: [
-                        {required: true, message: 'Please select atleast one day', trigger: 'change'}
-                    ],
                 },
                 step: 1,
                 countries: this.$allCountries
-            }
-        },
-        watch: {
-            'ruleForm.attendingOption'(data) {
-                this.ruleForm.priorityDates = []
             }
         },
         methods: {
@@ -246,7 +224,6 @@
                 this.ruleForm.category = data.category
                 this.ruleForm.attendingOption = data.attendingOption
                 this.ruleForm.withAwtaCard = data.withAwtaCard
-                this.ruleForm.priorityDates = data.priorityDates
                 this.step = 2
             }
         }

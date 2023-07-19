@@ -144,7 +144,6 @@ export default {
                 category: 'Adult',
                 attendingOption: '',
                 withAwtaCard: '',
-                priorityDates: [],
                 canBookDays: 0,
                 rebookingLimit: 0,
                 category: '',
@@ -169,25 +168,16 @@ export default {
                 ],
                 attendingOption: [
                     { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
-                ],
-                priorityDates: [
-                    {required: true, message: 'Please select atleast one day', trigger: 'change'}
-                ],
+                ]
             },
             countries: this.$allCountries,
             permissions: window.auth_user.permissions
         }
     },
     watch: {
-        'ruleForm.attendingOption'(newData, oldData) {
-            if (oldData != newData && oldData != '' && newData != '') {
-                this.ruleForm.priorityDates = []
-            }
-        },
         'ruleForm.withAwtaCard'(newData, oldData) {
             if (oldData != newData && oldData != '' && newData != '') {
                 this.ruleForm.attendingOption =''
-                this.ruleForm.priorityDates =[]
             }
         }
     },
@@ -203,7 +193,6 @@ export default {
                 category: this.registration.category,
                 attendingOption: this.registration.attending_option,
                 withAwtaCard: this.registration.with_awta_card,
-                priorityDates: JSON.parse(this.registration.priority_dates),
                 category: this.registration.category,
                 canBook: this.registration.can_book === 1,
                 canBookDays: this.registration.can_book_days,

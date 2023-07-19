@@ -651,7 +651,6 @@ class registerGuests extends Seeder
                 'category' => $data['category'],
                 'attending_option' => 'Hybrid',
                 'with_awta_card' => 'none',
-                'priority_dates' => json_encode([])
             ]);
 
             $this->command->info('--------------- done ----------------');
