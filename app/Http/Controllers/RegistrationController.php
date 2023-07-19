@@ -11,6 +11,7 @@ use App\Models\Payment;
 use App\Models\Rates;
 use App\Models\RebookingActivities;
 use App\Models\Registration;
+use App\Models\Slots;
 use App\Models\UUID;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -50,7 +51,9 @@ class RegistrationController extends Controller
      */
     public function create()
     {
-        return view('registration.create');
+        return view('registration.create', [
+            'slots' => Slots::where('registration_type', 'Member')->get()
+        ]);
     }
 
     /**

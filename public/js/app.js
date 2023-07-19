@@ -6952,6 +6952,78 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    slots: {
+      required: false,
+      type: Array
+    },
+    can_book_days: {
+      required: true,
+      type: Number
+    }
+  },
+  data: function data() {
+    return {
+      dates: [],
+      ruleForm: {
+        booked: []
+      },
+      rules: {
+        booked: [{
+          required: true,
+          message: 'Please select atleast one day',
+          trigger: ['blur', 'change']
+        }]
+      },
+      max: 2
+    };
+  },
+  mounted: function mounted() {
+    this.dates = this.slots.map(function (_ref) {
+      var event_date = _ref.event_date,
+          id = _ref.id,
+          available = _ref.available,
+          seat_count = _ref.seat_count;
+      return {
+        event_date: event_date,
+        id: id,
+        available: available,
+        seat_count: seat_count
+      };
+    });
+    this.ruleForm.booked = this.booked_dates.map(function (date) {
+      return date.slot.id;
+    });
+    this.max = this.can_book_days;
+  },
+  methods: {
+    onChangeProcessed: function onChangeProcessed(isChecked, id) {
+      var result;
+
+      for (var i = 0, len = this.dates.length; i < len; i++) {
+        if (this.dates[i]['id'] === id) {
+          this.dates[i]['available'] += isChecked ? -1 : 1;
+          break;
+        }
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js& ***!
@@ -7183,6 +7255,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    slots: {
+      required: false,
+      type: Array
+    }
+  },
   data: function data() {
     var _this = this;
 
@@ -7574,6 +7652,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    slots: {
+      required: false,
+      type: Array
+    }
+  },
   data: function data() {
     var _this = this;
 
@@ -7931,6 +8015,86 @@ var render = function render() {
   }, [_vm._v("Registration Reference")]), _vm._v(" "), _c("h3", {
     staticClass: "d-block"
   }, [_vm._v(_vm._s(_vm.uuid))])]);
+};
+
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("el-form", {
+    ref: "ruleForm",
+    attrs: {
+      model: _vm.ruleForm,
+      rules: _vm.rules,
+      "label-width": "160px"
+    }
+  }, [_c("div", {
+    staticClass: "card"
+  }, [_c("div", {
+    staticClass: "card-body pt-0"
+  }, [_c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("el-form-item", {
+    staticClass: "check-dates",
+    attrs: {
+      label: "Choose the dates you would like to attend physically. Please select at least 1 day, maximum of ".concat(_vm.max, " days."),
+      prop: "booked",
+      required: ""
+    }
+  }, [_c("el-checkbox-group", {
+    attrs: {
+      size: "small"
+    },
+    model: {
+      value: _vm.ruleForm.booked,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "booked", $$v);
+      },
+      expression: "ruleForm.booked"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, _vm._l(_vm.dates, function (date, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "col-md-3 text-center"
+    }, [_c("el-badge", {
+      staticClass: "item my-3 c-booking-date",
+      attrs: {
+        value: "".concat(date.available, " left!"),
+        type: date.available <= 10 ? "danger" : date.available <= 100 ? "warning" : "success"
+      }
+    }, [_c("el-checkbox", {
+      attrs: {
+        label: date.id,
+        name: "booked",
+        border: ""
+      },
+      on: {
+        change: function change($event) {
+          return _vm.onChangeProcessed($event, date.id);
+        }
+      }
+    }, [_vm.ruleForm.booked.includes(date.id) ? _c("span", [_vm._v("✓ ")]) : _vm._e(), _vm._v(_vm._s(date.event_date) + "\n                                    ")])], 1)], 1);
+  }), 0)])], 1)], 1)])])]);
 };
 
 var staticRenderFns = [];
@@ -8449,7 +8613,7 @@ var render = function render() {
       label: "Yes, and I still have it.",
       value: "yes"
     }
-  })], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "lost") && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
+  })], 1)], 1)], 1) : _vm._e()])]), _vm._v(" "), _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "always"
@@ -8458,7 +8622,7 @@ var render = function render() {
     staticClass: "px-2 row"
   }, [_c("el-alert", {
     attrs: {
-      title: "All registration after November 30, 2022 is considered online. For further inquiries, please reach out to your Local Church's Coordinators.",
+      title: "All registration after November 30, 2023 is considered online. For further inquiries, please reach out to your Local Church's Coordinators.",
       type: "warning",
       "show-icon": ""
     }
@@ -8493,21 +8657,21 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
+  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.withAwtaCard != "none" && _vm.ruleForm.withAwtaCard != "" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "always"
     }
   }, [_c("div", {
     staticClass: "row"
-  }, [_c("div", {
+  }, [_vm.ruleForm.withAwtaCard === "yes" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     staticClass: "transform-uppercase",
     attrs: {
       label: "What is your AWTA card number?",
       prop: "awtaCardNumber",
-      required: _vm.ruleForm.withAwtaCard === "yes" && _vm.ruleForm.registrationType === "Member"
+      required: _vm.ruleForm.withAwtaCard === "yes"
     }
   }, [_c("el-input", {
     attrs: {
@@ -8520,39 +8684,13 @@ var render = function render() {
       },
       expression: "ruleForm.awtaCardNumber"
     }
-  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "lost" && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
-    staticClass: "mb-3",
-    attrs: {
-      shadow: "always"
-    }
-  }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "What is your last name?",
-      prop: "lastname",
-      required: _vm.ruleForm.withAwtaCard === "lost" && _vm.ruleForm.registrationType === "Member"
-    }
-  }, [_c("el-input", {
-    attrs: {
-      clearable: true
-    },
-    model: {
-      value: _vm.ruleForm.lastname,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "lastname", $$v);
-      },
-      expression: "ruleForm.lastname"
-    }
-  })], 1)], 1), _vm._v(" "), _c("div", {
+  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "lost" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
       label: "From which local church are you?",
       prop: "localChurch",
-      required: _vm.ruleForm.withAwtaCard === "lost" && _vm.ruleForm.registrationType === "Member"
+      required: _vm.ruleForm.withAwtaCard === "lost"
     }
   }, [_c("el-select", {
     attrs: {
@@ -8615,7 +8753,26 @@ var render = function render() {
       label: "Valenzuela",
       value: "Valenzuela"
     }
-  })], 1)], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.tableData.length > 0 && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "lost" ? _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "What is your last name?",
+      prop: "lastname",
+      required: _vm.ruleForm.withAwtaCard === "lost" && _vm.ruleForm.registrationType === "Member"
+    }
+  }, [_c("el-input", {
+    attrs: {
+      clearable: true
+    },
+    model: {
+      value: _vm.ruleForm.lastname,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "lastname", $$v);
+      },
+      expression: "ruleForm.lastname"
+    }
+  })], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.tableData.length > 0 && _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "always"
@@ -8662,7 +8819,13 @@ var render = function render() {
       label: "Local Church",
       width: "120"
     }
-  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _c("div", {
+  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" ? _c("booking", {
+    staticClass: "mb-3",
+    attrs: {
+      slots: _vm.slots,
+      can_book_days: 2
+    }
+  }) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -8710,6 +8873,9 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "col-md-6"
   }, [_vm.step === 1 ? _c("find-data-component", {
+    attrs: {
+      slots: _vm.slots
+    },
     on: {
       next: _vm.nextStep
     }
@@ -8910,51 +9076,7 @@ var render = function render() {
         value: country
       }
     });
-  }), 1)], 1)], 1)])]), _vm._v(" "), _vm.ruleForm.registrationType === "Member" ? _c("el-card", {
-    staticClass: "mb-3",
-    attrs: {
-      shadow: "always"
-    }
-  }, [_c("div", {
-    staticClass: "px-2 row"
-  }, [_c("el-alert", {
-    attrs: {
-      title: "All registration after November 30, 2022 is considered online. For further inquiries, please reach out to your Local Church's Coordinators.",
-      type: "warning",
-      "show-icon": ""
-    }
-  })], 1), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }, [_vm.ruleForm.registrationType == "Member" ? _c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "How will you attend the AWTA?",
-      prop: "attendingOption",
-      required: _vm.ruleForm.registrationType === "Member"
-    }
-  }, [_c("el-select", {
-    attrs: {
-      placeholder: "Choose"
-    },
-    model: {
-      value: _vm.ruleForm.attendingOption,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "attendingOption", $$v);
-      },
-      expression: "ruleForm.attendingOption"
-    }
-  }, [_c("el-option", {
-    attrs: {
-      value: "Hybrid",
-      label: "Hybrid"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      value: "Online",
-      label: "Online"
-    }
-  })], 1)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
+  }), 1)], 1)], 1)])]), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
@@ -9124,6 +9246,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('barcode-component', (__we
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('ticket-component', (__webpack_require__(/*! ./components/TicketComponent.vue */ "./resources/js/components/TicketComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('banner-component', (__webpack_require__(/*! ./components/BannerComponent.vue */ "./resources/js/components/BannerComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('find-data-component', (__webpack_require__(/*! ./components/FindDataComponent.vue */ "./resources/js/components/FindDataComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('booking', (__webpack_require__(/*! ./components/BookingComponent.vue */ "./resources/js/components/BookingComponent.vue")["default"]));
 
 
 
@@ -98438,6 +98561,45 @@ component.options.__file = "resources/js/components/BarcodeComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/BookingComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/BookingComponent.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookingComponent.vue?vue&type=template&id=ba51ade2& */ "./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2&");
+/* harmony import */ var _BookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/BookingComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__.render,
+  _BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BookingComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/EditRegistrationComponent.vue":
 /*!***************************************************************!*\
   !*** ./resources/js/components/EditRegistrationComponent.vue ***!
@@ -98612,6 +98774,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/BookingComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/BookingComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/EditRegistrationComponent.vue?vue&type=script&lang=js& ***!
@@ -98706,6 +98884,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BarcodeComponent_vue_vue_type_template_id_2f0a0048_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BarcodeComponent_vue_vue_type_template_id_2f0a0048_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BarcodeComponent.vue?vue&type=template&id=2f0a0048&scoped=true& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BarcodeComponent.vue?vue&type=template&id=2f0a0048&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookingComponent.vue?vue&type=template&id=ba51ade2& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2&");
 
 
 /***/ }),

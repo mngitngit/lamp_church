@@ -12,7 +12,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <find-data-component @next="nextStep" v-if="step === 1" />
+                <find-data-component :slots="slots" v-if="step === 1" @next="nextStep" />
 
                 <el-form v-else :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                     <el-card shadow="always" class="mb-4">
@@ -66,29 +66,8 @@
                                 </el-form-item>
                             </div>
                         </div>
-                    </el-card> 
-
-
-                    <el-card v-if="ruleForm.registrationType === 'Member'" shadow="always" class="mb-3">
-                        <div class="px-2 row">
-                            <el-alert
-                                title="All registration after November 30, 2022 is considered online. For further inquiries, please reach out to your Local Church's Coordinators."
-                                type="warning"
-                                show-icon>
-                            </el-alert>
-                        </div>
-                        <div class="row">
-                            <div v-if="ruleForm.registrationType == 'Member'" class="col-md-6">
-                                <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType === 'Member'">
-                                    <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
-                                        <el-option value="Hybrid" label="Hybrid"></el-option>
-                                        <el-option value="Online" label="Online"></el-option>
-                                    </el-select>
-                                </el-form-item>
-                            </div>
-                        </div>
                     </el-card>
-
+                    
                     <el-row>
                         <div class="col-md-12">
                             <el-button type="warning" @click="submitForm('ruleForm')">Submit</el-button>
@@ -103,6 +82,12 @@
 
 <script>
     export default {
+        props: {
+            slots: {
+                required: false,
+                type: Array
+            },
+        },
         data() {
             var checkName = async (rule, value, callback) => {
                 var fields = document.querySelectorAll(".check-name");

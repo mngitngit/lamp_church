@@ -6963,24 +6963,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    uuid: {
-      required: true,
-      type: String
-    },
-    booked_dates: {
-      required: false,
-      type: Array
-    },
     slots: {
       required: false,
       type: Array
@@ -6988,21 +6972,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     can_book_days: {
       required: true,
       type: Number
-    },
-    self_redirect: {
-      required: true,
-      type: Boolean
-    },
-    hide_button: {
-      required: false,
-      type: Boolean,
-      "default": false
     }
   },
   data: function data() {
     return {
       dates: [],
-      initial: [],
       ruleForm: {
         booked: []
       },
@@ -7032,109 +7006,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.ruleForm.booked = this.booked_dates.map(function (date) {
       return date.slot.id;
     });
-    this.initial = this.booked_dates.map(function (date) {
-      return date.slot.id;
-    });
     this.max = this.can_book_days;
   },
   methods: {
-    submitForm: function submitForm(formName) {
-      var _this = this;
-
-      this.$refs[formName].validate( /*#__PURE__*/function () {
-        var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(valid) {
-          return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  _this.$confirm("Are you sure you want to continue?", 'Warning', {
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'Cancel',
-                    type: 'warning'
-                  }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-                    var loading;
-                    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-                      while (1) {
-                        switch (_context2.prev = _context2.next) {
-                          case 0:
-                            loading = _this.$loading({
-                              lock: true,
-                              text: 'Loading',
-                              background: 'rgba(0, 0, 0, 0.7)'
-                            });
-                            _context2.next = 3;
-                            return axios.post("/booking/".concat(_this.uuid, "/update"), {
-                              dates: _this.ruleForm.booked
-                            }).then( /*#__PURE__*/function () {
-                              var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
-                                return _regeneratorRuntime().wrap(function _callee$(_context) {
-                                  while (1) {
-                                    switch (_context.prev = _context.next) {
-                                      case 0:
-                                        loading.close();
-
-                                        _this.$alert('', 'Successfully Booked!', {
-                                          confirmButtonText: 'OK',
-                                          showCancelButton: false,
-                                          closeOnPressEscape: false,
-                                          closeOnClickModal: false,
-                                          showClose: false,
-                                          center: true,
-                                          type: 'success',
-                                          callback: function callback(action) {
-                                            if (_this.self_redirect) window.location.reload();else window.location.href = "booking/".concat(_this.uuid);
-                                          }
-                                        });
-
-                                      case 2:
-                                      case "end":
-                                        return _context.stop();
-                                    }
-                                  }
-                                }, _callee);
-                              }));
-
-                              return function (_x2) {
-                                return _ref4.apply(this, arguments);
-                              };
-                            }())["catch"](function (error) {
-                              loading.close();
-
-                              _this.$alert('', error.response.data.error, {
-                                confirmButtonText: 'OK',
-                                showCancelButton: false,
-                                closeOnPressEscape: false,
-                                closeOnClickModal: false,
-                                showClose: false,
-                                center: true,
-                                type: 'error',
-                                callback: function callback(action) {
-                                  window.location.reload();
-                                }
-                              });
-                            });
-
-                          case 3:
-                          case "end":
-                            return _context2.stop();
-                        }
-                      }
-                    }, _callee2);
-                  })));
-
-                case 1:
-                case "end":
-                  return _context3.stop();
-              }
-            }
-          }, _callee3);
-        }));
-
-        return function (_x) {
-          return _ref2.apply(this, arguments);
-        };
-      }());
-    },
     onChangeProcessed: function onChangeProcessed(isChecked, id) {
       var result;
 
@@ -7144,152 +7018,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           break;
         }
       }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ManageBookingComponent.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ManageBookingComponent.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      ruleForm: {
-        lastName: '',
-        localChurch: '',
-        referenceNumber: ''
-      },
-      disabled: false,
-      rules: {
-        lastName: [{
-          required: true,
-          message: 'Please input Last Name',
-          trigger: ['blur', 'change']
-        }],
-        localChurch: [{
-          required: true,
-          message: 'Please select Local Church',
-          trigger: 'change'
-        }],
-        referenceNumber: [{
-          required: true,
-          message: 'Please input Reference Number',
-          trigger: ['blur', 'change']
-        }]
-      },
-      validated: false,
-      error: null,
-      isLoading: false,
-      fieldErrors: null,
-      retrieved: {
-        booked_dates: [],
-        booked_dates_plucked: [],
-        slots: [],
-        uuid: null,
-        details: {},
-        can_book_days: null
-      }
-    };
-  },
-  mounted: function mounted() {
-    document.getElementsByClassName('transform-uppercase')[0].getElementsByClassName('el-form-item__content')[0].getElementsByClassName('el-input')[0].getElementsByTagName('input')[0].style = 'text-transform: uppercase !important';
-  },
-  methods: {
-    validateDelegate: function validateDelegate(formName) {
-      var _this = this;
-
-      this.validated = false;
-      this.retrieved = {
-        booked_dates: [],
-        booked_dates_plucked: [],
-        slots: [],
-        uuid: null,
-        details: {}
-      };
-      this.$refs[formName].validate( /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(valid) {
-          var loading;
-          return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  if (valid) {
-                    loading = _this.$loading({
-                      lock: true,
-                      text: 'Loading',
-                      background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                    _this.fieldErrors, _this.error = null;
-                    axios.get("/booking/validate", {
-                      params: _this.ruleForm
-                    }).then( /*#__PURE__*/function () {
-                      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
-                        var data;
-                        return _regeneratorRuntime().wrap(function _callee$(_context) {
-                          while (1) {
-                            switch (_context.prev = _context.next) {
-                              case 0:
-                                loading.close();
-                                _this.validated = true;
-                                data = response.data;
-                                _this.retrieved = {
-                                  booked_dates: data.bookings,
-                                  booked_dates_plucked: data.booked_dates,
-                                  slots: data.slots,
-                                  uuid: data.delegate.uuid,
-                                  details: data.delegate,
-                                  can_book_days: data.delegate.can_book_days
-                                };
-
-                              case 4:
-                              case "end":
-                                return _context.stop();
-                            }
-                          }
-                        }, _callee);
-                      }));
-
-                      return function (_x2) {
-                        return _ref2.apply(this, arguments);
-                      };
-                    }())["catch"](function (error) {
-                      loading.close();
-                      _this.error = new Error(error.response.data.error);
-                      _this.fieldErrors = '    ';
-                    });
-                    ;
-                  }
-
-                case 1:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2);
-        }));
-
-        return function (_x) {
-          return _ref.apply(this, arguments);
-        };
-      }());
     }
   }
 });
@@ -7440,8 +7168,7 @@ var render = function render() {
       attrs: {
         label: date.id,
         name: "booked",
-        border: "",
-        disabled: !_vm.ruleForm.booked.includes(date.id) && _vm.ruleForm.booked.length === _vm.max || date.available === 0 && !_vm.ruleForm.booked.includes(date.id) && !_vm.initial.includes(date.id) || _vm.hide_button
+        border: ""
       },
       on: {
         change: function change($event) {
@@ -7449,285 +7176,7 @@ var render = function render() {
         }
       }
     }, [_vm.ruleForm.booked.includes(date.id) ? _c("span", [_vm._v("✓ ")]) : _vm._e(), _vm._v(_vm._s(date.event_date) + "\n                                    ")])], 1)], 1);
-  }), 0)])], 1)], 1)])]), _vm._v(" "), !_vm.hide_button ? _c("el-row", {
-    staticClass: "mt-3"
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-button", {
-    attrs: {
-      type: "warning",
-      autofocus: true
-    },
-    on: {
-      click: function click($event) {
-        return _vm.submitForm("ruleForm");
-      }
-    }
-  }, [_vm._v("Continue")])], 1)]) : _vm._e()], 1);
-};
-
-var staticRenderFns = [];
-render._withStripped = true;
-
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ManageBookingComponent.vue?vue&type=template&id=03aeebd4&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ManageBookingComponent.vue?vue&type=template&id=03aeebd4& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function render() {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "w-full"
-  }, [!_vm.validated ? _c("div", {
-    staticClass: "row justify-content-center"
-  }, [_c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-card", {
-    staticClass: "mb-3 p-1",
-    staticStyle: {
-      "border-top": "10px solid #e9c843",
-      height: "100% !important"
-    },
-    attrs: {
-      shadow: "always"
-    }
-  }, [_c("div", {
-    staticClass: "text-black"
-  }, [_c("h6", {
-    staticClass: "fw-bolder text-muted"
-  }, [_vm._v("LAMP WORLDWIDE AWTA 2022")]), _vm._v(" "), _c("small", [_vm._v("\n                    Timeline: December 27, 28, 29 and 30"), _c("br"), _vm._v("\n                    Venue: Calamba Tent"), _c("br"), _vm._v("\n                    Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church"), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
-    staticClass: "fw-bolder text-muted"
-  }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                    Both members and visitors will be able to start booking their seats on October 9 until November 30, 2022 for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                    Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                    Rebooking is until November 30, 2022 only. "), _c("br"), _c("br"), _vm._v("\n                    For any booking isues, please report to your AWTA local coordinators."), _c("br"), _c("br"), _vm._v("\n\n                    Book now — hurry while seats last!\n                    ")])])])], 1), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6"
-  }, [_c("el-card", {
-    staticClass: "mb-3 pb-0",
-    staticStyle: {
-      "border-top": "10px solid #e9c843"
-    },
-    attrs: {
-      shadow: "always"
-    }
-  }, [_c("h3", [_vm._v("Manage Booking")]), _vm._v(" "), _c("p", {
-    staticClass: "mt-2 c-booking-subheader"
-  }, [_vm._v("Type in your details to manage your booking")]), _vm._v(" "), _c("el-form", {
-    ref: "ruleForm",
-    attrs: {
-      model: _vm.ruleForm,
-      rules: _vm.rules,
-      "label-width": "160px"
-    }
-  }, [_c("div", {
-    staticClass: "row mb-1"
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "Last Name",
-      prop: "lastName",
-      required: "",
-      error: _vm.fieldErrors
-    }
-  }, [_c("el-input", {
-    attrs: {
-      disabled: _vm.disabled
-    },
-    model: {
-      value: _vm.ruleForm.lastName,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "lastName", $$v);
-      },
-      expression: "ruleForm.lastName"
-    }
-  })], 1)], 1)]), _vm._v(" "), _c("div", {
-    staticClass: "row mb-1"
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "Local Church",
-      prop: "localChurch",
-      required: "",
-      error: _vm.fieldErrors
-    }
-  }, [_c("el-select", {
-    attrs: {
-      disabled: _vm.disabled,
-      placeholder: "Choose"
-    },
-    model: {
-      value: _vm.ruleForm.localChurch,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "localChurch", $$v);
-      },
-      expression: "ruleForm.localChurch"
-    }
-  }, [_c("el-option", {
-    attrs: {
-      label: "Binan",
-      value: "Binan"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Canlubang",
-      value: "Canlubang"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Dasmarinas",
-      value: "Dasmarinas"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "DC Cruz",
-      value: "DC Cruz"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Granada",
-      value: "Granada"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Isabela",
-      value: "Isabela"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Muntinlupa",
-      value: "Muntinlupa"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Pateros",
-      value: "Pateros"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Tarlac",
-      value: "Tarlac"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Valenzuela",
-      value: "Valenzuela"
-    }
-  })], 1)], 1)], 1)]), _vm._v(" "), _c("div", {
-    staticClass: "row mb-1"
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-form-item", {
-    staticClass: "transform-uppercase",
-    attrs: {
-      label: "AWTA Card Number / Guest Number",
-      prop: "referenceNumber",
-      required: "",
-      error: _vm.fieldErrors
-    }
-  }, [_c("el-input", {
-    attrs: {
-      disabled: _vm.disabled
-    },
-    model: {
-      value: _vm.ruleForm.referenceNumber,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "referenceNumber", $$v);
-      },
-      expression: "ruleForm.referenceNumber"
-    }
-  })], 1)], 1)]), _vm._v(" "), _vm.error ? _c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_c("div", {
-    staticStyle: {
-      color: "#F56C6C",
-      "font-size": "12px"
-    }
-  }, [_vm._v(_vm._s(_vm.error))])])]) : _vm._e()])], 1), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_c("el-button", {
-    attrs: {
-      loading: _vm.isLoading,
-      autofocus: true,
-      type: "warning",
-      disabled: _vm.disabled
-    },
-    on: {
-      click: function click($event) {
-        return _vm.validateDelegate("ruleForm");
-      }
-    }
-  }, [_vm._v("Continue")])], 1)])], 1)]) : _c("div", {
-    staticClass: "row justify-content-center"
-  }, [_c("div", {
-    staticClass: "col-md-12"
-  }, [_vm.retrieved.booked_dates.length > 0 ? _c("el-tabs", {
-    staticClass: "p-0",
-    attrs: {
-      type: "border-card"
-    }
-  }, [_c("el-tab-pane", {
-    attrs: {
-      label: "Ticket"
-    }
-  }, [_c("el-alert", {
-    staticClass: "mb-3",
-    attrs: {
-      title: "Congratulations! You are already booked for the AWTA 2022.",
-      type: "success",
-      description: "Please do screenshot this ticket if your AWTA card is lost, this will be your gate pass to the event place.",
-      closable: false,
-      "show-icon": ""
-    }
-  }), _vm._v(" "), _c("ticket-component", {
-    attrs: {
-      registration: _vm.retrieved.details,
-      booked_dates: _vm.retrieved.booked_dates_plucked
-    }
-  })], 1), _vm._v(" "), _c("el-tab-pane", {
-    attrs: {
-      label: "Booking"
-    }
-  }, [_vm.retrieved.details.rebooking_limit === 0 ? _c("el-alert", {
-    staticClass: "mb-3",
-    attrs: {
-      title: "You already reached your rebooking limit. Delegates can only rebook 3x.",
-      type: "warning",
-      closable: false
-    }
-  }) : _vm._e(), _vm._v(" "), _c("booking", {
-    attrs: {
-      booked_dates: _vm.retrieved.booked_dates,
-      slots: _vm.retrieved.slots,
-      uuid: _vm.retrieved.uuid,
-      can_book_days: _vm.retrieved.can_book_days,
-      self_redirect: false,
-      hide_button: _vm.retrieved.details.rebooking_limit === 0
-    }
-  })], 1)], 1) : _c("booking", {
-    attrs: {
-      booked_dates: _vm.retrieved.booked_dates,
-      slots: _vm.retrieved.slots,
-      uuid: _vm.retrieved.uuid,
-      can_book_days: _vm.retrieved.can_book_days,
-      self_redirect: false,
-      hide_button: _vm.retrieved.details.rebooking_limit === 0
-    }
-  })], 1)])]);
+  }), 0)])], 1)], 1)])])]);
 };
 
 var staticRenderFns = [];
@@ -97034,45 +96483,6 @@ component.options.__file = "resources/js/components/BookingComponent.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/ManageBookingComponent.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/components/ManageBookingComponent.vue ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _ManageBookingComponent_vue_vue_type_template_id_03aeebd4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManageBookingComponent.vue?vue&type=template&id=03aeebd4& */ "./resources/js/components/ManageBookingComponent.vue?vue&type=template&id=03aeebd4&");
-/* harmony import */ var _ManageBookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManageBookingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ManageBookingComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ManageBookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ManageBookingComponent_vue_vue_type_template_id_03aeebd4___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ManageBookingComponent_vue_vue_type_template_id_03aeebd4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/ManageBookingComponent.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/TicketComponent.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/TicketComponent.vue ***!
@@ -97144,22 +96554,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/ManageBookingComponent.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/ManageBookingComponent.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageBookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageBookingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ManageBookingComponent.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageBookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
 /***/ "./resources/js/components/TicketComponent.vue?vue&type=script&lang=js&":
 /*!******************************************************************************!*\
   !*** ./resources/js/components/TicketComponent.vue?vue&type=script&lang=js& ***!
@@ -97206,23 +96600,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookingComponent.vue?vue&type=template&id=ba51ade2& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/ManageBookingComponent.vue?vue&type=template&id=03aeebd4&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/ManageBookingComponent.vue?vue&type=template&id=03aeebd4& ***!
-  \*******************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageBookingComponent_vue_vue_type_template_id_03aeebd4___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageBookingComponent_vue_vue_type_template_id_03aeebd4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ManageBookingComponent_vue_vue_type_template_id_03aeebd4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManageBookingComponent.vue?vue&type=template&id=03aeebd4& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ManageBookingComponent.vue?vue&type=template&id=03aeebd4&");
 
 
 /***/ }),
@@ -109375,7 +108752,6 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('booking', (__webpack_require__(/*! ./components/BookingComponent.vue */ "./resources/js/components/BookingComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('barcode-component', (__webpack_require__(/*! ./components/BarcodeComponent.vue */ "./resources/js/components/BarcodeComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('ticket-component', (__webpack_require__(/*! ./components/TicketComponent.vue */ "./resources/js/components/TicketComponent.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('manage-booking', (__webpack_require__(/*! ./components/ManageBookingComponent.vue */ "./resources/js/components/ManageBookingComponent.vue")["default"]));
 
 
 

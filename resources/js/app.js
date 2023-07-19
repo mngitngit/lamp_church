@@ -15,6 +15,7 @@ Vue.component('barcode-component', require('./components/BarcodeComponent.vue').
 Vue.component('ticket-component', require('./components/TicketComponent.vue').default);
 Vue.component('banner-component', require('./components/BannerComponent.vue').default);
 Vue.component('find-data-component', require('./components/FindDataComponent.vue').default);
+Vue.component('booking', require('./components/BookingComponent.vue').default);
 
 import Vue from 'vue';
 import ElementUI from 'element-ui';

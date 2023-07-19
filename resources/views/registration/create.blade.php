@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="px-4">
-    <registration-component/>
+    <registration-component :slots="{{ $slots }}"/>
 </div>
 @endsection

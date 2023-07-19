@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
@@ -42,13 +42,6 @@ Route::post('/payments/{id}', [App\Http\Controllers\PaymentController::class, 's
 
 // activities
 Route::get('/activites', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities');
-
-// booking
-Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking.create');
-Route::get('/booking/validate', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
-Route::get('/booking/{id}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking.show');
-Route::get('/booking/{id}/edit', [App\Http\Controllers\BookingController::class, 'edit'])->name('booking.edit');
-Route::post('/booking/{id}/update', [App\Http\Controllers\BookingController::class, 'update'])->name('booking.update');
 
 // attendance
 Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'index'])->name('attendance.index');
