@@ -80,7 +80,6 @@ class RegistrationController extends Controller
             'category' => $request->category,
             'attending_option' => $request->attendingOption,
             'with_awta_card' => $request->withAwtaCard,
-            'priority_dates' => json_encode($request->priorityDates)
         ]);
 
         if ($request->registrationType === 'Member') {
@@ -154,7 +153,6 @@ class RegistrationController extends Controller
             'category' => $request->category,
             'attending_option' => $request->attendingOption,
             'with_awta_card' => $request->withAwtaCard,
-            'priority_dates' => json_encode($request->priorityDates),
             'can_book' => $request->canBook,
             'can_book_rate' => $request->bookingRate,
             'can_book_days' => $request->canBookDays,

@@ -16,7 +16,9 @@ class CreateRatesTable extends Migration
         Schema::create('rates', function (Blueprint $table) {
             $table->string('category');
             $table->string('attending_option');
+            $table->string('description');
             $table->decimal('rate', 9, 3);
+            $table->decimal('can_book_rate', 9, 3);
         });
     }
 

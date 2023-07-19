@@ -17,6 +17,7 @@ class CreateSlotsTable extends Migration
             $table->id();
             $table->date('event_date');
             $table->integer('seat_count');
+            $table->string('registration_type');
             $table->timestamps();
         });
     }

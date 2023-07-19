@@ -90,14 +90,6 @@
       width="130">
     </el-table-column>
     <el-table-column
-      label="Preferred dates"
-      align="center"
-      width="150">
-      <template slot-scope="scope">
-          <div v-html="transformDates(scope.row.priority_dates)"></div>
-      </template>
-    </el-table-column>
-    <el-table-column
       label="Booked dates"
       align="center"
       width="170">

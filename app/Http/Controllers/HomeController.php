@@ -26,45 +26,43 @@ class HomeController extends Controller
 
         if ($request->search) {
             $registration
-            ->where('fullname', 'LIKE', "%$request->search%")
-            ->orWhere('uuid', 'LIKE', "%$request->search%");
+                ->where('fullname', 'LIKE', "%$request->search%")
+                ->orWhere('uuid', 'LIKE', "%$request->search%");
         }
 
         $registration = $registration->paginate(10);
 
-        $registration->map(function($item) {
-            $item->priority_dates = implode(', ', json_decode($item->priority_dates));
-
+        $registration->map(function ($item) {
             $booked_dates = $item->bookings()->with('slot')->get()->toArray();
 
-            $item->booked_dates = array_map(function($date) {
-               return $date['slot']['event_date'];
+            $item->booked_dates = array_map(function ($date) {
+                return $date['slot']['event_date'];
             }, $booked_dates);
 
             $attended_dates = $item->attendances()->with('slot')->get()->toArray();
 
-            $item->attended_dates = array_map(function($date) {
+            $item->attended_dates = array_map(function ($date) {
                 return $date['slot']['event_date'];
-             }, $attended_dates);
+            }, $attended_dates);
         });
 
         $slots_members = Slots::where('registration_type', 'Member')->with('bookings')->get()->map(function ($slot) {
-            $booked = $slot->bookings->groupBy('local_church')->map(function($lc) {
+            $booked = $slot->bookings->groupBy('local_church')->map(function ($lc) {
                 return $lc->count();
             });
 
             $slot['booked_per_church'] = $booked;
-            
+
             return $slot;
         });
 
         $slots_guests = Slots::where('registration_type', 'Guest')->with('bookings')->get()->map(function ($slot) {
-            $booked = $slot->bookings->groupBy('local_church')->map(function($lc) {
+            $booked = $slot->bookings->groupBy('local_church')->map(function ($lc) {
                 return $lc->count();
             });
 
             $slot['booked_per_church'] = $booked;
-            
+
             return $slot;
         });
 
@@ -74,9 +72,9 @@ class HomeController extends Controller
         $attendance_count = [];
 
         foreach ($slots as $slot) {
-            $slot = (Object) $slot;
+            $slot = (object) $slot;
             $count = [];
-            
+
             $member = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Member')->first();
             $guest = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Guest')->first();
 
@@ -92,7 +90,7 @@ class HomeController extends Controller
                     ->where('local_church', $local_church)
                     ->where('slot_id', $member->id)
                     ->count();
-                
+
                 $member_attended = DB::table('attendances')
                     ->where('local_church', $local_church)
                     ->where('slot_id', $member->id)

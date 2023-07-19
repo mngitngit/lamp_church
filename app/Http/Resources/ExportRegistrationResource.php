@@ -39,7 +39,6 @@ class ExportRegistrationResource extends JsonResource
             'category' => $this->category,
             'attending_option' => $this->attending_option,
             'with_awta_card' => $this->with_awta_card,
-            'priority_dates' => implode(', ', json_decode($this->priority_dates)),
             'booked_dates' => implode(', ', $booked_dates),
             'attended_dates' => implode(',', $attended_dates),
             'rate' => $this->rate,

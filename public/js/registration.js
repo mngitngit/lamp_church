@@ -7560,22 +7560,6 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
-      label: "Preferred dates",
-      align: "center",
-      width: "150"
-    },
-    scopedSlots: _vm._u([{
-      key: "default",
-      fn: function fn(scope) {
-        return [_c("div", {
-          domProps: {
-            innerHTML: _vm._s(_vm.transformDates(scope.row.priority_dates))
-          }
-        })];
-      }
-    }])
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
       label: "Booked dates",
       align: "center",
       width: "170"

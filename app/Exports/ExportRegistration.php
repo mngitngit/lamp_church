@@ -29,7 +29,6 @@ class ExportRegistration implements FromCollection, WithHeadings
                 'category',
                 'attending_option',
                 'with_awta_card',
-                'priority_dates',
                 'rate',
                 'payment_status',
             ))

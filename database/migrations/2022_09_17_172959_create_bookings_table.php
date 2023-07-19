@@ -19,6 +19,7 @@ class CreateBookingsTable extends Migration
             $table->bigInteger('slot_id')->unsigned();
             $table->foreign('registration_uuid')->references('uuid')->on('registrations')->onDelete('cascade');
             $table->foreign('slot_id')->references('id')->on('slots')->onDelete('cascade');
+            $table->string('local_church');
             $table->timestamps();
         });
     }
