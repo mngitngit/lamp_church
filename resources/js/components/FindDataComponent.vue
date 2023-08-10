@@ -114,7 +114,27 @@
             </div>
         </el-card>
 
-        <booking v-if="ruleForm.attendingOption == 'Hybrid'" class="mb-3" :slots="slots" :can_book_days="2"/>
+        <el-card v-if="ruleForm.attendingOption === 'Hybrid' && ruleForm.registrationType === 'Member'" shadow="always" class="mb-3">
+            <div class="row justify-content-center">
+                <el-form-item class="check-dates" :label="`Choose the dates you would like to attend physically. Please select at least 1 day, maximum of ${max} days.`" prop="booked" required>
+                    <el-checkbox-group v-model="ruleForm.booked" size="small">
+                        <div class="row">
+                            <div v-for="(date, index) in dates" :key="index" class="col-md-3 text-center">
+                                <el-badge :value="`${date.available} left!`" class="item my-3 c-booking-date" :type="date.available <= 10 ? 'danger' : (date.available <= 100 ? 'warning' : 'success')">
+                                    <el-checkbox
+                                        :label="date.id"
+                                        name="booked"
+                                        border
+                                        @change="onChangeProcessed($event,date.id)">
+                                        <span v-if="ruleForm.booked.includes(date.id)">&#10003;&nbsp;</span>{{ date.event_date }}
+                                    </el-checkbox>
+                                </el-badge>
+                            </div>
+                        </div>
+                    </el-checkbox-group>
+                </el-form-item>
+            </div>
+        </el-card>
 
         <div class="row">
             <div class="col-md-12">
@@ -183,12 +203,15 @@ export default {
         };
         return {
             tableData: [],
+            dates: [],
+            max: 2,
             ruleForm: {
                 registrationType: '',
                 withAwtaCard: '',
                 lastname: '',
                 localChurch: '',
                 attendingOption: '',
+                booked: []
             },
             rules: {
                 registrationType: [
@@ -210,6 +233,9 @@ export default {
                 awtaCardNumber: [
                     { validator: checkAwtaCardNumber, trigger: ['submit'] },
                     { required: true, message: 'Please input your AWTA Card Number', trigger: ['blur', 'change']}
+                ],
+                booked: [
+                    { required: true, message: 'Please select atleast one day', trigger: ['blur', 'change']},
                 ]
             },
             data: {
@@ -224,6 +250,7 @@ export default {
                 category: 'Adult',
                 attendingOption: '',
                 withAwtaCard: '',
+                max: 2
             },
             isLoading: false,
             closeRegForMember: false
@@ -248,10 +275,32 @@ export default {
             this.ruleForm.lastname =''
             this.ruleForm.localChurch =''
             this.ruleForm.attendingOption =''
+        },
+        'ruleForm.attendingOption'(data) {
+            this.ruleForm.booked = (this.ruleForm.attendingOption === 'Hybrid') ? [] : [0]
+        },
+        'ruleForm.booked': {
+            handler: function(newValue) {
+                this.$emit('book', newValue)
+            },
+            deep: true
         }
     },
-    mounted() {},
+    mounted() {
+        this.dates = this.slots.map(({event_date, id, available, seat_count}) => ({event_date, id, available, seat_count}) );
+        this.ruleForm.booked = this.booked_dates.map(function (date) { return date.slot.id; });
+        this.max = this.can_book_days
+    },
     methods: {
+        onChangeProcessed(isChecked, id) {
+            var result;
+            for (var i = 0, len = this.dates.length; i < len; i++) {
+                if (this.dates[i]['id'] === id) {
+                    this.dates[i]['available'] += isChecked ? -1 : 1
+                    break;
+                }
+            }
+        },
         getDelegateData(formName) {
             this.$refs[formName].validate(async (valid) => {
                 if (valid) { 
@@ -347,6 +396,15 @@ export default {
         showTicket(uuid) {
             window.location.href = `registration/${uuid}`;
         },
+        onChangeProcessed(isChecked, id) {
+            var result;
+            for (var i = 0, len = this.dates.length; i < len; i++) {
+                if (this.dates[i]['id'] === id) {
+                    this.dates[i]['available'] += isChecked ? -1 : 1
+                    break;
+                }
+            }
+        }
     }
 }
 </script>

@@ -26,6 +26,7 @@ class LookUp extends Model
         'local_church',
         'category',
         'country',
-        'is_registered'
+        'is_registered',
+        'local_church'
     ];
 }

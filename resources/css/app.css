@@ -74,6 +74,18 @@
 .text-xxs {
     font-size: 13px !important;
 }
+
+.el-progress-bar__outer {
+    background-color: #c1c5cc !important;
+}
+
+.el-progress-bar {
+    width: 200px;
+}
+
+.el-progress__text {
+    font-size: 12.5px !important;
+}
 /* .pagination li {
     margin-right: 10px;
     border-radius: 20px;

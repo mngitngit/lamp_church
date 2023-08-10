@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\RegistrationType;
+use App\Models\Booking;
 use App\Models\Registration;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -40,6 +41,18 @@ class Controller extends BaseController
         $prefix = "GUEST";
 
         return $prefix . $new;
+    }
+
+    function book($registration, $bookings)
+    {
+        foreach ($bookings as $booking) {
+            Booking::create([
+                'registration_uuid' => $registration['uuid'],
+                'slot_id' => $booking,
+                'local_church' => $registration['local_church'],
+                'status' => $registration->payment_status === 'Paid' ? 'Confirmed' : 'Pending'
+            ]);
+        }
     }
 
     function updatePaymentStatus($uuid, $auto_enable_booking)

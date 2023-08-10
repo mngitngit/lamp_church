@@ -12,7 +12,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <find-data-component :slots="slots" v-if="step === 1" @next="nextStep" />
+                <find-data-component @book="selectBookedDates" :slots="slots" v-if="step === 1" @next="nextStep" />
 
                 <el-form v-else :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                     <el-card shadow="always" class="mb-4">
@@ -134,6 +134,7 @@
                     category: 'Adult',
                     attendingOption: '',
                     withAwtaCard: '',
+                    booked: []
                 },
                 rules: {
                     firstName: [
@@ -155,6 +156,9 @@
                     attendingOption: [
                         { required: true, message: 'Please select your attending option', trigger: 'blur'},
                     ],
+                    booked: [
+                        { required: true, message: 'Please select atleast one day', trigger: ['blur', 'change']}
+                    ]
                 },
                 step: 1,
                 countries: this.$allCountries
@@ -210,6 +214,9 @@
                 this.ruleForm.attendingOption = data.attendingOption
                 this.ruleForm.withAwtaCard = data.withAwtaCard
                 this.step = 2
+            },
+            selectBookedDates(dates) {
+                this.ruleForm.booked = dates;
             }
         }
     }
