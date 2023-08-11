@@ -8781,7 +8781,7 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "row"
-  }, [_vm.data.step_1.withAwtaCard === "none" ? _c("div", {
+  }, [_vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.registrationType === "Guest" ? _c("div", {
     staticClass: "col-md-12"
   }, [_c("el-form-item", {
     attrs: {
@@ -8796,7 +8796,7 @@ var render = function render() {
       },
       expression: "ruleForm.email"
     }
-  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" ? _c("div", {
+  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.registrationType === "Guest" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     staticClass: "check-name",
@@ -8813,7 +8813,7 @@ var render = function render() {
       },
       expression: "ruleForm.firstName"
     }
-  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.withAwtaCard === "lost" ? _c("div", {
+  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.withAwtaCard === "lost" || _vm.data.step_1.registrationType === "Guest" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     staticClass: "check-name",
@@ -8830,7 +8830,7 @@ var render = function render() {
       },
       expression: "ruleForm.lastName"
     }
-  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" ? _c("div", {
+  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.registrationType === "Guest" ? _c("div", {
     staticClass: "col-md-12"
   }, [_c("el-form-item", {
     attrs: {
@@ -8848,7 +8848,7 @@ var render = function render() {
       },
       expression: "ruleForm.facebookName"
     }
-  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.withAwtaCard === "lost" ? _c("div", {
+  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.withAwtaCard === "lost" || _vm.data.step_1.registrationType === "Guest" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
@@ -8917,7 +8917,7 @@ var render = function render() {
       label: "Valenzuela",
       value: "Valenzuela"
     }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" ? _c("div", {
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.registrationType === "Guest" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {

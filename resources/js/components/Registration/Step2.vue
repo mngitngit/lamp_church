@@ -4,28 +4,28 @@
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                 <el-card shadow="always" class="mb-4">
                     <div class="row">
-                        <div v-if="data.step_1.withAwtaCard === 'none'" class="col-md-12">
+                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.registrationType === 'Guest'" class="col-md-12">
                             <el-form-item label="Email Address" prop="email">
                                 <el-input v-model="ruleForm.email"></el-input>
                             </el-form-item>
                         </div>
-                        <div v-if="data.step_1.withAwtaCard === 'none'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none'|| data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item class="check-name" label="First Name" prop="firstName" required>
                                 <el-input v-model="ruleForm.firstName"></el-input>
                             </el-form-item>
                         </div>
-                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.withAwtaCard === 'lost'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.withAwtaCard === 'lost'|| data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item class="check-name" label="Last Name" prop="lastName" required>
                                 <el-input v-model="ruleForm.lastName"></el-input>
                             </el-form-item>
                         </div>
-                        <div v-if="data.step_1.withAwtaCard === 'none'" class="col-md-12">
+                        <div v-if="data.step_1.withAwtaCard === 'none'|| data.step_1.registrationType === 'Guest'" class="col-md-12">
                             <el-form-item label="Facebook Name" prop="facebookName">
                                 <el-input v-model="ruleForm.facebookName" placeholder="If none, kindly type in the Facebook name of your event companion"></el-input>
                             </el-form-item>
                         </div>
 
-                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.withAwtaCard === 'lost'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.withAwtaCard === 'lost' || data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item label="Local Church" prop="localChurch" required>
                                 <el-select v-model="ruleForm.localChurch" placeholder="Choose">
                                     <el-option label="Binan" value="Binan"></el-option>
@@ -41,7 +41,7 @@
                                 </el-select>
                             </el-form-item>
                         </div>
-                        <div v-if="data.step_1.withAwtaCard === 'none'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item label="Country" prop="country" required>
                                 <el-select v-model="ruleForm.country" placeholder="Choose">
                                     <el-option v-for="country in countries" v-bind:key="country" :label="country" :value="country"></el-option>
