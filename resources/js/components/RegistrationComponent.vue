@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-2">
                 <el-button v-if="currentStep > 1" plain @click="$refs.myChild.submitForm('back')">Back</el-button>
-                <el-button v-bind:type="currentStep < 3 ? '' : 'primary'" v-bind:plain="currentStep < 3" @click="$refs.myChild.submitForm('next')">{{ currentStep === 3 ? 'Submit' : 'Next' }}</el-button>
+                <el-button v-bind:type="(currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'primary' : ''" v-bind:plain="currentStep < 3" @click="$refs.myChild.submitForm('next')">{{ (currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'Submit' : 'Next' }}</el-button>
             </div>
             <div class="col-md-3">
                 <el-progress :stroke-width="6" define-back-color="#595353" class="mt-lg-2" :color="customColorMethod" :percentage="(100 * currentStep) / 3" :format="format"></el-progress>
@@ -47,12 +47,12 @@
         },
         data() {
             return {
-                currentStep: 2,
+                currentStep: 1,
                 currentTabComponent: null,
                 currentTabData: null,
                 countries: this.$allCountries,
                 data: {
-                    step_1: {"registrationType":"Guest","withAwtaCard":"","attendingOption":"Hybrid","awtaCardNumber":"","found":{}},
+                    step_1: {},
                     step_2: {},
                     step_3: {}
                 }
@@ -100,6 +100,11 @@
             submit(data) {
                 this.data.step_3 = data
 
+                if (this.data.step_1.registrationType === 'Guest') {
+                    this.data.step_2 = data;
+                    this.data.step_3 = {};
+                }
+
                 const loading = this.$loading({
                     lock: true,
                     text: 'Loading',
@@ -109,16 +114,17 @@
                 setTimeout(async () => {
                     await axios.post("/registration", this.data)
                     .then(async (response) => {
+                        console.log(response.data)
                         loading.close()
                         
-                        this.showTicket(response.data.uuid)
+                        this.showTicket(response.data.toString())
 
                         this.$refs[formName].resetFields();
                     });
                 }, 1000);
             },
             showTicket(uuid) {
-                window.location.href = `registration/${uuid}`;
+                window.location.href = `registration/ticket?id=${uuid}`;
             },
         }
     }

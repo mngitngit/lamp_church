@@ -4,7 +4,7 @@
 <div class="px-4">
     <div class="row justify-content-center my-4">
         <div class="col-md-6">
-            <ticket-component :registration="{{ $registration }}" :booked_dates="{{ json_encode($booked_dates) }}" />
+            <ticket-component :registrations="{{ json_encode($registration) }}" />
         </div>
     </div>
     <div class="row justify-content-center">

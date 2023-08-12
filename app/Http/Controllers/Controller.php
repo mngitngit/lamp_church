@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\RegistrationType;
 use App\Models\Booking;
+use App\Models\LookUp;
 use App\Models\Registration;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -94,5 +95,28 @@ class Controller extends BaseController
         $registration->update($parameters);
 
         return $registration;
+    }
+
+    function checkIfAlreadyRegistered($request)
+    {
+        $registration = Registration::where('firstname', $request->firstName)
+            ->where('lastname', $request->lastName)
+            ->where('local_church', $request->localChurch)
+            ->first();
+
+        if ($registration) {
+            return ['error' => 'This delegate from ' . $request->localChurch . ' is already registered.'];
+        }
+
+        $lookup = LookUp::where('firstname', $request->firstName)
+            ->where('lastname', $request->lastName)
+            ->where('local_church', $request->localChurch)
+            ->first();
+
+        if ($lookup) {
+            return ['error' => 'This delegate from ' . $request->localChurch . ' has already been issued with an AWTA card number.'];
+        }
+
+        return [];
     }
 }

@@ -15,6 +15,7 @@ use App\Models\Slots;
 use App\Models\UUID;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class RegistrationController extends Controller
 {
@@ -25,22 +26,62 @@ class RegistrationController extends Controller
 
     public function index(Request $request)
     {
-        $registration = Registration::where('firstname', $request->firstName)
-            ->where('lastname', $request->lastName)
-            ->where('local_church', $request->localChurch)
-            ->first();
+        $isBulk = $request->isBulk === 'true';
+        if ($isBulk) {
+            $errors = [];
 
-        if ($registration) {
-            return response()->json(['error' => 'This delegate from ' . $request->localChurch . ' is already registered.'], 500);
-        }
+            foreach ($request->data as $key => $value) {
+                $value = json_decode($value);
+                if (!$value->email) {
+                    $errors[$key]['email'] = 'Email is required.';
+                }
 
-        $lookup = LookUp::where('firstname', $request->firstName)
-            ->where('lastname', $request->lastName)
-            ->where('local_church', $request->localChurch)
-            ->first();
+                if (!$value->firstName) {
+                    $errors[$key]['firstName'] = 'First Name is required.';
+                }
 
-        if ($lookup) {
-            return response()->json(['error' => 'This delegate from ' . $request->localChurch . ' has already been issued with an AWTA card number.'], 500);
+                if (!$value->lastName) {
+                    $errors[$key]['lastName'] = 'Last Name is required.';
+                }
+
+                if (!$value->clusterGroup) {
+                    $errors[$key]['clusterGroup'] = 'Cluster Group is required.';
+                }
+
+                if (!$value->localChurch) {
+                    $errors[$key]['localChurch'] = 'Local Church is required.';
+                }
+
+                if (!$value->country) {
+                    $errors[$key]['country'] = 'Country is required.';
+                }
+
+                if (count($value->booked) === 0) {
+                    $errors[$key]['booked'] = 'Select preferred dates.';
+                }
+
+                if (!array_key_exists($key, $errors)) {
+                    $validation = $this->checkIfAlreadyRegistered((object) [
+                        'firstName' => $value->firstName,
+                        'lastName' => $value->lastName,
+                        'localChurch' => $value->localChurch
+                    ]);
+
+                    if ($validation && array_key_exists('error', $validation)) {
+                        $errors[$key]['invalid'] = $validation['error'];
+                    }
+                }
+            }
+
+            if (count($errors) > 0) {
+                return response()->json(['errors' => $errors], 500);
+            }
+        } else {
+            $validation = $this->checkIfAlreadyRegistered($request);
+
+            if (array_key_exists('error', $validation)) {
+                return response()->json(['error' => $validation['error']], 500);
+            }
         }
     }
 
@@ -64,83 +105,80 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        switch ($request->step_1['withAwtaCard']) {
-            case 'none': // None, I’m a new member.
-                $details = array_merge($request->step_1, $request->step_2, $request->step_3);
+        // member registration
+        if ($request->step_1['registrationType'] === 'Member') {
+            switch ($request->step_1['withAwtaCard']) {
+                case 'none': // None, I’m a new member.
+                    $details = array_merge($request->step_1, $request->step_2, $request->step_3);
 
-                $email = $details['email'];
-                $firstname = $details['firstName'];
-                $lastname = $details['lastName'];
-                $fullname = $details['firstName'] . ' ' . $details['lastName'];
-                $facebook = $details['facebookName'];
-                $registration_type = $details['registrationType'];
-                $local_church = $details['localChurch'];
-                $country = $details['country'];
-                $category = $details['category'];
-                $attending_option = $details['attendingOption'];
-                $with_awta_card = $details['withAwtaCard'];
-                $awta_card_number = '--';
-                break;
+                    $email = $details['email'];
+                    $firstname = $details['firstName'];
+                    $lastname = $details['lastName'];
+                    $fullname = $details['firstName'] . ' ' . $details['lastName'];
+                    $facebook = $details['facebookName'];
+                    $registration_type = $details['registrationType'];
+                    $local_church = $details['localChurch'];
+                    $country = $details['country'];
+                    $category = $details['category'];
+                    $attending_option = $details['attendingOption'];
+                    $with_awta_card = $details['withAwtaCard'];
+                    $awta_card_number = '--';
+                    break;
 
-            case 'lost': // Yes, but I lost it.
-                $details = array_merge($request->step_1, $request->step_2, $request->step_3);
+                case 'lost': // Yes, but I lost it.
+                    $details = array_merge($request->step_1, $request->step_2, $request->step_3);
 
-                $lookup = LookUp::where('lamp_card_number', $details['selected'])->first();
+                    $lookup = LookUp::where('lamp_card_number', $details['selected'])->first();
 
-                $email = $lookup['email'];
-                $firstname = $lookup['firstname'];
-                $lastname = $lookup['lastname'];
-                $fullname = $lookup['firstname'] . ' ' . $lookup['lastname'];
-                $facebook = $lookup['facebook_name'];
-                $registration_type = $details['registrationType'];
-                $local_church = $details['localChurch'];
-                $country = $details['country'];
-                $category = $details['category'];
-                $attending_option = $details['attendingOption'];
-                $with_awta_card = $details['withAwtaCard'];
-                $awta_card_number = $details['selected'];
-                break;
+                    $email = $lookup['email'];
+                    $firstname = $lookup['firstname'];
+                    $lastname = $lookup['lastname'];
+                    $fullname = $lookup['firstname'] . ' ' . $lookup['lastname'];
+                    $facebook = $lookup['facebook_name'];
+                    $registration_type = $details['registrationType'];
+                    $local_church = $details['localChurch'];
+                    $country = $details['country'];
+                    $category = $details['category'];
+                    $attending_option = $details['attendingOption'];
+                    $with_awta_card = $details['withAwtaCard'];
+                    $awta_card_number = $details['selected'];
+                    break;
 
-            case 'yes': // Yes, and I still have it.
-                $details = array_merge($request->step_1, $request->step_3);
+                case 'yes': // Yes, and I still have it.
+                    $details = array_merge($request->step_1, $request->step_3);
 
-                $email = $details['found']['email'];
-                $firstname = $details['found']['firstName'];
-                $lastname = $details['found']['lastName'];
-                $fullname = $details['found']['firstName'] . ' ' . $details['found']['lastName'];
-                $facebook = $details['found']['facebookName'];
-                $registration_type = $details['registrationType'];
-                $local_church = $details['found']['localChurch'];
-                $country = $details['found']['country'];
-                $category = $details['found']['category'];
-                $attending_option = $details['attendingOption'];
-                $with_awta_card = $details['withAwtaCard'];
-                $awta_card_number = $details['awtaCardNumber'];
-                break;
-        }
+                    $email = $details['found']['email'];
+                    $firstname = $details['found']['firstName'];
+                    $lastname = $details['found']['lastName'];
+                    $fullname = $details['found']['firstName'] . ' ' . $details['found']['lastName'];
+                    $facebook = $details['found']['facebookName'];
+                    $registration_type = $details['registrationType'];
+                    $local_church = $details['found']['localChurch'];
+                    $country = $details['found']['country'];
+                    $category = $details['found']['category'];
+                    $attending_option = $details['attendingOption'];
+                    $with_awta_card = $details['withAwtaCard'];
+                    $awta_card_number = $details['awtaCardNumber'];
+                    break;
+            }
 
-        if ($registration_type === 'Guest') {
-            $uuid = $this->generateGuestId();
-        } else {
             $uuid = UUID::issue();
-        }
 
-        $registration = Registration::create([
-            'uuid' => $uuid,
-            'email' => $email,
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'fullname' => $fullname,
-            'facebook_name' => $facebook,
-            'registration_type' => $registration_type,
-            'local_church' => $local_church,
-            'country' => $country,
-            'category' => $category,
-            'attending_option' => $attending_option,
-            'with_awta_card' => $with_awta_card
-        ]);
+            $registration = Registration::create([
+                'uuid' => $uuid,
+                'email' => $email,
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'fullname' => $fullname,
+                'facebook_name' => $facebook,
+                'registration_type' => $registration_type,
+                'local_church' => $local_church,
+                'country' => $country,
+                'category' => $category,
+                'attending_option' => $attending_option,
+                'with_awta_card' => $with_awta_card
+            ]);
 
-        if ($registration_type === 'Member') {
             $lookup = LookUp::where('lamp_card_number', $awta_card_number)->first();
 
             // checking if the member is in the master list
@@ -167,15 +205,71 @@ class RegistrationController extends Controller
                     'is_registered' => true
                 ]);
             }
+
+            $registration = $this->updatePaymentStatus($registration->uuid, false);
+
+            if ($attending_option === 'Hybrid') {
+                $this->book($registration, $request->step_3['booked']);
+            }
+
+            return $registration->uuid;
+        } else { // guest registration
+            if ($request->step_1['attendingOption'] === 'Hybrid') {
+                $registered = [];
+
+                foreach ($request->step_2['guests'] as $key => $value) {
+                    $uuid = $this->generateGuestId();
+
+                    $details = (object) $value;
+
+                    $registration = Registration::create([
+                        'uuid' => $uuid,
+                        'email' => $details->email,
+                        'firstname' => $details->firstName,
+                        'lastname' => $details->lastName,
+                        'fullname' => $details->firstName . ' ' . $details->lastName,
+                        'facebook_name' => $details->facebookName,
+                        'registration_type' => 'Guest',
+                        'local_church' => $details->localChurch,
+                        'country' => $details->country,
+                        'category' => $details->category,
+                        'attending_option' => 'Hybrid',
+                        'with_awta_card' => 'none'
+                    ]);
+
+                    $registration = $this->updatePaymentStatus($registration->uuid, false);
+
+                    $this->book($registration, $details->booked);
+
+                    $registered[] = $registration->uuid;
+                }
+
+                return $registered;
+            } else {
+                $uuid = $this->generateGuestId();
+
+                $details = (object) $request->step_2;
+
+                $registration = Registration::create([
+                    'uuid' => $uuid,
+                    'email' => $details->email,
+                    'firstname' => $details->firstName,
+                    'lastname' => $details->lastName,
+                    'fullname' => $details->firstName . ' ' . $details->lastName,
+                    'facebook_name' => $details->facebookName,
+                    'registration_type' => 'Guest',
+                    'local_church' => $details->localChurch,
+                    'country' => $details->country,
+                    'category' => $details->category,
+                    'attending_option' => 'Online',
+                    'with_awta_card' => 'none'
+                ]);
+
+                $registration = $this->updatePaymentStatus($registration->uuid, false);
+
+                return $registration->uuid;
+            }
         }
-
-        $registration = $this->updatePaymentStatus($registration->uuid, false);
-
-        if ($attending_option === 'Hybrid') {
-            $this->book($registration, $request->step_3['booked']);
-        }
-
-        return $registration;
     }
 
     /**
@@ -184,19 +278,22 @@ class RegistrationController extends Controller
      * @param  String $uuid
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show(Request $request)
     {
-        $registration = Registration::where('uuid', $uuid)->first();
+        $uuid = explode(',', $request->id);
 
-        $dates = $registration->bookings()->with('slot')->get()->toArray();
+        $registration = (array) Registration::with('bookings', 'bookings.slot')->whereIn('uuid', $uuid)->get()->toArray();
 
-        $booked_dates = array_map(function ($date) {
-            return $date['slot']['event_date'];
-        }, $dates);
+        $registration = array_map(function ($data) {
+            $data['booked_dates'] = array_map(function ($dates) {
+                return $dates['slot']['event_date'];
+            }, $data['bookings']);
+
+            return $data;
+        }, $registration);
 
         return view('registration.show', [
-            'registration' => $registration,
-            'booked_dates' => $booked_dates
+            'registration' => $registration
         ]);
     }
 

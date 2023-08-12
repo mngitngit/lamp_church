@@ -130,6 +130,9 @@ export default {
         },
         'ruleForm.withAwtaCard'(data, old) {
             if (old) this.resetData('with-awta-card')
+        },
+        'ruleForm.attendingOption'(data, old) {
+            if (old) this.resetData('all')
         }
     },
     mounted() {

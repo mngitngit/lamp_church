@@ -23,7 +23,7 @@ Route::get('/registration/validate', [App\Http\Controllers\RegistrationControlle
 
 // registration
 Route::post('/registration', [App\Http\Controllers\RegistrationController::class, 'store'])->name('registration.store');
-Route::get('/registration/{id}', [App\Http\Controllers\RegistrationController::class, 'show'])->name('registration.show');
+Route::get('/registration/ticket', [App\Http\Controllers\RegistrationController::class, 'show'])->name('registration.show');
 Route::get('/registration/{id}/edit', [App\Http\Controllers\RegistrationController::class, 'edit'])->name('registration.edit');
 Route::post('/registration/{id}/update', [App\Http\Controllers\RegistrationController::class, 'update'])->name('registration.update');
 Route::delete('/registration/{id}/delete', [App\Http\Controllers\RegistrationController::class, 'destroy'])->name('registration.delete');

@@ -2,23 +2,160 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-                <el-card shadow="always" class="mb-4">
+                <!-- display bulk registration if registrant is a guest attending hybrid -->
+                <el-card v-if="data.step_1.registrationType === 'Guest' && data.step_1.attendingOption === 'Hybrid'" shadow="always" class="mb-3">
+                    <el-form-item :label="`Please Input the Guest Details (maximum of ${maxBulk}).`" prop="guests" required></el-form-item>
+                    
+                    <div class="w-full" :class="{'mb-4' : i < ruleForm.guests.length-1 || ruleForm.guests.length === 1}" v-for="(guest, i) in ruleForm.guests" :key="i">
+                        <div class="border rounded-1 p-2 w-full mb-1">
+                            <table class="w-full" style="width: 100%;">
+                                <tr>
+                                    <td width="33.3%" class="p-1">
+                                        <label class="text-sm">First Name</label>
+                                        <el-input
+                                            size="mini"
+                                            placeholder="First Name"
+                                            :class="{'has-error' : (errors[i] && errors[i]['firstName']) || (errors[i] && errors[i]['invalid'])}"
+                                            v-model="guest.firstName">
+                                        </el-input>
+                                        <small v-if="errors[i] && (errors[i]['firstName'] || errors[i]['lastName'])" class="text-error">
+                                            <span v-if="errors[i]['firstName']">{{ errors[i]['firstName'] }}</span>&nbsp;
+                                        </small>
+                                    </td>
+                                    <td width="33.3%" class="p-1">
+                                        <label class="text-sm">Last Name</label>
+                                        <el-input
+                                            size="mini"
+                                            placeholder="Last Name"
+                                            :class="{'has-error' : (errors[i] && errors[i]['lastName']) || (errors[i] && errors[i]['invalid'])}"
+                                            v-model="guest.lastName">
+                                        </el-input>
+                                        <small v-if="errors[i] && (errors[i]['firstName'] || errors[i]['lastName'])" class="text-error">
+                                            <span v-if="errors[i].lastName">{{ errors[i].lastName }}</span>&nbsp;
+                                        </small>
+                                    </td>
+                                    <td width="33.4%" class="p-1">
+                                        <label class="text-sm">Facebook Name</label>
+                                        <el-input
+                                            size="mini"
+                                            placeholder="Facebook Name"
+                                            v-model="guest.facebookName">
+                                        </el-input>
+                                        <small v-if="errors[i] && (errors[i]['firstName'] || errors[i]['lastName'])" class="text-error">
+                                            <span v-if="errors[i].facebookName">{{ errors[i].facebookName }}</span>&nbsp;
+                                        </small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="p-1">
+                                        <label class="text-sm">Email Address</label>
+                                        <el-input
+                                            size="mini"
+                                            placeholder="Email Address"
+                                            :class="{'has-error' : (errors[i] && errors[i]['email'])}"
+                                            v-model="guest.email">
+                                        </el-input>
+                                        <small v-if="errors[i] && (errors[i]['email'] || errors[i]['country'])" class="text-error">
+                                            <span v-if="errors[i]['email']">{{ errors[i]['email'] }}</span>&nbsp;
+                                        </small>
+                                    </td>
+                                    <td class="p-1">
+                                        <label class="text-sm">Country</label>
+                                        <el-select 
+                                            size="mini" 
+                                            v-model="guest.country" 
+                                            placeholder="Choose" 
+                                            :class="{'has-error' : (errors[i] && errors[i]['country'])}">
+                                            <el-option v-for="country in countries" v-bind:key="country" :label="country" :value="country"></el-option>
+                                        </el-select>
+                                        <small v-if="errors[i] && (errors[i]['email'] || errors[i]['country'])" class="text-error">
+                                            <span v-if="errors[i]['country']">{{ errors[i]['country'] }}</span>&nbsp;
+                                        </small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1">
+                                        <label class="text-sm">Local Church</label>
+                                        <el-select 
+                                            :class="{'has-error' : (errors[i] && errors[i]['localChurch']) || (errors[i] && errors[i]['invalid'])}" 
+                                            size="mini" 
+                                            v-model="guest.localChurch" 
+                                            placeholder="Local Church">
+                                            <el-option label="Binan" value="Binan"></el-option>
+                                            <el-option label="Canlubang" value="Canlubang"></el-option>
+                                            <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
+                                            <el-option label="DC Cruz" value="DC Cruz"></el-option>
+                                            <el-option label="Granada" value="Granada"></el-option>
+                                            <el-option label="Isabela" value="Isabela"></el-option>
+                                            <el-option label="Muntinlupa" value="Muntinlupa"></el-option>
+                                            <el-option label="Pateros" value="Pateros"></el-option>
+                                            <el-option label="Tarlac" value="Tarlac"></el-option>
+                                            <el-option label="Valenzuela" value="Valenzuela"></el-option>
+                                        </el-select>
+                                        <small v-if="errors[i] && (errors[i]['localChurch'] || errors[i]['clusterGroup'])" class="text-error">
+                                            <span v-if="errors[i]['localChurch']">{{ errors[i]['localChurch'] }}</span>&nbsp;
+                                        </small>
+                                    </td>
+                                    <td class="p-1">
+                                        <label class="text-sm">Cluster Group</label>
+                                        <el-input
+                                            size="mini"
+                                            :class="{'has-error' : (errors[i] && errors[i]['clusterGroup'])}"
+                                            placeholder="Cluster Group"
+                                            v-model="guest.clusterGroup"
+                                            :error="true">
+                                        </el-input>
+                                        <small v-if="errors[i] && (errors[i]['localChurch'] || errors[i]['clusterGroup'])" class="text-error">
+                                            <span v-if="errors[i]['clusterGroup']">{{ errors[i]['clusterGroup'] }}</span>&nbsp;
+                                        </small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="p-1">
+                                        <label class="text-sm">Select Preferred Dates</label>
+                                        <el-checkbox-group v-model="guest.booked" size="mini">
+                                            <el-checkbox-button v-for="(date, index) in dates" :label="date.id" :key="date.id">
+                                                <label class="mb-1">{{ date.event_date }}</label> <br> 
+                                                <span>{{ date.available }} left!</span>
+                                            </el-checkbox-button>
+                                        </el-checkbox-group>
+                                        <small v-if="errors[i] && errors[i]['booked']" class="text-error">
+                                            <span v-if="errors[i]['booked']">{{ errors[i]['booked'] }}</span>&nbsp;
+                                        </small>
+                                    </td>
+                                </tr>
+                            </table>
+                            <small v-if="errors[i] && errors[i]['invalid']" class="text-error mx-1">
+                                <span v-if="errors[i]['invalid']">{{ errors[i]['invalid'] }}</span>&nbsp;
+                            </small>
+                        </div>
+
+                        <el-button v-if="i != 0 || ruleForm.guests.length > 1" class="float-right d-inline mt-2" size="mini" plain @click="removeRow(i)">Remove</el-button>
+                        <el-button type="primary" v-if="i === ruleForm.guests.length-1 && maxBulk != i+1" class="float-right d-inline float-end mt-2 mb-3" size="mini" plain @click="addRow()">Add Row</el-button>
+                    </div>
+                </el-card>
+                
+                <!-- display if member attending online/hybrid & guests attending online only. -->
+                <el-card v-else shadow="always" class="mb-4">
                     <div class="row">
                         <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.registrationType === 'Guest'" class="col-md-12">
                             <el-form-item label="Email Address" prop="email">
                                 <el-input v-model="ruleForm.email"></el-input>
                             </el-form-item>
                         </div>
+
                         <div v-if="data.step_1.withAwtaCard === 'none'|| data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item class="check-name" label="First Name" prop="firstName" required>
                                 <el-input v-model="ruleForm.firstName"></el-input>
                             </el-form-item>
                         </div>
+
                         <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.withAwtaCard === 'lost'|| data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item class="check-name" label="Last Name" prop="lastName" required>
                                 <el-input v-model="ruleForm.lastName"></el-input>
                             </el-form-item>
                         </div>
+                        
                         <div v-if="data.step_1.withAwtaCard === 'none'|| data.step_1.registrationType === 'Guest'" class="col-md-12">
                             <el-form-item label="Facebook Name" prop="facebookName">
                                 <el-input v-model="ruleForm.facebookName" placeholder="If none, kindly type in the Facebook name of your event companion"></el-input>
@@ -41,6 +178,7 @@
                                 </el-select>
                             </el-form-item>
                         </div>
+
                         <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item label="Country" prop="country" required>
                                 <el-select v-model="ruleForm.country" placeholder="Choose">
@@ -48,7 +186,8 @@
                                 </el-select>
                             </el-form-item>
                         </div>
-                        <div v-if="data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0">
+
+                        <div class="col-md-12" v-if="data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0">
                             <el-form-item label="Please choose your name" prop="selected" required>
                                 <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_card_number" border>
                                     <span>{{ data.firstname }} {{ data.lastname }}</span>
@@ -68,7 +207,11 @@
             data: {
                 required: true,
                 type: Object
-            }
+            },
+            slots: {
+                required: false,
+                type: Array
+            },
         },
         data() {
             var checkLastname = async (rule, value, callback) => {
@@ -97,6 +240,7 @@
                 }
             };
             var checkName = async (rule, value, callback) => {
+                console.log('ksbdhsjbd')
                 var fields = document.querySelectorAll(".check-name");
                 for (var i = 0; i < fields.length; i++) {
                     var str = fields[i].classList.remove("is-error")
@@ -112,7 +256,8 @@
                     params: {
                         firstName: this.ruleForm.firstName,
                         lastName: this.ruleForm.lastName,
-                        localChurch: this.ruleForm.localChurch
+                        localChurch: this.ruleForm.localChurch,
+                        isBulk: false
                     }
                 })
                 .then(async (response) => {
@@ -128,6 +273,31 @@
                     callback(new Error(error.response.data.error))
                 });
             };
+            var checkGuests = async (rule, value, callback) => {
+                this.errors = [];
+
+                if (this.data.step_1.registrationType === 'Guest' && this.data.step_1.attendingOption === 'Hybrid') {
+                    const loading = this.$loading({
+                            lock: true,
+                            text: 'Loading',
+                            background: 'rgba(0, 0, 0, 0.7)'
+                        });
+
+                    await axios.get(`/registration/validate`, {
+                        params: {
+                            data: this.ruleForm.guests,
+                            isBulk: true
+                        }
+                    })
+                    .then(async (response) => {
+                        loading.close()
+                    }).catch((error) => {
+                        loading.close();
+                        this.errors = error.response.data.errors;
+                        callback(new Error('Please check the details.'));
+                    });
+                }
+            };
             return {
                 ruleForm: {
                     email: '',
@@ -138,7 +308,18 @@
                     country: 'Philippines',
                     category: 'Adult',
                     lookUp: [],
-                    selected: ''
+                    selected: '',
+                    guests: [{
+                        email: '',
+                        firstName: '',
+                        lastName: '',
+                        facebookName: '',
+                        clusterGroup: '',
+                        localChurch: '',
+                        country: 'Philippines',
+                        category: 'Free',
+                        booked: [],
+                    }]
                 },
                 rules: {
                     firstName: [
@@ -158,15 +339,33 @@
                     ],
                     selected: [
                         { required: true, message: 'Please choose your Name', trigger: 'change'}
+                    ],
+                    guests: [
+                        { validator: checkGuests, trigger: ['change'] }
                     ]
                 },
-                countries: this.$allCountries
+                countries: this.$allCountries,
+                maxBulk: 10,
+                errors: [],
+                dates: []
             }
         },
         mounted() {
             if (Object.keys(this.data.step_2).length != 0) {
                 this.ruleForm = this.data.step_2;
             }
+
+            var booked_dates = [];
+
+            this.dates = this.slots.map(function(date) {
+                var available = booked_dates.includes(date.id) ? date.available-1 : date.available;
+                return {
+                    "event_date": date.event_date,
+                    "id": date.id,
+                    "available": available,
+                    "seat_count": date.seat_count
+                };
+            });
         },
         methods: {
             submitForm(action) {
@@ -177,14 +376,48 @@
 
                 this.$refs['ruleForm'].validate((valid) => {
                     if (valid) {
-                        this.$emit('change-step', {destination: 'step_3', current: 'step_2', data: this.ruleForm});
-                        this.$emit('next', this.ruleForm);
+                        if (this.data.step_1.registrationType === 'Guest') {
+                            this.$emit('submit', this.ruleForm);
+                        } else {
+                            this.$emit('change-step', {destination: 'step_3', current: 'step_2', data: this.ruleForm});
+                        }
                     } else {
                        console.error('error submission on step 2!');
                        return false;
                     }
                 });
             },
+            removeRow(index) {
+                this.ruleForm.guests.splice(index,1);
+            },
+            addRow() {
+                this.ruleForm.guests.push({
+                    email: '',
+                    firstName: '',
+                    lastName: '',
+                    facebookName: '',
+                    clusterGroup: '',
+                    localChurch: '',
+                    country: 'Philippines',
+                    category: 'Free',
+                    booked: [],
+                });
+            }
         }
    }
    </script>
+
+   <style scoped>
+    small {
+        color: #F56C6C;
+        font-size: 12px;
+        line-height: 1;
+        padding-top: 4px;
+    }
+
+    .text-sm {
+        font-size: 12px;
+        color: gray;
+        margin-left: 2px;
+    }
+    </style>
