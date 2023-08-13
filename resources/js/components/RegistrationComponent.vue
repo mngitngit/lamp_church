@@ -18,7 +18,24 @@
         <div class="row justify-content-center">
             <div class="col-md-2">
                 <el-button v-if="currentStep > 1" plain @click="$refs.myChild.submitForm('back')">Back</el-button>
-                <el-button v-bind:type="(currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'primary' : ''" v-bind:plain="currentStep < 3" @click="$refs.myChild.submitForm('next')">{{ (currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'Submit' : 'Next' }}</el-button>
+                <el-button 
+                    v-if="
+                        (this.currentStep === 1 && this.data.step_1.withAwtaCard === 'yes' && this.data.step_1.attendingOption === 'Online') ||
+                        (this.currentStep === 2 && 
+                            (this.data.step_1.registrationType === 'Guest' || (this.data.step_1.registrationType === 'Member' && this.data.step_1.attendingOption === 'Online'))) ||
+                        this.currentStep === 3
+                    "
+                    type="primary" 
+                    @click="$refs.myChild.submitForm('next')">
+                    Submit
+                </el-button>
+                <el-button 
+                    v-else
+                    plain 
+                    @click="$refs.myChild.submitForm('next')">
+                    Next
+                </el-button>
+                <!-- <el-button v-bind:type="(currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'primary' : ''" v-bind:plain="currentStep < 3" @click="$refs.myChild.submitForm('next')">{{ (currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'Submit' : 'Next' }}</el-button> -->
             </div>
             <div class="col-md-3">
                 <el-progress :stroke-width="6" define-back-color="#595353" class="mt-lg-2" :color="customColorMethod" :percentage="(100 * currentStep) / 3" :format="format"></el-progress>
@@ -98,10 +115,18 @@
                 this.data.step_3 = {};
             },
             submit(data) {
-                this.data.step_3 = data
+                if (this.currentStep === 3) {
+                    this.data.step_3 = data
+                }
 
-                if (this.data.step_1.registrationType === 'Guest') {
+                if (this.currentStep === 2) {
                     this.data.step_2 = data;
+                    this.data.step_3 = {};
+                }
+
+                if (this.currentStep === 1) {
+                    this.data.step_1 = data;
+                    this.data.step_2 = {};
                     this.data.step_3 = {};
                 }
 

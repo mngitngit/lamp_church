@@ -21,6 +21,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '../css/app.css';
 import { Loading } from 'element-ui';
+import VueQRCodeComponent from 'vue-qrcode-component'
 
 import {func} from '../js/func.js';
 
@@ -37,7 +38,7 @@ Vue.config.lang = 'en'
 
 Vue.use(ElementUI, {locale});
 
-var JsBarcode = require('jsbarcode')
+Vue.component('qr-code', VueQRCodeComponent);
 
 const app = new Vue({
     el: '#app',

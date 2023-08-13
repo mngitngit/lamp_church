@@ -376,7 +376,7 @@
 
                 this.$refs['ruleForm'].validate((valid) => {
                     if (valid) {
-                        if (this.data.step_1.registrationType === 'Guest') {
+                        if (this.data.step_1.registrationType === 'Guest' || (this.data.step_1.registrationType === 'Member' && this.data.step_1.attendingOption === "Online")) {
                             this.$emit('submit', this.ruleForm);
                         } else {
                             this.$emit('change-step', {destination: 'step_3', current: 'step_2', data: this.ruleForm});

@@ -14,19 +14,20 @@ class AttendanceController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth',['except'=>['index', 'show', 'store']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'store']]);
     }
 
-    public function index(Request $request) {
-        $local_churches = explode('|', env('LOCAL_CHURCHES'));
+    public function index(Request $request)
+    {
+        $local_churches = explode(',', env('LOCAL_CHURCHES'));
 
         $slots = Slots::where('registration_type', 'Member')->where('id', env('SLOT_ID_TODAY_MEMBER'))->get();
         $attendance_count = [];
 
         foreach ($slots as $slot) {
-            $slot = (Object) $slot;
+            $slot = (object) $slot;
             $count = [];
-            
+
             $member = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Member')->first();
             $guest = Slots::where('event_date', $slot['event_date'])->where('registration_type', 'Guest')->first();
 
@@ -37,23 +38,23 @@ class AttendanceController extends Controller
                 $array['count'] = array(
                     'member' => array(
                         'total' => DB::table('bookings')
-                                ->where('local_church', $local_church)
-                                ->where('slot_id', $member->id)
-                                ->count(),
+                            ->where('local_church', $local_church)
+                            ->where('slot_id', $member->id)
+                            ->count(),
                         'attended' => DB::table('attendances')
-                                ->where('local_church', $local_church)
-                                ->where('slot_id', $member->id)
-                                ->count(),
+                            ->where('local_church', $local_church)
+                            ->where('slot_id', $member->id)
+                            ->count(),
                     ),
                     'guest' => array(
                         'total' => DB::table('bookings')
-                                ->where('local_church', $local_church)
-                                ->where('slot_id', $guest->id)
-                                ->count(),
+                            ->where('local_church', $local_church)
+                            ->where('slot_id', $guest->id)
+                            ->count(),
                         'attended' => DB::table('attendances')
-                                ->where('local_church', $local_church)
-                                ->where('slot_id', $guest->id)
-                                ->count(),
+                            ->where('local_church', $local_church)
+                            ->where('slot_id', $guest->id)
+                            ->count(),
                     )
                 );
 
@@ -72,14 +73,15 @@ class AttendanceController extends Controller
         ]);
     }
 
-    public function show($uuid, Request $request) {
-        if (! $uuid) {
+    public function show($uuid, Request $request)
+    {
+        if (!$uuid) {
             return response()->json(['error' => 'Please enter AWTA Card/Guest number.'], 500);
         }
 
         $registration = Registration::where('uuid', $uuid)->first();
 
-        if (! $registration) {
+        if (!$registration) {
             return response()->json(['error' => 'Not found. Please check the number and try again.'], 500);
         }
 
@@ -111,7 +113,8 @@ class AttendanceController extends Controller
         ];
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $registration = Registration::where('uuid', $request->details['uuid'])->first();
 
         $slot_id = $registration->registration_type === 'Member' ? env('SLOT_ID_TODAY_MEMBER') : env('SLOT_ID_TODAY_GUEST');
@@ -125,7 +128,7 @@ class AttendanceController extends Controller
                 'local_church' => $request->details['local_church']
             ]);
         }
-        
+
         return $attendance;
     }
 }

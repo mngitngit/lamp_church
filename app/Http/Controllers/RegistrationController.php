@@ -32,9 +32,6 @@ class RegistrationController extends Controller
 
             foreach ($request->data as $key => $value) {
                 $value = json_decode($value);
-                if (!$value->email) {
-                    $errors[$key]['email'] = 'Email is required.';
-                }
 
                 if (!$value->firstName) {
                     $errors[$key]['firstName'] = 'First Name is required.';

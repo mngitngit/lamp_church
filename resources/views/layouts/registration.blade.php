@@ -15,6 +15,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <script>
+        window.env = {
+            guest_booking_code: '{{ config('settings.guest_booking_code') }}'
+        };
+    </script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js?time=') }}{{ time() }}" defer></script>
 

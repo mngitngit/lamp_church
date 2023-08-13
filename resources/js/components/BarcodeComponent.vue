@@ -1,6 +1,8 @@
 <template>
     <div class="text-center">
-        <canvas id="barcode"></canvas>
+        <center>
+        <qr-code size="180" :text="uuid"></qr-code> <br>
+        </center>
         <small class="text-description d-block">Registration Reference</small>
         <h3 class="d-block">{{ uuid }}</h3>
     </div>
@@ -13,12 +15,6 @@ export default {
             required: true,
             type: String
         },
-    },
-    mounted() {
-        JsBarcode("#barcode", this.uuid, {
-            displayValue: false,
-            fontSize: 18
-        });
     }
 }
 </script>

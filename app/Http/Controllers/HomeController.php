@@ -66,7 +66,7 @@ class HomeController extends Controller
             return $slot;
         });
 
-        $local_churches = explode('|', env('LOCAL_CHURCHES'));
+        $local_churches = explode(',', env('LOCAL_CHURCHES'));
 
         $slots = Slots::where('registration_type', 'Member')->get();
         $attendance_count = [];

@@ -41,6 +41,11 @@
                             </el-select>
                         </el-form-item>
                     </div>
+                    <div class="col-md-6" v-if="ruleForm.attendingOption === 'Hybrid' && ruleForm.registrationType === 'Guest'">
+                        <el-form-item class="transform-uppercase" label="Booking Code" prop="bookingCode" :required="ruleForm.attendingOption === 'Hybrid' && ruleForm.registrationType === 'Guest'">
+                            <el-input v-model="ruleForm.bookingCode" :clearable="true"></el-input>
+                        </el-form-item>
+                    </div>
                 </div>
             </el-card>
 
@@ -99,6 +104,11 @@ export default {
                     callback(new Error(error.response.data.error))
                 });
         };
+        var checkBookingCode = async (rule, value, callback) => {
+            if (this.ruleForm.bookingCode != this.guest_booking_code) {
+                callback(new Error('Incorrect booking code'))
+            }
+        };
         return {
             ruleForm: {
                 registrationType: '',
@@ -121,7 +131,12 @@ export default {
                     { validator: checkAwtaCardNumber, trigger: ['submit'] },
                     { required: true, message: 'Please input your AWTA Card Number', trigger: ['blur', 'change']}
                 ],
-            }
+                bookingCode: [
+                    { required: true, message: 'Please input booking code', trigger: ['blur', 'change']},
+                    { validator: checkBookingCode, trigger: ['submit'] },
+                ],
+            },
+            guest_booking_code: window.env.guest_booking_code
         }
     },
     watch: {
@@ -150,7 +165,11 @@ export default {
                             cancelButtonText: 'No',
                             type: 'warning'
                         }).then(async () => {
-                            this.$emit('change-step', {destination: 'step_3', current: 'step_1', data: this.ruleForm});
+                            if (this.ruleForm.attendingOption === "Online") {
+                                this.$emit('submit', this.ruleForm);
+                            } else {
+                                this.$emit('change-step', {destination: 'step_3', current: 'step_1', data: this.ruleForm});
+                            }
                         }).catch(() => {
                             return callback(new Error('Please input your correct AWTA Card Number'));
                         });

@@ -25,6 +25,6 @@
     },
     "dependencies": {
         "element-ui": "^2.15.9",
-        "jsbarcode": "^3.11.5"
+        "vue-qrcode-component": "^2.1.1"
     }
 }
