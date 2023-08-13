@@ -2,11 +2,14 @@
 
 @section('content')
 <div class="px-4">
-    <ticket-component :registrations="{{ json_encode($registration) }}" />
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <el-link type="primary" class="float-end" href="/registration">Register Another Delegate</el-link>
         </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+        <ticket-component :registrations="{{ json_encode($registration) }}" />
     </div>
 </div>
 @endsection

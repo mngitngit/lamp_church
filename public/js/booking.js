@@ -7035,7 +7035,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   props: {
     registrations: {
       required: true,
-      type: Object
+      type: Array
     }
   },
   methods: {
@@ -7080,7 +7080,7 @@ var render = function render() {
     staticClass: "text-center"
   }, [_c("center", [_c("qr-code", {
     attrs: {
-      size: "180",
+      size: 180,
       text: _vm.uuid
     }
   }), _vm._v(" "), _c("br")], 1), _vm._v(" "), _c("small", {
@@ -7197,7 +7197,7 @@ var render = function render() {
   }, _vm._l(_vm.registrations, function (registration, i) {
     return _c("div", {
       key: i,
-      staticClass: "col-md-4"
+      staticClass: "col-md-4 mb-4"
     }, [_c("el-card", {
       staticClass: "box-card ticket-header"
     }, [_c("div", {

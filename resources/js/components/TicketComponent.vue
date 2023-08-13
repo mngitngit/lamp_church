@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center my-4">
-        <div class="col-md-4" v-for="(registration, i) in registrations" :key="i">
+        <div class="col-md-4 mb-4" v-for="(registration, i) in registrations" :key="i">
             <el-card class="box-card ticket-header">
                 <div slot="header" class="clearfix">
                     <span>LAMP WORLDWIDE AWTA 2023</span>
@@ -77,7 +77,7 @@ export default {
     props: {
         registrations: {
             required: true,
-            type: Object
+            type: Array
         }
     },
     methods: {
