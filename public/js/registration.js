@@ -6990,7 +6990,7 @@ __webpack_require__.r(__webpack_exports__);
         color: '#6f7ad3',
         percentage: 100
       }],
-      localChurches: ['Binan', 'Canlubang', 'Dasmarinas', 'Cruz', 'Granada', 'Isabela', 'Muntinlupa', 'Pateros', 'Tarlac', 'Valenzuela']
+      localChurches: ['Binan', 'Canlubang', 'Dasmarinas', 'Cruz', 'Visayas', 'Isabela', 'Muntinlupa', 'Pateros', 'Tarlac', 'Valenzuela']
     };
   },
   mounted: function mounted() {
@@ -7502,11 +7502,8 @@ var render = function render() {
         text: "Dasmarinas",
         value: "Dasmarinas"
       }, {
-        text: "DC Cruz",
-        value: "DC Cruz"
-      }, {
-        text: "Granada",
-        value: "Granada"
+        text: "Visayas",
+        value: "Visayas"
       }, {
         text: "Isabela",
         value: "Isabela"

@@ -71,7 +71,7 @@ export default {
                 'Canlubang',
                 'Dasmarinas',
                 'Cruz',
-                'Granada',
+                'Visayas',
                 'Isabela',
                 'Muntinlupa',
                 'Pateros',

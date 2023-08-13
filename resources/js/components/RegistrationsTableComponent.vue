@@ -64,7 +64,7 @@
       label="Local Church"
       align="center"
       column-key="date"
-      :filters="[{text: 'Binan', value: 'Binan'},{text: 'Canlubang', value: 'Canlubang'},{text: 'Dasmarinas', value: 'Dasmarinas'},{text: 'DC Cruz', value: 'DC Cruz'},{text: 'Granada', value: 'Granada'},{text: 'Isabela', value: 'Isabela'},{text: 'Muntinlupa', value: 'Muntinlupa'},{text: 'Pateros', value: 'Pateros'},{text: 'Tarlac', value: 'Tarlac'},{text: 'Valenzuela', value: 'Valenzuela'},{text: 'Villamar/Maao'}]"
+      :filters="[{text: 'Binan', value: 'Binan'},{text: 'Canlubang', value: 'Canlubang'},{text: 'Dasmarinas', value: 'Dasmarinas'},{text: 'Visayas', value: 'Visayas'},{text: 'Isabela', value: 'Isabela'},{text: 'Muntinlupa', value: 'Muntinlupa'},{text: 'Pateros', value: 'Pateros'},{text: 'Tarlac', value: 'Tarlac'},{text: 'Valenzuela', value: 'Valenzuela'},{text: 'Villamar/Maao'}]"
       :filter-method="filterHandler"
       filter-placement="bottom-end"
       width="150">

@@ -8449,13 +8449,8 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
-      label: "DC Cruz",
-      value: "DC Cruz"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Granada",
-      value: "Granada"
+      label: "Visayas",
+      value: "Visayas"
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
@@ -9132,13 +9127,8 @@ var render = function render() {
       }
     }), _vm._v(" "), _c("el-option", {
       attrs: {
-        label: "DC Cruz",
-        value: "DC Cruz"
-      }
-    }), _vm._v(" "), _c("el-option", {
-      attrs: {
-        label: "Granada",
-        value: "Granada"
+        label: "Visayas",
+        value: "Visayas"
       }
     }), _vm._v(" "), _c("el-option", {
       attrs: {
@@ -9354,13 +9344,8 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {
-      label: "DC Cruz",
-      value: "DC Cruz"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Granada",
-      value: "Granada"
+      label: "Visayas",
+      value: "Visayas"
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {

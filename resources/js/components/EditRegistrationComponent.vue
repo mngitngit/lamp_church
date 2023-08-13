@@ -29,8 +29,7 @@
                             <el-option label="Binan" value="Binan"></el-option>
                             <el-option label="Canlubang" value="Canlubang"></el-option>
                             <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
-                            <el-option label="DC Cruz" value="DC Cruz"></el-option>
-                            <el-option label="Granada" value="Granada"></el-option>
+                            <el-option label="Visayas" value="Visayas"></el-option>
                             <el-option label="Isabela" value="Isabela"></el-option>
                             <el-option label="Muntinlupa" value="Muntinlupa"></el-option>
                             <el-option label="Pateros" value="Pateros"></el-option>
