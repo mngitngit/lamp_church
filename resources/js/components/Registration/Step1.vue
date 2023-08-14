@@ -53,7 +53,26 @@
                 <div class="row">
                     <div class="col-md-6" v-if="ruleForm.withAwtaCard === 'yes'">
                         <el-form-item class="transform-uppercase" label="What is your AWTA card number?" prop="awtaCardNumber" :required="ruleForm.withAwtaCard === 'yes'">
-                            <el-input v-model="ruleForm.awtaCardNumber" :clearable="true"></el-input>
+                            <el-input v-model="ruleForm.awtaCardNumber" @clear="resetData('awta-card')" :clearable="true"></el-input>
+                        </el-form-item>
+                    </div>
+                    <div class="col-md-6" v-if="ruleForm.withAwtaCard === 'yes'">
+                        <el-form-item label="Cluster Group" prop="clusterGroup" required>
+                            <el-select v-model="ruleForm.clusterGroup" placeholder="Select">
+                                <el-option v-if="options.length > 0" label="No Cluster Group" value="No Cluster">
+                                </el-option>
+                                <el-option-group
+                                    v-for="group in options"
+                                    :key="group.label"
+                                    :label="group.label">
+                                    <el-option
+                                        v-for="item in group.options"
+                                        :key="item"
+                                        :label="item"
+                                        :value="item">
+                                    </el-option>
+                                </el-option-group>
+                            </el-select>
                         </el-form-item>
                     </div>
                 </div>
@@ -77,15 +96,18 @@ export default {
     },
     data() {
         var checkAwtaCardNumber = async (rule, value, callback) => {
-            if (!value && this.ruleForm.withAwtaCard === 'yes') {
-                return callback(new Error('Please input your AWTA Card Number'));
-            }
+            if (value.length === 9) {  
+                if (value.length > 9) 
+                    return callback(new Error('Invalid AWTA Card Number'));
 
-            this.resetData('all');
-            this.isLoading = true
+                if (!value && this.ruleForm.withAwtaCard === 'yes') {
+                    return callback(new Error('Please input your AWTA Card Number'));
+                }
 
-            await axios.get(`/lookup/${this.ruleForm.awtaCardNumber}`)
-                .then(async (response) => {
+                this.isLoading = true
+
+                await axios.get(`/lookup/${this.ruleForm.awtaCardNumber}`)
+                    .then(async (response) => {
                         this.ruleForm.found.email = response.data.email
                         this.ruleForm.found.firstName = response.data.firstname
                         this.ruleForm.found.lastName = response.data.lastname
@@ -97,12 +119,15 @@ export default {
                         this.ruleForm.found.attendingOption = this.ruleForm.attendingOption
                         this.ruleForm.found.withAwtaCard = 'yes'
                         this.ruleForm.found.localChurch = response.data.local_church
+                        this.options = this.assignments[response.data.local_church]
                         this.isLoading = false
                         callback();
-                }).catch((error) => {
-                    this.isLoading = false
-                    callback(new Error(error.response.data.error))
-                });
+                    }).catch((error) => {
+                        this.resetData('awta-card');
+                        this.isLoading = false
+                        callback(new Error(error.response.data.error))
+                    });
+            }
         };
         var checkBookingCode = async (rule, value, callback) => {
             if (this.ruleForm.bookingCode != this.guest_booking_code) {
@@ -115,6 +140,7 @@ export default {
                 withAwtaCard: '',
                 attendingOption: '',
                 awtaCardNumber: '',
+                clusterGroup: '',
                 found: {}
             },
             rules: {
@@ -128,15 +154,27 @@ export default {
                     { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
                 ],
                 awtaCardNumber: [
-                    { validator: checkAwtaCardNumber, trigger: ['submit'] },
+                    { validator: checkAwtaCardNumber, trigger: ['change'] },
+                    { validator: async (rule, value, callback) => {
+                        if (this.ruleForm.awtaCardNumber.length > 9 || this.ruleForm.awtaCardNumber.length < 9) {
+                            this.options = [];
+                            this.ruleForm.clusterGroup = ''
+                            return callback(new Error('Invalid AWTA Card Number'));
+                        }
+                    }, trigger: ['blur'] },
                     { required: true, message: 'Please input your AWTA Card Number', trigger: ['blur', 'change']}
                 ],
                 bookingCode: [
                     { required: true, message: 'Please input booking code', trigger: ['blur', 'change']},
                     { validator: checkBookingCode, trigger: ['submit'] },
                 ],
+                clusterGroup: [
+                    { required: true, message: 'Please select your cluster group', trigger: ['blur', 'change']},
+                ]
             },
-            guest_booking_code: window.env.guest_booking_code
+            guest_booking_code: window.env.guest_booking_code,
+            assignments: window.env.cluster_groups,
+            options: []
         }
     },
     watch: {
@@ -147,7 +185,13 @@ export default {
             if (old) this.resetData('with-awta-card')
         },
         'ruleForm.attendingOption'(data, old) {
-            if (old) this.resetData('all')
+            if (old) this.resetData('attending-option')
+        },
+        'ruleForm.awtaCardNumber' (data, old) {
+            if (old) this.resetData('awta-card')
+        },
+        'options'(data, old) {
+            if (old.length > 0) this.ruleForm.clusterGroup = ''
         }
     },
     mounted() {
@@ -170,9 +214,7 @@ export default {
                             } else {
                                 this.$emit('change-step', {destination: 'step_3', current: 'step_1', data: this.ruleForm});
                             }
-                        }).catch(() => {
-                            return callback(new Error('Please input your correct AWTA Card Number'));
-                        });
+                        })
                     } else {
                         this.$emit('change-step', {destination: 'step_2', current: 'step_1', data: this.ruleForm});
                     }
@@ -183,6 +225,7 @@ export default {
             });
         },
         resetData(scope) {
+            console.log(scope)
             if (scope === 'all') {
                 this.$emit('reset');
                 this.ruleForm.found = {}
@@ -190,14 +233,25 @@ export default {
                 this.ruleForm.withAwtaCard = ''
                 this.ruleForm.attendingOption = ''
                 this.ruleForm.awtaCardNumber = ''
+                this.ruleForm.bookingCode = ''
                 this.ruleForm.found = {}
                 this.$emit('reset');
             } else if (scope === 'with-awta-card') {
                 this.ruleForm.awtaCardNumber = ''
                 this.ruleForm.found = {}
                 this.$emit('reset');
+            } else if (scope === 'attending-option') {
+                this.$emit('reset');
+                this.ruleForm.bookingCode = ''
+                this.ruleForm.found = {}
+            } else if (scope === 'awta-card') {
+                this.$emit('reset');
+                this.ruleForm.bookingCode = ''
+                this.ruleForm.found = {}
+                this.options = []
+                this.ruleForm.clusterGroup = ''
             }
-        },
+        }
     }
 }
 </script>

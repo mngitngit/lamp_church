@@ -22,6 +22,7 @@ class CreateLookUpsTable extends Migration
             $table->string('facebook_name')->nullable();
             $table->string('registration_type');
             $table->string('local_church');
+            $table->string('cluster_group')->nullable();
             $table->string('country');
             $table->string('category');
             $table->boolean('is_registered')->default(false);

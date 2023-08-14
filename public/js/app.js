@@ -7268,18 +7268,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                if (!(value.length === 9)) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                if (!(value.length > 9)) {
+                  _context2.next = 3;
+                  break;
+                }
+
+                return _context2.abrupt("return", callback(new Error('Invalid AWTA Card Number')));
+
+              case 3:
                 if (!(!value && _this.ruleForm.withAwtaCard === 'yes')) {
-                  _context2.next = 2;
+                  _context2.next = 5;
                   break;
                 }
 
                 return _context2.abrupt("return", callback(new Error('Please input your AWTA Card Number')));
 
-              case 2:
-                _this.resetData('all');
-
+              case 5:
                 _this.isLoading = true;
-                _context2.next = 6;
+                _context2.next = 8;
                 return axios.get("/lookup/".concat(_this.ruleForm.awtaCardNumber)).then( /*#__PURE__*/function () {
                   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
                     return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -7297,10 +7308,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             _this.ruleForm.found.attendingOption = _this.ruleForm.attendingOption;
                             _this.ruleForm.found.withAwtaCard = 'yes';
                             _this.ruleForm.found.localChurch = response.data.local_church;
+                            _this.options = _this.assignments[response.data.local_church];
                             _this.isLoading = false;
                             callback();
 
-                          case 13:
+                          case 14:
                           case "end":
                             return _context.stop();
                         }
@@ -7312,11 +7324,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     return _ref2.apply(this, arguments);
                   };
                 }())["catch"](function (error) {
+                  _this.resetData('awta-card');
+
                   _this.isLoading = false;
                   callback(new Error(error.response.data.error));
                 });
 
-              case 6:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -7358,6 +7372,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         withAwtaCard: '',
         attendingOption: '',
         awtaCardNumber: '',
+        clusterGroup: '',
         found: {}
       },
       rules: {
@@ -7378,7 +7393,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }],
         awtaCardNumber: [{
           validator: checkAwtaCardNumber,
-          trigger: ['submit']
+          trigger: ['change']
+        }, {
+          validator: function () {
+            var _validator = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(rule, value, callback) {
+              return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      if (!(_this.ruleForm.awtaCardNumber.length > 9 || _this.ruleForm.awtaCardNumber.length < 9)) {
+                        _context4.next = 4;
+                        break;
+                      }
+
+                      _this.options = [];
+                      _this.ruleForm.clusterGroup = '';
+                      return _context4.abrupt("return", callback(new Error('Invalid AWTA Card Number')));
+
+                    case 4:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4);
+            }));
+
+            function validator(_x8, _x9, _x10) {
+              return _validator.apply(this, arguments);
+            }
+
+            return validator;
+          }(),
+          trigger: ['blur']
         }, {
           required: true,
           message: 'Please input your AWTA Card Number',
@@ -7391,9 +7437,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, {
           validator: checkBookingCode,
           trigger: ['submit']
+        }],
+        clusterGroup: [{
+          required: true,
+          message: 'Please select your cluster group',
+          trigger: ['blur', 'change']
         }]
       },
-      guest_booking_code: window.env.guest_booking_code
+      guest_booking_code: window.env.guest_booking_code,
+      assignments: window.env.cluster_groups,
+      options: []
     };
   },
   watch: {
@@ -7404,7 +7457,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (old) this.resetData('with-awta-card');
     },
     'ruleForm.attendingOption': function ruleFormAttendingOption(data, old) {
-      if (old) this.resetData('all');
+      if (old) this.resetData('attending-option');
+    },
+    'ruleForm.awtaCardNumber': function ruleFormAwtaCardNumber(data, old) {
+      if (old) this.resetData('awta-card');
+    },
+    'options': function options(data, old) {
+      if (old.length > 0) this.ruleForm.clusterGroup = '';
     }
   },
   mounted: function mounted() {
@@ -7423,10 +7482,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               confirmButtonText: 'Yes',
               cancelButtonText: 'No',
               type: 'warning'
-            }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-              return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+            }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+              return _regeneratorRuntime().wrap(function _callee5$(_context5) {
                 while (1) {
-                  switch (_context4.prev = _context4.next) {
+                  switch (_context5.prev = _context5.next) {
                     case 0:
                       if (_this2.ruleForm.attendingOption === "Online") {
                         _this2.$emit('submit', _this2.ruleForm);
@@ -7440,13 +7499,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     case 1:
                     case "end":
-                      return _context4.stop();
+                      return _context5.stop();
                   }
                 }
-              }, _callee4);
-            })))["catch"](function () {
-              return callback(new Error('Please input your correct AWTA Card Number'));
-            });
+              }, _callee5);
+            })));
           } else {
             _this2.$emit('change-step', {
               destination: 'step_2',
@@ -7461,6 +7518,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     resetData: function resetData(scope) {
+      console.log(scope);
+
       if (scope === 'all') {
         this.$emit('reset');
         this.ruleForm.found = {};
@@ -7468,12 +7527,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.ruleForm.withAwtaCard = '';
         this.ruleForm.attendingOption = '';
         this.ruleForm.awtaCardNumber = '';
+        this.ruleForm.bookingCode = '';
         this.ruleForm.found = {};
         this.$emit('reset');
       } else if (scope === 'with-awta-card') {
         this.ruleForm.awtaCardNumber = '';
         this.ruleForm.found = {};
         this.$emit('reset');
+      } else if (scope === 'attending-option') {
+        this.$emit('reset');
+        this.ruleForm.bookingCode = '';
+        this.ruleForm.found = {};
+      } else if (scope === 'awta-card') {
+        this.$emit('reset');
+        this.ruleForm.bookingCode = '';
+        this.ruleForm.found = {};
+        this.options = [];
+        this.ruleForm.clusterGroup = '';
       }
     }
   }
@@ -7520,7 +7590,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(_this.data.step_1.withAwtaCard === 'lost' && _this.ruleForm.lastName != '' && _this.ruleForm.localChurch != '')) {
+                if (!(_this.data.step_1.withAwtaCard === 'lost' && _this.ruleForm.lastName != '' && _this.ruleForm.localChurch != '' && _this.ruleForm.clusterGroup != '')) {
                   _context2.next = 8;
                   break;
                 }
@@ -7725,6 +7795,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         category: 'Adult',
         lookUp: [],
         selected: '',
+        clusterGroup: '',
         guests: [{
           email: '',
           firstName: '',
@@ -7775,15 +7846,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         guests: [{
           validator: checkGuests,
           trigger: ['change']
+        }],
+        clusterGroup: [{
+          required: true,
+          message: 'Please select Cluster Group',
+          trigger: 'change'
         }]
       },
       countries: this.$allCountries,
       maxBulk: 10,
       errors: [],
-      dates: []
+      dates: [],
+      assignments: window.env.cluster_groups
     };
   },
+  watch: {
+    'ruleForm.localChurch': function ruleFormLocalChurch(data, old) {
+      if (old) this.ruleForm.clusterGroup = '';
+    },
+    'ruleForm.lastName': function ruleFormLastName(data, old) {
+      if (old) {
+        this.ruleForm.lookUp = [];
+        this.ruleForm.localChurch = '';
+        this.ruleForm.clusterGroup = '';
+      }
+    }
+  },
   mounted: function mounted() {
+    var _this2 = this;
+
+    this.$refs['ruleForm'].validate.lastName;
+
     if (Object.keys(this.data.step_2).length != 0) {
       this.ruleForm = this.data.step_2;
     }
@@ -7798,10 +7891,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         "seat_count": date.seat_count
       };
     });
+    this.ruleForm.guests.forEach(function (element) {
+      _this2.dates = _this2.dates.map(function (date) {
+        date.available = element.booked.includes(date.id) ? date.available - 1 : date.available;
+        return date;
+      });
+    });
   },
   methods: {
     submitForm: function submitForm(action) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (action == 'back') {
         this.$emit('change-step', {
@@ -7814,13 +7913,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.$refs['ruleForm'].validate(function (valid) {
         if (valid) {
-          if (_this2.data.step_1.registrationType === 'Guest' || _this2.data.step_1.registrationType === 'Member' && _this2.data.step_1.attendingOption === "Online") {
-            _this2.$emit('submit', _this2.ruleForm);
+          if (_this3.data.step_1.registrationType === 'Guest' || _this3.data.step_1.registrationType === 'Member' && _this3.data.step_1.attendingOption === "Online") {
+            _this3.$emit('submit', _this3.ruleForm);
           } else {
-            _this2.$emit('change-step', {
+            _this3.$emit('change-step', {
               destination: 'step_3',
               current: 'step_2',
-              data: _this2.ruleForm
+              data: _this3.ruleForm
             });
           }
         } else {
@@ -7844,6 +7943,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         category: 'Free',
         booked: []
       });
+    },
+    removeClusterGroup: function removeClusterGroup(index) {
+      this.ruleForm.guests[index].clusterGroup = '';
+    },
+    onChangeProcessed: function onChangeProcessed(isChecked, id) {
+      for (var i = 0, len = this.dates.length; i < len; i++) {
+        if (this.dates[i]['id'] === id) {
+          this.dates[i]['available'] += isChecked ? -1 : 1;
+          break;
+        }
+      }
     }
   }
 });
@@ -8901,6 +9011,11 @@ var render = function render() {
     attrs: {
       clearable: true
     },
+    on: {
+      clear: function clear($event) {
+        return _vm.resetData("awta-card");
+      }
+    },
     model: {
       value: _vm.ruleForm.awtaCardNumber,
       callback: function callback($$v) {
@@ -8908,7 +9023,46 @@ var render = function render() {
       },
       expression: "ruleForm.awtaCardNumber"
     }
-  })], 1)], 1) : _vm._e()])]) : _vm._e()], 1)], 1)]);
+  })], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.withAwtaCard === "yes" ? _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Cluster Group",
+      prop: "clusterGroup",
+      required: ""
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Select"
+    },
+    model: {
+      value: _vm.ruleForm.clusterGroup,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "clusterGroup", $$v);
+      },
+      expression: "ruleForm.clusterGroup"
+    }
+  }, [_vm.options.length > 0 ? _c("el-option", {
+    attrs: {
+      label: "No Cluster Group",
+      value: "No Cluster"
+    }
+  }) : _vm._e(), _vm._v(" "), _vm._l(_vm.options, function (group) {
+    return _c("el-option-group", {
+      key: group.label,
+      attrs: {
+        label: group.label
+      }
+    }, _vm._l(group.options, function (item) {
+      return _c("el-option", {
+        key: item,
+        attrs: {
+          label: item,
+          value: item
+        }
+      });
+    }), 1);
+  })], 2)], 1)], 1) : _vm._e()])]) : _vm._e()], 1)], 1)]);
 };
 
 var staticRenderFns = [];
@@ -9103,6 +9257,11 @@ var render = function render() {
         size: "mini",
         placeholder: "Local Church"
       },
+      on: {
+        change: function change($event) {
+          return _vm.removeClusterGroup(i);
+        }
+      },
       model: {
         value: guest.localChurch,
         callback: function callback($$v) {
@@ -9110,65 +9269,27 @@ var render = function render() {
         },
         expression: "guest.localChurch"
       }
-    }, [_c("el-option", {
-      attrs: {
-        label: "Binan",
-        value: "Binan"
-      }
-    }), _vm._v(" "), _c("el-option", {
-      attrs: {
-        label: "Canlubang",
-        value: "Canlubang"
-      }
-    }), _vm._v(" "), _c("el-option", {
-      attrs: {
-        label: "Dasmarinas",
-        value: "Dasmarinas"
-      }
-    }), _vm._v(" "), _c("el-option", {
-      attrs: {
-        label: "Visayas",
-        value: "Visayas"
-      }
-    }), _vm._v(" "), _c("el-option", {
-      attrs: {
-        label: "Isabela",
-        value: "Isabela"
-      }
-    }), _vm._v(" "), _c("el-option", {
-      attrs: {
-        label: "Muntinlupa",
-        value: "Muntinlupa"
-      }
-    }), _vm._v(" "), _c("el-option", {
-      attrs: {
-        label: "Pateros",
-        value: "Pateros"
-      }
-    }), _vm._v(" "), _c("el-option", {
-      attrs: {
-        label: "Tarlac",
-        value: "Tarlac"
-      }
-    }), _vm._v(" "), _c("el-option", {
-      attrs: {
-        label: "Valenzuela",
-        value: "Valenzuela"
-      }
-    })], 1), _vm._v(" "), _vm.errors[i] && (_vm.errors[i]["localChurch"] || _vm.errors[i]["clusterGroup"]) ? _c("small", {
+    }, _vm._l(_vm.assignments, function (value, local_church) {
+      return _c("el-option", {
+        key: local_church,
+        attrs: {
+          label: local_church,
+          value: local_church
+        }
+      });
+    }), 1), _vm._v(" "), _vm.errors[i] && (_vm.errors[i]["localChurch"] || _vm.errors[i]["clusterGroup"]) ? _c("small", {
       staticClass: "text-error"
     }, [_vm.errors[i]["localChurch"] ? _c("span", [_vm._v(_vm._s(_vm.errors[i]["localChurch"]))]) : _vm._e(), _vm._v(" \n                                     ")]) : _vm._e()], 1), _vm._v(" "), _c("td", {
       staticClass: "p-1"
     }, [_c("label", {
       staticClass: "text-sm"
-    }, [_vm._v("Cluster Group")]), _vm._v(" "), _c("el-input", {
+    }, [_vm._v("Cluster Group")]), _vm._v(" "), _c("el-select", {
       "class": {
         "has-error": _vm.errors[i] && _vm.errors[i]["clusterGroup"]
       },
       attrs: {
         size: "mini",
-        placeholder: "Cluster Group",
-        error: true
+        placeholder: "Cluster Group"
       },
       model: {
         value: guest.clusterGroup,
@@ -9177,7 +9298,22 @@ var render = function render() {
         },
         expression: "guest.clusterGroup"
       }
-    }), _vm._v(" "), _vm.errors[i] && (_vm.errors[i]["localChurch"] || _vm.errors[i]["clusterGroup"]) ? _c("small", {
+    }, _vm._l(_vm.assignments[_vm.ruleForm.guests[i].localChurch], function (group) {
+      return _c("el-option-group", {
+        key: group.label,
+        attrs: {
+          label: group.label
+        }
+      }, _vm._l(group.options, function (item) {
+        return _c("el-option", {
+          key: item,
+          attrs: {
+            label: item,
+            value: item
+          }
+        });
+      }), 1);
+    }), 1), _vm._v(" "), _vm.errors[i] && (_vm.errors[i]["localChurch"] || _vm.errors[i]["clusterGroup"]) ? _c("small", {
       staticClass: "text-error"
     }, [_vm.errors[i]["clusterGroup"] ? _c("span", [_vm._v(_vm._s(_vm.errors[i]["clusterGroup"]))]) : _vm._e(), _vm._v(" \n                                     ")]) : _vm._e()], 1)]), _vm._v(" "), _c("tr", [_c("td", {
       staticClass: "p-1",
@@ -9202,6 +9338,11 @@ var render = function render() {
         key: date.id,
         attrs: {
           label: date.id
+        },
+        on: {
+          change: function change($event) {
+            return _vm.onChangeProcessed($event, date.id);
+          }
         }
       }, [_c("label", {
         staticClass: "mb-1"
@@ -9327,52 +9468,53 @@ var render = function render() {
       },
       expression: "ruleForm.localChurch"
     }
-  }, [_c("el-option", {
+  }, _vm._l(_vm.assignments, function (value, local_church) {
+    return _c("el-option", {
+      key: local_church,
+      attrs: {
+        label: local_church,
+        value: local_church
+      }
+    });
+  }), 1)], 1)], 1) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
     attrs: {
-      label: "Binan",
-      value: "Binan"
+      label: "Cluster Group",
+      prop: "clusterGroup"
     }
-  }), _vm._v(" "), _c("el-option", {
+  }, [_c("el-select", {
     attrs: {
-      label: "Canlubang",
-      value: "Canlubang"
+      placeholder: "Select"
+    },
+    model: {
+      value: _vm.ruleForm.clusterGroup,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "clusterGroup", $$v);
+      },
+      expression: "ruleForm.clusterGroup"
     }
-  }), _vm._v(" "), _c("el-option", {
+  }, [_vm.ruleForm.localChurch != "" || _vm.data.step_1.registrationType === "Guest" ? _c("el-option", {
     attrs: {
-      label: "Dasmarinas",
-      value: "Dasmarinas"
+      label: "No Cluster Group",
+      value: "No Cluster"
     }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Visayas",
-      value: "Visayas"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Isabela",
-      value: "Isabela"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Muntinlupa",
-      value: "Muntinlupa"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Pateros",
-      value: "Pateros"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Tarlac",
-      value: "Tarlac"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Valenzuela",
-      value: "Valenzuela"
-    }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.registrationType === "Guest" ? _c("div", {
+  }) : _vm._e(), _vm._v(" "), _vm._l(_vm.assignments[_vm.ruleForm.localChurch], function (group) {
+    return _c("el-option-group", {
+      key: group.label,
+      attrs: {
+        label: group.label
+      }
+    }, _vm._l(group.options, function (item) {
+      return _c("el-option", {
+        key: item,
+        attrs: {
+          label: item,
+          value: item
+        }
+      });
+    }), 1);
+  })], 2)], 1)], 1), _vm._v(" "), _vm.data.step_1.withAwtaCard === "none" || _vm.data.step_1.registrationType === "Guest" ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
@@ -9403,7 +9545,7 @@ var render = function render() {
     staticClass: "col-md-12"
   }, [_c("el-form-item", {
     attrs: {
-      label: "Please choose your name",
+      label: "Please choose your name (if disabled, already registered)",
       prop: "selected",
       required: ""
     }
@@ -9412,6 +9554,7 @@ var render = function render() {
       key: data.id,
       attrs: {
         label: data.lamp_card_number,
+        disabled: data.is_registered === 1,
         border: ""
       },
       model: {

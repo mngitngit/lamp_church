@@ -17,7 +17,8 @@
 
     <script>
         window.env = {
-            guest_booking_code: '{{ config('settings.guest_booking_code') }}'
+            guest_booking_code: '{{ config('settings.guest_booking_code') }}',
+            cluster_groups: {!! json_encode(config('clustergroups')) !!}
         };
     </script>
     <!-- Scripts -->

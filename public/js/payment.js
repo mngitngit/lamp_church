@@ -73303,16 +73303,6 @@ module.exports = "/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff?31
 
 /***/ }),
 
-/***/ "./node_modules/jsbarcode/bin/JsBarcode.js":
-/*!*************************************************!*\
-  !*** ./node_modules/jsbarcode/bin/JsBarcode.js ***!
-  \*************************************************/
-/***/ (() => {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/mela/code/lamp_church/node_modules/jsbarcode/bin/JsBarcode.js'");
-
-/***/ }),
-
 /***/ "./node_modules/lodash/lodash.js":
 /*!***************************************!*\
   !*** ./node_modules/lodash/lodash.js ***!
@@ -105092,9 +105082,6 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].config.lang = 'en';
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use((element_ui__WEBPACK_IMPORTED_MODULE_1___default()), {
   locale: element_ui_lib_locale_lang_en__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
-
-var JsBarcode = __webpack_require__(/*! jsbarcode */ "./node_modules/jsbarcode/bin/JsBarcode.js");
-
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#app',
   data: function data() {

@@ -119,6 +119,7 @@ class RegistrationController extends Controller
                     $category = $details['category'];
                     $attending_option = $details['attendingOption'];
                     $with_awta_card = $details['withAwtaCard'];
+                    $cluster_group = $details['clusterGroup'];
                     $awta_card_number = '--';
                     break;
 
@@ -138,6 +139,7 @@ class RegistrationController extends Controller
                     $category = $details['category'];
                     $attending_option = $details['attendingOption'];
                     $with_awta_card = $details['withAwtaCard'];
+                    $cluster_group = $details['clusterGroup'];
                     $awta_card_number = $details['selected'];
                     break;
 
@@ -155,6 +157,7 @@ class RegistrationController extends Controller
                     $category = $details['found']['category'];
                     $attending_option = $details['attendingOption'];
                     $with_awta_card = $details['withAwtaCard'];
+                    $cluster_group = $details['clusterGroup'];
                     $awta_card_number = $details['awtaCardNumber'];
                     break;
             }
@@ -170,6 +173,7 @@ class RegistrationController extends Controller
                 'facebook_name' => $facebook,
                 'registration_type' => $registration_type,
                 'local_church' => $local_church,
+                'cluster_group' => $cluster_group,
                 'country' => $country,
                 'category' => $category,
                 'attending_option' => $attending_option,
@@ -228,6 +232,7 @@ class RegistrationController extends Controller
                         'facebook_name' => $details->facebookName,
                         'registration_type' => 'Guest',
                         'local_church' => $details->localChurch,
+                        'cluster_group' => $details->clusterGroup,
                         'country' => $details->country,
                         'category' => $details->category,
                         'attending_option' => 'Hybrid',
@@ -256,6 +261,7 @@ class RegistrationController extends Controller
                     'facebook_name' => $details->facebookName,
                     'registration_type' => 'Guest',
                     'local_church' => $details->localChurch,
+                    'cluster_group' => $details->clusterGroup,
                     'country' => $details->country,
                     'category' => $details->category,
                     'attending_option' => 'Online',

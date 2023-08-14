@@ -30,9 +30,7 @@
  Vue.config.lang = 'en'
  
  Vue.use(ElementUI, {locale});
- 
- var JsBarcode = require('jsbarcode')
- 
+  
  const app = new Vue({
      el: '#app',
      data: function() {

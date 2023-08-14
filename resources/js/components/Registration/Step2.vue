@@ -80,16 +80,9 @@
                                             :class="{'has-error' : (errors[i] && errors[i]['localChurch']) || (errors[i] && errors[i]['invalid'])}" 
                                             size="mini" 
                                             v-model="guest.localChurch" 
-                                            placeholder="Local Church">
-                                            <el-option label="Binan" value="Binan"></el-option>
-                                            <el-option label="Canlubang" value="Canlubang"></el-option>
-                                            <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
-                                            <el-option label="Visayas" value="Visayas"></el-option>
-                                            <el-option label="Isabela" value="Isabela"></el-option>
-                                            <el-option label="Muntinlupa" value="Muntinlupa"></el-option>
-                                            <el-option label="Pateros" value="Pateros"></el-option>
-                                            <el-option label="Tarlac" value="Tarlac"></el-option>
-                                            <el-option label="Valenzuela" value="Valenzuela"></el-option>
+                                            placeholder="Local Church"
+                                            @change="removeClusterGroup(i)">
+                                            <el-option v-for="(value, local_church) in assignments" :key="local_church" :label="local_church" :value="local_church"></el-option>
                                         </el-select>
                                         <small v-if="errors[i] && (errors[i]['localChurch'] || errors[i]['clusterGroup'])" class="text-error">
                                             <span v-if="errors[i]['localChurch']">{{ errors[i]['localChurch'] }}</span>&nbsp;
@@ -97,13 +90,23 @@
                                     </td>
                                     <td class="p-1">
                                         <label class="text-sm">Cluster Group</label>
-                                        <el-input
+                                        <el-select 
                                             size="mini"
                                             :class="{'has-error' : (errors[i] && errors[i]['clusterGroup'])}"
-                                            placeholder="Cluster Group"
-                                            v-model="guest.clusterGroup"
-                                            :error="true">
-                                        </el-input>
+                                            v-model="guest.clusterGroup" 
+                                            placeholder="Cluster Group">
+                                            <el-option-group
+                                            v-for="group in assignments[ruleForm.guests[i].localChurch]"
+                                                :key="group.label"
+                                                :label="group.label">
+                                                <el-option
+                                                    v-for="item in group.options"
+                                                    :key="item"
+                                                    :label="item"
+                                                    :value="item">
+                                                </el-option>
+                                            </el-option-group>
+                                        </el-select>
                                         <small v-if="errors[i] && (errors[i]['localChurch'] || errors[i]['clusterGroup'])" class="text-error">
                                             <span v-if="errors[i]['clusterGroup']">{{ errors[i]['clusterGroup'] }}</span>&nbsp;
                                         </small>
@@ -113,7 +116,7 @@
                                     <td colspan="3" class="p-1">
                                         <label class="text-sm">Select Preferred Dates</label>
                                         <el-checkbox-group v-model="guest.booked" size="mini">
-                                            <el-checkbox-button v-for="(date, index) in dates" :label="date.id" :key="date.id">
+                                            <el-checkbox-button v-for="(date, index) in dates" :label="date.id" :key="date.id" @change="onChangeProcessed($event, date.id)">
                                                 <label class="mb-1">{{ date.event_date }}</label> <br> 
                                                 <span>{{ date.available }} left!</span>
                                             </el-checkbox-button>
@@ -164,15 +167,27 @@
                         <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.withAwtaCard === 'lost' || data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item label="Local Church" prop="localChurch" required>
                                 <el-select v-model="ruleForm.localChurch" placeholder="Choose">
-                                    <el-option label="Binan" value="Binan"></el-option>
-                                    <el-option label="Canlubang" value="Canlubang"></el-option>
-                                    <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
-                                    <el-option label="Visayas" value="Visayas"></el-option>
-                                    <el-option label="Isabela" value="Isabela"></el-option>
-                                    <el-option label="Muntinlupa" value="Muntinlupa"></el-option>
-                                    <el-option label="Pateros" value="Pateros"></el-option>
-                                    <el-option label="Tarlac" value="Tarlac"></el-option>
-                                    <el-option label="Valenzuela" value="Valenzuela"></el-option>
+                                    <el-option v-for="(value, local_church) in assignments" :key="local_church" :label="local_church" :value="local_church"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </div>
+
+                        <div class="col-md-6">
+                            <el-form-item label="Cluster Group" prop="clusterGroup">
+                                <el-select v-model="ruleForm.clusterGroup" placeholder="Select">
+                                    <el-option v-if="ruleForm.localChurch != '' || data.step_1.registrationType === 'Guest'" label="No Cluster Group" value="No Cluster">
+                                    </el-option>
+                                    <el-option-group
+                                    v-for="group in assignments[ruleForm.localChurch]"
+                                    :key="group.label"
+                                    :label="group.label">
+                                    <el-option
+                                        v-for="item in group.options"
+                                        :key="item"
+                                        :label="item"
+                                        :value="item">
+                                    </el-option>
+                                    </el-option-group>
                                 </el-select>
                             </el-form-item>
                         </div>
@@ -186,8 +201,8 @@
                         </div>
 
                         <div class="col-md-12" v-if="data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0">
-                            <el-form-item label="Please choose your name" prop="selected" required>
-                                <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_card_number" border>
+                            <el-form-item label="Please choose your name (if disabled, already registered)" prop="selected" required>
+                                <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_card_number" :disabled="data.is_registered === 1" border>
                                     <span>{{ data.firstname }} {{ data.lastname }}</span>
                                 </el-radio>
                             </el-form-item>
@@ -213,7 +228,7 @@
         },
         data() {
             var checkLastname = async (rule, value, callback) => {
-                if (this.data.step_1.withAwtaCard === 'lost' && this.ruleForm.lastName != '' && this.ruleForm.localChurch != '') {
+                if (this.data.step_1.withAwtaCard === 'lost' && this.ruleForm.lastName != '' && this.ruleForm.localChurch != '' && this.ruleForm.clusterGroup != '') {
                     this.isLoading = true
                     this.tableData = []
 
@@ -307,6 +322,7 @@
                     category: 'Adult',
                     lookUp: [],
                     selected: '',
+                    clusterGroup: '',
                     guests: [{
                         email: '',
                         firstName: '',
@@ -340,15 +356,32 @@
                     ],
                     guests: [
                         { validator: checkGuests, trigger: ['change'] }
+                    ],
+                    clusterGroup: [
+                        { required: true, message: 'Please select Cluster Group', trigger: 'change'}
                     ]
                 },
                 countries: this.$allCountries,
                 maxBulk: 10,
                 errors: [],
-                dates: []
+                dates: [],
+                assignments: window.env.cluster_groups
+            }
+        },
+        watch: {
+            'ruleForm.localChurch'(data, old) {
+                if (old) this.ruleForm.clusterGroup = ''
+            },
+            'ruleForm.lastName'(data, old) {
+                if (old) {
+                    this.ruleForm.lookUp = []
+                    this.ruleForm.localChurch = ''
+                    this.ruleForm.clusterGroup = ''
+                }
             }
         },
         mounted() {
+            this.$refs['ruleForm'].validate.lastName
             if (Object.keys(this.data.step_2).length != 0) {
                 this.ruleForm = this.data.step_2;
             }
@@ -363,6 +396,14 @@
                     "available": available,
                     "seat_count": date.seat_count
                 };
+            });
+
+            this.ruleForm.guests.forEach(element => {
+                this.dates = this.dates.map(function (date) {
+                    date.available = element.booked.includes(date.id) ? date.available-1 : date.available;
+
+                    return date;
+                });
             });
         },
         methods: {
@@ -400,6 +441,17 @@
                     category: 'Free',
                     booked: [],
                 });
+            },
+            removeClusterGroup(index) {
+                this.ruleForm.guests[index].clusterGroup = ''
+            },
+            onChangeProcessed(isChecked, id) {
+                for (var i = 0, len = this.dates.length; i < len; i++) {
+                    if (this.dates[i]['id'] === id) {
+                        this.dates[i]['available'] += isChecked ? -1 : 1
+                        break;
+                    }
+                }
             }
         }
    }

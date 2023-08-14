@@ -29,7 +29,8 @@ class Registration extends Model
         'can_book',
         'can_book_rate',
         'can_book_days',
-        'rebooking_limit'
+        'rebooking_limit',
+        'cluster_group'
     ];
 
     public static function boot()
