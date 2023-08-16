@@ -47,13 +47,6 @@ class Registration extends Model
         });
 
         self::updating(function ($model) {
-            $payment_config = Rates::where('category', $model->category)
-                ->where('attending_option', $model->attending_option)
-                ->first();
-
-            $model->rate = $payment_config->rate;
-            $model->can_book_rate = $payment_config->can_book_rate;
-
             self::logActivity('updated the registration details of ' . $model->fullname, $model->fullname);
         });
 

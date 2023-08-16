@@ -82,7 +82,7 @@
 
         <el-card v-if="ruleForm.attendingOption == 'Hybrid' && permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <el-form-item label="Turn on if delegate is allowed to book" required>
                         <el-switch
                             @change="warnUser()"
@@ -107,6 +107,11 @@
                 <div class="col-md-2">
                     <el-form-item label="Booking Rate" required>
                         <el-input v-model="ruleForm.bookingRate"></el-input>
+                    </el-form-item>
+                </div>
+                <div class="col-md-2" v-if="permissions.can_edit_delegate_config">
+                    <el-form-item label="Rate" required>
+                        <el-input v-model="ruleForm.rate"></el-input>
                     </el-form-item>
                 </div>
             </div>
@@ -147,7 +152,8 @@ export default {
                 rebookingLimit: 0,
                 category: '',
                 canBook: false,
-                bookingRate: 0
+                bookingRate: 0,
+                rate: 0
             },
             rules: {
                 firstName: [
@@ -167,6 +173,9 @@ export default {
                 ],
                 attendingOption: [
                     { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
+                ],
+                rate: [
+                    { required: true, message: 'Please input rate', trigger: ['blur', 'change']},
                 ]
             },
             countries: this.$allCountries,
@@ -196,7 +205,8 @@ export default {
                 canBook: this.registration.can_book === 1,
                 canBookDays: this.registration.can_book_days,
                 rebookingLimit: this.registration.rebooking_limit,
-                bookingRate: this.registration.can_book_rate
+                bookingRate: this.registration.can_book_rate,
+                rate: this.registration.rate
             }
     },
     methods: {

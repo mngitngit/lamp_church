@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingStatus;
 use App\Enums\RegistrationType;
 use App\Models\Booking;
 use App\Models\LookUp;
@@ -89,6 +90,10 @@ class Controller extends BaseController
         if ($auto_enable_booking && $registration->attending_option === 'Hybrid') {
             if ($totalAmountPaid >= $canBookRate && !$registration->is_booking_bypassed) {
                 $parameters['can_book'] = true;
+
+                Booking::where('registration_uuid', $uuid)->update([
+                    'status' => BookingStatus::Confirmed
+                ]);
             }
         }
 

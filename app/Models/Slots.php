@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\BookingStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,18 +16,28 @@ class Slots extends Model
         'event_date'  => 'date:F d',
     ];
 
-    public function getAvailableAttribute() {
-        $taken = Booking::where('slot_id', $this->id)->count();
-        return $this->seat_count - $taken;
+    public function getAvailableAttribute()
+    {
+        $taken = Booking::whereIn('status', [
+            BookingStatus::Confirmed,
+            BookingStatus::Pending
+        ])->where('slot_id', $this->id)->count();
 
+        return $this->seat_count - $taken;
     }
 
-    public function getTakenAttribute() {
-        $taken = Booking::where('slot_id', $this->id)->count();
+    public function getTakenAttribute()
+    {
+        $taken = Booking::whereIn('status', [
+            BookingStatus::Confirmed,
+            BookingStatus::Pending
+        ])->where('slot_id', $this->id)->count();
+
         return $taken;
     }
 
-    public function getPercentageAttribute() {
+    public function getPercentageAttribute()
+    {
         $taken = Booking::where('slot_id', $this->id)->count();
         return number_format(($taken / $this->seat_count) * 100, 2, '.', '');
     }

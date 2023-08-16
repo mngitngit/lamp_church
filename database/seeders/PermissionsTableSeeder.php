@@ -16,7 +16,7 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         $users = User::all();
-        
+
         $administrators = [
             'Alex Cello',
             'Linda Valetin',

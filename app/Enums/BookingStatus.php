@@ -6,4 +6,5 @@ abstract class BookingStatus
 {
     const Pending = 'Pending';
     const Confirmed = 'Confirmed';
+    const Cancelled = 'Cancelled';
 }

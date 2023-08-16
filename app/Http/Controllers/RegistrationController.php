@@ -315,6 +315,7 @@ class RegistrationController extends Controller
             'can_book' => $request->canBook,
             'can_book_rate' => $request->bookingRate,
             'can_book_days' => $request->canBookDays,
+            'rate' => $request->rate,
             'rebooking_limit' => $request->rebookingLimit
         ]);
 
