@@ -8199,14 +8199,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       while (1) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
-                            console.log(response.data);
                             loading.close();
 
                             _this2.showTicket(response.data.toString());
 
                             _this2.$refs[formName].resetFields();
 
-                          case 4:
+                          case 3:
                           case "end":
                             return _context2.stop();
                         }

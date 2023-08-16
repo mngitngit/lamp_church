@@ -139,7 +139,6 @@
                 setTimeout(async () => {
                     await axios.post("/registration", this.data)
                     .then(async (response) => {
-                        console.log(response.data)
                         loading.close()
                         
                         this.showTicket(response.data.toString())

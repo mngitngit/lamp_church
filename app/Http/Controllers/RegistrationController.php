@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Exports\ExportRegistration;
 use App\Models\Attendance;
-use App\Models\AvailableUuid;
 use App\Models\Booking;
 use App\Models\LookUp;
 use App\Models\Payment;
-use App\Models\Rates;
 use App\Models\RebookingActivities;
 use App\Models\Registration;
 use App\Models\Slots;
 use App\Models\UUID;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class RegistrationController extends Controller
 {
@@ -234,7 +231,7 @@ class RegistrationController extends Controller
                         'local_church' => $details->localChurch,
                         'cluster_group' => $details->clusterGroup,
                         'country' => $details->country,
-                        'category' => $details->category,
+                        'category' => 'Free',
                         'attending_option' => 'Hybrid',
                         'with_awta_card' => 'none'
                     ]);
@@ -263,7 +260,7 @@ class RegistrationController extends Controller
                     'local_church' => $details->localChurch,
                     'cluster_group' => $details->clusterGroup,
                     'country' => $details->country,
-                    'category' => $details->category,
+                    'category' => 'Free',
                     'attending_option' => 'Online',
                     'with_awta_card' => 'none'
                 ]);
