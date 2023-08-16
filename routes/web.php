@@ -48,10 +48,12 @@ Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'in
 Route::get('/attendance/{id}', [App\Http\Controllers\AttendanceController::class, 'show'])->name('attendance.show');
 Route::post('/attendance', [App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store');
 
-Route::get('/testing', function () {
-    dd("hey");
-});
-
+// booking
+Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking.create');
+Route::get('/booking/validate', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
+Route::get('/booking/{id}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking.show');
+Route::get('/booking/{id}/edit', [App\Http\Controllers\BookingController::class, 'edit'])->name('booking.edit');
+Route::post('/booking/{id}/update', [App\Http\Controllers\BookingController::class, 'update'])->name('booking.update');
 
 // config
 Route::get('/config', [App\Http\Controllers\ConfigurationController::class, 'show'])->name('configurations');
