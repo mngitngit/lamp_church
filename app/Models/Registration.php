@@ -30,7 +30,10 @@ class Registration extends Model
         'can_book_rate',
         'can_book_days',
         'rebooking_limit',
-        'cluster_group'
+        'cluster_group',
+        'visitor_to_member',
+        'notes',
+        'activites'
     ];
 
     public static function boot()
@@ -52,6 +55,10 @@ class Registration extends Model
 
         self::deleting(function ($model) {
             self::logActivity('deleted the registration details of ' . $model->fullname, $model->fullname);
+        });
+
+        self::updated(function ($model) {
+            // dd($model->getFillableChanges());
         });
     }
 
@@ -95,5 +102,10 @@ class Registration extends Model
                 'delegate_name' => $delegate_name
             ]);
         }
+    }
+
+    public function getFillableChanges(): array
+    {
+        return array_intersect_key($this->getChanges(), array_flip($this->getFillable()));
     }
 }

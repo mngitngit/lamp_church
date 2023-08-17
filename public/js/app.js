@@ -7176,6 +7176,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _ruleForm;
 
     return {
+      pickerOptions: {
+        disabledDate: function disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+        shortcuts: [{
+          text: 'Today',
+          onClick: function onClick(picker) {
+            picker.$emit('pick', new Date());
+          }
+        }, {
+          text: 'Yesterday',
+          onClick: function onClick(picker) {
+            var date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24);
+            picker.$emit('pick', date);
+          }
+        }, {
+          text: 'A week ago',
+          onClick: function onClick(picker) {
+            var date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', date);
+          }
+        }]
+      },
       ruleForm: (_ruleForm = {
         email: '',
         firstName: '',
@@ -7190,7 +7215,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         withAwtaCard: '',
         canBookDays: 0,
         rebookingLimit: 0
-      }, _defineProperty(_ruleForm, "category", ''), _defineProperty(_ruleForm, "canBook", false), _defineProperty(_ruleForm, "bookingRate", 0), _defineProperty(_ruleForm, "rate", 0), _ruleForm),
+      }, _defineProperty(_ruleForm, "category", ''), _defineProperty(_ruleForm, "canBook", false), _defineProperty(_ruleForm, "bookingRate", 0), _defineProperty(_ruleForm, "rate", 0), _defineProperty(_ruleForm, "visitorToMember", ''), _ruleForm),
       rules: {
         firstName: [{
           required: true,
@@ -7253,7 +7278,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       category: this.registration.category,
       attendingOption: this.registration.attending_option,
       withAwtaCard: this.registration.with_awta_card
-    }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBook", this.registration.can_book === 1), _defineProperty(_this$ruleForm, "canBookDays", this.registration.can_book_days), _defineProperty(_this$ruleForm, "rebookingLimit", this.registration.rebooking_limit), _defineProperty(_this$ruleForm, "bookingRate", this.registration.can_book_rate), _defineProperty(_this$ruleForm, "rate", this.registration.rate), _this$ruleForm);
+    }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBook", this.registration.can_book === 1), _defineProperty(_this$ruleForm, "canBookDays", this.registration.can_book_days), _defineProperty(_this$ruleForm, "rebookingLimit", this.registration.rebooking_limit), _defineProperty(_this$ruleForm, "bookingRate", this.registration.can_book_rate), _defineProperty(_this$ruleForm, "rate", this.registration.rate), _defineProperty(_this$ruleForm, "visitorToMember", this.registration.visitor_to_member), _this$ruleForm);
   },
   methods: {
     submitForm: function submitForm(formName) {
@@ -8863,7 +8888,7 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1)])]), _vm._v(" "), _vm.ruleForm.attendingOption == "Hybrid" && _vm.permissions.can_edit_delegate_config ? _c("el-card", {
+  })], 1)], 1)], 1)])]), _vm._v(" "), _vm.permissions.can_edit_delegate_config ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"
@@ -8871,34 +8896,6 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-4"
-  }, [_c("el-form-item", {
-    attrs: {
-      label: "Turn on if delegate is allowed to book",
-      required: ""
-    }
-  }, [_c("el-switch", {
-    staticStyle: {
-      display: "block"
-    },
-    attrs: {
-      "active-color": "#13ce66",
-      "active-text": "can book",
-      "inactive-text": ""
-    },
-    on: {
-      change: function change($event) {
-        return _vm.warnUser();
-      }
-    },
-    model: {
-      value: _vm.ruleForm.canBook,
-      callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "canBook", $$v);
-      },
-      expression: "ruleForm.canBook"
-    }
-  })], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-2"
   }, [_c("el-form-item", {
     attrs: {
@@ -8958,7 +8955,51 @@ var render = function render() {
       },
       expression: "ruleForm.rate"
     }
-  })], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
+  })], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Guest" && _vm.permissions.can_edit_delegate_config ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "hover"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: 'Specify the date baptized to tag this delegate as "Visitor to Member"',
+      prop: "visitorToMember"
+    }
+  }, [_c("el-date-picker", {
+    attrs: {
+      type: "date",
+      placeholder: "Pick a day",
+      "picker-options": _vm.pickerOptions
+    },
+    model: {
+      value: _vm.ruleForm.visitorToMember,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "visitorToMember", $$v);
+      },
+      expression: "ruleForm.visitorToMember"
+    }
+  })], 1)], 1), _vm._v(" "), _c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Notes"
+    }
+  }, [_c("el-input", {
+    attrs: {
+      type: "textarea"
+    },
+    model: {
+      value: _vm.ruleForm.notes,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "notes", $$v);
+      },
+      expression: "ruleForm.notes"
+    }
+  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {

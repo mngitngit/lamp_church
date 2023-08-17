@@ -7625,7 +7625,7 @@ var render = function render() {
     attrs: {
       fixed: "right",
       prop: "payment_status",
-      label: "Status",
+      label: "Payment Status",
       align: "center",
       width: "125"
     },
@@ -7671,7 +7671,7 @@ var render = function render() {
             type: "text",
             size: "small"
           }
-        }, [_vm._v("Edit Details")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_edit_delegate && scope.row.can_book ? _c("a", {
+        }, [_vm._v("Edit Details")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_edit_delegate ? _c("a", {
           attrs: {
             href: "/booking/".concat(scope.row.uuid, "/edit")
           }

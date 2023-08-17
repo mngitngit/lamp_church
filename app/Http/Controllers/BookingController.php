@@ -116,9 +116,9 @@ class BookingController extends Controller
             return response()->json(['error' => 'This delegate is a church worker and is already booked for the entire AWTA days.'], 500);
         }
 
-        // if ($registration->rebooking_limit <= 0) {
-        //     return response()->json(['error' => 'Already reached rebooking limit.'], 500);
-        // }
+        if ($registration->rebooking_limit <= 0) {
+            return response()->json(['error' => 'Already reached rebooking limit.'], 500);
+        }
 
         if ($registration->attending_option !== 'Hybrid') {
             return response()->json(['error' => 'Delegate is not registered for hybrid.'], 500);

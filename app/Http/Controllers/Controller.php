@@ -124,4 +124,42 @@ class Controller extends BaseController
 
         return [];
     }
+
+    function updateStaffNotes($uuid, $details, array $messages)
+    {
+        $notes = json_decode($details, true);
+
+        foreach ($messages as $message) {
+            $notes[] = [
+                'user' => auth()->user()->name,
+                'message' => $message,
+                'timestamp' => date('M d, Y h:i A')
+            ];
+        }
+
+        $registration = Registration::where('uuid', $uuid)->update([
+            'notes' => $notes
+        ]);
+
+        return $registration;
+    }
+
+    function updateActivites($uuid, $details, array $messages)
+    {
+        $activities = json_decode($details, true);
+
+        foreach ($messages as $message) {
+            $activities[] = [
+                'user' => auth()->user()->name,
+                'message' => $message,
+                'timestamp' => date('M d, Y h:i A')
+            ];
+        }
+
+        $registration = Registration::where('uuid', $uuid)->update([
+            'activities' => $activities
+        ]);
+
+        return $registration;
+    }
 }

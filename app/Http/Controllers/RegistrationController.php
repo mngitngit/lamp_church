@@ -316,11 +316,12 @@ class RegistrationController extends Controller
             'can_book_rate' => $request->bookingRate,
             'can_book_days' => $request->canBookDays,
             'rate' => $request->rate,
-            'rebooking_limit' => $request->rebookingLimit
+            'rebooking_limit' => $request->rebookingLimit,
+            'visitor_to_member' => $request->visitorToMember ? date('Y-m-d', strtotime($request->visitorToMember)) : NULL
         ]);
 
-        if (!$request->canBook) {
-            $registration->bookings()->delete();
+        if ($request->notes) {
+            $this->updateStaffNotes($registration->uuid, $registration->notes, array($request->notes));
         }
 
         return $this->updatePaymentStatus($uuid, false);

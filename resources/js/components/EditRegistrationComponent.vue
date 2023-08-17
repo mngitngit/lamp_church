@@ -80,9 +80,9 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.attendingOption == 'Hybrid' && permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
+        <el-card v-if="permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
             <div class="row">
-                <div class="col-md-4">
+                <!-- <div class="col-md-4" v-if="false">
                     <el-form-item label="Turn on if delegate is allowed to book" required>
                         <el-switch
                             @change="warnUser()"
@@ -93,7 +93,7 @@
                             inactive-text="">
                         </el-switch>
                     </el-form-item>
-                </div>
+                </div> -->
                 <div class="col-md-2">
                     <el-form-item label="Days can book" required>
                         <el-input v-model="ruleForm.canBookDays"></el-input>
@@ -112,6 +112,27 @@
                 <div class="col-md-2" v-if="permissions.can_edit_delegate_config">
                     <el-form-item label="Rate" required>
                         <el-input v-model="ruleForm.rate"></el-input>
+                    </el-form-item>
+                </div>
+            </div>
+        </el-card>
+
+        <el-card v-if="ruleForm.registrationType == 'Guest' && permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <el-form-item label="Specify the date baptized to tag this delegate as &quot;Visitor to Member&quot;" prop="visitorToMember">
+                        <el-date-picker
+                        v-model="ruleForm.visitorToMember"
+                        type="date"
+                        placeholder="Pick a day"
+                        :picker-options="pickerOptions">
+                        </el-date-picker>
+                    </el-form-item>
+                </div>
+
+                <div class="col-md-12">
+                    <el-form-item label="Notes">
+                        <el-input type="textarea" v-model="ruleForm.notes"></el-input>
                     </el-form-item>
                 </div>
             </div>
@@ -136,6 +157,31 @@ export default {
     },
     data() {
         return {
+            pickerOptions: {
+                disabledDate(time) {
+                    return time.getTime() > Date.now();
+                },
+                shortcuts: [{
+                    text: 'Today',
+                    onClick(picker) {
+                    picker.$emit('pick', new Date());
+                    }
+                }, {
+                    text: 'Yesterday',
+                    onClick(picker) {
+                    const date = new Date();
+                    date.setTime(date.getTime() - 3600 * 1000 * 24);
+                    picker.$emit('pick', date);
+                    }
+                }, {
+                    text: 'A week ago',
+                    onClick(picker) {
+                    const date = new Date();
+                    date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                    picker.$emit('pick', date);
+                    }
+                }]
+            },
             ruleForm: {
                 email: '',
                 firstName: '',
@@ -153,7 +199,8 @@ export default {
                 category: '',
                 canBook: false,
                 bookingRate: 0,
-                rate: 0
+                rate: 0,
+                visitorToMember: ''
             },
             rules: {
                 firstName: [
@@ -206,7 +253,8 @@ export default {
                 canBookDays: this.registration.can_book_days,
                 rebookingLimit: this.registration.rebooking_limit,
                 bookingRate: this.registration.can_book_rate,
-                rate: this.registration.rate
+                rate: this.registration.rate,
+                visitorToMember: this.registration.visitor_to_member
             }
     },
     methods: {

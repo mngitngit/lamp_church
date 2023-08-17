@@ -12,6 +12,7 @@
  Vue.component('booking', require('./components/BookingComponent.vue').default);
  Vue.component('barcode-component', require('./components/BarcodeComponent.vue').default);
  Vue.component('ticket-component', require('./components/TicketComponent.vue').default);
+ Vue.component('manage-booking', require('./components/ManageBookingComponent.vue').default);
  
  import Vue from 'vue';
  import ElementUI from 'element-ui';
