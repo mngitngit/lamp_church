@@ -15,84 +15,46 @@
       </template>
     </el-table-column>
     <el-table-column
-      prop="created_at"
-      label="Date Registered"
-      align="center"
-      width="230">
+      label="Personal Details">
       <template slot-scope="scope">
-          {{ $func.formatToDateTime(scope.row.created_at) }}
+        <el-descriptions class="margin-top" :column="1" size="mini" border>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-user"></i>
+              Generated ID
+            </template>
+            {{ scope.row.uuid }}
+          </el-descriptions-item>
+          <el-descriptions-item label="Complete Name">{{ scope.row.firstname }} {{ scope.row.lastname }}</el-descriptions-item>
+          <el-descriptions-item label="Facebook Name">{{ scope.row.facebook_name || '--' }}</el-descriptions-item>
+          <el-descriptions-item label="Registration Type">
+            <el-tag effect="plain" size="mini" :type="scope.row.registration_type === 'Guest' ? '' : 'warning'">{{ scope.row.registration_type }}</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="Local Church">{{ scope.row.local_church }}</el-descriptions-item>
+          <el-descriptions-item label="Date Registered">{{ $func.formatToDateTime(scope.row.created_at) }}</el-descriptions-item>
+        </el-descriptions>
       </template>
     </el-table-column>
     <el-table-column
-      prop="uuid"
-      label="ID"
-      align="center"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="Name"
-      align="center"
-      width="200">
+      label="Other Details"      
+      width="300">
       <template slot-scope="scope">
-          {{ scope.row.firstname }} {{ scope.row.lastname }}
+        <el-descriptions class="margin-top" :column="1" size="mini" border>
+          <el-descriptions-item label="Category"><i>{{ scope.row.category }}</i></el-descriptions-item>
+          <el-descriptions-item label="Attending Option">{{ scope.row.attending_option }}</el-descriptions-item>
+          <el-descriptions-item label="Rate">{{ $func.formatAmount(scope.row.rate) }}</el-descriptions-item>
+          <el-descriptions-item label="Booking Confirmation Rate">{{ $func.formatAmount(scope.row.can_book_rate) }}</el-descriptions-item>
+          <el-descriptions-item label="Total Paid">{{ $func.formatAmount(scope.row.payments_sum_amount || 0) }}</el-descriptions-item>
+          <el-descriptions-item label="Payment Status">
+            <el-tag size="mini" effect="dark" :type="scope.row.payment_status === 'Paid' ? 'success' : (scope.row.payment_status === 'Free' ? 'info' : 'warning')">{{ scope.row.payment_status }}</el-tag>
+          </el-descriptions-item>
+        </el-descriptions>
       </template>
-    </el-table-column>
-    <el-table-column
-      prop="facebook_name"
-      label="Facebook Name"
-      align="center"
-      width="200">
-      <template slot-scope="scope">
-          {{ scope.row.facebook_name || '--' }}
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="registration_type"
-      label="Registration Type"
-      align="center"
-      width="150">
-    </el-table-column>
-    <el-table-column
-      prop="category"
-      label="Category"
-      align="center"
-      width="100">
-    </el-table-column>
-    <el-table-column
-      prop="local_church"
-      label="Local Church"
-      align="center"
-      column-key="date"
-      :filters="[{text: 'Binan', value: 'Binan'},{text: 'Canlubang', value: 'Canlubang'},{text: 'Dasmarinas', value: 'Dasmarinas'},{text: 'Visayas', value: 'Visayas'},{text: 'Isabela', value: 'Isabela'},{text: 'Muntinlupa', value: 'Muntinlupa'},{text: 'Pateros', value: 'Pateros'},{text: 'Tarlac', value: 'Tarlac'},{text: 'Valenzuela', value: 'Valenzuela'},{text: 'Villamar/Maao'}]"
-      :filter-method="filterHandler"
-      filter-placement="bottom-end"
-      width="150">
-    </el-table-column>
-    <el-table-column
-      prop="country"
-      label="Country"
-      align="center"
-      width="150">
-    </el-table-column>
-    <el-table-column
-      prop="attending_option"
-      label="Attending Option"
-      :filters="[{text: 'Hybrid', value: 'Hybrid'},{text: 'Online', value: 'Online'}]"
-      :filter-method="filterHandler"
-      align="center"
-      width="140">
-    </el-table-column>
-    <el-table-column
-      prop="with_awta_card"
-      label="with AWTA card number?"
-      align="center"
-      width="130">
     </el-table-column>
     <el-table-column
       label="Booked dates"
       align="center"
-      width="170">
+      width="230">
       <template slot-scope="scope">
           <el-alert
               v-if="scope.row.is_booking_bypassed"
@@ -101,7 +63,7 @@
               type="info"
               :closable="false">
           </el-alert>
-          <div v-else-if="scope.row.booked_dates.length > 0" v-html="transformDates(scope.row.booked_dates)"></div>
+          <div v-else-if="scope.row.booked_dates.length > 0" v-html="transformDates(scope.row.booked_dates, true, scope.row.booking_status)"></div>
           <span v-else>--</span>
       </template>
     </el-table-column>
@@ -109,44 +71,11 @@
       label="Dates Attended"
       align="center"
       fixed="right"
-      width="170">
+      width="230">
       <template slot-scope="scope">
           <div v-if="scope.row.attended_dates.length > 0" v-html="transformDates(scope.row.attended_dates)"></div>
           <span v-else>--</span>
       </template>
-    </el-table-column>
-    <el-table-column
-      prop="rate"
-      label="Rate"
-      align="center"
-      width="100">
-      <template slot-scope="scope">
-          {{ $func.formatAmount(scope.row.rate) }}
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="payments_sum_amount"
-      label="Total Paid"
-      align="center"
-      width="100">
-      <template slot-scope="scope">
-          {{ $func.formatAmount(scope.row.payments_sum_amount || 0) }}
-      </template>
-    </el-table-column>
-    <el-table-column
-      fixed="right"
-      prop="payment_status"
-      label="Payment Status"
-      align="center"
-      width="125">
-        <template slot-scope="scope">
-            <el-alert
-                class="py-1 text-xs d-inline"
-                :title="scope.row.payment_status"
-                :type="scope.row.payment_status === 'Paid' || scope.row.payment_status === 'Free' ? 'success' : 'warning'"
-                :closable="false">
-            </el-alert>
-        </template>
     </el-table-column>
     <el-table-column
       fixed="right"
@@ -156,7 +85,7 @@
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row.uuid)" type="text" size="small">Payments</el-button>
         <a v-if="permissions.can_edit_delegate" :href="`/registration/${scope.row.uuid}/edit`"><el-button type="text" size="small">Edit Details</el-button></a>
-        <a v-if="permissions.can_edit_delegate" :href="`/booking/${scope.row.uuid}/edit`"><el-button type="text" size="small">Booking</el-button></a> <br />
+        <a v-if="permissions.can_edit_delegate && scope.row.attending_option === 'Hybrid'" :href="`/booking/${scope.row.uuid}/edit`"><el-button type="text" size="small">Booking</el-button></a> <br />
         <el-button v-if="permissions.can_delete_delegate" type="text" size="small" @click="deleteRegistration(scope.row.uuid)">Delete</el-button>
       </template>
     </el-table-column>
@@ -221,12 +150,25 @@
             }, 1000);
           })
         },
-        transformDates(dates) {
+        transformDates(dates, withStatus = false, status = null) {
           var arr = typeof dates === 'object' ? dates : dates.split(", ")
           var html = "";
 
           arr.forEach(element => {
-            html += "<div>"+element+"</div>";
+            html += "<div>";
+
+            if (withStatus) {
+              if (status === 'Confirmed')
+                html += "<i class='el-icon-s-flag' style='color: green'></i> ";
+
+              if (status === 'Pending')
+                html += "<i class='el-icon-time' style='color: orange'></i> ";
+
+              if (status === 'Cancelled')
+                html += "<i class='el-icon-s-flag' style='color: red'></i> ";
+            }
+
+            html += element + "</div>";
           });
 
           return html;

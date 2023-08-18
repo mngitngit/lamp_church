@@ -107,7 +107,7 @@ export default {
         },
         overall_total: {
             required: true,
-            type: Array
+            type: Object
         }
     }
 }

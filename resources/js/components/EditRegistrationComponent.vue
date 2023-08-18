@@ -82,18 +82,6 @@
 
         <el-card v-if="permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
             <div class="row">
-                <!-- <div class="col-md-4" v-if="false">
-                    <el-form-item label="Turn on if delegate is allowed to book" required>
-                        <el-switch
-                            @change="warnUser()"
-                            style="display: block"
-                            v-model="ruleForm.canBook"
-                            active-color="#13ce66"
-                            active-text="can book"
-                            inactive-text="">
-                        </el-switch>
-                    </el-form-item>
-                </div> -->
                 <div class="col-md-2">
                     <el-form-item label="Days can book" required>
                         <el-input v-model="ruleForm.canBookDays"></el-input>
@@ -101,7 +89,9 @@
                 </div>
                 <div class="col-md-2">
                     <el-form-item label="Rebooking Limit" required>
-                        <el-input v-model="ruleForm.rebookingLimit"></el-input>
+                        <el-tooltip content="Only the administrator can edit this" placement="top">
+                            <el-input v-model="ruleForm.rebookingLimit" disabled></el-input>
+                        </el-tooltip>
                     </el-form-item>
                 </div>
                 <div class="col-md-2">
@@ -249,7 +239,6 @@ export default {
                 attendingOption: this.registration.attending_option,
                 withAwtaCard: this.registration.with_awta_card,
                 category: this.registration.category,
-                canBook: this.registration.can_book === 1,
                 canBookDays: this.registration.can_book_days,
                 rebookingLimit: this.registration.rebooking_limit,
                 bookingRate: this.registration.can_book_rate,
@@ -293,21 +282,7 @@ export default {
         },
         viewPayments() {
           window.location.href = `/payments/${this.registration.uuid}/create`;
-        },
-        warnUser() {
-            if (! this.ruleForm.canBook) {
-                this.$notify({
-                    title: 'Warning',
-                    type: 'warning',
-                    message: 'Turning off the `allowed to book` will lose all the booked dates of the delegate.',
-                    duration: 0
-                });
-            }
         }
     }
 }
 </script>
-
-<style>
-
-</style>

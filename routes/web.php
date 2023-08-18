@@ -41,7 +41,7 @@ Route::delete('/payments/{id}/delete', [App\Http\Controllers\PaymentController::
 Route::post('/payments/{id}', [App\Http\Controllers\PaymentController::class, 'store'])->name('payments.store');
 
 // activities
-Route::get('/activites', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities');
+Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities');
 
 // attendance
 Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'index'])->name('attendance.index');

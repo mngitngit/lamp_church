@@ -2,7 +2,7 @@
     <div>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <img width="100%" class="mb-3 rounded shadow" src="/images/registration_banner.jpg">
+                <img width="100%" height="165" class="mb-3 rounded shadow" src="/images/registration_banner.jpg">
             </div>
         </div>
         <div class="row justify-content-center">
@@ -15,7 +15,7 @@
                 <component ref="myChild" v-bind:is="currentTabComponent" v-bind:data="currentTabData" :slots="slots" @change-step="changeStep" :closeRegForMember="false" @reset="reset" @submit="submit"/>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-5">
             <div class="col-md-2">
                 <el-button v-if="currentStep > 1" plain @click="$refs.myChild.submitForm('back')">Back</el-button>
                 <el-button 

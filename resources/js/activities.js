@@ -9,7 +9,7 @@
  window.Vue = require('vue').default;
  
  // admin portal
- Vue.component('activites-table', require('./components/ActivitiesTableComponent.vue').default);
+ Vue.component('activities-table', require('./components/ActivitiesTableComponent.vue').default);
  
  import Vue from 'vue';
  import ElementUI from 'element-ui';

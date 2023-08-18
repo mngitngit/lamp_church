@@ -29,15 +29,15 @@ class CreateRegistrationsTable extends Migration
             $table->string('attending_option');
             $table->decimal('rate', 9, 3)->default(0.000);
             $table->string('payment_status')->default('Unsettled');
+            $table->string('booking_status')->default('Pending');
             $table->string('with_awta_card')->default('none');
-            $table->boolean('can_book')->default(false);
             $table->decimal('can_book_rate', 9, 3)->default(0.000);
             $table->integer('can_book_days')->default(2);
             $table->integer('rebooking_limit')->default(3);
             $table->boolean('is_booking_bypassed')->default(false);
             $table->date('visitor_to_member')->nullable();
-            $table->text('notes')->nullable();
-            $table->text('activities')->nullable();
+            $table->text('notes');
+            $table->text('activities');
             $table->timestamps();
         });
     }

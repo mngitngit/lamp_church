@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center my-4">
-        <div class="col-md-4 mb-4" v-for="(registration, i) in registrations" :key="i">
+        <div v-bind:class="{'col-md-12 mb-4' : isRebooking, 'col-md-4 mb-4' : !isRebooking}" v-for="(registration, i) in registrations" :key="i">
             <el-card class="box-card ticket-header">
                 <div slot="header" class="clearfix">
                     <span>LAMP WORLDWIDE AWTA 2023</span>
@@ -55,9 +55,10 @@
 
                     <div v-if="registration.attending_option === 'Hybrid'" class="row mb-3">
                         <div class="col-md-12">
-                            <small>Booked Dates</small>
-                            <span class="text-md font-bold d-block" v-if="registration.booked_dates.length > 0" v-html="registration.booked_dates.join([separator = ',  '])"></span>
-                            <span class="d-block font-bold text-black-50 text-md" v-else>Not yet booked. Please reach out to your local coordinator to book your schedule.</span>
+                            <small class="d-block">Booked Dates</small>
+                            <span class="text-md font-bold" v-if="registration.booked_dates.length > 0" v-html="registration.booked_dates.join([separator = ',  '])"></span>
+                            <span class="font-bold text-black-50 text-md" v-else>Not yet booked. Please reach out to your local coordinator to book your schedule.</span>
+                            <span v-if="isRebooking && registration.booked_dates.length > 0"><el-tag size="mini" effect="dark" :type="registration.booking_status === 'Confirmed' ? 'success' : (registration.booking_status === 'Cancelled' ? 'danger' : 'warning')">{{ registration.booking_status }}</el-tag></span>
                         </div>
                     </div>
 
@@ -78,6 +79,11 @@ export default {
         registrations: {
             required: true,
             type: Array
+        },
+        isRebooking: {
+            default: false,
+            type: Boolean,
+            required: false
         }
     },
     methods: {
@@ -88,16 +94,6 @@ export default {
         },
         goToRegistration() {
             window.location.href = `/registration`;
-        },
-        transformDates(dates) {
-          var arr = typeof dates === 'object' ? dates : dates.split(", ")
-          var html = "";
-
-          arr.forEach(element => {
-            html += "<div>"+element+"</div>";
-          });
-
-          return html;
         }
     }   
 }

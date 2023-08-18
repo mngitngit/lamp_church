@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <activites-table :activities="{{ json_encode($activities) }}"/>
+            <activities-table :activities="{{ json_encode($activities) }}"/>
         </div>
     </div>
 </div>

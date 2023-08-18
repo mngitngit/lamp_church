@@ -174,7 +174,9 @@ class RegistrationController extends Controller
                 'country' => $country,
                 'category' => $category,
                 'attending_option' => $attending_option,
-                'with_awta_card' => $with_awta_card
+                'with_awta_card' => $with_awta_card,
+                'notes' => [],
+                'activities' => []
             ]);
 
             $lookup = LookUp::where('lamp_card_number', $awta_card_number)->first();
@@ -233,7 +235,9 @@ class RegistrationController extends Controller
                         'country' => $details->country,
                         'category' => 'Free',
                         'attending_option' => 'Hybrid',
-                        'with_awta_card' => 'none'
+                        'with_awta_card' => 'none',
+                        'notes' => [],
+                        'activities' => []
                     ]);
 
                     $registration = $this->updatePaymentStatus($registration->uuid, false);
@@ -262,7 +266,9 @@ class RegistrationController extends Controller
                     'country' => $details->country,
                     'category' => 'Free',
                     'attending_option' => 'Online',
-                    'with_awta_card' => 'none'
+                    'with_awta_card' => 'none',
+                    'notes' => [],
+                    'activities' => []
                 ]);
 
                 $registration = $this->updatePaymentStatus($registration->uuid, false);
@@ -312,7 +318,6 @@ class RegistrationController extends Controller
             'category' => $request->category,
             'attending_option' => $request->attendingOption,
             'with_awta_card' => $request->withAwtaCard,
-            'can_book' => $request->canBook,
             'can_book_rate' => $request->bookingRate,
             'can_book_days' => $request->canBookDays,
             'rate' => $request->rate,
@@ -321,7 +326,7 @@ class RegistrationController extends Controller
         ]);
 
         if ($request->notes) {
-            $this->updateStaffNotes($registration->uuid, $registration->notes, array($request->notes));
+            $registration->updateStaffNotes($registration->uuid, $registration->notes, array($request->notes));
         }
 
         return $this->updatePaymentStatus($uuid, false);

@@ -19,6 +19,7 @@
  import 'element-ui/lib/theme-chalk/index.css';
  import '../css/app.css';
  import { Loading } from 'element-ui';
+ import VueQRCodeComponent from 'vue-qrcode-component'
  
  import {func} from './func.js';
  
@@ -31,6 +32,8 @@
  Vue.config.lang = 'en'
  
  Vue.use(ElementUI, {locale});
+
+ Vue.component('qr-code', VueQRCodeComponent);
   
  const app = new Vue({
      el: '#app',

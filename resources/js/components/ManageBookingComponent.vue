@@ -92,7 +92,7 @@
     </div>
     <div v-else class="row justify-content-center">
         <div class="col-md-12">
-            <el-tabs v-if="(retrieved.booked_dates.length > 0)" type="border-card" class="p-0">
+            <el-tabs v-if="(retrieved.details.bookings.length > 0)" type="border-card" class="p-0">
                 <el-tab-pane label="Ticket">
                     <el-alert
                         class="mb-3"
@@ -102,7 +102,7 @@
                         :closable="false"
                         show-icon>
                     </el-alert>
-                    <ticket-component :registrations="[retrieved.details]" :booked_dates="retrieved.booked_dates_plucked" />
+                    <ticket-component :registrations="[retrieved.details]" :isRebooking="true"/>
                 </el-tab-pane>
                 <el-tab-pane label="Booking">
                     <el-alert
@@ -112,10 +112,10 @@
                         type="warning"
                         :closable="false">
                     </el-alert>
-                    <booking :booked_dates="retrieved.booked_dates" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
+                    <booking :booked_dates="retrieved.details.booking_status === 'Cancelled' ? [] : retrieved.details.bookings" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
                 </el-tab-pane>
             </el-tabs>
-            <booking v-else :booked_dates="retrieved.booked_dates" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
+            <booking v-else :booked_dates="retrieved.details.booking_status === 'Cancelled' ? [] : retrieved.details.bookings" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
         </div>
     </div>
 </div>
@@ -125,11 +125,7 @@
 export default {
     data () {
       return {
-        ruleForm: {
-            lastName: '',
-            localChurch: '',
-            referenceNumber: ''
-        },
+        ruleForm: {"lastName":"balane","localChurch":"Muntinlupa","referenceNumber":"LAMP00003"},
         disabled: false,
         rules: {
             lastName: [
@@ -147,8 +143,6 @@ export default {
         isLoading: false,
         fieldErrors: null,
         retrieved: {
-            booked_dates: [],
-            booked_dates_plucked: [],
             slots: [],
             uuid: null,
             details: {},
@@ -164,8 +158,6 @@ export default {
             this.validated = false;
 
             this.retrieved = {
-                booked_dates: [],
-                booked_dates_plucked: [],
                 slots: [],
                 uuid: null,
                 details: {}
@@ -190,8 +182,6 @@ export default {
                         var data = response.data
 
                         this.retrieved = {
-                            booked_dates: data.bookings,
-                            booked_dates_plucked: data.booked_dates,
                             slots: data.slots,
                             uuid: data.delegate.uuid,
                             details: data.delegate,

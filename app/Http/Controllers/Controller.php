@@ -88,12 +88,16 @@ class Controller extends BaseController
         }
 
         if ($auto_enable_booking && $registration->attending_option === 'Hybrid') {
-            if ($totalAmountPaid >= $canBookRate && !$registration->is_booking_bypassed) {
-                $parameters['can_book'] = true;
+            if ($totalAmountPaid >= $canBookRate) {
+                if ($registration->booking_status === 'Pending') {
+                    Booking::where('registration_uuid', $uuid)->update([
+                        'status' => BookingStatus::Confirmed
+                    ]);
 
-                Booking::where('registration_uuid', $uuid)->update([
-                    'status' => BookingStatus::Confirmed
-                ]);
+                    $registration->update([
+                        'booking_status' => BookingStatus::Confirmed
+                    ]);
+                }
             }
         }
 
@@ -123,43 +127,5 @@ class Controller extends BaseController
         }
 
         return [];
-    }
-
-    function updateStaffNotes($uuid, $details, array $messages)
-    {
-        $notes = json_decode($details, true);
-
-        foreach ($messages as $message) {
-            $notes[] = [
-                'user' => auth()->user()->name,
-                'message' => $message,
-                'timestamp' => date('M d, Y h:i A')
-            ];
-        }
-
-        $registration = Registration::where('uuid', $uuid)->update([
-            'notes' => $notes
-        ]);
-
-        return $registration;
-    }
-
-    function updateActivites($uuid, $details, array $messages)
-    {
-        $activities = json_decode($details, true);
-
-        foreach ($messages as $message) {
-            $activities[] = [
-                'user' => auth()->user()->name,
-                'message' => $message,
-                'timestamp' => date('M d, Y h:i A')
-            ];
-        }
-
-        $registration = Registration::where('uuid', $uuid)->update([
-            'activities' => $activities
-        ]);
-
-        return $registration;
     }
 }

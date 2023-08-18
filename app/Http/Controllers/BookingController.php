@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingStatus;
 use App\Http\Resources\RebookingActivityResource;
 use App\Models\Booking;
 use App\Models\Rates;
@@ -43,23 +44,20 @@ class BookingController extends Controller
      */
     public function show($uuid)
     {
-        $registration = Registration::where('uuid', $uuid)->first();
+        $registration = Registration::with('bookings', 'bookings.slot')->where('uuid', $uuid)->first();
 
-        $dates = $registration->bookings()->with(['slot'])->get()->toArray();
-
-        $booked_dates = array_map(function ($date) {
-            return $date['slot']['event_date'];
-        }, $dates);
+        $registration->booked_dates = array_map(function ($dates) {
+            return $dates['slot']['event_date'];
+        }, $registration->bookings->toArray());
 
         return view('booking.show', [
-            'registration' => $registration,
-            'booked_dates' => $booked_dates
+            'registration' => $registration
         ]);
     }
 
     public function update($uuid, Request $request)
     {
-        $registration = Registration::where('uuid', $uuid)->first();
+        $registration = Registration::withSum('payments', 'amount')->where('uuid', $uuid)->first();
 
         if ($registration->is_booking_bypassed) {
             return response()->json(['error' => 'This delegate is a church worker and is already booked for the entire AWTA days.'], 500);
@@ -73,9 +71,39 @@ class BookingController extends Controller
 
         $hasPermission = auth()->user() ? auth()->user()->permissions->can_edit_delegate : false;
 
-        $registration->rebooking_limit = $new_booked_dates == $old_booked_dates || $hasPermission ? $limit : $limit - 1;
+        // considered paid if partially paid
+        $paid = $registration->payment_status === 'Paid' || floatval($registration->can_book_rate) <= floatval($registration->payments_sum_amount);
 
+        $hasChanges = false;
+
+        // has changes if old vs new booked dates are different
+        if ($new_booked_dates != $old_booked_dates) {
+            $hasChanges = true;
+        }
+
+        // has changes if paid
+        if ($new_booked_dates == $old_booked_dates && $paid && ($registration->booking_status === 'Pending' || $registration->booking_status === 'Cancelled')) {
+            $hasChanges = true;
+        }
+
+        // if no changes or admin, booking limit wont be deducted
+        $limit = !$hasChanges || $hasPermission ? $limit : $limit - 1;
+
+        // delete current bookings
         $registration->bookings()->delete();
+
+        // set default booking status based on its initial value
+        $booking_status = $registration->booking_status;
+
+        // set booking status as confirmed if has changes and is paid
+        if ($hasChanges && $paid) {
+            $booking_status = BookingStatus::Confirmed;
+        }
+
+        // set booking status as pending if has changes but not yet paid
+        if ($hasChanges && !$paid) {
+            $booking_status = BookingStatus::Pending;
+        }
 
         foreach ($request->dates as $date) {
             $taken = Booking::where('slot_id', $date)->count();
@@ -83,17 +111,27 @@ class BookingController extends Controller
             $remaining = $slot->seat_count - $taken;
 
             if ($remaining > 0) {
+                // update booking status, deduct to rebooking limit
+                $registration->update([
+                    'booking_status' => $booking_status,
+                    'rebooking_limit' => $limit
+                ]);
+
+                // store bookings
                 $registration->bookings()->create([
                     'registration_uuid' => $registration->uuid,
                     'slot_id' => $date,
-                    'local_church' => $registration->local_church
+                    'local_church' => $registration->local_church,
+                    'status' => $booking_status
                 ]);
+
+                // add activity to registration
+                if ($hasChanges) {
+                }
             } else {
                 return response()->json(['error' => 'Sorry, no remaining seats left. Please refresh the page and try again.'], 500);
             }
         }
-
-        $registration->save();
 
         $this->logActivity($old_booked_dates, $new_booked_dates, $uuid);
 
@@ -102,7 +140,8 @@ class BookingController extends Controller
 
     public function index(Request $request)
     {
-        $registration = Registration::where('uuid', $request->referenceNumber)
+        $registration = Registration::with('bookings', 'bookings.slot')
+            ->where('uuid', $request->referenceNumber)
             ->where('lastname', $request->lastName)
             ->where('local_church', $request->localChurch)
             ->withSum('payments', 'amount')
@@ -124,33 +163,14 @@ class BookingController extends Controller
             return response()->json(['error' => 'Delegate is not registered for hybrid.'], 500);
         }
 
-        $rate = Rates::where('category', $registration->category)->where('attending_option', $registration->attending_option)->first();
+        $registration->booked_dates = array_map(function ($dates) {
+            return $dates['slot']['event_date'];
+        }, $registration->bookings->toArray());
 
-        if ($registration->can_book) {
-            $dates = $registration->bookings()->with(['slot'])->get()->pluck('slot');
-
-            $booked_dates = array_column($dates->toArray(), 'event_date');
-
-            return [
-                'delegate' => $registration,
-                'bookings' => $registration->bookings()->with(['slot'])->get(),
-                'booked_dates' => $booked_dates,
-                'slots' => Slots::where('registration_type', $registration->registration_type)->get(),
-            ];
-        }
-
-        if (floatval($rate->can_book_rate) > floatval($registration->payments_sum_amount)) {
-            return response()->json(['error' => 'Partial payment is required. Please reach out to your local coordinator for other details.'], 500);
-        }
-
-        if (floatval($rate->can_book_rate) <= floatval($registration->payments_sum_amount)) {
-            $registration->can_book = true;
-            $registration->save();
-
-            return response()->json(['error' => 'Please try again.'], 500);
-        }
-
-        return response()->json(['error' => 'An error occured. Please report this issue to your local coordinator for other details.'], 500);
+        return [
+            'delegate' => $registration,
+            'slots' => Slots::where('registration_type', $registration->registration_type)->get(),
+        ];
     }
 
     public function logActivity($old_booked_dates, $new_booked_dates, $uuid)

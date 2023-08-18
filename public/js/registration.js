@@ -6947,7 +6947,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     overall_total: {
       required: true,
-      type: Array
+      type: Object
     }
   }
 });
@@ -7118,10 +7118,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       })));
     },
     transformDates: function transformDates(dates) {
+      var withStatus = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var status = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       var arr = _typeof(dates) === 'object' ? dates : dates.split(", ");
       var html = "";
       arr.forEach(function (element) {
-        html += "<div>" + element + "</div>";
+        html += "<div>";
+
+        if (withStatus) {
+          if (status === 'Confirmed') html += "<i class='el-icon-s-flag' style='color: green'></i> ";
+          if (status === 'Pending') html += "<i class='el-icon-time' style='color: orange'></i> ";
+          if (status === 'Cancelled') html += "<i class='el-icon-s-flag' style='color: red'></i> ";
+        }
+
+        html += element + "</div>";
       });
       return html;
     }
@@ -7428,138 +7438,104 @@ var render = function render() {
     }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
-      prop: "created_at",
-      label: "Date Registered",
-      align: "center",
-      width: "230"
+      label: "Personal Details"
     },
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_vm._v("\n        " + _vm._s(_vm.$func.formatToDateTime(scope.row.created_at)) + "\n    ")];
+        return [_c("el-descriptions", {
+          staticClass: "margin-top",
+          attrs: {
+            column: 1,
+            size: "mini",
+            border: ""
+          }
+        }, [_c("el-descriptions-item", [_c("template", {
+          slot: "label"
+        }, [_c("i", {
+          staticClass: "el-icon-user"
+        }), _vm._v("\n            Generated ID\n          ")]), _vm._v("\n          " + _vm._s(scope.row.uuid) + "\n        ")], 2), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Complete Name"
+          }
+        }, [_vm._v(_vm._s(scope.row.firstname) + " " + _vm._s(scope.row.lastname))]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Facebook Name"
+          }
+        }, [_vm._v(_vm._s(scope.row.facebook_name || "--"))]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Registration Type"
+          }
+        }, [_c("el-tag", {
+          attrs: {
+            effect: "plain",
+            size: "mini",
+            type: scope.row.registration_type === "Guest" ? "" : "warning"
+          }
+        }, [_vm._v(_vm._s(scope.row.registration_type))])], 1), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Local Church"
+          }
+        }, [_vm._v(_vm._s(scope.row.local_church))]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Date Registered"
+          }
+        }, [_vm._v(_vm._s(_vm.$func.formatToDateTime(scope.row.created_at)))])], 1)];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
-      prop: "uuid",
-      label: "ID",
-      align: "center",
-      width: "120"
-    }
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "name",
-      label: "Name",
-      align: "center",
-      width: "200"
+      label: "Other Details",
+      width: "300"
     },
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_vm._v("\n        " + _vm._s(scope.row.firstname) + " " + _vm._s(scope.row.lastname) + "\n    ")];
+        return [_c("el-descriptions", {
+          staticClass: "margin-top",
+          attrs: {
+            column: 1,
+            size: "mini",
+            border: ""
+          }
+        }, [_c("el-descriptions-item", {
+          attrs: {
+            label: "Category"
+          }
+        }, [_c("i", [_vm._v(_vm._s(scope.row.category))])]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Attending Option"
+          }
+        }, [_vm._v(_vm._s(scope.row.attending_option))]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Rate"
+          }
+        }, [_vm._v(_vm._s(_vm.$func.formatAmount(scope.row.rate)))]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Booking Confirmation Rate"
+          }
+        }, [_vm._v(_vm._s(_vm.$func.formatAmount(scope.row.can_book_rate)))]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Total Paid"
+          }
+        }, [_vm._v(_vm._s(_vm.$func.formatAmount(scope.row.payments_sum_amount || 0)))]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Payment Status"
+          }
+        }, [_c("el-tag", {
+          attrs: {
+            size: "mini",
+            effect: "dark",
+            type: scope.row.payment_status === "Paid" ? "success" : scope.row.payment_status === "Free" ? "info" : "warning"
+          }
+        }, [_vm._v(_vm._s(scope.row.payment_status))])], 1)], 1)];
       }
     }])
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "facebook_name",
-      label: "Facebook Name",
-      align: "center",
-      width: "200"
-    },
-    scopedSlots: _vm._u([{
-      key: "default",
-      fn: function fn(scope) {
-        return [_vm._v("\n        " + _vm._s(scope.row.facebook_name || "--") + "\n    ")];
-      }
-    }])
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "registration_type",
-      label: "Registration Type",
-      align: "center",
-      width: "150"
-    }
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "category",
-      label: "Category",
-      align: "center",
-      width: "100"
-    }
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "local_church",
-      label: "Local Church",
-      align: "center",
-      "column-key": "date",
-      filters: [{
-        text: "Binan",
-        value: "Binan"
-      }, {
-        text: "Canlubang",
-        value: "Canlubang"
-      }, {
-        text: "Dasmarinas",
-        value: "Dasmarinas"
-      }, {
-        text: "Visayas",
-        value: "Visayas"
-      }, {
-        text: "Isabela",
-        value: "Isabela"
-      }, {
-        text: "Muntinlupa",
-        value: "Muntinlupa"
-      }, {
-        text: "Pateros",
-        value: "Pateros"
-      }, {
-        text: "Tarlac",
-        value: "Tarlac"
-      }, {
-        text: "Valenzuela",
-        value: "Valenzuela"
-      }, {
-        text: "Villamar/Maao"
-      }],
-      "filter-method": _vm.filterHandler,
-      "filter-placement": "bottom-end",
-      width: "150"
-    }
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "country",
-      label: "Country",
-      align: "center",
-      width: "150"
-    }
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "attending_option",
-      label: "Attending Option",
-      filters: [{
-        text: "Hybrid",
-        value: "Hybrid"
-      }, {
-        text: "Online",
-        value: "Online"
-      }],
-      "filter-method": _vm.filterHandler,
-      align: "center",
-      width: "140"
-    }
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "with_awta_card",
-      label: "with AWTA card number?",
-      align: "center",
-      width: "130"
-    }
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       label: "Booked dates",
       align: "center",
-      width: "170"
+      width: "230"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -7573,7 +7549,7 @@ var render = function render() {
           }
         }) : scope.row.booked_dates.length > 0 ? _c("div", {
           domProps: {
-            innerHTML: _vm._s(_vm.transformDates(scope.row.booked_dates))
+            innerHTML: _vm._s(_vm.transformDates(scope.row.booked_dates, true, scope.row.booking_status))
           }
         }) : _c("span", [_vm._v("--")])];
       }
@@ -7583,7 +7559,7 @@ var render = function render() {
       label: "Dates Attended",
       align: "center",
       fixed: "right",
-      width: "170"
+      width: "230"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -7593,53 +7569,6 @@ var render = function render() {
             innerHTML: _vm._s(_vm.transformDates(scope.row.attended_dates))
           }
         }) : _c("span", [_vm._v("--")])];
-      }
-    }])
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "rate",
-      label: "Rate",
-      align: "center",
-      width: "100"
-    },
-    scopedSlots: _vm._u([{
-      key: "default",
-      fn: function fn(scope) {
-        return [_vm._v("\n        " + _vm._s(_vm.$func.formatAmount(scope.row.rate)) + "\n    ")];
-      }
-    }])
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      prop: "payments_sum_amount",
-      label: "Total Paid",
-      align: "center",
-      width: "100"
-    },
-    scopedSlots: _vm._u([{
-      key: "default",
-      fn: function fn(scope) {
-        return [_vm._v("\n        " + _vm._s(_vm.$func.formatAmount(scope.row.payments_sum_amount || 0)) + "\n    ")];
-      }
-    }])
-  }), _vm._v(" "), _c("el-table-column", {
-    attrs: {
-      fixed: "right",
-      prop: "payment_status",
-      label: "Payment Status",
-      align: "center",
-      width: "125"
-    },
-    scopedSlots: _vm._u([{
-      key: "default",
-      fn: function fn(scope) {
-        return [_c("el-alert", {
-          staticClass: "py-1 text-xs d-inline",
-          attrs: {
-            title: scope.row.payment_status,
-            type: scope.row.payment_status === "Paid" || scope.row.payment_status === "Free" ? "success" : "warning",
-            closable: false
-          }
-        })];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {
@@ -7671,7 +7600,7 @@ var render = function render() {
             type: "text",
             size: "small"
           }
-        }, [_vm._v("Edit Details")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_edit_delegate ? _c("a", {
+        }, [_vm._v("Edit Details")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_edit_delegate && scope.row.attending_option === "Hybrid" ? _c("a", {
           attrs: {
             href: "/booking/".concat(scope.row.uuid, "/edit")
           }
@@ -14810,7 +14739,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n\n.ticket-header .el-card__header {\n    background-color: aliceblue !important;\n}\n\n.text-xxs {\n    font-size: 13px !important;\n}\n\n.el-progress-bar__outer {\n    background-color: #c1c5cc !important;\n}\n\n.el-progress-bar {\n    width: 200px;\n}\n\n.el-progress__text {\n    font-size: 12.5px !important;\n}\n\n.has-error input.el-input__inner {\n    border-color: #F56C6C !important;\n}\n\n.border-danger {\n    color: #f56c6c;\n    border-color: #fbc4c4;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n\n.ticket-header .el-card__header {\n    background-color: aliceblue !important;\n}\n\n.text-xxs {\n    font-size: 13px !important;\n}\n\n.el-progress-bar__outer {\n    background-color: #c1c5cc !important;\n}\n\n.el-progress-bar {\n    width: 200px;\n}\n\n.el-progress__text {\n    font-size: 12.5px !important;\n}\n\n.has-error input.el-input__inner {\n    border-color: #F56C6C !important;\n}\n\n.border-danger {\n    color: #f56c6c;\n    border-color: #fbc4c4;\n}\n\n.footer {\n    position: fixed;\n    Width: 100%;\n    bottom: 0;\n    background-color: #FFF;\n    border: 1px solid #EBEEF5;\n    overflow: hidden;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

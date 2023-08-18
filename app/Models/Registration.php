@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Registration extends Model
+class Registration extends MyModel
 {
     use HasFactory;
 
@@ -23,17 +21,21 @@ class Registration extends Model
         'category',
         'rate',
         'payment_status',
-        'other_details',
+        'booking_status',
         'attending_option',
         'with_awta_card',
-        'can_book',
         'can_book_rate',
         'can_book_days',
         'rebooking_limit',
         'cluster_group',
         'visitor_to_member',
         'notes',
-        'activites'
+        'activities'
+    ];
+
+    protected $casts = [
+        'notes' => 'array',
+        'activities' => 'array'
     ];
 
     public static function boot()
@@ -58,7 +60,11 @@ class Registration extends Model
         });
 
         self::updated(function ($model) {
-            // dd($model->getFillableChanges());
+            if (count($model->getFillableChanges()) > 0) {
+                $model->updateActivities($model->uuid, $model->activities, array(
+                    'updated ' . implode(', ', $model->getFillableChanges())
+                ));
+            }
         });
     }
 
@@ -106,6 +112,14 @@ class Registration extends Model
 
     public function getFillableChanges(): array
     {
-        return array_intersect_key($this->getChanges(), array_flip($this->getFillable()));
+        $array = array_intersect_key($this->getChanges(), array_flip($this->getTrackable()));
+
+        $array = array_keys($array);
+
+        $array = array_map(function ($x) {
+            return __(sprintf('columns.%s', $x));
+        }, $array);
+
+        return $array;
     }
 }
