@@ -123,7 +123,7 @@
         </div>
     </div>
 
-    <div v-if="Object.keys(retrieved.details).length > 0" class="row justify-content-center">
+    <div v-if="Object.keys(retrieved.details).length > 0" class="row justify-content-center mb-5">
         <div class="col-md-6">
             <label v-if="retrieved.details.booking_activities.length > 0" class="mb-3 text-secondary">Activity</label>
             <el-timeline v-if="retrieved.details.booking_activities.length > 0">

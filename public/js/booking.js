@@ -7719,7 +7719,7 @@ var render = function render() {
       hide_button: _vm.retrieved.details.rebooking_limit === 0
     }
   })], 1)])])]), _vm._v(" "), Object.keys(_vm.retrieved.details).length > 0 ? _c("div", {
-    staticClass: "row justify-content-center"
+    staticClass: "row justify-content-center mb-5"
   }, [_c("div", {
     staticClass: "col-md-6"
   }, [_vm.retrieved.details.booking_activities.length > 0 ? _c("label", {
