@@ -30,12 +30,14 @@ class Registration extends MyModel
         'cluster_group',
         'visitor_to_member',
         'notes',
-        'activities'
+        'activities',
+        'booking_activities'
     ];
 
     protected $casts = [
         'notes' => 'array',
-        'activities' => 'array'
+        'activities' => 'array',
+        'booking_activities' => 'array'
     ];
 
     public static function boot()

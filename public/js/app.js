@@ -10058,7 +10058,7 @@ var render = function render() {
       }
     }) : _c("span", {
       staticClass: "font-bold text-black-50 text-md"
-    }, [_vm._v("Not yet booked. Please reach out to your local coordinator to book your schedule.")]), _vm._v(" "), _vm.isRebooking && registration.booked_dates.length > 0 ? _c("span", [_c("el-tag", {
+    }, [_vm._v("Not yet booked. Please reach out to your local coordinator to book your schedule.")]), _vm._v(" "), registration.booked_dates.length > 0 ? _c("span", [_c("el-tag", {
       attrs: {
         size: "mini",
         effect: "dark",

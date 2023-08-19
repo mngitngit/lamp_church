@@ -69,4 +69,23 @@ class MyModel extends Model
 
         return $registration;
     }
+
+    function updateBookingActivities($uuid, $details, array $messages)
+    {
+        $booking_activities = $details;
+
+        foreach ($messages as $message) {
+            array_unshift($booking_activities, [
+                'user' => auth()->user()->name ?? '',
+                'message' => $message,
+                'timestamp' => date('M d, Y h:i A')
+            ]);
+        }
+
+        $registration = Registration::where('uuid', $uuid)->update([
+            'booking_activities' => $booking_activities
+        ]);
+
+        return $registration;
+    }
 }

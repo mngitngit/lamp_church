@@ -126,7 +126,12 @@ class BookingController extends Controller
                 ]);
 
                 // add activity to registration
-                if ($hasChanges) {
+                if ($hasChanges && !auth()->user()) {
+                    $dates = array_map(function ($date) {
+                        return $date['slot']['event_date'];
+                    }, $registration->bookings()->with('slot')->get()->toArray());
+
+                    $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array($registration->fullname . ' rebooked for ' . implode(', ', $dates)));
                 }
             } else {
                 return response()->json(['error' => 'Sorry, no remaining seats left. Please refresh the page and try again.'], 500);

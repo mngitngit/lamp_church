@@ -176,7 +176,8 @@ class RegistrationController extends Controller
                 'attending_option' => $attending_option,
                 'with_awta_card' => $with_awta_card,
                 'notes' => [],
-                'activities' => []
+                'activities' => [],
+                'booking_activities' => []
             ]);
 
             $lookup = LookUp::where('lamp_card_number', $awta_card_number)->first();
@@ -237,7 +238,8 @@ class RegistrationController extends Controller
                         'attending_option' => 'Hybrid',
                         'with_awta_card' => 'none',
                         'notes' => [],
-                        'activities' => []
+                        'activities' => [],
+                        'booking_activities' => []
                     ]);
 
                     $registration = $this->updatePaymentStatus($registration->uuid, false);
@@ -268,7 +270,8 @@ class RegistrationController extends Controller
                     'attending_option' => 'Online',
                     'with_awta_card' => 'none',
                     'notes' => [],
-                    'activities' => []
+                    'activities' => [],
+                    'booking_activities' => []
                 ]);
 
                 $registration = $this->updatePaymentStatus($registration->uuid, false);

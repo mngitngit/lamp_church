@@ -1,121 +1,141 @@
 <template>
-<div class="w-full">
-    <div v-if="! validated" class="row justify-content-center">
+<div>
+    <div class="row justify-content-center mb-4">
         <div class="col-md-6">
-            <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843; height: 100% !important;">
-                <div class="text-black">
-                    <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2022</h6>
-                    <small>
-                    Timeline: December 27, 28, 29 and 30<br/>
-                    Venue: Calamba Tent<br/>
-                    Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church<br/>
-                    <br/>
-                    </small>
+            <div v-if="! validated" class="row justify-content-center">
+                <div class="col-md-6">
+                    <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843; height: 100% !important;">
+                        <div class="text-black">
+                            <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2022</h6>
+                            <small>
+                            Timeline: December 27, 28, 29 and 30<br/>
+                            Venue: Calamba Tent<br/>
+                            Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church<br/>
+                            <br/>
+                            </small>
 
-                    <h6 class="fw-bolder text-muted">GUIDELINES: </h6>
-                    <small>
-                    Both members and visitors will be able to start booking their seats on October 9 until November 30, 2022 for Hybrid Attendees.<br/><br/>
+                            <h6 class="fw-bolder text-muted">GUIDELINES: </h6>
+                            <small>
+                            Both members and visitors will be able to start booking their seats on October 9 until November 30, 2022 for Hybrid Attendees.<br/><br/>
 
-                    Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings.<br/><br/>
+                            Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings.<br/><br/>
 
-                    Rebooking is until November 30, 2022 only. <br/><br/>
-                    For any booking isues, please report to your AWTA local coordinators.<br/><br/>
+                            Rebooking is until November 30, 2022 only. <br/><br/>
+                            For any booking isues, please report to your AWTA local coordinators.<br/><br/>
 
-                    Book now — hurry while seats last!
-                    </small>
+                            Book now — hurry while seats last!
+                            </small>
+                        </div>
+                    </el-card>
                 </div>
-            </el-card>
-        </div>
-        <div class="col-md-6">
-            <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid #e9c843">
-                <h3>Manage Booking</h3>
-                <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>
+                <div class="col-md-6">
+                    <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid #e9c843">
+                        <h3>Manage Booking</h3>
+                        <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>
 
-                <div class="px-2 row">
-                    <el-alert
-                        v-if="disabled"
-                        title="Members' booking & rebooking is already closed. For other concerns, please reach out to your local coordinators."
-                        type="warning"
-                        :closable="false"
-                        show-icon>
-                    </el-alert>
+                        <div class="px-2 row">
+                            <el-alert
+                                v-if="disabled"
+                                title="Members' booking & rebooking is already closed. For other concerns, please reach out to your local coordinators."
+                                type="warning"
+                                :closable="false"
+                                show-icon>
+                            </el-alert>
+                        </div>
+
+                        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
+                            <div class="row mb-1">
+                                <div class="col-md-12">
+                                    <el-form-item label="Last Name" prop="lastName" required :error="fieldErrors">
+                                        <el-input :disabled="disabled" v-model="ruleForm.lastName"></el-input>
+                                    </el-form-item>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-12">
+                                    <el-form-item label="Local Church" prop="localChurch" required :error="fieldErrors">
+                                        <el-select :disabled="disabled" v-model="ruleForm.localChurch" placeholder="Choose">
+                                            <el-option label="Binan" value="Binan"></el-option>
+                                            <el-option label="Canlubang" value="Canlubang"></el-option>
+                                            <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
+                                            <el-option label="DC Cruz" value="DC Cruz"></el-option>
+                                            <el-option label="Granada" value="Granada"></el-option>
+                                            <el-option label="Isabela" value="Isabela"></el-option>
+                                            <el-option label="Muntinlupa" value="Muntinlupa"></el-option>
+                                            <el-option label="Pateros" value="Pateros"></el-option>
+                                            <el-option label="Tarlac" value="Tarlac"></el-option>
+                                            <el-option label="Valenzuela" value="Valenzuela"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-12">
+                                    <el-form-item class="transform-uppercase" label="AWTA Card Number / Guest Number" prop="referenceNumber" required :error="fieldErrors">
+                                        <el-input :disabled="disabled" v-model="ruleForm.referenceNumber"></el-input>
+                                    </el-form-item>
+                                </div>
+                            </div>
+
+                            <div v-if="error" class="row">
+                                <div class="col-md-12">
+                                    <div style="color: #F56C6C;font-size: 12px;">{{ error }}</div>
+                                </div>
+                            </div>
+                        </el-form>
+                    </el-card>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <el-button :loading="isLoading" :autofocus="true" type="warning" @click="validateDelegate('ruleForm')" :disabled="disabled">Continue</el-button>
+                        </div>
+                    </div>
                 </div>
-
-                <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
-                    <div class="row mb-1">
-                        <div class="col-md-12">
-                            <el-form-item label="Last Name" prop="lastName" required :error="fieldErrors">
-                                <el-input :disabled="disabled" v-model="ruleForm.lastName"></el-input>
-                            </el-form-item>
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <div class="col-md-12">
-                            <el-form-item label="Local Church" prop="localChurch" required :error="fieldErrors">
-                                <el-select :disabled="disabled" v-model="ruleForm.localChurch" placeholder="Choose">
-                                    <el-option label="Binan" value="Binan"></el-option>
-                                    <el-option label="Canlubang" value="Canlubang"></el-option>
-                                    <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
-                                    <el-option label="DC Cruz" value="DC Cruz"></el-option>
-                                    <el-option label="Granada" value="Granada"></el-option>
-                                    <el-option label="Isabela" value="Isabela"></el-option>
-                                    <el-option label="Muntinlupa" value="Muntinlupa"></el-option>
-                                    <el-option label="Pateros" value="Pateros"></el-option>
-                                    <el-option label="Tarlac" value="Tarlac"></el-option>
-                                    <el-option label="Valenzuela" value="Valenzuela"></el-option>
-                                </el-select>
-                            </el-form-item>
-                        </div>
-                    </div>
-                    <div class="row mb-1">
-                        <div class="col-md-12">
-                            <el-form-item class="transform-uppercase" label="AWTA Card Number / Guest Number" prop="referenceNumber" required :error="fieldErrors">
-                                <el-input :disabled="disabled" v-model="ruleForm.referenceNumber"></el-input>
-                            </el-form-item>
-                        </div>
-                    </div>
-
-                    <div v-if="error" class="row">
-                        <div class="col-md-12">
-                            <div style="color: #F56C6C;font-size: 12px;">{{ error }}</div>
-                        </div>
-                    </div>
-                </el-form>
-            </el-card>
-
-            <div class="row">
+            </div>
+            <div v-else class="row justify-content-center">
                 <div class="col-md-12">
-                    <el-button :loading="isLoading" :autofocus="true" type="warning" @click="validateDelegate('ruleForm')" :disabled="disabled">Continue</el-button>
+                    <el-tabs v-if="(retrieved.details.bookings.length > 0)" type="border-card" class="p-0">
+                        <el-tab-pane label="Ticket">
+                            <el-alert
+                                class="mb-3"
+                                title="Congratulations! You are already booked for the AWTA 2022."
+                                type="success"
+                                description="Please do screenshot this ticket if your AWTA card is lost, this will be your gate pass to the event place."
+                                :closable="false"
+                                show-icon>
+                            </el-alert>
+                            <ticket-component :registrations="[retrieved.details]" :isRebooking="true"/>
+                        </el-tab-pane>
+                        <el-tab-pane label="Booking">
+                            <el-alert
+                                v-if="(retrieved.details.rebooking_limit === 0)"
+                                class="mb-3"
+                                title="You already reached your rebooking limit. Delegates can only rebook 3x."
+                                type="warning"
+                                :closable="false">
+                            </el-alert>
+                            <booking :booked_dates="retrieved.details.booking_status === 'Cancelled' ? [] : retrieved.details.bookings" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
+                        </el-tab-pane>
+                    </el-tabs>
+                    <booking v-else :booked_dates="retrieved.details.booking_status === 'Cancelled' ? [] : retrieved.details.bookings" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
                 </div>
             </div>
         </div>
     </div>
-    <div v-else class="row justify-content-center">
-        <div class="col-md-12">
-            <el-tabs v-if="(retrieved.details.bookings.length > 0)" type="border-card" class="p-0">
-                <el-tab-pane label="Ticket">
-                    <el-alert
-                        class="mb-3"
-                        title="Congratulations! You are already booked for the AWTA 2022."
-                        type="success"
-                        description="Please do screenshot this ticket if your AWTA card is lost, this will be your gate pass to the event place."
-                        :closable="false"
-                        show-icon>
-                    </el-alert>
-                    <ticket-component :registrations="[retrieved.details]" :isRebooking="true"/>
-                </el-tab-pane>
-                <el-tab-pane label="Booking">
-                    <el-alert
-                        v-if="(retrieved.details.rebooking_limit === 0)"
-                        class="mb-3"
-                        title="You already reached your rebooking limit. Delegates can only rebook 3x."
-                        type="warning"
-                        :closable="false">
-                    </el-alert>
-                    <booking :booked_dates="retrieved.details.booking_status === 'Cancelled' ? [] : retrieved.details.bookings" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
-                </el-tab-pane>
-            </el-tabs>
-            <booking v-else :booked_dates="retrieved.details.booking_status === 'Cancelled' ? [] : retrieved.details.bookings" :slots="retrieved.slots" :uuid="retrieved.uuid" :can_book_days="retrieved.can_book_days" :self_redirect="false" :hide_button="retrieved.details.rebooking_limit === 0"/>
+
+    <div v-if="Object.keys(retrieved.details).length > 0" class="row justify-content-center">
+        <div class="col-md-6">
+            <label v-if="retrieved.details.booking_activities" class="mb-3 text-secondary">Activity</label>
+            <el-timeline v-if="retrieved.details.booking_activities">
+                <el-timeline-item
+                    v-for="(activity, index) in retrieved.details.booking_activities"
+                    type="default"
+                    size="large"
+                    :timestamp="activity.timestamp">
+                    {{ activity.message }}
+                </el-timeline-item>
+            </el-timeline>
+            <el-empty v-else description="No recorded activity"></el-empty>
         </div>
     </div>
 </div>
@@ -125,7 +145,7 @@
 export default {
     data () {
       return {
-        ruleForm: {"lastName":"balane","localChurch":"Muntinlupa","referenceNumber":"LAMP00003"},
+        ruleForm: {"lastName":"balane","localChurch":"Muntinlupa","referenceNumber":"LAMP00004"},
         disabled: false,
         rules: {
             lastName: [

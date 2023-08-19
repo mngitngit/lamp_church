@@ -7169,7 +7169,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       ruleForm: {
         "lastName": "balane",
         "localChurch": "Muntinlupa",
-        "referenceNumber": "LAMP00003"
+        "referenceNumber": "LAMP00004"
       },
       disabled: false,
       rules: {
@@ -7468,8 +7468,10 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", {
-    staticClass: "w-full"
+  return _c("div", [_c("div", {
+    staticClass: "row justify-content-center mb-4"
+  }, [_c("div", {
+    staticClass: "col-md-6"
   }, [!_vm.validated ? _c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
@@ -7487,9 +7489,9 @@ var render = function render() {
     staticClass: "text-black"
   }, [_c("h6", {
     staticClass: "fw-bolder text-muted"
-  }, [_vm._v("LAMP WORLDWIDE AWTA 2022")]), _vm._v(" "), _c("small", [_vm._v("\n                    Timeline: December 27, 28, 29 and 30"), _c("br"), _vm._v("\n                    Venue: Calamba Tent"), _c("br"), _vm._v("\n                    Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church"), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
+  }, [_vm._v("LAMP WORLDWIDE AWTA 2022")]), _vm._v(" "), _c("small", [_vm._v("\n                            Timeline: December 27, 28, 29 and 30"), _c("br"), _vm._v("\n                            Venue: Calamba Tent"), _c("br"), _vm._v("\n                            Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church"), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
     staticClass: "fw-bolder text-muted"
-  }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                    Both members and visitors will be able to start booking their seats on October 9 until November 30, 2022 for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                    Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                    Rebooking is until November 30, 2022 only. "), _c("br"), _c("br"), _vm._v("\n                    For any booking isues, please report to your AWTA local coordinators."), _c("br"), _c("br"), _vm._v("\n\n                    Book now — hurry while seats last!\n                    ")])])])], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                            Both members and visitors will be able to start booking their seats on October 9 until November 30, 2022 for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                            Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                            Rebooking is until November 30, 2022 only. "), _c("br"), _c("br"), _vm._v("\n                            For any booking isues, please report to your AWTA local coordinators."), _c("br"), _c("br"), _vm._v("\n\n                            Book now — hurry while seats last!\n                            ")])])])], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",
@@ -7716,7 +7718,25 @@ var render = function render() {
       self_redirect: false,
       hide_button: _vm.retrieved.details.rebooking_limit === 0
     }
-  })], 1)])]);
+  })], 1)])])]), _vm._v(" "), Object.keys(_vm.retrieved.details).length > 0 ? _c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+    staticClass: "col-md-6"
+  }, [_vm.retrieved.details.booking_activities ? _c("label", {
+    staticClass: "mb-3 text-secondary"
+  }, [_vm._v("Activity")]) : _vm._e(), _vm._v(" "), _vm.retrieved.details.booking_activities ? _c("el-timeline", _vm._l(_vm.retrieved.details.booking_activities, function (activity, index) {
+    return _c("el-timeline-item", {
+      attrs: {
+        type: "default",
+        size: "large",
+        timestamp: activity.timestamp
+      }
+    }, [_vm._v("\n                    " + _vm._s(activity.message) + "\n                ")]);
+  }), 1) : _c("el-empty", {
+    attrs: {
+      description: "No recorded activity"
+    }
+  })], 1)]) : _vm._e()]);
 };
 
 var staticRenderFns = [];
@@ -7819,7 +7839,7 @@ var render = function render() {
       }
     }) : _c("span", {
       staticClass: "font-bold text-black-50 text-md"
-    }, [_vm._v("Not yet booked. Please reach out to your local coordinator to book your schedule.")]), _vm._v(" "), _vm.isRebooking && registration.booked_dates.length > 0 ? _c("span", [_c("el-tag", {
+    }, [_vm._v("Not yet booked. Please reach out to your local coordinator to book your schedule.")]), _vm._v(" "), registration.booked_dates.length > 0 ? _c("span", [_c("el-tag", {
       attrs: {
         size: "mini",
         effect: "dark",
