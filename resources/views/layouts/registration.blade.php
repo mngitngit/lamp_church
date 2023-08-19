@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://online.lampawta.com/registration"/>
     <meta property="og:title" content="Annual Worship and Thanksgiving 2023" />
-    <meta property="og:description" content="Upon this rock of revelation, I will build my kingdom."/>
+    <meta property="og:description" content="Year of Clustering"/>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
