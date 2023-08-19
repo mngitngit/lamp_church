@@ -125,8 +125,8 @@
 
     <div v-if="Object.keys(retrieved.details).length > 0" class="row justify-content-center">
         <div class="col-md-6">
-            <label v-if="retrieved.details.booking_activities" class="mb-3 text-secondary">Activity</label>
-            <el-timeline v-if="retrieved.details.booking_activities">
+            <label v-if="retrieved.details.booking_activities.length > 0" class="mb-3 text-secondary">Activity</label>
+            <el-timeline v-if="retrieved.details.booking_activities.length > 0">
                 <el-timeline-item
                     v-for="(activity, index) in retrieved.details.booking_activities"
                     type="default"

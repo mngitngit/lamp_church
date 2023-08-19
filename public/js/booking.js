@@ -7722,9 +7722,9 @@ var render = function render() {
     staticClass: "row justify-content-center"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_vm.retrieved.details.booking_activities ? _c("label", {
+  }, [_vm.retrieved.details.booking_activities.length > 0 ? _c("label", {
     staticClass: "mb-3 text-secondary"
-  }, [_vm._v("Activity")]) : _vm._e(), _vm._v(" "), _vm.retrieved.details.booking_activities ? _c("el-timeline", _vm._l(_vm.retrieved.details.booking_activities, function (activity, index) {
+  }, [_vm._v("Activity")]) : _vm._e(), _vm._v(" "), _vm.retrieved.details.booking_activities.length > 0 ? _c("el-timeline", _vm._l(_vm.retrieved.details.booking_activities, function (activity, index) {
     return _c("el-timeline-item", {
       attrs: {
         type: "default",
