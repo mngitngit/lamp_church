@@ -82,7 +82,7 @@ class BookingController extends Controller
         }
 
         // has changes if paid
-        if ($new_booked_dates == $old_booked_dates && $paid && ($registration->booking_status === 'Pending' || $registration->booking_status === 'Cancelled')) {
+        if ($new_booked_dates == $old_booked_dates && $paid && ($registration->booking_status === BookingStatus::Pending || $registration->booking_status === BookingStatus::Cancelled)) {
             $hasChanges = true;
         }
 

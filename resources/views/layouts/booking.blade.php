@@ -31,6 +31,8 @@
         <main style="min-height: 100vh; background-color: #ebebeb" class="py-4">
             @yield('content')
         </main>
+
+        @yield('footer')
     </div>
 </body>
 <!-- import JavaScript -->

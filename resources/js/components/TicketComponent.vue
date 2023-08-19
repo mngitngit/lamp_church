@@ -26,7 +26,7 @@
                                     <span class="text-md font-bold d-block">{{ registration.email }}</span>
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <small>Registration Type</small>
                                     <span class="text-md font-bold d-block">{{ registration.registration_type }}</span>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    <div class="row mb-3">
+                    <div class="row">
                         <div class="col-md-4 mb-3">
                             <small>Rate</small> <small>({{registration.attending_option}})</small>
                             <span class="text-md font-bold d-block">{{ $func.formatAmount(registration.rate) }}</span>
@@ -53,6 +53,13 @@
                         </div>
                     </div>
 
+                    <!-- <div v-if="registration.cluster_group != ''" class="row">
+                        <div class="col-md-12 mb-3">
+                            <small>Cluster Group</small>
+                            <span class="text-md font-bold d-block">{{ registration.cluster_group }}</span>
+                        </div>
+                    </div> -->
+
                     <div v-if="registration.attending_option === 'Hybrid'" class="row mb-3">
                         <div class="col-md-12">
                             <small class="d-block">Booked Dates</small>
@@ -61,6 +68,8 @@
                             <span v-if="registration.booked_dates.length > 0"><el-tag size="mini" effect="dark" :type="registration.booking_status === 'Confirmed' ? 'success' : (registration.booking_status === 'Cancelled' ? 'danger' : 'warning')">{{ registration.booking_status }}</el-tag></span>
                         </div>
                     </div>
+
+                    
 
                     <div v-if="registration.attending_option === 'Hybrid'" class="row">
                         <div class="col-md-12">

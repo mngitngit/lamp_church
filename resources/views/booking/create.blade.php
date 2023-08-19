@@ -11,3 +11,13 @@
     <manage-booking />
 </div>
 @endsection
+
+@section('footer')
+<footer class="footer shadow">
+    <div class="container py-2">
+        <center>
+            <span class="text-muted">Not yet registered? &nbsp;<el-link href="/registration" type="warning">Register</el-link></span>
+        </center>
+    </div>
+</footer>
+@endsection

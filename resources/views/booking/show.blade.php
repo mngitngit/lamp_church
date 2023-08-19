@@ -3,7 +3,7 @@
 @section('content')
 <div class="px-4">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <el-link type="primary" class="float-end" href="/booking">Book Another Delegate</el-link>
         </div>
     </div>

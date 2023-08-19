@@ -7347,7 +7347,7 @@ var render = function render() {
   }), _vm._v(" "), _c("br")], 1), _vm._v(" "), _c("small", {
     staticClass: "text-description d-block"
   }, [_vm._v("Registration Reference")]), _vm._v(" "), _c("h3", {
-    staticClass: "d-block"
+    staticClass: "d-block mb-0"
   }, [_vm._v(_vm._s(_vm.uuid))])], 1);
 };
 
@@ -7621,7 +7621,7 @@ var render = function render() {
   }, [_c("el-form-item", {
     staticClass: "transform-uppercase",
     attrs: {
-      label: "AWTA Card Number / Guest Number",
+      label: "LAMP ID / Guest Number",
       prop: "referenceNumber",
       required: "",
       error: _vm.fieldErrors
@@ -7797,7 +7797,7 @@ var render = function render() {
     }, [_c("small", [_vm._v("Email Address")]), _vm._v(" "), _c("span", {
       staticClass: "text-md font-bold d-block"
     }, [_vm._v(_vm._s(registration.email))])])]), _vm._v(" "), _c("div", {
-      staticClass: "row mb-3"
+      staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
     }, [_c("small", [_vm._v("Registration Type")]), _vm._v(" "), _c("span", {
@@ -7809,7 +7809,7 @@ var render = function render() {
         uuid: registration.uuid
       }
     })], 1)]), _vm._v(" "), _c("div", {
-      staticClass: "row mb-3"
+      staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-4 mb-3"
     }, [_c("small", [_vm._v("Rate")]), _vm._v(" "), _c("small", [_vm._v("(" + _vm._s(registration.attending_option) + ")")]), _vm._v(" "), _c("span", {

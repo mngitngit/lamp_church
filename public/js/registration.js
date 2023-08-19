@@ -7127,7 +7127,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         if (withStatus) {
           if (status === 'Confirmed') html += "<i class='el-icon-s-flag' style='color: green'></i> ";
-          if (status === 'Pending') html += "<i class='el-icon-time' style='color: orange'></i> ";
+          if (status === 'Pending Payment') html += "<i class='el-icon-time' style='color: orange'></i> ";
           if (status === 'Cancelled') html += "<i class='el-icon-s-flag' style='color: red'></i> ";
         }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\BookingStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -29,7 +30,7 @@ class CreateRegistrationsTable extends Migration
             $table->string('attending_option');
             $table->decimal('rate', 9, 3)->default(0.000);
             $table->string('payment_status')->default('Unsettled');
-            $table->string('booking_status')->default('Pending');
+            $table->string('booking_status')->default(BookingStatus::Pending);
             $table->string('with_awta_card')->default('none');
             $table->decimal('can_book_rate', 9, 3)->default(0.000);
             $table->integer('can_book_days')->default(2);

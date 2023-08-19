@@ -52,7 +52,7 @@ class Controller extends BaseController
                 'registration_uuid' => $registration['uuid'],
                 'slot_id' => $booking,
                 'local_church' => $registration['local_church'],
-                'status' => $registration->payment_status === 'Paid' ? 'Confirmed' : 'Pending'
+                'status' => $registration->payment_status === 'Paid' ? BookingStatus::Confirmed : BookingStatus::Pending
             ]);
         }
     }
@@ -89,7 +89,7 @@ class Controller extends BaseController
 
         if ($auto_enable_booking && $registration->attending_option === 'Hybrid') {
             if ($totalAmountPaid >= $canBookRate) {
-                if ($registration->booking_status === 'Pending') {
+                if ($registration->booking_status === BookingStatus::Pending) {
                     Booking::where('registration_uuid', $uuid)->update([
                         'status' => BookingStatus::Confirmed
                     ]);

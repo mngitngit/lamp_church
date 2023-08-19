@@ -161,7 +161,7 @@
               if (status === 'Confirmed')
                 html += "<i class='el-icon-s-flag' style='color: green'></i> ";
 
-              if (status === 'Pending')
+              if (status === 'Pending Payment')
                 html += "<i class='el-icon-time' style='color: orange'></i> ";
 
               if (status === 'Cancelled')
