@@ -10,7 +10,7 @@
                             <small>
                             Timeline: December 27, 28, 29 and 30<br/>
                             Venue: Calamba Tent<br/>
-                            Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church<br/>
+                            Theme: Year of Clustering<br/>
                             <br/>
                             </small>
 

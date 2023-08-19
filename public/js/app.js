@@ -8443,7 +8443,7 @@ var render = function render() {
     }
   }, [_c("h2", [_vm._v("LAMP WORLDWIDE AWTA 2023")]), _vm._v(" "), _c("p", {
     staticClass: "text-sm"
-  }, [_vm._v("\n        BE BLESSED PHYSICALLY, MATERIALLY & SPIRITUALLY "), _c("br"), _vm._v("\n        Event Timing: DECEMBER 27-30, 2023 "), _c("br"), _vm._v("\n        Event Place: Calamba Tent "), _c("br"), _vm._v("\n        Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church\n    ")]), _vm._v(" "), _c("p", {
+  }, [_vm._v("\n        BE BLESSED PHYSICALLY, MATERIALLY & SPIRITUALLY "), _c("br"), _vm._v("\n        Event Timing: DECEMBER 27-30, 2023 "), _c("br"), _vm._v("\n        Event Place: Calamba Tent "), _c("br"), _vm._v("\n        Theme: Year of Clustering\n    ")]), _vm._v(" "), _c("p", {
     staticClass: "text-sm mb-0"
   }, [_vm._v('\n        Chosen people of God in the old testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where "offering made by fire unto the Lord" are given to celebrate God. But with Christ\'s death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. '), _c("br"), _c("br"), _vm._v("\n\n        Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!\n    ")])]);
 };

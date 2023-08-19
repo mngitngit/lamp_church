@@ -5,7 +5,7 @@
             BE BLESSED PHYSICALLY, MATERIALLY & SPIRITUALLY <br/>
             Event Timing: DECEMBER 27-30, 2023 <br/>
             Event Place: Calamba Tent <br/>
-            Theme: Matthew 16:18 Upon this Rock of Salvation I Will Build My Church
+            Theme: Year of Clustering
         </p>
 
         <p class="text-sm mb-0">
