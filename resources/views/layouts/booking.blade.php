@@ -7,9 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta property="og:image" content="https://lampawta.online/images/registration_banner.jpg" />
+    <meta property="og:image" content="https://online.lampawta.com/images/registration_banner.jpg" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://lampawta.online/registration"/>
+    <meta property="og:url" content="https://online.lampawta.com/registration"/>
     <meta property="og:title" content="Annual Worship and Thanksgiving 2022" />
     <meta property="og:description" content="Upon this rock of revelation, I will build my kingdom."/>
 
