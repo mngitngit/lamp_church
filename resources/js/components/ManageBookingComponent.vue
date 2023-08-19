@@ -144,7 +144,11 @@
 export default {
     data () {
       return {
-        ruleForm: {"lastName":"balane","localChurch":"Muntinlupa","referenceNumber":"LAMP00004"},
+        ruleForm: {
+            'lastName': '',
+            'localChurch': '',
+            'referenceNumber': ''
+        },
         disabled: false,
         rules: {
             lastName: [
