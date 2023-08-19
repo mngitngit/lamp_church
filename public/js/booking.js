@@ -7732,11 +7732,7 @@ var render = function render() {
         timestamp: activity.timestamp
       }
     }, [_vm._v("\n                    " + _vm._s(activity.message) + "\n                ")]);
-  }), 1) : _c("el-empty", {
-    attrs: {
-      description: "No recorded activity"
-    }
-  })], 1)]) : _vm._e()]);
+  }), 1) : _vm._e()], 1)]) : _vm._e()]);
 };
 
 var staticRenderFns = [];

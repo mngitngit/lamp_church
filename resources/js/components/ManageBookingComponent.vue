@@ -135,7 +135,6 @@
                     {{ activity.message }}
                 </el-timeline-item>
             </el-timeline>
-            <el-empty v-else description="No recorded activity"></el-empty>
         </div>
     </div>
 </div>
