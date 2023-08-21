@@ -7305,7 +7305,15 @@ __webpack_require__.r(__webpack_exports__);
       "default": false,
       type: Boolean,
       required: false
+    },
+    congratulate: {
+      "default": false,
+      type: Boolean,
+      required: false
     }
+  },
+  mounted: function mounted() {
+    if (this.congratulate) this.open();
   },
   methods: {
     capitalizeString: function capitalizeString(str) {
@@ -7315,6 +7323,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     goToRegistration: function goToRegistration() {
       window.location.href = "/registration";
+    },
+    open: function open() {
+      this.$confirm('<strong>Congratulations!</strong> Your registration has been accepted! <br /><br /><small>Please settle your balance or at least pay partially to confirm your booking. If your booking is left unsettled within 7 days, it will be canceled automatically.</small> <br /><br /><small>Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA Card with the new LAMP ID, please contact your local coordinator and pay 35 pesos for the issuance.</small><br/><br/><img width="170" height="100" class="mb-3 rounded shadow" src="/images/new_id.jpg">', 'You did it!', {
+        confirmButtonText: 'OK',
+        type: 'success',
+        showCancelButton: false,
+        showClose: false,
+        center: true,
+        dangerouslyUseHTMLString: true
+      });
     }
   }
 });
@@ -7489,9 +7507,9 @@ var render = function render() {
     staticClass: "text-black"
   }, [_c("h6", {
     staticClass: "fw-bolder text-muted"
-  }, [_vm._v("LAMP WORLDWIDE AWTA 2022")]), _vm._v(" "), _c("small", [_vm._v("\n                            Timeline: December 27, 28, 29 and 30"), _c("br"), _vm._v("\n                            Venue: Calamba Tent"), _c("br"), _vm._v("\n                            Theme: Year of Clustering"), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
+  }, [_vm._v("LAMP WORLDWIDE AWTA 2023")]), _vm._v(" "), _c("small", [_vm._v("\n                            Timeline: December 27, 28, 29 and 30"), _c("br"), _vm._v("\n                            Venue: Calamba Tent"), _c("br"), _vm._v("\n                            Theme: Year of Clustering"), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
     staticClass: "fw-bolder text-muted"
-  }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                            Both members and visitors will be able to start booking their seats on October 9 until November 30, 2022 for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                            Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                            Rebooking is until November 30, 2022 only. "), _c("br"), _c("br"), _vm._v("\n                            For any booking isues, please report to your AWTA local coordinators."), _c("br"), _c("br"), _vm._v("\n\n                            Book now — hurry while seats last!\n                            ")])])])], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                            Both members and visitors will be able to start booking their seats on October 9 until November 30, 2023 for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                            Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                            Rebooking is until November 30, 2023 only. "), _c("br"), _c("br"), _vm._v("\n                            For any booking isues, please report to your AWTA local coordinators."), _c("br"), _c("br"), _vm._v("\n\n                            Book now — hurry while seats last!\n                            ")])])])], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",
@@ -7678,7 +7696,7 @@ var render = function render() {
   }, [_c("el-alert", {
     staticClass: "mb-3",
     attrs: {
-      title: "Congratulations! You are already booked for the AWTA 2022.",
+      title: "Congratulations! You are already booked for the AWTA 2023.",
       type: "success",
       description: "Please do screenshot this ticket if your AWTA card is lost, this will be your gate pass to the event place.",
       closable: false,
@@ -7726,6 +7744,7 @@ var render = function render() {
     staticClass: "mb-3 text-secondary"
   }, [_vm._v("Activity")]) : _vm._e(), _vm._v(" "), _vm.retrieved.details.booking_activities.length > 0 ? _c("el-timeline", _vm._l(_vm.retrieved.details.booking_activities, function (activity, index) {
     return _c("el-timeline-item", {
+      key: index,
       attrs: {
         type: "default",
         size: "large",

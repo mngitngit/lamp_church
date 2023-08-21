@@ -6,7 +6,7 @@
                 <div class="col-md-6">
                     <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843; height: 100% !important;">
                         <div class="text-black">
-                            <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2022</h6>
+                            <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2023</h6>
                             <small>
                             Timeline: December 27, 28, 29 and 30<br/>
                             Venue: Calamba Tent<br/>
@@ -16,11 +16,11 @@
 
                             <h6 class="fw-bolder text-muted">GUIDELINES: </h6>
                             <small>
-                            Both members and visitors will be able to start booking their seats on October 9 until November 30, 2022 for Hybrid Attendees.<br/><br/>
+                            Both members and visitors will be able to start booking their seats on October 9 until November 30, 2023 for Hybrid Attendees.<br/><br/>
 
                             Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings.<br/><br/>
 
-                            Rebooking is until November 30, 2022 only. <br/><br/>
+                            Rebooking is until November 30, 2023 only. <br/><br/>
                             For any booking isues, please report to your AWTA local coordinators.<br/><br/>
 
                             Book now — hurry while seats last!
@@ -98,7 +98,7 @@
                         <el-tab-pane label="Ticket">
                             <el-alert
                                 class="mb-3"
-                                title="Congratulations! You are already booked for the AWTA 2022."
+                                title="Congratulations! You are already booked for the AWTA 2023."
                                 type="success"
                                 description="Please do screenshot this ticket if your AWTA card is lost, this will be your gate pass to the event place."
                                 :closable="false"
@@ -129,6 +129,7 @@
             <el-timeline v-if="retrieved.details.booking_activities.length > 0">
                 <el-timeline-item
                     v-for="(activity, index) in retrieved.details.booking_activities"
+                    :key="index"
                     type="default"
                     size="large"
                     :timestamp="activity.timestamp">

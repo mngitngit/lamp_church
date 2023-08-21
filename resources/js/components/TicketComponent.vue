@@ -69,8 +69,6 @@
                         </div>
                     </div>
 
-                    
-
                     <div v-if="registration.attending_option === 'Hybrid'" class="row">
                         <div class="col-md-12">
                             <small>*** Please screenshot this ticket. This will be your gate pass to the event place.</small>
@@ -93,7 +91,16 @@ export default {
             default: false,
             type: Boolean,
             required: false
+        },
+        congratulate: {
+            default: false,
+            type: Boolean,
+            required: false
         }
+    },
+    mounted() {
+        if (this.congratulate)
+            this.open()
     },
     methods: {
         capitalizeString(str) { 
@@ -103,6 +110,16 @@ export default {
         },
         goToRegistration() {
             window.location.href = `/registration`;
+        },
+        open() {
+            this.$confirm('<strong>Congratulations!</strong> Your registration has been accepted! <br /><br /><small>Please settle your balance or at least pay partially to confirm your booking. If your booking is left unsettled within 7 days, it will be canceled automatically.</small> <br /><br /><small>Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA Card with the new LAMP ID, please contact your local coordinator and pay 35 pesos for the issuance.</small><br/><br/><img width="170" height="100" class="mb-3 rounded shadow" src="/images/new_id.jpg">', 'You did it!', {
+                confirmButtonText: 'OK',
+                type: 'success',
+                showCancelButton: false,
+                showClose: false,
+                center: true,
+                dangerouslyUseHTMLString: true
+            })
         }
     }   
 }

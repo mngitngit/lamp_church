@@ -9,7 +9,7 @@
     </div>
 
     <div class="row justify-content-center mb-4">
-        <ticket-component :registrations="{{ json_encode($registration) }}" />
+        <ticket-component :registrations="{{ json_encode($registration) }}" :congratulate="true"/>
     </div>
 </div>
 @endsection
