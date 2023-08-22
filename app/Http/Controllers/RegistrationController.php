@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AttendingOption;
 use App\Enums\PaymentStatus;
 use App\Exports\ExportRegistration;
 use App\Models\Attendance;
@@ -210,13 +211,13 @@ class RegistrationController extends Controller
 
             $registration = $this->updatePaymentStatus($registration->uuid, false);
 
-            if ($attending_option === 'Hybrid') {
+            if ($attending_option === AttendingOption::Hybrid) {
                 $this->book($registration, $request->step_3['booked']);
             }
 
             return $registration->uuid;
         } else { // guest registration
-            if ($request->step_1['attendingOption'] === 'Hybrid') {
+            if ($request->step_1['attendingOption'] === AttendingOption::Hybrid) {
                 $registered = [];
 
                 foreach ($request->step_2['guests'] as $key => $value) {
@@ -236,7 +237,7 @@ class RegistrationController extends Controller
                         'cluster_group' => $details->clusterGroup,
                         'country' => $details->country,
                         'category' => PaymentStatus::Free,
-                        'attending_option' => 'Hybrid',
+                        'attending_option' => AttendingOption::Hybrid,
                         'with_awta_card' => 'none',
                         'notes' => [],
                         'activities' => [],
@@ -268,7 +269,7 @@ class RegistrationController extends Controller
                     'cluster_group' => $details->clusterGroup,
                     'country' => $details->country,
                     'category' => PaymentStatus::Free,
-                    'attending_option' => 'Online',
+                    'attending_option' => AttendingOption::Online,
                     'with_awta_card' => 'none',
                     'notes' => [],
                     'activities' => [],

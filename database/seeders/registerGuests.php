@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\AttendingOption;
 use App\Enums\RegistrationType;
 use App\Models\Registration;
 use Illuminate\Database\Seeder;
@@ -649,7 +650,7 @@ class registerGuests extends Seeder
                 'local_church' => $data['local_church'],
                 'country' => 'Philippines',
                 'category' => $data['category'],
-                'attending_option' => 'Hybrid',
+                'attending_option' => AttendingOption::Hybrid,
                 'with_awta_card' => 'none',
             ]);
 

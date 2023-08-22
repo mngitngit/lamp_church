@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AttendingOption;
 use App\Enums\BookingStatus;
 use App\Enums\PaymentStatus;
 use App\Http\Resources\RebookingActivityResource;
@@ -169,7 +170,7 @@ class BookingController extends Controller
             return response()->json(['error' => 'Already reached rebooking limit.'], 500);
         }
 
-        if ($registration->attending_option !== 'Hybrid') {
+        if ($registration->attending_option !== AttendingOption::Hybrid) {
             return response()->json(['error' => 'Delegate is not registered for hybrid.'], 500);
         }
 

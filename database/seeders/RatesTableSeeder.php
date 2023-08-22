@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\AttendingOption;
 use App\Enums\PaymentStatus;
 use App\Models\Rates;
 use Illuminate\Database\Seeder;
@@ -18,37 +19,37 @@ class RatesTableSeeder extends Seeder
         Rates::insert([
             [
                 'category' => 'Adult',
-                'attending_option' => 'Hybrid',
+                'attending_option' => AttendingOption::Hybrid,
                 'description' => 'Member (Hybrid)',
                 'rate' => 900,
                 'can_book_rate' => 500
             ], [
                 'category' => 'Adult',
-                'attending_option' => 'Online',
+                'attending_option' => AttendingOption::Online,
                 'description' => 'Member (Online)',
                 'rate' => 100,
                 'can_book_rate' => 0
             ], [
                 'category' => 'Kids',
-                'attending_option' => 'Hybrid',
+                'attending_option' => AttendingOption::Hybrid,
                 'description' => 'Member age 5 - 8 yrs old (Hybrid)',
                 'rate' => 500,
                 'can_book_rate' => 250
             ], [
                 'category' => 'Kids',
-                'attending_option' => 'Online',
+                'attending_option' => AttendingOption::Online,
                 'description' => 'Member age 5 - 8 yrs old (Online)',
                 'rate' => 50,
                 'can_book_rate' => 0
             ], [
                 'category' => PaymentStatus::Free,
-                'attending_option' => 'Hybrid',
+                'attending_option' => AttendingOption::Hybrid,
                 'description' => 'Visitor & Member 0 - 4 yrs old (Hybrid)',
                 'rate' => 0,
                 'can_book_rate' => 0
             ], [
                 'category' => PaymentStatus::Free,
-                'attending_option' => 'Online',
+                'attending_option' => AttendingOption::Online,
                 'description' => 'Visitor & Member 0 - 4 yrs old (Online)',
                 'rate' => 0,
                 'can_book_rate' => 0

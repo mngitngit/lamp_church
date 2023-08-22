@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AttendingOption;
 use App\Enums\BookingStatus;
 use App\Enums\PaymentStatus;
 use App\Enums\RegistrationType;
@@ -88,7 +89,7 @@ class Controller extends BaseController
             $parameters['payment_status'] = PaymentStatus::Unsettled;
         }
 
-        if ($auto_enable_booking && $registration->attending_option === 'Hybrid') {
+        if ($auto_enable_booking && $registration->attending_option === AttendingOption::Hybrid) {
             if ($totalAmountPaid >= $canBookRate) {
                 if ($registration->booking_status === BookingStatus::Pending) {
                     Booking::where('registration_uuid', $uuid)->update([

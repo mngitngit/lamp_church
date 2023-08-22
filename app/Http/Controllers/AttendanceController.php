@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AttendingOption;
 use App\Enums\PaymentStatus;
 use App\Models\Attendance;
 use App\Models\Booking;
@@ -94,7 +95,7 @@ class AttendanceController extends Controller
             return response()->json(['error' => 'This delegate is not booked for today.'], 500);
         }
 
-        if ($registration->attending_option !== 'Hybrid') {
+        if ($registration->attending_option !== AttendingOption::Hybrid) {
             return response()->json(['error' => 'This delegate is not registered for hybrid.'], 500);
         }
 
