@@ -7177,7 +7177,11 @@ __webpack_require__.r(__webpack_exports__);
       window.location.href = "/registration";
     },
     open: function open() {
-      this.$confirm('<strong>Congratulations!</strong> Your registration has been accepted! <br /><br /><small>Please settle your balance or at least pay partially to confirm your booking. If your booking is left unsettled within 7 days, it will be canceled automatically.</small> <br /><br /><small>Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA Card with the new LAMP ID, please contact your local coordinator and pay 35 pesos for the issuance.</small><br/><br/><img width="170" height="100" class="mb-3 rounded shadow" src="/images/new_id.jpg">', 'You did it!', {
+      var msg = '<strong>Congratulations!</strong> Your registration has been accepted! ';
+      if (this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid') msg += '<br /><br /><small>Please settle your balance or at least pay partially to confirm your booking. If your booking is left unsettled within 7 days, it will be canceled automatically.<br /><br />If your booking is cancelled, please reach out to your local coordinator for assistance.</small>';
+      if (this.registrations[0].attending_option === 'Online') msg += '<br /><br /><small>To watch the live broadcast, join our FB Group <br/><a href="https://www.facebook.com/groups/446318280091482">https://www.facebook.com/groups/446318280091482</a></small>';
+      if (this.registrations[0].registration_type === 'Member') msg += '<br /><br /><small>Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA Card with the new LAMP ID, please contact your local coordinator and pay 35 pesos for the issuance.</small><br/><br/><img width="170" height="100" class="mb-3 rounded shadow" src="/images/new_id.jpg">';
+      this.$confirm(msg, 'You did it!', {
         confirmButtonText: 'OK',
         type: 'success',
         showCancelButton: false,
@@ -7637,7 +7641,7 @@ var render = function render() {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
-    }, [_c("small", [_vm._v("*** Please screenshot this ticket. This will be your gate pass to the event place.")])])]) : _vm._e()])])], 1);
+    }, [_c("small", [_vm._v("*** Please screenshot this ticket. This will be your gate pass to the event place if your LAMP ID/Guest Ticket is lost.")])])]) : _vm._e()])])], 1);
   }), 0);
 };
 

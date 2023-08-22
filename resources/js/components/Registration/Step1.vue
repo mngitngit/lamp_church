@@ -141,6 +141,7 @@ export default {
                 attendingOption: '',
                 awtaCardNumber: '',
                 clusterGroup: '',
+                bookingCode: '',
                 found: {}
             },
             rules: {

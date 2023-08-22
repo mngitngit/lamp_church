@@ -75,18 +75,22 @@ class Controller extends BaseController
 
         if ($balance <= 0.0 && count($registration->payments) > 0) {
             $parameters['payment_status'] = PaymentStatus::Paid;
+            $parameters['booking_status'] = BookingStatus::Confirmed;
         }
 
         if ($balance > 0.0 && count($registration->payments) > 0) {
             $parameters['payment_status'] = PaymentStatus::Partial;
+            $parameters['booking_status'] = BookingStatus::Confirmed;
         }
 
         if ($balance == 0.0 && count($registration->payments) == 0) {
             $parameters['payment_status'] = PaymentStatus::Free;
+            $parameters['booking_status'] = BookingStatus::Confirmed;
         }
 
         if ($balance > 0.0 && count($registration->payments) == 0) {
             $parameters['payment_status'] = PaymentStatus::Unsettled;
+            $parameters['booking_status'] = BookingStatus::Pending;
         }
 
         if ($auto_enable_booking && $registration->attending_option === AttendingOption::Hybrid) {
