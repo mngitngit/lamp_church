@@ -7563,7 +7563,7 @@ var render = function render() {
         }, [_c("el-tag", {
           attrs: {
             size: "mini",
-            type: scope.row.booking_status === "Confirmed" ? "" : scope.row.booking_status === "Cancelled" ? "danger" : "warning"
+            type: scope.row.booking_status === "Confirmed" ? "success" : scope.row.booking_status === "Cancelled" ? "danger" : "warning"
           }
         }, [_vm._v(_vm._s(scope.row.booking_status))])], 1), _vm._v(" "), _vm._l(scope.row.booked_dates, function (dates, index) {
           return _c("el-descriptions-item", {

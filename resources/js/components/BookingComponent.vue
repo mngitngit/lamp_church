@@ -61,6 +61,11 @@ export default {
             required: false,
             type: Boolean,
             default: false
+        },
+        is_admin: {
+            default: false,
+            type: Boolean,
+            required: false
         }
     },
     data () {
@@ -99,7 +104,8 @@ export default {
                     });
 
                     await axios.post(`/booking/${this.uuid}/update`, {
-                        dates: this.ruleForm.booked
+                        dates: this.ruleForm.booked,
+                        is_admin: this.is_admin
                     })
                     .then(async (response) => {
                         loading.close()

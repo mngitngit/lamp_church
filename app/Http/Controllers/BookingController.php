@@ -31,8 +31,7 @@ class BookingController extends Controller
             'booked_dates' => $registration->bookings()->with(['slot'])->get(),
             'slots' => Slots::where('registration_type', $registration->registration_type)->get(),
             'uuid' => $uuid,
-            'can_book_days' => $registration->can_book_days,
-            'rebooking_activities' => $registration->rebooking_activities,
+            'registration' => $registration
         ]);
     }
 
@@ -69,7 +68,8 @@ class BookingController extends Controller
 
         $limit = $registration->rebooking_limit;
 
-        $hasPermission = auth()->user() ? auth()->user()->permissions->can_edit_delegate : false;
+        // if admin did the rebooking, rebooking limit must not be deducted.
+        $hasPermission = $request->is_admin === 1;
 
         // considered paid if partially paid
         $paid = $registration->payment_status === 'Paid' || floatval($registration->can_book_rate) <= floatval($registration->payments_sum_amount);
@@ -126,12 +126,16 @@ class BookingController extends Controller
                 ]);
 
                 // add activity to registration
-                if ($hasChanges && !auth()->user()) {
+                if ($hasChanges) {
                     $dates = array_map(function ($date) {
                         return $date['slot']['event_date'];
                     }, $registration->bookings()->with('slot')->get()->toArray());
 
-                    $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array($registration->fullname . ' rebooked for ' . implode(', ', $dates)));
+                    if ($hasPermission) {
+                        $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array('This delegate was rebooked by ' . auth()->user()->name . ' for ' . implode(', ', $dates)));
+                    } else {
+                        $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array($registration->fullname . ' rebooked for ' . implode(', ', $dates)));
+                    }
                 }
             } else {
                 return response()->json(['error' => 'Sorry, no remaining seats left. Please refresh the page and try again.'], 500);

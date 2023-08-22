@@ -6991,6 +6991,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       required: false,
       type: Boolean,
       "default": false
+    },
+    is_admin: {
+      "default": false,
+      type: Boolean,
+      required: false
     }
   },
   data: function data() {
@@ -7058,7 +7063,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             });
                             _context2.next = 3;
                             return axios.post("/booking/".concat(_this.uuid, "/update"), {
-                              dates: _this.ruleForm.booked
+                              dates: _this.ruleForm.booked,
+                              is_admin: _this.is_admin
                             }).then( /*#__PURE__*/function () {
                               var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
                                 return _regeneratorRuntime().wrap(function _callee$(_context) {

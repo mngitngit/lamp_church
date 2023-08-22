@@ -67,7 +67,7 @@
 
         <el-descriptions v-else-if="scope.row.booked_dates.length > 0" class="margin-top" :column="1" size="mini" border>
           <el-descriptions-item label="Booking Status" contentClassName="text-center">
-            <el-tag size="mini" :type="scope.row.booking_status === 'Confirmed' ? '' : (scope.row.booking_status === 'Cancelled' ? 'danger' : 'warning')">{{ scope.row.booking_status }}</el-tag>  
+            <el-tag size="mini" :type="scope.row.booking_status === 'Confirmed' ? 'success' : (scope.row.booking_status === 'Cancelled' ? 'danger' : 'warning')">{{ scope.row.booking_status }}</el-tag>  
           </el-descriptions-item>
 
           <el-descriptions-item v-for="(dates, index) in scope.row.booked_dates" :key="index" :label="index === 0 ? 'Booked Dates' : ''" contentClassName="text-center">{{ dates }}</el-descriptions-item>

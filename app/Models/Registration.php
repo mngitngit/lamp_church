@@ -94,14 +94,6 @@ class Registration extends MyModel
         return $this->hasMany(Attendance::class, 'registration_uuid', 'uuid');
     }
 
-    /**
-     * Get the rebooking activities for the delegate.
-     */
-    public function rebooking_activities()
-    {
-        return $this->hasMany(RebookingActivities::class, 'registration_uuid', 'uuid');
-    }
-
     private static function logActivity($description, $delegate_name)
     {
         if (auth()->user()) {
