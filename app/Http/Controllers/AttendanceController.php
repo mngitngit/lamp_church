@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentStatus;
 use App\Models\Attendance;
 use App\Models\Booking;
 use App\Models\Registration;
@@ -97,7 +98,7 @@ class AttendanceController extends Controller
             return response()->json(['error' => 'This delegate is not registered for hybrid.'], 500);
         }
 
-        if ($registration->payment_status != 'Paid' && $registration->payment_status != 'Free') {
+        if ($registration->payment_status != PaymentStatus::Paid && $registration->payment_status != PaymentStatus::Free) {
             return response()->json(['error' => 'This delegate has remaining balance. Please reach out to your local coordinator.'], 500);
         }
 

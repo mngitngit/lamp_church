@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentStatus;
 use App\Exports\ExportRegistration;
 use App\Models\Attendance;
 use App\Models\Booking;
@@ -234,7 +235,7 @@ class RegistrationController extends Controller
                         'local_church' => $details->localChurch,
                         'cluster_group' => $details->clusterGroup,
                         'country' => $details->country,
-                        'category' => 'Free',
+                        'category' => PaymentStatus::Free,
                         'attending_option' => 'Hybrid',
                         'with_awta_card' => 'none',
                         'notes' => [],
@@ -266,7 +267,7 @@ class RegistrationController extends Controller
                     'local_church' => $details->localChurch,
                     'cluster_group' => $details->clusterGroup,
                     'country' => $details->country,
-                    'category' => 'Free',
+                    'category' => PaymentStatus::Free,
                     'attending_option' => 'Online',
                     'with_awta_card' => 'none',
                     'notes' => [],

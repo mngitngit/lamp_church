@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\PaymentStatus;
 use App\Models\Rates;
 use Illuminate\Database\Seeder;
 
@@ -40,13 +41,13 @@ class RatesTableSeeder extends Seeder
                 'rate' => 50,
                 'can_book_rate' => 0
             ], [
-                'category' => 'Free',
+                'category' => PaymentStatus::Free,
                 'attending_option' => 'Hybrid',
                 'description' => 'Visitor & Member 0 - 4 yrs old (Hybrid)',
                 'rate' => 0,
                 'can_book_rate' => 0
             ], [
-                'category' => 'Free',
+                'category' => PaymentStatus::Free,
                 'attending_option' => 'Online',
                 'description' => 'Visitor & Member 0 - 4 yrs old (Online)',
                 'rate' => 0,

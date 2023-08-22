@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\BookingStatus;
+use App\Enums\PaymentStatus;
 use App\Http\Resources\RebookingActivityResource;
 use App\Models\Booking;
 use App\Models\Rates;
@@ -72,7 +73,7 @@ class BookingController extends Controller
         $hasPermission = $request->is_admin === 1;
 
         // considered paid if partially paid
-        $paid = $registration->payment_status === 'Paid' || floatval($registration->can_book_rate) <= floatval($registration->payments_sum_amount);
+        $paid = $registration->payment_status === PaymentStatus::Paid || $registration->payment_status === PaymentStatus::Partial;
 
         $hasChanges = false;
 

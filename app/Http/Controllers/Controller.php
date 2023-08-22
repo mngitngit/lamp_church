@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\BookingStatus;
+use App\Enums\PaymentStatus;
 use App\Enums\RegistrationType;
 use App\Models\Booking;
 use App\Models\LookUp;
@@ -52,7 +53,7 @@ class Controller extends BaseController
                 'registration_uuid' => $registration['uuid'],
                 'slot_id' => $booking,
                 'local_church' => $registration['local_church'],
-                'status' => $registration->payment_status === 'Paid' ? BookingStatus::Confirmed : BookingStatus::Pending
+                'status' => $registration->payment_status === PaymentStatus::Paid || $registration->payment_status === PaymentStatus::Free ? BookingStatus::Confirmed : BookingStatus::Pending
             ]);
         }
     }
@@ -72,19 +73,19 @@ class Controller extends BaseController
         $parameters = array();
 
         if ($balance <= 0.0 && count($registration->payments) > 0) {
-            $parameters['payment_status'] = 'Paid';
+            $parameters['payment_status'] = PaymentStatus::Paid;
         }
 
         if ($balance > 0.0 && count($registration->payments) > 0) {
-            $parameters['payment_status'] = 'Partial';
+            $parameters['payment_status'] = PaymentStatus::Partial;
         }
 
         if ($balance == 0.0 && count($registration->payments) == 0) {
-            $parameters['payment_status'] = 'Free';
+            $parameters['payment_status'] = PaymentStatus::Free;
         }
 
         if ($balance > 0.0 && count($registration->payments) == 0) {
-            $parameters['payment_status'] = 'Unsettled';
+            $parameters['payment_status'] = PaymentStatus::Unsettled;
         }
 
         if ($auto_enable_booking && $registration->attending_option === 'Hybrid') {
