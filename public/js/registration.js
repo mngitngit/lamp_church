@@ -7123,15 +7123,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var arr = _typeof(dates) === 'object' ? dates : dates.split(", ");
       var html = "";
       arr.forEach(function (element) {
-        html += "<div>";
-
-        if (withStatus) {
-          if (status === 'Confirmed') html += "<i class='el-icon-s-flag' style='color: green'></i> ";
-          if (status === 'Pending Payment') html += "<i class='el-icon-time' style='color: orange'></i> ";
-          if (status === 'Cancelled') html += "<i class='el-icon-s-flag' style='color: red'></i> ";
-        }
-
-        html += element + "</div>";
+        // if (withStatus) {
+        //   if (status === 'Confirmed')
+        //     html += "<i class='el-icon-s-flag' style='color: green'></i> ";
+        //   if (status === 'Pending Payment')
+        //     html += "<i class='el-icon-time' style='color: orange'></i> ";
+        //   if (status === 'Cancelled')
+        //     html += "<i class='el-icon-s-flag' style='color: red'></i> ";
+        // }
+        html += element;
       });
       return html;
     }
@@ -7438,7 +7438,8 @@ var render = function render() {
     }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
-      label: "Personal Details"
+      label: "Personal Details",
+      width: "305"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -7535,7 +7536,7 @@ var render = function render() {
     attrs: {
       label: "Booked dates",
       align: "center",
-      width: "230"
+      width: "255"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -7547,11 +7548,32 @@ var render = function render() {
             type: "info",
             closable: false
           }
-        }) : scope.row.booked_dates.length > 0 ? _c("div", {
-          domProps: {
-            innerHTML: _vm._s(_vm.transformDates(scope.row.booked_dates, true, scope.row.booking_status))
+        }) : scope.row.booked_dates.length > 0 ? _c("el-descriptions", {
+          staticClass: "margin-top",
+          attrs: {
+            column: 1,
+            size: "mini",
+            border: ""
           }
-        }) : _c("span", [_vm._v("--")])];
+        }, [_c("el-descriptions-item", {
+          attrs: {
+            label: "Booking Status",
+            contentClassName: "text-center"
+          }
+        }, [_c("el-tag", {
+          attrs: {
+            size: "mini",
+            type: scope.row.booking_status === "Confirmed" ? "" : scope.row.booking_status === "Cancelled" ? "danger" : "warning"
+          }
+        }, [_vm._v(_vm._s(scope.row.booking_status))])], 1), _vm._v(" "), _vm._l(scope.row.booked_dates, function (dates, index) {
+          return _c("el-descriptions-item", {
+            key: index,
+            attrs: {
+              label: index === 0 ? "Booked Dates" : "",
+              contentClassName: "text-center"
+            }
+          }, [_vm._v(_vm._s(dates))]);
+        })], 2) : _c("span", [_vm._v("--")])];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {

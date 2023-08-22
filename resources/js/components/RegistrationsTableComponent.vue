@@ -15,7 +15,8 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="Personal Details">
+      label="Personal Details"
+      width="305">
       <template slot-scope="scope">
         <el-descriptions class="margin-top" :column="1" size="mini" border>
           <el-descriptions-item>
@@ -54,17 +55,25 @@
     <el-table-column
       label="Booked dates"
       align="center"
-      width="230">
+      width="255">
       <template slot-scope="scope">
-          <el-alert
-              v-if="scope.row.is_booking_bypassed"
-              class="py-1 text-xs d-inline"
-              title="All Days Pass"
-              type="info"
-              :closable="false">
-          </el-alert>
-          <div v-else-if="scope.row.booked_dates.length > 0" v-html="transformDates(scope.row.booked_dates, true, scope.row.booking_status)"></div>
-          <span v-else>--</span>
+        <el-alert
+            v-if="scope.row.is_booking_bypassed"
+            class="py-1 text-xs d-inline"
+            title="All Days Pass"
+            type="info"
+            :closable="false">
+        </el-alert>
+
+        <el-descriptions v-else-if="scope.row.booked_dates.length > 0" class="margin-top" :column="1" size="mini" border>
+          <el-descriptions-item label="Booking Status" contentClassName="text-center">
+            <el-tag size="mini" :type="scope.row.booking_status === 'Confirmed' ? '' : (scope.row.booking_status === 'Cancelled' ? 'danger' : 'warning')">{{ scope.row.booking_status }}</el-tag>  
+          </el-descriptions-item>
+
+          <el-descriptions-item v-for="(dates, index) in scope.row.booked_dates" :key="index" :label="index === 0 ? 'Booked Dates' : ''" contentClassName="text-center">{{ dates }}</el-descriptions-item>
+        </el-descriptions>
+
+        <span v-else>--</span>
       </template>
     </el-table-column>
     <el-table-column
@@ -155,20 +164,18 @@
           var html = "";
 
           arr.forEach(element => {
-            html += "<div>";
+            // if (withStatus) {
+            //   if (status === 'Confirmed')
+            //     html += "<i class='el-icon-s-flag' style='color: green'></i> ";
 
-            if (withStatus) {
-              if (status === 'Confirmed')
-                html += "<i class='el-icon-s-flag' style='color: green'></i> ";
+            //   if (status === 'Pending Payment')
+            //     html += "<i class='el-icon-time' style='color: orange'></i> ";
 
-              if (status === 'Pending Payment')
-                html += "<i class='el-icon-time' style='color: orange'></i> ";
+            //   if (status === 'Cancelled')
+            //     html += "<i class='el-icon-s-flag' style='color: red'></i> ";
+            // }
 
-              if (status === 'Cancelled')
-                html += "<i class='el-icon-s-flag' style='color: red'></i> ";
-            }
-
-            html += element + "</div>";
+            html += element;
           });
 
           return html;
