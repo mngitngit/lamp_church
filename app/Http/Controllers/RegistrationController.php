@@ -13,7 +13,10 @@ use App\Models\RebookingActivities;
 use App\Models\Registration;
 use App\Models\Slots;
 use App\Models\UUID;
+use App\Notifications\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RegistrationController extends Controller
@@ -368,5 +371,16 @@ class RegistrationController extends Controller
         Attendance::where('registration_uuid', $uuid)->delete();
 
         return Registration::where('uuid', $uuid)->first()->delete();
+    }
+
+    public function test_mail()
+    {
+        $registration = Registration::with('bookings', 'bookings.slot')->withSum('payments', 'amount')->find(21);
+
+        FacadesNotification::route('mail', [
+            $registration->email => $registration->fullname,
+        ])->notify(new Registered($registration));
+
+        dd($registration);
     }
 }
