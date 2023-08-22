@@ -71,7 +71,7 @@
 
                     <div v-if="registration.attending_option === 'Hybrid'" class="row">
                         <div class="col-md-12">
-                            <small>*** Please screenshot this ticket. This will be your gate pass to the event place if your LAMP ID/Guest Ticket is lost.</small>
+                            <small>*** Please screenshot this ticket. This is will be your gate pass to the event place if your LAMP ID/Guest Ticket is lost.</small>
                         </div>
                     </div>
                 </div>

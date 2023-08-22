@@ -7874,7 +7874,7 @@ var render = function render() {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
-    }, [_c("small", [_vm._v("*** Please screenshot this ticket. This will be your gate pass to the event place if your LAMP ID/Guest Ticket is lost.")])])]) : _vm._e()])])], 1);
+    }, [_c("small", [_vm._v("*** Please screenshot this ticket. This is will be your gate pass to the event place if your LAMP ID/Guest Ticket is lost.")])])]) : _vm._e()])])], 1);
   }), 0);
 };
 
