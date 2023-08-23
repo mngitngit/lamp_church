@@ -4,7 +4,7 @@
         <div class="col-md-6">
             <div v-if="! validated" class="row justify-content-center">
                 <div class="col-md-6">
-                    <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid #e9c843; height: 100% !important;">
+                    <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid rgb(60 189 181); height: 100% !important;">
                         <div class="text-black">
                             <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2023</h6>
                             <small>
@@ -29,7 +29,7 @@
                     </el-card>
                 </div>
                 <div class="col-md-6">
-                    <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid #e9c843">
+                    <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid rgb(60 189 181)">
                         <h3>Manage Booking</h3>
                         <p class="mt-2 c-booking-subheader">Type in your details to manage your booking</p>
 
@@ -87,7 +87,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <el-button :loading="isLoading" :autofocus="true" type="warning" @click="validateDelegate('ruleForm')" :disabled="disabled">Continue</el-button>
+                            <el-button :loading="isLoading" :autofocus="true" type="theme" @click="validateDelegate('ruleForm')" :disabled="disabled">Continue</el-button>
                         </div>
                     </div>
                 </div>

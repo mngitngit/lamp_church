@@ -2,7 +2,7 @@
     <div>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <img width="100%" height="165" class="mb-3 rounded shadow" src="/images/registration_banner.jpg">
+                <img width="100%" height="165" class="mb-3 rounded shadow" src="/images/2023_banner.jpg">
             </div>
         </div>
         <div class="row justify-content-center">
@@ -25,7 +25,7 @@
                             (this.data.step_1.registrationType === 'Guest' || (this.data.step_1.registrationType === 'Member' && this.data.step_1.attendingOption === 'Online'))) ||
                         this.currentStep === 3
                     "
-                    type="primary" 
+                    type="theme" 
                     @click="$refs.myChild.submitForm('next')">
                     Submit
                 </el-button>

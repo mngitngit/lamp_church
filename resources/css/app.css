@@ -108,6 +108,20 @@
 .el-message-box {
     width: 380px !important;
 }
+
+.el-button--theme {
+    color: #FFF !important;
+    background-color: #3abdb5 !important;
+    border-color: #3abdb5 !important;
+}
+
+.el-link.el-link--theme:hover {
+    color: #00c4a3 !important;
+}
+
+.el-link.el-link--theme {
+    color: #3cbdb5 !important;
+}
 /* .pagination li {
     margin-right: 10px;
     border-radius: 20px;
