@@ -16,12 +16,12 @@
 
                             <h6 class="fw-bolder text-muted">GUIDELINES: </h6>
                             <small>
-                            Both members and visitors will be able to start booking their seats on October 9 until November 30, 2023 for Hybrid Attendees.<br/><br/>
+                            Both members and visitors will be able to start booking their seats on October 1 until November 30, 2023 for Hybrid Attendees.<br/><br/>
 
-                            Hybrid Attendees will book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings.<br/><br/>
+                            Hybrid Attendees should book for intended AWTA days only. Visitors will need to coordinate with their local coordinators for their bookings.<br/><br/>
 
                             Rebooking is until November 30, 2023 only. <br/><br/>
-                            For any booking isues, please report to your AWTA local coordinators.<br/><br/>
+                            For any booking issues/concerns, kindly reach out to your local AWTA Registrars.<br/><br/>
 
                             Book now — hurry while seats last!
                             </small>
