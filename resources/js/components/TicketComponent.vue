@@ -127,6 +127,7 @@ export default {
                 confirmButtonText: 'OK',
                 type: 'success',
                 showCancelButton: false,
+                width: '50%',
                 showClose: false,
                 center: true,
                 dangerouslyUseHTMLString: true

@@ -9,10 +9,12 @@ use App\Enums\RegistrationType;
 use App\Models\Booking;
 use App\Models\LookUp;
 use App\Models\Registration;
+use App\Notifications\Registered;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Notification;
 
 class Controller extends BaseController
 {
@@ -61,7 +63,7 @@ class Controller extends BaseController
 
     function updatePaymentStatus($uuid, $auto_enable_booking)
     {
-        $registration = Registration::where('uuid', $uuid)->first();
+        $registration = Registration::with('bookings', 'bookings.slot')->withSum('payments', 'amount')->where('uuid', $uuid)->first();
 
         $balance = floatval($registration->rate);
 
@@ -73,19 +75,31 @@ class Controller extends BaseController
 
         $parameters = array();
 
+        $bookingStatusUpdated = false;
+
         if ($balance <= 0.0 && count($registration->payments) > 0) {
             $parameters['payment_status'] = PaymentStatus::Paid;
-            $parameters['booking_status'] = BookingStatus::Confirmed;
+            if ($registration->booking_status === BookingStatus::Pending) {
+                $parameters['booking_status'] = BookingStatus::Confirmed;
+                $bookingStatusUpdated = true;
+            }
         }
 
         if ($balance > 0.0 && count($registration->payments) > 0) {
             $parameters['payment_status'] = PaymentStatus::Partial;
-            $parameters['booking_status'] = BookingStatus::Confirmed;
+            if ($registration->booking_status === BookingStatus::Pending && floatval($registration->can_book_rate) <= floatval($registration->payments_sum_amount)) {
+                $parameters['booking_status'] = BookingStatus::Confirmed;
+                $bookingStatusUpdated = true;
+            }
         }
 
         if ($balance == 0.0 && count($registration->payments) == 0) {
             $parameters['payment_status'] = PaymentStatus::Free;
             $parameters['booking_status'] = BookingStatus::Confirmed;
+
+            if ($registration->booking_status === BookingStatus::Pending) {
+                $bookingStatusUpdated = true;
+            }
         }
 
         if ($balance > 0.0 && count($registration->payments) == 0) {
@@ -103,13 +117,30 @@ class Controller extends BaseController
                     $registration->update([
                         'booking_status' => BookingStatus::Confirmed
                     ]);
+
+                    $bookingStatusUpdated = true;
                 }
             }
         }
 
         $registration->update($parameters);
 
+        if (true === $bookingStatusUpdated) {
+            $this->notify($registration->id);
+        }
+
         return $registration;
+    }
+
+    function notify($id)
+    {
+        $registration = Registration::with('bookings', 'bookings.slot')->withSum('payments', 'amount')->find($id);
+
+        if ($registration->email) {
+            Notification::route('mail', [
+                $registration->email => $registration->fullname,
+            ])->notify(new Registered($registration));
+        }
     }
 
     function checkIfAlreadyRegistered($request)

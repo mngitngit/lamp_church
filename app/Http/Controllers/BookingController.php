@@ -74,7 +74,7 @@ class BookingController extends Controller
         $hasPermission = $request->is_admin === 1;
 
         // considered paid if partially paid
-        $paid = $registration->payment_status === PaymentStatus::Paid || $registration->payment_status === PaymentStatus::Partial;
+        $paid = $registration->payment_status === PaymentStatus::Paid || floatval($registration->can_book_rate) <= floatval($registration->payments_sum_amount);
 
         $hasChanges = false;
 

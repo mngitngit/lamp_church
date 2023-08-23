@@ -2,8 +2,10 @@
 
 use App\Enums\BookingStatus;
 use App\Models\Registration;
+use App\Notifications\Registered;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,18 +23,28 @@ Artisan::command('cancel-bookings', function () {
     $date = \Carbon\Carbon::today()->subDays(8);
 
     // get all registrations that have not been paid for more than seven days since they were booked
-    $registrations = Registration::where('created_at', '<=', $date)->where('booking_status', BookingStatus::Pending)->get();
+    $registrations = Registration::withSum('payments', 'amount')->where('created_at', '<=', $date)->where('booking_status', BookingStatus::Pending)->get();
 
     foreach ($registrations as $registration) {
-        $registration->bookings()->update([
-            'status' => BookingStatus::Cancelled
-        ]);
+        if (floatval($registration->can_book_rate) > floatval($registration->payments_sum_amount)) {
+            $registration->bookings()->update([
+                'status' => BookingStatus::Cancelled
+            ]);
 
-        $registration->update([
-            'booking_status' => BookingStatus::Cancelled
-        ]);
+            $registration->update([
+                'booking_status' => BookingStatus::Cancelled
+            ]);
 
-        $this->comment('[' . $registration->uuid . '] ' . $registration->fullname . '\'s booking is now cancelled. Date Registered: ' . $registration->created_at);
+            $registration = Registration::with('bookings', 'bookings.slot')->withSum('payments', 'amount')->find($registration->id);
+
+            if ($registration->email) {
+                Notification::route('mail', [
+                    $registration->email => $registration->fullname,
+                ])->notify(new Registered($registration));
+            }
+
+            $this->comment('[' . $registration->uuid . '] ' . $registration->fullname . '\'s booking is now cancelled. Date Registered: ' . $registration->created_at);
+        }
     }
 
     if (count($registrations) === 0) {

@@ -104,6 +104,10 @@
     border: 1px solid #EBEEF5;
     overflow: hidden;
 }
+
+.el-message-box {
+    width: 380px !important;
+}
 /* .pagination li {
     margin-right: 10px;
     border-radius: 20px;

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Enums\AttendingOption;
 use App\Enums\BookingStatus;
 use App\Models\Registration;
 use Illuminate\Bus\Queueable;
@@ -52,10 +53,17 @@ class Registered extends Notification
         } else if ($this->registration->booking_status === BookingStatus::Cancelled) {
             $markup = 'mail.registration.cancelled';
             $subject = 'Booking cancelled for Annual Worship and Thanksgiving 2023';
-            $url = url('/booking');
+            $url = url('/booking/');
         } else if ($this->registration->booking_status === BookingStatus::Confirmed) {
             $markup = 'mail.registration.confirmed';
             $subject = 'Booking confirmed for Annual Worship and Thanksgiving 2023';
+        }
+
+        // $this->registration->booking_status === BookingStatus::Confirmed && 
+        if ($this->registration->attending_option === AttendingOption::Online) {
+            $markup = 'mail.registration.guest.confirmed';
+            $subject = 'Registration completed for Annual Worship and Thanksgiving 2023';
+            $url = 'https://www.facebook.com/groups/446318280091482';
         }
 
         $balance = $this->registration->rate - $this->registration->payments_sum_amount;

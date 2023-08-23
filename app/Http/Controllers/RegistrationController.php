@@ -212,11 +212,15 @@ class RegistrationController extends Controller
                 ]);
             }
 
-            $registration = $this->updatePaymentStatus($registration->uuid, false);
-
             if ($attending_option === AttendingOption::Hybrid) {
                 $this->book($registration, $request->step_3['booked']);
             }
+
+            $registration = $this->updatePaymentStatus($registration->uuid, false);
+
+            // if ($registration->attending_option === AttendingOption::Hybrid) {
+            $this->notify($registration->id);
+            // }
 
             return $registration->uuid;
         } else { // guest registration
@@ -247,9 +251,9 @@ class RegistrationController extends Controller
                         'booking_activities' => []
                     ]);
 
-                    $registration = $this->updatePaymentStatus($registration->uuid, false);
-
                     $this->book($registration, $details->booked);
+
+                    $registration = $this->updatePaymentStatus($registration->uuid, false);
 
                     $registered[] = $registration->uuid;
                 }
@@ -375,7 +379,7 @@ class RegistrationController extends Controller
 
     public function test_mail()
     {
-        $registration = Registration::with('bookings', 'bookings.slot')->withSum('payments', 'amount')->find(21);
+        $registration = Registration::with('bookings', 'bookings.slot')->withSum('payments', 'amount')->find(24);
 
         FacadesNotification::route('mail', [
             $registration->email => $registration->fullname,
