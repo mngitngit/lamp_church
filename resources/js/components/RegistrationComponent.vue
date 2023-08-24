@@ -61,15 +61,11 @@
         },
         data() {
             return {
-                currentStep: 1,
+                currentStep: 3,
                 currentTabComponent: null,
-                currentTabData: null,
+                currentTabData: {"step_1":{"registrationType":"Member","withAwtaCard":"yes","attendingOption":"Hybrid","awtaCardNumber":"LPBI00020","clusterGroup":"Langgam Cluster","bookingCode":"","found":{"email":"melanie.ngitngit@yahoo.com","firstName":"Julie Alie","lastName":"Cello","facebookName":"Julie Cello","registrationType":"Member","country":"Philippines","awtaCardNumber":"LPBI00020","category":"Adult","attendingOption":"Hybrid","withAwtaCard":"yes","localChurch":"Binan"}},"step_2":{},"step_3":{}},
                 countries: this.$allCountries,
-                data: {
-                    step_1: {},
-                    step_2: {},
-                    step_3: {}
-                }
+                data: {"step_1":{"registrationType":"Member","withAwtaCard":"yes","attendingOption":"Hybrid","awtaCardNumber":"LPBI00020","clusterGroup":"Langgam Cluster","bookingCode":"","found":{"email":"melanie.ngitngit@yahoo.com","firstName":"Julie Alie","lastName":"Cello","facebookName":"Julie Cello","registrationType":"Member","country":"Philippines","awtaCardNumber":"LPBI00020","category":"Adult","attendingOption":"Hybrid","withAwtaCard":"yes","localChurch":"Binan"}},"step_2":{},"step_3":{}}
             }
         },
         created() {

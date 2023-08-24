@@ -13,6 +13,7 @@
                                                 :label="date.id"
                                                 name="booked"
                                                 border
+                                                :disabled="((!ruleForm.booked.includes(date.id) && ruleForm.booked.length === max) || (date.available === 0 && !ruleForm.booked.includes(date.id)) || hide_button)"
                                                 @change="onChangeProcessed($event,date.id)">
                                                 <span v-if="ruleForm.booked.includes(date.id)">&#10003;&nbsp;</span>{{ date.event_date }}
                                             </el-checkbox>
@@ -38,7 +39,7 @@
             slots: {
                 required: false,
                 type: Array
-            },
+            }
         },
         data() {
            return {

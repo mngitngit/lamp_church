@@ -8259,14 +8259,58 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      currentStep: 1,
+      currentStep: 3,
       currentTabComponent: null,
-      currentTabData: null,
+      currentTabData: {
+        "step_1": {
+          "registrationType": "Member",
+          "withAwtaCard": "yes",
+          "attendingOption": "Hybrid",
+          "awtaCardNumber": "LPBI00020",
+          "clusterGroup": "Langgam Cluster",
+          "bookingCode": "",
+          "found": {
+            "email": "melanie.ngitngit@yahoo.com",
+            "firstName": "Julie Alie",
+            "lastName": "Cello",
+            "facebookName": "Julie Cello",
+            "registrationType": "Member",
+            "country": "Philippines",
+            "awtaCardNumber": "LPBI00020",
+            "category": "Adult",
+            "attendingOption": "Hybrid",
+            "withAwtaCard": "yes",
+            "localChurch": "Binan"
+          }
+        },
+        "step_2": {},
+        "step_3": {}
+      },
       countries: this.$allCountries,
       data: {
-        step_1: {},
-        step_2: {},
-        step_3: {}
+        "step_1": {
+          "registrationType": "Member",
+          "withAwtaCard": "yes",
+          "attendingOption": "Hybrid",
+          "awtaCardNumber": "LPBI00020",
+          "clusterGroup": "Langgam Cluster",
+          "bookingCode": "",
+          "found": {
+            "email": "melanie.ngitngit@yahoo.com",
+            "firstName": "Julie Alie",
+            "lastName": "Cello",
+            "facebookName": "Julie Cello",
+            "registrationType": "Member",
+            "country": "Philippines",
+            "awtaCardNumber": "LPBI00020",
+            "category": "Adult",
+            "attendingOption": "Hybrid",
+            "withAwtaCard": "yes",
+            "localChurch": "Binan"
+          }
+        },
+        "step_2": {},
+        "step_3": {}
       }
     };
   },
@@ -9873,7 +9917,8 @@ var render = function render() {
       attrs: {
         label: date.id,
         name: "booked",
-        border: ""
+        border: "",
+        disabled: !_vm.ruleForm.booked.includes(date.id) && _vm.ruleForm.booked.length === _vm.max || date.available === 0 && !_vm.ruleForm.booked.includes(date.id) || _vm.hide_button
       },
       on: {
         change: function change($event) {
