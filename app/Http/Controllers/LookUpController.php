@@ -45,13 +45,13 @@ class LookUpController extends Controller
      */
     public function show($awtaNumber)
     {
-        $lookUp = LookUp::where('lamp_card_number', $awtaNumber)->first();
+        $lookUp = LookUp::where('lamp_card_number', $awtaNumber)->orWhere('old_lamp_card_number', $awtaNumber)->first();
 
         if (!$lookUp) {
             return response()->json(['error' => 'Data not found. Please reach out to your local coordinator.'], 404);
         }
 
-        $isRegistered = Registration::where('uuid', $awtaNumber)->first();
+        $isRegistered = Registration::where('uuid', $lookUp->lamp_card_number)->first();
 
         if ($isRegistered) {
             return response()->json(['error' => 'Sorry, this AWTA Card number is already registered.'], 500);
