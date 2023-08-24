@@ -121,7 +121,7 @@ export default {
                 msg += '<br /><br /><small>To watch the live broadcast, join our FB Group <br/><a href="https://www.facebook.com/groups/446318280091482">https://www.facebook.com/groups/446318280091482</a></small>'
             
             if (this.registrations[0].registration_type === 'Member')
-                msg += '<br /><br /><small>Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA Card with the new LAMP ID, please contact your local coordinator and pay 35 pesos for the issuance.</small><br/><br/><img width="170" height="100" class="mb-3 rounded shadow" src="/images/new_id.jpg"><br/><small>sample ID only</small>';
+                msg += '<br /><br /><small>Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA Card with the new LAMP ID, please contact your local coordinator and pay 35 pesos for the issuance.</small><br/><br/><img width="170" height="100" class="mb-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small>';
 
             this.$confirm(msg, 'You did it!', {
                 confirmButtonText: 'Close',
