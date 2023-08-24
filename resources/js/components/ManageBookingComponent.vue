@@ -3,7 +3,7 @@
     <div class="row justify-content-center mb-4">
         <div class="col-md-6">
             <div v-if="! validated" class="row justify-content-center">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
                     <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid rgb(60 189 181); height: 100% !important;">
                         <div class="text-black">
                             <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2023</h6>

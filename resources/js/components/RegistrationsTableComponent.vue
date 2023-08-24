@@ -128,6 +128,7 @@
         },
         deleteRegistration(uuid) {
           this.$confirm(`Are you sure you want to delete this registration?`, 'Warning', {
+              customClass: 'prompt-message',
               confirmButtonText: 'Yes',
               cancelButtonText: 'Cancel',
               type: 'warning'

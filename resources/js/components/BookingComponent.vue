@@ -93,6 +93,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate(async (valid) => {
                 this.$confirm(`Are you sure you want to continue?`, 'Warning', {
+                    customClass: 'prompt-message',
                     confirmButtonText: 'Yes',
                     cancelButtonText: 'Cancel',
                     type: 'warning'

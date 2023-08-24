@@ -46,6 +46,7 @@
     methods: {
       deletePayment(id) {
         this.$confirm(`Are you sure you want to delete this payment?`, 'Warning', {
+            customClass: 'prompt-message',
             confirmButtonText: 'Yes',
             cancelButtonText: 'Cancel',
             type: 'warning'

@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row justify-content-center mb-5">
-            <div class="col-md-2">
+            <div class="col-md-6">
                 <el-button v-if="currentStep > 1" plain @click="$refs.myChild.submitForm('back')">Back</el-button>
                 <el-button 
                     v-if="
@@ -35,12 +35,9 @@
                     @click="$refs.myChild.submitForm('next')">
                     Next
                 </el-button>
+                <el-progress :stroke-width="5" style="width:fit-content;display: inline;" define-back-color="#595353" class="m-2 float-end" :color="customColorMethod" :percentage="(100 * currentStep) / 3" :format="format"></el-progress>
                 <!-- <el-button v-bind:type="(currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'primary' : ''" v-bind:plain="currentStep < 3" @click="$refs.myChild.submitForm('next')">{{ (currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'Submit' : 'Next' }}</el-button> -->
             </div>
-            <div class="col-md-3">
-                <el-progress :stroke-width="6" define-back-color="#595353" class="mt-lg-2" :color="customColorMethod" :percentage="(100 * currentStep) / 3" :format="format"></el-progress>
-            </div>
-            <div class="col-md-1"></div>
         </div>
     </div>
 </template>

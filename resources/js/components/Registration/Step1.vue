@@ -205,10 +205,11 @@ export default {
             this.$refs['ruleForm'].validate((valid) => {
                 if (valid) {
                     if (this.ruleForm.withAwtaCard === 'yes') {
-                        this.$confirm(`Are you sure you are ${this.ruleForm.found.firstName} ${this.ruleForm.found.lastName}?`, 'Warning', {
+                        this.$confirm(`You are registering for ${this.ruleForm.found.firstName} ${this.ruleForm.found.lastName}. Are you sure you want to proceed?`, 'Warning', {
                             confirmButtonText: 'Yes',
                             cancelButtonText: 'No',
-                            type: 'warning'
+                            type: 'warning',
+                            customClass: 'prompt-message'
                         }).then(async () => {
                             if (this.ruleForm.attendingOption === "Online") {
                                 this.$emit('submit', this.ruleForm);
