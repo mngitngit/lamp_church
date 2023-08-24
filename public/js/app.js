@@ -8475,7 +8475,7 @@ var render = function render() {
     staticClass: "text-sm"
   }, [_vm._v("\n        BE BLESSED PHYSICALLY, MATERIALLY & SPIRITUALLY "), _c("br"), _vm._v("\n        Event Timing: DECEMBER 27-30, 2023 "), _c("br"), _vm._v("\n        Event Place: Calamba Tent "), _c("br"), _vm._v("\n        Theme: Year of Clustering\n    ")]), _vm._v(" "), _c("p", {
     staticClass: "text-sm mb-0"
-  }, [_vm._v('\n        Chosen people of God in the old testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where "offering made by fire unto the Lord" are given to celebrate God. But with Christ\'s death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. '), _c("br"), _c("br"), _vm._v("\n\n        Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!\n    ")])]);
+  }, [_vm._v('\n        Chosen people of God in the Old Testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where "offering made by fire unto the Lord" are given to celebrate God. But with Christ\'s death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. '), _c("br"), _c("br"), _vm._v("\n\n        Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!\n    ")])]);
 };
 
 var staticRenderFns = [];
@@ -9984,7 +9984,6 @@ var staticRenderFns = [function () {
     staticClass: "mb-3 rounded shadow",
     attrs: {
       width: "100%",
-      height: "165",
       src: "/images/2023_banner.jpg"
     }
   })])]);
