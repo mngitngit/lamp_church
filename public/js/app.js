@@ -8259,58 +8259,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      currentStep: 3,
+      currentStep: 1,
       currentTabComponent: null,
-      currentTabData: {
-        "step_1": {
-          "registrationType": "Member",
-          "withAwtaCard": "yes",
-          "attendingOption": "Hybrid",
-          "awtaCardNumber": "LPBI00020",
-          "clusterGroup": "Langgam Cluster",
-          "bookingCode": "",
-          "found": {
-            "email": "melanie.ngitngit@yahoo.com",
-            "firstName": "Julie Alie",
-            "lastName": "Cello",
-            "facebookName": "Julie Cello",
-            "registrationType": "Member",
-            "country": "Philippines",
-            "awtaCardNumber": "LPBI00020",
-            "category": "Adult",
-            "attendingOption": "Hybrid",
-            "withAwtaCard": "yes",
-            "localChurch": "Binan"
-          }
-        },
-        "step_2": {},
-        "step_3": {}
-      },
+      currentTabData: null,
       countries: this.$allCountries,
       data: {
-        "step_1": {
-          "registrationType": "Member",
-          "withAwtaCard": "yes",
-          "attendingOption": "Hybrid",
-          "awtaCardNumber": "LPBI00020",
-          "clusterGroup": "Langgam Cluster",
-          "bookingCode": "",
-          "found": {
-            "email": "melanie.ngitngit@yahoo.com",
-            "firstName": "Julie Alie",
-            "lastName": "Cello",
-            "facebookName": "Julie Cello",
-            "registrationType": "Member",
-            "country": "Philippines",
-            "awtaCardNumber": "LPBI00020",
-            "category": "Adult",
-            "attendingOption": "Hybrid",
-            "withAwtaCard": "yes",
-            "localChurch": "Binan"
-          }
-        },
-        "step_2": {},
-        "step_3": {}
+        step_1: {},
+        step_2: {},
+        step_3: {}
       }
     };
   },
