@@ -37,6 +37,7 @@ class CreateRegistrationsTable extends Migration
             $table->integer('can_book_days')->default(2);
             $table->integer('rebooking_limit')->default(3);
             $table->boolean('is_booking_bypassed')->default(false);
+            $table->char('avail_new_lamp_id')->default('no');
             $table->date('visitor_to_member')->nullable();
             $table->text('notes');
             $table->text('activities');

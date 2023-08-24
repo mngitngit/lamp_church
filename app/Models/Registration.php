@@ -31,7 +31,8 @@ class Registration extends MyModel
         'visitor_to_member',
         'notes',
         'activities',
-        'booking_activities'
+        'booking_activities',
+        'avail_new_lamp_id'
     ];
 
     protected $casts = [

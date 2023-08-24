@@ -15,7 +15,7 @@ Please settle your balance or atleast pay partially to confirm your booking on o
 <b>Payment Due Date:</b> {{ $due_date }}<br />
 @endcomponent
 
-To settle it, please reach out to your local coordinators.
+To settle it, please reach out to your local AWTA Registrars.
 
 Thank you and we hope to see you there!
  

@@ -201,7 +201,7 @@
                         </div>
 
                         <div class="col-md-12" v-if="data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0">
-                            <el-form-item label="Please choose your name (if unclickable, already registered)" prop="selected" required>
+                            <el-form-item label="Please choose your name (3. If your name cannot be clicked, you have already registered)" prop="selected" required>
                                 <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_card_number" :disabled="data.is_registered === 1" border>
                                     <span>{{ data.firstname }} {{ data.lastname }}</span>
                                 </el-radio>

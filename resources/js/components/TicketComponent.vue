@@ -115,22 +115,34 @@ export default {
             var msg = '<strong>Congratulations!</strong> Your registration has been accepted! ';
 
             if (this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid')
-                msg += '<br /><br /><small>Please settle your balance or at least pay partially to confirm your booking. If your booking is left unsettled within 7 days, it will be cancelled automatically.<br /><br />If your booking is cancelled, please reach out to your local coordinator for assistance.</small>';
+                msg += '<br /><br /><small>Please settle your balance or at least pay partially to confirm your booking. It will automatically expire after 7 days.<br />In the event that your reservation is cancelled, please contact your local AWTA Registrars for help.</small>';
             
             if (this.registrations[0].attending_option === 'Online') 
                 msg += '<br /><br /><small>To watch the live broadcast, join our FB Group <br/><a href="https://www.facebook.com/groups/446318280091482">https://www.facebook.com/groups/446318280091482</a></small>'
             
             if (this.registrations[0].registration_type === 'Member')
-                msg += '<br /><br /><small>Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA Card with the new LAMP ID, please contact your local coordinator and pay 35 pesos for the issuance.</small><br/><br/><img width="170" height="100" class="mb-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small>';
+                msg += '<br /><br /><small>Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA card, an additional Php 35.00 will be required. Kindly reach out to your local AWTA Registrars for payment and issuance.</small><br/><br/><img width="170" height="100" class="mb-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><br /><small>Would you like to avail the new LAMP ID?</small>';
 
+            
             this.$confirm(msg, 'You did it!', {
-                confirmButtonText: 'Close',
-                showCancelButton: false,
-                width: '50%',
-                showClose: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                showCancelButton: true,
                 type: 'success',
+                showClose: false,
+                closeOnPressEscape: false,
+                closeOnHashChange: false,
+                closeOnClickModal: false,
                 center: true,
                 dangerouslyUseHTMLString: true
+            }).then(async () => {
+                await axios.post(`/registration/${this.registrations[0].uuid}/update`, {
+                    avail_new_lamp_id: 'yes'
+                })
+            }).catch(async () => {
+                await axios.post(`/registration/${this.registrations[0].uuid}/update`, {
+                    avail_new_lamp_id: 'no'
+                })
             })
         }
     }   

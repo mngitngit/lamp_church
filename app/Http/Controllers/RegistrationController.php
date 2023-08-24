@@ -23,7 +23,7 @@ class RegistrationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'create', 'store', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'create', 'store', 'show', 'update']]);
     }
 
     public function index(Request $request)
@@ -319,23 +319,29 @@ class RegistrationController extends Controller
     {
         $registration = Registration::where('uuid', $uuid)->first();
 
-        $registration->update([
-            'email' => $request->email,
-            'firstname' => $request->firstName,
-            'lastname' => $request->lastName,
-            'fullname' => $request->firstName . ' ' . $request->lastName,
-            'facebook_name' => $request->facebookName,
-            'local_church' => $request->localChurch,
-            'country' => $request->country,
-            'category' => $request->category,
-            'attending_option' => $request->attendingOption,
-            'with_awta_card' => $request->withAwtaCard,
-            'can_book_rate' => $request->bookingRate,
-            'can_book_days' => $request->canBookDays,
-            'rate' => $request->rate,
-            'rebooking_limit' => $request->rebookingLimit,
-            'visitor_to_member' => $request->visitorToMember ? date('Y-m-d', strtotime($request->visitorToMember)) : NULL
-        ]);
+        if (isset($request->avail_new_lamp_id)) {
+            $registration->update([
+                'avail_new_lamp_id' => $request->avail_new_lamp_id,
+            ]);
+        } else {
+            $registration->update([
+                'email' => $request->email,
+                'firstname' => $request->firstName,
+                'lastname' => $request->lastName,
+                'fullname' => $request->firstName . ' ' . $request->lastName,
+                'facebook_name' => $request->facebookName,
+                'local_church' => $request->localChurch,
+                'country' => $request->country,
+                'category' => $request->category,
+                'attending_option' => $request->attendingOption,
+                'with_awta_card' => $request->withAwtaCard,
+                'can_book_rate' => $request->bookingRate,
+                'can_book_days' => $request->canBookDays,
+                'rate' => $request->rate,
+                'rebooking_limit' => $request->rebookingLimit,
+                'visitor_to_member' => $request->visitorToMember ? date('Y-m-d', strtotime($request->visitorToMember)) : NULL
+            ]);
+        }
 
         if ($request->notes) {
             $registration->updateStaffNotes($registration->uuid, $registration->notes, array($request->notes));
