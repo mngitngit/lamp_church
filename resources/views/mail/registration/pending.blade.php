@@ -7,11 +7,10 @@
  
 <b>Hi {{ $name }},</b>
 
-Please settle your balance or atleast pay partially to confirm your booking on or before the due date indicated below. Otherwise, your booking will automatically be cancelled.<br />
+Please settle your balance or atleast pay half to confirm your booking on or before the due date indicated below. Otherwise, your booking will automatically be cancelled.<br />
 
 @component('mail::panel')
 <b>Balance:</b> Php {{ $balance }}<br />
-<b>Minimum Payment:</b> Php {{ $minimum }}<br />
 <b>Payment Due Date:</b> {{ $due_date }}<br />
 @endcomponent
 
