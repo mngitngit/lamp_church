@@ -1,7 +1,7 @@
 <template>
     <div class="text-center">
         <center>
-        <qr-code :size="180" :text="uuid"></qr-code> <br>
+        <qr-code :size="150" :text="uuid"></qr-code> <br>
         </center>
         <small class="text-description d-block">Registration Reference</small>
         <h3 class="d-block mb-0">{{ uuid }}</h3>

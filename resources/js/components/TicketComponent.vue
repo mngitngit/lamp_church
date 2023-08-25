@@ -1,13 +1,13 @@
 <template>
     <div class="row justify-content-center my-4">
-        <div v-bind:class="{'col-md-12 mb-4' : isRebooking, 'col-md-4 mb-4' : !isRebooking}" v-for="(registration, i) in registrations" :key="i">
+        <div v-bind:class="{'col-lg-12 mb-4' : isRebooking, 'col-md-6 col-lg-4 mb-4' : !isRebooking}" v-for="(registration, i) in registrations" :key="i">
             <el-card class="box-card ticket-header">
                 <div slot="header" class="clearfix">
                     <span>LAMP WORLDWIDE AWTA 2023</span>
                 </div>
                 <div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 div-personal-details">
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <small>Name</small>
@@ -26,28 +26,28 @@
                                     <span class="text-md font-bold d-block">{{ registration.email }}</span>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-md-12">
                                     <small>Registration Type</small>
                                     <span class="text-md font-bold d-block">{{ registration.registration_type }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 div-qr-code">
                             <barcode-component :uuid="registration.uuid" />
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-3">
                             <small>Rate</small> <small>({{registration.attending_option}})</small>
                             <span class="text-md font-bold d-block">{{ $func.formatAmount(registration.rate) }}</span>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-3">
                             <small>Local Church</small>
                             <span class="text-md font-bold d-block">{{ registration.local_church }}</span>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-3">
                             <small>Country</small>
                             <span class="text-md font-bold d-block">{{ registration.country }}</span>
                         </div>

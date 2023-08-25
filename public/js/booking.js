@@ -7416,7 +7416,7 @@ var render = function render() {
     staticClass: "text-center"
   }, [_c("center", [_c("qr-code", {
     attrs: {
-      size: 180,
+      size: 150,
       text: _vm.uuid
     }
   }), _vm._v(" "), _c("br")], 1), _vm._v(" "), _c("small", {
@@ -7839,8 +7839,8 @@ var render = function render() {
     return _c("div", {
       key: i,
       "class": {
-        "col-md-12 mb-4": _vm.isRebooking,
-        "col-md-4 mb-4": !_vm.isRebooking
+        "col-lg-12 mb-4": _vm.isRebooking,
+        "col-md-6 col-lg-4 mb-4": !_vm.isRebooking
       }
     }, [_c("el-card", {
       staticClass: "box-card ticket-header"
@@ -7853,7 +7853,7 @@ var render = function render() {
     }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA 2023")])]), _vm._v(" "), _c("div", [_c("div", {
       staticClass: "row"
     }, [_c("div", {
-      staticClass: "col-md-6"
+      staticClass: "col-sm-12 col-md-12 col-lg-12 col-xl-6 div-personal-details"
     }, [_c("div", {
       staticClass: "row mb-3"
     }, [_c("div", {
@@ -7873,13 +7873,13 @@ var render = function render() {
     }, [_c("small", [_vm._v("Email Address")]), _vm._v(" "), _c("span", {
       staticClass: "text-md font-bold d-block"
     }, [_vm._v(_vm._s(registration.email))])])]), _vm._v(" "), _c("div", {
-      staticClass: "row"
+      staticClass: "row mb-3"
     }, [_c("div", {
       staticClass: "col-md-12"
     }, [_c("small", [_vm._v("Registration Type")]), _vm._v(" "), _c("span", {
       staticClass: "text-md font-bold d-block"
     }, [_vm._v(_vm._s(registration.registration_type))])])])]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-6"
+      staticClass: "col-sm-12 col-md-12 col-lg-12 col-xl-6 div-qr-code"
     }, [_c("barcode-component", {
       attrs: {
         uuid: registration.uuid
@@ -7887,15 +7887,15 @@ var render = function render() {
     })], 1)]), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
-      staticClass: "col-md-4 mb-3"
+      staticClass: "col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-3"
     }, [_c("small", [_vm._v("Rate")]), _vm._v(" "), _c("small", [_vm._v("(" + _vm._s(registration.attending_option) + ")")]), _vm._v(" "), _c("span", {
       staticClass: "text-md font-bold d-block"
     }, [_vm._v(_vm._s(_vm.$func.formatAmount(registration.rate)))])]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-4 mb-3"
+      staticClass: "col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-3"
     }, [_c("small", [_vm._v("Local Church")]), _vm._v(" "), _c("span", {
       staticClass: "text-md font-bold d-block"
     }, [_vm._v(_vm._s(registration.local_church))])]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-4 mb-3"
+      staticClass: "col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-3"
     }, [_c("small", [_vm._v("Country")]), _vm._v(" "), _c("span", {
       staticClass: "text-md font-bold d-block"
     }, [_vm._v(_vm._s(registration.country))])])]), _vm._v(" "), registration.attending_option === "Hybrid" ? _c("div", {
@@ -15039,7 +15039,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n\n.ticket-header .el-card__header {\n    background-color: aliceblue !important;\n}\n\n.text-xxs {\n    font-size: 13px !important;\n}\n\n.el-progress-bar__outer {\n    background-color: #c1c5cc !important;\n}\n\n.el-progress-bar {\n    width: 200px;\n}\n\n.el-progress__text {\n    font-size: 12.5px !important;\n}\n\n.has-error input.el-input__inner {\n    border-color: #F56C6C !important;\n}\n\n.border-danger {\n    color: #f56c6c;\n    border-color: #fbc4c4;\n}\n\n.footer {\n    position: fixed;\n    Width: 100%;\n    bottom: 0;\n    background-color: #FFF;\n    border: 1px solid #EBEEF5;\n    overflow: hidden;\n}\n\n@media only screen and (max-width: 320px) {\n    .prompt-congratulatory-message {\n        width: 280px !important;\n    }\n\n    .el-message-box {\n        width: 230px !important;\n    }\n}\n\n@media only screen and (max-width: 500px) {\n    .prompt-congratulatory-message {\n        width: 380px;\n    }\n\n    .el-message-box {\n        width: 330px;\n    }\n}\n\n.el-button--theme {\n    color: #FFF !important;\n    background-color: #3abdb5 !important;\n    border-color: #3abdb5 !important;\n}\n\n.el-link.el-link--theme:hover {\n    color: #00c4a3 !important;\n}\n\n.el-link.el-link--theme {\n    color: #3cbdb5 !important;\n}\n\n.el-progress-bar {\n    width: 130px !important;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n\n.ticket-header .el-card__header {\n    background-color: aliceblue !important;\n}\n\n.text-xxs {\n    font-size: 13px !important;\n}\n\n.el-progress-bar__outer {\n    background-color: #c1c5cc !important;\n}\n\n.el-progress-bar {\n    width: 200px;\n}\n\n.el-progress__text {\n    font-size: 12.5px !important;\n}\n\n.has-error input.el-input__inner {\n    border-color: #F56C6C !important;\n}\n\n.border-danger {\n    color: #f56c6c;\n    border-color: #fbc4c4;\n}\n\n.footer {\n    position: fixed;\n    Width: 100%;\n    bottom: 0;\n    background-color: #FFF;\n    border: 1px solid #EBEEF5;\n    overflow: hidden;\n}\n\n@media only screen and (max-width: 320px) {\n    .prompt-congratulatory-message {\n        width: 280px !important;\n    }\n\n    .el-message-box {\n        width: 230px !important;\n    }\n}\n\n@media only screen and (max-width: 500px) {\n    .prompt-congratulatory-message {\n        width: 380px;\n    }\n\n    .el-message-box {\n        width: 330px;\n    }\n}\n\n@media only screen and (max-width: 1199px) {\n    .div-personal-details {\n        order: 2;\n    }\n\n    .div-qr-code {\n        order: 1;\n    }\n}\n\n.el-button--theme {\n    color: #FFF !important;\n    background-color: #3abdb5 !important;\n    border-color: #3abdb5 !important;\n}\n\n.el-link.el-link--theme:hover {\n    color: #00c4a3 !important;\n}\n\n.el-link.el-link--theme {\n    color: #3cbdb5 !important;\n}\n\n.el-progress-bar {\n    width: 130px !important;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

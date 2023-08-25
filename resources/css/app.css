@@ -125,6 +125,16 @@
     }
 }
 
+@media only screen and (max-width: 1199px) {
+    .div-personal-details {
+        order: 2;
+    }
+
+    .div-qr-code {
+        order: 1;
+    }
+}
+
 .el-button--theme {
     color: #FFF !important;
     background-color: #3abdb5 !important;
