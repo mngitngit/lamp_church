@@ -1,5 +1,5 @@
 <template>
-<div class="col-md-9">
+<div class="col-md-12">
     <div class="card mb-3">
         <div class="card-body">
             <div class="row">
@@ -50,7 +50,6 @@
     </div>
 
     <el-button v-if="data.payment_status != 'Paid' && data.payment_status != 'Free'" type="primary" @click="formSubmit()">Save Payment</el-button>
-    <el-link type="primary" class="float-end" @click="viewDetails()">Edit Delegate Details</el-link>
 </div>
 </template>
 

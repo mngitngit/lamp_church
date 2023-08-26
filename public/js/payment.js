@@ -7250,7 +7250,7 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "col-md-9"
+    staticClass: "col-md-12"
   }, [_c("div", {
     staticClass: "card mb-3"
   }, [_c("div", {
@@ -7356,17 +7356,7 @@ var render = function render() {
         return _vm.formSubmit();
       }
     }
-  }, [_vm._v("Save Payment")]) : _vm._e(), _vm._v(" "), _c("el-link", {
-    staticClass: "float-end",
-    attrs: {
-      type: "primary"
-    },
-    on: {
-      click: function click($event) {
-        return _vm.viewDetails();
-      }
-    }
-  }, [_vm._v("Edit Delegate Details")])], 1);
+  }, [_vm._v("Save Payment")]) : _vm._e()], 1);
 };
 
 var staticRenderFns = [];

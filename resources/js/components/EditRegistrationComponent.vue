@@ -131,7 +131,6 @@
         <el-row>
             <div class="col-md-12">
                 <el-button type="warning" @click="submitForm('ruleForm')">Update</el-button>
-                <el-link type="primary" class="float-end" @click="viewPayments()">View Payments</el-link>
             </div>
         </el-row>
     </el-form>

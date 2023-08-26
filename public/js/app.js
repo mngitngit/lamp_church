@@ -9084,17 +9084,7 @@ var render = function render() {
         return _vm.submitForm("ruleForm");
       }
     }
-  }, [_vm._v("Update")]), _vm._v(" "), _c("el-link", {
-    staticClass: "float-end",
-    attrs: {
-      type: "primary"
-    },
-    on: {
-      click: function click($event) {
-        return _vm.viewPayments();
-      }
-    }
-  }, [_vm._v("View Payments")])], 1)])], 1);
+  }, [_vm._v("Update")])], 1)])], 1);
 };
 
 var staticRenderFns = [];
@@ -10083,19 +10073,19 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "col-md-12"
     }, [_c("small", [_vm._v("Name")]), _vm._v(" "), _c("span", {
-      staticClass: "text-lg font-bold d-block text-uppercase"
+      staticClass: "text-lg font-bold d-block text-uppercase text-break"
     }, [_vm._v(_vm._s(registration.firstname) + " " + _vm._s(registration.lastname))])])]), _vm._v(" "), _c("div", {
       staticClass: "row mb-3"
     }, [_c("div", {
       staticClass: "col-md-12"
     }, [_c("small", [_vm._v("Facebook Name")]), _vm._v(" "), _c("span", {
-      staticClass: "text-lg font-bold d-block text-uppercase"
+      staticClass: "text-lg font-bold d-block text-uppercase text-break"
     }, [_vm._v(_vm._s(registration.facebook_name || "--"))])])]), _vm._v(" "), _c("div", {
       staticClass: "row mb-3"
     }, [_c("div", {
       staticClass: "col-md-12"
     }, [_c("small", [_vm._v("Email Address")]), _vm._v(" "), _c("span", {
-      staticClass: "text-md font-bold d-block"
+      staticClass: "text-md font-bold d-block text-break"
     }, [_vm._v(_vm._s(registration.email))])])]), _vm._v(" "), _c("div", {
       staticClass: "row mb-3"
     }, [_c("div", {

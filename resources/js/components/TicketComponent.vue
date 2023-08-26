@@ -11,19 +11,19 @@
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <small>Name</small>
-                                    <span class="text-lg font-bold d-block text-uppercase">{{ registration.firstname }} {{ registration.lastname }}</span>
+                                    <span class="text-lg font-bold d-block text-uppercase text-break">{{ registration.firstname }} {{ registration.lastname }}</span>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <small>Facebook Name</small>
-                                    <span class="text-lg font-bold d-block text-uppercase">{{ registration.facebook_name || '--' }}</span>
+                                    <span class="text-lg font-bold d-block text-uppercase text-break">{{ registration.facebook_name || '--' }}</span>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <small>Email Address</small>
-                                    <span class="text-md font-bold d-block">{{ registration.email }}</span>
+                                    <span class="text-md font-bold d-block text-break">{{ registration.email }}</span>
                                 </div>
                             </div>
                             <div class="row mb-3">

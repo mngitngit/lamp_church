@@ -9,7 +9,6 @@ use App\Models\Attendance;
 use App\Models\Booking;
 use App\Models\LookUp;
 use App\Models\Payment;
-use App\Models\RebookingActivities;
 use App\Models\Registration;
 use App\Models\Slots;
 use App\Models\UUID;
@@ -373,8 +372,6 @@ class RegistrationController extends Controller
         }
 
         Booking::where('registration_uuid', $uuid)->delete();
-
-        RebookingActivities::where('registration_uuid', $uuid)->delete();
 
         Payment::where('registration_uuid', $uuid)->delete();
 
