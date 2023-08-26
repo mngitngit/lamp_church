@@ -4,7 +4,11 @@
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                 <!-- display bulk registration if registrant is a guest attending hybrid -->
                 <el-card v-if="data.step_1.registrationType === 'Guest' && data.step_1.attendingOption === 'Hybrid'" shadow="always" class="mb-3">
-                    <el-form-item :label="`Please Input the Guest Details (maximum of ${maxBulk}).`" prop="guests" required></el-form-item>
+                    <el-form-item prop="guests" required>
+                        <template slot-scope="label">
+                            <label class="el-form-item__label"><span class="text-danger">*</span> Please Input the Guest Details. <br/><small class="text-sm">To add more guests, click add row in the bottom right (for a maximum of {{maxBulk}} guests per registration).</small></label>
+                        </template>
+                    </el-form-item>
                     
                     <div class="w-full" :class="{'mb-4' : i < ruleForm.guests.length-1 || ruleForm.guests.length === 1}" v-for="(guest, i) in ruleForm.guests" :key="i">
                         <div class="border rounded-1 p-2 w-full mb-1">
@@ -116,9 +120,14 @@
                                     <td colspan="3" class="p-1">
                                         <label class="text-sm">Select Preferred Dates</label>
                                         <el-checkbox-group v-model="guest.booked" size="mini">
-                                            <el-checkbox-button v-for="(date, index) in dates" :label="date.id" :key="date.id" @change="onChangeProcessed($event, date.id)">
-                                                <label class="mb-1">{{ date.event_date }}</label> <br> 
-                                                <span>{{ date.available }} left!</span>
+                                            <el-checkbox-button 
+                                                v-for="(date, index) in dates" 
+                                                :label="date.id" 
+                                                :key="date.id" 
+                                                @change="onChangeProcessed($event, date.id)"
+                                                :disabled="(!guest.booked.includes(date.id) && guest.booked.length === guest_booking_limit) || (date.available === 0 && !guest.booked.includes(date.id))">
+                                                    <label class="mb-1">{{ date.event_date }}</label> <br> 
+                                                    <span>{{ date.available }} left!</span>
                                             </el-checkbox-button>
                                         </el-checkbox-group>
                                         <small v-if="errors[i] && errors[i]['booked']" class="text-error">
@@ -201,8 +210,8 @@
                         </div>
 
                         <div class="col-md-12" v-if="data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0">
-                            <el-form-item label="Please choose your name (3. If your name cannot be clicked, you have already registered)" prop="selected" required>
-                                <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_card_number" :disabled="data.is_registered === 1" border>
+                            <el-form-item label="Please choose your name (If your name cannot be clicked, you have already registered)" prop="selected" required>
+                                <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_card_number" :disabled="data.is_registered === 1" @change="setCanBookDays()" border>
                                     <span>{{ data.firstname }} {{ data.lastname }}</span>
                                 </el-radio>
                             </el-form-item>
@@ -253,7 +262,6 @@
                 }
             };
             var checkName = async (rule, value, callback) => {
-                console.log('ksbdhsjbd')
                 var fields = document.querySelectorAll(".check-name");
                 for (var i = 0; i < fields.length; i++) {
                     var str = fields[i].classList.remove("is-error")
@@ -323,6 +331,7 @@
                     lookUp: [],
                     selected: '',
                     clusterGroup: '',
+                    canBookDays: parseInt(window.env.member_booking_limit || 0),
                     guests: [{
                         email: '',
                         firstName: '',
@@ -365,7 +374,8 @@
                 maxBulk: 10,
                 errors: [],
                 dates: [],
-                assignments: window.env.cluster_groups
+                assignments: window.env.cluster_groups,
+                guest_booking_limit: parseInt(window.env.guest_booking_limit || 0)
             }
         },
         watch: {
@@ -452,6 +462,13 @@
                         break;
                     }
                 }
+            },
+            setCanBookDays() {
+                var selected = this.ruleForm.lookUp.filter(function (el) {
+                    return el.lamp_card_number === this.ruleForm.selected;
+                }.bind(this));
+
+                this.ruleForm.canBookDays = selected.can_book_days;
             }
         }
    }

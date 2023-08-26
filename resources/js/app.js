@@ -14,6 +14,7 @@ Vue.component('edit-registration-component', require('./components/EditRegistrat
 Vue.component('barcode-component', require('./components/BarcodeComponent.vue').default);
 Vue.component('ticket-component', require('./components/TicketComponent.vue').default);
 Vue.component('banner-component', require('./components/BannerComponent.vue').default);
+Vue.component('upload-component', require('./components/UploadComponent.vue').default);
 Vue.component('booking', require('./components/BookingComponent.vue').default);
 
 import Vue from 'vue';

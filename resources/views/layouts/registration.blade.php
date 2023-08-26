@@ -18,6 +18,8 @@
     <script>
         window.env = {
             guest_booking_code: '{{ config('settings.guest_booking_code') }}',
+            guest_booking_limit: '{{ config('settings.guest_booking_limit') }}',
+            member_booking_limit: '{{ config('settings.member_booking_limit') }}',
             cluster_groups: {!! json_encode(config('clustergroups')) !!}
         };
     </script>

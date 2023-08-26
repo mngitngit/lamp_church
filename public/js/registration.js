@@ -7000,6 +7000,37 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LookUpsTableComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LookUpsTableComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    lookups: {
+      required: true,
+      type: Object
+    }
+  },
+  data: function data() {
+    return {
+      tableData: [],
+      permissions: window.auth_user.permissions
+    };
+  },
+  mounted: function mounted() {
+    this.tableData = this.lookups.data;
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RegistrationsTableComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RegistrationsTableComponent.vue?vue&type=script&lang=js& ***!
@@ -7390,6 +7421,136 @@ var render = function render() {
   }, [_c("i", [_c("p", {
     staticClass: "font-italic font-monospace m-0 p-0 text-center text-muted"
   }, [_vm._v("Sorry, under construction.")])])])], 1)]);
+};
+
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LookUpsTableComponent.vue?vue&type=template&id=0a8e0426&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LookUpsTableComponent.vue?vue&type=template&id=0a8e0426& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("el-table", {
+    ref: "filterTable",
+    staticStyle: {
+      width: "100%"
+    },
+    attrs: {
+      data: _vm.tableData,
+      border: ""
+    }
+  }, [_c("el-table-column", {
+    attrs: {
+      prop: "count",
+      label: "#",
+      fixed: "left",
+      align: "center",
+      width: "50"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n        " + _vm._s(scope.$index + _vm.lookups.from) + "\n    ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "count",
+      label: "AWTA Card #",
+      fixed: "left",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n        " + _vm._s(scope.row.lamp_card_number) + "\n    ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "count",
+      label: "Full Name",
+      fixed: "left",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n        " + _vm._s(scope.row.fullname) + "\n    ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "count",
+      label: "Email Address",
+      fixed: "left",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_c("small", [_vm._v(_vm._s(scope.row.email))])];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "count",
+      label: "Local Church",
+      fixed: "left",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n        " + _vm._s(scope.row.local_church) + "\n    ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "count",
+      label: "Registration Status",
+      fixed: "left",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [scope.row.is_registred ? _c("el-tag", [_vm._v("Registered")]) : _c("el-tag", {
+          attrs: {
+            type: "danger"
+          }
+        }, [_vm._v("Not yet registered")])];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      prop: "count",
+      label: "Days can book",
+      fixed: "left",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n      " + _vm._s(scope.row.can_book_days) + "\n    ")];
+      }
+    }])
+  })], 1);
 };
 
 var staticRenderFns = [];
@@ -93011,6 +93172,45 @@ component.options.__file = "resources/js/components/BookingTableComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/LookUpsTableComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/LookUpsTableComponent.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _LookUpsTableComponent_vue_vue_type_template_id_0a8e0426___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LookUpsTableComponent.vue?vue&type=template&id=0a8e0426& */ "./resources/js/components/LookUpsTableComponent.vue?vue&type=template&id=0a8e0426&");
+/* harmony import */ var _LookUpsTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LookUpsTableComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/LookUpsTableComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _LookUpsTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LookUpsTableComponent_vue_vue_type_template_id_0a8e0426___WEBPACK_IMPORTED_MODULE_0__.render,
+  _LookUpsTableComponent_vue_vue_type_template_id_0a8e0426___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/LookUpsTableComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/RegistrationsTableComponent.vue":
 /*!*****************************************************************!*\
   !*** ./resources/js/components/RegistrationsTableComponent.vue ***!
@@ -93082,6 +93282,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/LookUpsTableComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/LookUpsTableComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LookUpsTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LookUpsTableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LookUpsTableComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LookUpsTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/RegistrationsTableComponent.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************!*\
   !*** ./resources/js/components/RegistrationsTableComponent.vue?vue&type=script&lang=js& ***!
@@ -93128,6 +93344,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingTableComponent_vue_vue_type_template_id_5988e82d___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingTableComponent_vue_vue_type_template_id_5988e82d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookingTableComponent.vue?vue&type=template&id=5988e82d& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingTableComponent.vue?vue&type=template&id=5988e82d&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/LookUpsTableComponent.vue?vue&type=template&id=0a8e0426&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/LookUpsTableComponent.vue?vue&type=template&id=0a8e0426& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LookUpsTableComponent_vue_vue_type_template_id_0a8e0426___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LookUpsTableComponent_vue_vue_type_template_id_0a8e0426___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LookUpsTableComponent_vue_vue_type_template_id_0a8e0426___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LookUpsTableComponent.vue?vue&type=template&id=0a8e0426& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LookUpsTableComponent.vue?vue&type=template&id=0a8e0426&");
 
 
 /***/ }),
@@ -105265,6 +105498,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]); // admin portal
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('registration-table', (__webpack_require__(/*! ./components/RegistrationsTableComponent.vue */ "./resources/js/components/RegistrationsTableComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('lookups-table', (__webpack_require__(/*! ./components/LookUpsTableComponent.vue */ "./resources/js/components/LookUpsTableComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('booking-table', (__webpack_require__(/*! ./components/BookingTableComponent.vue */ "./resources/js/components/BookingTableComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('attendance-table', (__webpack_require__(/*! ./components/AttendanceTableComponent.vue */ "./resources/js/components/AttendanceTableComponent.vue")["default"]));
 

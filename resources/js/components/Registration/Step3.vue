@@ -13,7 +13,7 @@
                                                 :label="date.id"
                                                 name="booked"
                                                 border
-                                                :disabled="((!ruleForm.booked.includes(date.id) && ruleForm.booked.length === max) || (date.available === 0 && !ruleForm.booked.includes(date.id)) || hide_button)"
+                                                :disabled="(!ruleForm.booked.includes(date.id) && ruleForm.booked.length === max) || (date.available === 0 && !ruleForm.booked.includes(date.id))"
                                                 @change="onChangeProcessed($event,date.id)">
                                                 <span v-if="ruleForm.booked.includes(date.id)">&#10003;&nbsp;</span>{{ date.event_date }}
                                             </el-checkbox>
@@ -44,7 +44,7 @@
         data() {
            return {
                 dates: [],
-                max: 2,
+                max: 0,
                 ruleForm: {
                     booked: []
                 },
@@ -54,11 +54,6 @@
                     ]
                 }
            }
-        },
-        mounted() {
-            if (Object.keys(this.data.step_3).length != 0) {
-                this.ruleForm = this.data.step_3;
-            }
         },
         mounted() {
             if (Object.keys(this.data.step_3).length != 0) {
@@ -77,6 +72,15 @@
                     "seat_count": date.seat_count
                 };
             });
+
+            if (this.data.step_1.withAwtaCard === 'none') 
+                this.max = this.data.step_1.canBookDays
+            if (this.data.step_1.withAwtaCard === 'lost')
+                this.max = this.data.step_2.canBookDays
+            if (this.data.step_1.withAwtaCard === 'yes')
+                this.max = this.data.step_1.found.canBookDays
+
+            console.log(this.data.step_1.withAwtaCard)
         },
         methods: {
             submitForm(action) {

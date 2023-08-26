@@ -119,6 +119,7 @@ export default {
                         this.ruleForm.found.attendingOption = this.ruleForm.attendingOption
                         this.ruleForm.found.withAwtaCard = 'yes'
                         this.ruleForm.found.localChurch = response.data.local_church
+                        this.ruleForm.found.canBookDays = response.data.can_book_days
                         this.options = this.assignments[response.data.local_church]
                         this.isLoading = false
                         callback();
@@ -142,6 +143,7 @@ export default {
                 awtaCardNumber: '',
                 clusterGroup: '',
                 bookingCode: '',
+                canBookDays: parseInt(window.env.member_booking_limit || 0),
                 found: {}
             },
             rules: {

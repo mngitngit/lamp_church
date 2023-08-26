@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\LookUpImport;
 use App\Models\LookUp;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 
 class LookUpController extends Controller
 {
@@ -14,7 +17,7 @@ class LookUpController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['show', 'index']]);
+        $this->middleware('auth', ['except' => ['show', 'index', 'store']]);
     }
 
     public function index(Request $request)
@@ -58,5 +61,20 @@ class LookUpController extends Controller
         }
 
         return $lookUp;
+    }
+
+    public function upload(Request $request)
+    {
+        request()->validate([
+            'lookup' => 'required|mimes:xlx,xls,xlsx|max:2048'
+        ]);
+
+        FacadesExcel::import(new LookUpImport, $request->file('lookup'));
+        return back()->with('massage', 'User Imported Successfully');
+    }
+
+    public function upload_view()
+    {
+        return view('lookup.create');
     }
 }

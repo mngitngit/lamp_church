@@ -21,12 +21,14 @@ class LookUp extends Model
         'email',
         'firstname',
         'lastname',
+        'fullname',
         'facebook_name',
         'registration_type',
         'local_church',
         'category',
         'country',
         'is_registered',
-        'local_church'
+        'local_church',
+        'can_book_days'
     ];
 }

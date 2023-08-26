@@ -10,6 +10,7 @@
  
  // admin portal
  Vue.component('registration-table', require('./components/RegistrationsTableComponent.vue').default);
+ Vue.component('lookups-table', require('./components/LookUpsTableComponent.vue').default);
  Vue.component('booking-table', require('./components/BookingTableComponent.vue').default);
  Vue.component('attendance-table', require('./components/AttendanceTableComponent.vue').default);
  

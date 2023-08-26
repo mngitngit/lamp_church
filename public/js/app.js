@@ -7461,11 +7461,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             _this.ruleForm.found.attendingOption = _this.ruleForm.attendingOption;
                             _this.ruleForm.found.withAwtaCard = 'yes';
                             _this.ruleForm.found.localChurch = response.data.local_church;
+                            _this.ruleForm.found.canBookDays = response.data.can_book_days;
                             _this.options = _this.assignments[response.data.local_church];
                             _this.isLoading = false;
                             callback();
 
-                          case 14:
+                          case 15:
                           case "end":
                             return _context.stop();
                         }
@@ -7527,6 +7528,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         awtaCardNumber: '',
         clusterGroup: '',
         bookingCode: '',
+        canBookDays: parseInt(window.env.member_booking_limit || 0),
         found: {}
       },
       rules: {
@@ -7813,7 +7815,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                console.log('ksbdhsjbd');
                 fields = document.querySelectorAll(".check-name");
 
                 for (i = 0; i < fields.length; i++) {
@@ -7825,7 +7826,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   text: 'Loading',
                   background: 'rgba(0, 0, 0, 0.7)'
                 });
-                _context4.next = 6;
+                _context4.next = 5;
                 return axios.get("/registration/validate", {
                   params: {
                     firstName: _this.ruleForm.firstName,
@@ -7863,7 +7864,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   callback(new Error(error.response.data.error));
                 });
 
-              case 6:
+              case 5:
               case "end":
                 return _context4.stop();
             }
@@ -7951,6 +7952,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         lookUp: [],
         selected: '',
         clusterGroup: '',
+        canBookDays: parseInt(window.env.member_booking_limit || 0),
         guests: [{
           email: '',
           firstName: '',
@@ -8012,7 +8014,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       maxBulk: 10,
       errors: [],
       dates: [],
-      assignments: window.env.cluster_groups
+      assignments: window.env.cluster_groups,
+      guest_booking_limit: parseInt(window.env.guest_booking_limit || 0)
     };
   },
   watch: {
@@ -8109,6 +8112,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           break;
         }
       }
+    },
+    setCanBookDays: function setCanBookDays() {
+      var selected = this.ruleForm.lookUp.filter(function (el) {
+        return el.lamp_card_number === this.ruleForm.selected;
+      }.bind(this));
+      this.ruleForm.canBookDays = selected.can_book_days;
     }
   }
 });
@@ -8126,11 +8135,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var _props$data$mounted$m;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_props$data$mounted$m = {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     data: {
       required: true,
@@ -8144,7 +8149,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       dates: [],
-      max: 2,
+      max: 0,
       ruleForm: {
         booked: []
       },
@@ -8159,64 +8164,65 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     if (Object.keys(this.data.step_3).length != 0) {
-      this.ruleForm = this.data.step_3;
-    }
-  }
-}, _defineProperty(_props$data$mounted$m, "mounted", function mounted() {
-  if (Object.keys(this.data.step_3).length != 0) {
-    this.ruleForm.booked = this.data.step_3.booked.map(function (date) {
-      return date;
-    });
-  }
-
-  var booked_dates = this.ruleForm.booked;
-  this.dates = this.slots.map(function (date) {
-    var available = booked_dates.includes(date.id) ? date.available - 1 : date.available;
-    return {
-      "event_date": date.event_date,
-      "id": date.id,
-      "available": available,
-      "seat_count": date.seat_count
-    };
-  });
-}), _defineProperty(_props$data$mounted$m, "methods", {
-  submitForm: function submitForm(action) {
-    var _this = this;
-
-    if (action == 'back') {
-      if (Object.keys(this.data.step_1.found).length === 0) this.$emit('change-step', {
-        destination: 'step_2',
-        current: 'step_3',
-        data: this.ruleForm
-      });else this.$emit('change-step', {
-        destination: 'step_1',
-        current: 'step_3',
-        data: this.ruleForm
+      this.ruleForm.booked = this.data.step_3.booked.map(function (date) {
+        return date;
       });
-      return false;
     }
 
-    this.$refs['ruleForm'].validate(function (valid) {
-      if (valid) {
-        _this.$emit('submit', _this.ruleForm);
-      } else {
-        console.log('error submit!!');
+    var booked_dates = this.ruleForm.booked;
+    this.dates = this.slots.map(function (date) {
+      var available = booked_dates.includes(date.id) ? date.available - 1 : date.available;
+      return {
+        "event_date": date.event_date,
+        "id": date.id,
+        "available": available,
+        "seat_count": date.seat_count
+      };
+    });
+    if (this.data.step_1.withAwtaCard === 'none') this.max = this.data.step_1.canBookDays;
+    if (this.data.step_1.withAwtaCard === 'lost') this.max = this.data.step_2.canBookDays;
+    if (this.data.step_1.withAwtaCard === 'yes') this.max = this.data.step_1.found.canBookDays;
+    console.log(this.data.step_1.withAwtaCard);
+  },
+  methods: {
+    submitForm: function submitForm(action) {
+      var _this = this;
+
+      if (action == 'back') {
+        if (Object.keys(this.data.step_1.found).length === 0) this.$emit('change-step', {
+          destination: 'step_2',
+          current: 'step_3',
+          data: this.ruleForm
+        });else this.$emit('change-step', {
+          destination: 'step_1',
+          current: 'step_3',
+          data: this.ruleForm
+        });
         return false;
       }
-    });
-  },
-  selectBookedDates: function selectBookedDates(dates) {
-    this.ruleForm.booked = dates;
-  },
-  onChangeProcessed: function onChangeProcessed(isChecked, id) {
-    for (var i = 0, len = this.dates.length; i < len; i++) {
-      if (this.dates[i]['id'] === id) {
-        this.dates[i]['available'] += isChecked ? -1 : 1;
-        break;
+
+      this.$refs['ruleForm'].validate(function (valid) {
+        if (valid) {
+          _this.$emit('submit', _this.ruleForm);
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    selectBookedDates: function selectBookedDates(dates) {
+      this.ruleForm.booked = dates;
+    },
+    onChangeProcessed: function onChangeProcessed(isChecked, id) {
+      for (var i = 0, len = this.dates.length; i < len; i++) {
+        if (this.dates[i]['id'] === id) {
+          this.dates[i]['available'] += isChecked ? -1 : 1;
+          break;
+        }
       }
     }
   }
-}), _props$data$mounted$m);
+});
 
 /***/ }),
 
@@ -8488,6 +8494,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       })));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UploadComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UploadComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: {
+    submitUpload: function submitUpload() {
+      this.$refs.upload.submit();
+    },
+    handleExceed: function handleExceed(files, fileList) {
+      this.$message.warning("The limit is 1, you selected ".concat(files.length, " files this time, add up to ").concat(files.length + fileList.length, " totally"));
+    },
+    beforeRemove: function beforeRemove(file, fileList) {
+      return this.$confirm("Cancel the attachment of ".concat(file.name, " ?"));
     }
   }
 });
@@ -9370,10 +9403,21 @@ var render = function render() {
     }
   }, [_c("el-form-item", {
     attrs: {
-      label: "Please Input the Guest Details (maximum of ".concat(_vm.maxBulk, ")."),
       prop: "guests",
       required: ""
-    }
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(label) {
+        return [_c("label", {
+          staticClass: "el-form-item__label"
+        }, [_c("span", {
+          staticClass: "text-danger"
+        }, [_vm._v("*")]), _vm._v(" Please Input the Guest Details. "), _c("br"), _c("small", {
+          staticClass: "text-sm"
+        }, [_vm._v("To add more guests, click add row in the bottom right (for a maximum of " + _vm._s(_vm.maxBulk) + " guests per registration).")])])];
+      }
+    }], null, false, 493318427)
   }), _vm._v(" "), _vm._l(_vm.ruleForm.guests, function (guest, i) {
     return _c("div", {
       key: i,
@@ -9602,7 +9646,8 @@ var render = function render() {
       return _c("el-checkbox-button", {
         key: date.id,
         attrs: {
-          label: date.id
+          label: date.id,
+          disabled: !guest.booked.includes(date.id) && guest.booked.length === _vm.guest_booking_limit || date.available === 0 && !guest.booked.includes(date.id)
         },
         on: {
           change: function change($event) {
@@ -9810,7 +9855,7 @@ var render = function render() {
     staticClass: "col-md-12"
   }, [_c("el-form-item", {
     attrs: {
-      label: "Please choose your name (3. If your name cannot be clicked, you have already registered)",
+      label: "Please choose your name (If your name cannot be clicked, you have already registered)",
       prop: "selected",
       required: ""
     }
@@ -9821,6 +9866,11 @@ var render = function render() {
         label: data.lamp_card_number,
         disabled: data.is_registered === 1,
         border: ""
+      },
+      on: {
+        change: function change($event) {
+          return _vm.setCanBookDays();
+        }
       },
       model: {
         value: _vm.ruleForm.selected,
@@ -9909,7 +9959,7 @@ var render = function render() {
         label: date.id,
         name: "booked",
         border: "",
-        disabled: !_vm.ruleForm.booked.includes(date.id) && _vm.ruleForm.booked.length === _vm.max || date.available === 0 && !_vm.ruleForm.booked.includes(date.id) || _vm.hide_button
+        disabled: !_vm.ruleForm.booked.includes(date.id) && _vm.ruleForm.booked.length === _vm.max || date.available === 0 && !_vm.ruleForm.booked.includes(date.id)
       },
       on: {
         change: function change($event) {
@@ -10145,6 +10195,67 @@ render._withStripped = true;
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UploadComponent.vue?vue&type=template&id=602a0e61&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UploadComponent.vue?vue&type=template&id=602a0e61& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", [_c("el-upload", {
+    ref: "upload",
+    staticClass: "upload-demo",
+    attrs: {
+      action: "https://jsonplaceholder.typicode.com/posts/",
+      "auto-upload": false,
+      multiple: false,
+      limit: 1,
+      "on-exceed": _vm.handleExceed,
+      "before-remove": _vm.beforeRemove,
+      name: "lookup"
+    }
+  }, [_c("el-button", {
+    attrs: {
+      slot: "trigger",
+      size: "small",
+      type: "primary"
+    },
+    slot: "trigger"
+  }, [_vm._v("select file")]), _vm._v(" "), _c("el-button", {
+    staticStyle: {
+      "margin-left": "10px"
+    },
+    attrs: {
+      size: "small",
+      type: "success"
+    },
+    on: {
+      click: _vm.submitUpload
+    }
+  }, [_vm._v("upload to server")]), _vm._v(" "), _c("div", {
+    staticClass: "el-upload__tip",
+    attrs: {
+      slot: "tip"
+    },
+    slot: "tip"
+  }, [_vm._v("xlx/xls/xlsx files with maximum of 2048 rows")])], 1)], 1);
+};
+
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -10176,6 +10287,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('edit-registration-compone
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('barcode-component', (__webpack_require__(/*! ./components/BarcodeComponent.vue */ "./resources/js/components/BarcodeComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('ticket-component', (__webpack_require__(/*! ./components/TicketComponent.vue */ "./resources/js/components/TicketComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('banner-component', (__webpack_require__(/*! ./components/BannerComponent.vue */ "./resources/js/components/BannerComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('upload-component', (__webpack_require__(/*! ./components/UploadComponent.vue */ "./resources/js/components/UploadComponent.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('booking', (__webpack_require__(/*! ./components/BookingComponent.vue */ "./resources/js/components/BookingComponent.vue")["default"]));
 
 
@@ -96832,6 +96944,45 @@ component.options.__file = "resources/js/components/TicketComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/UploadComponent.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/UploadComponent.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UploadComponent_vue_vue_type_template_id_602a0e61___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UploadComponent.vue?vue&type=template&id=602a0e61& */ "./resources/js/components/UploadComponent.vue?vue&type=template&id=602a0e61&");
+/* harmony import */ var _UploadComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UploadComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/UploadComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UploadComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UploadComponent_vue_vue_type_template_id_602a0e61___WEBPACK_IMPORTED_MODULE_0__.render,
+  _UploadComponent_vue_vue_type_template_id_602a0e61___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/UploadComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/BarcodeComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/BarcodeComponent.vue?vue&type=script&lang=js& ***!
@@ -96957,6 +97108,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TicketComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TicketComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TicketComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TicketComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/UploadComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/UploadComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UploadComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UploadComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -97109,6 +97276,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TicketComponent_vue_vue_type_template_id_5b8c7b36___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TicketComponent_vue_vue_type_template_id_5b8c7b36___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TicketComponent.vue?vue&type=template&id=5b8c7b36& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TicketComponent.vue?vue&type=template&id=5b8c7b36&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/UploadComponent.vue?vue&type=template&id=602a0e61&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/UploadComponent.vue?vue&type=template&id=602a0e61& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadComponent_vue_vue_type_template_id_602a0e61___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadComponent_vue_vue_type_template_id_602a0e61___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadComponent_vue_vue_type_template_id_602a0e61___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UploadComponent.vue?vue&type=template&id=602a0e61& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UploadComponent.vue?vue&type=template&id=602a0e61&");
 
 
 /***/ }),

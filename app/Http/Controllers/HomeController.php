@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 use App\Http\Resources\RegistrationResource;
+use App\Models\LookUp;
 use App\Models\Slots;
 use Illuminate\Support\Facades\DB;
 
@@ -24,10 +25,13 @@ class HomeController extends Controller
     {
         $registration = Registration::withSum('payments', 'amount');
 
-        if ($request->search) {
-            $registration
-                ->where('fullname', 'LIKE', "%$request->search%")
-                ->orWhere('uuid', 'LIKE', "%$request->search%");
+
+        if ($request->type && $request->type === 'registration') {
+            if ($request->search) {
+                $registration
+                    ->where('fullname', 'LIKE', "%$request->search%")
+                    ->orWhere('uuid', 'LIKE', "%$request->search%");
+            }
         }
 
         $registration = $registration->paginate(10);
@@ -194,8 +198,21 @@ class HomeController extends Controller
             ]
         ];
 
+        $lookups = LookUp::select();
+
+        if ($request->type && $request->type === 'lookup') {
+            if ($request->search) {
+                $lookups
+                    ->where('fullname', 'LIKE', "%$request->search%")
+                    ->orWhere('lamp_card_number', 'LIKE', "%$request->search%");
+            }
+        }
+
+        $lookups = $lookups->paginate(10);
+
         return view('home', [
             'registrations' => $registration,
+            'lookups' => $lookups,
             'search' => $request->search,
             'slots' => [
                 'members' => $slots_members,
