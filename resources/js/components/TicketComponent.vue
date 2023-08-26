@@ -112,22 +112,25 @@ export default {
             window.location.href = `/registration`;
         },
         open() {
-            var msg = '<strong>Congratulations!</strong> Your registration has been accepted! ';
+            var msg = '<strong>Congratulations!</strong> Your registration has been accepted. ';
+
+            if (this.registrations[0].registration_type === 'Guest' && this.registrations[0].attending_option === 'Hybrid' && this.registrations[0].email != '')
+                msg += '<br /><small style="line-height: 0px;">We have sent email to <i>' + this.registrations[0].email + '</i>. Please check to see the details.</small>';
 
             if (this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid')
-                msg += '<br /><br /><small>Please settle your balance or at least pay partially to confirm your booking. It will automatically expire after 7 days.<br />In the event that your reservation is cancelled, please contact your local AWTA Registrars for help.</small>';
+                msg += '<br /><br /><small style="line-height: 0px;">Please settle your balance or at least pay partially to confirm your booking. It will automatically expire after 7 days.<br />In the event that your reservation is cancelled, please contact your local AWTA Registrars for help.</small>';
             
             if (this.registrations[0].attending_option === 'Online') 
-                msg += '<br /><br /><small>To watch the live broadcast, join our FB Group <br/><a href="https://www.facebook.com/groups/446318280091482">https://www.facebook.com/groups/446318280091482</a></small>'
+                msg += '<br /><br /><small style="line-height: 0px;">To watch the live broadcast, join our FB Group <br/><a href="https://www.facebook.com/groups/446318280091482">https://www.facebook.com/groups/446318280091482</a></small>'
             
             if (this.registrations[0].registration_type === 'Member')
-                msg += '<br /><br /><small>Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA card, an additional Php 35.00 will be required. Kindly reach out to your local AWTA Registrars for payment and issuance.</small><br/><br/><img width="170" height="100" class="mb-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><br /><small>Would you like to avail the new LAMP ID?</small>';
+                msg += '<br /><br /><small style="line-height: 0px;">Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA card, an additional Php 35.00 will be required. Kindly reach out to your local AWTA Registrars for payment and issuance.</small><br/><img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><small>Would you like to avail the new LAMP ID?</small>';
 
             
             this.$confirm(msg, 'You did it!', {
-                confirmButtonText: 'Yes',
+                confirmButtonText: this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid' ? 'Yes' : 'Continue',
                 cancelButtonText: 'No',
-                showCancelButton: true,
+                showCancelButton: this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid',
                 type: 'success',
                 showClose: false,
                 closeOnPressEscape: false,
@@ -136,9 +139,11 @@ export default {
                 center: true,
                 dangerouslyUseHTMLString: true
             }).then(async () => {
-                await axios.post(`/registration/${this.registrations[0].uuid}/update`, {
-                    avail_new_lamp_id: 'yes'
-                })
+                if (this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid') {
+                    await axios.post(`/registration/${this.registrations[0].uuid}/update`, {
+                        avail_new_lamp_id: 'yes'
+                    })
+                }
             }).catch(async () => {
                 await axios.post(`/registration/${this.registrations[0].uuid}/update`, {
                     avail_new_lamp_id: 'no'

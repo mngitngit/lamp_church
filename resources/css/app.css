@@ -123,6 +123,16 @@
     .el-message-box {
         width: 330px;
     }
+
+    .el-message-box {
+        width: 99% !important;
+    }
+
+    .el-message-box--center .el-message-box__content {
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+        padding-top: 5px !important;
+    }
 }
 
 @media only screen and (max-width: 1199px) {
