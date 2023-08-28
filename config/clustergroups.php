@@ -1,6 +1,33 @@
 <?php
 
 return [
+    "Bacolod" => [
+        [
+            "label" =>  "Online",
+            "options" => [
+                "Ortiz, Iloilo"
+            ]
+        ],
+        [
+            "label" =>  "Physical",
+            "options" => [
+                "Abada Escay",
+                "Baseline",
+                "Gonzaga",
+                "Greenbeach. Pulupandan",
+                "Greenplains",
+                "La Salle",
+                "Ma-ao",
+                "Mansilingan",
+                "Pahanocoy",
+                "Puntevedra ",
+                "San Enrique",
+                "Tapong, Pulupandan",
+                "Villa fe",
+                "Villamar",
+            ]
+        ],
+    ],
     "Binan" => [
         [
             "label" =>  "Online/Physical",
@@ -74,7 +101,47 @@ return [
             ]
         ]
     ],
-    "Isabela" => [],
+    "Granada" => [
+        [
+            "label" =>  "Online/Physical",
+            "options" => [
+                "Lamirez Cluster 1",
+                "Lamirez Cluster 2",
+                "Diocson Cluster",
+                "Lanozo Cluster",
+                "Vista Cluster"
+            ]
+        ]
+    ],
+    "Hinigaran" => [
+        [
+            "label" =>  "Online",
+            "options" => [
+                "Japan Cluster"
+            ]
+        ],
+        [
+            "label" =>  "Physical",
+            "options" => [
+                "Ambacan Cluster",
+                "Hinigaran (Center) Cluster",
+                "Nabuswang Cluster",
+                "Lugway Cluster",
+                "Oton, Iloilo"
+            ]
+        ],
+    ],
+    "Isabela" => [
+        [
+            "label" =>  "Online/Physical",
+            "options" => [
+                "Centro Cluster",
+                "Alibagu Cluster",
+                "Tangcul Cluster",
+                "Cauayan Cluster"
+            ]
+        ]
+    ],
     "Muntinlupa" => [
         [
             "label" =>  "Online/Physical",
@@ -155,27 +222,6 @@ return [
                 "Online Cluster",
                 "Palasan Cluster",
                 "TGIF cluster (yp)"
-            ]
-        ]
-    ],
-    "Visayas" => [
-        [
-            "label" =>  "Online/Physical",
-            "options" => [
-                "Abada Escay",
-                "Baseline",
-                "Gonzaga",
-                "Greenplains",
-                "Hinigaran",
-                "Iloilo-Oton",
-                "Ma-ao",
-                "Mansilingan",
-                "Pahanocoy",
-                "Pontevedra",
-                "Pulu- Greenbeach",
-                "Pulupandan Tapong",
-                "San Enrique",
-                "Villamar"
             ]
         ]
     ]
