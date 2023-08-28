@@ -21,10 +21,10 @@ View Ticket
 @endcomponent
 
 You may also join us via Zoom: <br />
-<a href="https://us02web.zoom.us/j/88691518236?pwd=Z0xiQUFkd2FndER6M2NrUUhyVFBPQT09">https://us02web.zoom.us/j/88691518236?pwd=Z0xiQUFkd2FndER6M2NrUUhyVFBPQT09</a><br />
+<a href="https://us02web.zoom.us/j/81746669062?pwd=MlpQbDk2R2Zjbzl3ZWdWNWdqWWYxQT09">https://us02web.zoom.us/j/81746669062?pwd=MlpQbDk2R2Zjbzl3ZWdWNWdqWWYxQT09</a><br />
 <br />
-Meeting ID: 886 9151 8236<br />
-Passcode: 2022AWTA
+Meeting ID: 817 4666 9062<br />
+Passcode: AWTA2023
 <br /><br />
 We will be sending a reminder before the event starts too!
 
