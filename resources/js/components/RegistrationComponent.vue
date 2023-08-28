@@ -39,6 +39,26 @@
                 <!-- <el-button v-bind:type="(currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'primary' : ''" v-bind:plain="currentStep < 3" @click="$refs.myChild.submitForm('next')">{{ (currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'Submit' : 'Next' }}</el-button> -->
             </div>
         </div>
+
+        <el-dialog
+        :visible.sync="dialogVisible"
+        width="30%"
+        :close-on-click-modal="false"
+        :close-on-press-escape="false"
+        :show-close="false"
+        :destroy-on-close="false">
+        <span class="content">
+            <p class="m-0">
+                <el-checkbox v-model="isAllowing"/>&nbsp;&nbsp;I authorize LAMP Church to collect, use and retain the personal information in this form for the purpose of attending AWTA 2023  (Annual Worship and Thanksgiving Assembly) and in the pursuit of any legal interests of the church.
+                <span v-if="display" class="error">
+                    Please check if you want to continue
+                </span>
+            </p>
+        </span>
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="validateAuthorization()">Continue</el-button>
+        </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -69,11 +89,16 @@
                     step_1: {},
                     step_2: {},
                     step_3: {}
-                }
+                },
+                isAllowing: false,
+                dialogVisible: false,
+                display: false
             }
         },
         created() {
-            this.setTabComponents()
+            this.setTabComponents();
+
+            this.dialogVisible = true
         },
         methods: {
             customColorMethod(percentage) {
@@ -147,6 +172,12 @@
             showTicket(uuid) {
                 window.location.href = `registration/ticket?id=${uuid}`;
             },
+            validateAuthorization() {
+                if (!this.isAllowing)
+                    this.display = true
+                else
+                    this.dialogVisible = false
+            }
         }
     }
 </script>

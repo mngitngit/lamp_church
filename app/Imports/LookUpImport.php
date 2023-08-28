@@ -3,10 +3,12 @@
 namespace App\Imports;
 
 use App\Models\LookUp;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class LookUpImport implements ToModel, WithStartRow
+class LookUpImport implements ToModel, WithStartRow, WithValidation
 {
     /**
      * @return int
@@ -35,5 +37,12 @@ class LookUpImport implements ToModel, WithStartRow
             'local_church' => $row[7],
             'country' => $row[8]
         ]);
+    }
+
+    public function rules(): array
+    {
+        return [
+            '0' => 'unique:look_ups,lamp_card_number'
+        ];
     }
 }

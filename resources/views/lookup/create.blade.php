@@ -7,6 +7,7 @@
 @section('content')
 <div class="px-4">
     <el-tabs type="border-card">
+        @csrf
         <upload-component>
     </el-tabs>
 </div>

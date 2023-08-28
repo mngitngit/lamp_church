@@ -13,6 +13,7 @@
  Vue.component('lookups-table', require('./components/LookUpsTableComponent.vue').default);
  Vue.component('booking-table', require('./components/BookingTableComponent.vue').default);
  Vue.component('attendance-table', require('./components/AttendanceTableComponent.vue').default);
+ Vue.component('upload-component', require('./components/UploadComponent.vue').default);
  
  import Vue from 'vue';
  import ElementUI from 'element-ui';
@@ -38,6 +39,7 @@
          return { 
              visible: false,
              search: null,
+             dialogVisible: false
          }
      }
  });

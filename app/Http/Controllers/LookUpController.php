@@ -17,7 +17,7 @@ class LookUpController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['show', 'index', 'store']]);
+        $this->middleware('auth', ['except' => ['show', 'index', 'store', 'upload', 'upload_view']]);
     }
 
     public function index(Request $request)
