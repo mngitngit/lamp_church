@@ -33,7 +33,7 @@
                 </div>
                 <div class="el-tabs__content">
                     <div role="tabpanel" id="pane-0" aria-labelledby="tab-0" class="el-tab-pane" active>
-                        <edit-registration-component :registration="{{ $registration }}"></edit-registration-component>
+                        <edit-registration-component :registration="{{ $registration }}" />
                     </div>
                 </div>
             </div>

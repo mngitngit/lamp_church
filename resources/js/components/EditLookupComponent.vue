@@ -59,70 +59,9 @@
 
         <el-card shadow="hover" class="mb-3">
             <div class="row">
-                <div v-if="ruleForm.registrationType === 'Member'" class="col-md-6">
-                    <el-form-item label="Do you have an awta card?" prop="withAwtaCard" required>
-                        <el-select v-model="ruleForm.withAwtaCard" placeholder="Choose">
-                            <el-option label="None, I’m a new member." value="none"></el-option>
-                            <el-option label="Yes, but I lost it." value="lost"></el-option>
-                            <el-option label="Yes, and I still have it." value="yes"></el-option>
-                        </el-select>
-                    </el-form-item>
-                </div>
-
-                <div class="col-md-6">
-                    <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType === 'Member'">
-                        <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
-                            <el-option value="Hybrid" label="Hybrid"></el-option>
-                            <el-option value="Online" label="Online"></el-option>
-                        </el-select>
-                    </el-form-item>
-                </div>
-            </div>
-        </el-card>
-
-        <el-card v-if="permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
-            <div class="row">
                 <div class="col-md-2">
                     <el-form-item label="Days can book" required>
                         <el-input v-model="ruleForm.canBookDays"></el-input>
-                    </el-form-item>
-                </div>
-                <div class="col-md-2">
-                    <el-form-item label="Rebooking Limit" required>
-                        <el-tooltip content="Only the administrator can edit this" placement="top">
-                            <el-input v-model="ruleForm.rebookingLimit" disabled></el-input>
-                        </el-tooltip>
-                    </el-form-item>
-                </div>
-                <div class="col-md-2">
-                    <el-form-item label="Booking Rate" required>
-                        <el-input v-model="ruleForm.bookingRate"></el-input>
-                    </el-form-item>
-                </div>
-                <div class="col-md-2" v-if="permissions.can_edit_delegate_config">
-                    <el-form-item label="Rate" required>
-                        <el-input v-model="ruleForm.rate"></el-input>
-                    </el-form-item>
-                </div>
-            </div>
-        </el-card>
-
-        <el-card v-if="ruleForm.registrationType == 'Guest' && permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <el-form-item label="Specify the date baptized to tag this delegate as &quot;Visitor to Member&quot;" prop="visitorToMember">
-                        <el-date-picker
-                        v-model="ruleForm.visitorToMember"
-                        type="date"
-                        placeholder="Pick a day"
-                        :picker-options="pickerOptions">
-                        </el-date-picker>
-                    </el-form-item>
-                </div>
-
-                <div class="col-md-12">
-                    <el-form-item label="Notes">
-                        <el-input type="textarea" v-model="ruleForm.notes"></el-input>
                     </el-form-item>
                 </div>
             </div>
@@ -139,38 +78,13 @@
 <script>
 export default {
     props: {
-        registration: {
+        lookup: {
             required: true,
             type: Object
         },
     },
     data() {
         return {
-            pickerOptions: {
-                disabledDate(time) {
-                    return time.getTime() > Date.now();
-                },
-                shortcuts: [{
-                    text: 'Today',
-                    onClick(picker) {
-                    picker.$emit('pick', new Date());
-                    }
-                }, {
-                    text: 'Yesterday',
-                    onClick(picker) {
-                    const date = new Date();
-                    date.setTime(date.getTime() - 3600 * 1000 * 24);
-                    picker.$emit('pick', date);
-                    }
-                }, {
-                    text: 'A week ago',
-                    onClick(picker) {
-                    const date = new Date();
-                    date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-                    picker.$emit('pick', date);
-                    }
-                }]
-            },
             ruleForm: {
                 email: '',
                 firstName: '',
@@ -181,15 +95,7 @@ export default {
                 country: 'Philippines',
                 awtaCardNumber: '',
                 category: 'Adult',
-                attendingOption: '',
-                withAwtaCard: '',
-                canBookDays: 0,
-                rebookingLimit: 0,
-                category: '',
-                canBook: false,
-                bookingRate: 0,
-                rate: 0,
-                visitorToMember: ''
+                canBookDays: parseInt(window.env.member_booking_limit || 0)
             },
             rules: {
                 firstName: [
@@ -207,43 +113,29 @@ export default {
                 awtaCardNumber: [
                     { required: true, message: 'Please input AWTA Card Number', trigger: ['blur', 'change']},
                 ],
-                attendingOption: [
-                    { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
+                category: [
+                    { required: true, message: 'Please select rate', trigger: ['blur', 'change']},
                 ],
-                rate: [
-                    { required: true, message: 'Please input rate', trigger: ['blur', 'change']},
+                canBookDays: [
+                    { required: true, message: 'Please input number of days can book', trigger: ['blur', 'change']},
                 ]
             },
             countries: this.$allCountries,
-            permissions: window.auth_user.permissions
-        }
-    },
-    watch: {
-        'ruleForm.withAwtaCard'(newData, oldData) {
-            if (oldData != newData && oldData != '' && newData != '') {
-                this.ruleForm.attendingOption =''
-            }
         }
     },
     mounted() {
         this.ruleForm = {
-                email: this.registration.email,
-                firstName: this.registration.firstname,
-                lastName: this.registration.lastname,
-                facebookName: this.registration.facebook_name,
-                registrationType: this.registration.registration_type,
-                localChurch: this.registration.local_church,
-                country: this.registration.country,
-                category: this.registration.category,
-                attendingOption: this.registration.attending_option,
-                withAwtaCard: this.registration.with_awta_card,
-                category: this.registration.category,
-                canBookDays: this.registration.can_book_days,
-                rebookingLimit: this.registration.rebooking_limit,
-                bookingRate: this.registration.can_book_rate,
-                rate: this.registration.rate,
-                visitorToMember: this.registration.visitor_to_member
-            }
+            email: this.lookup.email,
+            firstName: this.lookup.firstname,
+            lastName: this.lookup.lastname,
+            facebookName: this.lookup.facebook_name,
+            registrationType: this.lookup.registration_type,
+            localChurch: this.lookup.local_church,
+            country: this.lookup.country,
+            awtaCardNumber: this.lookup.lamp_card_number,
+            category: this.lookup.category,
+            canBookDays: this.lookup.can_book_days
+        }
     },
     methods: {
         submitForm(formName) {
@@ -256,7 +148,7 @@ export default {
                     });
 
                     setTimeout(async () => {
-                        await axios.post(`/registration/${this.registration.uuid}/update`, this.ruleForm)
+                        await axios.post(`/lookup/${this.lookup.lamp_card_number}/update`, this.ruleForm)
                         .then(async (response) => {
                             loading.close()
 

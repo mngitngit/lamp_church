@@ -7604,6 +7604,28 @@ var render = function render() {
         return [_vm._v("\n      " + _vm._s(scope.row.can_book_days) + "\n    ")];
       }
     }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      fixed: "right",
+      label: "Operations",
+      align: "center",
+      width: "120"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_c("a", {
+          attrs: {
+            href: "/lookup/".concat(scope.row.lamp_card_number, "/edit")
+          }
+        }, [_c("el-button", {
+          attrs: {
+            type: "text",
+            size: "small"
+          }
+        }, [_vm._v("Edit Details")])], 1)];
+      }
+    }])
   })], 1);
 };
 

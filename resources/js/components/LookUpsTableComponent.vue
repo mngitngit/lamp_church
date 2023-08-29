@@ -69,6 +69,15 @@
           {{ scope.row.can_book_days }}
         </template>
       </el-table-column>
+      <el-table-column
+        fixed="right"
+        label="Operations"
+        align="center"
+        width="120">
+        <template slot-scope="scope">
+          <a :href="`/lookup/${scope.row.lamp_card_number}/edit`"><el-button type="text" size="small">Edit Details</el-button></a>
+        </template>
+      </el-table-column>
     </el-table>
 </template>
 

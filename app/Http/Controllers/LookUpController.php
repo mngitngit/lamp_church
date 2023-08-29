@@ -17,7 +17,7 @@ class LookUpController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['show', 'index', 'store', 'upload', 'upload_view']]);
+        $this->middleware('auth', ['except' => ['show', 'index', 'store', 'upload', 'upload_view', 'edit']]);
     }
 
     public function index(Request $request)
@@ -76,5 +76,33 @@ class LookUpController extends Controller
     public function upload_view()
     {
         return view('lookup.create');
+    }
+
+    public function edit($awtaNumber)
+    {
+        return view('lookup.edit', [
+            'lookup' => LookUp::where('lamp_card_number', $awtaNumber)->first()
+        ]);
+    }
+
+    public function update($awtaNumber, Request $request)
+    {
+        $lookup = LookUp::where('lamp_card_number', $awtaNumber)->first();
+
+        $lookup->update([
+            'email' => $request->email,
+            'firstname' => $request->firstName,
+            'lastname' => $request->lastName,
+            'fullname' => $request->firstName . ' ' . $request->lastName,
+            'facebook_name' => $request->facebookName,
+            'local_church' => $request->localChurch,
+            'country' => $request->country,
+            'category' => $request->category,
+            'can_book_days' => $request->canBookDays,
+        ]);
+
+        return view('lookup.edit', [
+            'lookup' => $lookup
+        ]);
     }
 }
