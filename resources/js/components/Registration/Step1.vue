@@ -77,6 +77,17 @@
                     </div>
                 </div>
             </el-card>
+
+            <el-card v-if="ruleForm.registrationType === 'Member' && ruleForm.withAwtaCard === 'yes'" shadow="always" class="mb-3"> 
+                <div class="row">
+                    <div class="col-md-12" v-if="ruleForm.withAwtaCard === 'yes'">
+                        <el-form-item label="Email Address (Optional)" class="rm-margin" prop="email">
+                            <small class="text-sm">Please provide the email address where you would like to receive the confirmation email.</small>
+                            <el-input v-model="ruleForm.email" :clearable="true"></el-input>
+                        </el-form-item>
+                    </div>
+                </div>   
+            </el-card>
         </el-form>
     </div>
 </div>
@@ -120,6 +131,7 @@ export default {
                         this.ruleForm.found.withAwtaCard = 'yes'
                         this.ruleForm.found.localChurch = response.data.local_church
                         this.ruleForm.found.canBookDays = response.data.can_book_days
+                        this.ruleForm.email = this.ruleForm.email === '' ? response.data.email : this.ruleForm.email
                         this.options = this.assignments[response.data.local_church]
                         this.isLoading = false
                         callback();
@@ -143,6 +155,7 @@ export default {
                 awtaCardNumber: '',
                 clusterGroup: '',
                 bookingCode: '',
+                email: '',
                 canBookDays: parseInt(window.env.member_booking_limit || 0),
                 found: {}
             },

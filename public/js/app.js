@@ -7462,11 +7462,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                             _this.ruleForm.found.withAwtaCard = 'yes';
                             _this.ruleForm.found.localChurch = response.data.local_church;
                             _this.ruleForm.found.canBookDays = response.data.can_book_days;
+                            _this.ruleForm.email = _this.ruleForm.email === '' ? response.data.email : _this.ruleForm.email;
                             _this.options = _this.assignments[response.data.local_church];
                             _this.isLoading = false;
                             callback();
 
-                          case 15:
+                          case 16:
                           case "end":
                             return _context.stop();
                         }
@@ -7528,6 +7529,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         awtaCardNumber: '',
         clusterGroup: '',
         bookingCode: '',
+        email: '',
         canBookDays: parseInt(window.env.member_booking_limit || 0),
         found: {}
       },
@@ -8113,11 +8115,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }
     },
-    setCanBookDays: function setCanBookDays() {
+    selectName: function selectName() {
       var selected = this.ruleForm.lookUp.filter(function (el) {
         return el.lamp_card_number === this.ruleForm.selected;
       }.bind(this));
-      this.ruleForm.canBookDays = selected.can_book_days;
+      this.ruleForm.canBookDays = selected[0].can_book_days;
+      this.ruleForm.email = selected[0].email;
     }
   }
 });
@@ -9400,7 +9403,35 @@ var render = function render() {
         }
       });
     }), 1);
-  })], 2)], 1)], 1) : _vm._e()])]) : _vm._e()], 1)], 1)]);
+  })], 2)], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.withAwtaCard === "yes" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "always"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_vm.ruleForm.withAwtaCard === "yes" ? _c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    staticClass: "rm-margin",
+    attrs: {
+      label: "Email Address (Optional)",
+      prop: "email"
+    }
+  }, [_c("small", {
+    staticClass: "text-sm"
+  }, [_vm._v("Please provide the email address where you would like to receive the confirmation email.")]), _vm._v(" "), _c("el-input", {
+    attrs: {
+      clearable: true
+    },
+    model: {
+      value: _vm.ruleForm.email,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "email", $$v);
+      },
+      expression: "ruleForm.email"
+    }
+  })], 1)], 1) : _vm._e()])]) : _vm._e()], 1)], 1)]);
 };
 
 var staticRenderFns = [];
@@ -9726,7 +9757,7 @@ var render = function render() {
       }
     }, [_vm._v("Add Row")]) : _vm._e()], 1);
   })], 2) : _c("el-card", {
-    staticClass: "mb-4",
+    staticClass: "mb-3",
     attrs: {
       shadow: "always"
     }
@@ -9909,7 +9940,7 @@ var render = function render() {
       },
       on: {
         change: function change($event) {
-          return _vm.setCanBookDays();
+          return _vm.selectName();
         }
       },
       model: {
@@ -9920,7 +9951,35 @@ var render = function render() {
         expression: "ruleForm.selected"
       }
     }, [_c("span", [_vm._v(_vm._s(data.firstname) + " " + _vm._s(data.lastname))])]);
-  }), 1)], 1) : _vm._e()])])], 1)], 1)]);
+  }), 1)], 1) : _vm._e()])]), _vm._v(" "), _vm.data.step_1.registrationType === "Member" && _vm.data.step_1.withAwtaCard === "lost" && _vm.ruleForm.lookUp.length > 0 ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "always"
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("el-form-item", {
+    staticClass: "rm-margin",
+    attrs: {
+      label: "Email Address (Optional)",
+      prop: "email"
+    }
+  }, [_c("small", {
+    staticClass: "text-sm"
+  }, [_vm._v("Please provide the email address where you would like to receive the confirmation email.")]), _vm._v(" "), _c("el-input", {
+    attrs: {
+      clearable: true
+    },
+    model: {
+      value: _vm.ruleForm.email,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "email", $$v);
+      },
+      expression: "ruleForm.email"
+    }
+  })], 1)], 1)])]) : _vm._e()], 1)], 1)]);
 };
 
 var staticRenderFns = [];
@@ -17521,7 +17580,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n\n.ticket-header .el-card__header {\n    background-color: aliceblue !important;\n}\n\n.text-xxs {\n    font-size: 13px !important;\n}\n\n.el-progress-bar__outer {\n    background-color: #c1c5cc !important;\n}\n\n.el-progress-bar {\n    width: 200px;\n}\n\n.el-progress__text {\n    font-size: 12.5px !important;\n}\n\n.has-error input.el-input__inner {\n    border-color: #F56C6C !important;\n}\n\n.border-danger {\n    color: #f56c6c;\n    border-color: #fbc4c4;\n}\n\n.footer {\n    position: fixed;\n    Width: 100%;\n    bottom: 0;\n    background-color: #FFF;\n    border: 1px solid #EBEEF5;\n    overflow: hidden;\n}\n\n@media only screen and (max-width: 320px) {\n    .prompt-congratulatory-message {\n        width: 280px !important;\n    }\n\n    .el-message-box {\n        width: 230px !important;\n    }\n}\n\n@media only screen and (max-width: 500px) {\n    .prompt-congratulatory-message {\n        width: 380px;\n    }\n\n    .el-message-box {\n        width: 330px;\n    }\n\n    .el-message-box {\n        width: 99% !important;\n    }\n\n    .el-message-box--center .el-message-box__content {\n        padding-left: 18px !important;\n        padding-right: 18px !important;\n        padding-top: 5px !important;\n    }\n}\n\n@media only screen and (max-width: 1199px) {\n    .div-personal-details {\n        order: 2;\n    }\n\n    .div-qr-code {\n        order: 1;\n    }\n}\n\n.el-button--theme {\n    color: #FFF !important;\n    background-color: #3abdb5 !important;\n    border-color: #3abdb5 !important;\n}\n\n.el-link.el-link--theme:hover {\n    color: #00c4a3 !important;\n}\n\n.el-link.el-link--theme {\n    color: #3cbdb5 !important;\n}\n\n.el-progress-bar {\n    width: 130px !important;\n}\n\n.el-dialog__body:has(> span.content) {\n    letter-spacing: .3px;\n    line-height: 1.9;\n    padding-top: 0.5rem !important;\n    padding-bottom: 0.5rem !important;\n    font-size: 14px;\n}\n\n.content .error {\n    color: #f56c6c;\n    font-size: 12px;\n    line-height: 1;\n    padding-top: 4px;\n    display: block;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".el-form-item__label {\n    width: 100% !important;\n    text-align: left !important;\n    line-height: 25px !important;\n    margin: 15px 0px 15px !important;\n    padding: 0;\n}\n\n.el-form-item__content label {\n    color: #606266 !important;\n}\n\n.el-form-item__content {\n    margin-left: 0px !important;\n}\n\n.el-form-item {\n    /* margin-bottom: 13px; */\n}\n\n.el-select {\n    width: 100%;\n}\n\n.page-link.active, .active > .page-link {\n    background-color: #409eff !important;\n    border-color: #409eff !important;\n}\n\n.page-link {\n    color: #409eff;\n}\n\n.el-badge__content.is-fixed {\n    right: 40px !important;\n}\n\n.c-booking-date label {\n    line-height: 8px !important;\n    padding-top: 15px !important;\n    padding-bottom: 30px !important;\n    padding-left: 12px !important;\n    padding-right: 12px !important;\n}\n\n.c-booking-date .el-checkbox__label {\n    font-size: 15px !important;\n    padding: 0 !important;\n}\n\n.c-booking-date .el-checkbox__input {\n    display: none !important;\n}\n\n.c-booking-date .el-badge__content {\n    height: 23px !important;\n    /* line-height: 18px !important; */\n    padding: 2px 6px !important;\n}\n\n.c-booking-date .is-checked {\n    background-color: #409eff38 !important;\n}\n\n.c-booking-subheader {\n    font-size: 14px !important;\n    color: #606266 !important;\n}\n\n.ticket-header .el-card__header {\n    background-color: aliceblue !important;\n}\n\n.text-xxs {\n    font-size: 13px !important;\n}\n\n.el-progress-bar__outer {\n    background-color: #c1c5cc !important;\n}\n\n.el-progress-bar {\n    width: 200px;\n}\n\n.el-progress__text {\n    font-size: 12.5px !important;\n}\n\n.has-error input.el-input__inner {\n    border-color: #F56C6C !important;\n}\n\n.border-danger {\n    color: #f56c6c;\n    border-color: #fbc4c4;\n}\n\n.footer {\n    position: fixed;\n    Width: 100%;\n    bottom: 0;\n    background-color: #FFF;\n    border: 1px solid #EBEEF5;\n    overflow: hidden;\n}\n\n@media only screen and (max-width: 320px) {\n    .prompt-congratulatory-message {\n        width: 280px !important;\n    }\n\n    .el-message-box {\n        width: 230px !important;\n    }\n}\n\n@media only screen and (max-width: 500px) {\n    .prompt-congratulatory-message {\n        width: 380px;\n    }\n\n    .el-message-box {\n        width: 330px;\n    }\n\n    .el-message-box {\n        width: 99% !important;\n    }\n\n    .el-message-box--center .el-message-box__content {\n        padding-left: 18px !important;\n        padding-right: 18px !important;\n        padding-top: 5px !important;\n    }\n}\n\n@media only screen and (max-width: 1199px) {\n    .div-personal-details {\n        order: 2;\n    }\n\n    .div-qr-code {\n        order: 1;\n    }\n}\n\n.el-button--theme {\n    color: #FFF !important;\n    background-color: #3abdb5 !important;\n    border-color: #3abdb5 !important;\n}\n\n.el-link.el-link--theme:hover {\n    color: #00c4a3 !important;\n}\n\n.el-link.el-link--theme {\n    color: #3cbdb5 !important;\n}\n\n.el-progress-bar {\n    width: 130px !important;\n}\n\n.el-dialog__body:has(> span.content) {\n    letter-spacing: .3px;\n    line-height: 1.9;\n    padding-top: 0.5rem !important;\n    padding-bottom: 0.5rem !important;\n    font-size: 14px;\n}\n\n.content .error {\n    color: #f56c6c;\n    font-size: 12px;\n    line-height: 1;\n    padding-top: 4px;\n    display: block;\n}\n\n.rm-margin label {\n    margin-bottom: -9px !important;\n}\n/* .pagination li {\n    margin-right: 10px;\n    border-radius: 20px;\n    width: 37px;\n    text-align: center;\n}\n\n.pagination li span {\n    border-radius: 4px;\n}\n\n.pagination li a {\n    border-radius: 4px;\n} */", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

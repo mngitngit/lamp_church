@@ -147,7 +147,7 @@
                 </el-card>
                 
                 <!-- display if member attending online/hybrid & guests attending online only. -->
-                <el-card v-else shadow="always" class="mb-4">
+                <el-card v-else shadow="always" class="mb-3">
                     <div class="row">
                         <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.registrationType === 'Guest'" class="col-md-12">
                             <el-form-item label="Email Address" prop="email">
@@ -211,12 +211,23 @@
 
                         <div class="col-md-12" v-if="data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0">
                             <el-form-item label="Please choose your name (If your name cannot be clicked, you have already registered)" prop="selected" required>
-                                <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_card_number" :disabled="data.is_registered === 1" @change="setCanBookDays()" border>
+                                <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_card_number" :disabled="data.is_registered === 1" @change="selectName()" border>
                                     <span>{{ data.firstname }} {{ data.lastname }}</span>
                                 </el-radio>
                             </el-form-item>
                         </div>
                     </div>
+                </el-card>
+
+                <el-card v-if="data.step_1.registrationType === 'Member' && data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0" shadow="always" class="mb-3"> 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <el-form-item label="Email Address (Optional)" class="rm-margin" prop="email">
+                                <small class="text-sm">Please provide the email address where you would like to receive the confirmation email.</small>
+                                <el-input v-model="ruleForm.email" :clearable="true"></el-input>
+                            </el-form-item>
+                        </div>
+                    </div>   
                 </el-card>
             </el-form>
         </div>
@@ -463,12 +474,13 @@
                     }
                 }
             },
-            setCanBookDays() {
+            selectName() {
                 var selected = this.ruleForm.lookUp.filter(function (el) {
                     return el.lamp_card_number === this.ruleForm.selected;
                 }.bind(this));
 
-                this.ruleForm.canBookDays = selected.can_book_days;
+                this.ruleForm.canBookDays = selected[0].can_book_days;
+                this.ruleForm.email = selected[0].email;
             }
         }
    }

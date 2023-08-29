@@ -129,7 +129,7 @@ class RegistrationController extends Controller
 
                     $lookup = LookUp::where('lamp_card_number', $details['selected'])->first();
 
-                    $email = $lookup['email'];
+                    $email = $details['email'];
                     $firstname = $lookup['firstname'];
                     $lastname = $lookup['lastname'];
                     $fullname = $lookup['firstname'] . ' ' . $lookup['lastname'];
@@ -147,7 +147,7 @@ class RegistrationController extends Controller
                 case 'yes': // Yes, and I still have it.
                     $details = array_merge($request->step_1, $request->step_3);
 
-                    $email = $details['found']['email'];
+                    $email = $details['email'];
                     $firstname = $details['found']['firstName'];
                     $lastname = $details['found']['lastName'];
                     $fullname = $details['found']['firstName'] . ' ' . $details['found']['lastName'];
@@ -202,7 +202,8 @@ class RegistrationController extends Controller
                     'email' => $email,
                     'firstname' => $firstname,
                     'lastname' => $lastname,
-                    'facebook_name' => ($firstname) . ' ' . ($lastname),
+                    'fullname' => $firstname . ' ' . $lastname,
+                    'facebook_name' => $facebook,
                     'registration_type' => 'Member',
                     'category' => $category,
                     'local_church' => $local_church,
