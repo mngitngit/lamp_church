@@ -210,17 +210,24 @@ class HomeController extends Controller
 
         $lookups = $lookups->paginate(10);
 
+        // set tab value
+        $tab = 0;
+        if ($request->type === 'registration') $tab = 0;
+        if ($request->type === 'lookup') $tab = 1;
+
         return view('home', [
             'registrations' => $registration,
             'lookups' => $lookups,
             'search' => $request->search,
+            'type' => $request->type,
             'slots' => [
                 'members' => $slots_members,
                 'guests' => $slots_guests
             ],
             'count' => json_encode($attendance_count),
             'overall' => json_encode($overall),
-            'overall_total' => json_encode($overall_total)
+            'overall_total' => json_encode($overall_total),
+            'tab' => $tab
         ]);
     }
 }

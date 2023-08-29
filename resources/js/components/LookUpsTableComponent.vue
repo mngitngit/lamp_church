@@ -56,7 +56,7 @@
         fixed="left"
         align="center">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.is_registred">Registered</el-tag>
+          <el-tag v-if="scope.row.is_registered">Registered</el-tag>
           <el-tag v-else type="danger">Not yet registered</el-tag>
         </template>
       </el-table-column>

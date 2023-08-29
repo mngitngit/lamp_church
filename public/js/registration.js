@@ -7584,7 +7584,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [scope.row.is_registred ? _c("el-tag", [_vm._v("Registered")]) : _c("el-tag", {
+        return [scope.row.is_registered ? _c("el-tag", [_vm._v("Registered")]) : _c("el-tag", {
           attrs: {
             type: "danger"
           }
@@ -7819,17 +7819,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_c("el-button", {
-          attrs: {
-            type: "text",
-            size: "small"
-          },
-          on: {
-            click: function click($event) {
-              return _vm.handleClick(scope.row.uuid);
-            }
-          }
-        }, [_vm._v("Payments")]), _vm._v(" "), _vm.permissions.can_edit_delegate ? _c("a", {
+        return [_vm.permissions.can_edit_delegate ? _c("a", {
           attrs: {
             href: "/registration/".concat(scope.row.uuid, "/edit")
           }

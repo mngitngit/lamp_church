@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="container">
-    <el-tabs type="border-card">
+    <el-tabs type="border-card" value="{{ $tab }}">
         {{-- Registration --}}
         <el-tab-pane label="Registrations">
             <div class="row">
@@ -14,7 +14,7 @@
                     <form method="GET" action="{{ url('home') }}">
                         <div class="input-with-select el-input el-input-group el-input-group--append">
                             <input type="hidden" name="type" value="registration" />
-                            <input type="text" autocomplete="off" placeholder="Search by Name or ID" name="search" value="{{ $search }}" class="el-input__inner">
+                            <input type="text" autocomplete="off" placeholder="Search by Name or ID" name="search" value="{{ $type === 'registration' ? $search : '' }}" class="el-input__inner">
                             <div class="el-input-group__append">
                                 <button type="submit" class="el-button el-button--submit" value="Submit">
                                     <i class="el-icon-search"></i>
@@ -51,8 +51,8 @@
                 <div class="col-md-5 mb-3">
                     <form method="GET" action="{{ url('home') }}">
                         <div class="input-with-select el-input el-input-group el-input-group--append">
-                            <input type="hidden" name="type" value="registration" />
-                            <input type="text" autocomplete="off" placeholder="Search by Name or ID" name="search" value="{{ $search }}" class="el-input__inner">
+                            <input type="hidden" name="type" value="lookup" />
+                            <input type="text" autocomplete="off" placeholder="Search by Name or ID" name="search" value="{{ $type === 'lookup' ? $search : '' }}" class="el-input__inner">
                             <div class="el-input-group__append">
                                 <button type="submit" class="el-button el-button--submit" value="Submit">
                                     <i class="el-icon-search"></i>
