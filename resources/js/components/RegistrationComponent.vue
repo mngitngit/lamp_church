@@ -42,7 +42,7 @@
 
         <el-dialog
         :visible.sync="dialogVisible"
-        width="30%"
+        custom-class="responsive-dialog"
         :close-on-click-modal="false"
         :close-on-press-escape="false"
         :show-close="false"

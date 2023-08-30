@@ -113,6 +113,10 @@
     .el-message-box {
         width: 230px !important;
     }
+
+    .responsive-dialog {
+        width: 99% !important;
+    }
 }
 
 @media only screen and (max-width: 500px) {
@@ -142,6 +146,10 @@
 
     .div-qr-code {
         order: 1;
+    }
+
+    .responsive-dialog {
+        width: 80% !important;
     }
 }
 
@@ -181,6 +189,10 @@
 
 .rm-margin label {
     margin-bottom: -9px !important;
+}
+
+.responsive-dialog {
+    width: 30%;
 }
 /* .pagination li {
     margin-right: 10px;
