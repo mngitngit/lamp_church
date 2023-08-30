@@ -23,7 +23,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $this->notify(3);
         $registration = Registration::withSum('payments', 'amount');
 
         if ($request->type && $request->type === 'registration') {
