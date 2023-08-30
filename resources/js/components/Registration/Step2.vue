@@ -135,6 +135,16 @@
                                         </small>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="3" class="p-1">
+                                        <label class="text-sm">Needs any medical assistance?</label>
+                                        <el-input
+                                            size="mini"
+                                            placeholder="Please specify..."
+                                            v-model="guest.specificMedicalAssistance">
+                                        </el-input>
+                                    </td>
+                                </tr>
                             </table>
                             <small v-if="errors[i] && errors[i]['invalid']" class="text-error mx-1">
                                 <span v-if="errors[i]['invalid']">{{ errors[i]['invalid'] }}</span>&nbsp;
@@ -230,7 +240,7 @@
                     </div>   
                 </el-card>
 
-                <el-card v-if="(data.step_1.registrationType === 'Member' && data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0) || data.step_1.withAwtaCard === 'none'" shadow="always" class="mb-3"> 
+                <el-card v-if="((data.step_1.registrationType === 'Member' && data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0) || data.step_1.withAwtaCard === 'none') && data.step_1.attendingOption === 'Hybrid'" shadow="always" class="mb-3"> 
                     <el-form-item label="Needs any medical assistance?">
                         <el-input v-model="ruleForm.specificMedicalAssistance" placeholder="Please specify..." :clearable="true"></el-input>
                     </el-form-item>
@@ -360,6 +370,7 @@
                         country: 'Philippines',
                         category: 'Free',
                         booked: [],
+                        specificMedicalAssistance: ''
                     }]
                 },
                 rules: {
@@ -468,6 +479,7 @@
                     country: 'Philippines',
                     category: 'Free',
                     booked: [],
+                    specificMedicalAssistance: ''
                 });
             },
             removeClusterGroup(index) {

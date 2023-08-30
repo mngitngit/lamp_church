@@ -8150,7 +8150,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           localChurch: '',
           country: 'Philippines',
           category: 'Free',
-          booked: []
+          booked: [],
+          specificMedicalAssistance: ''
         }]
       },
       rules: {
@@ -8287,7 +8288,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         localChurch: '',
         country: 'Philippines',
         category: 'Free',
-        booked: []
+        booked: [],
+        specificMedicalAssistance: ''
       });
     },
     removeClusterGroup: function removeClusterGroup(index) {
@@ -10200,7 +10202,26 @@ var render = function render() {
       }, [_vm._v(_vm._s(date.event_date))]), _vm._v(" "), _c("br"), _vm._v(" "), _c("span", [_vm._v(_vm._s(date.available) + " left!")])]);
     }), 1), _vm._v(" "), _vm.errors[i] && _vm.errors[i]["booked"] ? _c("small", {
       staticClass: "text-error"
-    }, [_vm.errors[i]["booked"] ? _c("span", [_vm._v(_vm._s(_vm.errors[i]["booked"]))]) : _vm._e(), _vm._v(" \n                                     ")]) : _vm._e()], 1)])]), _vm._v(" "), _vm.errors[i] && _vm.errors[i]["invalid"] ? _c("small", {
+    }, [_vm.errors[i]["booked"] ? _c("span", [_vm._v(_vm._s(_vm.errors[i]["booked"]))]) : _vm._e(), _vm._v(" \n                                     ")]) : _vm._e()], 1)]), _vm._v(" "), _c("tr", [_c("td", {
+      staticClass: "p-1",
+      attrs: {
+        colspan: "3"
+      }
+    }, [_c("label", {
+      staticClass: "text-sm"
+    }, [_vm._v("Needs any medical assistance?")]), _vm._v(" "), _c("el-input", {
+      attrs: {
+        size: "mini",
+        placeholder: "Please specify..."
+      },
+      model: {
+        value: guest.specificMedicalAssistance,
+        callback: function callback($$v) {
+          _vm.$set(guest, "specificMedicalAssistance", $$v);
+        },
+        expression: "guest.specificMedicalAssistance"
+      }
+    })], 1)])]), _vm._v(" "), _vm.errors[i] && _vm.errors[i]["invalid"] ? _c("small", {
       staticClass: "text-error mx-1"
     }, [_vm.errors[i]["invalid"] ? _c("span", [_vm._v(_vm._s(_vm.errors[i]["invalid"]))]) : _vm._e(), _vm._v(" \n                         ")]) : _vm._e()]), _vm._v(" "), i != 0 || _vm.ruleForm.guests.length > 1 ? _c("el-button", {
       staticClass: "float-right d-inline mt-2",
@@ -10449,7 +10470,7 @@ var render = function render() {
       },
       expression: "ruleForm.email"
     }
-  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.data.step_1.registrationType === "Member" && _vm.data.step_1.withAwtaCard === "lost" && _vm.ruleForm.lookUp.length > 0 || _vm.data.step_1.withAwtaCard === "none" ? _c("el-card", {
+  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), (_vm.data.step_1.registrationType === "Member" && _vm.data.step_1.withAwtaCard === "lost" && _vm.ruleForm.lookUp.length > 0 || _vm.data.step_1.withAwtaCard === "none") && _vm.data.step_1.attendingOption === "Hybrid" ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "always"

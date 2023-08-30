@@ -250,6 +250,7 @@ class RegistrationController extends Controller
                         'country' => $details->country,
                         'category' => PaymentStatus::Free,
                         'attending_option' => AttendingOption::Hybrid,
+                        'medical_assistance_needed' => $details->specificMedicalAssistance,
                         'with_awta_card' => 'none',
                         'notes' => [],
                         'activities' => [],
