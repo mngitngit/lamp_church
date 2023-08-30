@@ -91,14 +91,12 @@
                     step_3: {}
                 },
                 isAllowing: false,
-                dialogVisible: false,
+                dialogVisible: window.env.display_disclosure_prompt === 'yes',
                 display: false
             }
         },
         created() {
             this.setTabComponents();
-
-            // this.dialogVisible = true
         },
         methods: {
             customColorMethod(percentage) {

@@ -8466,12 +8466,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         step_3: {}
       },
       isAllowing: false,
-      dialogVisible: false,
+      dialogVisible: window.env.display_disclosure_prompt === 'yes',
       display: false
     };
   },
   created: function created() {
-    this.setTabComponents(); // this.dialogVisible = true
+    this.setTabComponents();
   },
   methods: {
     customColorMethod: function customColorMethod(percentage) {
