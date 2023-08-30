@@ -25,12 +25,17 @@ class ExportRegistration implements FromCollection, WithHeadings
                 'facebook_name',
                 'registration_type',
                 'local_church',
+                'cluster_group',
                 'country',
                 'category',
                 'attending_option',
                 'with_awta_card',
+                'avail_new_lamp_id',
                 'rate',
                 'payment_status',
+                'booking_status',
+                'medical_assistance_needed',
+                'visitor_to_member'
             ))
                 ->withSum('payments', 'amount')
                 ->get()
@@ -48,16 +53,20 @@ class ExportRegistration implements FromCollection, WithHeadings
             'Facebook Name',
             'Registration Type',
             'Local Church',
+            'Cluster Group',
             'Country',
             'Category',
             'Attending Option',
             'with AWTA Card number?',
-            'Preffered Dates for',
+            'will avail new LAMP ID?',
             'Booked Dates',
+            'Booking Status',
             'Attended Dates',
             'Rate',
             'Payment Status',
-            'Total Amount Paid'
+            'Total Amount Paid',
+            'Medical Assistance Needed',
+            'Visitor to Member'
         );
     }
 }
