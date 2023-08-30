@@ -9888,10 +9888,13 @@ var render = function render() {
       shadow: "always"
     }
   }, [_c("el-form-item", {
+    staticClass: "rm-margin",
     attrs: {
-      label: "Do you need any medical assistance during the event? If YES, kindly specify below. If NO, kindly put N/A."
+      label: "Do you need any medical assistance during the event?"
     }
-  }, [_c("el-input", {
+  }, [_c("small", {
+    staticClass: "text-sm"
+  }, [_vm._v("If YES, kindly specify below. If NO, kindly put N/A.")]), _vm._v(" "), _c("el-input", {
     attrs: {
       placeholder: "Please specify...",
       clearable: true
@@ -10476,10 +10479,13 @@ var render = function render() {
       shadow: "always"
     }
   }, [_c("el-form-item", {
+    staticClass: "rm-margin",
     attrs: {
-      label: "Do you need any medical assistance during the event? If YES, kindly specify below. If NO, kindly put N/A."
+      label: "Do you need any medical assistance during the event?"
     }
-  }, [_c("el-input", {
+  }, [_c("small", {
+    staticClass: "text-sm"
+  }, [_vm._v("If YES, kindly specify below. If NO, kindly put N/A.")]), _vm._v(" "), _c("el-input", {
     attrs: {
       placeholder: "Please specify...",
       clearable: true
