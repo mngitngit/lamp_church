@@ -8649,9 +8649,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.registrations[0].attending_option === 'Online') msg += '<br /><br /><small style="line-height: 0px;">To watch the live broadcast, join our FB Group <br/><a href="https://www.facebook.com/groups/446318280091482">https://www.facebook.com/groups/446318280091482</a></small>';
       if (this.registrations[0].registration_type === 'Member') msg += '<br /><br /><small style="line-height: 0px;">Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA card, an additional Php 35.00 will be required. Kindly reach out to your local AWTA Registrars for payment and issuance.</small><br/><img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><small>Would you like to avail the new LAMP ID?</small>';
       this.$confirm(msg, 'You did it!', {
-        confirmButtonText: this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid' ? 'Yes' : 'Continue',
+        confirmButtonText: this.registrations[0].registration_type === 'Member' ? 'Yes' : 'Continue',
         cancelButtonText: 'No',
-        showCancelButton: this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid',
+        showCancelButton: this.registrations[0].registration_type === 'Member',
         type: 'success',
         showClose: false,
         closeOnPressEscape: false,
@@ -9889,7 +9889,7 @@ var render = function render() {
     }
   }, [_c("el-form-item", {
     attrs: {
-      label: "Do you require medical assistance? If no, put N/A"
+      label: "Do you need any medical assistance during the event? If YES, kindly specify below. If NO, kindly put N/A."
     }
   }, [_c("el-input", {
     attrs: {
@@ -10209,7 +10209,7 @@ var render = function render() {
       }
     }, [_c("label", {
       staticClass: "text-sm"
-    }, [_vm._v("Do you require medical assistance? If no, put N/A")]), _vm._v(" "), _c("el-input", {
+    }, [_vm._v("Do you need any medical assistance during the event? If YES, kindly specify below. If NO, kindly put N/A.")]), _vm._v(" "), _c("el-input", {
       attrs: {
         size: "mini",
         placeholder: "Please specify..."
@@ -10477,7 +10477,7 @@ var render = function render() {
     }
   }, [_c("el-form-item", {
     attrs: {
-      label: "Do you require medical assistance? If no, put N/A"
+      label: "Do you need any medical assistance during the event? If YES, kindly specify below. If NO, kindly put N/A."
     }
   }, [_c("el-input", {
     attrs: {
@@ -10684,7 +10684,7 @@ var render = function render() {
     }
   }, [_c("span", {
     staticClass: "content"
-  }, [_c("p", {
+  }, [_c("div", {
     staticClass: "m-0"
   }, [_c("el-checkbox", {
     model: {

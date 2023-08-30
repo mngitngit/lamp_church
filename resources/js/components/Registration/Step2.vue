@@ -137,7 +137,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="p-1">
-                                        <label class="text-sm">Do you require medical assistance? If no, put N/A</label>
+                                        <label class="text-sm">Do you need any medical assistance during the event? If YES, kindly specify below. If NO, kindly put N/A.</label>
                                         <el-input
                                             size="mini"
                                             placeholder="Please specify..."
@@ -241,7 +241,7 @@
                 </el-card>
 
                 <el-card v-if="((data.step_1.registrationType === 'Member' && data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0) || data.step_1.withAwtaCard === 'none') && data.step_1.attendingOption === 'Hybrid'" shadow="always" class="mb-3"> 
-                    <el-form-item label="Do you require medical assistance? If no, put N/A">
+                    <el-form-item label="Do you need any medical assistance during the event? If YES, kindly specify below. If NO, kindly put N/A.">
                         <el-input v-model="ruleForm.specificMedicalAssistance" placeholder="Please specify..." :clearable="true"></el-input>
                     </el-form-item>
                 </el-card>

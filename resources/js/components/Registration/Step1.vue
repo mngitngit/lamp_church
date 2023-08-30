@@ -90,7 +90,7 @@
             </el-card>
 
             <el-card v-if="ruleForm.registrationType === 'Member' && ruleForm.withAwtaCard === 'yes'" shadow="always" class="mb-3"> 
-                <el-form-item label="Do you require medical assistance? If no, put N/A">
+                <el-form-item label="Do you need any medical assistance during the event? If YES, kindly specify below. If NO, kindly put N/A.">
                     <el-input v-model="ruleForm.specificMedicalAssistance" placeholder="Please specify..." :clearable="true"></el-input>
                 </el-form-item>
             </el-card>

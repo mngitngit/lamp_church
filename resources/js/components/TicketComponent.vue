@@ -128,9 +128,9 @@ export default {
 
             
             this.$confirm(msg, 'You did it!', {
-                confirmButtonText: this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid' ? 'Yes' : 'Continue',
+                confirmButtonText: this.registrations[0].registration_type === 'Member' ? 'Yes' : 'Continue',
                 cancelButtonText: 'No',
-                showCancelButton: this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid',
+                showCancelButton: this.registrations[0].registration_type === 'Member',
                 type: 'success',
                 showClose: false,
                 closeOnPressEscape: false,
