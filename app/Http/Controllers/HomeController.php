@@ -23,10 +23,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $lookup = LookUp::all();
-
-        dd(json_encode($lookup));
-        $this->notify(1);
         $registration = Registration::withSum('payments', 'amount');
 
 
