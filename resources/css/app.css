@@ -194,6 +194,11 @@
 .responsive-dialog {
     width: 30%;
 }
+
+.responsive-dialog div.el-dialog__body {
+    word-break: normal !important;
+    text-align: justify !important;
+}
 /* .pagination li {
     margin-right: 10px;
     border-radius: 20px;
