@@ -229,6 +229,12 @@
                         </div>
                     </div>   
                 </el-card>
+
+                <el-card v-if="(data.step_1.registrationType === 'Member' && data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0) || data.step_1.withAwtaCard === 'none'" shadow="always" class="mb-3"> 
+                    <el-form-item label="Needs any medical assistance?">
+                        <el-input v-model="ruleForm.specificMedicalAssistance" placeholder="Please specify..." :clearable="true"></el-input>
+                    </el-form-item>
+                </el-card>
             </el-form>
         </div>
    </div>
@@ -343,6 +349,7 @@
                     selected: '',
                     clusterGroup: '',
                     canBookDays: parseInt(window.env.member_booking_limit || 0),
+                    specificMedicalAssistance: '',
                     guests: [{
                         email: '',
                         firstName: '',

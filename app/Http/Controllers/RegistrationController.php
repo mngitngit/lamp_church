@@ -121,6 +121,7 @@ class RegistrationController extends Controller
                     $attending_option = $details['attendingOption'];
                     $with_awta_card = $details['withAwtaCard'];
                     $cluster_group = $details['clusterGroup'];
+                    $assistance = $details['specificMedicalAssistance'];
                     $awta_card_number = '--';
                     break;
 
@@ -142,6 +143,7 @@ class RegistrationController extends Controller
                     $with_awta_card = $details['withAwtaCard'];
                     $cluster_group = $details['clusterGroup'];
                     $awta_card_number = $details['selected'];
+                    $assistance = $details['specificMedicalAssistance'];
                     break;
 
                 case 'yes': // Yes, and I still have it.
@@ -160,6 +162,7 @@ class RegistrationController extends Controller
                     $with_awta_card = $details['withAwtaCard'];
                     $cluster_group = $details['clusterGroup'];
                     $awta_card_number = $details['awtaCardNumber'];
+                    $assistance = $details['specificMedicalAssistance'];
                     break;
             }
 
@@ -179,6 +182,7 @@ class RegistrationController extends Controller
                 'category' => $category,
                 'attending_option' => $attending_option,
                 'with_awta_card' => $with_awta_card,
+                'medical_assistance_needed' => $assistance,
                 'notes' => [],
                 'activities' => [],
                 'booking_activities' => []
@@ -208,6 +212,7 @@ class RegistrationController extends Controller
                     'category' => $category,
                     'local_church' => $local_church,
                     'country' => $country,
+                    'can_book_days' => config('settings.member_booking_limit'),
                     'is_registered' => true
                 ]);
             }

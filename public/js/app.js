@@ -7714,6 +7714,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         clusterGroup: '',
         bookingCode: '',
         email: '',
+        specificMedicalAssistance: '',
         canBookDays: parseInt(window.env.member_booking_limit || 0),
         found: {}
       },
@@ -8139,6 +8140,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         selected: '',
         clusterGroup: '',
         canBookDays: parseInt(window.env.member_booking_limit || 0),
+        specificMedicalAssistance: '',
         guests: [{
           email: '',
           firstName: '',
@@ -8467,8 +8469,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   created: function created() {
-    this.setTabComponents();
-    this.dialogVisible = true;
+    this.setTabComponents(); // this.dialogVisible = true
   },
   methods: {
     customColorMethod: function customColorMethod(percentage) {
@@ -9879,7 +9880,28 @@ var render = function render() {
       },
       expression: "ruleForm.email"
     }
-  })], 1)], 1) : _vm._e()])]) : _vm._e()], 1)], 1)]);
+  })], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType === "Member" && _vm.ruleForm.withAwtaCard === "yes" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "always"
+    }
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Needs any medical assistance?"
+    }
+  }, [_c("el-input", {
+    attrs: {
+      placeholder: "Please specify...",
+      clearable: true
+    },
+    model: {
+      value: _vm.ruleForm.specificMedicalAssistance,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "specificMedicalAssistance", $$v);
+      },
+      expression: "ruleForm.specificMedicalAssistance"
+    }
+  })], 1)], 1) : _vm._e()], 1)], 1)]);
 };
 
 var staticRenderFns = [];
@@ -10427,7 +10449,28 @@ var render = function render() {
       },
       expression: "ruleForm.email"
     }
-  })], 1)], 1)])]) : _vm._e()], 1)], 1)]);
+  })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.data.step_1.registrationType === "Member" && _vm.data.step_1.withAwtaCard === "lost" && _vm.ruleForm.lookUp.length > 0 || _vm.data.step_1.withAwtaCard === "none" ? _c("el-card", {
+    staticClass: "mb-3",
+    attrs: {
+      shadow: "always"
+    }
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Needs any medical assistance?"
+    }
+  }, [_c("el-input", {
+    attrs: {
+      placeholder: "Please specify...",
+      clearable: true
+    },
+    model: {
+      value: _vm.ruleForm.specificMedicalAssistance,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "specificMedicalAssistance", $$v);
+      },
+      expression: "ruleForm.specificMedicalAssistance"
+    }
+  })], 1)], 1) : _vm._e()], 1)], 1)]);
 };
 
 var staticRenderFns = [];

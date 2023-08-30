@@ -88,6 +88,12 @@
                     </div>
                 </div>   
             </el-card>
+
+            <el-card v-if="ruleForm.registrationType === 'Member' && ruleForm.withAwtaCard === 'yes'" shadow="always" class="mb-3"> 
+                <el-form-item label="Needs any medical assistance?">
+                    <el-input v-model="ruleForm.specificMedicalAssistance" placeholder="Please specify..." :clearable="true"></el-input>
+                </el-form-item>
+            </el-card>
         </el-form>
     </div>
 </div>
@@ -156,6 +162,7 @@ export default {
                 clusterGroup: '',
                 bookingCode: '',
                 email: '',
+                specificMedicalAssistance: '',
                 canBookDays: parseInt(window.env.member_booking_limit || 0),
                 found: {}
             },

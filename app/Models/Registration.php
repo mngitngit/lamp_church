@@ -32,7 +32,8 @@ class Registration extends MyModel
         'notes',
         'activities',
         'booking_activities',
-        'avail_new_lamp_id'
+        'avail_new_lamp_id',
+        'medical_assistance_needed'
     ];
 
     protected $casts = [

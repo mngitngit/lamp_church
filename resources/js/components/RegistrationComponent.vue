@@ -98,7 +98,7 @@
         created() {
             this.setTabComponents();
 
-            this.dialogVisible = true
+            // this.dialogVisible = true
         },
         methods: {
             customColorMethod(percentage) {
