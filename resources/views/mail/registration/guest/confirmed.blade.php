@@ -25,6 +25,22 @@ Passcode: AWTA2023
 We will be sending a reminder before the event starts too!
 
 See you there! 
+@if ($registration->registration_type === 'Member')
+@component('mail::subcopy')
+<table>
+    <tr>
+        <td width="140">
+            <img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="https://online.lampawta.com/images/new_id.jpg">
+        </td>
+        <td style="word-break: normal !important; text-align: justify !important;">
+            <small style="line-height: 0px; word-break: normal !important; text-align: justify !important;">Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA card, an additional Php 35.00 will be required. Kindly reach out to your local AWTA Registrars for payment and issuance.</small>
+        </td>
+    </tr>
+</table>
+<br />
+<br />
+@endcomponent
+@endif
 
 Thanks,<br>
 {{ config('app.name') }}
