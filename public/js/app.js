@@ -7228,7 +7228,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           trigger: ['blur', 'change']
         }]
       },
-      countries: this.$allCountries
+      countries: this.$allCountries,
+      permissions: window.auth_user.permissions
     };
   },
   mounted: function mounted() {
@@ -9167,7 +9168,7 @@ var render = function render() {
     }
   })], 1)], 1)])]), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
-  }, [_c("el-button", {
+  }, [_vm.permissions.can_edit_lookup_data ? _c("el-button", {
     attrs: {
       type: "warning"
     },
@@ -9176,7 +9177,7 @@ var render = function render() {
         return _vm.submitForm("ruleForm");
       }
     }
-  }, [_vm._v("Update")])], 1)])], 1);
+  }, [_vm._v("Update")]) : _vm._e()], 1)])], 1);
 };
 
 var staticRenderFns = [];
@@ -9598,7 +9599,7 @@ var render = function render() {
     }
   })], 1)], 1)])]) : _vm._e(), _vm._v(" "), _c("el-row", [_c("div", {
     staticClass: "col-md-12"
-  }, [_c("el-button", {
+  }, [_vm.permissions.can_edit_delegate ? _c("el-button", {
     attrs: {
       type: "warning"
     },
@@ -9607,7 +9608,7 @@ var render = function render() {
         return _vm.submitForm("ruleForm");
       }
     }
-  }, [_vm._v("Update")])], 1)])], 1);
+  }, [_vm._v("Update")]) : _vm._e()], 1)])], 1);
 };
 
 var staticRenderFns = [];

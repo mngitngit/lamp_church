@@ -69,7 +69,7 @@
 
         <el-row>
             <div class="col-md-12">
-                <el-button type="warning" @click="submitForm('ruleForm')">Update</el-button>
+                <el-button v-if="permissions.can_edit_lookup_data" type="warning" @click="submitForm('ruleForm')">Update</el-button>
             </div>
         </el-row>
     </el-form>
@@ -121,6 +121,7 @@ export default {
                 ]
             },
             countries: this.$allCountries,
+            permissions: window.auth_user.permissions
         }
     },
     mounted() {

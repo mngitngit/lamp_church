@@ -17,15 +17,18 @@ class PermissionsTableSeeder extends Seeder
     {
         $users = User::all();
 
+        $superAdministrators = [
+            'Melanie Ngitngit',
+            'Key Sarmiento Garcia'
+        ];
+
         $administrators = [
             'Alex Cello',
             'Linda Valetin',
             'Dhazle de Vera',
             'Uzzhel Entierro',
-            'Melanie Ngitngit',
             'Ann Jose',
             'Jake Patrick Imperial',
-            'Abram Frianeza',
             'John Michael Robles',
             'Klaud-Cuasay Laureano',
             'Bryan Sta Rosa'
@@ -33,14 +36,16 @@ class PermissionsTableSeeder extends Seeder
 
         foreach ($users as $user) {
             $isAdmin = in_array($user->name, $administrators);
+            $isSuperAdmin = in_array($user->name, $superAdministrators);
 
             $user->permissions()->create([
-                'can_edit_delegate' => $isAdmin,
-                'can_delete_delegate' => $isAdmin,
-                'can_delete_payment' => $isAdmin,
-                'can_edit_delegate_config' => $isAdmin,
+                'can_edit_delegate' => $isAdmin || $isSuperAdmin,
+                'can_delete_delegate' => $isAdmin || $isSuperAdmin,
+                'can_delete_payment' => $isAdmin || $isSuperAdmin,
+                'can_edit_delegate_config' => $isAdmin || $isSuperAdmin,
                 'can_export_registrations' => true,
-                'can_view_registrations' => true
+                'can_view_registrations' => true,
+                'can_edit_lookup_data' => $isSuperAdmin
             ]);
         }
     }

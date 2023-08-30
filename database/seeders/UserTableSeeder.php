@@ -38,10 +38,10 @@ class UserTableSeeder extends Seeder
             ['name' => 'Melanie Ngitngit', 'email' => 'mela@lampawta.online', 'password' => Hash::make('admin123')],
             ['name' => 'Ann Jose', 'email' => 'ajose@lampawta.online', 'password' => Hash::make('admin123')],
             ['name' => 'Jake Patrick Imperial', 'email' => 'jimperial@lampawta.online', 'password' => Hash::make('admin123')],
-            ['name' => 'Abram Frianeza', 'email' => 'afrianeza@lampawta.online', 'password' => Hash::make('admin123')],
             ['name' => 'John Michael Robles', 'email' => 'jrobles@lampawta.online', 'password' => Hash::make('admin123')],
             ['name' => 'Bryan Sta Rosa', 'email' => 'bstarosa@lampawta.online', 'password' => Hash::make('admin123')],
             ['name' => 'Klaud-Cuasay Laureano', 'email' => 'klaureano@lampawta.online', 'password' => Hash::make('admin123')],
+            ['name' => 'Key Sarmiento Garcia', 'email' => 'keygarcia@lampawta.online', 'password' => Hash::make('admin123')],
         ]);
     }
 }

@@ -23,6 +23,7 @@ class CreatePermissionsTable extends Migration
             $table->boolean('can_view_registrations')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('can_edit_delegate_config')->default(false);
+            $table->boolean('can_edit_lookup_data')->default(false);
             $table->timestamps();
         });
     }
