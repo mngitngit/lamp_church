@@ -17,6 +17,7 @@ Vue.component('ticket-component', require('./components/TicketComponent.vue').de
 Vue.component('banner-component', require('./components/BannerComponent.vue').default);
 Vue.component('upload-component', require('./components/UploadComponent.vue').default);
 Vue.component('booking', require('./components/BookingComponent.vue').default);
+Vue.component('pagination', require('./components/Common/Pagination.vue').default);
 
 import Vue from 'vue';
 import ElementUI from 'element-ui';

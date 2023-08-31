@@ -17,10 +17,23 @@ class LookUpController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['show', 'index', 'store', 'upload', 'upload_view', 'edit']]);
+        $this->middleware('auth', ['except' => ['show', 'index', 'validation', 'store', 'upload', 'upload_view', 'edit']]);
     }
 
     public function index(Request $request)
+    {
+        $lookups = LookUp::select();
+
+        if ($request->search) {
+            $lookups
+                ->where('fullname', 'LIKE', "%$request->search%")
+                ->orWhere('lamp_card_number', 'LIKE', "%$request->search%");
+        }
+
+        return $lookups->paginate(10);
+    }
+
+    public function validation(Request $request)
     {
         $lookUp = LookUp::select();
 

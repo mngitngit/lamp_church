@@ -34,6 +34,7 @@ Route::get('/registrations/test_mail', [App\Http\Controllers\RegistrationControl
 
 // lookup
 Route::get('/lookup', [App\Http\Controllers\LookUpController::class, 'index'])->name('lookup.index');
+Route::get('/lookup/validate', [App\Http\Controllers\LookUpController::class, 'validation'])->name('lookup.validation');
 Route::get('/lookup/{id}', [App\Http\Controllers\LookUpController::class, 'show'])->name('lookup.show');
 Route::get('/lookup/{id}/edit', [App\Http\Controllers\LookUpController::class, 'edit'])->name('lookup.edit');
 Route::post('/lookup/{id}/update', [App\Http\Controllers\LookUpController::class, 'update'])->name('lookup.update');
