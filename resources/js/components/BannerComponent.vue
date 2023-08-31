@@ -2,8 +2,8 @@
     <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid rgb(60 189 181)">
         <h2>LAMP WORLDWIDE AWTA 2023</h2>
         <p class="text-sm">
-            BE BLESSED PHYSICALLY, MATERIALLY & SPIRITUALLY <br/>
-            Event Timing: DECEMBER 27-30, 2023 <br/>
+            BE BLESSED PHYSICALLY, MATERIALLY, & SPIRITUALLY <br/>
+            Event Date: DECEMBER 27-30, 2023 <br/>
             Event Place: Calamba Tent <br/>
             Theme: Year of Clustering
         </p>
