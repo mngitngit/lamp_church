@@ -16,9 +16,9 @@ Join Facebook Group
 
 You may also join us via Zoom: 
 @component('mail::panel')
-<a href="https://us02web.zoom.us/j/81746669062?pwd=MlpQbDk2R2Zjbzl3ZWdWNWdqWWYxQT09">https://us02web.zoom.us/j/81746669062?pwd=MlpQbDk2R2Zjbzl3ZWdWNWdqWWYxQT09</a>
+<a href="https://us02web.zoom.us/j/81934498358?pwd=MDhGcXpiMitiT1JYU0V2dGhWZy91dz09">https://us02web.zoom.us/j/81934498358?pwd=MDhGcXpiMitiT1JYU0V2dGhWZy91dz09</a>
 
-Meeting ID: 817 4666 9062<br />
+Meeting ID: 819 3449 8358<br />
 Passcode: AWTA2023
 @endcomponent
 
