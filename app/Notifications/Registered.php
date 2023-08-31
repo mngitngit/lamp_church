@@ -77,7 +77,7 @@ class Registered extends Notification
             ->markdown($markup, [
                 'url' => $url,
                 'name' => $this->registration->fullname,
-                'balance' => number_format($balance + 35),
+                'balance' => number_format($balance + ($this->registration->avail_new_lamp_id === 'yes' ? 35 : 0)),
                 'minimum_due' => number_format($this->registration->can_book_rate),
                 'minimum_payment_due_date' => date('M d, Y', strtotime($this->registration->created_at . ' + 7 days')),
                 'booked_dates' => implode(', ', $booked_dates),
