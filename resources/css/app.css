@@ -199,6 +199,13 @@
     word-break: normal !important;
     text-align: justify !important;
 }
+
+ul.pagination button {
+    margin-right: 8px;
+    padding: 9px 15px;
+    font-size: 12px;
+    border-radius: 3px;
+}
 /* .pagination li {
     margin-right: 10px;
     border-radius: 20px;

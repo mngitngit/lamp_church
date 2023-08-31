@@ -22,15 +22,8 @@ class LookUpController extends Controller
 
     public function index(Request $request)
     {
-        $lookups = LookUp::select();
-
-        if ($request->search) {
-            $lookups
-                ->where('fullname', 'LIKE', "%$request->search%")
-                ->orWhere('lamp_card_number', 'LIKE', "%$request->search%");
-        }
-
-        return $lookups->paginate(10);
+        return LookUp::where('fullname', 'LIKE', "%$request->search%")
+            ->orWhere('lamp_card_number', 'LIKE', "%$request->search%")->paginate(10);
     }
 
     public function validation(Request $request)

@@ -142,6 +142,9 @@
     },
     methods: {
         fetchLookUps() {
+          if (this.search != '')
+            this.tableData.current_page = 1;
+            
           axios
               .get(`/lookup`, {
                   params: {
