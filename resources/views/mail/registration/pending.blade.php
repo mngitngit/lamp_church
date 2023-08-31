@@ -11,7 +11,7 @@ Please settle your balance or atleast pay half to confirm your booking on or bef
 
 @component('mail::panel')
 <b>Balance:</b> Php {{ $balance }}<br />
-<b>Minimum Payment Due:</b>Php {{ $minimum_due }}<br />
+<b>Minimum Payment Due:</b> Php {{ $minimum_due }}<br />
 <b>Minimum Due Date:</b> {{ $minimum_payment_due_date }}<br />
 <b>Full Payment Due Date:</b> November 30, 2023<br />
 @endcomponent
