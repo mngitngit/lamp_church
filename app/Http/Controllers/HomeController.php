@@ -23,32 +23,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $registration = Registration::withSum('payments', 'amount');
-
-        if ($request->type && $request->type === 'registration') {
-            if ($request->search) {
-                $registration
-                    ->where('fullname', 'LIKE', "%$request->search%")
-                    ->orWhere('uuid', 'LIKE', "%$request->search%");
-            }
-        }
-
-        $registration = $registration->paginate(10);
-
-        $registration->map(function ($item) {
-            $booked_dates = $item->bookings()->with('slot')->get()->toArray();
-
-            $item->booked_dates = array_map(function ($date) {
-                return $date['slot']['event_date'];
-            }, $booked_dates);
-
-            $attended_dates = $item->attendances()->with('slot')->get()->toArray();
-
-            $item->attended_dates = array_map(function ($date) {
-                return $date['slot']['event_date'];
-            }, $attended_dates);
-        });
-
         $slots_members = Slots::where('registration_type', 'Member')->with('bookings')->get()->map(function ($slot) {
             $booked = $slot->bookings->groupBy('local_church')->map(function ($lc) {
                 return $lc->count();
@@ -197,26 +171,12 @@ class HomeController extends Controller
             ]
         ];
 
-        $lookups = LookUp::select();
-
-        if ($request->type && $request->type === 'lookup') {
-            if ($request->search) {
-                $lookups
-                    ->where('fullname', 'LIKE', "%$request->search%")
-                    ->orWhere('lamp_card_number', 'LIKE', "%$request->search%");
-            }
-        }
-
-        $lookups = $lookups->paginate(10);
-
         // set tab value
         $tab = 0;
         if ($request->type === 'registration') $tab = 0;
         if ($request->type === 'lookup') $tab = 1;
 
         return view('home', [
-            'registrations' => $registration,
-            'lookups' => $lookups,
             'search' => $request->search,
             'type' => $request->type,
             'slots' => [
