@@ -19,7 +19,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/registration', [App\Http\Controllers\RegistrationController::class, 'create'])->name('registration');
-Route::get('/registration/validate', [App\Http\Controllers\RegistrationController::class, 'index'])->name('registration.validate');
+Route::get('/registration/all', [App\Http\Controllers\RegistrationController::class, 'index'])->name('registration.index');
+Route::get('/registration/validate', [App\Http\Controllers\RegistrationController::class, 'validation'])->name('registration.validation');
 
 // registration
 Route::post('/registration', [App\Http\Controllers\RegistrationController::class, 'store'])->name('registration.store');

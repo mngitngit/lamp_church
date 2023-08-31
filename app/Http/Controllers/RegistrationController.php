@@ -22,10 +22,35 @@ class RegistrationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'create', 'store', 'show', 'update']]);
+        $this->middleware('auth', ['except' => ['validation', 'create', 'store', 'show', 'update']]);
     }
 
     public function index(Request $request)
+    {
+        $registration = Registration::withSum('payments', 'amount')
+            ->where('fullname', 'LIKE', "%$request->search%")
+            ->orWhere('uuid', 'LIKE', "%$request->search%");
+
+        $registration = $registration->paginate(10);
+
+        $registration->map(function ($item) {
+            $booked_dates = $item->bookings()->with('slot')->get()->toArray();
+
+            $item->booked_dates = array_map(function ($date) {
+                return $date['slot']['event_date'];
+            }, $booked_dates);
+
+            $attended_dates = $item->attendances()->with('slot')->get()->toArray();
+
+            $item->attended_dates = array_map(function ($date) {
+                return $date['slot']['event_date'];
+            }, $attended_dates);
+        });
+
+        return $registration;
+    }
+
+    public function validation(Request $request)
     {
         $isBulk = $request->isBulk === 'true';
         if ($isBulk) {

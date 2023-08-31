@@ -7159,63 +7159,94 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    registrations: {
-      required: true,
-      type: Object
-    }
-  },
   data: function data() {
     return {
-      tableData: [],
+      search: '',
+      tableData: {
+        total: 0,
+        per_page: 2,
+        from: 1,
+        to: 0,
+        current_page: 1,
+        data: []
+      },
       permissions: window.auth_user.permissions
     };
   },
   mounted: function mounted() {
-    this.tableData = this.registrations.data;
+    this.fetchRegistrations();
   },
   methods: {
-    handleClick: function handleClick(id) {
-      window.location.href = "/payments/".concat(id, "/create");
-    },
-    filterHandler: function filterHandler(value, row, column) {
-      var property = column['property'];
-      return row[property] === value;
+    fetchRegistrations: function fetchRegistrations() {
+      var _this = this;
+
+      if (this.search != '') this.tableData.current_page = 1;
+      axios.get("/registration/all", {
+        params: {
+          search: this.search,
+          page: this.tableData.current_page
+        }
+      }).then( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
+          return _regeneratorRuntime().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _this.tableData = response.data;
+
+                case 1:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }())["catch"](function (error) {
+        console.log(_this.tableData);
+
+        _this.$notify.error({
+          title: error
+        });
+      });
     },
     deleteRegistration: function deleteRegistration(uuid) {
-      var _this = this;
+      var _this2 = this;
 
       this.$confirm("Are you sure you want to delete this registration?", 'Warning', {
         customClass: 'prompt-message',
         confirmButtonText: 'Yes',
         cancelButtonText: 'Cancel',
         type: 'warning'
-      }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var loading;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                loading = _this.$loading({
+                loading = _this2.$loading({
                   lock: true,
                   text: 'Loading',
                   background: 'rgba(0, 0, 0, 0.7)'
                 });
-                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-                  return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+                  return _regeneratorRuntime().wrap(function _callee3$(_context3) {
                     while (1) {
-                      switch (_context2.prev = _context2.next) {
+                      switch (_context3.prev = _context3.next) {
                         case 0:
-                          _context2.next = 2;
+                          _context3.next = 2;
                           return axios["delete"]("/registration/".concat(uuid, "/delete")).then( /*#__PURE__*/function () {
-                            var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
-                              return _regeneratorRuntime().wrap(function _callee$(_context) {
+                            var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(response) {
+                              return _regeneratorRuntime().wrap(function _callee2$(_context2) {
                                 while (1) {
-                                  switch (_context.prev = _context.next) {
+                                  switch (_context2.prev = _context2.next) {
                                     case 0:
                                       loading.close();
 
-                                      _this.$alert('', 'Registration Successfully Deleted!', {
+                                      _this2.$alert('', 'Registration Successfully Deleted!', {
                                         confirmButtonText: 'OK',
                                         showCancelButton: false,
                                         closeOnPressEscape: false,
@@ -7230,31 +7261,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                                     case 2:
                                     case "end":
-                                      return _context.stop();
+                                      return _context2.stop();
                                   }
                                 }
-                              }, _callee);
+                              }, _callee2);
                             }));
 
-                            return function (_x) {
-                              return _ref3.apply(this, arguments);
+                            return function (_x2) {
+                              return _ref4.apply(this, arguments);
                             };
                           }());
 
                         case 2:
                         case "end":
-                          return _context2.stop();
+                          return _context3.stop();
                       }
                     }
-                  }, _callee2);
+                  }, _callee3);
                 })), 1000);
 
               case 2:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       })));
     },
     transformDates: function transformDates(dates) {
@@ -7932,13 +7963,81 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("el-table", {
+  return _c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-5 mb-3 p-0"
+  }, [_c("div", {
+    staticClass: "input-with-select el-input el-input-group el-input-group--append"
+  }, [_c("input", {
+    attrs: {
+      type: "hidden",
+      name: "type",
+      value: "lookup"
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.search,
+      expression: "search"
+    }],
+    staticClass: "el-input__inner",
+    attrs: {
+      type: "text",
+      autocomplete: "off",
+      placeholder: "Search by Name or ID",
+      name: "search"
+    },
+    domProps: {
+      value: _vm.search
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.search = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "el-input-group__append"
+  }, [_c("button", {
+    staticClass: "el-button el-button--submit",
+    attrs: {
+      type: "submit",
+      value: "Submit"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.fetchRegistrations();
+      }
+    }
+  }, [_c("i", {
+    staticClass: "el-icon-search"
+  })])])])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-7 mb-3"
+  }, [_c("a", {
+    attrs: {
+      href: "/registrations/export"
+    }
+  }, [_c("el-button", {
+    staticClass: "float-end",
+    attrs: {
+      type: "success"
+    }
+  }, [_vm._v("Export to Excel "), _c("i", {
+    staticClass: "el-icon-download el-icon-right"
+  })])], 1)])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-24"
+  }, [_c("el-table", {
     ref: "filterTable",
+    staticClass: "mb-3",
     staticStyle: {
       width: "100%"
     },
     attrs: {
-      data: _vm.tableData,
+      data: _vm.tableData.data,
       border: ""
     }
   }, [_c("el-table-column", {
@@ -7952,7 +8051,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_vm._v("\n        " + _vm._s(scope.$index + _vm.registrations.from) + "\n    ")];
+        return [_vm._v("\n            " + _vm._s(scope.$index + _vm.tableData.from) + "\n        ")];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {
@@ -7974,7 +8073,7 @@ var render = function render() {
           slot: "label"
         }, [_c("i", {
           staticClass: "el-icon-user"
-        }), _vm._v("\n            Generated ID\n          ")]), _vm._v("\n          " + _vm._s(scope.row.uuid) + "\n        ")], 2), _vm._v(" "), _c("el-descriptions-item", {
+        }), _vm._v("\n                Generated ID\n              ")]), _vm._v("\n              " + _vm._s(scope.row.uuid) + "\n            ")], 2), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
             label: "Complete Name"
           }
@@ -8144,7 +8243,18 @@ var render = function render() {
         }, [_vm._v("Delete")]) : _vm._e()];
       }
     }])
-  })], 1);
+  })], 1), _vm._v(" "), _vm.tableData.data.length > 0 ? _c("pagination", {
+    staticClass: "m-0",
+    attrs: {
+      pagination: _vm.tableData,
+      offset: 4
+    },
+    on: {
+      paginate: function paginate($event) {
+        return _vm.fetchRegistrations();
+      }
+    }
+  }) : _vm._e()], 1)]);
 };
 
 var staticRenderFns = [];
