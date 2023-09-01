@@ -7349,7 +7349,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                               return function (_x2) {
                                 return _ref3.apply(this, arguments);
                               };
-                            }());
+                            }())["catch"](function (error) {
+                              loading.close();
+
+                              _this.$message.error(error.response.data.error);
+                            });
 
                           case 2:
                           case "end":
@@ -9498,7 +9502,7 @@ var render = function render() {
       },
       expression: "ruleForm.canBookDays"
     }
-  })], 1)], 1)])]), _vm._v(" "), _c("el-row", [_c("div", {
+  })], 1)], 1)])]), _vm._v(" "), _vm.permissions.can_add_lookup_data ? _c("el-row", [_c("div", {
     staticClass: "col-md-12"
   }, [_c("el-button", {
     attrs: {
@@ -9509,7 +9513,7 @@ var render = function render() {
         return _vm.submitForm("ruleForm");
       }
     }
-  }, [_vm._v("Save")])], 1)])], 1);
+  }, [_vm._v("Save")])], 1)]) : _vm._e()], 1);
 };
 
 var staticRenderFns = [];

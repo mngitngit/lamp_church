@@ -170,6 +170,18 @@ class LookUpController extends Controller
      */
     public function store(Request $request)
     {
+        $lookUp = LookUp::where('lamp_card_number', $request->awtaCardNumber)->first();
+
+        if ($lookUp) {
+            return response()->json(['error' => 'AWTA Card number already exists.'], 422);
+        }
+
+        $lookUp = LookUp::where('fullname', $request->firstName . ' ' . $request->lastName)->first();
+
+        if ($lookUp) {
+            return response()->json(['error' => 'Data already exists.'], 422);
+        }
+
         $lookUp = LookUp::create([
             'lamp_card_number' => $request->awtaCardNumber,
             'email' => $request->email,

@@ -152,6 +152,11 @@ export default {
                                     window.location.reload();
                                 }
                             });
+                        })
+                        .catch((error) => {
+                            loading.close()
+
+                            this.$message.error(error.response.data.error);
                         });
                     }, 1000);
                 } else {
