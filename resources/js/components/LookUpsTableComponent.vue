@@ -13,7 +13,8 @@
           </div>
         </div>
         <div class="col-md-7 mb-3 p-0">
-            <el-button type="success" class="float-end" @click="dialogVisible = true">Upload Excel&nbsp;<i class="el-icon-upload el-icon-right"></i></el-button>
+            <el-button v-if="permissions.can_add_lookup_data" type="success" class="float-end" @click="dialogVisible = true">Upload Excel&nbsp;<i class="el-icon-upload el-icon-right"></i></el-button>
+            <a v-if="permissions.can_add_lookup_data" href="/lookup/create"><el-button type="info" class="float-end mx-3">Create New</el-button></a>
         </div>
     </div>
     <div class="col-md-24">
@@ -94,7 +95,7 @@
           align="center"
           width="120">
           <template slot-scope="scope">
-            <a :href="`/lookup/${scope.row.lamp_card_number}/edit`"><el-button type="text" size="small">Edit Details</el-button></a>
+            <a :href="`/lookup/${scope.row.lamp_card_number}/edit`"><el-button type="text" size="small">View Details</el-button></a>
           </template>
         </el-table-column>
       </el-table>

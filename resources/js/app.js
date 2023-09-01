@@ -12,6 +12,7 @@ window.Vue = require('vue').default;
 Vue.component('registration-component', require('./components/RegistrationComponent.vue').default);
 Vue.component('edit-registration-component', require('./components/EditRegistrationComponent.vue').default);
 Vue.component('edit-lookup-component', require('./components/EditLookupComponent.vue').default);
+Vue.component('create-lookup-component', require('./components/CreateLookupComponent.vue').default);
 Vue.component('barcode-component', require('./components/BarcodeComponent.vue').default);
 Vue.component('ticket-component', require('./components/TicketComponent.vue').default);
 Vue.component('banner-component', require('./components/BannerComponent.vue').default);

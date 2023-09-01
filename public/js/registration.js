@@ -7774,7 +7774,7 @@ var render = function render() {
     staticClass: "el-icon-search"
   })])])])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-7 mb-3 p-0"
-  }, [_c("el-button", {
+  }, [_vm.permissions.can_add_lookup_data ? _c("el-button", {
     staticClass: "float-end",
     attrs: {
       type: "success"
@@ -7786,7 +7786,16 @@ var render = function render() {
     }
   }, [_vm._v("Upload Excel "), _c("i", {
     staticClass: "el-icon-upload el-icon-right"
-  })])], 1)]), _vm._v(" "), _c("div", {
+  })]) : _vm._e(), _vm._v(" "), _vm.permissions.can_add_lookup_data ? _c("a", {
+    attrs: {
+      href: "/lookup/create"
+    }
+  }, [_c("el-button", {
+    staticClass: "float-end mx-3",
+    attrs: {
+      type: "info"
+    }
+  }, [_vm._v("Create New")])], 1) : _vm._e()], 1)]), _vm._v(" "), _c("div", {
     staticClass: "col-md-24"
   }, [_c("el-table", {
     ref: "filterTable",
@@ -7913,7 +7922,7 @@ var render = function render() {
             type: "text",
             size: "small"
           }
-        }, [_vm._v("Edit Details")])], 1)];
+        }, [_vm._v("View Details")])], 1)];
       }
     }])
   })], 1), _vm._v(" "), _vm.tableData.data.length > 0 ? _c("pagination", {

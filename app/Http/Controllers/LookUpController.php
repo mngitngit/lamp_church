@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\RegistrationType;
 use App\Imports\LookUpImport;
 use App\Models\LookUp;
 use App\Models\Registration;
@@ -20,12 +21,26 @@ class LookUpController extends Controller
         $this->middleware('auth', ['except' => ['show', 'index', 'validation', 'store', 'upload', 'upload_view', 'edit']]);
     }
 
+    /**
+     * Return all lookup data
+     *
+     * @param  String $awtaNumber
+     * @return \App\Models\LookUp
+     */
     public function index(Request $request)
     {
         return LookUp::where('fullname', 'LIKE', "%$request->search%")
-            ->orWhere('lamp_card_number', 'LIKE', "%$request->search%")->paginate(10);
+            ->orWhere('lamp_card_number', 'LIKE', "%$request->search%")
+            ->paginate(10);
     }
 
+    /**
+     * Checking if record exists in the lookup data
+     * Checking by Last Name & Local Church
+     *
+     * @param  Request $request
+     * @return \App\Models\LookUp
+     */
     public function validation(Request $request)
     {
         $lookUp = LookUp::select();
@@ -69,6 +84,12 @@ class LookUpController extends Controller
         return $lookUp;
     }
 
+    /**
+     * Bulk upload via excel
+     *
+     * @param  Request $request
+     * @return String
+     */
     public function upload(Request $request)
     {
         request()->validate([
@@ -76,14 +97,25 @@ class LookUpController extends Controller
         ]);
 
         FacadesExcel::import(new LookUpImport, $request->file('lookup'));
+
         return back()->with('massage', 'User Imported Successfully');
     }
 
+    /**
+     * Upload via excel view
+     *
+     * @return View
+     */
     public function upload_view()
     {
-        return view('lookup.create');
+        return view('lookup.upload');
     }
 
+    /**
+     * Edit lookup data view
+     *
+     * @return View
+     */
     public function edit($awtaNumber)
     {
         return view('lookup.edit', [
@@ -91,6 +123,13 @@ class LookUpController extends Controller
         ]);
     }
 
+    /**
+     * Update lookup data
+     *
+     * @param  String $awtaNumber
+     * @param  Request $request
+     * @return View
+     */
     public function update($awtaNumber, Request $request)
     {
         $lookup = LookUp::where('lamp_card_number', $awtaNumber)->first();
@@ -109,6 +148,44 @@ class LookUpController extends Controller
 
         return view('lookup.edit', [
             'lookup' => $lookup
+        ]);
+    }
+
+    /**
+     * Create lookup view
+     *
+     * @return View
+     */
+    public function create()
+    {
+        return view('lookup.create');
+    }
+
+    /**
+     * Store lookup data
+     *
+     * @param  String $awtaNumber
+     * @param  Request $request
+     * @return View
+     */
+    public function store(Request $request)
+    {
+        $lookUp = LookUp::create([
+            'lamp_card_number' => $request->awtaCardNumber,
+            'email' => $request->email,
+            'firstname' => $request->firstName,
+            'lastname' => $request->lastName,
+            'fullname' => $request->firstName . ' ' . $request->lastName,
+            'facebook_name' => $request->facebookName,
+            'registration_type' => RegistrationType::Member,
+            'local_church' => $request->localChurch,
+            'country' => $request->country,
+            'category' => $request->category,
+            'can_book_days' => $request->canBookDays,
+        ]);
+
+        return view('lookup.create', [
+            'lookup' => $lookUp
         ]);
     }
 }
