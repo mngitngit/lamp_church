@@ -136,6 +136,7 @@ return [
             "label" =>  "Online/Physical",
             "options" => [
                 "Centro Cluster",
+                "Baligatan Cluster",
                 "Alibagu Cluster",
                 "Tangcul Cluster",
                 "Cauayan Cluster"
