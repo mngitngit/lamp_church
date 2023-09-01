@@ -147,6 +147,7 @@ class RegistrationController extends Controller
                     $with_awta_card = $details['withAwtaCard'];
                     $cluster_group = $details['clusterGroup'];
                     $assistance = $details['specificMedicalAssistance'];
+                    $can_book_days = config('settings.member_booking_limit');
                     $awta_card_number = '--';
                     break;
 
@@ -169,6 +170,7 @@ class RegistrationController extends Controller
                     $cluster_group = $details['clusterGroup'];
                     $awta_card_number = $details['selected'];
                     $assistance = $details['specificMedicalAssistance'];
+                    $can_book_days = $lookup['can_book_days'];
                     break;
 
                 case 'yes': // Yes, and I still have it.
@@ -188,6 +190,7 @@ class RegistrationController extends Controller
                     $cluster_group = $details['clusterGroup'];
                     $awta_card_number = $details['awtaCardNumber'];
                     $assistance = $details['specificMedicalAssistance'];
+                    $can_book_days = $details['found']['canBookDays'];
                     break;
             }
 
@@ -208,6 +211,7 @@ class RegistrationController extends Controller
                 'attending_option' => $attending_option,
                 'with_awta_card' => $with_awta_card,
                 'medical_assistance_needed' => $assistance,
+                'can_book_days' => $can_book_days,
                 'notes' => [],
                 'activities' => [],
                 'booking_activities' => []
