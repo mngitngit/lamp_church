@@ -220,3 +220,7 @@ ul.pagination button {
 .pagination li a {
     border-radius: 4px;
 } */
+
+.hidden {
+    display: hidden !important;
+}

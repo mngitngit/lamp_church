@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "element-ui": "^2.15.9",
+        "html2canvas": "^1.4.1",
         "vue-qrcode-component": "^2.1.1"
     }
 }

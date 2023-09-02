@@ -1,9 +1,11 @@
 <template>
     <div class="row justify-content-center my-4">
         <div v-bind:class="{'col-lg-12 mb-4' : isRebooking, 'col-md-6 col-lg-4 mb-4' : !isRebooking}" v-for="(registration, i) in registrations" :key="i">
-            <el-card class="box-card ticket-header">
+            <el-card id="capture" class="box-card ticket-header">
                 <div slot="header" class="clearfix">
                     <span>LAMP WORLDWIDE AWTA 2023</span>
+
+                    <el-button icon="el-icon-download" class="float-end p-1 mx-0" type="primary" plain @click.preventDefault="printThis" />
                 </div>
                 <div>
                     <div class="row">
@@ -81,6 +83,8 @@
 </template>
 
 <script>
+import html2canvas from 'html2canvas';
+
 export default {
     props: {
         registrations: {
@@ -149,7 +153,25 @@ export default {
                     avail_new_lamp_id: 'no'
                 })
             })
+        },
+        async printThis() {
+            const options = {
+                type: "dataURL"
+            };
+
+            const printCanvas = await html2canvas(document.querySelector("#capture"), options);
+
+            const link = document.createElement("a");
+            link.setAttribute("download", "download.png");
+            link.setAttribute(
+                "href",
+                printCanvas
+                .toDataURL("image/png")
+                .replace("image/png", "image/octet-stream")
+            );
+
+            link.click();
         }
-    }   
+    },   
 }
 </script>
