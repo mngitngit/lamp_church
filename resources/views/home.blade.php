@@ -13,7 +13,7 @@
         </el-tab-pane>
 
         {{-- Look Up --}}
-        <el-tab-pane label="Look Ups">
+        <el-tab-pane label="Look Up">
             <lookups-table />
         </el-tab-pane>
 
