@@ -7309,17 +7309,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resendMail: function resendMail(id) {
       var _this3 = this;
 
+      var loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
       axios.get("/registration/".concat(id, "/resend-mail")).then( /*#__PURE__*/function () {
         var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(response) {
           return _regeneratorRuntime().wrap(function _callee5$(_context5) {
             while (1) {
               switch (_context5.prev = _context5.next) {
                 case 0:
+                  loading.close();
+
                   _this3.$notify.success({
                     title: 'Email successfully resent.'
                   });
 
-                case 1:
+                case 2:
                 case "end":
                   return _context5.stop();
               }

@@ -228,12 +228,20 @@
         return html;
       },
       resendMail(id) {
+        const loading = this.$loading({
+            lock: true,
+            text: 'Loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+        });
+
         axios
             .get(`/registration/${id}/resend-mail`)
             .then(async response => {
+              loading.close()
+
               this.$notify.success({
-                    title: 'Email successfully resent.'
-                });
+                title: 'Email resent successfully.'
+              });
             })
       }
     }
