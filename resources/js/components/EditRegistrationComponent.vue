@@ -2,28 +2,30 @@
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
         <el-card shadow="hover" class="mb-4">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <el-form-item label="Email Address" prop="email">
                         <el-input v-model="ruleForm.email"></el-input>
                     </el-form-item>
                 </div>
-                <div class="col-md-6">
+            </div>
+            <div class="row">
+                <div class="col-md-3">
                     <el-form-item class="check-name" label="First Name" prop="firstName" required>
                         <el-input v-model="ruleForm.firstName"></el-input>
                     </el-form-item>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <el-form-item class="check-name" label="Last Name" prop="lastName" required>
                         <el-input v-model="ruleForm.lastName"></el-input>
                     </el-form-item>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <el-form-item label="Facebook Name" prop="facebookName">
                         <el-input v-model="ruleForm.facebookName" placeholder="If none, kindly type in the Facebook name of your event companion"></el-input>
                     </el-form-item>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <el-form-item label="Local Church" prop="localChurch" required>
                         <el-select v-model="ruleForm.localChurch" placeholder="Choose">
                             <el-option label="Binan" value="Binan"></el-option>
@@ -38,14 +40,14 @@
                         </el-select>
                     </el-form-item>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <el-form-item label="Country" prop="country" required>
                         <el-select v-model="ruleForm.country" placeholder="Choose">
                             <el-option v-for="country in countries" v-bind:key="country" :label="country" :value="country"></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <el-form-item label="Rate Category" prop="category" required>
                         <el-select v-model="ruleForm.category" placeholder="Choose">
                             <el-option label="Adult" value="Adult"></el-option>
@@ -59,7 +61,7 @@
 
         <el-card shadow="hover" class="mb-3">
             <div class="row">
-                <div v-if="ruleForm.registrationType === 'Member'" class="col-md-6">
+                <div v-if="ruleForm.registrationType === 'Member'" class="col-md-3">
                     <el-form-item label="Do you have an awta card?" prop="withAwtaCard" required>
                         <el-select v-model="ruleForm.withAwtaCard" placeholder="Choose">
                             <el-option label="None, I’m a new member." value="none"></el-option>
@@ -69,7 +71,7 @@
                     </el-form-item>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType === 'Member'">
                         <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
                             <el-option value="Hybrid" label="Hybrid"></el-option>
@@ -108,7 +110,7 @@
         </el-card>
 
         <el-card class="mb-3">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <el-form-item label="Will avail new LAMP ID?" required>
                     <el-select v-model="ruleForm.availNewLAMPID" placeholder="Choose">
                         <el-option value="yes" label="yes"></el-option>
