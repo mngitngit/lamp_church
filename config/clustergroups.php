@@ -35,7 +35,7 @@ return [
                 "Batangas Cluster",
                 "Biñan Cluster",
                 "Carmona Cluster",
-                "Dasmariñas Cluster",
+                "Dasmarinas Cluster",
                 "Estrella Cluster",
                 "Langgam Cluster",
                 "Mindanao Cluster",
@@ -80,7 +80,7 @@ return [
             ]
         ]
     ],
-    "Dasmariñas" => [
+    "Dasmarinas" => [
         [
             "label" => "Online",
             "options" => [
