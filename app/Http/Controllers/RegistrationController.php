@@ -418,6 +418,12 @@ class RegistrationController extends Controller
 
     public function resend_mail($id)
     {
+        $registration = Registration::find($id);
+
+        $registration->updateActivities($registration->uuid, $registration->activities, array(
+            'resent email notification'
+        ));
+
         $this->notify($id);
     }
 }
