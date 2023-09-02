@@ -162,7 +162,7 @@ export default {
             const printCanvas = await html2canvas(document.querySelector("#capture"), options);
 
             const link = document.createElement("a");
-            link.setAttribute("download", "download.png");
+            link.setAttribute("download", "awta-ticket.png");
             link.setAttribute(
                 "href",
                 printCanvas

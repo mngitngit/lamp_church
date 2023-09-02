@@ -7416,7 +7416,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 printCanvas = _context3.sent;
                 link = document.createElement("a");
-                link.setAttribute("download", "download.png");
+                link.setAttribute("download", "awta-ticket.png");
                 link.setAttribute("href", printCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
                 link.click();
 

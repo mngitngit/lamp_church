@@ -15,6 +15,8 @@
  Vue.component('attendance-table', require('./components/AttendanceTableComponent.vue').default);
  Vue.component('upload-component', require('./components/UploadComponent.vue').default);
  Vue.component('pagination', require('./components/Common/Pagination.vue').default);
+ Vue.component('ticket-component', require('./components/TicketComponent.vue').default);
+
  
  import Vue from 'vue';
  import ElementUI from 'element-ui';

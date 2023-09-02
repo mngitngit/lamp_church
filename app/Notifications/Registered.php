@@ -45,7 +45,7 @@ class Registered extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/booking/' . $this->registration->uuid);
+        $url = url('/ticket/' . $this->registration->uuid);
 
         if ($this->registration->booking_status === BookingStatus::Pending) {
             $markup = 'mail.registration.pending';

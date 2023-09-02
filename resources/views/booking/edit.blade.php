@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <el-breadcrumb class="mb-4 mx-2" separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item><a href="/home">All Registrations</a></el-breadcrumb-item>
                 <el-breadcrumb-item>View Details</el-breadcrumb-item>
@@ -24,11 +24,14 @@
                                 <div id="tab-1" aria-controls="pane-1" role="tab" tabindex="-1" class="el-tabs__item is-top">
                                     <el-link :underline="false" href="/payments/{{ $registration->uuid }}/create">Payments</el-link>
                                 </div>
-                                @if (auth()->user()->permissions->can_edit_delegate === 1)
-                                <div id="tab-2" aria-controls="pane-2" role="tab" tabindex="-1" class="el-tabs__item is-top">
+                                @if (auth()->user()->permissions->can_edit_delegate === 1 && $registration->attending_option === 'Hybrid')
+                                <div id="tab-2" aria-controls="pane-2" role="tab" tabindex="-1" class="el-tabs__item is-top is-active">
                                     <el-link :underline="false" href="/booking/{{ $registration->uuid }}/edit">Booking</el-link>
                                 </div>
                                 @endif
+                                <div id="tab-3" aria-controls="pane-3" role="tab" tabindex="-1" class="el-tabs__item is-top">
+                                    <el-link :underline="false" href="/ticket/{{ $registration->id }}/edit">Ticket</el-link>
+                                </div>
                             </div>
                         </div>
                     </div>
