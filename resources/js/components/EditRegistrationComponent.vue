@@ -107,6 +107,17 @@
             </div>
         </el-card>
 
+        <el-card class="mb-3">
+            <div class="col-md-4">
+                <el-form-item label="Will avail new LAMP ID?" required>
+                    <el-select v-model="ruleForm.availNewLAMPID" placeholder="Choose">
+                        <el-option value="yes" label="yes"></el-option>
+                        <el-option value="no" label="no"></el-option>
+                    </el-select>
+                </el-form-item>
+            </div>
+        </el-card>
+
         <el-card v-if="ruleForm.registrationType == 'Guest' && permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
             <div class="row">
                 <div class="col-md-12">
@@ -189,7 +200,8 @@ export default {
                 canBook: false,
                 bookingRate: 0,
                 rate: 0,
-                visitorToMember: ''
+                visitorToMember: '',
+                availNewLAMPID: ''
             },
             rules: {
                 firstName: [
@@ -210,6 +222,9 @@ export default {
                 attendingOption: [
                     { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
                 ],
+                availNewLAMPID: [
+                    { required: true, message: 'Please select if will avail new LAMP ID', trigger: ['blur', 'change']},
+                ],
                 rate: [
                     { required: true, message: 'Please input rate', trigger: ['blur', 'change']},
                 ]
@@ -227,23 +242,24 @@ export default {
     },
     mounted() {
         this.ruleForm = {
-                email: this.registration.email,
-                firstName: this.registration.firstname,
-                lastName: this.registration.lastname,
-                facebookName: this.registration.facebook_name,
-                registrationType: this.registration.registration_type,
-                localChurch: this.registration.local_church,
-                country: this.registration.country,
-                category: this.registration.category,
-                attendingOption: this.registration.attending_option,
-                withAwtaCard: this.registration.with_awta_card,
-                category: this.registration.category,
-                canBookDays: this.registration.can_book_days,
-                rebookingLimit: this.registration.rebooking_limit,
-                bookingRate: this.registration.can_book_rate,
-                rate: this.registration.rate,
-                visitorToMember: this.registration.visitor_to_member
-            }
+            email: this.registration.email,
+            firstName: this.registration.firstname,
+            lastName: this.registration.lastname,
+            facebookName: this.registration.facebook_name,
+            registrationType: this.registration.registration_type,
+            localChurch: this.registration.local_church,
+            country: this.registration.country,
+            category: this.registration.category,
+            attendingOption: this.registration.attending_option,
+            withAwtaCard: this.registration.with_awta_card,
+            category: this.registration.category,
+            canBookDays: this.registration.can_book_days,
+            rebookingLimit: this.registration.rebooking_limit,
+            bookingRate: this.registration.can_book_rate,
+            rate: this.registration.rate,
+            visitorToMember: this.registration.visitor_to_member,
+            availNewLAMPID: this.registration.avail_new_lamp_id
+        }
     },
     methods: {
         submitForm(formName) {

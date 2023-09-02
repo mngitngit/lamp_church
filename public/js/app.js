@@ -7644,7 +7644,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         withAwtaCard: '',
         canBookDays: 0,
         rebookingLimit: 0
-      }, _defineProperty(_ruleForm, "category", ''), _defineProperty(_ruleForm, "canBook", false), _defineProperty(_ruleForm, "bookingRate", 0), _defineProperty(_ruleForm, "rate", 0), _defineProperty(_ruleForm, "visitorToMember", ''), _ruleForm),
+      }, _defineProperty(_ruleForm, "category", ''), _defineProperty(_ruleForm, "canBook", false), _defineProperty(_ruleForm, "bookingRate", 0), _defineProperty(_ruleForm, "rate", 0), _defineProperty(_ruleForm, "visitorToMember", ''), _defineProperty(_ruleForm, "availNewLAMPID", ''), _ruleForm),
       rules: {
         firstName: [{
           required: true,
@@ -7674,6 +7674,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         attendingOption: [{
           required: true,
           message: 'Please select your attending option',
+          trigger: ['blur', 'change']
+        }],
+        availNewLAMPID: [{
+          required: true,
+          message: 'Please select if will avail new LAMP ID',
           trigger: ['blur', 'change']
         }],
         rate: [{
@@ -7707,7 +7712,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       category: this.registration.category,
       attendingOption: this.registration.attending_option,
       withAwtaCard: this.registration.with_awta_card
-    }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBookDays", this.registration.can_book_days), _defineProperty(_this$ruleForm, "rebookingLimit", this.registration.rebooking_limit), _defineProperty(_this$ruleForm, "bookingRate", this.registration.can_book_rate), _defineProperty(_this$ruleForm, "rate", this.registration.rate), _defineProperty(_this$ruleForm, "visitorToMember", this.registration.visitor_to_member), _this$ruleForm);
+    }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBookDays", this.registration.can_book_days), _defineProperty(_this$ruleForm, "rebookingLimit", this.registration.rebooking_limit), _defineProperty(_this$ruleForm, "bookingRate", this.registration.can_book_rate), _defineProperty(_this$ruleForm, "rate", this.registration.rate), _defineProperty(_this$ruleForm, "visitorToMember", this.registration.visitor_to_member), _defineProperty(_this$ruleForm, "availNewLAMPID", this.registration.avail_new_lamp_id), _this$ruleForm);
   },
   methods: {
     submitForm: function submitForm(formName) {
@@ -10153,7 +10158,37 @@ var render = function render() {
       },
       expression: "ruleForm.rate"
     }
-  })], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType == "Guest" && _vm.permissions.can_edit_delegate_config ? _c("el-card", {
+  })], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _c("el-card", {
+    staticClass: "mb-3"
+  }, [_c("div", {
+    staticClass: "col-md-4"
+  }, [_c("el-form-item", {
+    attrs: {
+      label: "Will avail new LAMP ID?",
+      required: ""
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.availNewLAMPID,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "availNewLAMPID", $$v);
+      },
+      expression: "ruleForm.availNewLAMPID"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      value: "yes",
+      label: "yes"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "no",
+      label: "no"
+    }
+  })], 1)], 1)], 1)]), _vm._v(" "), _vm.ruleForm.registrationType == "Guest" && _vm.permissions.can_edit_delegate_config ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "hover"

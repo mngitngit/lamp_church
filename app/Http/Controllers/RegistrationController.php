@@ -374,7 +374,8 @@ class RegistrationController extends Controller
                 'can_book_days' => $request->canBookDays,
                 'rate' => $request->rate,
                 'rebooking_limit' => $request->rebookingLimit,
-                'visitor_to_member' => $request->visitorToMember ? date('Y-m-d', strtotime($request->visitorToMember)) : NULL
+                'visitor_to_member' => $request->visitorToMember ? date('Y-m-d', strtotime($request->visitorToMember)) : NULL,
+                'avail_new_lamp_id' => $request->availNewLAMPID
             ]);
         }
 

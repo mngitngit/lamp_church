@@ -7323,7 +7323,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   loading.close();
 
                   _this3.$notify.success({
-                    title: 'Email successfully resent.'
+                    title: 'Email resent successfully.'
                   });
 
                 case 2:
