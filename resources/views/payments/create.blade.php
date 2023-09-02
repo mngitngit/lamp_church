@@ -24,9 +24,11 @@
                                 <div id="tab-1" aria-controls="pane-1" role="tab" tabindex="-1" class="el-tabs__item is-top is-active" aria-selected="true">
                                     <el-link :underline="false" href="/payments/{{ $registration->uuid }}/create">Payments</el-link>
                                 </div>
+                                @if (auth()->user()->permissions->can_edit_delegate === 1)
                                 <div id="tab-2" aria-controls="pane-2" role="tab" tabindex="-1" class="el-tabs__item is-top">
                                     <el-link :underline="false" href="/booking/{{ $registration->uuid }}/edit">Booking</el-link>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
