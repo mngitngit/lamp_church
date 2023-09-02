@@ -416,14 +416,8 @@ class RegistrationController extends Controller
         return Registration::where('uuid', $uuid)->first()->delete();
     }
 
-    public function test_mail()
+    public function resend_mail($id)
     {
-        $registration = Registration::with('bookings', 'bookings.slot')->withSum('payments', 'amount')->find(24);
-
-        FacadesNotification::route('mail', [
-            $registration->email => $registration->fullname,
-        ])->notify(new Registered($registration));
-
-        dd($registration);
+        $this->notify($id);
     }
 }

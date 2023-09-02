@@ -7305,6 +7305,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         html += element;
       });
       return html;
+    },
+    resendMail: function resendMail(id) {
+      var _this3 = this;
+
+      axios.get("/registration/".concat(id, "/resend-mail")).then( /*#__PURE__*/function () {
+        var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(response) {
+          return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+            while (1) {
+              switch (_context5.prev = _context5.next) {
+                case 0:
+                  _this3.$notify.success({
+                    title: 'Email successfully resent.'
+                  });
+
+                case 1:
+                case "end":
+                  return _context5.stop();
+              }
+            }
+          }, _callee5);
+        }));
+
+        return function (_x3) {
+          return _ref5.apply(this, arguments);
+        };
+      }());
     }
   }
 });
@@ -8230,7 +8256,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_vm.permissions.can_edit_delegate ? _c("a", {
+        return [_c("a", {
           attrs: {
             href: "/registration/".concat(scope.row.uuid, "/edit")
           }
@@ -8239,7 +8265,17 @@ var render = function render() {
             type: "text",
             size: "small"
           }
-        }, [_vm._v("View Details")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_delete_delegate ? _c("el-button", {
+        }, [_vm._v("View Details")])], 1), _vm._v(" "), scope.row.email ? _c("el-button", {
+          attrs: {
+            type: "text",
+            size: "small"
+          },
+          on: {
+            click: function click($event) {
+              return _vm.resendMail(scope.row.id);
+            }
+          }
+        }, [_vm._v("Resend Mail")]) : _vm._e(), _vm._v(" "), _vm.permissions.can_delete_delegate ? _c("el-button", {
           attrs: {
             type: "text",
             size: "small"

@@ -28,6 +28,7 @@ Route::get('/registration/ticket', [App\Http\Controllers\RegistrationController:
 Route::get('/registration/{id}/edit', [App\Http\Controllers\RegistrationController::class, 'edit'])->name('registration.edit');
 Route::post('/registration/{id}/update', [App\Http\Controllers\RegistrationController::class, 'update'])->name('registration.update');
 Route::delete('/registration/{id}/delete', [App\Http\Controllers\RegistrationController::class, 'destroy'])->name('registration.delete');
+Route::get('/registration/{id}/resend-mail', [App\Http\Controllers\RegistrationController::class, 'resend_mail'])->name('registration.resend_mail');
 
 // export
 Route::get('/registrations/export', [App\Http\Controllers\RegistrationController::class, 'export'])->name('registration.export');
