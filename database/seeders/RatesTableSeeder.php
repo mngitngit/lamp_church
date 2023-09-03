@@ -28,7 +28,7 @@ class RatesTableSeeder extends Seeder
                 'attending_option' => AttendingOption::Online,
                 'description' => 'Member (Online)',
                 'rate' => 100,
-                'can_book_rate' => 0
+                'can_book_rate' => 100
             ], [
                 'category' => 'Kids',
                 'attending_option' => AttendingOption::Hybrid,
@@ -40,7 +40,7 @@ class RatesTableSeeder extends Seeder
                 'attending_option' => AttendingOption::Online,
                 'description' => 'Member age 5 - 8 yrs old (Online)',
                 'rate' => 50,
-                'can_book_rate' => 0
+                'can_book_rate' => 50
             ], [
                 'category' => PaymentStatus::Free,
                 'attending_option' => AttendingOption::Hybrid,
