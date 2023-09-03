@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <el-breadcrumb class="mb-4 mx-2" separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item><a href="/home">All Registrations</a></el-breadcrumb-item>
-                <el-breadcrumb-item>View Details</el-breadcrumb-item>
+                <el-breadcrumb-item class="text-highlight">View Details</el-breadcrumb-item>
             </el-breadcrumb>
 
             <div class="el-tabs el-tabs--top el-tabs--border-card">

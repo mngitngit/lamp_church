@@ -115,7 +115,7 @@
           <template slot-scope="scope">
             <a :href="`/registration/${scope.row.uuid}/edit`"><el-button type="text" size="small">View Details</el-button></a>
             <el-button v-if="scope.row.email" type="text" size="small" @click="resendMail(scope.row.id)">Resend Mail</el-button>
-            <el-button v-if="permissions.can_delete_delegate" type="text" size="small" @click="deleteRegistration(scope.row.uuid)">Delete</el-button>
+            <el-button v-if="permissions.can_delete_delegate" class="text-danger" type="text" size="small" @click="deleteRegistration(scope.row.uuid)">Delete</el-button>
           </template>
         </el-table-column>
       </el-table>

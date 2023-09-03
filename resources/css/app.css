@@ -224,3 +224,7 @@ ul.pagination button {
 .hidden {
     display: hidden !important;
 }
+
+.text-highlight .el-breadcrumb__inner {
+    color: #409EFF !important;
+}
