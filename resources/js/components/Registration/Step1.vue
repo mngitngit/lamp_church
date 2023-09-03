@@ -27,7 +27,7 @@
             <el-card v-if="ruleForm.registrationType != ''" shadow="always" class="mb-3">
                 <div class="px-2 row">
                     <el-alert
-                        title="All registration after November 30, 2023 is considered online. For further inquiries, please reach out to your Local Church's Coordinators."
+                        title="All registration after November 30, 2023 is considered online. For further inquiries, please reach out to your local AWTA Registrars."
                         type="warning"
                         show-icon>
                     </el-alert>
