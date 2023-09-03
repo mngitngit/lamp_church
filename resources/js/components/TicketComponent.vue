@@ -143,7 +143,7 @@ export default {
                 center: true,
                 dangerouslyUseHTMLString: true
             }).then(async () => {
-                if (this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid') {
+                if (this.registrations[0].registration_type === 'Member') {
                     await axios.post(`/registration/${this.registrations[0].uuid}/update`, {
                         avail_new_lamp_id: 'yes'
                     })

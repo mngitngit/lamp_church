@@ -18,7 +18,7 @@ Please settle your balance or atleast pay half to confirm your booking on or bef
 
 To settle it, please reach out to your local AWTA Registrars.
 
-Thank you and we hope to see you there!
+We hope to see you there!
  
 @component('mail::button', ['url' => $url])
 View Ticket

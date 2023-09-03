@@ -4,6 +4,8 @@ namespace App\Notifications;
 
 use App\Enums\AttendingOption;
 use App\Enums\BookingStatus;
+use App\Enums\PaymentStatus;
+use App\Enums\RegistrationType;
 use App\Models\Registration;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -61,9 +63,19 @@ class Registered extends Notification
 
         // $this->registration->booking_status === BookingStatus::Confirmed && 
         if ($this->registration->attending_option === AttendingOption::Online) {
-            $markup = 'mail.registration.guest.confirmed';
-            $subject = 'Registration completed for Annual Worship and Thanksgiving 2023';
-            $url = 'https://www.facebook.com/groups/446318280091482';
+            // guest confirmation
+            // member unpaid = pending
+            // member paid = confirmation
+            if ($this->registration->payment_status === PaymentStatus::Paid || $this->registration->registration_type === RegistrationType::Guest) {
+                $markup = 'mail.registration.online.confirmed';
+                $subject = 'Registration completed for Annual Worship and Thanksgiving 2023';
+                $url = 'https://www.facebook.com/groups/446318280091482';
+            }
+
+            if ($this->registration->registration_type === RegistrationType::Member && ($this->registration->payment_status === PaymentStatus::Unsettled || $this->registration->payment_status === PaymentStatus::Partial)) {
+                $markup = 'mail.registration.online.pending';
+                $subject = 'Registration pending payment for Annual Worship and Thanksgiving 2023';
+            }
         }
 
         $balance = $this->registration->rate - $this->registration->payments_sum_amount;
@@ -77,7 +89,7 @@ class Registered extends Notification
             ->markdown($markup, [
                 'url' => $url,
                 'name' => $this->registration->fullname,
-                'balance' => number_format($balance + ($this->registration->avail_new_lamp_id === 'yes' ? 35 : 0)),
+                'balance' => strval(number_format($balance)) . ($this->registration->avail_new_lamp_id === 'yes' ? ' (with additional 35)' : ''),
                 'minimum_due' => number_format($this->registration->can_book_rate),
                 'minimum_payment_due_date' => date('M d, Y', strtotime($this->registration->created_at . ' + 7 days')),
                 'booked_dates' => implode(', ', $booked_dates),

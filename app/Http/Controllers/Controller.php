@@ -125,7 +125,9 @@ class Controller extends BaseController
 
         $registration->update($parameters);
 
-        if (true === $bookingStatusUpdated) {
+        $onlineMemberRegistrantsPaid = $registration->attending_option === AttendingOption::Online && $registration->registration_type === RegistrationType::Member && $registration->payment_status === PaymentStatus::Paid;
+
+        if (true === $bookingStatusUpdated || true === $onlineMemberRegistrantsPaid) {
             $this->notify($registration->id);
         }
 
