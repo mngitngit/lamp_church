@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\AttendingOption;
 use App\Enums\PaymentStatus;
+use App\Enums\RegistrationType;
 use App\Exports\ExportRegistration;
 use App\Models\Attendance;
 use App\Models\Booking;
@@ -116,7 +117,10 @@ class RegistrationController extends Controller
     public function create()
     {
         return view('registration.create', [
-            'slots' => Slots::where('registration_type', 'Member')->get()
+            'slots' => [
+                'member' => Slots::where('registration_type', RegistrationType::Member)->get(),
+                'guest' => Slots::where('registration_type', RegistrationType::Guest)->get()
+            ]
         ]);
     }
 

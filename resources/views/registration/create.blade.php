@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="px-4">
-    <registration-component :slots="{{ $slots }}"/>
+    <registration-component :slots="{{ json_encode($slots) }}"/>
 </div>
 @endsection
 

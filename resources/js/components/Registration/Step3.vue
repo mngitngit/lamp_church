@@ -62,7 +62,7 @@
 
             var booked_dates = this.ruleForm.booked;
 
-            this.dates = this.slots.map(function(date) {
+            this.dates = this.slots.member.map(function(date) {
 
                 var available = booked_dates.includes(date.id) ? date.available-1 : date.available;
                 return {

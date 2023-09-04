@@ -428,15 +428,29 @@
 
             var booked_dates = [];
 
-            this.dates = this.slots.map(function(date) {
-                var available = booked_dates.includes(date.id) ? date.available-1 : date.available;
-                return {
-                    "event_date": date.event_date,
-                    "id": date.id,
-                    "available": available,
-                    "seat_count": date.seat_count
-                };
-            });
+            if (this.data.step_1.registrationType === 'Member') {
+                this.dates = this.slots.member.map(function(date) {
+                    var available = booked_dates.includes(date.id) ? date.available-1 : date.available;
+                    return {
+                        "event_date": date.event_date,
+                        "id": date.id,
+                        "available": available,
+                        "seat_count": date.seat_count
+                    };
+                });
+            }
+
+            if (this.data.step_1.registrationType === 'Guest') {
+                this.dates = this.slots.guest.map(function(date) {
+                    var available = booked_dates.includes(date.id) ? date.available-1 : date.available;
+                    return {
+                        "event_date": date.event_date,
+                        "id": date.id,
+                        "available": available,
+                        "seat_count": date.seat_count
+                    };
+                });
+            }
 
             this.ruleForm.guests.forEach(element => {
                 this.dates = this.dates.map(function (date) {
