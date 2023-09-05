@@ -1,103 +1,250 @@
 <template>
- <div class="row justify-content-center">
-    <div class="col-md-12">
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-            <el-card shadow="always" class="mb-3">
-                <div class="row">
-                    <div class="col-md-6">
-                        <el-form-item label="Are you a guest or a member?" prop="registrationType" required>
-                            <el-select v-model="ruleForm.registrationType" placeholder="Choose">
-                                <el-option label="Member" value="Member" :disabled="closeRegForMember"></el-option>
-                                <el-option label="Guest" value="Guest"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </div>
-                    <div v-if="ruleForm.registrationType === 'Member'" class="col-md-6">
-                        <el-form-item label="Do you have an awta card?" prop="withAwtaCard" required>
-                            <el-select v-model="ruleForm.withAwtaCard" placeholder="Choose">
-                                <el-option label="None, I’m a new member." value="none"></el-option>
-                                <el-option label="Yes, but I lost it." value="lost"></el-option>
-                                <el-option label="Yes, and I still have it." value="yes"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </div>
-                </div>
-            </el-card>
-
-            <el-card v-if="ruleForm.registrationType != ''" shadow="always" class="mb-3">
-                <div class="px-2 row">
-                    <el-alert
-                        title="All registration after November 30, 2023 is considered online. For further inquiries, please reach out to your local AWTA Registrars."
-                        type="warning"
-                        show-icon>
-                    </el-alert>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <el-form-item label="How will you attend the AWTA?" prop="attendingOption" required>
-                            <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
-                                <el-option value="Hybrid" label="Hybrid"></el-option>
-                                <el-option value="Online" label="Online"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </div>
-                    <div class="col-md-6" v-if="ruleForm.attendingOption === 'Hybrid' && ruleForm.registrationType === 'Guest'">
-                        <el-form-item class="transform-uppercase" label="Booking Code" prop="bookingCode" :required="ruleForm.attendingOption === 'Hybrid' && ruleForm.registrationType === 'Guest'">
-                            <el-input v-model="ruleForm.bookingCode" :clearable="true"></el-input>
-                        </el-form-item>
-                    </div>
-                </div>
-            </el-card>
-
-            <el-card v-if="ruleForm.registrationType === 'Member' && ruleForm.withAwtaCard === 'yes'" shadow="always" class="mb-3">    
-                <div class="row">
-                    <div class="col-md-6" v-if="ruleForm.withAwtaCard === 'yes'">
-                        <el-form-item class="transform-uppercase" label="What is your AWTA card number?" prop="awtaCardNumber" :required="ruleForm.withAwtaCard === 'yes'">
-                            <el-input v-model="ruleForm.awtaCardNumber" @clear="resetData('awta-card')" :clearable="true"></el-input>
-                        </el-form-item>
-                    </div>
-                    <div class="col-md-6" v-if="ruleForm.withAwtaCard === 'yes'">
-                        <el-form-item label="Cluster Group" prop="clusterGroup" required>
-                            <el-select v-model="ruleForm.clusterGroup" placeholder="Select">
-                                <el-option v-if="options.length > 0" label="No Cluster Group" value="No Cluster">
-                                </el-option>
-                                <el-option-group
-                                    v-for="group in options"
-                                    :key="group.label"
-                                    :label="group.label">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <el-form
+                :model="ruleForm"
+                :rules="rules"
+                ref="ruleForm"
+                label-width="120px"
+                class="demo-ruleForm"
+            >
+                <el-card shadow="always" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <el-form-item
+                                label="Are you a guest or a member?"
+                                prop="registrationType"
+                                required
+                            >
+                                <el-select
+                                    v-model="ruleForm.registrationType"
+                                    placeholder="Choose"
+                                >
                                     <el-option
-                                        v-for="item in group.options"
-                                        :key="item"
-                                        :label="item"
-                                        :value="item">
+                                        label="Member"
+                                        value="Member"
+                                        :disabled="closeRegForMember"
+                                    ></el-option>
+                                    <el-option
+                                        label="Guest"
+                                        value="Guest"
+                                    ></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </div>
+                        <div
+                            v-if="ruleForm.registrationType === 'Member'"
+                            class="col-md-6"
+                        >
+                            <el-form-item
+                                label="Do you have an AWTA card?"
+                                prop="withAwtaCard"
+                                required
+                            >
+                                <el-select
+                                    v-model="ruleForm.withAwtaCard"
+                                    placeholder="Choose"
+                                >
+                                    <el-option
+                                        label="None, I’m a new member."
+                                        value="none"
+                                    ></el-option>
+                                    <el-option
+                                        label="Yes, but I lost it."
+                                        value="lost"
+                                    ></el-option>
+                                    <el-option
+                                        label="Yes, and I still have it."
+                                        value="yes"
+                                    ></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </div>
+                    </div>
+                </el-card>
+
+                <el-card
+                    v-if="ruleForm.registrationType != ''"
+                    shadow="always"
+                    class="mb-3"
+                >
+                    <div class="px-2 row">
+                        <el-alert
+                            title="All registration after November 30, 2023 is considered online. For further inquiries, please reach out to your local AWTA Registrars."
+                            type="warning"
+                            show-icon
+                        >
+                        </el-alert>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <el-form-item
+                                label="How will you attend the AWTA?"
+                                prop="attendingOption"
+                                required
+                            >
+                                <el-select
+                                    v-model="ruleForm.attendingOption"
+                                    placeholder="Choose"
+                                >
+                                    <el-option
+                                        value="Hybrid"
+                                        label="Hybrid"
+                                    ></el-option>
+                                    <el-option
+                                        value="Online"
+                                        label="Online"
+                                    ></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </div>
+                        <div
+                            class="col-md-6"
+                            v-if="
+                                ruleForm.attendingOption === 'Hybrid' &&
+                                ruleForm.registrationType === 'Guest'
+                            "
+                        >
+                            <el-form-item
+                                class="transform-uppercase"
+                                label="Booking Code"
+                                prop="bookingCode"
+                                :required="
+                                    ruleForm.attendingOption === 'Hybrid' &&
+                                    ruleForm.registrationType === 'Guest'
+                                "
+                            >
+                                <el-input
+                                    v-model="ruleForm.bookingCode"
+                                    :clearable="true"
+                                ></el-input>
+                            </el-form-item>
+                        </div>
+                    </div>
+                </el-card>
+
+                <el-card
+                    v-if="
+                        ruleForm.registrationType === 'Member' &&
+                        ruleForm.withAwtaCard === 'yes'
+                    "
+                    shadow="always"
+                    class="mb-3"
+                >
+                    <div class="row">
+                        <div
+                            class="col-md-6"
+                            v-if="ruleForm.withAwtaCard === 'yes'"
+                        >
+                            <el-form-item
+                                class="transform-uppercase"
+                                label="What is your AWTA card number?"
+                                prop="awtaCardNumber"
+                                :required="ruleForm.withAwtaCard === 'yes'"
+                            >
+                                <el-input
+                                    v-model="ruleForm.awtaCardNumber"
+                                    @clear="resetData('awta-card')"
+                                    :clearable="true"
+                                ></el-input>
+                            </el-form-item>
+                        </div>
+                        <div
+                            class="col-md-6"
+                            v-if="ruleForm.withAwtaCard === 'yes'"
+                        >
+                            <el-form-item
+                                label="Cluster Group"
+                                prop="clusterGroup"
+                                required
+                            >
+                                <el-select
+                                    v-model="ruleForm.clusterGroup"
+                                    placeholder="Select"
+                                >
+                                    <el-option
+                                        v-if="options.length > 0"
+                                        label="No Cluster Group"
+                                        value="No Cluster"
+                                    >
                                     </el-option>
-                                </el-option-group>
-                            </el-select>
-                        </el-form-item>
+                                    <el-option-group
+                                        v-for="group in options"
+                                        :key="group.label"
+                                        :label="group.label"
+                                    >
+                                        <el-option
+                                            v-for="item in group.options"
+                                            :key="item"
+                                            :label="item"
+                                            :value="item"
+                                        >
+                                        </el-option>
+                                    </el-option-group>
+                                </el-select>
+                            </el-form-item>
+                        </div>
                     </div>
-                </div>
-            </el-card>
+                </el-card>
 
-            <el-card v-if="ruleForm.registrationType === 'Member' && ruleForm.withAwtaCard === 'yes'" shadow="always" class="mb-3"> 
-                <div class="row">
-                    <div class="col-md-12" v-if="ruleForm.withAwtaCard === 'yes'">
-                        <el-form-item label="Email Address (Optional)" class="rm-margin" prop="email">
-                            <small class="text-sm">Please provide the email address where you would like to receive the confirmation email.</small>
-                            <el-input v-model="ruleForm.email" :clearable="true"></el-input>
-                        </el-form-item>
+                <el-card
+                    v-if="
+                        ruleForm.registrationType === 'Member' &&
+                        ruleForm.withAwtaCard === 'yes'
+                    "
+                    shadow="always"
+                    class="mb-3"
+                >
+                    <div class="row">
+                        <div
+                            class="col-md-12"
+                            v-if="ruleForm.withAwtaCard === 'yes'"
+                        >
+                            <el-form-item
+                                label="Email Address (Optional)"
+                                class="rm-margin"
+                                prop="email"
+                            >
+                                <small class="text-sm"
+                                    >Please provide the email address where you
+                                    would like to receive the confirmation
+                                    email.</small
+                                >
+                                <el-input
+                                    v-model="ruleForm.email"
+                                    :clearable="true"
+                                ></el-input>
+                            </el-form-item>
+                        </div>
                     </div>
-                </div>   
-            </el-card>
+                </el-card>
 
-            <el-card v-if="ruleForm.registrationType === 'Member' && ruleForm.withAwtaCard === 'yes'" shadow="always" class="mb-3"> 
-                <el-form-item label="Do you need any medical assistance during the event?" class="rm-margin">
-                    <small class="text-sm">If YES, kindly specify below. If NO, kindly put N/A.</small>
-                    <el-input v-model="ruleForm.specificMedicalAssistance" placeholder="Please specify..." :clearable="true"></el-input>
-                </el-form-item>
-            </el-card>
-        </el-form>
+                <el-card
+                    v-if="
+                        ruleForm.registrationType === 'Member' &&
+                        ruleForm.withAwtaCard === 'yes'
+                    "
+                    shadow="always"
+                    class="mb-3"
+                >
+                    <el-form-item
+                        label="Do you need any medical assistance during the event?"
+                        class="rm-margin"
+                    >
+                        <small class="text-sm"
+                            >If YES, kindly specify below. If NO, kindly put
+                            N/A.</small
+                        >
+                        <el-input
+                            v-model="ruleForm.specificMedicalAssistance"
+                            placeholder="Please specify..."
+                            :clearable="true"
+                        ></el-input>
+                    </el-form-item>
+                </el-card>
+            </el-form>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -105,118 +252,164 @@ export default {
     props: {
         closeRegForMember: {
             required: true,
-            type: Boolean
+            type: Boolean,
         },
         data: {
             required: true,
-            type: Object
-        }
+            type: Object,
+        },
     },
     data() {
         var checkAwtaCardNumber = async (rule, value, callback) => {
-            if (value.length === 9) {  
-                if (value.length > 9) 
-                    return callback(new Error('Invalid AWTA Card Number'));
+            if (value.length === 9) {
+                if (value.length > 9)
+                    return callback(new Error("Invalid AWTA Card Number"));
 
-                if (!value && this.ruleForm.withAwtaCard === 'yes') {
-                    return callback(new Error('Please input your AWTA Card Number'));
+                if (!value && this.ruleForm.withAwtaCard === "yes") {
+                    return callback(
+                        new Error("Please input your AWTA Card Number")
+                    );
                 }
 
-                this.isLoading = true
+                this.isLoading = true;
 
-                await axios.get(`/lookup/${this.ruleForm.awtaCardNumber}`)
+                await axios
+                    .get(`/lookup/${this.ruleForm.awtaCardNumber}`)
                     .then(async (response) => {
-                        this.ruleForm.found.email = response.data.email
-                        this.ruleForm.found.firstName = response.data.firstname
-                        this.ruleForm.found.lastName = response.data.lastname
-                        this.ruleForm.found.facebookName = response.data.facebook_name
-                        this.ruleForm.found.registrationType = response.data.registration_type
-                        this.ruleForm.found.country = response.data.country
-                        this.ruleForm.found.awtaCardNumber = response.data.lamp_card_number
-                        this.ruleForm.found.category = response.data.category
-                        this.ruleForm.found.attendingOption = this.ruleForm.attendingOption
-                        this.ruleForm.found.withAwtaCard = 'yes'
-                        this.ruleForm.found.localChurch = response.data.local_church
-                        this.ruleForm.found.canBookDays = response.data.can_book_days
-                        this.ruleForm.email = this.ruleForm.email === '' ? response.data.email : this.ruleForm.email
-                        this.options = this.assignments[response.data.local_church]
-                        this.isLoading = false
+                        this.ruleForm.found.email = response.data.email;
+                        this.ruleForm.found.firstName = response.data.firstname;
+                        this.ruleForm.found.lastName = response.data.lastname;
+                        this.ruleForm.found.facebookName =
+                            response.data.facebook_name;
+                        this.ruleForm.found.registrationType =
+                            response.data.registration_type;
+                        this.ruleForm.found.country = response.data.country;
+                        this.ruleForm.found.awtaCardNumber =
+                            response.data.lamp_card_number;
+                        this.ruleForm.found.category = response.data.category;
+                        this.ruleForm.found.attendingOption =
+                            this.ruleForm.attendingOption;
+                        this.ruleForm.found.withAwtaCard = "yes";
+                        this.ruleForm.found.localChurch =
+                            response.data.local_church;
+                        this.ruleForm.found.canBookDays =
+                            response.data.can_book_days;
+                        this.ruleForm.email =
+                            this.ruleForm.email === ""
+                                ? response.data.email
+                                : this.ruleForm.email;
+                        this.options =
+                            this.assignments[response.data.local_church];
+                        this.isLoading = false;
                         callback();
-                    }).catch((error) => {
-                        this.resetData('awta-card');
-                        this.isLoading = false
-                        callback(new Error(error.response.data.error))
+                    })
+                    .catch((error) => {
+                        this.resetData("awta-card");
+                        this.isLoading = false;
+                        callback(new Error(error.response.data.error));
                     });
             }
         };
         var checkBookingCode = async (rule, value, callback) => {
             if (this.ruleForm.bookingCode != this.guest_booking_code) {
-                callback(new Error('Incorrect booking code'))
+                callback(new Error("Incorrect booking code"));
             }
         };
         return {
             ruleForm: {
-                registrationType: '',
-                withAwtaCard: '',
-                attendingOption: '',
-                awtaCardNumber: '',
-                clusterGroup: '',
-                bookingCode: '',
-                email: '',
-                specificMedicalAssistance: '',
+                registrationType: "",
+                withAwtaCard: "",
+                attendingOption: "",
+                awtaCardNumber: "",
+                clusterGroup: "",
+                bookingCode: "",
+                email: "",
+                specificMedicalAssistance: "",
                 canBookDays: parseInt(window.env.member_booking_limit || 0),
-                found: {}
+                found: {},
             },
             rules: {
                 registrationType: [
-                    { required: true, message: 'Please select Registration Type', trigger: ['blur', 'change']}
+                    {
+                        required: true,
+                        message: "Please select Registration Type",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 withAwtaCard: [
-                    { required: true, message: 'Please select an answer', trigger: ['blur', 'change']}
+                    {
+                        required: true,
+                        message: "Please select an answer",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 attendingOption: [
-                    { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
+                    {
+                        required: true,
+                        message: "Please select your attending option",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 awtaCardNumber: [
-                    { validator: checkAwtaCardNumber, trigger: ['change'] },
-                    { validator: async (rule, value, callback) => {
-                        if (this.ruleForm.awtaCardNumber.length > 9 || this.ruleForm.awtaCardNumber.length < 9) {
-                            this.options = [];
-                            this.ruleForm.clusterGroup = ''
-                            return callback(new Error('Invalid AWTA Card Number'));
-                        }
-                    }, trigger: ['blur'] },
-                    { required: true, message: 'Please input your AWTA Card Number', trigger: ['blur', 'change']}
+                    { validator: checkAwtaCardNumber, trigger: ["change"] },
+                    {
+                        validator: async (rule, value, callback) => {
+                            if (
+                                this.ruleForm.awtaCardNumber.length > 9 ||
+                                this.ruleForm.awtaCardNumber.length < 9
+                            ) {
+                                this.options = [];
+                                this.ruleForm.clusterGroup = "";
+                                return callback(
+                                    new Error("Invalid AWTA Card Number")
+                                );
+                            }
+                        },
+                        trigger: ["blur"],
+                    },
+                    {
+                        required: true,
+                        message: "Please input your AWTA Card Number",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 bookingCode: [
-                    { required: true, message: 'Please input booking code', trigger: ['blur', 'change']},
-                    { validator: checkBookingCode, trigger: ['submit'] },
+                    {
+                        required: true,
+                        message: "Please input booking code",
+                        trigger: ["blur", "change"],
+                    },
+                    { validator: checkBookingCode, trigger: ["submit"] },
                 ],
                 clusterGroup: [
-                    { required: true, message: 'Please select your cluster group', trigger: ['blur', 'change']},
-                ]
+                    {
+                        required: true,
+                        message: "Please select your cluster group",
+                        trigger: ["blur", "change"],
+                    },
+                ],
             },
             guest_booking_code: window.env.guest_booking_code,
             assignments: window.env.cluster_groups,
-            options: []
-        }
+            options: [],
+        };
     },
     watch: {
-        'ruleForm.registrationType'(data, old) {
-            if (old) this.resetData('reg-type')
+        "ruleForm.registrationType"(data, old) {
+            if (old) this.resetData("reg-type");
         },
-        'ruleForm.withAwtaCard'(data, old) {
-            if (old) this.resetData('with-awta-card')
+        "ruleForm.withAwtaCard"(data, old) {
+            if (old) this.resetData("with-awta-card");
         },
-        'ruleForm.attendingOption'(data, old) {
-            if (old) this.resetData('attending-option')
+        "ruleForm.attendingOption"(data, old) {
+            if (old) this.resetData("attending-option");
         },
-        'ruleForm.awtaCardNumber' (data, old) {
-            if (old) this.resetData('awta-card')
+        "ruleForm.awtaCardNumber"(data, old) {
+            if (old) this.resetData("awta-card");
         },
-        'options'(data, old) {
-            if (old.length > 0) this.ruleForm.clusterGroup = ''
-        }
+        options(data, old) {
+            if (old.length > 0) this.ruleForm.clusterGroup = "";
+        },
     },
     mounted() {
         if (Object.keys(this.data.step_1).length != 0) {
@@ -225,64 +418,76 @@ export default {
     },
     methods: {
         submitForm(action) {
-            this.$refs['ruleForm'].validate((valid) => {
+            this.$refs["ruleForm"].validate((valid) => {
                 if (valid) {
-                    if (this.ruleForm.withAwtaCard === 'yes') {
-                        this.$confirm(`You are registering for ${this.ruleForm.found.firstName} ${this.ruleForm.found.lastName}. Are you sure you want to proceed?`, 'Warning', {
-                            confirmButtonText: 'Yes',
-                            cancelButtonText: 'No',
-                            type: 'warning',
-                            customClass: 'prompt-message'
-                        }).then(async () => {
-                            if (this.ruleForm.attendingOption === "Online") {
-                                this.$emit('submit', this.ruleForm);
-                            } else {
-                                this.$emit('change-step', {destination: 'step_3', current: 'step_1', data: this.ruleForm});
+                    if (this.ruleForm.withAwtaCard === "yes") {
+                        this.$confirm(
+                            `You are registering for ${this.ruleForm.found.firstName} ${this.ruleForm.found.lastName}. Are you sure you want to proceed?`,
+                            "Warning",
+                            {
+                                confirmButtonText: "Yes",
+                                cancelButtonText: "No",
+                                type: "warning",
+                                customClass: "prompt-message",
                             }
-                        })
+                        ).then(async () => {
+                            if (this.ruleForm.attendingOption === "Online") {
+                                this.$emit("submit", this.ruleForm);
+                            } else {
+                                this.$emit("change-step", {
+                                    destination: "step_3",
+                                    current: "step_1",
+                                    data: this.ruleForm,
+                                });
+                            }
+                        });
                     } else {
-                        this.$emit('change-step', {destination: 'step_2', current: 'step_1', data: this.ruleForm});
+                        this.$emit("change-step", {
+                            destination: "step_2",
+                            current: "step_1",
+                            data: this.ruleForm,
+                        });
                     }
                 } else {
-                    console.error('error submission on step 1!');
+                    console.error("error submission on step 1!");
                     return false;
                 }
             });
         },
         resetData(scope) {
-            console.log(scope)
-            if (scope === 'all') {
-                this.$emit('reset');
-                this.ruleForm.found = {}
-            } else if (scope === 'reg-type') {
-                this.ruleForm.withAwtaCard = ''
-                this.ruleForm.attendingOption = ''
-                this.ruleForm.awtaCardNumber = ''
-                this.ruleForm.bookingCode = ''
-                this.ruleForm.found = {}
-                this.$emit('reset');
-            } else if (scope === 'with-awta-card') {
-                this.ruleForm.awtaCardNumber = ''
-                this.ruleForm.found = {}
-                this.$emit('reset');
-            } else if (scope === 'attending-option') {
-                this.$emit('reset');
-                this.ruleForm.bookingCode = ''
-                this.ruleForm.found = {}
-            } else if (scope === 'awta-card') {
-                this.$emit('reset');
-                this.ruleForm.bookingCode = ''
-                this.ruleForm.found = {}
-                this.options = []
-                this.ruleForm.clusterGroup = ''
+            console.log(scope);
+            if (scope === "all") {
+                this.$emit("reset");
+                this.ruleForm.found = {};
+            } else if (scope === "reg-type") {
+                this.ruleForm.withAwtaCard = "";
+                this.ruleForm.attendingOption = "";
+                this.ruleForm.awtaCardNumber = "";
+                this.ruleForm.bookingCode = "";
+                this.ruleForm.found = {};
+                this.$emit("reset");
+            } else if (scope === "with-awta-card") {
+                this.ruleForm.awtaCardNumber = "";
+                this.ruleForm.found = {};
+                this.$emit("reset");
+            } else if (scope === "attending-option") {
+                this.$emit("reset");
+                this.ruleForm.bookingCode = "";
+                this.ruleForm.found = {};
+            } else if (scope === "awta-card") {
+                this.$emit("reset");
+                this.ruleForm.bookingCode = "";
+                this.ruleForm.found = {};
+                this.options = [];
+                this.ruleForm.clusterGroup = "";
             }
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style scoped>
-.el-input--suffix .el-input__inner{
+.el-input--suffix .el-input__inner {
     text-transform: uppercase !important;
 }
 </style>

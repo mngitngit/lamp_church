@@ -1,5 +1,10 @@
 <template>
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
+    <el-form
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="160px"
+    >
         <el-card shadow="hover" class="mb-4">
             <div class="row">
                 <div class="col-md-6">
@@ -10,46 +15,105 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <el-form-item class="check-name" label="First Name" prop="firstName" required>
+                    <el-form-item
+                        class="check-name"
+                        label="First Name"
+                        prop="firstName"
+                        required
+                    >
                         <el-input v-model="ruleForm.firstName"></el-input>
                     </el-form-item>
                 </div>
                 <div class="col-md-3">
-                    <el-form-item class="check-name" label="Last Name" prop="lastName" required>
+                    <el-form-item
+                        class="check-name"
+                        label="Last Name"
+                        prop="lastName"
+                        required
+                    >
                         <el-input v-model="ruleForm.lastName"></el-input>
                     </el-form-item>
                 </div>
                 <div class="col-md-6">
                     <el-form-item label="Facebook Name" prop="facebookName">
-                        <el-input v-model="ruleForm.facebookName" placeholder="If none, kindly type in the Facebook name of your event companion"></el-input>
+                        <el-input
+                            v-model="ruleForm.facebookName"
+                            placeholder="If none, kindly type in the Facebook name of your event companion"
+                        ></el-input>
                     </el-form-item>
                 </div>
 
                 <div class="col-md-3">
-                    <el-form-item label="Local Church" prop="localChurch" required>
-                        <el-select v-model="ruleForm.localChurch" placeholder="Choose">
+                    <el-form-item
+                        label="Local Church"
+                        prop="localChurch"
+                        required
+                    >
+                        <el-select
+                            v-model="ruleForm.localChurch"
+                            placeholder="Choose"
+                        >
                             <el-option label="Binan" value="Binan"></el-option>
-                            <el-option label="Canlubang" value="Canlubang"></el-option>
-                            <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
-                            <el-option label="Visayas" value="Visayas"></el-option>
-                            <el-option label="Isabela" value="Isabela"></el-option>
-                            <el-option label="Muntinlupa" value="Muntinlupa"></el-option>
-                            <el-option label="Pateros" value="Pateros"></el-option>
-                            <el-option label="Tarlac" value="Tarlac"></el-option>
-                            <el-option label="Valenzuela" value="Valenzuela"></el-option>
+                            <el-option
+                                label="Canlubang"
+                                value="Canlubang"
+                            ></el-option>
+                            <el-option
+                                label="Dasmarinas"
+                                value="Dasmarinas"
+                            ></el-option>
+                            <el-option
+                                label="Visayas"
+                                value="Visayas"
+                            ></el-option>
+                            <el-option
+                                label="Isabela"
+                                value="Isabela"
+                            ></el-option>
+                            <el-option
+                                label="Muntinlupa"
+                                value="Muntinlupa"
+                            ></el-option>
+                            <el-option
+                                label="Pateros"
+                                value="Pateros"
+                            ></el-option>
+                            <el-option
+                                label="Tarlac"
+                                value="Tarlac"
+                            ></el-option>
+                            <el-option
+                                label="Valenzuela"
+                                value="Valenzuela"
+                            ></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
                 <div class="col-md-3">
                     <el-form-item label="Country" prop="country" required>
-                        <el-select v-model="ruleForm.country" placeholder="Choose">
-                            <el-option v-for="country in countries" v-bind:key="country" :label="country" :value="country"></el-option>
+                        <el-select
+                            v-model="ruleForm.country"
+                            placeholder="Choose"
+                        >
+                            <el-option
+                                v-for="country in countries"
+                                v-bind:key="country"
+                                :label="country"
+                                :value="country"
+                            ></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
                 <div class="col-md-3">
-                    <el-form-item label="Rate Category" prop="category" required>
-                        <el-select v-model="ruleForm.category" placeholder="Choose">
+                    <el-form-item
+                        label="Rate Category"
+                        prop="category"
+                        required
+                    >
+                        <el-select
+                            v-model="ruleForm.category"
+                            placeholder="Choose"
+                        >
                             <el-option label="Adult" value="Adult"></el-option>
                             <el-option label="Kids" value="Kids"></el-option>
                             <el-option label="Free" value="Free"></el-option>
@@ -57,32 +121,68 @@
                     </el-form-item>
                 </div>
             </div>
-        </el-card> 
+        </el-card>
 
         <el-card shadow="hover" class="mb-3">
             <div class="row">
-                <div v-if="ruleForm.registrationType === 'Member'" class="col-md-3">
-                    <el-form-item label="Do you have an awta card?" prop="withAwtaCard" required>
-                        <el-select v-model="ruleForm.withAwtaCard" placeholder="Choose">
-                            <el-option label="None, I’m a new member." value="none"></el-option>
-                            <el-option label="Yes, but I lost it." value="lost"></el-option>
-                            <el-option label="Yes, and I still have it." value="yes"></el-option>
+                <div
+                    v-if="ruleForm.registrationType === 'Member'"
+                    class="col-md-3"
+                >
+                    <el-form-item
+                        label="Do you have an AWTA card?"
+                        prop="withAwtaCard"
+                        required
+                    >
+                        <el-select
+                            v-model="ruleForm.withAwtaCard"
+                            placeholder="Choose"
+                        >
+                            <el-option
+                                label="None, I’m a new member."
+                                value="none"
+                            ></el-option>
+                            <el-option
+                                label="Yes, but I lost it."
+                                value="lost"
+                            ></el-option>
+                            <el-option
+                                label="Yes, and I still have it."
+                                value="yes"
+                            ></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
 
                 <div class="col-md-3">
-                    <el-form-item label="How will you attend the AWTA?" prop="attendingOption" :required="ruleForm.registrationType === 'Member'">
-                        <el-select v-model="ruleForm.attendingOption" placeholder="Choose">
-                            <el-option value="Hybrid" label="Hybrid"></el-option>
-                            <el-option value="Online" label="Online"></el-option>
+                    <el-form-item
+                        label="How will you attend the AWTA?"
+                        prop="attendingOption"
+                        :required="ruleForm.registrationType === 'Member'"
+                    >
+                        <el-select
+                            v-model="ruleForm.attendingOption"
+                            placeholder="Choose"
+                        >
+                            <el-option
+                                value="Hybrid"
+                                label="Hybrid"
+                            ></el-option>
+                            <el-option
+                                value="Online"
+                                label="Online"
+                            ></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
             </div>
         </el-card>
 
-        <el-card v-if="permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
+        <el-card
+            v-if="permissions.can_edit_delegate_config"
+            shadow="hover"
+            class="mb-3"
+        >
             <div class="row">
                 <div class="col-md-2">
                     <el-form-item label="Days can book" required>
@@ -91,8 +191,14 @@
                 </div>
                 <div class="col-md-2">
                     <el-form-item label="Rebooking Limit" required>
-                        <el-tooltip content="Only the administrator can edit this" placement="top">
-                            <el-input v-model="ruleForm.rebookingLimit" disabled></el-input>
+                        <el-tooltip
+                            content="Only the administrator can edit this"
+                            placement="top"
+                        >
+                            <el-input
+                                v-model="ruleForm.rebookingLimit"
+                                disabled
+                            ></el-input>
                         </el-tooltip>
                     </el-form-item>
                 </div>
@@ -101,7 +207,10 @@
                         <el-input v-model="ruleForm.bookingRate"></el-input>
                     </el-form-item>
                 </div>
-                <div class="col-md-2" v-if="permissions.can_edit_delegate_config">
+                <div
+                    class="col-md-2"
+                    v-if="permissions.can_edit_delegate_config"
+                >
                     <el-form-item label="Rate" required>
                         <el-input v-model="ruleForm.rate"></el-input>
                     </el-form-item>
@@ -112,7 +221,10 @@
         <el-card class="mb-3">
             <div class="col-md-3">
                 <el-form-item label="Will avail new LAMP ID?" required>
-                    <el-select v-model="ruleForm.availNewLAMPID" placeholder="Choose">
+                    <el-select
+                        v-model="ruleForm.availNewLAMPID"
+                        placeholder="Choose"
+                    >
                         <el-option value="yes" label="yes"></el-option>
                         <el-option value="no" label="no"></el-option>
                     </el-select>
@@ -120,22 +232,36 @@
             </div>
         </el-card>
 
-        <el-card v-if="ruleForm.registrationType == 'Guest' && permissions.can_edit_delegate_config" shadow="hover" class="mb-3">
+        <el-card
+            v-if="
+                ruleForm.registrationType == 'Guest' &&
+                permissions.can_edit_delegate_config
+            "
+            shadow="hover"
+            class="mb-3"
+        >
             <div class="row">
                 <div class="col-md-12">
-                    <el-form-item label="Specify the date baptized to tag this delegate as &quot;Visitor to Member&quot;" prop="visitorToMember">
+                    <el-form-item
+                        label='Specify the date baptized to tag this delegate as "Visitor to Member"'
+                        prop="visitorToMember"
+                    >
                         <el-date-picker
-                        v-model="ruleForm.visitorToMember"
-                        type="date"
-                        placeholder="Pick a day"
-                        :picker-options="pickerOptions">
+                            v-model="ruleForm.visitorToMember"
+                            type="date"
+                            placeholder="Pick a day"
+                            :picker-options="pickerOptions"
+                        >
                         </el-date-picker>
                     </el-form-item>
                 </div>
 
                 <div class="col-md-12">
                     <el-form-item label="Notes">
-                        <el-input type="textarea" v-model="ruleForm.notes"></el-input>
+                        <el-input
+                            type="textarea"
+                            v-model="ruleForm.notes"
+                        ></el-input>
                     </el-form-item>
                 </div>
             </div>
@@ -143,7 +269,12 @@
 
         <el-row>
             <div class="col-md-12">
-                <el-button v-if="permissions.can_edit_delegate" type="warning" @click="submitForm('ruleForm')">Update</el-button>
+                <el-button
+                    v-if="permissions.can_edit_delegate"
+                    type="warning"
+                    @click="submitForm('ruleForm')"
+                    >Update</el-button
+                >
             </div>
         </el-row>
     </el-form>
@@ -154,7 +285,7 @@ export default {
     props: {
         registration: {
             required: true,
-            type: Object
+            type: Object,
         },
     },
     data() {
@@ -163,84 +294,120 @@ export default {
                 disabledDate(time) {
                     return time.getTime() > Date.now();
                 },
-                shortcuts: [{
-                    text: 'Today',
-                    onClick(picker) {
-                    picker.$emit('pick', new Date());
-                    }
-                }, {
-                    text: 'Yesterday',
-                    onClick(picker) {
-                    const date = new Date();
-                    date.setTime(date.getTime() - 3600 * 1000 * 24);
-                    picker.$emit('pick', date);
-                    }
-                }, {
-                    text: 'A week ago',
-                    onClick(picker) {
-                    const date = new Date();
-                    date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-                    picker.$emit('pick', date);
-                    }
-                }]
+                shortcuts: [
+                    {
+                        text: "Today",
+                        onClick(picker) {
+                            picker.$emit("pick", new Date());
+                        },
+                    },
+                    {
+                        text: "Yesterday",
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24);
+                            picker.$emit("pick", date);
+                        },
+                    },
+                    {
+                        text: "A week ago",
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit("pick", date);
+                        },
+                    },
+                ],
             },
             ruleForm: {
-                email: '',
-                firstName: '',
-                lastName: '',
-                facebookName: '',
-                registrationType: 'Member',
-                localChurch: '',
-                country: 'Philippines',
-                awtaCardNumber: '',
-                category: 'Adult',
-                attendingOption: '',
-                withAwtaCard: '',
+                email: "",
+                firstName: "",
+                lastName: "",
+                facebookName: "",
+                registrationType: "Member",
+                localChurch: "",
+                country: "Philippines",
+                awtaCardNumber: "",
+                category: "Adult",
+                attendingOption: "",
+                withAwtaCard: "",
                 canBookDays: 0,
                 rebookingLimit: 0,
-                category: '',
+                category: "",
                 canBook: false,
                 bookingRate: 0,
                 rate: 0,
-                visitorToMember: '',
-                availNewLAMPID: ''
+                visitorToMember: "",
+                availNewLAMPID: "",
             },
             rules: {
                 firstName: [
-                    { required: true, message: 'Please input First Name', trigger: ['blur', 'change']}
+                    {
+                        required: true,
+                        message: "Please input First Name",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 lastName: [
-                    { required: true, message: 'Please input Last Name', trigger: ['blur', 'change']}
+                    {
+                        required: true,
+                        message: "Please input Last Name",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 localChurch: [
-                    { required: true, message: 'Please select Local Church', trigger: ['blur', 'change']}
+                    {
+                        required: true,
+                        message: "Please select Local Church",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 country: [
-                    { required: true, message: 'Please select Country', trigger: ['blur', 'change']}
+                    {
+                        required: true,
+                        message: "Please select Country",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 awtaCardNumber: [
-                    { required: true, message: 'Please input AWTA Card Number', trigger: ['blur', 'change']},
+                    {
+                        required: true,
+                        message: "Please input AWTA Card Number",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 attendingOption: [
-                    { required: true, message: 'Please select your attending option', trigger: ['blur', 'change']},
+                    {
+                        required: true,
+                        message: "Please select your attending option",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 availNewLAMPID: [
-                    { required: true, message: 'Please select if will avail new LAMP ID', trigger: ['blur', 'change']},
+                    {
+                        required: true,
+                        message: "Please select if will avail new LAMP ID",
+                        trigger: ["blur", "change"],
+                    },
                 ],
                 rate: [
-                    { required: true, message: 'Please input rate', trigger: ['blur', 'change']},
-                ]
+                    {
+                        required: true,
+                        message: "Please input rate",
+                        trigger: ["blur", "change"],
+                    },
+                ],
             },
             countries: this.$allCountries,
-            permissions: window.auth_user.permissions
-        }
+            permissions: window.auth_user.permissions,
+        };
     },
     watch: {
-        'ruleForm.withAwtaCard'(newData, oldData) {
-            if (oldData != newData && oldData != '' && newData != '') {
-                this.ruleForm.attendingOption =''
+        "ruleForm.withAwtaCard"(newData, oldData) {
+            if (oldData != newData && oldData != "" && newData != "") {
+                this.ruleForm.attendingOption = "";
             }
-        }
+        },
     },
     mounted() {
         this.ruleForm = {
@@ -260,8 +427,8 @@ export default {
             bookingRate: this.registration.can_book_rate,
             rate: this.registration.rate,
             visitorToMember: this.registration.visitor_to_member,
-            availNewLAMPID: this.registration.avail_new_lamp_id
-        }
+            availNewLAMPID: this.registration.avail_new_lamp_id,
+        };
     },
     methods: {
         submitForm(formName) {
@@ -269,34 +436,42 @@ export default {
                 if (valid) {
                     const loading = this.$loading({
                         lock: true,
-                        text: 'Loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
+                        text: "Loading",
+                        background: "rgba(0, 0, 0, 0.7)",
                     });
 
                     setTimeout(async () => {
-                        await axios.post(`/registration/${this.registration.uuid}/update`, this.ruleForm)
-                        .then(async (response) => {
-                            loading.close()
+                        await axios
+                            .post(
+                                `/registration/${this.registration.uuid}/update`,
+                                this.ruleForm
+                            )
+                            .then(async (response) => {
+                                loading.close();
 
-                            this.$alert('', 'Details Successfully Updated!', {
-                                confirmButtonText: 'OK',
-                                showCancelButton: false,
-                                closeOnPressEscape: false,
-                                closeOnClickModal: false,
-                                showClose: false,
-                                center: true,
-                                type: 'success',
-                                callback: action => {
-                                    window.location.reload();
-                                }
+                                this.$alert(
+                                    "",
+                                    "Details Successfully Updated!",
+                                    {
+                                        confirmButtonText: "OK",
+                                        showCancelButton: false,
+                                        closeOnPressEscape: false,
+                                        closeOnClickModal: false,
+                                        showClose: false,
+                                        center: true,
+                                        type: "success",
+                                        callback: (action) => {
+                                            window.location.reload();
+                                        },
+                                    }
+                                );
                             });
-                        });
                     }, 1000);
                 } else {
                     return false;
                 }
             });
-        }
-    }
-}
+        },
+    },
+};
 </script>
