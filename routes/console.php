@@ -43,6 +43,8 @@ Artisan::command('cancel-bookings', function () {
                 ])->notify(new Registered($registration));
             }
 
+            $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array('Booking cancelled.'));
+
             $this->comment('[' . $registration->uuid . '] ' . $registration->fullname . '\'s booking is now cancelled. Date Registered: ' . $registration->created_at);
         }
     }
