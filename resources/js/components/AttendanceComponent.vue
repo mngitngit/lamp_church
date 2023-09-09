@@ -8,10 +8,12 @@
             <div class="card-body">
                   <div class="row justify-content-center">
                     <div class="col-md-12">
-                      <p class="mb-0 text-black-50 text-center mt-2 text-xxs">Align the barcode within the <br/>reader to scan</p>
+                      <p class="mb-0 text-black-50 text-center mt-2 text-xxs">Align the QR Code within the <br/>reader to scan</p>
                     </div>
-                    <div class="col-md-6 text-center">
-                      <img width="90%" class="mb-3" src="/images/barcode.png">
+                    <div class="col-md-6">
+                      <center>
+                      <img width="80%" class="m-3" src="/images/qr-code-scan.png">
+                      </center>
                     </div>
                   </div>
                 <div class="row" style="border-top: 2px dashed #dee2e6;">

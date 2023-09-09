@@ -7308,7 +7308,17 @@ var render = function render() {
     staticClass: "border-0 card shadow"
   }, [_c("div", {
     staticClass: "card-body"
+  }, [_c("div", {
+    staticClass: "row justify-content-center"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("center", [_c("img", {
+    staticClass: "m-3",
+    attrs: {
+      width: "80%",
+      src: "/images/qr-code-scan.png"
+    }
+  })])], 1)]), _vm._v(" "), _c("div", {
     staticClass: "row",
     staticStyle: {
       "border-top": "2px dashed #dee2e6"
@@ -7551,20 +7561,10 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "row justify-content-center"
-  }, [_c("div", {
     staticClass: "col-md-12"
   }, [_c("p", {
     staticClass: "mb-0 text-black-50 text-center mt-2 text-xxs"
-  }, [_vm._v("Align the barcode within the "), _c("br"), _vm._v("reader to scan")])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6 text-center"
-  }, [_c("img", {
-    staticClass: "mb-3",
-    attrs: {
-      width: "90%",
-      src: "/images/barcode.png"
-    }
-  })])]);
+  }, [_vm._v("Align the QR Code within the "), _c("br"), _vm._v("reader to scan")])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
