@@ -275,12 +275,14 @@ class RegLoggerSeeder extends Seeder
             ['lamp_card_number' => 'LPVI00023', 'local_church' => 'Bacolod']
         ];
 
-        foreach ($data as $lookup) {
-            $lookup = LookUp::where('lamp_card_number', $lookup['lamp_card_number'])->first();
+        foreach ($data as $arr) {
+            $lookup = LookUp::where('lamp_card_number', $arr['lamp_card_number'])->first();
 
             $lookup->update([
-                'local_church' => $lookup['local_church']
+                'local_church' => $arr['local_church']
             ]);
+
+            $this->command->info('lookup ' . $lookup['lamp_card_number'] . ' -> ' . $lookup['local_church']);
         }
     }
 }
