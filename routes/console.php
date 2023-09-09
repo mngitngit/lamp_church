@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Notification;
 
 Artisan::command('cancel-bookings', function () {
     $this->comment('---------------------------------- ' . \Carbon\Carbon::today() . ' ---------------------------------');
-    $date = \Carbon\Carbon::today()->subDays(8);
+    $date = \Carbon\Carbon::today()->subDays(7);
 
     // get all registrations that have not been paid for more than seven days since they were booked
     $registrations = Registration::withSum('payments', 'amount')->where('created_at', '<=', $date)->where('booking_status', BookingStatus::Pending)->get();
