@@ -7174,9 +7174,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       ruleForm: {
-        'lastName': '',
-        'localChurch': '',
-        'referenceNumber': ''
+        'lastName': 'Cello',
+        'localChurch': 'Binan',
+        'referenceNumber': 'LAMP00003'
       },
       disabled: false,
       rules: {

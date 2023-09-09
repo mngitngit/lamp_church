@@ -76,7 +76,7 @@ class BookingController extends Controller
         $hasChanges = false;
 
         // has changes if old vs new booked dates are different
-        if ($new_booked_dates != $old_booked_dates) {
+        if ($new_booked_dates != $old_booked_dates || $registration->booking_status === BookingStatus::Cancelled) {
             $hasChanges = true;
         }
 
