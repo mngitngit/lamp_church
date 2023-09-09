@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('cancel-bookings')->everyMinute()->appendOutputTo("scheduler/cancelled-booking-output.log");
+        $schedule->command('cancel-bookings')->daily()->appendOutputTo("scheduler/cancelled-booking-output.log");
     }
 
     /**
