@@ -55,6 +55,7 @@ class BookingController extends Controller
 
     public function update($uuid, Request $request)
     {
+
         $registration = Registration::withSum('payments', 'amount')->where('uuid', $uuid)->first();
 
         if ($registration->is_booking_bypassed) {
@@ -129,6 +130,10 @@ class BookingController extends Controller
                     $dates = array_map(function ($date) {
                         return $date['slot']['event_date'];
                     }, $registration->bookings()->with('slot')->get()->toArray());
+
+                    $registration->update([
+                        'booked_date' => NOW()
+                    ]);
 
                     if ($hasPermission) {
                         $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array('This delegate was rebooked by ' . auth()->user()->name . ' for ' . implode(', ', $dates)));

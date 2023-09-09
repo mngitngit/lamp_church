@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\BookingStatus;
+use App\Enums\AttendingOption;
 use App\Models\Registration;
 use Illuminate\Database\Seeder;
 
@@ -15,10 +15,12 @@ class RegLoggerSeeder extends Seeder
      */
     public function run()
     {
-        $registrations = Registration::where('booking_status', BookingStatus::Cancelled)->get();
+        $registrations = Registration::where('attending_option', AttendingOption::Hybrid)->get();
 
         foreach ($registrations as $registration) {
-            $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array('Booking cancelled due to unsettled payment.'));
+            $registration->update([
+                'booked_date' => $registration->created_at
+            ]);
         }
     }
 }

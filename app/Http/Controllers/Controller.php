@@ -51,6 +51,10 @@ class Controller extends BaseController
 
     function book($registration, $bookings)
     {
+        $registration->update([
+            'booked_date' => now()
+        ]);
+
         foreach ($bookings as $booking) {
             Booking::create([
                 'registration_uuid' => $registration['uuid'],

@@ -23,7 +23,7 @@ Artisan::command('cancel-bookings', function () {
     $date = \Carbon\Carbon::today()->subDays(7);
 
     // get all registrations that have not been paid for more than seven days since they were booked
-    $registrations = Registration::withSum('payments', 'amount')->where('created_at', '<=', $date)->where('booking_status', BookingStatus::Pending)->get();
+    $registrations = Registration::withSum('payments', 'amount')->where('booked_date', '<=', $date)->where('booking_status', BookingStatus::Pending)->get();
 
     foreach ($registrations as $registration) {
         if (floatval($registration->can_book_rate) > floatval($registration->payments_sum_amount)) {

@@ -146,9 +146,9 @@ export default {
     data () {
       return {
         ruleForm: {
-            'lastName': 'Cello',
-            'localChurch': 'Binan',
-            'referenceNumber': 'LAMP00003'
+            'lastName': '',
+            'localChurch': '',
+            'referenceNumber': ''
         },
         disabled: false,
         rules: {
