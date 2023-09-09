@@ -27,8 +27,8 @@
     </div>
     <div class="col-md-5">
         <el-card shadow="never" class="p-0">
-            <table style="width: 100%; font-size: 12px;" class="border">
-                <thead>
+            <table style="width: 100%; font-size: 12px;">
+                <thead class="border">
                     <th colspan="2" class="p-2 text-center">Local Church</th>
                     <template v-for="(slot, index) in slots.members">
                         <th class="p-2 text-center" :key="index">{{ slot.event_date }}</th>

@@ -7787,12 +7787,13 @@ var render = function render() {
       shadow: "never"
     }
   }, [_c("table", {
-    staticClass: "border",
     staticStyle: {
       width: "100%",
       "font-size": "12px"
     }
-  }, [_c("thead", [_c("th", {
+  }, [_c("thead", {
+    staticClass: "border"
+  }, [_c("th", {
     staticClass: "p-2 text-center",
     attrs: {
       colspan: "2"
