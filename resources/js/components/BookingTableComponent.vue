@@ -27,23 +27,31 @@
     </div>
     <div class="col-md-5">
         <el-card shadow="never" class="p-0">
-            <!-- <table style="width: 100%; font-size: 12px;">
+            <table style="width: 100%; font-size: 12px;" class="border">
                 <thead>
-                    <th class="p-2 text-center">Local Church</th>
+                    <th colspan="2" class="p-2 text-center">Local Church</th>
                     <template v-for="(slot, index) in slots.members">
                         <th class="p-2 text-center" :key="index">{{ slot.event_date }}</th>
                     </template>
                 </thead>
                 <tbody>
-                    <tr v-for="(lc, index) in localChurches" :key="index">
-                        <td class="p-2 text-center">{{ lc }}</td>
-                        <template v-for="(slot, index) in slots.members">
-                            <td :key="index" class="p-2 text-center">{{ slot.booked_per_church[lc] || 0 }}</td>
-                        </template>
-                    </tr>
+                    <template v-for="(lc, index) in localChurches">
+                        <tr class="border">
+                            <td rowspan="2" class="p-2 text-center border">{{ lc }}</td>
+                            <td class="p-2 text-center">Member</td>
+                            <template v-for="(slot, index) in slots.members">
+                                <td class="p-2 text-center">{{ slot.booked_per_church[lc] || 0 }}</td>
+                            </template>
+                        </tr>
+                        <tr class="border">
+                            <td class="p-2 text-center">Guest</td>
+                            <template v-for="(slot, index) in slots.guests">
+                                <td class="p-2 text-center">{{ slot.booked_per_church[lc] || 0 }}</td>
+                            </template>
+                        </tr>
+                    </template>
                 </tbody>
-            </table> -->
-            <i><p class="font-italic font-monospace m-0 p-0 text-center text-muted">Sorry, under construction.</p></i>
+            </table>
         </el-card>
     </div>
 </div>
@@ -66,18 +74,7 @@ export default {
                 {color: '#1989fa', percentage: 80},
                 {color: '#6f7ad3', percentage: 100}
             ],
-            localChurches: [
-                'Binan',
-                'Canlubang',
-                'Dasmarinas',
-                'Cruz',
-                'Visayas',
-                'Isabela',
-                'Muntinlupa',
-                'Pateros',
-                'Tarlac',
-                'Valenzuela'
-            ]
+            localChurches: Object.keys(window.env.cluster_groups)
         }
     },
     mounted() {

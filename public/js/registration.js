@@ -6990,7 +6990,7 @@ __webpack_require__.r(__webpack_exports__);
         color: '#6f7ad3',
         percentage: 100
       }],
-      localChurches: ['Binan', 'Canlubang', 'Dasmarinas', 'Cruz', 'Visayas', 'Isabela', 'Muntinlupa', 'Pateros', 'Tarlac', 'Valenzuela']
+      localChurches: Object.keys(window.env.cluster_groups)
     };
   },
   mounted: function mounted() {
@@ -7786,9 +7786,46 @@ var render = function render() {
     attrs: {
       shadow: "never"
     }
-  }, [_c("i", [_c("p", {
-    staticClass: "font-italic font-monospace m-0 p-0 text-center text-muted"
-  }, [_vm._v("Sorry, under construction.")])])])], 1)]);
+  }, [_c("table", {
+    staticClass: "border",
+    staticStyle: {
+      width: "100%",
+      "font-size": "12px"
+    }
+  }, [_c("thead", [_c("th", {
+    staticClass: "p-2 text-center",
+    attrs: {
+      colspan: "2"
+    }
+  }, [_vm._v("Local Church")]), _vm._v(" "), _vm._l(_vm.slots.members, function (slot, index) {
+    return [_c("th", {
+      key: index,
+      staticClass: "p-2 text-center"
+    }, [_vm._v(_vm._s(slot.event_date))])];
+  })], 2), _vm._v(" "), _c("tbody", [_vm._l(_vm.localChurches, function (lc, index) {
+    return [_c("tr", {
+      staticClass: "border"
+    }, [_c("td", {
+      staticClass: "p-2 text-center border",
+      attrs: {
+        rowspan: "2"
+      }
+    }, [_vm._v(_vm._s(lc))]), _vm._v(" "), _c("td", {
+      staticClass: "p-2 text-center"
+    }, [_vm._v("Member")]), _vm._v(" "), _vm._l(_vm.slots.members, function (slot, index) {
+      return [_c("td", {
+        staticClass: "p-2 text-center"
+      }, [_vm._v(_vm._s(slot.booked_per_church[lc] || 0))])];
+    })], 2), _vm._v(" "), _c("tr", {
+      staticClass: "border"
+    }, [_c("td", {
+      staticClass: "p-2 text-center"
+    }, [_vm._v("Guest")]), _vm._v(" "), _vm._l(_vm.slots.guests, function (slot, index) {
+      return [_c("td", {
+        staticClass: "p-2 text-center"
+      }, [_vm._v(_vm._s(slot.booked_per_church[lc] || 0))])];
+    })], 2)];
+  })], 2)])])], 1)]);
 };
 
 var staticRenderFns = [];
