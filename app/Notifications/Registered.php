@@ -91,7 +91,7 @@ class Registered extends Notification
                 'name' => $this->registration->fullname,
                 'balance' => strval(number_format($balance)) . ($this->registration->avail_new_lamp_id === 'yes' ? ' (with additional 35)' : ''),
                 'minimum_due' => number_format($this->registration->can_book_rate),
-                'minimum_payment_due_date' => date('M d, Y', strtotime($this->registration->created_at . ' + 7 days')),
+                'minimum_payment_due_date' => date('M d, Y', strtotime($this->registration->booked_date . ' + 7 days')),
                 'booked_dates' => implode(', ', $booked_dates),
                 'registration' => $this->registration
             ]);
