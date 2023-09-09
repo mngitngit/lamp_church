@@ -135,8 +135,6 @@ class BookingController extends Controller
                         'booked_date' => NOW()
                     ]);
 
-                    $this->notify($registration->id);
-
                     if ($hasPermission) {
                         $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array('This delegate was rebooked by ' . auth()->user()->name . ' for ' . implode(', ', $dates)));
                     } else {
@@ -146,6 +144,10 @@ class BookingController extends Controller
             } else {
                 return response()->json(['error' => 'Sorry, no remaining seats left. Please refresh the page and try again.'], 500);
             }
+        }
+
+        if ($hasChanges) {
+            $this->notify($registration->id);
         }
 
         return $registration->bookings()->with(['slot'])->get();
