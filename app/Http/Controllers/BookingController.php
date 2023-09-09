@@ -135,6 +135,8 @@ class BookingController extends Controller
                         'booked_date' => NOW()
                     ]);
 
+                    $this->notify($registration->id);
+
                     if ($hasPermission) {
                         $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array('This delegate was rebooked by ' . auth()->user()->name . ' for ' . implode(', ', $dates)));
                     } else {
