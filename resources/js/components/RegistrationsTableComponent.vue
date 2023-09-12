@@ -76,7 +76,7 @@
         <el-table-column
           label="Booked dates"
           align="center"
-          width="280">
+          width="300">
           <template slot-scope="scope">
             <el-alert
                 v-if="scope.row.is_booking_bypassed"
