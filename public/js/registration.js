@@ -8376,7 +8376,7 @@ var render = function render() {
     attrs: {
       label: "Booked dates",
       align: "center",
-      width: "270"
+      width: "280"
     },
     scopedSlots: _vm._u([{
       key: "default",
