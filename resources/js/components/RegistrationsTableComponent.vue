@@ -76,7 +76,7 @@
         <el-table-column
           label="Booked dates"
           align="center"
-          width="255">
+          width="270">
           <template slot-scope="scope">
             <el-alert
                 v-if="scope.row.is_booking_bypassed"
@@ -87,6 +87,8 @@
             </el-alert>
 
             <el-descriptions v-else-if="scope.row.booked_dates.length > 0" class="margin-top" :column="1" size="mini" border>
+              <el-descriptions-item label="Date Booked" contentClassName="text-center">{{ $func.formatToDateTime(scope.row.booked_date) }}</el-descriptions-item>
+
               <el-descriptions-item label="Booking Status" contentClassName="text-center">
                 <el-tag size="mini" :type="scope.row.booking_status === 'Confirmed' ? 'success' : (scope.row.booking_status === 'Cancelled' ? 'danger' : 'warning')">{{ scope.row.booking_status }}</el-tag>  
               </el-descriptions-item>

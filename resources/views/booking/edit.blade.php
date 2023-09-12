@@ -38,6 +38,7 @@
                 </div>
                 <div class="el-tabs__content">
                     <p>Booking Status: <el-tag type="{{$registration->booking_status === 'Confirmed' ? 'success' : ($registration->booking_status === 'Cancelled' ? 'danger' : 'warning')}}">{{ $registration->booking_status }}</el-tag></p>
+                    <p>Date Booked: {{ date("M d, Y h:i A", strtotime($registration->booked_date)) }}</p>
                     
                     <booking :booked_dates="{{ $booked_dates }}" :slots="{{ $slots }}" uuid="{{ $uuid }}" :can_book_days="{{ $registration->can_book_days }}" :self_redirect="{{ true }}" :is_admin="{{ true }}"/>
                 </div>

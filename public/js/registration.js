@@ -8376,7 +8376,7 @@ var render = function render() {
     attrs: {
       label: "Booked dates",
       align: "center",
-      width: "255"
+      width: "270"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -8396,6 +8396,11 @@ var render = function render() {
             border: ""
           }
         }, [_c("el-descriptions-item", {
+          attrs: {
+            label: "Date Booked",
+            contentClassName: "text-center"
+          }
+        }, [_vm._v(_vm._s(_vm.$func.formatToDateTime(scope.row.booked_date)))]), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
             label: "Booking Status",
             contentClassName: "text-center"
