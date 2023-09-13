@@ -28,9 +28,38 @@ class RegistrationController extends Controller
 
     public function index(Request $request)
     {
-        $registration = Registration::withSum('payments', 'amount')
-            ->where('fullname', 'LIKE', "%$request->search%")
-            ->orWhere('uuid', 'LIKE', "%$request->search%");
+        $search = json_decode($request->search);
+
+        $registration = Registration::withSum('payments', 'amount');
+
+        if ($search->payment_status) {
+            $registration = $registration->where('payment_status', '=', $search->payment_status);
+        }
+
+        if ($search->booking_status) {
+            $registration = $registration->where('booking_status', '=', $search->booking_status);
+        }
+
+        if ($search->registration_type) {
+            $registration = $registration->where('registration_type', '=', $search->registration_type);
+        }
+
+        if ($search->attending_option) {
+            $registration = $registration->where('attending_option', '=', $search->attending_option);
+        }
+
+        if ($search->category) {
+            $registration = $registration->where('category', '=', $search->category);
+        }
+
+        if ($search->local_church) {
+            $registration = $registration->where('local_church', '=', $search->local_church);
+        }
+
+        if ($search->keyword) {
+            $registration = $registration->where('fullname', 'LIKE', "%$search->keyword%")
+                ->orWhere('uuid', 'LIKE', "%$search->keyword%");
+        }
 
         $registration = $registration->paginate(10);
 

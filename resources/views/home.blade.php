@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="mx-4">
     <el-tabs type="border-card" value="{{ $tab }}">
         {{-- Registration --}}
         <el-tab-pane label="Registrations">

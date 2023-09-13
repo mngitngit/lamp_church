@@ -7161,7 +7161,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      search: '',
+      search: {
+        keyword: '',
+        payment_status: '',
+        booking_status: '',
+        registration_type: '',
+        attending_option: '',
+        category: '',
+        local_church: ''
+      },
       tableData: {
         total: 0,
         per_page: 2,
@@ -8188,69 +8196,6 @@ var render = function render() {
   return _c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-md-5 mb-3 p-0"
-  }, [_c("div", {
-    staticClass: "input-with-select el-input el-input-group el-input-group--append"
-  }, [_c("input", {
-    attrs: {
-      type: "hidden",
-      name: "type",
-      value: "lookup"
-    }
-  }), _vm._v(" "), _c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.search,
-      expression: "search"
-    }],
-    staticClass: "el-input__inner",
-    attrs: {
-      type: "text",
-      autocomplete: "off",
-      placeholder: "Search by Name or ID",
-      name: "search"
-    },
-    domProps: {
-      value: _vm.search
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.search = $event.target.value;
-      }
-    }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "el-input-group__append"
-  }, [_c("button", {
-    staticClass: "el-button el-button--submit",
-    attrs: {
-      type: "submit",
-      value: "Submit"
-    },
-    on: {
-      click: function click($event) {
-        return _vm.fetchRegistrations();
-      }
-    }
-  }, [_c("i", {
-    staticClass: "el-icon-search"
-  })])])])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-7 mb-3"
-  }, [_c("a", {
-    attrs: {
-      href: "/registrations/export"
-    }
-  }, [_c("el-button", {
-    staticClass: "float-end",
-    attrs: {
-      type: "success"
-    }
-  }, [_vm._v("Export to Excel "), _c("i", {
-    staticClass: "el-icon-download el-icon-right"
-  })])], 1)])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-24"
   }, [_c("el-table", {
     ref: "filterTable",
@@ -8263,6 +8208,285 @@ var render = function render() {
       border: ""
     }
   }, [_c("el-table-column", {
+    scopedSlots: _vm._u([{
+      key: "header",
+      fn: function fn(scope) {
+        return [_c("table", [_c("tr", {
+          staticStyle: {
+            "background-color": "#f5f7fa"
+          }
+        }, [_c("td", {
+          attrs: {
+            width: "250"
+          }
+        }, [_c("small", [_vm._v("Search by Name or LAMP ID")]), _vm._v(" "), _c("input", {
+          attrs: {
+            type: "hidden",
+            name: "type",
+            value: "lookup"
+          }
+        }), _vm._v(" "), _c("el-input", {
+          attrs: {
+            clearable: "",
+            size: "mini",
+            name: "search",
+            placeholder: "Type to search"
+          },
+          model: {
+            value: _vm.search.keyword,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "keyword", $$v);
+            },
+            expression: "search.keyword"
+          }
+        })], 1), _vm._v(" "), _c("td", {
+          attrs: {
+            width: "120"
+          }
+        }, [_c("small", [_vm._v("Payment Status")]), _vm._v(" "), _c("el-select", {
+          attrs: {
+            size: "mini",
+            clearable: "",
+            placeholder: "select"
+          },
+          model: {
+            value: _vm.search.payment_status,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "payment_status", $$v);
+            },
+            expression: "search.payment_status"
+          }
+        }, [_c("el-option", {
+          attrs: {
+            label: "Unsettled",
+            value: "Unsettled"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            label: "Partial",
+            value: "Partial"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            label: "Paid",
+            value: "Paid"
+          }
+        })], 1)], 1), _vm._v(" "), _c("td", {
+          attrs: {
+            width: "120"
+          }
+        }, [_c("small", [_vm._v("Booking Status")]), _vm._v(" "), _c("el-select", {
+          attrs: {
+            size: "mini",
+            clearable: "",
+            placeholder: "select"
+          },
+          model: {
+            value: _vm.search.booking_status,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "booking_status", $$v);
+            },
+            expression: "search.booking_status"
+          }
+        }, [_c("el-option", {
+          attrs: {
+            label: "Pending",
+            value: "Pending Payment"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            label: "Cancelled",
+            value: "Cancelled"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            label: "Confirmed",
+            value: "Confirmed"
+          }
+        })], 1)], 1), _vm._v(" "), _c("td", {
+          attrs: {
+            width: "120"
+          }
+        }, [_c("small", [_vm._v("Reg Type")]), _vm._v(" "), _c("el-select", {
+          attrs: {
+            size: "mini",
+            clearable: "",
+            placeholder: "select"
+          },
+          model: {
+            value: _vm.search.registration_type,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "registration_type", $$v);
+            },
+            expression: "search.registration_type"
+          }
+        }, [_c("el-option", {
+          attrs: {
+            label: "Member",
+            value: "Member"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            label: "Guest",
+            value: "Guest"
+          }
+        })], 1)], 1), _vm._v(" "), _c("td", {
+          attrs: {
+            width: "120"
+          }
+        }, [_c("small", [_vm._v("Attending Option")]), _vm._v(" "), _c("el-select", {
+          attrs: {
+            size: "mini",
+            clearable: "",
+            placeholder: "select"
+          },
+          model: {
+            value: _vm.search.attending_option,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "attending_option", $$v);
+            },
+            expression: "search.attending_option"
+          }
+        }, [_c("el-option", {
+          attrs: {
+            label: "Hybrid",
+            value: "Hybrid"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            label: "Online",
+            value: "Online"
+          }
+        })], 1)], 1), _vm._v(" "), _c("td", {
+          attrs: {
+            width: "120"
+          }
+        }, [_c("small", [_vm._v("Rate Category")]), _vm._v(" "), _c("el-select", {
+          attrs: {
+            size: "mini",
+            clearable: "",
+            placeholder: "select"
+          },
+          model: {
+            value: _vm.search.category,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "category", $$v);
+            },
+            expression: "search.category"
+          }
+        }, [_c("el-option", {
+          attrs: {
+            label: "Adult",
+            value: "Adult"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            label: "Kids",
+            value: "Kids"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            label: "Free",
+            value: "Free"
+          }
+        })], 1)], 1), _vm._v(" "), _c("td", {
+          attrs: {
+            width: "120"
+          }
+        }, [_c("small", [_vm._v("Local Church")]), _vm._v(" "), _c("el-select", {
+          attrs: {
+            size: "mini",
+            clearable: "",
+            placeholder: "select"
+          },
+          model: {
+            value: _vm.search.local_church,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "local_church", $$v);
+            },
+            expression: "search.local_church"
+          }
+        }, [_c("el-option", {
+          attrs: {
+            value: "Bacolod",
+            label: "Bacolod"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Binan",
+            label: "Binan"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Canlubang",
+            label: "Canlubang"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Dasmarinas",
+            label: "Dasmarinas"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Granada",
+            label: "Granada"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Hinigaran",
+            label: "Hinigaran"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Isabela",
+            label: "Isabela"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Muntinlupa",
+            label: "Muntinlupa"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Pateros",
+            label: "Pateros"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Tarlac",
+            label: "Tarlac"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Valenzuela",
+            label: "Valenzuela"
+          }
+        })], 1)], 1), _vm._v(" "), _c("td", [_c("br"), _vm._v(" "), _c("el-button", {
+          attrs: {
+            size: "mini",
+            type: "primary"
+          },
+          on: {
+            click: function click($event) {
+              return _vm.fetchRegistrations();
+            }
+          }
+        }, [_vm._v("Search")])], 1), _vm._v(" "), _c("td", [_c("br"), _vm._v(" "), _c("a", {
+          attrs: {
+            href: "/registrations/export"
+          }
+        }, [_c("el-button", {
+          staticClass: "float-end",
+          attrs: {
+            type: "success",
+            size: "mini"
+          }
+        }, [_vm._v("Export to Excel "), _c("i", {
+          staticClass: "el-icon-download el-icon-right"
+        })])], 1)])])])];
+      }
+    }])
+  }, [_vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "count",
       label: "#",
@@ -8273,7 +8497,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_vm._v("\n            " + _vm._s(scope.$index + _vm.tableData.from) + "\n        ")];
+        return [_vm._v("\n              " + _vm._s(scope.$index + _vm.tableData.from) + "\n          ")];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {
@@ -8295,7 +8519,7 @@ var render = function render() {
           slot: "label"
         }, [_c("i", {
           staticClass: "el-icon-user"
-        }), _vm._v("\n                Generated ID\n              ")]), _vm._v("\n              " + _vm._s(scope.row.uuid) + "\n            ")], 2), _vm._v(" "), _c("el-descriptions-item", {
+        }), _vm._v("\n                  Generated ID\n                ")]), _vm._v("\n                " + _vm._s(scope.row.uuid) + "\n              ")], 2), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
             label: "Complete Name"
           }
@@ -8327,7 +8551,7 @@ var render = function render() {
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       label: "Other Details",
-      width: "300"
+      width: "305"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -8376,7 +8600,7 @@ var render = function render() {
     attrs: {
       label: "Booked dates",
       align: "center",
-      width: "300"
+      width: "305"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -8426,7 +8650,7 @@ var render = function render() {
       label: "Dates Attended",
       align: "center",
       fixed: "right",
-      width: "230"
+      width: "305"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -8481,7 +8705,7 @@ var render = function render() {
         }, [_vm._v("Delete")]) : _vm._e()];
       }
     }])
-  })], 1), _vm._v(" "), _vm.tableData.data.length > 0 ? _c("pagination", {
+  })], 1)], 1), _vm._v(" "), _vm.tableData.data.length > 0 ? _c("pagination", {
     staticClass: "m-0",
     attrs: {
       pagination: _vm.tableData,
