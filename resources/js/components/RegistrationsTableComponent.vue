@@ -196,7 +196,7 @@
           v-if="tableData.data.length > 0"
           class="m-0"
           :pagination="tableData"
-          @paginate="fetchRegistrations()"
+          @paginate="fetchRegistrations(false)"
           :offset="4">
       </pagination>
     </div>
@@ -231,8 +231,8 @@
       this.fetchRegistrations();
     },
     methods: {
-      fetchRegistrations() {
-        if (this.search != '')
+      fetchRegistrations(ignore_page = true) {
+        if ((this.search.keyword != '' || this.search.payment_status != '' || this.search.booking_status != '' || this.search.registration_type != '' || this.search.attending_option != '' || this.search.category != '' || this.search.local_church != '') && ignore_page)
           this.tableData.current_page = 1;
           
         axios

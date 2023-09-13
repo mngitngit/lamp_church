@@ -7188,7 +7188,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     fetchRegistrations: function fetchRegistrations() {
       var _this = this;
 
-      if (this.search != '') this.tableData.current_page = 1;
+      var ignore_page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      if ((this.search.keyword != '' || this.search.payment_status != '' || this.search.booking_status != '' || this.search.registration_type != '' || this.search.attending_option != '' || this.search.category != '' || this.search.local_church != '') && ignore_page) this.tableData.current_page = 1;
       axios.get("/registration/all", {
         params: {
           search: this.search,
@@ -8713,7 +8714,7 @@ var render = function render() {
     },
     on: {
       paginate: function paginate($event) {
-        return _vm.fetchRegistrations();
+        return _vm.fetchRegistrations(false);
       }
     }
   }) : _vm._e()], 1)]);
