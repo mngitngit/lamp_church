@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingStatus;
 use App\Enums\RegistrationType;
 use App\Models\Attendance;
 use App\Models\Booking;
@@ -153,10 +154,11 @@ class DashboardController extends Controller
         $data = [];
 
         foreach (config('clustergroups') as $local_church => $clusters) {
-            $actual_attendance = Attendance::where('local_church', $local_church)->whereIn('slot_id', [config('settings.member_booking_limit'), config('settings.guest_booking_limit')])->count();
-            $expected_attendance = Booking::where('local_church', $local_church)->whereIn('slot_id', [config('settings.member_booking_limit'), config('settings.guest_booking_limit')])->count();
+            $actual_attendance = Attendance::where('local_church', $local_church)->whereIn('slot_id', [config('settings.guest_slot_today'), config('settings.member_slot_today')])->count();
+            $expected_attendance = Booking::where('local_church', $local_church)->whereIn('slot_id', [config('settings.guest_slot_today'), config('settings.member_slot_today')])->where('status', BookingStatus::Confirmed)->count();
 
-            $percentage = $expected_attendance === 0 ? 0 : number_format(($actual_attendance / $expected_attendance) * 100, 2);
+            $percentage = $expected_attendance === 0 ? 0 : (($actual_attendance / $expected_attendance) * 100);
+            $percentage = fmod($percentage, 1) !== 0.0 ? number_format($percentage, 2) : $percentage;
             $data[] = [
                 'local_church' => $local_church . ' Church',
                 'percentage' => $percentage,

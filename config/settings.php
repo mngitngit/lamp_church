@@ -5,6 +5,8 @@ return [
     'year' => env('YEAR'),
     'guest_booking_limit' => env('GUEST_BOOKING_LIMIT'),
     'member_booking_limit' => env('MEMBER_BOOKING_LIMIT'),
+    'guest_slot_today' => env('SLOT_ID_TODAY_GUEST'),
+    'member_slot_today' => env('SLOT_ID_TODAY_MEMBER'),
     'display_disclosure_prompt' => env('DISPLAY_DISCLOSURE_PROMPT'),
     'slots_allotment' => [
         'Day 1' => [1, 5],

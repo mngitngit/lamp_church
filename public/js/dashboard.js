@@ -6979,7 +6979,23 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
       chartOptions: {
         responsive: true,
         maintainAspectRatio: true
-      }
+      },
+      colors: [{
+        color: 'rgb(255, 73, 73)',
+        percentage: 25
+      }, {
+        color: 'rgb(230, 162, 60)',
+        percentage: 50
+      }, {
+        color: 'rgb(32, 160, 255)',
+        percentage: 75
+      }, {
+        color: 'rgb(19, 206, 102)',
+        percentage: 90
+      }, {
+        color: 'rgb(19, 206, 102)',
+        percentage: 100
+      }]
     };
   },
   methods: {
@@ -7086,6 +7102,7 @@ var render = function render() {
       attrs: {
         "text-inside": true,
         "stroke-width": 15,
+        color: _vm.colors,
         percentage: data.percentage
       }
     }), _vm._v("  "), _c("small", [_vm._v(_vm._s(data.actual_attendance) + " out of " + _vm._s(data.expected_attendance) + " is present today  "), _c("el-link", {

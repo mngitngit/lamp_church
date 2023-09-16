@@ -59,7 +59,7 @@
               <div class="row">
                 <div class="col-md-6 mb-4" v-for="data in progressData">
                   <small>{{ data.local_church }}</small> <br />
-                  <el-progress class="d-inline" :text-inside="true" :stroke-width="15"  :percentage="data.percentage"></el-progress>&nbsp;&nbsp;<small>{{ data.actual_attendance }} out of {{ data.expected_attendance }} is present today &nbsp;<el-link style="font-size: 0.875em;" type="primary" :underline="true">View Details</el-link></small>
+                  <el-progress class="d-inline" :text-inside="true" :stroke-width="15" :color="colors" :percentage="data.percentage"></el-progress>&nbsp;&nbsp;<small>{{ data.actual_attendance }} out of {{ data.expected_attendance }} is present today &nbsp;<el-link style="font-size: 0.875em;" type="primary" :underline="true">View Details</el-link></small>
                 </div>
               </div>
             </div>
@@ -112,7 +112,14 @@
         chartOptions: {
           responsive: true,
           maintainAspectRatio: true
-        }
+        },
+        colors: [
+            {color: 'rgb(255, 73, 73)', percentage: 25},
+            {color: 'rgb(230, 162, 60)', percentage: 50},
+            {color: 'rgb(32, 160, 255)', percentage: 75},
+            {color: 'rgb(19, 206, 102)', percentage: 90},
+            {color: 'rgb(19, 206, 102)', percentage: 100}
+        ],
       }
     },
     methods: {
