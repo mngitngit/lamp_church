@@ -8,6 +8,7 @@ return [
     'guest_slot_today' => env('SLOT_ID_TODAY_GUEST'),
     'member_slot_today' => env('SLOT_ID_TODAY_MEMBER'),
     'display_disclosure_prompt' => env('DISPLAY_DISCLOSURE_PROMPT'),
+    'api_key' => env('API_KEY'),
     'slots_allotment' => [
         'Day 1' => [1, 5],
         'Day 2' => [2, 6],
