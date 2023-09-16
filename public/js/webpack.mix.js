@@ -18,4 +18,5 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/payment.js', 'public/js')
     .js('resources/js/activities.js', 'public/js')
     .js('resources/js/booking.js', 'public/js')
+    .js('resources/js/dashboard.js', 'public/js')
     .extract(['vue', 'axios']);

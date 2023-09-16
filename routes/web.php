@@ -71,3 +71,5 @@ Route::post('/booking/{id}/update', [App\Http\Controllers\BookingController::cla
 
 // config
 Route::get('/config', [App\Http\Controllers\ConfigurationController::class, 'show'])->name('configurations');
+
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');

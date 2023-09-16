@@ -5,5 +5,6 @@
     "/js/activities.js": "/js/activities.js",
     "/js/booking.js": "/js/booking.js",
     "/js/attendance.js": "/js/attendance.js",
+    "/js/dashboard.js": "/js/dashboard.js",
     "/css/app.css": "/css/app.css"
 }

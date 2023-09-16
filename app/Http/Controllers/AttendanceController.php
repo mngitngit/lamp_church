@@ -127,6 +127,7 @@ class AttendanceController extends Controller
             return Attendance::create([
                 'registration_uuid' => $request->details['uuid'],
                 'slot_id' => $slot_id,
+                'registration_type' => $registration->registration_type,
                 'local_church' => $request->details['local_church']
             ]);
         }

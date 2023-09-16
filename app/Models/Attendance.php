@@ -12,7 +12,8 @@ class Attendance extends Model
     protected $fillable = [
         'registration_uuid',
         'slot_id',
-        'local_church'
+        'local_church',
+        'registration_type'
     ];
 
     /**

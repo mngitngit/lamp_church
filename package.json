@@ -24,8 +24,10 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "chart.js": "^4.4.0",
         "element-ui": "^2.15.9",
         "html2canvas": "^1.4.1",
+        "vue-chartjs": "^5.2.0",
         "vue-qrcode-component": "^2.1.1"
     }
 }
