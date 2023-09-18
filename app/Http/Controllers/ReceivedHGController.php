@@ -13,6 +13,10 @@ class ReceivedHGController extends Controller
             return response()->json(['error' => 'API key is required.'], 403);
         }
 
+        if ($request->api_key !== config('settings.api_key')) {
+            return response()->json(['error' => 'API key is invalid.'], 403);
+        }
+
         if (is_null($uuid)) {
             return response()->json(['error' => 'LAMP ID/Guest code is required.'], 422);
         }

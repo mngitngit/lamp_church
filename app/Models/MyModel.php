@@ -24,7 +24,8 @@ class MyModel extends Model
         'can_book_rate',
         'can_book_days',
         'cluster_group',
-        'visitor_to_member'
+        'visitor_to_member',
+        'avail_new_lamp_id'
     ];
 
     function getTrackable()
