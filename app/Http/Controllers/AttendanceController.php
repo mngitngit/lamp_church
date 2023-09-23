@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AttendingOption;
+use App\Enums\BookingStatus;
 use App\Enums\PaymentStatus;
 use App\Models\Attendance;
 use App\Models\Booking;
@@ -42,6 +43,7 @@ class AttendanceController extends Controller
                         'total' => DB::table('bookings')
                             ->where('local_church', $local_church)
                             ->where('slot_id', $member->id)
+                            ->where('status', BookingStatus::Confirmed)
                             ->count(),
                         'attended' => DB::table('attendances')
                             ->where('local_church', $local_church)
@@ -52,6 +54,7 @@ class AttendanceController extends Controller
                         'total' => DB::table('bookings')
                             ->where('local_church', $local_church)
                             ->where('slot_id', $guest->id)
+                            ->where('status', BookingStatus::Confirmed)
                             ->count(),
                         'attended' => DB::table('attendances')
                             ->where('local_church', $local_church)

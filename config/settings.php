@@ -9,6 +9,7 @@ return [
     'member_slot_today' => env('SLOT_ID_TODAY_MEMBER'),
     'display_disclosure_prompt' => env('DISPLAY_DISCLOSURE_PROMPT'),
     'api_key' => env('API_KEY'),
+    'awta_day' => env('AWTA_DAY'),
     'slots_allotment' => [
         'Day 1' => [1, 5],
         'Day 2' => [2, 6],

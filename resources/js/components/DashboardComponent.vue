@@ -58,8 +58,8 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-6 mb-4" v-for="data in progressData">
-                  <small>{{ data.local_church }}</small> <br />
-                  <el-progress class="d-inline" :text-inside="true" :stroke-width="15" :color="colors" :percentage="data.percentage"></el-progress>&nbsp;&nbsp;<small>{{ data.actual_attendance }} out of {{ data.expected_attendance }} is present today &nbsp;<el-link style="font-size: 0.875em;" type="primary" :underline="true">View Details</el-link></small>
+                  <small>{{ data.local_church }} Church</small> <br />
+                  <el-progress class="d-inline" :text-inside="true" :stroke-width="15" :color="colors" :percentage="data.percentage"></el-progress>&nbsp;&nbsp;<small>{{ data.actual_attendance }} out of {{ data.expected_attendance }} is present today &nbsp;<el-link style="font-size: 0.875em;" type="primary" :underline="true" @click="view_attendance(data.local_church)">View Details</el-link></small>
                 </div>
               </div>
             </div>
@@ -125,6 +125,13 @@
     methods: {
       format(percentage) {
         return `${percentage}%`;
+      },
+      view_attendance(local_church) {
+        window.open(
+          `dashboard/attendance?local_church=${local_church}&awta_day=${window.env.awta_day}`,
+          "mywindow",
+          "menubar=1,resizable=1,width=800,height=800"
+        );
       }
     }
   }

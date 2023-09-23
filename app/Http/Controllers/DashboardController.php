@@ -6,6 +6,9 @@ use App\Enums\BookingStatus;
 use App\Enums\RegistrationType;
 use App\Models\Attendance;
 use App\Models\Booking;
+use App\Models\Registration;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -160,7 +163,7 @@ class DashboardController extends Controller
             $percentage = $expected_attendance === 0 ? 0 : (($actual_attendance / $expected_attendance) * 100);
             $percentage = fmod($percentage, 1) !== 0.0 ? number_format($percentage, 2) : $percentage;
             $data[] = [
-                'local_church' => $local_church . ' Church',
+                'local_church' => $local_church,
                 'percentage' => $percentage,
                 'actual_attendance' => $actual_attendance,
                 'expected_attendance' => $expected_attendance
@@ -168,5 +171,54 @@ class DashboardController extends Controller
         }
 
         return $data;
+    }
+
+    public function view_attendance_per_church(Request $request)
+    {
+        // dd($request->awta_day);
+        $attendance = Attendance::where('local_church', $request->local_church);
+
+        if ($request->awta_day) {
+
+            $attendance = $attendance->whereIn('slot_id', config('settings.slots_allotment')[$request->awta_day]);
+        }
+
+        $attendance = $attendance->pluck('registration_uuid');
+
+        $booking = Booking::with('registration');
+
+        if ($request->awta_day) {
+            $booking = $booking->whereIn('slot_id', config('settings.slots_allotment')[$request->awta_day]);
+        }
+
+        $booking = $booking->whereHas('registration', function ($query) use ($request) {
+            return $query->where('fullname', 'LIKE', "%$request->keyword%")
+                ->orWhere('uuid', $request->keyword);
+        })
+            ->where('status', BookingStatus::Confirmed)
+            ->where('local_church', $request->local_church);
+
+        if ($request->attendance) {
+            if ($request->attendance === 'Present') {
+                $booking = $booking->whereIn('registration_uuid', $attendance->toArray());
+            }
+
+            if ($request->attendance === 'Not Yet Present') {
+                $booking = $booking->whereNotIn('registration_uuid', $attendance->toArray());
+            }
+        }
+
+        $booking = $booking->paginate(10);
+
+        $booking->getCollection()->transform(function ($value) use ($attendance) {
+            // Your code here
+            $value->attendance = in_array($value->registration_uuid, $attendance->toArray()) ? 'Present' : 'Not Yet Present';
+
+            return $value;
+        });
+
+        return view('dashboard.attendance', [
+            'absents' => $booking
+        ]);
     }
 }

@@ -8,7 +8,9 @@
 
  window.Vue = require('vue').default;
 
+ Vue.component('pagination', require('./components/Common/Pagination.vue').default);
  Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
+ Vue.component('dashboard-attendance-component', require('./components/AttendancePerLocalChurchComponent.vue').default);
 
  import Vue from 'vue';
  import ElementUI from 'element-ui';

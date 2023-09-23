@@ -25,6 +25,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        window.env = {
+            awta_day: '{{ config('settings.awta_day') }}'
+        };
+    </script>
 </head>
 <body>
     <div id="app">
