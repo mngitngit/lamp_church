@@ -13,6 +13,7 @@ class ReceivedHG extends Model
         'registration_uuid',
         'slot_id',
         'local_church',
-        'registration_type'
+        'registration_type',
+        'notes'
     ];
 }

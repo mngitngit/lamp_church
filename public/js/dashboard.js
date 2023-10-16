@@ -7094,7 +7094,7 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
       defaults: false
     }
   },
-  name: 'BarChart',
+  name: "BarChart",
   components: {
     Bar: vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Bar,
     LineChartGenerator: vue_chartjs__WEBPACK_IMPORTED_MODULE_1__.Line
@@ -7111,19 +7111,19 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
         maintainAspectRatio: true
       },
       colors: [{
-        color: 'rgb(255, 73, 73)',
+        color: "rgb(255, 73, 73)",
         percentage: 25
       }, {
-        color: 'rgb(230, 162, 60)',
+        color: "rgb(230, 162, 60)",
         percentage: 50
       }, {
-        color: 'rgb(32, 160, 255)',
+        color: "rgb(32, 160, 255)",
         percentage: 75
       }, {
-        color: 'rgb(19, 206, 102)',
+        color: "rgb(19, 206, 102)",
         percentage: 90
       }, {
-        color: 'rgb(19, 206, 102)',
+        color: "rgb(19, 206, 102)",
         percentage: 100
       }]
     };
@@ -7637,11 +7637,83 @@ var render = function render() {
       data: _vm.trendData,
       options: _vm.chartOptions
     }
-  })], 1)])])]), _vm._v(" "), _c("div", {
+  })], 1)])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-5"
+  }, [_c("div", {
+    staticClass: "card mb-3 p-3"
+  }, [_c("center", [_c("p", {
+    staticClass: "font-bold text-lg-center m-0 mt-xxl-1",
+    staticStyle: {
+      "font-size": "17px",
+      "margin-bottom": "-5px !important"
+    }
+  }, [_vm._v("\n                                KARL LORENZ TUD\n                            ")]), _vm._v(" "), _c("small", {
+    staticClass: "mb-4"
+  }, [_vm._v("MEMBER")]), _vm._v(" "), _c("p", {
+    staticClass: "font-bold text-lg-center m-0 mt-xxl-1",
+    staticStyle: {
+      "font-size": "17px",
+      "margin-bottom": "-5px !important"
+    }
+  }, [_vm._v("\n                                LAMP00009\n                            ")]), _vm._v(" "), _c("small", {
+    staticClass: "mb-4"
+  }, [_vm._v("LAMP ID")]), _vm._v(" "), _c("p", {
+    staticClass: "font-bold text-lg-center m-0 mt-xxl-1",
+    staticStyle: {
+      "font-size": "17px",
+      "margin-bottom": "-5px !important"
+    }
+  }, [_vm._v("\n                                Muntinlupa\n                            ")]), _vm._v(" "), _c("small", {
+    staticClass: "mb-4"
+  }, [_vm._v("Local Church")]), _vm._v(" "), _c("p", {
+    staticClass: "font-bold text-lg-center m-0 mt-xxl-1",
+    staticStyle: {
+      "font-size": "15px",
+      "margin-bottom": "-5px !important"
+    }
+  }, [_vm._v("\n                                M8 (Katarungan/Manggahan)\n                            ")]), _vm._v(" "), _c("small", {
+    staticClass: "mb-4"
+  }, [_vm._v("Cluster")])])], 1), _vm._v(" "), _c("div", {
+    staticClass: "card mb-3 p-3"
+  }, [_c("small", {
+    staticClass: "mb-1",
+    staticStyle: {
+      "margin-left": "3px"
+    }
+  }, [_vm._v("Date Received the HG")]), _vm._v(" "), _c("el-select", {
+    attrs: {
+      placeholder: "please select date",
+      value: "Day 1"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      label: "Day 1",
+      value: "Day 1"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      label: "Day 2",
+      value: "Day 2"
+    }
+  })], 1), _vm._v(" "), _c("br"), _vm._v(" "), _c("small", {
+    staticClass: "mb-1",
+    staticStyle: {
+      "margin-left": "3px"
+    }
+  }, [_vm._v("Notes")]), _vm._v(" "), _c("el-input", {
+    attrs: {
+      type: "textarea",
+      placeholder: "Specify the names of the altar worker or witnesses..."
+    }
+  }), _vm._v(" "), _c("br"), _vm._v(" "), _c("el-button", {
+    attrs: {
+      type: "primary"
+    }
+  }, [_vm._v("Submit")])], 1)])]), _vm._v(" "), _c("div", {
     staticClass: "card mb-3"
   }, [_c("div", {
     staticClass: "card-header"
-  }, [_vm._v("Attendance Progress Per Local Church")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    Attendance Progress Per Local Church\n                ")]), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("div", {
     staticClass: "row"
@@ -7656,7 +7728,7 @@ var render = function render() {
         color: _vm.colors,
         percentage: data.percentage
       }
-    }), _vm._v("  "), _c("small", [_vm._v(_vm._s(data.actual_attendance) + " out of " + _vm._s(data.expected_attendance) + " is present today  "), _c("el-link", {
+    }), _vm._v("  "), _c("small", [_vm._v(_vm._s(data.actual_attendance) + " out of\n                                " + _vm._s(data.expected_attendance) + " is present\n                                today  "), _c("el-link", {
       staticStyle: {
         "font-size": "0.875em"
       },

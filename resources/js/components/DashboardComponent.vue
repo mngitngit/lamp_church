@@ -1,138 +1,263 @@
 <template>
-<div class="container" style="max-width: 100% !important;margin: 0;">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header">Overall Attendance</div>
+    <div class="container" style="max-width: 100% !important; margin: 0">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-header">Overall Attendance</div>
 
-                <div class="card-body">
-                  <Bar
-                    id="my-chart-id"
-                    :options="chartOptions"
-                    :data="allData"
-                  />
+                    <div class="card-body">
+                        <Bar
+                            id="my-chart-id"
+                            :options="chartOptions"
+                            :data="allData"
+                        />
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">Members Attendance</div>
+
+                    <div class="card-body">
+                        <Bar
+                            id="my-chart-id"
+                            :options="chartOptions"
+                            :data="memberData"
+                        />
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">Guests Attendance</div>
+
+                    <div class="card-body">
+                        <Bar
+                            id="my-chart-id"
+                            :options="chartOptions"
+                            :data="guestData"
+                        />
+                    </div>
                 </div>
             </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="card mb-3">
+                            <div class="card-header">Attendance Trend</div>
 
-            <div class="card mb-3">
-                <div class="card-header">Members Attendance</div>
+                            <div class="card-body">
+                                <LineChartGenerator
+                                    :data="trendData"
+                                    :options="chartOptions"
+                                />
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="card-body">
-                  <Bar
-                    id="my-chart-id"
-                    :options="chartOptions"
-                    :data="memberData"
-                  />
+                    <div class="col-md-5">
+                        <div class="card mb-3 p-3">
+                            <center>
+                                <p
+                                    style="
+                                        font-size: 17px;
+                                        margin-bottom: -5px !important;
+                                    "
+                                    class="font-bold text-lg-center m-0 mt-xxl-1"
+                                >
+                                    KARL LORENZ TUD
+                                </p>
+                                <small class="mb-4">MEMBER</small>
+
+                                <p
+                                    style="
+                                        font-size: 17px;
+                                        margin-bottom: -5px !important;
+                                    "
+                                    class="font-bold text-lg-center m-0 mt-xxl-1"
+                                >
+                                    LAMP00009
+                                </p>
+                                <small class="mb-4">LAMP ID</small>
+
+                                <p
+                                    style="
+                                        font-size: 17px;
+                                        margin-bottom: -5px !important;
+                                    "
+                                    class="font-bold text-lg-center m-0 mt-xxl-1"
+                                >
+                                    Muntinlupa
+                                </p>
+                                <small class="mb-4">Local Church</small>
+
+                                <p
+                                    style="
+                                        font-size: 15px;
+                                        margin-bottom: -5px !important;
+                                    "
+                                    class="font-bold text-lg-center m-0 mt-xxl-1"
+                                >
+                                    M8 (Katarungan/Manggahan)
+                                </p>
+                                <small class="mb-4">Cluster</small>
+                            </center>
+                        </div>
+
+                        <div class="card mb-3 p-3">
+                            <small class="mb-1" style="margin-left: 3px"
+                                >Date Received the HG</small
+                            >
+                            <el-select
+                                placeholder="please select date"
+                                value="Day 1"
+                            >
+                                <el-option
+                                    label="Day 1"
+                                    value="Day 1"
+                                ></el-option>
+                                <el-option
+                                    label="Day 2"
+                                    value="Day 2"
+                                ></el-option>
+                            </el-select>
+                            <br />
+                            <small class="mb-1" style="margin-left: 3px"
+                                >Notes</small
+                            >
+                            <el-input
+                                type="textarea"
+                                placeholder="Specify the names of the altar worker or witnesses..."
+                            ></el-input>
+                            <br />
+                            <el-button type="primary">Submit</el-button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Attendance Progress Per Local Church
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div
+                                class="col-md-6 mb-4"
+                                v-for="data in progressData"
+                            >
+                                <small>{{ data.local_church }} Church</small>
+                                <br />
+                                <el-progress
+                                    class="d-inline"
+                                    :text-inside="true"
+                                    :stroke-width="15"
+                                    :color="colors"
+                                    :percentage="data.percentage"
+                                ></el-progress
+                                >&nbsp;&nbsp;<small
+                                    >{{ data.actual_attendance }} out of
+                                    {{ data.expected_attendance }} is present
+                                    today &nbsp;<el-link
+                                        style="font-size: 0.875em"
+                                        type="primary"
+                                        :underline="true"
+                                        @click="
+                                            view_attendance(data.local_church)
+                                        "
+                                        >View Details</el-link
+                                    ></small
+                                >
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="card mb-3">
-                <div class="card-header">Guests Attendance</div>
-
-                <div class="card-body">
-                  <Bar
-                    id="my-chart-id"
-                    :options="chartOptions"
-                    :data="guestData"
-                  />
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-
-          <div class="row">
-            <div class="col-md-7">
-              <div class="card mb-3">
-                <div class="card-header">Attendance Trend</div>
-
-                <div class="card-body">
-                  <LineChartGenerator :data="trendData" :options="chartOptions" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mb-3">
-            <div class="card-header">Attendance Progress Per Local Church</div>
-
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-6 mb-4" v-for="data in progressData">
-                  <small>{{ data.local_church }} Church</small> <br />
-                  <el-progress class="d-inline" :text-inside="true" :stroke-width="15" :color="colors" :percentage="data.percentage"></el-progress>&nbsp;&nbsp;<small>{{ data.actual_attendance }} out of {{ data.expected_attendance }} is present today &nbsp;<el-link style="font-size: 0.875em;" type="primary" :underline="true" @click="view_attendance(data.local_church)">View Details</el-link></small>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
     </div>
-</div>
-  </template>
-  
-  <script lang="ts">
-  import { Bar } from 'vue-chartjs';
-  import { Line as LineChartGenerator } from 'vue-chartjs'
+</template>
 
-  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js'
-  
-  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement, LineElement)
+<script lang="ts">
+import { Bar } from "vue-chartjs";
+import { Line as LineChartGenerator } from "vue-chartjs";
 
-  export default {
+import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+} from "chart.js";
+
+ChartJS.register(
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement
+);
+
+export default {
     props: {
-      all : {
-        type: Object,
-        default: false
-      },
-      members : {
-        type: Object,
-        default: false
-      },
-      guests : {
-        type: Object,
-        default: false
-      },
-      trend : {
-        type: Object,
-        default: false
-      },
-      progress : {
-        type: Object,
-        defaults: false
-      }
+        all: {
+            type: Object,
+            default: false,
+        },
+        members: {
+            type: Object,
+            default: false,
+        },
+        guests: {
+            type: Object,
+            default: false,
+        },
+        trend: {
+            type: Object,
+            default: false,
+        },
+        progress: {
+            type: Object,
+            defaults: false,
+        },
     },
-    name: 'BarChart',
+    name: "BarChart",
     components: { Bar, LineChartGenerator },
     data() {
-      return {
-        allData: this.all.data,
-        memberData: this.members.data,
-        guestData: this.guests.data,
-        trendData: this.trend,
-        progressData: this.progress,
-        chartOptions: {
-          responsive: true,
-          maintainAspectRatio: true
-        },
-        colors: [
-            {color: 'rgb(255, 73, 73)', percentage: 25},
-            {color: 'rgb(230, 162, 60)', percentage: 50},
-            {color: 'rgb(32, 160, 255)', percentage: 75},
-            {color: 'rgb(19, 206, 102)', percentage: 90},
-            {color: 'rgb(19, 206, 102)', percentage: 100}
-        ],
-      }
+        return {
+            allData: this.all.data,
+            memberData: this.members.data,
+            guestData: this.guests.data,
+            trendData: this.trend,
+            progressData: this.progress,
+            chartOptions: {
+                responsive: true,
+                maintainAspectRatio: true,
+            },
+            colors: [
+                { color: "rgb(255, 73, 73)", percentage: 25 },
+                { color: "rgb(230, 162, 60)", percentage: 50 },
+                { color: "rgb(32, 160, 255)", percentage: 75 },
+                { color: "rgb(19, 206, 102)", percentage: 90 },
+                { color: "rgb(19, 206, 102)", percentage: 100 },
+            ],
+        };
     },
     methods: {
-      format(percentage) {
-        return `${percentage}%`;
-      },
-      view_attendance(local_church) {
-        window.open(
-          `dashboard/attendance?local_church=${local_church}&awta_day=${window.env.awta_day}`,
-          "mywindow",
-          "menubar=1,resizable=1,width=800,height=800"
-        );
-      }
-    }
-  }
-  </script>
+        format(percentage) {
+            return `${percentage}%`;
+        },
+        view_attendance(local_church) {
+            window.open(
+                `dashboard/attendance?local_church=${local_church}&awta_day=${window.env.awta_day}`,
+                "mywindow",
+                "menubar=1,resizable=1,width=800,height=800"
+            );
+        },
+    },
+};
+</script>
