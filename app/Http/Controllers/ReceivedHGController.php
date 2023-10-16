@@ -43,6 +43,16 @@ class ReceivedHGController extends Controller
             return response()->json(['error' => 'Delegate not found.'], 422);
         }
 
+        $received = ReceivedHG::where('registration_uuid', $uuid)->first();
+
+        if ($received) {
+            return response()->json(['error' => 'This delegate has record already.'], 422);
+        }
+
+        if (!$registration) {
+            return response()->json(['error' => 'Delegate not found.'], 422);
+        }
+
         if (!$request->day) {
             return response()->json(['error' => 'Please select AWTA day.'], 422);
         }
