@@ -52,7 +52,7 @@ class Registration extends MyModel
     {
         return $this->registration_type == 'Member' ?
             LookUp::where('lamp_card_number', $this->uuid)->first()->old_lamp_card_number
-            : null;
+            : '--';
     }
 
     public static function boot()
