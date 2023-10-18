@@ -33,7 +33,7 @@ return [
             "label" =>  "Online/Physical",
             "options" => [
                 "Batangas Cluster",
-                "Biñan Cluster",
+                "Binan Cluster",
                 "Carmona Cluster",
                 "Dasmarinas Cluster",
                 "Estrella Cluster",
@@ -153,8 +153,8 @@ return [
                 "C3C4 (Dasma/Imus/Bacoor)",
                 "Campus Ministry",
                 "Canada",
-                "CB (Carmona/Biñan)",
-                "LP (Las Piñas)",
+                "CB (Carmona/Binan)",
+                "LP (Las Pinas)",
                 "LTB (Buraeun)",
                 "M1 (Soldiers/Bicutan)",
                 "M2 (Sta. Rosa)",
@@ -168,7 +168,7 @@ return [
                 "QC (Quezon City)",
                 "SP1 (Langgam/NHA/Batangas)",
                 "SP2 (Brgy. UB)",
-                "SP4 (Bacoor/Parañaque)"
+                "SP4 (Bacoor/Paranaque)"
             ]
         ]
     ],
