@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\RegistrationType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Registration extends MyModel
@@ -42,6 +43,17 @@ class Registration extends MyModel
         'activities' => 'array',
         'booking_activities' => 'array'
     ];
+
+    protected $appends = [
+        "old_uuid"
+    ];
+
+    public function getOldUuidAttribute()
+    {
+        return $this->registration_type == 'Member' ?
+            LookUp::where('lamp_card_number', $this->uuid)->first()->old_lamp_card_number
+            : null;
+    }
 
     public static function boot()
     {

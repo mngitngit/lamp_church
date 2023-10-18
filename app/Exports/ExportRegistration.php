@@ -37,7 +37,7 @@ class ExportRegistration implements FromCollection, WithHeadings
                 'medical_assistance_needed',
                 'visitor_to_member'
             ))
-                ->withSum('payments', 'amount')
+                ->withSum('payments', 'amount', 'old_uuid')
                 ->get()
         );
     }
@@ -66,7 +66,8 @@ class ExportRegistration implements FromCollection, WithHeadings
             'Payment Status',
             'Total Amount Paid',
             'Medical Assistance Needed',
-            'Visitor to Member'
+            'Visitor to Member',
+            'Old AWTA Card Number'
         );
     }
 }
