@@ -53,39 +53,7 @@
                             v-model="ruleForm.localChurch"
                             placeholder="Choose"
                         >
-                            <el-option label="Binan" value="Binan"></el-option>
-                            <el-option
-                                label="Canlubang"
-                                value="Canlubang"
-                            ></el-option>
-                            <el-option
-                                label="Dasmarinas"
-                                value="Dasmarinas"
-                            ></el-option>
-                            <el-option
-                                label="Visayas"
-                                value="Visayas"
-                            ></el-option>
-                            <el-option
-                                label="Isabela"
-                                value="Isabela"
-                            ></el-option>
-                            <el-option
-                                label="Muntinlupa"
-                                value="Muntinlupa"
-                            ></el-option>
-                            <el-option
-                                label="Pateros"
-                                value="Pateros"
-                            ></el-option>
-                            <el-option
-                                label="Tarlac"
-                                value="Tarlac"
-                            ></el-option>
-                            <el-option
-                                label="Valenzuela"
-                                value="Valenzuela"
-                            ></el-option>
+                            <el-option v-for="lc in localChurches" :key="lc" :label="lc" :value="lc"></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
@@ -400,6 +368,7 @@ export default {
             },
             countries: this.$allCountries,
             permissions: window.auth_user.permissions,
+            localChurches: Object.keys(window.env.cluster_groups)
         };
     },
     watch: {
