@@ -7331,7 +7331,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    if (this.congratulate) this.open();
+    if (this.congratulate && this.registrations[0].avail_new_lamp_id == null) this.open();
   },
   methods: {
     capitalizeString: function capitalizeString(str) {

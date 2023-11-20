@@ -103,7 +103,7 @@ export default {
         }
     },
     mounted() {
-        if (this.congratulate)
+        if (this.congratulate && this.registrations[0].avail_new_lamp_id == null)
             this.open()
     },
     methods: {
