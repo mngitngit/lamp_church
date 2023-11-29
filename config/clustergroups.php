@@ -20,7 +20,7 @@ return [
                 "Ma-ao",
                 "Mansilingan",
                 "Pahanocoy",
-                "Puntevedra ",
+                "Pontevedra ",
                 "San Enrique",
                 "Tapong, Pulupandan",
                 "Villa fe",
