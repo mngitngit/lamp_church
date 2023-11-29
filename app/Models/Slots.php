@@ -46,4 +46,8 @@ class Slots extends Model
     {
         return $this->hasMany(Booking::class, 'slot_id', 'id');
     }
+
+    public function received_hg() {
+        return $this->hasMany(Attendance::class, 'slot_id', 'id');
+    }
 }

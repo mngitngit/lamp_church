@@ -7,6 +7,8 @@ use App\Enums\RegistrationType;
 use App\Models\Attendance;
 use App\Models\Booking;
 use App\Models\Registration;
+use App\Models\ReceivedHG;
+use App\Models\Slots;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +25,8 @@ class DashboardController extends Controller
             'members' => (object) $this->get_member_attendance($color_assignment, $local_churches),
             'guests' => (object) $this->get_guest_attendance($color_assignment, $local_churches),
             'trend' => (object) $this->get_all_attendance(),
-            'progress' => (object) $this->get_attendance_progress()
+            'progress' => (object) $this->get_attendance_progress(),
+            'received_hg' => (Array) $this->get_all_list_received_hg()
         ]);
     }
 
@@ -220,5 +223,29 @@ class DashboardController extends Controller
         return view('dashboard.attendance', [
             'absents' => $booking
         ]);
+    }
+
+    public function get_all_list_received_hg() {
+        $allotments = config('settings.slots_allotment');
+        $data = [];
+
+        foreach ($allotments as $day => $allotment) {
+            $member = ReceivedHG::with('slot')->where('id', $allotment[0])->get();
+            $guest = ReceivedHG::with('slot')->where('id', $allotment[1])->get();
+
+            $data[] = [
+                'day' => $day,
+                'member' => [
+                    'data' => $member,
+                    'count' => $member->count()
+                ],
+                'guest' => [
+                    'data' => $guest,
+                    'count' => $guest->count()
+                ]
+            ];
+        }
+        
+        return $data;
     }
 }

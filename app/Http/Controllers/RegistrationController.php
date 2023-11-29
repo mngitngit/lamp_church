@@ -83,6 +83,7 @@ class RegistrationController extends Controller
     public function validation(Request $request)
     {
         $isBulk = $request->isBulk === 'true';
+        $booked = [];
         if ($isBulk) {
             $errors = [];
 
@@ -123,6 +124,30 @@ class RegistrationController extends Controller
                     if ($validation && array_key_exists('error', $validation)) {
                         $errors[$key]['invalid'] = $validation['error'];
                     }
+                }
+
+                $booked = array_unique(array_merge($booked, $value->booked));
+            }
+
+            // check all slot if available
+            $booking_error = [];
+            $availability = [];
+            foreach ($booked as $slot_id) {
+                $slot = Slots::where('id', $slot_id)->first();
+                
+                if ($slot->available <= 0) {
+                    $booking_error[] = $slot_id;
+                }
+
+                $availability[] = $slot->available;
+            }
+            
+            // loop on all reg if has error with slot availability
+            foreach ($request->data as $key => $value) {
+                $value = json_decode($value);
+
+                if (count(array_intersect($value->booked, $booking_error)) > 0) {
+                    $errors[$key]['booked'] = 'Some dates are already taken. Please refresh the page and try again.';
                 }
             }
 

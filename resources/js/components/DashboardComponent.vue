@@ -40,7 +40,7 @@
             </div>
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-5">
                         <div class="card mb-3">
                             <div class="card-header">Attendance Trend</div>
 
@@ -53,82 +53,49 @@
                         </div>
                     </div>
 
-                    <div class="col-md-5">
-                        <div class="card mb-3 p-3">
-                            <center>
-                                <p
-                                    style="
-                                        font-size: 17px;
-                                        margin-bottom: -5px !important;
-                                    "
-                                    class="font-bold text-lg-center m-0 mt-xxl-1"
-                                >
-                                    KARL LORENZ TUD
-                                </p>
-                                <small class="mb-4">MEMBER</small>
+                    <div class="col-md-7">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                            Received the Holy Ghost
+                            </div>
 
-                                <p
-                                    style="
-                                        font-size: 17px;
-                                        margin-bottom: -5px !important;
-                                    "
-                                    class="font-bold text-lg-center m-0 mt-xxl-1"
-                                >
-                                    LAMP00009
-                                </p>
-                                <small class="mb-4">LAMP ID</small>
-
-                                <p
-                                    style="
-                                        font-size: 17px;
-                                        margin-bottom: -5px !important;
-                                    "
-                                    class="font-bold text-lg-center m-0 mt-xxl-1"
-                                >
-                                    Muntinlupa
-                                </p>
-                                <small class="mb-4">Local Church</small>
-
-                                <p
-                                    style="
-                                        font-size: 15px;
-                                        margin-bottom: -5px !important;
-                                    "
-                                    class="font-bold text-lg-center m-0 mt-xxl-1"
-                                >
-                                    M8 (Katarungan/Manggahan)
-                                </p>
-                                <small class="mb-4">Cluster</small>
-                            </center>
-                        </div>
-
-                        <div class="card mb-3 p-3">
-                            <small class="mb-1" style="margin-left: 3px"
-                                >Date Received the HG</small
-                            >
-                            <el-select
-                                placeholder="please select date"
-                                value="Day 1"
-                            >
-                                <el-option
-                                    label="Day 1"
-                                    value="Day 1"
-                                ></el-option>
-                                <el-option
-                                    label="Day 2"
-                                    value="Day 2"
-                                ></el-option>
-                            </el-select>
-                            <br />
-                            <small class="mb-1" style="margin-left: 3px"
-                                >Notes</small
-                            >
-                            <el-input
-                                type="textarea"
-                                placeholder="Specify the names of the altar worker or witnesses..."
-                            ></el-input>
-                            <br />
-                            <el-button type="primary">Submit</el-button>
+                            <div class="card-body">
+                                <el-table
+                                    size="mini"
+                                    border
+                                    :data="received_hg"
+                                    style="width: 100%">
+                                        <el-table-column type="expand">
+                                            <template slot-scope="props">
+                                                <p>test</p>
+                                            </template>
+                                        </el-table-column>
+                                        <el-table-column label="Day" align="center">
+                                            <template slot-scope="scope">
+                                                {{ scope.row.day }}
+                                            </template>
+                                        </el-table-column>
+                                        <el-table-column label="Guest" align="center">
+                                            <template slot-scope="scope">
+                                                {{ scope.row.guest.count }}
+                                            </template>
+                                        </el-table-column>
+                                        <el-table-column label="Member" align="center">
+                                            <template slot-scope="scope">
+                                                {{ scope.row.member.count }}
+                                            </template>
+                                        </el-table-column>
+                                        <el-table-column align="center">
+                                            <small>
+                                                <el-link
+                                                    style="font-size: 11px"
+                                                    type="primary"
+                                                    >View Details
+                                                </el-link>
+                                            </small>
+                                        </el-table-column>
+                                </el-table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -224,6 +191,10 @@ export default {
             type: Object,
             defaults: false,
         },
+        received_hg: {
+            type: Array,
+            defaults: false,
+        }
     },
     name: "BarChart",
     components: { Bar, LineChartGenerator },

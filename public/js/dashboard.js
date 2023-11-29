@@ -7092,6 +7092,10 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
     progress: {
       type: Object,
       defaults: false
+    },
+    received_hg: {
+      type: Array,
+      defaults: false
     }
   },
   name: "BarChart",
@@ -7625,7 +7629,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-7"
+    staticClass: "col-md-5"
   }, [_c("div", {
     staticClass: "card mb-3"
   }, [_c("div", {
@@ -7638,78 +7642,77 @@ var render = function render() {
       options: _vm.chartOptions
     }
   })], 1)])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-5"
+    staticClass: "col-md-7"
   }, [_c("div", {
-    staticClass: "card mb-3 p-3"
-  }, [_c("center", [_c("p", {
-    staticClass: "font-bold text-lg-center m-0 mt-xxl-1",
+    staticClass: "card mb-3"
+  }, [_c("div", {
+    staticClass: "card-header"
+  }, [_vm._v("\n                        Received the Holy Ghost\n                        ")]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("el-table", {
     staticStyle: {
-      "font-size": "17px",
-      "margin-bottom": "-5px !important"
-    }
-  }, [_vm._v("\n                                KARL LORENZ TUD\n                            ")]), _vm._v(" "), _c("small", {
-    staticClass: "mb-4"
-  }, [_vm._v("MEMBER")]), _vm._v(" "), _c("p", {
-    staticClass: "font-bold text-lg-center m-0 mt-xxl-1",
-    staticStyle: {
-      "font-size": "17px",
-      "margin-bottom": "-5px !important"
-    }
-  }, [_vm._v("\n                                LAMP00009\n                            ")]), _vm._v(" "), _c("small", {
-    staticClass: "mb-4"
-  }, [_vm._v("LAMP ID")]), _vm._v(" "), _c("p", {
-    staticClass: "font-bold text-lg-center m-0 mt-xxl-1",
-    staticStyle: {
-      "font-size": "17px",
-      "margin-bottom": "-5px !important"
-    }
-  }, [_vm._v("\n                                Muntinlupa\n                            ")]), _vm._v(" "), _c("small", {
-    staticClass: "mb-4"
-  }, [_vm._v("Local Church")]), _vm._v(" "), _c("p", {
-    staticClass: "font-bold text-lg-center m-0 mt-xxl-1",
-    staticStyle: {
-      "font-size": "15px",
-      "margin-bottom": "-5px !important"
-    }
-  }, [_vm._v("\n                                M8 (Katarungan/Manggahan)\n                            ")]), _vm._v(" "), _c("small", {
-    staticClass: "mb-4"
-  }, [_vm._v("Cluster")])])], 1), _vm._v(" "), _c("div", {
-    staticClass: "card mb-3 p-3"
-  }, [_c("small", {
-    staticClass: "mb-1",
-    staticStyle: {
-      "margin-left": "3px"
-    }
-  }, [_vm._v("Date Received the HG")]), _vm._v(" "), _c("el-select", {
+      width: "100%"
+    },
     attrs: {
-      placeholder: "please select date",
-      value: "Day 1"
+      size: "mini",
+      border: "",
+      data: _vm.received_hg
     }
-  }, [_c("el-option", {
+  }, [_c("el-table-column", {
     attrs: {
-      label: "Day 1",
-      value: "Day 1"
-    }
-  }), _vm._v(" "), _c("el-option", {
+      type: "expand"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(props) {
+        return [_c("p", [_vm._v("test")])];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
     attrs: {
-      label: "Day 2",
-      value: "Day 2"
+      label: "Day",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n                                            " + _vm._s(scope.row.day) + "\n                                        ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      label: "Guest",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n                                            " + _vm._s(scope.row.guest.count) + "\n                                        ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      label: "Member",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n                                            " + _vm._s(scope.row.member.count) + "\n                                        ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      align: "center"
     }
-  })], 1), _vm._v(" "), _c("br"), _vm._v(" "), _c("small", {
-    staticClass: "mb-1",
+  }, [_c("small", [_c("el-link", {
     staticStyle: {
-      "margin-left": "3px"
-    }
-  }, [_vm._v("Notes")]), _vm._v(" "), _c("el-input", {
-    attrs: {
-      type: "textarea",
-      placeholder: "Specify the names of the altar worker or witnesses..."
-    }
-  }), _vm._v(" "), _c("br"), _vm._v(" "), _c("el-button", {
+      "font-size": "11px"
+    },
     attrs: {
       type: "primary"
     }
-  }, [_vm._v("Submit")])], 1)])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("View Details\n                                            ")])], 1)])], 1)], 1)])])]), _vm._v(" "), _c("div", {
     staticClass: "card mb-3"
   }, [_c("div", {
     staticClass: "card-header"
