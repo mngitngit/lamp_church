@@ -108,7 +108,7 @@ class BookingController extends Controller
         foreach ($request->dates as $date) {
             $taken = Booking::where('slot_id', $date)->count();
             $slot = Slots::where('id', $date)->first();
-            $remaining = $slot->seat_count - $taken;
+            $remaining = $slot->available;
 
             if ($remaining > 0) {
                 // update booking status, deduct to rebooking limit
