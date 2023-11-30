@@ -88,6 +88,7 @@
                                     placeholder="Choose"
                                 >
                                     <el-option
+                                        :disabled="ruleForm.registrationType === 'Member'"
                                         value="Hybrid"
                                         label="Hybrid"
                                     ></el-option>
