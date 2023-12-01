@@ -38,7 +38,11 @@ class Slots extends Model
 
     public function getPercentageAttribute()
     {
-        $taken = Booking::where('slot_id', $this->id)->count();
+        $taken = Booking::whereIn('status', [
+            BookingStatus::Confirmed,
+            BookingStatus::Pending
+        ])->where('slot_id', $this->id)->count();
+        
         return number_format(($taken / $this->seat_count) * 100, 2, '.', '');
     }
 
