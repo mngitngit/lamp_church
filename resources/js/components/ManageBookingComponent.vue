@@ -20,7 +20,7 @@
 
                             Hybrid Attendees should book for intended AWTA days only. Visitors will need to coordinate with their cluster local coordinators for their bookings.<br/><br/>
 
-                            Rebooking is until November 30, 2023 only. <br/><br/>
+                            Rebooking is until December 24, 2023 only. <br/><br/>
                             For any booking issues/concerns, kindly reach out to your local AWTA Registrars.<br/><br/>
 
                             Book now — hurry while seats last!
