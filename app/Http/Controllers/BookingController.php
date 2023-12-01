@@ -146,6 +146,10 @@ class BookingController extends Controller
             }
         }
 
+        if (count($new_booked_dates) === 0 && count($old_booked_dates) > 0) {
+            $registration->updateBookingActivities($registration->uuid, $registration->booking_activities, array('Removed all the booked dates by ' . auth()->user()->name));
+        }
+
         if ($hasChanges) {
             $this->notify($registration->id);
         }

@@ -88,7 +88,6 @@
                                     placeholder="Choose"
                                 >
                                     <el-option
-                                        disabled
                                         value="Hybrid"
                                         label="Hybrid"
                                     ></el-option>
