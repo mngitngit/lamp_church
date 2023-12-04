@@ -72,5 +72,8 @@ Route::post('/booking/{id}/update', [App\Http\Controllers\BookingController::cla
 // config
 Route::get('/config', [App\Http\Controllers\ConfigurationController::class, 'show'])->name('configurations');
 
+// dashboard
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/attendance', [App\Http\Controllers\DashboardController::class, 'view_attendance_per_church'])->name('dashboard.attendance');
+Route::get('/dashboard/received-hg', [App\Http\Controllers\DashboardController::class, 'view_received_hg_per_church'])->name('hg.index');
+

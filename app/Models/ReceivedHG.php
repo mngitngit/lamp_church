@@ -21,6 +21,14 @@ class ReceivedHG extends Model
     /**
      * Get the delegate that owns the payment.
      */
+    public function registration()
+    {
+        return $this->belongsTo(Registration::class, 'registration_uuid', 'uuid');
+    }
+
+    /**
+     * Get the delegate that owns the payment.
+     */
     public function slot()
     {
         return $this->belongsTo(Slots::class, 'slot_id', 'id');

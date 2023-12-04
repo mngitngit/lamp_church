@@ -140,13 +140,18 @@
                                         <el-table-column label="Guest" prop="guest.count" align="center"></el-table-column>
                                         <el-table-column label="Member" prop="member.count" align="center"></el-table-column>
                                         <el-table-column align="center">
+                                            <template slot-scope="scope">
                                             <small>
                                                 <el-link
                                                     style="font-size: 11px"
                                                     type="primary"
+                                                    @click="
+                                                        view_received_hg(scope.row.day)
+                                                    "
                                                     >View Details
                                                 </el-link>
                                             </small>
+                                        </template>
                                         </el-table-column>
                                 </el-table>
                             </div>
@@ -243,6 +248,13 @@ export default {
                 `dashboard/attendance?local_church=${local_church}&awta_day=${window.env.awta_day}`,
                 "mywindow",
                 "menubar=1,resizable=1,width=800,height=800"
+            );
+        },
+        view_received_hg(awta_day) {
+            window.open(
+                `dashboard/received-hg?awta_day=${awta_day}`,
+                "mywindow",
+                "menubar=1,resizable=1,width=1000,height=800"
             );
         },
         getSummaries(param) {

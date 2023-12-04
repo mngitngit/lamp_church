@@ -4,38 +4,39 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
- require('./bootstrap');
+require('./bootstrap');
 
- window.Vue = require('vue').default;
+window.Vue = require('vue').default;
 
- Vue.component('pagination', require('./components/Common/Pagination.vue').default);
- Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
- Vue.component('dashboard-attendance-component', require('./components/AttendancePerLocalChurchComponent.vue').default);
+Vue.component('pagination', require('./components/Common/Pagination.vue').default);
+Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
+Vue.component('dashboard-attendance-component', require('./components/AttendancePerLocalChurchComponent.vue').default);
+Vue.component('dashboard-received-hg-component', require('./components/ReceivedHGPerLocalChurchComponent.vue').default);
 
- import Vue from 'vue';
- import ElementUI from 'element-ui';
- import 'element-ui/lib/theme-chalk/index.css';
- import '../css/app.css';
- import { Loading } from 'element-ui';
- 
- import {func} from './func.js';
+import Vue from 'vue';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import '../css/app.css';
+import { Loading } from 'element-ui';
 
- import locale from 'element-ui/lib/locale/lang/en'
- 
- Vue.prototype.$func = func
- 
- // Loading.service({ fullscreen: true })
- 
- Vue.config.lang = 'en'
- 
- Vue.use(ElementUI, {locale});
-  
- const app = new Vue({
-     el: '#app',
-     data: function() {
-         return { 
-             visible: false,
-             search: null,
-         }
-     }
- });
+import { func } from './func.js';
+
+import locale from 'element-ui/lib/locale/lang/en'
+
+Vue.prototype.$func = func
+
+// Loading.service({ fullscreen: true })
+
+Vue.config.lang = 'en'
+
+Vue.use(ElementUI, { locale });
+
+const app = new Vue({
+    el: '#app',
+    data: function () {
+        return {
+            visible: false,
+            search: null,
+        }
+    }
+});
