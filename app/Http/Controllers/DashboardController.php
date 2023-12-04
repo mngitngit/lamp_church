@@ -183,8 +183,8 @@ class DashboardController extends Controller
         $data = [];
 
         foreach ($allotments as $day => $allotment) {
-            $member = ReceivedHG::with('slot')->where('id', $allotment[0])->get();
-            $guest = ReceivedHG::with('slot')->where('id', $allotment[1])->get();
+            $member = ReceivedHG::with('slot')->where('slot_id', $allotment[0])->get();
+            $guest = ReceivedHG::with('slot')->where('slot_id', $allotment[1])->get();
 
             $collection = [
                 'day' => $day,
@@ -201,8 +201,8 @@ class DashboardController extends Controller
 
             $local_churches = explode(',', env('LOCAL_CHURCHES'));
             foreach ($local_churches as $lc) {
-                $lc_member = ReceivedHG::with('slot')->where('id', $allotment[0])->where('local_church', $lc)->get();
-                $lc_guest = ReceivedHG::with('slot')->where('id', $allotment[1])->where('local_church', $lc)->get();
+                $lc_member = ReceivedHG::with('slot')->where('slot_id', $allotment[0])->where('local_church', $lc)->get();
+                $lc_guest = ReceivedHG::with('slot')->where('slot_id', $allotment[1])->where('local_church', $lc)->get();
 
                 $collection['local_churches'][] = [
                     'local_church' => $lc,
