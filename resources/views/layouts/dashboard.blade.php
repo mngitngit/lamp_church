@@ -34,7 +34,7 @@
 </head>
 <body>
     <div id="app">
-        <main style="min-height: 100vh; background-color: #ebebeb" class="py-3">
+        <main style="min-height: 100vh; background-color: #ebebeb" class="py-3 pb-5">
             @yield('content')
         </main>
 

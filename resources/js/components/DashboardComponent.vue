@@ -39,6 +39,44 @@
                 </div>
             </div>
             <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Attendance Progress Per Local Church
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div
+                                class="col-md-6 mb-4"
+                                v-for="data in progressData"
+                            >
+                                <small>{{ data.local_church }} Church</small>
+                                <br />
+                                <el-progress
+                                    class="d-inline"
+                                    :text-inside="true"
+                                    :stroke-width="15"
+                                    :color="colors"
+                                    :percentage="parseInt(data.percentage)"
+                                ></el-progress
+                                >&nbsp;&nbsp;<small
+                                    >{{ data.actual_attendance }} out of
+                                    {{ data.expected_attendance }} is present
+                                    today &nbsp;<el-link
+                                        style="font-size: 0.875em"
+                                        type="primary"
+                                        :underline="true"
+                                        @click="
+                                            view_attendance(data.local_church)
+                                        "
+                                        >View Details</el-link
+                                    ></small
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="row">
                     <div class="col-md-5">
                         <div class="card mb-3">
@@ -64,10 +102,34 @@
                                     size="mini"
                                     border
                                     :data="received_hg"
+                                    show-summary
+                                    :summary-method="getSummaries"
                                     style="width: 100%">
-                                        <el-table-column type="expand">
+                                        <el-table-column type="expand" align="center">
                                             <template slot-scope="props">
-                                                <p>test</p>
+                                                <el-table
+                                                    :data="props.row.local_churches"
+                                                    border
+                                                    size="mini"
+                                                    class="mx-2"
+                                                    style="width: 97%"
+                                                    cell-style="padding: 0; font-size: 10px">
+                                                        <el-table-column
+                                                        prop="local_church"
+                                                        label="Local Church"
+                                                        width="180">
+                                                        </el-table-column>
+                                                        <el-table-column label="Guest" prop="guest.count" align="center" sortable>
+                                                            <template slot-scope="scope">
+                                                                {{ scope.row.guest.count }}
+                                                            </template>
+                                                        </el-table-column>
+                                                        <el-table-column label="Member" prop="member.count" align="center" sortable>
+                                                            <template slot-scope="scope">
+                                                                {{ scope.row.member.count }}
+                                                            </template>
+                                                        </el-table-column>
+                                                </el-table>
                                             </template>
                                         </el-table-column>
                                         <el-table-column label="Day" align="center">
@@ -75,16 +137,8 @@
                                                 {{ scope.row.day }}
                                             </template>
                                         </el-table-column>
-                                        <el-table-column label="Guest" align="center">
-                                            <template slot-scope="scope">
-                                                {{ scope.row.guest.count }}
-                                            </template>
-                                        </el-table-column>
-                                        <el-table-column label="Member" align="center">
-                                            <template slot-scope="scope">
-                                                {{ scope.row.member.count }}
-                                            </template>
-                                        </el-table-column>
+                                        <el-table-column label="Guest" prop="guest.count" align="center"></el-table-column>
+                                        <el-table-column label="Member" prop="member.count" align="center"></el-table-column>
                                         <el-table-column align="center">
                                             <small>
                                                 <el-link
@@ -95,44 +149,6 @@
                                             </small>
                                         </el-table-column>
                                 </el-table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3">
-                    <div class="card-header">
-                        Attendance Progress Per Local Church
-                    </div>
-
-                    <div class="card-body">
-                        <div class="row">
-                            <div
-                                class="col-md-6 mb-4"
-                                v-for="data in progressData"
-                            >
-                                <small>{{ data.local_church }} Church</small>
-                                <br />
-                                <el-progress
-                                    class="d-inline"
-                                    :text-inside="true"
-                                    :stroke-width="15"
-                                    :color="colors"
-                                    :percentage="data.percentage"
-                                ></el-progress
-                                >&nbsp;&nbsp;<small
-                                    >{{ data.actual_attendance }} out of
-                                    {{ data.expected_attendance }} is present
-                                    today &nbsp;<el-link
-                                        style="font-size: 0.875em"
-                                        type="primary"
-                                        :underline="true"
-                                        @click="
-                                            view_attendance(data.local_church)
-                                        "
-                                        >View Details</el-link
-                                    ></small
-                                >
                             </div>
                         </div>
                     </div>
@@ -229,6 +245,29 @@ export default {
                 "menubar=1,resizable=1,width=800,height=800"
             );
         },
+        getSummaries(param) {
+            const { columns, data } = param;
+            const sums = [];
+            columns.forEach((column, index) => {
+                if (index === 0 || index === 4 || index === 1) {
+                    sums[index] = index === 1 ? 'Total' : '';
+                    return;
+                }
+                
+                var col = index === 2 ? 'guest' : 'member';
+                const values = data.map(item => item[col]['count']);
+                sums[index] = values.reduce((prev, curr) => {
+                    const value = Number(curr);
+                    if (!isNaN(value)) {
+                        return prev + curr;
+                    } else {
+                        return prev;
+                    }
+                }, 0);
+            });
+
+            return sums;
+        }
     },
 };
 </script>

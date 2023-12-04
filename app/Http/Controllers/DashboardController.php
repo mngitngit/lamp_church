@@ -26,7 +26,9 @@ class DashboardController extends Controller
             'guests' => (object) $this->get_guest_attendance($color_assignment, $local_churches),
             'trend' => (object) $this->get_all_attendance(),
             'progress' => (object) $this->get_attendance_progress(),
-            'received_hg' => (Array) $this->get_all_list_received_hg()
+            'received_hg' => (Array) $this->get_all_list_received_hg(),
+            'guest_current_date' => Slots::where('id', env('SLOT_ID_TODAY_GUEST'))->first()->event_date,
+            'member_current_date' => Slots::where('id', env('SLOT_ID_TODAY_MEMBER'))->first()->event_date
         ]);
     }
 
@@ -233,17 +235,38 @@ class DashboardController extends Controller
             $member = ReceivedHG::with('slot')->where('id', $allotment[0])->get();
             $guest = ReceivedHG::with('slot')->where('id', $allotment[1])->get();
 
-            $data[] = [
+            $collection = [
                 'day' => $day,
                 'member' => [
                     'data' => $member,
-                    'count' => $member->count()
+                    'count' => $member->count(),
                 ],
                 'guest' => [
                     'data' => $guest,
                     'count' => $guest->count()
-                ]
+                ],
+                'local_churches' => []
             ];
+
+            $local_churches = explode(',', env('LOCAL_CHURCHES'));
+            foreach ($local_churches as $lc) {
+                $lc_member = ReceivedHG::with('slot')->where('id', $allotment[0])->where('local_church', $lc)->get();
+                $lc_guest = ReceivedHG::with('slot')->where('id', $allotment[1])->where('local_church', $lc)->get();
+
+                $collection['local_churches'][] = [
+                    'local_church' => $lc,
+                    'member' => [
+                        'data' => $lc_member,
+                        'count' => $lc_member->count(),
+                    ],
+                    'guest' => [
+                        'data' => $lc_guest,
+                        'count' => $lc_guest->count()
+                    ]
+                ];
+            }
+
+            $data[] = $collection;
         }
         
         return $data;

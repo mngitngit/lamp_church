@@ -7138,6 +7138,32 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
     },
     view_attendance: function view_attendance(local_church) {
       window.open("dashboard/attendance?local_church=".concat(local_church, "&awta_day=").concat(window.env.awta_day), "mywindow", "menubar=1,resizable=1,width=800,height=800");
+    },
+    getSummaries: function getSummaries(param) {
+      var columns = param.columns,
+          data = param.data;
+      var sums = [];
+      columns.forEach(function (column, index) {
+        if (index === 0 || index === 4 || index === 1) {
+          sums[index] = index === 1 ? 'Total' : '';
+          return;
+        }
+
+        var col = index === 2 ? 'guest' : 'member';
+        var values = data.map(function (item) {
+          return item[col]['count'];
+        });
+        sums[index] = values.reduce(function (prev, curr) {
+          var value = Number(curr);
+
+          if (!isNaN(value)) {
+            return prev + curr;
+          } else {
+            return prev;
+          }
+        }, 0);
+      });
+      return sums;
     }
   }
 });
@@ -7627,6 +7653,39 @@ var render = function render() {
   })], 1)])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-8"
   }, [_c("div", {
+    staticClass: "card mb-3"
+  }, [_c("div", {
+    staticClass: "card-header"
+  }, [_vm._v("\n                    Attendance Progress Per Local Church\n                ")]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("div", {
+    staticClass: "row"
+  }, _vm._l(_vm.progressData, function (data) {
+    return _c("div", {
+      staticClass: "col-md-6 mb-4"
+    }, [_c("small", [_vm._v(_vm._s(data.local_church) + " Church")]), _vm._v(" "), _c("br"), _vm._v(" "), _c("el-progress", {
+      staticClass: "d-inline",
+      attrs: {
+        "text-inside": true,
+        "stroke-width": 15,
+        color: _vm.colors,
+        percentage: parseInt(data.percentage)
+      }
+    }), _vm._v("  "), _c("small", [_vm._v(_vm._s(data.actual_attendance) + " out of\n                                " + _vm._s(data.expected_attendance) + " is present\n                                today  "), _c("el-link", {
+      staticStyle: {
+        "font-size": "0.875em"
+      },
+      attrs: {
+        type: "primary",
+        underline: true
+      },
+      on: {
+        click: function click($event) {
+          return _vm.view_attendance(data.local_church);
+        }
+      }
+    }, [_vm._v("View Details")])], 1)], 1);
+  }), 0)])]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-5"
@@ -7656,16 +7715,62 @@ var render = function render() {
     attrs: {
       size: "mini",
       border: "",
-      data: _vm.received_hg
+      data: _vm.received_hg,
+      "show-summary": "",
+      "summary-method": _vm.getSummaries
     }
   }, [_c("el-table-column", {
     attrs: {
-      type: "expand"
+      type: "expand",
+      align: "center"
     },
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(props) {
-        return [_c("p", [_vm._v("test")])];
+        return [_c("el-table", {
+          staticClass: "mx-2",
+          staticStyle: {
+            width: "97%"
+          },
+          attrs: {
+            data: props.row.local_churches,
+            border: "",
+            size: "mini",
+            "cell-style": "padding: 0; font-size: 10px"
+          }
+        }, [_c("el-table-column", {
+          attrs: {
+            prop: "local_church",
+            label: "Local Church",
+            width: "180"
+          }
+        }), _vm._v(" "), _c("el-table-column", {
+          attrs: {
+            label: "Guest",
+            prop: "guest.count",
+            align: "center",
+            sortable: ""
+          },
+          scopedSlots: _vm._u([{
+            key: "default",
+            fn: function fn(scope) {
+              return [_vm._v("\n                                                            " + _vm._s(scope.row.guest.count) + "\n                                                        ")];
+            }
+          }], null, true)
+        }), _vm._v(" "), _c("el-table-column", {
+          attrs: {
+            label: "Member",
+            prop: "member.count",
+            align: "center",
+            sortable: ""
+          },
+          scopedSlots: _vm._u([{
+            key: "default",
+            fn: function fn(scope) {
+              return [_vm._v("\n                                                            " + _vm._s(scope.row.member.count) + "\n                                                        ")];
+            }
+          }], null, true)
+        })], 1)];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {
@@ -7682,25 +7787,15 @@ var render = function render() {
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       label: "Guest",
+      prop: "guest.count",
       align: "center"
-    },
-    scopedSlots: _vm._u([{
-      key: "default",
-      fn: function fn(scope) {
-        return [_vm._v("\n                                            " + _vm._s(scope.row.guest.count) + "\n                                        ")];
-      }
-    }])
+    }
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       label: "Member",
+      prop: "member.count",
       align: "center"
-    },
-    scopedSlots: _vm._u([{
-      key: "default",
-      fn: function fn(scope) {
-        return [_vm._v("\n                                            " + _vm._s(scope.row.member.count) + "\n                                        ")];
-      }
-    }])
+    }
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       align: "center"
@@ -7712,40 +7807,7 @@ var render = function render() {
     attrs: {
       type: "primary"
     }
-  }, [_vm._v("View Details\n                                            ")])], 1)])], 1)], 1)])])]), _vm._v(" "), _c("div", {
-    staticClass: "card mb-3"
-  }, [_c("div", {
-    staticClass: "card-header"
-  }, [_vm._v("\n                    Attendance Progress Per Local Church\n                ")]), _vm._v(" "), _c("div", {
-    staticClass: "card-body"
-  }, [_c("div", {
-    staticClass: "row"
-  }, _vm._l(_vm.progressData, function (data) {
-    return _c("div", {
-      staticClass: "col-md-6 mb-4"
-    }, [_c("small", [_vm._v(_vm._s(data.local_church) + " Church")]), _vm._v(" "), _c("br"), _vm._v(" "), _c("el-progress", {
-      staticClass: "d-inline",
-      attrs: {
-        "text-inside": true,
-        "stroke-width": 15,
-        color: _vm.colors,
-        percentage: data.percentage
-      }
-    }), _vm._v("  "), _c("small", [_vm._v(_vm._s(data.actual_attendance) + " out of\n                                " + _vm._s(data.expected_attendance) + " is present\n                                today  "), _c("el-link", {
-      staticStyle: {
-        "font-size": "0.875em"
-      },
-      attrs: {
-        type: "primary",
-        underline: true
-      },
-      on: {
-        click: function click($event) {
-          return _vm.view_attendance(data.local_church);
-        }
-      }
-    }, [_vm._v("View Details")])], 1)], 1);
-  }), 0)])])])])]);
+  }, [_vm._v("View Details\n                                            ")])], 1)])], 1)], 1)])])])])])]);
 };
 
 var staticRenderFns = [];
