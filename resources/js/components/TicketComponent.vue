@@ -55,13 +55,6 @@
                         </div>
                     </div>
 
-                    <!-- <div v-if="registration.cluster_group != ''" class="row">
-                        <div class="col-md-12 mb-3">
-                            <small>Cluster Group</small>
-                            <span class="text-md font-bold d-block">{{ registration.cluster_group }}</span>
-                        </div>
-                    </div> -->
-
                     <div v-if="registration.attending_option === 'Hybrid'" class="row mb-3">
                         <div class="col-md-12">
                             <small class="d-block">Booked Dates</small>

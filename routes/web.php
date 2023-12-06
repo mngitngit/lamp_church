@@ -64,7 +64,7 @@ Route::post('/attendance', [App\Http\Controllers\AttendanceController::class, 's
 
 // booking
 Route::get('/booking', [App\Http\Controllers\BookingController::class, 'create'])->name('booking.create');
-Route::get('/booking/validate', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
+Route::get('/booking/validate', [App\Http\Controllers\BookingController::class, 'validation'])->name('booking.validation');
 Route::get('/booking/{id}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking.show');
 Route::get('/booking/{id}/edit', [App\Http\Controllers\BookingController::class, 'edit'])->name('booking.edit');
 Route::post('/booking/{id}/update', [App\Http\Controllers\BookingController::class, 'update'])->name('booking.update');
@@ -77,3 +77,8 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'inde
 Route::get('/dashboard/attendance', [App\Http\Controllers\DashboardController::class, 'view_attendance_per_church'])->name('dashboard.attendance');
 Route::get('/dashboard/received-hg', [App\Http\Controllers\DashboardController::class, 'view_received_hg_per_church'])->name('hg.index');
 
+// online check in
+Route::get('/check-in', [App\Http\Controllers\CheckInController::class, 'index'])->name('check-in');
+Route::get('/check-in/validate', [App\Http\Controllers\CheckInController::class, 'validation'])->name('check-in.validation');
+Route::post('/check-in/{id}', [App\Http\Controllers\CheckInController::class, 'update'])->name('check-in.update');
+Route::get('/check-in/passes', [App\Http\Controllers\CheckInController::class, 'show'])->name('check-in.attendance');

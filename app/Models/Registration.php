@@ -101,6 +101,10 @@ class Registration extends MyModel
         return $this->hasMany(Booking::class, 'registration_uuid', 'uuid');
     }
 
+    public function available_bookings($id) {
+        return $this->bookings()->where('id', $id);
+    }
+
     /**
      * Get the attendance for the delegate.
      */

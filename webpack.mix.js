@@ -19,4 +19,5 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/activities.js', 'public/js')
     .js('resources/js/booking.js', 'public/js')
     .js('resources/js/attendance.js', 'public/js')
+    .js('resources/js/checkin.js', 'public/js')
     .js('resources/js/dashboard.js', 'public/js');

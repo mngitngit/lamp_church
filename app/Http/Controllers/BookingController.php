@@ -157,7 +157,7 @@ class BookingController extends Controller
         return $registration->bookings()->with(['slot'])->get();
     }
 
-    public function index(Request $request)
+    public function validation(Request $request)
     {
         $registration = Registration::with('bookings', 'bookings.slot')
             ->where('uuid', $request->referenceNumber)

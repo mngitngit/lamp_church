@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AttendingOption;
+use App\Enums\AttendanceType;
 use App\Enums\BookingStatus;
 use App\Enums\PaymentStatus;
 use App\Models\Attendance;
@@ -131,7 +132,8 @@ class AttendanceController extends Controller
                 'registration_uuid' => $request->details['uuid'],
                 'slot_id' => $slot_id,
                 'registration_type' => $registration->registration_type,
-                'local_church' => $request->details['local_church']
+                'local_church' => $request->details['local_church'],
+                'notes' => AttendanceType::Physical
             ]);
         }
 

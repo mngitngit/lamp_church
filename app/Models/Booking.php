@@ -16,6 +16,29 @@ class Booking extends Model
         'status'
     ];
 
+    protected $appends = [
+        "attendance_status",
+        "is_happening"
+    ];
+
+    /**
+     * Get the attendance status of booking
+     */
+    public function getAttendanceStatusAttribute()
+    {
+        $attendance = Attendance::where('registration_uuid', $this->registration_uuid)->where('slot_id', $this->slot_id)->first();
+
+        return $attendance ? $attendance->notes : 'Pending';
+    }
+
+    /**
+     * Get the attendance status of booking
+     */
+    public function getIsHappeningAttribute()
+    {
+        return $this->slot_id == env('SLOT_ID_TODAY_GUEST') || $this->slot_id == env('SLOT_ID_TODAY_MEMBER');
+    }
+
     /**
      * Get the delegate that owns the payment.
      */
@@ -30,5 +53,13 @@ class Booking extends Model
     public function slot()
     {
         return $this->belongsTo(Slots::class, 'slot_id', 'id');
+    }
+
+    /**
+     * Get the attendance.
+     */
+    public function attendance()
+    {
+        return $this->hasOne(Attendance::class, 'slot_id', 'slot_id');
     }
 }
