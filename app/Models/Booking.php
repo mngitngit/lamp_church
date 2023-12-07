@@ -60,6 +60,6 @@ class Booking extends Model
      */
     public function attendance()
     {
-        return $this->hasOne(Attendance::class, 'slot_id', 'slot_id');
+        return $this->hasOne(Attendance::class, 'registration_uuid', 'registration_uuid')->where('slot_id', $this->slot_id);
     }
 }
