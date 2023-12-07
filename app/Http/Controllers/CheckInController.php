@@ -21,7 +21,7 @@ class CheckInController extends Controller
     }
 
     public function validation(Request $request) {
-        $registration = Registration::with('bookings', 'bookings.slot', 'bookings.attendance')
+        $registration = Registration::with('bookings', 'bookings.slot')
             ->where('uuid', $request->referenceNumber)
             ->where('lastname', $request->lastName)
             ->where('local_church', $request->localChurch)

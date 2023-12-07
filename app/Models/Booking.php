@@ -18,7 +18,8 @@ class Booking extends Model
 
     protected $appends = [
         "attendance_status",
-        "is_happening"
+        "is_happening",
+        "attendance"
     ];
 
     /**
@@ -58,8 +59,8 @@ class Booking extends Model
     /**
      * Get the attendance.
      */
-    public function attendance()
+    public function getAttendanceAttribute()
     {
-        return $this->hasOne(Attendance::class, 'registration_uuid', 'registration_uuid')->where('slot_id', $this->slot_id);
+        return Attendance::where('registration_uuid', $this->registration_uuid)->where('slot_id', $this->slot_id)->first();
     }
 }
