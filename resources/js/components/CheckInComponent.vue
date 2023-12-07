@@ -190,7 +190,6 @@ export default {
                 .then(async (response) => {
                     var data = response.data[response.data.length-1];
                     window.location.href = `check-in/passes?id=${data.id}`;
-                    location.reload();
                 });
             });
         },

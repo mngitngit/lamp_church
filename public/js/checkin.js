@@ -7095,9 +7095,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                           case 0:
                             data = response.data[response.data.length - 1];
                             window.location.href = "check-in/passes?id=".concat(data.id);
-                            location.reload();
 
-                          case 3:
+                          case 2:
                           case "end":
                             return _context3.stop();
                         }
