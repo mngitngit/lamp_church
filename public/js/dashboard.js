@@ -7555,9 +7555,9 @@ var render = function render() {
         return [_c("el-tag", {
           attrs: {
             size: "mini",
-            type: scope.row.attendance === "Present" ? "success" : "warning"
+            type: scope.row.attendance_status === "Pending" ? "warning" : "success"
           }
-        }, [_vm._v(_vm._s(scope.row.attendance))])];
+        }, [_vm._v(_vm._s(scope.row.attendance_status))])];
       }
     }])
   })], 1)], 1), _vm._v(" "), _vm.tableData.data.length > 0 ? _c("pagination", {

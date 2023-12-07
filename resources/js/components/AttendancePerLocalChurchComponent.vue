@@ -115,7 +115,7 @@
               fixed="left"
               align="center">
               <template slot-scope="scope">
-                <el-tag size="mini" :type="scope.row.attendance === 'Present' ? 'success' : 'warning'">{{ scope.row.attendance }}</el-tag>
+                <el-tag size="mini" :type="scope.row.attendance_status === 'Pending' ? 'warning' : 'success'">{{ scope.row.attendance_status }}</el-tag>
               </template>
             </el-table-column>
           </el-table-column>
