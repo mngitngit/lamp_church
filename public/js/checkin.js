@@ -7094,9 +7094,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                         switch (_context3.prev = _context3.next) {
                           case 0:
                             data = response.data[response.data.length - 1];
-
-                            _this2.viewPass(data.id);
-
+                            window.location.href = "check-in/passes?id=".concat(data.id);
                             location.reload();
 
                           case 3:

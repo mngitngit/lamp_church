@@ -189,7 +189,7 @@ export default {
                 })
                 .then(async (response) => {
                     var data = response.data[response.data.length-1];
-                    this.viewPass(data.id);
+                    window.location.href = `check-in/passes?id=${data.id}`;
                     location.reload();
                 });
             });
