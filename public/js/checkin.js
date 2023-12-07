@@ -7248,7 +7248,7 @@ var render = function render() {
     }
   }, [_c("h3", [_vm._v("Online Check In")]), _vm._v(" "), _c("p", {
     staticClass: "mt-2 c-booking-subheader"
-  }, [_vm._v("Type in your details to manage your booking")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Type in your details to check in.")]), _vm._v(" "), _c("div", {
     staticClass: "px-2 row"
   }, [_vm.disabled ? _c("el-alert", {
     attrs: {
