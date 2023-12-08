@@ -75,7 +75,9 @@ class AttendanceController extends Controller
         }
 
         return view('attendance.index', [
-            'count' => json_encode($attendance_count)
+            'count' => json_encode($attendance_count),
+            'guest_current_date' => Slots::where('id', env('SLOT_ID_TODAY_GUEST'))->first()->event_date,
+            'member_current_date' => Slots::where('id', env('SLOT_ID_TODAY_MEMBER'))->first()->event_date
         ]);
     }
 

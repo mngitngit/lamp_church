@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class ReceivedHGController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['index']]);
-    }
-
     public function show($uuid, Request $request)
     {
         if (!$request->api_key) {

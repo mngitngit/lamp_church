@@ -16,7 +16,7 @@ class CheckInController extends Controller
 {
     public function index(Request $request) {
         return view('checkin.index', [
-            'loc' => $request->lo_c == 1 ? 'Online' : 'Onsite'
+            'loc' => $request->lo_c == 2 ? 'Onsite' : 'Online'
         ]);
     }
 
