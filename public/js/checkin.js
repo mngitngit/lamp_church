@@ -7183,7 +7183,9 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_vm.validated ? _c("div", {
+  return _c("div", [!_vm.validated ? _c("div", {
+    staticClass: "row justify-content-center"
+  }, [_vm._m(0)]) : _vm._e(), _vm._v(" "), _vm.validated ? _c("div", {
     staticClass: "row justify-content-center mb-4"
   }, [_c("div", {
     staticClass: "col-md-4"
@@ -7410,7 +7412,20 @@ var render = function render() {
   }, [_vm._v("Continue")])], 1)])], 1)])]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "col-md-3"
+  }, [_c("img", {
+    staticClass: "mb-3 rounded shadow",
+    attrs: {
+      width: "100%",
+      src: "/images/2023_banner.jpg"
+    }
+  })]);
+}];
 render._withStripped = true;
 
 

@@ -1,5 +1,11 @@
 <template>
 <div>
+    <div v-if="!validated" class="row justify-content-center">
+        <div class="col-md-3">
+            <img width="100%" class="mb-3 rounded shadow" src="/images/2023_banner.jpg">
+        </div>
+    </div>
+
     <div v-if="validated" class="row justify-content-center mb-4">
         <div class="col-md-4">
             <h3>My Bookings</h3>
