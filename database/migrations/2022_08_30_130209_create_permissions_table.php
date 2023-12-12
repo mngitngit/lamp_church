@@ -25,6 +25,7 @@ class CreatePermissionsTable extends Migration
             $table->boolean('can_edit_delegate_config')->default(false);
             $table->boolean('can_edit_lookup_data')->default(false);
             $table->boolean('can_add_lookup_data')->default(false);
+            $table->boolean('can_add_slots')->default(false);
             $table->timestamps();
         });
     }

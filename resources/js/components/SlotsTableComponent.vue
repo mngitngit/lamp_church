@@ -37,7 +37,7 @@
             </el-table-column>
             <el-table-column
                 prop="activities"
-                label="Activities"
+                label="Activity"
                 width="500">
                 <template slot-scope="scope">
                     <p class="m-0" style="font-size: x-small;" v-for="(activity, index) in scope.row.activities" :key="index">

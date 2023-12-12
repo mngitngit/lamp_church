@@ -28,9 +28,11 @@
             <attendance-table :count="{{ $count }}" :overall="{{ $overall }}" :overall_total="{{ $overall_total }}" />
         </el-tab-pane>
 
-        <el-tab-pane label="Slots">
-            <slots-table :slots="{{ $slots_list }}" />
-        </el-tab-pane>
+        @if (auth()->user()->permissions->can_add_slot === 1)
+            <el-tab-pane label="Slots">
+                <slots-table :slots="{{ $slots_list }}" />
+            </el-tab-pane>
+        @endif
     </el-tabs>
 </div>
 @endsection
