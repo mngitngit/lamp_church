@@ -82,3 +82,5 @@ Route::get('/check-in', [App\Http\Controllers\CheckInController::class, 'index']
 Route::get('/check-in/validate', [App\Http\Controllers\CheckInController::class, 'validation'])->name('check-in.validation');
 Route::post('/check-in/{id}', [App\Http\Controllers\CheckInController::class, 'update'])->name('check-in.update');
 Route::get('/check-in/passes', [App\Http\Controllers\CheckInController::class, 'show'])->name('check-in.attendance');
+
+Route::post('/slots', [App\Http\Controllers\SlotsController::class, 'store'])->name('slots.store');

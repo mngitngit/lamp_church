@@ -46,7 +46,8 @@ class PermissionsTableSeeder extends Seeder
                 'can_export_registrations' => true,
                 'can_view_registrations' => true,
                 'can_edit_lookup_data' => $isSuperAdmin,
-                'can_add_lookup_data' => $isSuperAdmin
+                'can_add_lookup_data' => $isSuperAdmin,
+                'can_add_slots' => $isSuperAdmin
             ]);
         }
     }

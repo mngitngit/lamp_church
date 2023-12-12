@@ -14,6 +14,12 @@ class Slots extends Model
 
     protected $casts = [
         'event_date'  => 'date:F d',
+        'activities' => 'array'
+    ];
+
+    protected $fillable = [
+        'seat_count',
+        'activities'
     ];
 
     public function getAvailableAttribute()

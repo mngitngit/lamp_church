@@ -183,6 +183,7 @@ class HomeController extends Controller
                 'members' => $slots_members,
                 'guests' => $slots_guests
             ],
+            'slots_list' => json_encode(Slots::all()),
             'count' => json_encode($attendance_count),
             'overall' => json_encode($overall),
             'overall_total' => json_encode($overall_total),
