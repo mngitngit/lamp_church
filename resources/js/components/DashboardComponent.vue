@@ -139,7 +139,7 @@
                                         </el-table-column>
                                         <el-table-column label="Guest" prop="guest.count" align="center"></el-table-column>
                                         <el-table-column label="Member" prop="member.count" align="center"></el-table-column>
-                                        <el-table-column align="center">
+                                        <el-table-column align="center" width="100">
                                             <template slot-scope="scope">
                                             <small>
                                                 <el-link

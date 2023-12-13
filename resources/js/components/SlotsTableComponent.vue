@@ -45,7 +45,7 @@
                     </p>
                 </template>
             </el-table-column>
-            <el-table-column align="center">
+            <el-table-column align="center" width="120">
                 <template slot-scope="scope">
                 <el-button type="primary" plain @click="openModal(scope.row)">Add Slot</el-button>
                 </template>

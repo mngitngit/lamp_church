@@ -7915,7 +7915,7 @@ var render = function render() {
         color: _vm.colors
       }
     }), _vm._v(" "), _c("small", {
-      staticClass: "text-muted text-uppercase"
+      staticClass: "text-muted text-uppercase d-block"
     }, [_vm._v(_vm._s(slot.registration_type) + "s")]), _vm._v(" "), _c("p", {
       staticClass: "font-monospace m-0"
     }, [_vm._v(_vm._s(slot.event_date))]), _vm._v(" "), _c("small", {
@@ -7938,7 +7938,7 @@ var render = function render() {
         color: _vm.colors
       }
     }), _vm._v(" "), _c("small", {
-      staticClass: "text-muted text-uppercase"
+      staticClass: "text-muted text-uppercase d-block"
     }, [_vm._v(_vm._s(slot.registration_type) + "s")]), _vm._v(" "), _c("p", {
       staticClass: "font-monospace m-0"
     }, [_vm._v(_vm._s(slot.event_date))]), _vm._v(" "), _c("small", {
@@ -8964,7 +8964,8 @@ var render = function render() {
     }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
-      align: "center"
+      align: "center",
+      width: "120"
     },
     scopedSlots: _vm._u([{
       key: "default",

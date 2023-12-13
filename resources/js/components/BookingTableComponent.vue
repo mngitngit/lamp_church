@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-3 text-center mb-4" v-for="(slot, index) in slots.members" :key="index">
                     <el-progress type="dashboard" :percentage="parseFloat(slot.percentage)" :color="colors"></el-progress>
-                    <small class="text-muted text-uppercase">{{ slot.registration_type }}s</small>
+                    <small class="text-muted text-uppercase d-block">{{ slot.registration_type }}s</small>
                     <p class="font-monospace m-0">{{ slot.event_date }}</p>
                     <small class="text-muted">{{ slot.taken }} out of {{ slot.seat_count }} is taken</small><br />
                     <small>{{ slot.available }} remaining</small>
@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-3 text-center mb-4" v-for="(slot, index) in slots.guests" :key="index">
                     <el-progress type="dashboard" :percentage="parseFloat(slot.percentage)" :color="colors"></el-progress>
-                    <small class="text-muted text-uppercase">{{ slot.registration_type }}s</small>
+                    <small class="text-muted text-uppercase d-block">{{ slot.registration_type }}s</small>
                     <p class="font-monospace m-0">{{ slot.event_date }}</p>
                     <small class="text-muted">{{ slot.taken }} out of {{ slot.seat_count }} is taken</small><br />
                     <small>{{ slot.available }} remaining</small>
