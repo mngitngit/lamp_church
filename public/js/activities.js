@@ -7030,13 +7030,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "func": () => (/* binding */ func)
 /* harmony export */ });
 var func = {
-  // isMobileView: (data) => {
-  //    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-  //       return true
-  //    } else {
-  //       return false
-  //    }
-  //  }
+  isMobileView: function isMobileView() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   formatAmount: function formatAmount(amount) {
     if (typeof amount === 'string') amount = parseFloat(amount);
     return amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

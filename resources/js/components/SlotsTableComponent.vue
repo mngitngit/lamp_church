@@ -54,7 +54,7 @@
         <el-dialog
             :title="dialogTitle"
             :visible.sync="dialogVisible"
-            width="30%">
+            :width="$func.isMobileView() ? '95%' : '30%'">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px">
                 <el-form-item label="Additional Slot Count" prop="number">
                     <el-input v-model="ruleForm.number"></el-input>
@@ -64,7 +64,6 @@
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">Cancel</el-button>
                 <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
             </span>
         </el-dialog>
@@ -149,7 +148,7 @@ export default {
                     return false;
                 }
             });
-        },
+        }
     }
 }
 </script>

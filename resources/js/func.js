@@ -1,11 +1,11 @@
 export const func = {
-   // isMobileView: (data) => {
-   //    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-   //       return true
-   //    } else {
-   //       return false
-   //    }
-   //  }
+   isMobileView() {
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+         return true
+      } else {
+         return false
+      }
+   },
    formatAmount(amount) {
       if (typeof amount === 'string')
          amount = parseFloat(amount)
@@ -13,7 +13,7 @@ export const func = {
    },
    formatToDateTime(date) {
       var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric' };
-      var today  = new Date(date);
+      var today = new Date(date);
 
       return today.toLocaleDateString("en-US", options);
    },

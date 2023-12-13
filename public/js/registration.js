@@ -8945,7 +8945,7 @@ var render = function render() {
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "activities",
-      label: "Activities",
+      label: "Activity",
       width: "500"
     },
     scopedSlots: _vm._u([{
@@ -8986,7 +8986,7 @@ var render = function render() {
     attrs: {
       title: _vm.dialogTitle,
       visible: _vm.dialogVisible,
-      width: "30%"
+      width: _vm.$func.isMobileView() ? "95%" : "30%"
     },
     on: {
       "update:visible": function updateVisible($event) {
@@ -9033,12 +9033,6 @@ var render = function render() {
     },
     slot: "footer"
   }, [_c("el-button", {
-    on: {
-      click: function click($event) {
-        _vm.dialogVisible = false;
-      }
-    }
-  }, [_vm._v("Cancel")]), _vm._v(" "), _c("el-button", {
     attrs: {
       type: "primary"
     },
@@ -9295,13 +9289,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "func": () => (/* binding */ func)
 /* harmony export */ });
 var func = {
-  // isMobileView: (data) => {
-  //    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-  //       return true
-  //    } else {
-  //       return false
-  //    }
-  //  }
+  isMobileView: function isMobileView() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   formatAmount: function formatAmount(amount) {
     if (typeof amount === 'string') amount = parseFloat(amount);
     return amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
