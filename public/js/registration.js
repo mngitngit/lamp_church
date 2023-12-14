@@ -8812,7 +8812,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_c("el-descriptions", {
+        return [scope.row.attended_dates.length > 0 ? _c("el-descriptions", {
           staticClass: "margin-top",
           attrs: {
             column: 1,
@@ -8824,10 +8824,11 @@ var render = function render() {
             key: index,
             attrs: {
               label: index === 0 ? "Dates Attended" : "",
-              contentClassName: "text-center"
+              contentClassName: "text-center",
+              labelClassName: "text-center"
             }
           }, [_vm._v(_vm._s(dates))]);
-        }), 1)];
+        }), 1) : _c("span", [_vm._v("--")])];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {

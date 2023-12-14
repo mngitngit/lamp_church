@@ -174,9 +174,11 @@
             fixed="right"
             width="305">
             <template slot-scope="scope">
-              <el-descriptions class="margin-top" :column="1" size="mini" border>
-                <el-descriptions-item v-for="(dates, index) in scope.row.attended_dates" :key="index" :label="index === 0 ? 'Dates Attended' : ''" contentClassName="text-center">{{ dates }}</el-descriptions-item>
+              <el-descriptions v-if="scope.row.attended_dates.length > 0" class="margin-top" :column="1" size="mini" border>
+                <el-descriptions-item v-for="(dates, index) in scope.row.attended_dates" :key="index" :label="index === 0 ? 'Dates Attended' : ''" contentClassName="text-center" labelClassName="text-center">{{ dates }}</el-descriptions-item>
               </el-descriptions>
+
+              <span v-else>--</span>
             </template>
           </el-table-column>
           <el-table-column
