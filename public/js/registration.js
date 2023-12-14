@@ -8812,11 +8812,22 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [scope.row.attended_dates.length > 0 ? _c("div", {
-          domProps: {
-            innerHTML: _vm._s(_vm.transformDates(scope.row.attended_dates))
+        return [_c("el-descriptions", {
+          staticClass: "margin-top",
+          attrs: {
+            column: 1,
+            size: "mini",
+            border: ""
           }
-        }) : _c("span", [_vm._v("--")])];
+        }, _vm._l(scope.row.attended_dates, function (dates, index) {
+          return _c("el-descriptions-item", {
+            key: index,
+            attrs: {
+              label: index === 0 ? "Dates Attended" : "",
+              contentClassName: "text-center"
+            }
+          }, [_vm._v(_vm._s(dates))]);
+        }), 1)];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {

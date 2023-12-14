@@ -174,8 +174,9 @@
             fixed="right"
             width="305">
             <template slot-scope="scope">
-                <div v-if="scope.row.attended_dates.length > 0" v-html="transformDates(scope.row.attended_dates)"></div>
-                <span v-else>--</span>
+              <el-descriptions class="margin-top" :column="1" size="mini" border>
+                <el-descriptions-item v-for="(dates, index) in scope.row.attended_dates" :key="index" :label="index === 0 ? 'Dates Attended' : ''" contentClassName="text-center">{{ dates }}</el-descriptions-item>
+              </el-descriptions>
             </template>
           </el-table-column>
           <el-table-column
