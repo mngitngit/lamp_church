@@ -8735,6 +8735,11 @@ var render = function render() {
           }
         }, [_c("el-option", {
           attrs: {
+            label: "All",
+            value: ""
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
             label: "Unsettled",
             value: "Unsettled"
           }
@@ -8766,6 +8771,11 @@ var render = function render() {
             expression: "search.booking_status"
           }
         }, [_c("el-option", {
+          attrs: {
+            label: "All",
+            value: ""
+          }
+        }), _vm._v(" "), _c("el-option", {
           attrs: {
             label: "Pending",
             value: "Pending Payment"
@@ -8799,6 +8809,11 @@ var render = function render() {
           }
         }, [_c("el-option", {
           attrs: {
+            label: "All",
+            value: ""
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
             label: "Member",
             value: "Member"
           }
@@ -8826,6 +8841,11 @@ var render = function render() {
           }
         }, [_c("el-option", {
           attrs: {
+            label: "All",
+            value: ""
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
             label: "Hybrid",
             value: "Hybrid"
           }
@@ -8852,6 +8872,11 @@ var render = function render() {
             expression: "search.category"
           }
         }, [_c("el-option", {
+          attrs: {
+            label: "All",
+            value: ""
+          }
+        }), _vm._v(" "), _c("el-option", {
           attrs: {
             label: "Adult",
             value: "Adult"
@@ -8884,6 +8909,11 @@ var render = function render() {
             expression: "search.local_church"
           }
         }, [_c("el-option", {
+          attrs: {
+            label: "All",
+            value: ""
+          }
+        }), _vm._v(" "), _c("el-option", {
           attrs: {
             value: "Bacolod",
             label: "Bacolod"

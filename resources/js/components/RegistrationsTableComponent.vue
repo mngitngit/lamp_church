@@ -26,6 +26,7 @@
                 <td width="120">
                   <small>Payment Status</small>
                   <el-select size="mini" v-model="search.payment_status" clearable placeholder="select">
+                    <el-option label="All" value=""></el-option>
                     <el-option label="Unsettled" value="Unsettled"></el-option>
                     <el-option label="Partial" value="Partial"></el-option>
                     <el-option label="Paid" value="Paid"></el-option>
@@ -35,6 +36,7 @@
                 <td width="120">
                   <small>Booking Status</small>
                   <el-select size="mini" v-model="search.booking_status" clearable placeholder="select">
+                    <el-option label="All" value=""></el-option>
                     <el-option label="Pending" value="Pending Payment"></el-option>
                     <el-option label="Cancelled" value="Cancelled"></el-option>
                     <el-option label="Confirmed" value="Confirmed"></el-option>
@@ -44,6 +46,7 @@
                 <td width="120">
                   <small>Reg Type</small>
                   <el-select size="mini" v-model="search.registration_type" clearable placeholder="select">
+                    <el-option label="All" value=""></el-option>
                     <el-option label="Member" value="Member"></el-option>
                     <el-option label="Guest" value="Guest"></el-option>
                   </el-select>
@@ -52,6 +55,7 @@
                 <td width="120">
                   <small>Attending Option</small>
                   <el-select size="mini" v-model="search.attending_option" clearable placeholder="select">
+                    <el-option label="All" value=""></el-option>
                     <el-option label="Hybrid" value="Hybrid"></el-option>
                     <el-option label="Online" value="Online"></el-option>
                   </el-select>
@@ -60,6 +64,7 @@
                 <td width="120">
                   <small>Rate Category</small>
                   <el-select size="mini" v-model="search.category" clearable placeholder="select">
+                    <el-option label="All" value=""></el-option>
                     <el-option label="Adult" value="Adult"></el-option>
                     <el-option label="Kids" value="Kids"></el-option>
                     <el-option label="Free" value="Free"></el-option>
@@ -69,6 +74,7 @@
                 <td width="120">
                   <small>Local Church</small>
                   <el-select size="mini" v-model="search.local_church" clearable placeholder="select">
+                    <el-option label="All" value=""></el-option>
                     <el-option value="Bacolod" label="Bacolod"></el-option>
                     <el-option value="Binan" label="Binan"></el-option>
                     <el-option value="Canlubang" label="Canlubang"></el-option>
