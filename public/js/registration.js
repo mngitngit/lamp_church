@@ -7977,7 +7977,8 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("el-table", {
+  return _c("div", [_c("el-table", {
+    staticClass: "mb-3",
     staticStyle: {
       width: "100%"
     },
@@ -8160,7 +8161,18 @@ var render = function render() {
       sortable: "",
       align: "center"
     }
-  })], 1)], 1);
+  })], 1)], 1), _vm._v(" "), _vm.tableData.data.length > 0 ? _c("pagination", {
+    staticClass: "m-0",
+    attrs: {
+      pagination: _vm.tableData,
+      offset: 4
+    },
+    on: {
+      paginate: function paginate($event) {
+        return _vm.fetchAttendances(false);
+      }
+    }
+  }) : _vm._e()], 1);
 };
 
 var staticRenderFns = [];
