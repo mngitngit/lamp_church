@@ -23,7 +23,8 @@
         class="mb-3"
         :data="tableData.data"
         border
-        style="width: 100%">
+        style="width: 100%"
+        size="mini">
           <el-table-column
           prop="count"
           label="#"

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\RegistrationResource;
 use App\Models\LookUp;
 use App\Models\Slots;
+use App\Models\Attendance;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -175,7 +176,6 @@ class HomeController extends Controller
         $tab = 0;
         if ($request->type === 'registration') $tab = 0;
         if ($request->type === 'lookup') $tab = 1;
-
         return view('home', [
             'search' => $request->search,
             'type' => $request->type,

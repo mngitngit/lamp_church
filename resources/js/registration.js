@@ -13,6 +13,7 @@ Vue.component('registration-table', require('./components/RegistrationsTableComp
 Vue.component('lookups-table', require('./components/LookUpsTableComponent.vue').default);
 Vue.component('booking-table', require('./components/BookingTableComponent.vue').default);
 Vue.component('attendance-table', require('./components/AttendanceTableComponent.vue').default);
+Vue.component('attendances-table', require('./components/AttendancesTableComponent.vue').default);
 Vue.component('slots-table', require('./components/SlotsTableComponent.vue').default);
 Vue.component('upload-component', require('./components/UploadComponent.vue').default);
 Vue.component('pagination', require('./components/Common/Pagination.vue').default);

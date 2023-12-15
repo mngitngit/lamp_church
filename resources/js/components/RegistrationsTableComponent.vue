@@ -11,88 +11,88 @@
           <template slot="header" slot-scope="scope">
             <table>
               <tr style="background-color: #f5f7fa;">
-              <td width="250">
-                <small>Search by Name or LAMP ID</small>
-                <input type="hidden" name="type" value="lookup" />
-                <el-input
-                  clearable
-                  v-model="search.keyword"
-                  size="mini"
-                  name="search"
-                  placeholder="Type to search"/>
-              </td>
+                <td width="250">
+                  <small>Search by Name or LAMP ID</small>
+                  <input type="hidden" name="type" value="lookup" />
+                  <el-input
+                    clearable
+                    v-model="search.keyword"
+                    size="mini"
+                    name="search"
+                    placeholder="Type to search"/>
+                </td>
 
-              <td width="120">
-                <small>Payment Status</small>
-                <el-select size="mini" v-model="search.payment_status" clearable placeholder="select">
-                  <el-option label="Unsettled" value="Unsettled"></el-option>
-                  <el-option label="Partial" value="Partial"></el-option>
-                  <el-option label="Paid" value="Paid"></el-option>
-                </el-select>
-              </td>
+                <td width="120">
+                  <small>Payment Status</small>
+                  <el-select size="mini" v-model="search.payment_status" clearable placeholder="select">
+                    <el-option label="Unsettled" value="Unsettled"></el-option>
+                    <el-option label="Partial" value="Partial"></el-option>
+                    <el-option label="Paid" value="Paid"></el-option>
+                  </el-select>
+                </td>
 
-              <td width="120">
-                <small>Booking Status</small>
-                <el-select size="mini" v-model="search.booking_status" clearable placeholder="select">
-                  <el-option label="Pending" value="Pending Payment"></el-option>
-                  <el-option label="Cancelled" value="Cancelled"></el-option>
-                  <el-option label="Confirmed" value="Confirmed"></el-option>
-                </el-select>
-              </td>
+                <td width="120">
+                  <small>Booking Status</small>
+                  <el-select size="mini" v-model="search.booking_status" clearable placeholder="select">
+                    <el-option label="Pending" value="Pending Payment"></el-option>
+                    <el-option label="Cancelled" value="Cancelled"></el-option>
+                    <el-option label="Confirmed" value="Confirmed"></el-option>
+                  </el-select>
+                </td>
 
-              <td width="120">
-                <small>Reg Type</small>
-                <el-select size="mini" v-model="search.registration_type" clearable placeholder="select">
-                  <el-option label="Member" value="Member"></el-option>
-                  <el-option label="Guest" value="Guest"></el-option>
-                </el-select>
-              </td>
+                <td width="120">
+                  <small>Reg Type</small>
+                  <el-select size="mini" v-model="search.registration_type" clearable placeholder="select">
+                    <el-option label="Member" value="Member"></el-option>
+                    <el-option label="Guest" value="Guest"></el-option>
+                  </el-select>
+                </td>
 
-              <td width="120">
-                <small>Attending Option</small>
-                <el-select size="mini" v-model="search.attending_option" clearable placeholder="select">
-                  <el-option label="Hybrid" value="Hybrid"></el-option>
-                  <el-option label="Online" value="Online"></el-option>
-                </el-select>
-              </td>
+                <td width="120">
+                  <small>Attending Option</small>
+                  <el-select size="mini" v-model="search.attending_option" clearable placeholder="select">
+                    <el-option label="Hybrid" value="Hybrid"></el-option>
+                    <el-option label="Online" value="Online"></el-option>
+                  </el-select>
+                </td>
 
-              <td width="120">
-                <small>Rate Category</small>
-                <el-select size="mini" v-model="search.category" clearable placeholder="select">
-                  <el-option label="Adult" value="Adult"></el-option>
-                  <el-option label="Kids" value="Kids"></el-option>
-                  <el-option label="Free" value="Free"></el-option>
-                </el-select>
-              </td>
+                <td width="120">
+                  <small>Rate Category</small>
+                  <el-select size="mini" v-model="search.category" clearable placeholder="select">
+                    <el-option label="Adult" value="Adult"></el-option>
+                    <el-option label="Kids" value="Kids"></el-option>
+                    <el-option label="Free" value="Free"></el-option>
+                  </el-select>
+                </td>
 
-              <td width="120">
-                <small>Local Church</small>
-                <el-select size="mini" v-model="search.local_church" clearable placeholder="select">
-                  <el-option value="Bacolod" label="Bacolod"></el-option>
-                  <el-option value="Binan" label="Binan"></el-option>
-                  <el-option value="Canlubang" label="Canlubang"></el-option>
-                  <el-option value="Dasmarinas" label="Dasmarinas"></el-option>
-                  <el-option value="Granada" label="Granada"></el-option>
-                  <el-option value="Hinigaran" label="Hinigaran"></el-option>
-                  <el-option value="Isabela" label="Isabela"></el-option>
-                  <el-option value="Muntinlupa" label="Muntinlupa"></el-option>
-                  <el-option value="Pateros" label="Pateros"></el-option>
-                  <el-option value="Tarlac" label="Tarlac"></el-option>
-                  <el-option value="Valenzuela" label="Valenzuela"></el-option>
-                </el-select>
-              </td>
-              <td>
-                <br />
-                <el-button @click="fetchRegistrations()" size="mini" type="primary">Search</el-button>
-              </td>
-              <td>
-                <br />
-                <a href="/registrations/export">
-                <el-button type="success" size="mini" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
-                </a>
-              </td>
+                <td width="120">
+                  <small>Local Church</small>
+                  <el-select size="mini" v-model="search.local_church" clearable placeholder="select">
+                    <el-option value="Bacolod" label="Bacolod"></el-option>
+                    <el-option value="Binan" label="Binan"></el-option>
+                    <el-option value="Canlubang" label="Canlubang"></el-option>
+                    <el-option value="Dasmarinas" label="Dasmarinas"></el-option>
+                    <el-option value="Granada" label="Granada"></el-option>
+                    <el-option value="Hinigaran" label="Hinigaran"></el-option>
+                    <el-option value="Isabela" label="Isabela"></el-option>
+                    <el-option value="Muntinlupa" label="Muntinlupa"></el-option>
+                    <el-option value="Pateros" label="Pateros"></el-option>
+                    <el-option value="Tarlac" label="Tarlac"></el-option>
+                    <el-option value="Valenzuela" label="Valenzuela"></el-option>
+                  </el-select>
+                </td>
+                <td>
+                  <br />
+                  <el-button @click="fetchRegistrations()" size="mini" type="primary">Search</el-button>
+                </td>
+                <td>
+                  <br />
+                  <a href="/registrations/export">
+                  <el-button type="success" size="mini" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
+                  </a>
+                </td>
               </tr>
-              </table>
+            </table>
           </template>
           <el-table-column
             prop="count"

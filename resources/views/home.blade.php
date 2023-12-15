@@ -17,6 +17,10 @@
             <lookups-table />
         </el-tab-pane>
 
+        <el-tab-pane label="Attendance">
+            <attendances-table />
+        </el-tab-pane>
+
         {{-- Bookings --}}
         <el-tab-pane label="Bookings">
             <!-- {{json_encode($slots)}} -->
@@ -24,7 +28,7 @@
         </el-tab-pane>
 
         {{-- Attendance --}}
-        <el-tab-pane label="Attendance">
+        <el-tab-pane label="Attendance Count">
             <attendance-table :count="{{ $count }}" :overall="{{ $overall }}" :overall_total="{{ $overall_total }}" />
         </el-tab-pane>
 

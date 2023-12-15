@@ -21,6 +21,27 @@ class AttendanceController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show', 'store']]);
     }
 
+    public function all(Request $request) {
+        $search = json_decode($request->search);
+
+        $attendances = Attendance::with('registration', 'slot');
+
+        if ($search->registration_type) {
+            $attendances = $attendances->whereRelation('registration', 'registration_type', '=', $search->registration_type);
+        }
+
+        if ($search->local_church) {
+            $attendances = $attendances->whereRelation('registration', 'local_church', '=', $search->local_church);
+        }
+
+        if ($search->keyword) {
+            $attendances = $attendances->whereRelation('registration', 'fullname', 'LIKE', "%$search->keyword%")
+                ->orWhereRelation('registration', 'uuid', 'LIKE', "%$search->keyword%");
+        }
+
+        return $attendances->paginate(10);
+    }
+
     public function index(Request $request)
     {
         $local_churches = explode(',', env('LOCAL_CHURCHES'));
