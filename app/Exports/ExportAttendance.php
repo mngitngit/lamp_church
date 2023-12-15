@@ -3,6 +3,8 @@
 namespace App\Exports;
 
 use App\Models\Attendance;
+use App\Models\ExportHistory;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ExportAttendanceResource;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,7 +16,11 @@ class ExportAttendance implements FromCollection, WithHeadings
      */
     public function collection()
     {
-
+        ExportHistory::create([
+            'type' => 'attendances',
+            'user_id' => Auth::user()->id
+        ]);
+        
         return ExportAttendanceResource::collection(
             Attendance::with('registration', 'slot')->get()
         );

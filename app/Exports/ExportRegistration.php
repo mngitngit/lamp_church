@@ -3,6 +3,8 @@
 namespace App\Exports;
 
 use App\Models\Registration;
+use App\Models\ExportHistory;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ExportRegistrationResource;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,6 +16,10 @@ class ExportRegistration implements FromCollection, WithHeadings
      */
     public function collection()
     {
+        ExportHistory::create([
+            'type' => 'registrations',
+            'user_id' => Auth::user()->id
+        ]);
 
         return ExportRegistrationResource::collection(
             Registration::select(array(

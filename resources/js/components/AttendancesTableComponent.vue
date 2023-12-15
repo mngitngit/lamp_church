@@ -43,9 +43,20 @@
                                 </td>
                             <td>
                                 <br />
-                                <a href="/attendances/export">
-                                <el-button type="success" size="mini" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
-                                </a>
+                                <el-popover
+                                placement="top-start"
+                                title="History"
+                                width="350"
+                                trigger="hover">
+                                    <template>
+                                        <p class="m-0" style="font-size: x-small;" v-for="(activity, index) in history" :key="index">
+                                            {{ activity.created_at }} - <i>exported by {{activity.user_name}}</i>
+                                        </p>
+                                    </template>
+                                    <a href="/attendances/export" slot="reference" @click="refreshHistory()">
+                                    <el-button type="success" size="mini" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
+                                    </a>
+                                </el-popover>
                             </td>
                         </tr>
                     </table>
@@ -137,10 +148,12 @@
                     local_church: ''
                 },
                 assignments: window.env.cluster_groups,
+                history: []
             }
         },
         mounted() {
             this.fetchAttendances();
+            this.fetchHistory();
         },
         methods: {
             fetchAttendances(ignore_page = true) {
@@ -164,6 +177,21 @@
                         });
                     });
             },
+            fetchHistory() {
+                axios
+                .get(`/export/history`, {
+                    params: {
+                    type: 'attendances'
+                    }})
+                .then(response => {
+                    this.history = response.data
+                })
+            },
+            refreshHistory() {
+                var root = this;
+
+                setTimeout(function() { root.fetchHistory(); }, 2000);
+            }
         }
     }
   </script>

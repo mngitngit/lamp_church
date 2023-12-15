@@ -6989,11 +6989,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         registration_type: '',
         local_church: ''
       },
-      assignments: window.env.cluster_groups
+      assignments: window.env.cluster_groups,
+      history: []
     };
   },
   mounted: function mounted() {
     this.fetchAttendances();
+    this.fetchHistory();
   },
   methods: {
     fetchAttendances: function fetchAttendances() {
@@ -7032,6 +7034,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           title: error
         });
       });
+    },
+    fetchHistory: function fetchHistory() {
+      var _this2 = this;
+
+      axios.get("/export/history", {
+        params: {
+          type: 'attendances'
+        }
+      }).then(function (response) {
+        _this2.history = response.data;
+      });
+    },
+    refreshHistory: function refreshHistory() {
+      var root = this;
+      setTimeout(function () {
+        root.fetchHistory();
+      }, 2000);
     }
   }
 });
@@ -7262,11 +7281,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         current_page: 1,
         data: []
       },
-      permissions: window.auth_user.permissions
+      permissions: window.auth_user.permissions,
+      history: []
     };
   },
   mounted: function mounted() {
     this.fetchRegistrations();
+    this.fetchHistory();
   },
   methods: {
     fetchRegistrations: function fetchRegistrations() {
@@ -7431,6 +7452,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           return _ref5.apply(this, arguments);
         };
       }());
+    },
+    fetchHistory: function fetchHistory() {
+      var _this4 = this;
+
+      axios.get("/export/history", {
+        params: {
+          type: 'registrations'
+        }
+      }).then(function (response) {
+        _this4.history = response.data;
+      });
+    },
+    refreshHistory: function refreshHistory() {
+      var root = this;
+      setTimeout(function () {
+        root.fetchHistory();
+      }, 2000);
     }
   }
 });
@@ -8091,10 +8129,32 @@ var render = function render() {
               return _vm.fetchAttendances();
             }
           }
-        }, [_vm._v("Search")])], 1), _vm._v(" "), _c("td", [_c("br"), _vm._v(" "), _c("a", {
+        }, [_vm._v("Search")])], 1), _vm._v(" "), _c("td", [_c("br"), _vm._v(" "), _c("el-popover", {
           attrs: {
-            href: "/attendances/export"
+            placement: "top-start",
+            title: "History",
+            width: "350",
+            trigger: "hover"
           }
+        }, [_vm._l(_vm.history, function (activity, index) {
+          return _c("p", {
+            key: index,
+            staticClass: "m-0",
+            staticStyle: {
+              "font-size": "x-small"
+            }
+          }, [_vm._v("\n                                        " + _vm._s(activity.created_at) + " - "), _c("i", [_vm._v("exported by " + _vm._s(activity.user_name))])]);
+        }), _vm._v(" "), _c("a", {
+          attrs: {
+            slot: "reference",
+            href: "/attendances/export"
+          },
+          on: {
+            click: function click($event) {
+              return _vm.refreshHistory();
+            }
+          },
+          slot: "reference"
         }, [_c("el-button", {
           staticClass: "float-end",
           attrs: {
@@ -8103,7 +8163,7 @@ var render = function render() {
           }
         }, [_vm._v("Export to Excel "), _c("i", {
           staticClass: "el-icon-download el-icon-right"
-        })])], 1)])])])];
+        })])], 1)], 2)], 1)])])];
       }
     }])
   }, [_vm._v(" "), _c("el-table-column", {
@@ -8986,10 +9046,32 @@ var render = function render() {
               return _vm.fetchRegistrations();
             }
           }
-        }, [_vm._v("Search")])], 1), _vm._v(" "), _c("td", [_c("br"), _vm._v(" "), _c("a", {
+        }, [_vm._v("Search")])], 1), _vm._v(" "), _c("td", [_c("br"), _vm._v(" "), _c("el-popover", {
           attrs: {
-            href: "/registrations/export"
+            placement: "top-start",
+            title: "History",
+            width: "350",
+            trigger: "hover"
           }
+        }, [_vm._l(_vm.history, function (activity, index) {
+          return _c("p", {
+            key: index,
+            staticClass: "m-0",
+            staticStyle: {
+              "font-size": "x-small"
+            }
+          }, [_vm._v("\n                      " + _vm._s(activity.created_at) + " - "), _c("i", [_vm._v("exported by " + _vm._s(activity.user_name))])]);
+        }), _vm._v(" "), _c("a", {
+          attrs: {
+            slot: "reference",
+            href: "/registrations/export"
+          },
+          on: {
+            click: function click($event) {
+              return _vm.refreshHistory();
+            }
+          },
+          slot: "reference"
         }, [_c("el-button", {
           staticClass: "float-end",
           attrs: {
@@ -8998,7 +9080,7 @@ var render = function render() {
           }
         }, [_vm._v("Export to Excel "), _c("i", {
           staticClass: "el-icon-download el-icon-right"
-        })])], 1)])])])];
+        })])], 1)], 2)], 1)])])];
       }
     }])
   }, [_vm._v(" "), _c("el-table-column", {

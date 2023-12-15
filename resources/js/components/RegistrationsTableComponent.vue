@@ -94,9 +94,20 @@
                 </td>
                 <td>
                   <br />
-                  <a href="/registrations/export">
-                  <el-button type="success" size="mini" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
-                  </a>
+                  <el-popover
+                    placement="top-start"
+                    title="History"
+                    width="350"
+                    trigger="hover">
+                    <template>
+                      <p class="m-0" style="font-size: x-small;" v-for="(activity, index) in history" :key="index">
+                        {{ activity.created_at }} - <i>exported by {{activity.user_name}}</i>
+                      </p>
+                    </template>
+                    <a href="/registrations/export" slot="reference" @click="refreshHistory()">
+                    <el-button type="success" size="mini" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
+                    </a>
+                  </el-popover>
                 </td>
               </tr>
             </table>
@@ -234,11 +245,13 @@
           current_page: 1,
           data: []
         },
-        permissions: window.auth_user.permissions
+        permissions: window.auth_user.permissions,
+        history: []
       }
     },
     mounted() {
       this.fetchRegistrations();
+      this.fetchHistory();
     },
     methods: {
       fetchRegistrations(ignore_page = true) {
@@ -333,6 +346,21 @@
                 title: 'Email resent successfully.'
               });
             })
+      },
+      fetchHistory() {
+        axios
+          .get(`/export/history`, {
+            params: {
+              type: 'registrations'
+            }})
+          .then(response => {
+            this.history = response.data
+          })
+      },
+      refreshHistory() {
+        var root = this;
+
+        setTimeout(function() { root.fetchHistory(); }, 2000);
       }
     }
   }

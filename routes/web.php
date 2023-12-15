@@ -86,3 +86,5 @@ Route::post('/check-in/{id}', [App\Http\Controllers\CheckInController::class, 'u
 Route::get('/check-in/passes', [App\Http\Controllers\CheckInController::class, 'show'])->name('check-in.attendance');
 
 Route::post('/slots', [App\Http\Controllers\SlotsController::class, 'store'])->name('slots.store');
+
+Route::get('/export/history', [App\Http\Controllers\ExportHistoryController::class, 'index'])->name('history.index');
