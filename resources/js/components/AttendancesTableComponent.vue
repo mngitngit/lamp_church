@@ -43,7 +43,7 @@
                                 </td>
                             <td>
                                 <br />
-                                <a href="/registrations/export">
+                                <a href="/attendances/export">
                                 <el-button type="success" size="mini" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
                                 </a>
                             </td>

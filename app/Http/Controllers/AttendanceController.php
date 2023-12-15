@@ -12,7 +12,9 @@ use App\Models\Registration;
 use App\Models\Slots;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\ExportAttendance;
 use PhpParser\Node\Expr\Cast\Object_;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AttendanceController extends Controller
 {
@@ -161,5 +163,9 @@ class AttendanceController extends Controller
         }
 
         return $attendance;
+    }
+
+    public function export() {
+        return Excel::download(new ExportAttendance, 'attendance_' . TIME() . '.csv');
     }
 }

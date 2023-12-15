@@ -8093,7 +8093,7 @@ var render = function render() {
           }
         }, [_vm._v("Search")])], 1), _vm._v(" "), _c("td", [_c("br"), _vm._v(" "), _c("a", {
           attrs: {
-            href: "/registrations/export"
+            href: "/attendances/export"
           }
         }, [_c("el-button", {
           staticClass: "float-end",
