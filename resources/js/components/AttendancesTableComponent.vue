@@ -68,6 +68,13 @@
                     align="center">
                 </el-table-column>
                 <el-table-column
+                    prop="created_at"
+                    label="Date & Time"
+                    width="180"
+                    sortable
+                    align="center">
+                </el-table-column>
+                <el-table-column
                     prop="registration.uuid"
                     label="LAMP ID"
                     width="180"
@@ -75,7 +82,7 @@
                 </el-table-column>
                 <el-table-column
                     prop="registration.fullname"
-                    label="Attendee Name"
+                    label="Complete Name"
                     sortable
                     width="250">
                 </el-table-column>

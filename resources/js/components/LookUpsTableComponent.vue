@@ -46,7 +46,7 @@
         </el-table-column>
         <el-table-column
           prop="count"
-          label="Full Name"
+          label="Complete Name"
           fixed="left"
           align="center">
           <template slot-scope="scope">

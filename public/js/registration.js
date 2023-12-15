@@ -8130,6 +8130,14 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
+      prop: "created_at",
+      label: "Date & Time",
+      width: "180",
+      sortable: "",
+      align: "center"
+    }
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
       prop: "registration.uuid",
       label: "LAMP ID",
       width: "180",
@@ -8138,7 +8146,7 @@ var render = function render() {
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "registration.fullname",
-      label: "Attendee Name",
+      label: "Complete Name",
       sortable: "",
       width: "250"
     }
@@ -8534,7 +8542,7 @@ var render = function render() {
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "count",
-      label: "Full Name",
+      label: "Complete Name",
       fixed: "left",
       align: "center"
     },
