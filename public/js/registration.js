@@ -8108,6 +8108,20 @@ var render = function render() {
     }])
   }, [_vm._v(" "), _c("el-table-column", {
     attrs: {
+      prop: "count",
+      label: "#",
+      fixed: "left",
+      align: "center",
+      width: "50"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n                    " + _vm._s(scope.$index + _vm.tableData.from) + "\n                ")];
+      }
+    }])
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
       prop: "slot.event_date",
       label: "Date Attended",
       width: "180",
@@ -8666,6 +8680,7 @@ var render = function render() {
       width: "100%"
     },
     attrs: {
+      size: "mini",
       data: _vm.tableData.data,
       border: ""
     }

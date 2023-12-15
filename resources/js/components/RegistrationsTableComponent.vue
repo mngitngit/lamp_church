@@ -4,6 +4,7 @@
       <el-table
         ref="filterTable"
         class="mb-3"
+        size="mini"
         :data="tableData.data"
         border
         style="width: 100%">

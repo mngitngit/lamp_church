@@ -50,7 +50,16 @@
                         </tr>
                     </table>
                 </template>
-        
+                <el-table-column
+                    prop="count"
+                    label="#"
+                    fixed="left"
+                    align="center"
+                    width="50">
+                    <template slot-scope="scope">
+                        {{ scope.$index + tableData.from }}
+                    </template>
+                </el-table-column>
                 <el-table-column
                     prop="slot.event_date"
                     label="Date Attended"
