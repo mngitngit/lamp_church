@@ -7001,7 +7001,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var ignore_page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       if ((this.search.keyword != '' || this.search.registration_type != '' || this.search.local_church != '') && ignore_page) this.tableData.current_page = 1;
-      axios.get("/attendance/all", {
+      axios.get("/attendances", {
         params: {
           search: this.search,
           page: this.tableData.current_page

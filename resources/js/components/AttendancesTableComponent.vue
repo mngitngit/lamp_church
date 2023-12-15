@@ -141,7 +141,7 @@
                 this.tableData.current_page = 1;
                 
                 axios
-                    .get(`/attendance/all`, {
+                    .get(`/attendances`, {
                         params: {
                             search: this.search,
                             page: this.tableData.current_page,

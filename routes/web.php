@@ -59,9 +59,9 @@ Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'inde
 
 // attendance
 Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'index'])->name('attendance.index');
-Route::get('/attendance/all', [App\Http\Controllers\AttendanceController::class, 'all'])->name('attendance.all');
 Route::get('/attendance/{id}', [App\Http\Controllers\AttendanceController::class, 'show'])->name('attendance.show');
 Route::post('/attendance', [App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store');
+Route::get('/attendances', [App\Http\Controllers\AttendanceController::class, 'all'])->name('attendance.all');
 Route::get('/attendances/export', [App\Http\Controllers\AttendanceController::class, 'export'])->name('attendance.export');
 
 // booking
