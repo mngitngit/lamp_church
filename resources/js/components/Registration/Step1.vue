@@ -70,7 +70,7 @@
                 >
                     <div class="px-2 row">
                         <el-alert
-                            title="All registration after November 30, 2023 is considered online. For further inquiries, please reach out to your local AWTA Registrars."
+                            title="All registration after December 17, 2023 is considered online. For further inquiries, please reach out to your local AWTA Registrars."
                             type="warning"
                             show-icon
                         >
