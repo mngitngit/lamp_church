@@ -9108,6 +9108,7 @@ var render = function render() {
         return [_c("el-descriptions", {
           staticClass: "margin-top",
           attrs: {
+            labelStyle: "width: 120px",
             column: 1,
             size: "mini",
             border: ""
@@ -9120,7 +9121,14 @@ var render = function render() {
           attrs: {
             label: "Complete Name"
           }
-        }, [_vm._v(_vm._s(scope.row.firstname) + " " + _vm._s(scope.row.lastname))]), _vm._v(" "), _c("el-descriptions-item", {
+        }, [scope.row.is_received_hg != null ? _c("span", [_c("img", {
+          staticClass: "mb-1",
+          attrs: {
+            height: "13",
+            width: "15",
+            src: "/images/flame.png"
+          }
+        }), _vm._v(" ")]) : _vm._e(), _vm._v(_vm._s(scope.row.firstname) + " " + _vm._s(scope.row.lastname))]), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
             label: "Facebook Name"
           }
@@ -9156,6 +9164,7 @@ var render = function render() {
         return [_c("el-descriptions", {
           staticClass: "margin-top",
           attrs: {
+            labelStyle: "width: 170px",
             column: 1,
             size: "mini",
             border: ""
@@ -9212,6 +9221,7 @@ var render = function render() {
         }) : scope.row.booked_dates.length > 0 ? _c("el-descriptions", {
           staticClass: "margin-top",
           attrs: {
+            labelStyle: "width: 120px",
             column: 1,
             size: "mini",
             border: ""
@@ -9255,6 +9265,7 @@ var render = function render() {
         return [scope.row.attended_dates.length > 0 ? _c("el-descriptions", {
           staticClass: "margin-top",
           attrs: {
+            labelStyle: "width: 120px",
             column: 1,
             size: "mini",
             border: ""

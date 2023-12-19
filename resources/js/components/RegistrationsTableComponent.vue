@@ -126,7 +126,7 @@
             label="Personal Details"
             width="305">
             <template slot-scope="scope">
-              <el-descriptions class="margin-top" :column="1" size="mini" border>
+              <el-descriptions class="margin-top" labelStyle="width: 120px" :column="1" size="mini" border>
                 <el-descriptions-item>
                   <template slot="label">
                     <i class="el-icon-user"></i>
@@ -134,7 +134,7 @@
                   </template>
                   {{ scope.row.uuid }}
                 </el-descriptions-item>
-                <el-descriptions-item label="Complete Name">{{ scope.row.firstname }} {{ scope.row.lastname }}</el-descriptions-item>
+                <el-descriptions-item label="Complete Name"><span v-if="scope.row.is_received_hg != null"><img class="mb-1" height="13" width="15" src="/images/flame.png" />&nbsp;</span>{{ scope.row.firstname }} {{ scope.row.lastname }}</el-descriptions-item>
                 <el-descriptions-item label="Facebook Name">{{ scope.row.facebook_name || '--' }}</el-descriptions-item>
                 <el-descriptions-item label="Registration Type">
                   <el-tag effect="plain" size="mini" :type="scope.row.registration_type === 'Guest' ? '' : 'warning'">{{ scope.row.registration_type }}</el-tag>
@@ -148,7 +148,7 @@
             label="Other Details"      
             width="305">
             <template slot-scope="scope">
-              <el-descriptions class="margin-top" :column="1" size="mini" border>
+              <el-descriptions labelStyle="width: 170px" class="margin-top" :column="1" size="mini" border>
                 <el-descriptions-item label="Category"><i>{{ scope.row.category }}</i></el-descriptions-item>
                 <el-descriptions-item label="Attending Option">{{ scope.row.attending_option }}</el-descriptions-item>
                 <el-descriptions-item label="Rate">{{ $func.formatAmount(scope.row.rate) }}</el-descriptions-item>
@@ -173,7 +173,7 @@
                   :closable="false">
               </el-alert>
 
-              <el-descriptions v-else-if="scope.row.booked_dates.length > 0" class="margin-top" :column="1" size="mini" border>
+              <el-descriptions labelStyle="width: 120px" v-else-if="scope.row.booked_dates.length > 0" class="margin-top" :column="1" size="mini" border>
                 <el-descriptions-item label="Date Booked" contentClassName="text-center">{{ $func.formatToDateTime(scope.row.booked_date) }}</el-descriptions-item>
 
                 <el-descriptions-item label="Booking Status" contentClassName="text-center">
@@ -192,7 +192,7 @@
             fixed="right"
             width="305">
             <template slot-scope="scope">
-              <el-descriptions v-if="scope.row.attended_dates.length > 0" class="margin-top" :column="1" size="mini" border>
+              <el-descriptions labelStyle="width: 120px" v-if="scope.row.attended_dates.length > 0" class="margin-top" :column="1" size="mini" border>
                 <el-descriptions-item v-for="(dates, index) in scope.row.attended_dates" :key="index" :label="index === 0 ? 'Dates Attended' : ''" contentClassName="text-center" labelClassName="text-center">{{ dates }}</el-descriptions-item>
               </el-descriptions>
 

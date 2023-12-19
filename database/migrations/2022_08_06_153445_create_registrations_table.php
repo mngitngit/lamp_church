@@ -39,6 +39,7 @@ class CreateRegistrationsTable extends Migration
             $table->boolean('is_booking_bypassed')->default(false);
             $table->char('avail_new_lamp_id')->default('no');
             $table->date('visitor_to_member')->nullable();
+            $table->date('is_received_hg')->nullable();
             $table->text('medical_assistance_needed')->nullable();
             $table->text('notes');
             $table->text('activities');
