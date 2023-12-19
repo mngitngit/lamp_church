@@ -141,7 +141,7 @@
           v-if="tableData.data.length > 0"
           class="m-0"
           :pagination="tableData"
-          @paginate="fetchLookUps()"
+          @paginate="fetchLookUps(false)"
           :offset="4">
       </pagination>
     </div>
@@ -184,8 +184,8 @@
       this.fetchLookUps();
     },
     methods: {
-        fetchLookUps() {
-          if (this.search.keyword != '' || this.search.local_church != '' || this.search.registration_type != '')
+        fetchLookUps(ignore_page = true) {
+          if ((this.search.keyword != '' || this.search.local_church != '' || this.search.registration_type != '') && ignore_page)
             this.tableData.current_page = 1;
             
           axios

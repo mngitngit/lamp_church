@@ -7210,7 +7210,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     fetchLookUps: function fetchLookUps() {
       var _this = this;
 
-      if (this.search.keyword != '' || this.search.local_church != '' || this.search.registration_type != '') this.tableData.current_page = 1;
+      var ignore_page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      if ((this.search.keyword != '' || this.search.local_church != '' || this.search.registration_type != '') && ignore_page) this.tableData.current_page = 1;
       axios.get("/lookup", {
         params: {
           search: this.search,
@@ -8815,7 +8816,7 @@ var render = function render() {
     },
     on: {
       paginate: function paginate($event) {
-        return _vm.fetchLookUps();
+        return _vm.fetchLookUps(false);
       }
     }
   }) : _vm._e()], 1), _vm._v(" "), _c("el-dialog", {
