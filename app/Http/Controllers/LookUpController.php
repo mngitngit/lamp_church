@@ -29,9 +29,26 @@ class LookUpController extends Controller
      */
     public function index(Request $request)
     {
-        return LookUp::where('fullname', 'LIKE', "%$request->search%")
-            ->orWhere('lamp_card_number', 'LIKE', "%$request->search%")
-            ->paginate(10);
+        $search = json_decode($request->search);
+
+        $lookUp = LookUp::query();
+
+        if ($search->keyword) {
+            $lookUp = $lookUp->where('fullname', 'LIKE', "%$search->keyword%")
+                ->orWhere('lamp_card_number', 'LIKE', "%$search->keyword%");
+        }
+
+        if ($search->registration_status != '') {
+            $lookUp = $lookUp->where('is_registered', (int) $search->registration_status);
+        }
+
+        if ($search->local_church) {
+            $lookUp = $lookUp->where('local_church', $search->local_church);
+        }
+
+        $lookUp = $lookUp->paginate(10);
+
+        return $lookUp;
     }
 
     /**

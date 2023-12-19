@@ -7181,9 +7181,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       search: '',
       tableData: {
         total: 0,
@@ -7192,10 +7196,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         to: 0,
         current_page: 1,
         data: []
-      },
-      dialogVisible: false,
-      permissions: window.auth_user.permissions
-    };
+      }
+    }, _defineProperty(_ref, "search", {
+      keyword: '',
+      local_church: '',
+      registration_status: ''
+    }), _defineProperty(_ref, "dialogVisible", false), _defineProperty(_ref, "permissions", window.auth_user.permissions), _ref;
   },
   mounted: function mounted() {
     this.fetchLookUps();
@@ -7204,14 +7210,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     fetchLookUps: function fetchLookUps() {
       var _this = this;
 
-      if (this.search != '') this.tableData.current_page = 1;
+      if (this.search.keyword != '' || this.search.local_church != '' || this.search.registration_type != '') this.tableData.current_page = 1;
       axios.get("/lookup", {
         params: {
           search: this.search,
           page: this.tableData.current_page
         }
       }).then( /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {
           return _regeneratorRuntime().wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
@@ -7227,7 +7233,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }));
 
         return function (_x) {
-          return _ref.apply(this, arguments);
+          return _ref2.apply(this, arguments);
         };
       }())["catch"](function (error) {
         console.log(_this.tableData);
@@ -8487,79 +8493,6 @@ var render = function render() {
   return _c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-md-5 mb-3 p-0"
-  }, [_c("div", {
-    staticClass: "input-with-select el-input el-input-group el-input-group--append"
-  }, [_c("input", {
-    attrs: {
-      type: "hidden",
-      name: "type",
-      value: "lookup"
-    }
-  }), _vm._v(" "), _c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.search,
-      expression: "search"
-    }],
-    staticClass: "el-input__inner",
-    attrs: {
-      type: "text",
-      autocomplete: "off",
-      placeholder: "Search by Name or ID",
-      name: "search"
-    },
-    domProps: {
-      value: _vm.search
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.search = $event.target.value;
-      }
-    }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "el-input-group__append"
-  }, [_c("button", {
-    staticClass: "el-button el-button--submit",
-    attrs: {
-      type: "submit",
-      value: "Submit"
-    },
-    on: {
-      click: function click($event) {
-        return _vm.fetchLookUps();
-      }
-    }
-  }, [_c("i", {
-    staticClass: "el-icon-search"
-  })])])])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-7 mb-3 p-0"
-  }, [_vm.permissions.can_add_lookup_data ? _c("el-button", {
-    staticClass: "float-end",
-    attrs: {
-      type: "success"
-    },
-    on: {
-      click: function click($event) {
-        _vm.dialogVisible = true;
-      }
-    }
-  }, [_vm._v("Upload Excel "), _c("i", {
-    staticClass: "el-icon-upload el-icon-right"
-  })]) : _vm._e(), _vm._v(" "), _vm.permissions.can_add_lookup_data ? _c("a", {
-    attrs: {
-      href: "/lookup/create"
-    }
-  }, [_c("el-button", {
-    staticClass: "float-end mx-3",
-    attrs: {
-      type: "info"
-    }
-  }, [_vm._v("Create New")])], 1) : _vm._e()], 1)]), _vm._v(" "), _c("div", {
     staticClass: "col-md-24"
   }, [_c("el-table", {
     ref: "filterTable",
@@ -8573,6 +8506,190 @@ var render = function render() {
       size: "mini"
     }
   }, [_c("el-table-column", {
+    scopedSlots: _vm._u([{
+      key: "header",
+      fn: function fn(scope) {
+        return [_c("table", {
+          staticClass: "w-100"
+        }, [_c("tr", {
+          staticStyle: {
+            "background-color": "#f5f7fa"
+          }
+        }, [_c("td", {
+          attrs: {
+            width: "250"
+          }
+        }, [_c("small", [_vm._v("Search by Name or LAMP ID")]), _vm._v(" "), _c("input", {
+          attrs: {
+            type: "hidden",
+            name: "type",
+            value: "lookup"
+          }
+        }), _vm._v(" "), _c("el-input", {
+          attrs: {
+            clearable: "",
+            size: "mini",
+            name: "search",
+            placeholder: "Type to search"
+          },
+          model: {
+            value: _vm.search.keyword,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "keyword", $$v);
+            },
+            expression: "search.keyword"
+          }
+        })], 1), _vm._v(" "), _c("td", {
+          attrs: {
+            width: "120"
+          }
+        }, [_c("small", [_vm._v("Local Church")]), _vm._v(" "), _c("el-select", {
+          attrs: {
+            size: "mini",
+            clearable: "",
+            placeholder: "select"
+          },
+          model: {
+            value: _vm.search.local_church,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "local_church", $$v);
+            },
+            expression: "search.local_church"
+          }
+        }, [_c("el-option", {
+          attrs: {
+            label: "All",
+            value: ""
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Bacolod",
+            label: "Bacolod"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Binan",
+            label: "Binan"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Canlubang",
+            label: "Canlubang"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Dasmarinas",
+            label: "Dasmarinas"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Granada",
+            label: "Granada"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Hinigaran",
+            label: "Hinigaran"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Isabela",
+            label: "Isabela"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Muntinlupa",
+            label: "Muntinlupa"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Pateros",
+            label: "Pateros"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Tarlac",
+            label: "Tarlac"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: "Valenzuela",
+            label: "Valenzuela"
+          }
+        })], 1)], 1), _vm._v(" "), _c("td", {
+          attrs: {
+            width: "120"
+          }
+        }, [_c("small", [_vm._v("Registration Status")]), _vm._v(" "), _c("el-select", {
+          attrs: {
+            size: "mini",
+            clearable: "",
+            placeholder: "select"
+          },
+          model: {
+            value: _vm.search.registration_status,
+            callback: function callback($$v) {
+              _vm.$set(_vm.search, "registration_status", $$v);
+            },
+            expression: "search.registration_status"
+          }
+        }, [_c("el-option", {
+          attrs: {
+            label: "All",
+            value: ""
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: 1,
+            label: "Registered"
+          }
+        }), _vm._v(" "), _c("el-option", {
+          attrs: {
+            value: 0,
+            label: "Not yet registered"
+          }
+        })], 1)], 1), _vm._v(" "), _c("td", {
+          attrs: {
+            width: "120"
+          }
+        }, [_c("br"), _vm._v(" "), _c("el-button", {
+          attrs: {
+            size: "mini",
+            type: "primary"
+          },
+          on: {
+            click: function click($event) {
+              return _vm.fetchLookUps();
+            }
+          }
+        }, [_vm._v("Search")])], 1), _vm._v(" "), _c("td", [_c("br"), _vm._v(" "), _vm.permissions.can_add_lookup_data ? _c("a", {
+          staticClass: "float-end",
+          attrs: {
+            href: "/lookup/create"
+          }
+        }, [_c("el-button", {
+          staticClass: "mx-3",
+          attrs: {
+            size: "mini",
+            type: "info"
+          }
+        }, [_vm._v("Create New")])], 1) : _vm._e(), _vm._v(" "), _vm.permissions.can_add_lookup_data ? _c("el-button", {
+          staticClass: "float-end",
+          attrs: {
+            size: "mini",
+            type: "success"
+          },
+          on: {
+            click: function click($event) {
+              _vm.dialogVisible = true;
+            }
+          }
+        }, [_vm._v("Upload Excel "), _c("i", {
+          staticClass: "el-icon-upload el-icon-right"
+        })]) : _vm._e()], 1)])])];
+      }
+    }])
+  }, [_vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "count",
       label: "#",
@@ -8690,7 +8807,7 @@ var render = function render() {
         }, [_vm._v("View Details")])], 1)];
       }
     }])
-  })], 1), _vm._v(" "), _vm.tableData.data.length > 0 ? _c("pagination", {
+  })], 1)], 1), _vm._v(" "), _vm.tableData.data.length > 0 ? _c("pagination", {
     staticClass: "m-0",
     attrs: {
       pagination: _vm.tableData,
@@ -9108,7 +9225,9 @@ var render = function render() {
         return [_c("el-descriptions", {
           staticClass: "margin-top",
           attrs: {
-            labelStyle: "width: 120px",
+            labelStyle: {
+              width: "120px"
+            },
             column: 1,
             size: "mini",
             border: ""
@@ -9168,7 +9287,9 @@ var render = function render() {
         return [_c("el-descriptions", {
           staticClass: "margin-top",
           attrs: {
-            labelStyle: "width: 170px",
+            labelStyle: {
+              width: "170px"
+            },
             column: 1,
             size: "mini",
             border: ""
@@ -9225,7 +9346,9 @@ var render = function render() {
         }) : scope.row.booked_dates.length > 0 ? _c("el-descriptions", {
           staticClass: "margin-top",
           attrs: {
-            labelStyle: "width: 120px",
+            labelStyle: {
+              width: "120px"
+            },
             column: 1,
             size: "mini",
             border: ""
@@ -9269,7 +9392,9 @@ var render = function render() {
         return [scope.row.attended_dates.length > 0 ? _c("el-descriptions", {
           staticClass: "margin-top",
           attrs: {
-            labelStyle: "width: 120px",
+            labelStyle: {
+              width: "120px"
+            },
             column: 1,
             size: "mini",
             border: ""
