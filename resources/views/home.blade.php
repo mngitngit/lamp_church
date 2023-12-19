@@ -37,6 +37,9 @@
                 <slots-table :slots="{{ $slots_list }}" />
             </el-tab-pane>
         @endif
+
+        <el-tab-pane label="Received HG">
+        </el-tab-pane>
     </el-tabs>
 </div>
 @endsection
