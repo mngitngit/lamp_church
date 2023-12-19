@@ -8669,7 +8669,7 @@ var render = function render() {
             href: "/lookup/create"
           }
         }, [_c("el-button", {
-          staticClass: "mx-3",
+          staticClass: "mx-1",
           attrs: {
             size: "mini",
             type: "info"
