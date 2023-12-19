@@ -78,6 +78,12 @@ class ReceivedHGController extends Controller
             'notes' => $request->notes
         ]);
 
+        $slot = Slots::find($slot_id)->getOriginal('event_date');
+
+        $registration->update([
+            'is_received_hg' => date_format($slot, 'Y-m-d')
+        ]);
+
         return response()->json([
             'success' => 'Successfully Recorded!',
             'data' => $hg
