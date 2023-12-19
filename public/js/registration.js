@@ -9121,14 +9121,7 @@ var render = function render() {
           attrs: {
             label: "Complete Name"
           }
-        }, [scope.row.is_received_hg != null ? _c("span", [_c("img", {
-          staticClass: "mb-1",
-          attrs: {
-            height: "13",
-            width: "15",
-            src: "/images/flame.png"
-          }
-        }), _vm._v(" ")]) : _vm._e(), _vm._v(_vm._s(scope.row.firstname) + " " + _vm._s(scope.row.lastname))]), _vm._v(" "), _c("el-descriptions-item", {
+        }, [_vm._v(_vm._s(scope.row.firstname) + " " + _vm._s(scope.row.lastname))]), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
             label: "Facebook Name"
           }
@@ -9147,6 +9140,17 @@ var render = function render() {
             label: "Local Church"
           }
         }, [_vm._v(_vm._s(scope.row.local_church))]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Date Received HG"
+          }
+        }, [scope.row.is_received_hg != null ? _c("span", [_vm._v(_vm._s(scope.row.is_received_hg))]) : _c("span", [_vm._v("--")]), scope.row.is_received_hg != null ? _c("span", [_vm._v(" "), _c("img", {
+          staticClass: "mb-1",
+          attrs: {
+            height: "13",
+            width: "15",
+            src: "/images/flame.png"
+          }
+        })]) : _vm._e()]), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
             label: "Date Registered"
           }

@@ -134,12 +134,13 @@
                   </template>
                   {{ scope.row.uuid }}
                 </el-descriptions-item>
-                <el-descriptions-item label="Complete Name"><span v-if="scope.row.is_received_hg != null"><img class="mb-1" height="13" width="15" src="/images/flame.png" />&nbsp;</span>{{ scope.row.firstname }} {{ scope.row.lastname }}</el-descriptions-item>
+                <el-descriptions-item label="Complete Name">{{ scope.row.firstname }} {{ scope.row.lastname }}</el-descriptions-item>
                 <el-descriptions-item label="Facebook Name">{{ scope.row.facebook_name || '--' }}</el-descriptions-item>
                 <el-descriptions-item label="Registration Type">
                   <el-tag effect="plain" size="mini" :type="scope.row.registration_type === 'Guest' ? '' : 'warning'">{{ scope.row.registration_type }}</el-tag>
                 </el-descriptions-item>
                 <el-descriptions-item label="Local Church">{{ scope.row.local_church }}</el-descriptions-item>
+                <el-descriptions-item label="Date Received HG"><span v-if="scope.row.is_received_hg != null">{{ scope.row.is_received_hg }}</span><span v-else>--</span><span v-if="scope.row.is_received_hg != null">&nbsp;<img class="mb-1" height="13" width="15" src="/images/flame.png" /></span></el-descriptions-item>
                 <el-descriptions-item label="Date Registered">{{ $func.formatToDateTime(scope.row.created_at) }}</el-descriptions-item>
               </el-descriptions>
             </template>

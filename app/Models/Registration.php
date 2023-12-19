@@ -42,7 +42,8 @@ class Registration extends MyModel
     protected $casts = [
         'notes' => 'array',
         'activities' => 'array',
-        'booking_activities' => 'array'
+        'booking_activities' => 'array',
+        'is_received_hg' => 'date:M d, Y',
     ];
 
     protected $appends = [
