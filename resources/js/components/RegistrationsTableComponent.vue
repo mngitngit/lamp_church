@@ -124,9 +124,9 @@
           </el-table-column>
           <el-table-column
             label="Personal Details"
-            width="305">
+            width="325">
             <template slot-scope="scope">
-              <el-descriptions class="margin-top" :labelStyle="{'width': '120px'}" :column="1" size="mini" border>
+              <el-descriptions class="margin-top" :labelStyle="{'width': '120px'}" :contentStyle="{'width': '170px'}" :column="1" size="mini" border>
                 <el-descriptions-item>
                   <template slot="label">
                     <i class="el-icon-user"></i>
@@ -147,15 +147,16 @@
           </el-table-column>
           <el-table-column
             label="Other Details"      
-            width="305">
+            width="295">
             <template slot-scope="scope">
-              <el-descriptions :labelStyle="{'width': '170px'}" class="margin-top" :column="1" size="mini" border>
-                <el-descriptions-item label="Category"><i>{{ scope.row.category }}</i></el-descriptions-item>
-                <el-descriptions-item label="Attending Option">{{ scope.row.attending_option }}</el-descriptions-item>
-                <el-descriptions-item label="Rate">{{ $func.formatAmount(scope.row.rate) }}</el-descriptions-item>
-                <el-descriptions-item label="Booking Confirmation Rate">{{ $func.formatAmount(scope.row.can_book_rate) }}</el-descriptions-item>
-                <el-descriptions-item label="Total Paid">{{ $func.formatAmount(scope.row.payments_sum_amount || 0) }}</el-descriptions-item>
-                <el-descriptions-item label="Payment Status">
+              <el-descriptions :labelStyle="{'width': '170px'}" :contentStyle="{'width': '70px'}" class="margin-top" :column="1" size="mini" border>
+                <el-descriptions-item label="Category" contentClassName="text-center"><i>{{ scope.row.category }}</i></el-descriptions-item>
+                <el-descriptions-item label="Attending Option" contentClassName="text-center">{{ scope.row.attending_option }}</el-descriptions-item>
+                <el-descriptions-item label="Availed New LAMP ID" contentClassName="text-center"><i><span v-if="scope.row.avail_new_lamp_id == 'yes'">Yes</span><span v-else>No</span></i></el-descriptions-item>
+                <el-descriptions-item label="Rate" contentClassName="text-center">{{ $func.formatAmount(scope.row.rate) }}</el-descriptions-item>
+                <el-descriptions-item label="Booking Confirmation Rate" contentClassName="text-center">{{ $func.formatAmount(scope.row.can_book_rate) }}</el-descriptions-item>
+                <el-descriptions-item label="Total Paid" contentClassName="text-center">{{ $func.formatAmount(scope.row.payments_sum_amount || 0) }}</el-descriptions-item>
+                <el-descriptions-item label="Payment Status" contentClassName="text-center">
                   <el-tag size="mini" effect="dark" :type="scope.row.payment_status === 'Paid' ? 'success' : (scope.row.payment_status === 'Free' ? 'info' : 'warning')">{{ scope.row.payment_status }}</el-tag>
                 </el-descriptions-item>
               </el-descriptions>
@@ -164,7 +165,7 @@
           <el-table-column
             label="Booked dates"
             align="center"
-            width="305">
+            width="295">
             <template slot-scope="scope">
               <el-alert
                   v-if="scope.row.is_booking_bypassed"
@@ -191,7 +192,7 @@
             label="Dates Attended"
             align="center"
             fixed="right"
-            width="305">
+            width="295">
             <template slot-scope="scope">
               <el-descriptions :labelStyle="{'width': '120px'}" v-if="scope.row.attended_dates.length > 0" class="margin-top" :column="1" size="mini" border>
                 <el-descriptions-item v-for="(dates, index) in scope.row.attended_dates" :key="index" :label="index === 0 ? 'Dates Attended' : ''" contentClassName="text-center" labelClassName="text-center">{{ dates }}</el-descriptions-item>

@@ -9218,7 +9218,7 @@ var render = function render() {
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       label: "Personal Details",
-      width: "305"
+      width: "325"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -9228,6 +9228,9 @@ var render = function render() {
           attrs: {
             labelStyle: {
               width: "120px"
+            },
+            contentStyle: {
+              width: "170px"
             },
             column: 1,
             size: "mini",
@@ -9280,7 +9283,7 @@ var render = function render() {
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       label: "Other Details",
-      width: "305"
+      width: "295"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -9291,33 +9294,47 @@ var render = function render() {
             labelStyle: {
               width: "170px"
             },
+            contentStyle: {
+              width: "70px"
+            },
             column: 1,
             size: "mini",
             border: ""
           }
         }, [_c("el-descriptions-item", {
           attrs: {
-            label: "Category"
+            label: "Category",
+            contentClassName: "text-center"
           }
         }, [_c("i", [_vm._v(_vm._s(scope.row.category))])]), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
-            label: "Attending Option"
+            label: "Attending Option",
+            contentClassName: "text-center"
           }
         }, [_vm._v(_vm._s(scope.row.attending_option))]), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
-            label: "Rate"
+            label: "Availed New LAMP ID",
+            contentClassName: "text-center"
+          }
+        }, [_c("i", [scope.row.avail_new_lamp_id == "yes" ? _c("span", [_vm._v("Yes")]) : _c("span", [_vm._v("No")])])]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
+            label: "Rate",
+            contentClassName: "text-center"
           }
         }, [_vm._v(_vm._s(_vm.$func.formatAmount(scope.row.rate)))]), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
-            label: "Booking Confirmation Rate"
+            label: "Booking Confirmation Rate",
+            contentClassName: "text-center"
           }
         }, [_vm._v(_vm._s(_vm.$func.formatAmount(scope.row.can_book_rate)))]), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
-            label: "Total Paid"
+            label: "Total Paid",
+            contentClassName: "text-center"
           }
         }, [_vm._v(_vm._s(_vm.$func.formatAmount(scope.row.payments_sum_amount || 0)))]), _vm._v(" "), _c("el-descriptions-item", {
           attrs: {
-            label: "Payment Status"
+            label: "Payment Status",
+            contentClassName: "text-center"
           }
         }, [_c("el-tag", {
           attrs: {
@@ -9332,7 +9349,7 @@ var render = function render() {
     attrs: {
       label: "Booked dates",
       align: "center",
-      width: "305"
+      width: "295"
     },
     scopedSlots: _vm._u([{
       key: "default",
@@ -9385,7 +9402,7 @@ var render = function render() {
       label: "Dates Attended",
       align: "center",
       fixed: "right",
-      width: "305"
+      width: "295"
     },
     scopedSlots: _vm._u([{
       key: "default",
