@@ -176,6 +176,10 @@ class HomeController extends Controller
         $tab = 0;
         if ($request->type === 'registration') $tab = 0;
         if ($request->type === 'lookup') $tab = 1;
+        if ($request->type === 'attendance') $tab = 2;
+        if ($request->type === 'bookings') $tab = 3;
+        if ($request->type === 'attendance_count') $tab = 4;
+        if ($request->type === 'slots') $tab = 5;
         return view('home', [
             'search' => $request->search,
             'type' => $request->type,
