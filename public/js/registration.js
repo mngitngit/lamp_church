@@ -8250,7 +8250,7 @@ var render = function render() {
             width: "350",
             trigger: "hover"
           }
-        }, [_vm._l(_vm.history, function (activity, index) {
+        }, [_vm._l(_vm.history.slice().reverse(), function (activity, index) {
           return _c("p", {
             key: index,
             staticClass: "m-0",
@@ -9011,7 +9011,7 @@ var render = function render() {
             width: "350",
             trigger: "hover"
           }
-        }, [_vm._l(_vm.history, function (activity, index) {
+        }, [_vm._l(_vm.history.slice().reverse(), function (activity, index) {
           return _c("p", {
             key: index,
             staticClass: "m-0",
@@ -9424,7 +9424,7 @@ var render = function render() {
             width: "350",
             trigger: "hover"
           }
-        }, [_vm._l(_vm.history, function (activity, index) {
+        }, [_vm._l(_vm.history.slice().reverse(), function (activity, index) {
           return _c("p", {
             key: index,
             staticClass: "m-0",

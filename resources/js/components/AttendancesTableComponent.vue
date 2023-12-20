@@ -49,7 +49,7 @@
                                 width="350"
                                 trigger="hover">
                                     <template>
-                                        <p class="m-0" style="font-size: x-small;" v-for="(activity, index) in history" :key="index">
+                                        <p class="m-0" style="font-size: x-small;" v-for="(activity, index) in history.slice().reverse()" :key="index">
                                             {{ activity.created_at }} - <i>exported by {{activity.user_name}}</i>
                                         </p>
                                     </template>
