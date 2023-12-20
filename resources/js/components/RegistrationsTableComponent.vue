@@ -10,7 +10,7 @@
         style="width: 100%">
         <el-table-column>
           <template slot="header" slot-scope="scope">
-            <table>
+            <table class="w-100">
               <tr style="background-color: #f5f7fa;">
                 <td width="250">
                   <small>Search by Name or LAMP ID</small>
@@ -75,17 +75,7 @@
                   <small>Local Church</small>
                   <el-select size="mini" v-model="search.local_church" clearable placeholder="select">
                     <el-option label="All" value=""></el-option>
-                    <el-option value="Bacolod" label="Bacolod"></el-option>
-                    <el-option value="Binan" label="Binan"></el-option>
-                    <el-option value="Canlubang" label="Canlubang"></el-option>
-                    <el-option value="Dasmarinas" label="Dasmarinas"></el-option>
-                    <el-option value="Granada" label="Granada"></el-option>
-                    <el-option value="Hinigaran" label="Hinigaran"></el-option>
-                    <el-option value="Isabela" label="Isabela"></el-option>
-                    <el-option value="Muntinlupa" label="Muntinlupa"></el-option>
-                    <el-option value="Pateros" label="Pateros"></el-option>
-                    <el-option value="Tarlac" label="Tarlac"></el-option>
-                    <el-option value="Valenzuela" label="Valenzuela"></el-option>
+                    <el-option v-for="(value, local_church) in assignments" :key="local_church" :label="local_church" :value="local_church"></el-option>
                   </el-select>
                 </td>
                 <td>
@@ -104,8 +94,8 @@
                         {{ activity.created_at }} - <i>exported by {{activity.user_name}}</i>
                       </p>
                     </template>
-                    <a href="/registrations/export" slot="reference" @click="refreshHistory()">
-                    <el-button type="success" size="mini" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
+                    <a href="/registrations/export" slot="reference" @click="refreshHistory()" class="float-end">
+                    <el-button type="success" size="mini">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
                     </a>
                   </el-popover>
                 </td>
@@ -147,7 +137,7 @@
           </el-table-column>
           <el-table-column
             label="Other Details"      
-            width="295">
+            width="305">
             <template slot-scope="scope">
               <el-descriptions :labelStyle="{'width': '170px'}" :contentStyle="{'width': '70px'}" class="margin-top" :column="1" size="mini" border>
                 <el-descriptions-item label="Category" contentClassName="text-center"><i>{{ scope.row.category }}</i></el-descriptions-item>
@@ -248,7 +238,8 @@
           data: []
         },
         permissions: window.auth_user.permissions,
-        history: []
+        assignments: window.env.cluster_groups,
+        history: [],
       }
     },
     mounted() {

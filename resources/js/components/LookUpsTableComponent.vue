@@ -27,17 +27,7 @@
                   <small>Local Church</small>
                   <el-select size="mini" v-model="search.local_church" clearable placeholder="select">
                     <el-option label="All" value=""></el-option>
-                    <el-option value="Bacolod" label="Bacolod"></el-option>
-                    <el-option value="Binan" label="Binan"></el-option>
-                    <el-option value="Canlubang" label="Canlubang"></el-option>
-                    <el-option value="Dasmarinas" label="Dasmarinas"></el-option>
-                    <el-option value="Granada" label="Granada"></el-option>
-                    <el-option value="Hinigaran" label="Hinigaran"></el-option>
-                    <el-option value="Isabela" label="Isabela"></el-option>
-                    <el-option value="Muntinlupa" label="Muntinlupa"></el-option>
-                    <el-option value="Pateros" label="Pateros"></el-option>
-                    <el-option value="Tarlac" label="Tarlac"></el-option>
-                    <el-option value="Valenzuela" label="Valenzuela"></el-option>
+                    <el-option v-for="(value, local_church) in assignments" :key="local_church" :label="local_church" :value="local_church"></el-option>
                   </el-select>
                 </td>
                 <td width="120">
@@ -71,46 +61,51 @@
           </template>
         </el-table-column>
         <el-table-column
-          prop="count"
+          prop="lamp_card_number"
           label="AWTA Card #"
           fixed="left"
-          align="center">
+          align="center"
+          sortable>
           <template slot-scope="scope">
               {{ scope.row.lamp_card_number }}
           </template>
         </el-table-column>
         <el-table-column
-          prop="count"
+          prop="fullname"
           label="Complete Name"
           fixed="left"
-          align="center">
+          align="center"
+          sortable>
           <template slot-scope="scope">
               {{ scope.row.fullname }}
           </template>
         </el-table-column>
         <el-table-column
-          prop="count"
+          prop="email"
           label="Email Address"
           fixed="left"
-          align="center">
+          align="center"
+          sortable>
           <template slot-scope="scope">
               <small>{{ scope.row.email }}</small>
           </template>
         </el-table-column>
         <el-table-column
-          prop="count"
+          prop="local_church"
           label="Local Church"
           fixed="left"
-          align="center">
+          align="center"
+          sortable>
           <template slot-scope="scope">
               {{ scope.row.local_church }}
           </template>
         </el-table-column>
         <el-table-column
-          prop="count"
+          prop="is_registered"
           label="Registration Status"
           fixed="left"
-          align="center">
+          align="center"
+          sortable>
           <template slot-scope="scope">
             <el-tag v-if="scope.row.is_registered">Registered</el-tag>
             <el-tag v-else type="danger">Not yet registered</el-tag>
@@ -177,7 +172,8 @@
           registration_status: ''
         },
         dialogVisible: false,
-        permissions: window.auth_user.permissions
+        permissions: window.auth_user.permissions,
+        assignments: window.env.cluster_groups,
       }
     },
     mounted() {

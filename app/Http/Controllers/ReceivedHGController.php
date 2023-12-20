@@ -6,9 +6,30 @@ use App\Models\ReceivedHG;
 use App\Models\Registration;
 use App\Models\Slots;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ExportReceivedHG;
 
 class ReceivedHGController extends Controller
 {
+    public function index(Request $request) {
+        $search = json_decode($request->search);
+
+        $receivedHG = ReceivedHG::with('registration', 'slot');
+
+        if ($search->local_church) {
+            $receivedHG = $receivedHG->where('local_church', $search->local_church);
+        }
+
+        if ($search->keyword) {
+            $receivedHG = $receivedHG->whereRelation('registration', 'fullname', 'LIKE', "%$search->keyword%")
+                ->orWhereRelation('registration', 'uuid', 'LIKE', "%$search->keyword%");
+        }
+
+        $receivedHG = $receivedHG->paginate(10);
+
+        return $receivedHG;
+    }
+
     public function show($uuid, Request $request)
     {
         if (!$request->api_key) {
@@ -88,5 +109,9 @@ class ReceivedHGController extends Controller
             'success' => 'Successfully Recorded!',
             'data' => $hg
         ], 422);
+    }
+
+    public function export() {
+        return Excel::download(new ExportReceivedHG, 'received_hg_' . TIME() . '.csv');
     }
 }

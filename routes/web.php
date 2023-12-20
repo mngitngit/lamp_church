@@ -77,7 +77,11 @@ Route::get('/config', [App\Http\Controllers\ConfigurationController::class, 'sho
 // dashboard
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/attendance', [App\Http\Controllers\DashboardController::class, 'view_attendance_per_church'])->name('dashboard.attendance');
-Route::get('/dashboard/received-hg', [App\Http\Controllers\DashboardController::class, 'view_received_hg_per_church'])->name('hg.index');
+Route::get('/dashboard/received-hg', [App\Http\Controllers\DashboardController::class, 'view_received_hg_per_church'])->name('dashboard.hg');
+
+Route::get('received-hg', [App\Http\Controllers\ReceivedHGController::class, 'index'])->name('hg.index');
+Route::get('received-hg/export', [App\Http\Controllers\ReceivedHGController::class, 'export'])->name('hg.export');
+
 
 // online check in
 Route::get('/check-in', [App\Http\Controllers\CheckInController::class, 'index'])->name('check-in');

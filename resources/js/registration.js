@@ -15,6 +15,7 @@ Vue.component('booking-table', require('./components/BookingTableComponent.vue')
 Vue.component('attendance-table', require('./components/AttendanceTableComponent.vue').default);
 Vue.component('attendances-table', require('./components/AttendancesTableComponent.vue').default);
 Vue.component('slots-table', require('./components/SlotsTableComponent.vue').default);
+Vue.component('received-hg-table', require('./components/ReceivedHGTableComponent.vue').default);
 Vue.component('upload-component', require('./components/UploadComponent.vue').default);
 Vue.component('pagination', require('./components/Common/Pagination.vue').default);
 Vue.component('ticket-component', require('./components/TicketComponent.vue').default);

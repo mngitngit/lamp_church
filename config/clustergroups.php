@@ -1,34 +1,6 @@
 <?php
 
 return [
-    "Bacolod" => [
-        [
-            "label" =>  "Online",
-            "options" => [
-                "Ortiz, Iloilo"
-            ]
-        ],
-        [
-            "label" =>  "Physical",
-            "options" => [
-                "Abada Escay",
-                "Baseline",
-                "Cauayan",
-                "Gonzaga",
-                "Greenbeach. Pulupandan",
-                "Greenplains",
-                "La Salle",
-                "Ma-ao",
-                "Mansilingan",
-                "Pahanocoy",
-                "Pontevedra ",
-                "San Enrique",
-                "Tapong, Pulupandan",
-                "Villa fe",
-                "Villamar",
-            ]
-        ],
-    ],
     "Binan" => [
         [
             "label" =>  "Online/Physical",

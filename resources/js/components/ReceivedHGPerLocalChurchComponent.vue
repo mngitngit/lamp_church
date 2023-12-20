@@ -36,17 +36,7 @@
                   <small>Local Church</small>
                   <el-select size="mini" v-model="search.local_church" placeholder="select">
                     <el-option label="All" value=""></el-option>
-                    <el-option value="Bacolod" label="Bacolod"></el-option>
-                    <el-option value="Binan" label="Binan"></el-option>
-                    <el-option value="Canlubang" label="Canlubang"></el-option>
-                    <el-option value="Dasmarinas" label="Dasmarinas"></el-option>
-                    <el-option value="Granada" label="Granada"></el-option>
-                    <el-option value="Hinigaran" label="Hinigaran"></el-option>
-                    <el-option value="Isabela" label="Isabela"></el-option>
-                    <el-option value="Muntinlupa" label="Muntinlupa"></el-option>
-                    <el-option value="Pateros" label="Pateros"></el-option>
-                    <el-option value="Tarlac" label="Tarlac"></el-option>
-                    <el-option value="Valenzuela" label="Valenzuela"></el-option>
+                    <el-option v-for="(value, local_church) in assignments" :key="local_church" :label="local_church" :value="local_church"></el-option>
                   </el-select>
                 </td>
 
@@ -146,7 +136,8 @@
             to: 0,
             current_page: 1,
             data: []
-          }
+          },
+          assignments: window.env.cluster_groups,
         }
       },
       mounted() {

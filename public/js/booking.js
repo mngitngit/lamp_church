@@ -7205,7 +7205,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         uuid: null,
         details: {},
         can_book_days: null
-      }
+      },
+      assignments: window.env.cluster_groups
     };
   },
   mounted: function mounted() {
@@ -7676,57 +7677,15 @@ var render = function render() {
       },
       expression: "ruleForm.localChurch"
     }
-  }, [_c("el-option", {
-    attrs: {
-      label: "Binan",
-      value: "Binan"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Canlubang",
-      value: "Canlubang"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Dasmarinas",
-      value: "Dasmarinas"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "DC Cruz",
-      value: "DC Cruz"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Granada",
-      value: "Granada"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Isabela",
-      value: "Isabela"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Muntinlupa",
-      value: "Muntinlupa"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Pateros",
-      value: "Pateros"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Tarlac",
-      value: "Tarlac"
-    }
-  }), _vm._v(" "), _c("el-option", {
-    attrs: {
-      label: "Valenzuela",
-      value: "Valenzuela"
-    }
-  })], 1)], 1)], 1)]), _vm._v(" "), _c("div", {
+  }, _vm._l(_vm.assignments, function (value, local_church) {
+    return _c("el-option", {
+      key: local_church,
+      attrs: {
+        label: local_church,
+        value: local_church
+      }
+    });
+  }), 1)], 1)], 1)]), _vm._v(" "), _c("div", {
     staticClass: "row mb-1"
   }, [_c("div", {
     staticClass: "col-md-12"

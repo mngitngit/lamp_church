@@ -39,6 +39,7 @@
         @endif
 
         <el-tab-pane label="Received HG">
+            <received-hg-table />
         </el-tab-pane>
     </el-tabs>
 </div>

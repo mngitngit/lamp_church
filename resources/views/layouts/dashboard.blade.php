@@ -28,7 +28,8 @@
 
     <script>
         window.env = {
-            awta_day: '{{ config('settings.awta_day') }}'
+            awta_day: '{{ config('settings.awta_day') }}',
+            cluster_groups: {!! json_encode(config('clustergroups')) !!}
         };
     </script>
 </head>

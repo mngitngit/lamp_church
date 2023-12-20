@@ -8,7 +8,7 @@
         style="width: 100%">
         <el-table-column>
                 <template slot="header" slot-scope="scope">
-                    <table>
+                    <table class="w-100">
                         <tr style="background-color: #f5f7fa;">
                             <td width="250">
                                 <small>Search by Name or LAMP ID</small>
@@ -53,8 +53,8 @@
                                             {{ activity.created_at }} - <i>exported by {{activity.user_name}}</i>
                                         </p>
                                     </template>
-                                    <a href="/attendances/export" slot="reference" @click="refreshHistory()">
-                                    <el-button type="success" size="mini" class="float-end">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
+                                    <a href="/attendances/export" class="float-end" slot="reference" @click="refreshHistory()">
+                                    <el-button type="success" size="mini">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
                                     </a>
                                 </el-popover>
                             </td>

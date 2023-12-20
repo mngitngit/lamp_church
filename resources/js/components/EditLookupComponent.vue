@@ -28,15 +28,7 @@
                 <div class="col-md-3">
                     <el-form-item label="Local Church" prop="localChurch" required>
                         <el-select v-model="ruleForm.localChurch" placeholder="Choose">
-                            <el-option label="Binan" value="Binan"></el-option>
-                            <el-option label="Canlubang" value="Canlubang"></el-option>
-                            <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
-                            <el-option label="Visayas" value="Visayas"></el-option>
-                            <el-option label="Isabela" value="Isabela"></el-option>
-                            <el-option label="Muntinlupa" value="Muntinlupa"></el-option>
-                            <el-option label="Pateros" value="Pateros"></el-option>
-                            <el-option label="Tarlac" value="Tarlac"></el-option>
-                            <el-option label="Valenzuela" value="Valenzuela"></el-option>
+                            <el-option v-for="(value, local_church) in assignments" :key="local_church" :label="local_church" :value="local_church"></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
@@ -123,7 +115,8 @@ export default {
                 ]
             },
             countries: this.$allCountries,
-            permissions: window.auth_user.permissions
+            permissions: window.auth_user.permissions,
+            assignments: window.env.cluster_groups,
         }
     },
     mounted() {

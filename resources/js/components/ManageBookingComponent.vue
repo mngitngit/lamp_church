@@ -55,16 +55,7 @@
                                 <div class="col-md-12">
                                     <el-form-item label="Local Church" prop="localChurch" required :error="fieldErrors">
                                         <el-select :disabled="disabled" v-model="ruleForm.localChurch" placeholder="Choose">
-                                            <el-option label="Binan" value="Binan"></el-option>
-                                            <el-option label="Canlubang" value="Canlubang"></el-option>
-                                            <el-option label="Dasmarinas" value="Dasmarinas"></el-option>
-                                            <el-option label="DC Cruz" value="DC Cruz"></el-option>
-                                            <el-option label="Granada" value="Granada"></el-option>
-                                            <el-option label="Isabela" value="Isabela"></el-option>
-                                            <el-option label="Muntinlupa" value="Muntinlupa"></el-option>
-                                            <el-option label="Pateros" value="Pateros"></el-option>
-                                            <el-option label="Tarlac" value="Tarlac"></el-option>
-                                            <el-option label="Valenzuela" value="Valenzuela"></el-option>
+                                            <el-option v-for="(value, local_church) in assignments" :key="local_church" :label="local_church" :value="local_church"></el-option>
                                         </el-select>
                                     </el-form-item>
                                 </div>
@@ -171,7 +162,8 @@ export default {
             uuid: null,
             details: {},
             can_book_days: null
-        }
+        },
+        assignments: window.env.cluster_groups,
       }
     },
     mounted() {
