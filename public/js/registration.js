@@ -9011,15 +9011,15 @@ var render = function render() {
             width: "350",
             trigger: "hover"
           }
-        }, [_vm._l(_vm.history.slice().reverse(), function (activity, index) {
-          return _c("p", {
+        }, [[_vm._l(_vm.history.slice().reverse(), function (activity, index) {
+          return index < 10 ? _c("p", {
             key: index,
             staticClass: "m-0",
             staticStyle: {
               "font-size": "x-small"
             }
-          }, [_vm._v("\n                                        " + _vm._s(activity.created_at) + " - "), _c("i", [_vm._v("exported by " + _vm._s(activity.user_name))])]);
-        }), _vm._v(" "), _c("a", {
+          }, [_vm._v("\n                                        " + _vm._s(activity.created_at) + " - "), _c("i", [_vm._v("exported by " + _vm._s(activity.user_name))])]) : _vm._e();
+        }), _vm._v(" "), _vm.history.length > 10 ? _c("p", [_vm._v("...")]) : _vm._e()], _vm._v(" "), _c("a", {
           staticClass: "float-end",
           attrs: {
             slot: "reference",
