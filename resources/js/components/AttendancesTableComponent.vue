@@ -49,9 +49,10 @@
                                 width="350"
                                 trigger="hover">
                                     <template>
-                                        <p class="m-0" style="font-size: x-small;" v-for="(activity, index) in history.slice().reverse()" :key="index">
+                                        <p class="m-0" style="font-size: x-small;" v-for="(activity, index) in history.slice().reverse()" v-if="index < 10" :key="index">
                                             {{ activity.created_at }} - <i>exported by {{activity.user_name}}</i>
                                         </p>
+                                        <p v-if="history.length > 10">...</p>
                                     </template>
                                     <a href="/attendances/export" class="float-end" slot="reference" @click="refreshHistory()">
                                     <el-button type="success" size="mini">Export to Excel&nbsp;<i class="el-icon-download el-icon-right"></i></el-button>
