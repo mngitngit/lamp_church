@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Notification;
 */
 Artisan::command('send-out-event-reminder', function () {
     $this->comment('---------------------------------- ' . \Carbon\Carbon::today() . ' ---------------------------------');
-    $registrations = Registration::where('attending_option', AttendingOption::Hybrid)->where('id', '>', 309)->get();
+    $registrations = Registration::where('attending_option', AttendingOption::Hybrid)->where('id', '>', 396)->get();
     
     foreach ($registrations as $registration) {
         if ($registration->email != '') {
