@@ -149,6 +149,16 @@ class Controller extends BaseController
         }
     }
 
+    function remind($id) {
+        $registration = Registration::with('bookings', 'bookings.slot')->withSum('payments', 'amount')->find($id);
+
+        if ($registration->email) {
+            Notification::route('mail', [
+                $registration->email => $registration->fullname,
+            ])->notify(new Reminder($registration));
+        }
+    }
+
     function checkIfAlreadyRegistered($request)
     {
         $registration = Registration::where('firstname', $request->firstName)

@@ -2,7 +2,9 @@
 
 use App\Enums\BookingStatus;
 use App\Models\Registration;
+use App\Enums\AttendingOption;
 use App\Notifications\Registered;
+use App\Notifications\Reminder;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Notification;
@@ -17,6 +19,23 @@ use Illuminate\Support\Facades\Notification;
 | simple approach to interacting with each command's IO methods.
 |
 */
+Artisan::command('send-out-event-reminder', function () {
+    $this->comment('---------------------------------- ' . \Carbon\Carbon::today() . ' ---------------------------------');
+    $registrations = Registration::where('attending_option', AttendingOption::Hybrid)->get();
+    
+    foreach ($registrations as $registration) {
+        if ($registration->email != '') {
+            Notification::route('mail', [
+                $registration->email => $registration->fullname,
+            ])->notify(new Reminder($registration));
+
+            $this->comment('sent reminder to ' . $registration->fullname . ' - ' . $registration->email);
+        } else {
+            $this->comment('reminder not sent for ' . $registration->fullname . ' - [no email address provided]');
+        }
+    }
+});
+
 
 Artisan::command('cancel-bookings', function () {
     $this->comment('---------------------------------- ' . \Carbon\Carbon::today() . ' ---------------------------------');
