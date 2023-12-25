@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/registration', function () {
-    print('sorry, the page you requested is not available.');
+    return view('registration.closed');
 })->name('registration');
 Route::get('/registration/new', [App\Http\Controllers\RegistrationController::class, 'create'])->name('registration');
 Route::get('/registration/all', [App\Http\Controllers\RegistrationController::class, 'index'])->name('registration.index');
