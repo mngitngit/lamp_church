@@ -34,6 +34,7 @@ Artisan::command('send-out-event-reminder', function () {
             $this->comment($registration->id . ' - reminder not sent for ' . $registration->fullname . ' - [no email address provided]');
         }
     }
+    $this->comment('---------------------------------- end ---------------------------------');
 });
 
 
