@@ -23,7 +23,8 @@ class RegistrationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['validation', 'create', 'store', 'show', 'update']]);
+        // $this->middleware('auth', ['except' => ['validation', 'create', 'store', 'show', 'update']]);
+        $this->middleware('auth', ['except' => ['validation', 'store', 'show', 'update']]);
     }
 
     public function index(Request $request)
