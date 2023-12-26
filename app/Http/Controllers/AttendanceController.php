@@ -158,7 +158,8 @@ class AttendanceController extends Controller
                 'slot_id' => $slot_id,
                 'registration_type' => $registration->registration_type,
                 'local_church' => $request->details['local_church'],
-                'notes' => AttendanceType::Physical
+                'notes' => AttendanceType::Physical,
+                'created_at' => NOW()
             ]);
         }
 
