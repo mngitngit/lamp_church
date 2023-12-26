@@ -47,20 +47,18 @@ class Reminder extends Notification
         if ($this->registration->attending_option === AttendingOption::Hybrid) {
             $url = url('/ticket/' . $this->registration->uuid);
             $markdown = 'mail.registration.reminder';
-            $file = 'event_details.pdf';
+            $file = storage_path(). "/images/event_details.pdf";
         } else {
             $url = env('FB_GROUP_URL');
             $markdown = 'mail.registration.online.reminder';
-            $file = 'programme.pdf';
+            $file = storage_path(). "/images/programme.pdf";
         }
 
         if (env('TEST_MAIL') == true) {
             $url = env('FB_GROUP_URL');
             $markdown = 'mail.registration.online.reminder';
-            $file = 'programme.pdf';
+            $file = storage_path(). "/images/programme.pdf";
         }
-
-        $file = storage_path(). "/images/event_details.pdf";
 
         return (new MailMessage)
             ->subject('Reminder: Upcoming Annual Worship and Thanksgiving Assembly TOMORROW!')
