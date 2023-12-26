@@ -67,7 +67,7 @@ class Reminder extends Notification
                 'name' => $this->registration->fullname
             ])
             ->attach($file, [
-                'as' => $file,
+                'as' => 'event_details.pdf',
                 'mime' => 'application/pdf',
             ]);;
 
