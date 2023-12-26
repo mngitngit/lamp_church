@@ -23,8 +23,9 @@ class RegistrationController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth', ['except' => ['validation', 'create', 'store', 'show', 'update']]);
-        $this->middleware('auth', ['except' => ['validation', 'store', 'show', 'update']]);
+        $auth_exeptions = ['validation', 'store', 'show', 'update', 'create'];
+        
+        $this->middleware('auth', ['except' => $auth_exeptions]);
     }
 
     public function index(Request $request)
@@ -171,6 +172,19 @@ class RegistrationController extends Controller
      */
     public function create()
     {
+        if (env('CLOSE_REGISTRATION') == true) {
+            return view('registration.closed');
+        }
+
+        return view('registration.create', [
+            'slots' => [
+                'member' => Slots::where('registration_type', RegistrationType::Member)->get(),
+                'guest' => Slots::where('registration_type', RegistrationType::Guest)->get()
+            ]
+        ]);
+    }
+
+    public function new() {
         return view('registration.create', [
             'slots' => [
                 'member' => Slots::where('registration_type', RegistrationType::Member)->get(),
