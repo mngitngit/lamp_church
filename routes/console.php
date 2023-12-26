@@ -45,7 +45,7 @@ Artisan::command('send-out-event-reminder-online', function () {
             $registration->email => $registration->fullname,
         ])->notify(new Reminder($registration));
     } else {
-        $registrations = Registration::where('attending_option', AttendingOption::Online)->get();
+        $registrations = Registration::where('attending_option', AttendingOption::Online)->where('id', '>', 304)->get();
         
         foreach ($registrations as $registration) {
             if ($registration->email != '') {
