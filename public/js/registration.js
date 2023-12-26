@@ -8309,7 +8309,13 @@ var render = function render() {
       width: "180",
       sortable: "",
       align: "center"
-    }
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm._v("\n                " + _vm._s(_vm.$func.formatToDateTime(scope.row.created_at)) + "\n                ")];
+      }
+    }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
       prop: "registration.uuid",

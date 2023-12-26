@@ -85,6 +85,9 @@
                     width="180"
                     sortable
                     align="center">
+                    <template slot-scope="scope">
+                    {{ $func.formatToDateTime(scope.row.created_at) }}
+                    </template>
                 </el-table-column>
                 <el-table-column
                     prop="registration.uuid"
