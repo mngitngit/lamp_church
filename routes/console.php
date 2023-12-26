@@ -39,17 +39,24 @@ Artisan::command('send-out-event-reminder', function () {
 
 Artisan::command('send-out-event-reminder-online', function () {
     $this->comment('---------------------------------- ' . \Carbon\Carbon::today() . ' ---------------------------------');
-    $registrations = Registration::where('attending_option', AttendingOption::Online)->get();
-    
-    foreach ($registrations as $registration) {
-        if ($registration->email != '') {
-            Notification::route('mail', [
-                $registration->email => $registration->fullname,
-            ])->notify(new Reminder($registration));
+    if (env('TEST_MAIL') == true) {
+        $registration = Registration::where('uuid', 'LAMP00002')->first();
+        Notification::route('mail', [
+            $registration->email => $registration->fullname,
+        ])->notify(new Reminder($registration));
+    } else {
+        $registrations = Registration::where('attending_option', AttendingOption::Online)->get();
+        
+        foreach ($registrations as $registration) {
+            if ($registration->email != '') {
+                Notification::route('mail', [
+                    $registration->email => $registration->fullname,
+                ])->notify(new Reminder($registration));
 
-            $this->comment($registration->id . ' - sent reminder to ' . $registration->fullname . ' - ' . $registration->email);
-        } else {
-            $this->comment($registration->id . ' - reminder not sent for ' . $registration->fullname . ' - [no email address provided]');
+                $this->comment($registration->id . ' - sent reminder to ' . $registration->fullname . ' - ' . $registration->email);
+            } else {
+                $this->comment($registration->id . ' - reminder not sent for ' . $registration->fullname . ' - [no email address provided]');
+            }
         }
     }
     $this->comment('---------------------------------- end ---------------------------------');

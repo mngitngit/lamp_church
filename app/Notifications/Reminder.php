@@ -54,6 +54,12 @@ class Reminder extends Notification
             $file = 'programme.pdf';
         }
 
+        if (env('TEST_MAIL') == true) {
+            $url = env('FB_GROUP_URL');
+            $markdown = 'mail.registration.online.reminder';
+            $file = 'programme.pdf';
+        }
+
         $file = storage_path(). "/images/event_details.pdf";
 
         return (new MailMessage)
