@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\Registration;
+use App\Enums\AttendingOption;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -43,33 +44,28 @@ class Reminder extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/ticket/' . $this->registration->uuid);
+        if ($this->registration->attending_option === AttendingOption::Hybrid) {
+            $url = url('/ticket/' . $this->registration->uuid);
+            $markdown = 'mail.registration.reminder';
+            $file = 'event_details.pdf';
+        } else {
+            $url = env('FB_GROUP_URL');
+            $markdown = 'mail.registration.online.reminder';
+            $file = 'programme.pdf';
+        }
 
         $file = storage_path(). "/images/event_details.pdf";
 
         return (new MailMessage)
-            ->subject('Reminder: Upcoming Annual Worship and Thanksgiving Assembly in 3 Days!')
-            ->markdown('mail.registration.reminder', [
+            ->subject('Reminder: Upcoming Annual Worship and Thanksgiving Assembly TOMORROW!')
+            ->markdown($markdown, [
                 'url' => $url,
                 'name' => $this->registration->fullname
             ])
             ->attach($file, [
-                'as' => 'event_details.pdf',
+                'as' => $file,
                 'mime' => 'application/pdf',
             ]);;
 
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

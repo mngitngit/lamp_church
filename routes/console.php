@@ -21,7 +21,25 @@ use Illuminate\Support\Facades\Notification;
 */
 Artisan::command('send-out-event-reminder', function () {
     $this->comment('---------------------------------- ' . \Carbon\Carbon::today() . ' ---------------------------------');
-    $registrations = Registration::where('attending_option', AttendingOption::Hybrid)->where('id', '>', 2551)->get();
+    $registrations = Registration::where('attending_option', AttendingOption::Hybrid)->get();
+    
+    foreach ($registrations as $registration) {
+        if ($registration->email != '') {
+            Notification::route('mail', [
+                $registration->email => $registration->fullname,
+            ])->notify(new Reminder($registration));
+
+            $this->comment($registration->id . ' - sent reminder to ' . $registration->fullname . ' - ' . $registration->email);
+        } else {
+            $this->comment($registration->id . ' - reminder not sent for ' . $registration->fullname . ' - [no email address provided]');
+        }
+    }
+    $this->comment('---------------------------------- end ---------------------------------');
+});
+
+Artisan::command('send-out-event-reminder-online', function () {
+    $this->comment('---------------------------------- ' . \Carbon\Carbon::today() . ' ---------------------------------');
+    $registrations = Registration::where('attending_option', AttendingOption::Online)->get();
     
     foreach ($registrations as $registration) {
         if ($registration->email != '') {
