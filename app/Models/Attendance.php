@@ -14,8 +14,7 @@ class Attendance extends Model
         'slot_id',
         'local_church',
         'registration_type',
-        'notes',
-        'created_at'
+        'notes'
     ];
 
     protected $casts = [
