@@ -156,7 +156,7 @@
           <el-table-column
             label="Booked dates"
             align="center"
-            width="295">
+            width="305">
             <template slot-scope="scope">
               <el-alert
                   v-if="scope.row.is_booking_bypassed"
@@ -183,7 +183,7 @@
             label="Dates Attended"
             align="center"
             fixed="right"
-            width="295">
+            width="284">
             <template slot-scope="scope">
               <el-descriptions :labelStyle="{'width': '120px'}" v-if="scope.row.attended_dates.length > 0" class="margin-top" :column="1" size="mini" border>
                 <el-descriptions-item v-for="(dates, index) in scope.row.attended_dates" :key="index" :label="index === 0 ? 'Dates Attended' : ''" contentClassName="text-center" labelClassName="text-center">{{ dates }}</el-descriptions-item>
