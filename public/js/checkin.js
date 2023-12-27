@@ -7450,7 +7450,7 @@ var render = function render() {
       slot: "label"
     }, [_c("i", {
       staticClass: "el-icon-date"
-    })]), _vm._v("\n                            " + _vm._s(date.created_at) + "  "), _c("el-tag", {
+    })]), _vm._v("\n                            " + _vm._s(_vm.$func.formatToDateTime(date.created_at)) + "  "), _c("el-tag", {
       attrs: {
         size: "mini"
       }

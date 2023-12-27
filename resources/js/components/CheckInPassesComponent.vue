@@ -32,7 +32,7 @@
                                 <template slot="label">
                                     <i class="el-icon-date"></i>
                                 </template>
-                                {{ date.created_at }}&nbsp;&nbsp;<el-tag size="mini">{{ date.notes }}</el-tag>
+                                {{ $func.formatToDateTime(date.created_at) }}&nbsp;&nbsp;<el-tag size="mini">{{ date.notes }}</el-tag>
                             </el-descriptions-item>
                         </el-descriptions>
                     </div>
