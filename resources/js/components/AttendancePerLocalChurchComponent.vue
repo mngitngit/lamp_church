@@ -6,6 +6,7 @@
           class="mb-3"
           :data="tableData.data"
           border
+          size="mini"
           style="width: 100%">
           <el-table-column>
             <template slot="header" slot-scope="scope">

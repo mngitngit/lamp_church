@@ -7274,7 +7274,8 @@ var render = function render() {
     },
     attrs: {
       data: _vm.tableData.data,
-      border: ""
+      border: "",
+      size: "mini"
     }
   }, [_c("el-table-column", {
     scopedSlots: _vm._u([{
