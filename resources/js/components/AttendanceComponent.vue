@@ -19,7 +19,7 @@
                 <div class="row" style="border-top: 2px dashed #dee2e6;">
                   <div class="col-md-12">
                     <p class="mb-0 text-black-50 text-center mt-2 text-xxs">Or enter your code below</p>
-                    <el-input placeholder="Your code" class="mt-2" @change="submit()" v-model="input" :autofocus="true">
+                    <el-input id="qrcode_value" placeholder="Your code" class="mt-2 eme" @change="submit()" v-model="input" :autofocus="true">
                       <template style="cursor: pointer" type="primary" plain slot="append" @click="submit()">Validate</template>
                     </el-input>
                     <p v-if="error" class="text-danger">{{ error }}</p>
@@ -214,7 +214,6 @@ export default {
         setTimeout(() => document.getElementById('btn-continue').focus(), 500);
         
       }).catch((error) => {
-        console.log(error)
         this.loading = false;
         this.error = error.response.data.error;
       });
@@ -239,7 +238,10 @@ export default {
       }
     },
     reload() {
-      window.location.reload();
+      this.retrieved = null
+      this.dialogVisible = false
+      this.input = ''
+      setTimeout(() => document.getElementById("qrcode_value").focus(), 500);
     },
     autoFocus() {
       setTimeout(() => document.getElementById('btn-confirm').focus(), 500);

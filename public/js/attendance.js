@@ -7029,7 +7029,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     return _ref.apply(this, arguments);
                   };
                 }())["catch"](function (error) {
-                  console.log(error);
                   _this2.loading = false;
                   _this2.error = error.response.data.error;
                 });
@@ -7102,7 +7101,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     reload: function reload() {
-      window.location.reload();
+      this.retrieved = null;
+      this.dialogVisible = false;
+      this.input = '';
+      setTimeout(function () {
+        return document.getElementById("qrcode_value").focus();
+      }, 500);
     },
     autoFocus: function autoFocus() {
       setTimeout(function () {
@@ -7328,8 +7332,9 @@ var render = function render() {
   }, [_c("p", {
     staticClass: "mb-0 text-black-50 text-center mt-2 text-xxs"
   }, [_vm._v("Or enter your code below")]), _vm._v(" "), _c("el-input", {
-    staticClass: "mt-2",
+    staticClass: "mt-2 eme",
     attrs: {
+      id: "qrcode_value",
       placeholder: "Your code",
       autofocus: true
     },
