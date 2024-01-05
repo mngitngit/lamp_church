@@ -86,6 +86,7 @@ Route::get('/dashboard/received-hg', [App\Http\Controllers\DashboardController::
 
 Route::get('received-hg', [App\Http\Controllers\ReceivedHGController::class, 'index'])->name('hg.index');
 Route::get('received-hg/export', [App\Http\Controllers\ReceivedHGController::class, 'export'])->name('hg.export');
+Route::delete('received-hg/{id}/delete', [App\Http\Controllers\ReceivedHGController::class, 'destroy'])->name('hg.record.delete');
 
 
 // online check in

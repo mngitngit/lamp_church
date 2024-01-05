@@ -109,6 +109,13 @@
                     sortable
                     align="center">
                 </el-table-column>
+                <el-table-column
+                    label="Option"
+                    align="center">
+                    <template slot-scope="scope">
+                        <el-button v-if="permissions.can_delete_delegate" class="text-danger" type="text" size="small" @click="deleteHGRecipient(scope.row.id)">Delete</el-button>
+                    </template>
+                </el-table-column>
             </el-table-column>
         </el-table>
         <pagination 
@@ -184,7 +191,41 @@
             var root = this;
 
             setTimeout(function() { root.fetchHistory(); }, 2000);
-        }
+        },
+        deleteHGRecipient(id) {
+            this.$confirm(`Are you sure you want to delete this record?`, 'Warning', {
+                customClass: 'prompt-message',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel',
+                type: 'warning'
+            }).then(async () => {
+            const loading = this.$loading({
+                lock: true,
+                text: 'Loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+            });
+
+            setTimeout(async () => {
+                await axios.delete(`/received-hg/${id}/delete`)
+                .then(async (response) => {
+                loading.close()
+                
+                this.$alert('', 'Record Successfully Deleted!', {
+                    confirmButtonText: 'OK',
+                    showCancelButton: false,
+                    closeOnPressEscape: false,
+                    closeOnClickModal: false,
+                    showClose: false,
+                    center: true,
+                    type: 'success',
+                    callback: action => {
+                        window.location.reload();
+                    }
+                });
+                })
+            }, 1000);
+            })
+        },
       }
 }
 </script>

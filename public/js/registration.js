@@ -7347,6 +7347,81 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       setTimeout(function () {
         root.fetchHistory();
       }, 2000);
+    },
+    deleteHGRecipient: function deleteHGRecipient(id) {
+      var _this3 = this;
+
+      this.$confirm("Are you sure you want to delete this record?", 'Warning', {
+        customClass: 'prompt-message',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        var loading;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                loading = _this3.$loading({
+                  lock: true,
+                  text: 'Loading',
+                  background: 'rgba(0, 0, 0, 0.7)'
+                });
+                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+                  return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+                    while (1) {
+                      switch (_context3.prev = _context3.next) {
+                        case 0:
+                          _context3.next = 2;
+                          return axios["delete"]("/received-hg/".concat(id, "/delete")).then( /*#__PURE__*/function () {
+                            var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(response) {
+                              return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                                while (1) {
+                                  switch (_context2.prev = _context2.next) {
+                                    case 0:
+                                      loading.close();
+
+                                      _this3.$alert('', 'Record Successfully Deleted!', {
+                                        confirmButtonText: 'OK',
+                                        showCancelButton: false,
+                                        closeOnPressEscape: false,
+                                        closeOnClickModal: false,
+                                        showClose: false,
+                                        center: true,
+                                        type: 'success',
+                                        callback: function callback(action) {
+                                          window.location.reload();
+                                        }
+                                      });
+
+                                    case 2:
+                                    case "end":
+                                      return _context2.stop();
+                                  }
+                                }
+                              }, _callee2);
+                            }));
+
+                            return function (_x2) {
+                              return _ref5.apply(this, arguments);
+                            };
+                          }());
+
+                        case 2:
+                        case "end":
+                          return _context3.stop();
+                      }
+                    }
+                  }, _callee3);
+                })), 1000);
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      })));
     }
   }
 });
@@ -9123,6 +9198,28 @@ var render = function render() {
       sortable: "",
       align: "center"
     }
+  }), _vm._v(" "), _c("el-table-column", {
+    attrs: {
+      label: "Option",
+      align: "center"
+    },
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function fn(scope) {
+        return [_vm.permissions.can_delete_delegate ? _c("el-button", {
+          staticClass: "text-danger",
+          attrs: {
+            type: "text",
+            size: "small"
+          },
+          on: {
+            click: function click($event) {
+              return _vm.deleteHGRecipient(scope.row.id);
+            }
+          }
+        }, [_vm._v("Delete")]) : _vm._e()];
+      }
+    }])
   })], 1)], 1), _vm._v(" "), _vm.tableData.data.length > 0 ? _c("pagination", {
     staticClass: "m-0",
     attrs: {

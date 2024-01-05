@@ -114,4 +114,10 @@ class ReceivedHGController extends Controller
     public function export() {
         return Excel::download(new ExportReceivedHG, 'received_hg_' . TIME() . '.csv');
     }
+
+    public function destroy($id) {
+        $record = ReceivedHG::find($id);
+
+        $record->delete();
+    }
 }
