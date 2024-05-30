@@ -19,7 +19,10 @@ class Slots extends Model
 
     protected $fillable = [
         'seat_count',
-        'activities'
+        'registration_type',
+        'event_date',
+        'created_at',
+        'updated_at'
     ];
 
     public function getAvailableAttribute()
