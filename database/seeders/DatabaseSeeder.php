@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             PermissionsTableSeeder::class,
             SlotsTableSeeder::class,
-            LookUpTableSeeder::class
+            LookUpTableSeeder::class,
+            AvailableUUIDsTableSeeder::class
         ]);
     }
 }
