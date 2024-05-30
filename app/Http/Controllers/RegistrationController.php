@@ -202,6 +202,7 @@ class RegistrationController extends Controller
     public function store(Request $request)
     {
         // member registration
+        dd($request->step_1);
         if ($request->step_1['registrationType'] === 'Member') {
             switch ($request->step_1['withAwtaCard']) {
                 case 'none': // None, I’m a new member.
