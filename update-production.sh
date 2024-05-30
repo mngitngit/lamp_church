@@ -1,6 +1,6 @@
 #! /bin/bash
 
-git pull origin master
+git pull origin version/2024
 
 nvm install 16.15.1
 npm run prod
