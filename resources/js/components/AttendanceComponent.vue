@@ -133,7 +133,7 @@
                 <tr class="border">
                     <td class="px-2 py-1"><i class="el-icon-date"></i></td>
                     <td class="px-2 py-1 text-start">Date</td>
-                    <td class="px-2 py-1 text-start">December 29</td>
+                    <td class="px-2 py-1 text-start">{{ appDate }}</td>
                 </tr>
                 <tr class="border">
                     <td class="px-2 py-1"><i class="el-icon-place"></i></td>
@@ -161,6 +161,7 @@ export default {
   },
   data() {
     return {
+      appDate: null,
       input: '',
       loading: false,
       error: null,
@@ -191,6 +192,15 @@ export default {
     }
   },
   mounted() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+
+    this.appDate = today;
+
     this.count[0].count.forEach(item => {
       this.totals.member.attended = parseFloat(this.totals.member.attended) + parseFloat(item.count.member.attended)
       this.totals.member.total = parseFloat(this.totals.member.total) + parseFloat(item.count.member.total)

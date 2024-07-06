@@ -6952,6 +6952,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      appDate: null,
       input: '',
       loading: false,
       error: null,
@@ -6984,6 +6985,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     var _this = this;
 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+
+    var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
+    this.appDate = today;
     this.count[0].count.forEach(function (item) {
       _this.totals.member.attended = parseFloat(_this.totals.member.attended) + parseFloat(item.count.member.attended);
       _this.totals.member.total = parseFloat(_this.totals.member.total) + parseFloat(item.count.member.total);
@@ -7532,7 +7540,7 @@ var render = function render() {
     staticClass: "px-2 py-1 text-start"
   }, [_vm._v("Date")]), _vm._v(" "), _c("td", {
     staticClass: "px-2 py-1 text-start"
-  }, [_vm._v("December 29")])]), _vm._v(" "), _c("tr", {
+  }, [_vm._v(_vm._s(_vm.appDate))])]), _vm._v(" "), _c("tr", {
     staticClass: "border"
   }, [_c("td", {
     staticClass: "px-2 py-1"
@@ -7610,7 +7618,8 @@ var render = function render() {
   }, [_c("center", [_c("qr-code", {
     attrs: {
       size: 150,
-      text: _vm.uuid
+      text: _vm.uuid,
+      name: "Anniversary"
     }
   }), _vm._v(" "), _c("br")], 1), _vm._v(" "), _c("small", {
     staticClass: "text-description d-block"

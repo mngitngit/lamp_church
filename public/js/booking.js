@@ -7455,7 +7455,8 @@ var render = function render() {
   }, [_c("center", [_c("qr-code", {
     attrs: {
       size: 150,
-      text: _vm.uuid
+      text: _vm.uuid,
+      name: "Anniversary"
     }
   }), _vm._v(" "), _c("br")], 1), _vm._v(" "), _c("small", {
     staticClass: "text-description d-block"
