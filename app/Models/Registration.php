@@ -52,8 +52,9 @@ class Registration extends MyModel
 
     public function getOldUuidAttribute()
     {
+        $old = LookUp::where('lamp_card_number', $this->uuid)->first();
         return $this->registration_type == 'Member' ?
-            LookUp::where('lamp_card_number', $this->uuid)->first()->old_lamp_card_number
+            ($old ? old->old_lamp_card_number : '--')
             : '--';
     }
 
