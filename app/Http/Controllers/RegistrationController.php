@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\AvailableUuid;
 
 class RegistrationController extends Controller
 {
@@ -203,10 +204,13 @@ class RegistrationController extends Controller
     {
         // member registration
         if ($request->step_1['registrationType'] === 'Member') {
+            $uuid = null;
+
             switch ($request->step_1['withAwtaCard']) {
                 case 'none': // None, I’m a new member.
                     $details = array_merge($request->step_1, $request->step_2, $request->step_3);
 
+                    $uuid = UUID::issue();
                     $email = $details['email'];
                     $firstname = $details['firstName'];
                     $lastname = $details['lastName'];
@@ -229,6 +233,7 @@ class RegistrationController extends Controller
 
                     $lookup = LookUp::where('lamp_card_number', $details['selected'])->first();
 
+                    $uuid = is_null($lookup['old_lamp_card_number']) ? UUID::issue() : $lookup['lamp_card_number'];
                     $email = $details['email'];
                     $firstname = $lookup['firstname'];
                     $lastname = $lookup['lastname'];
@@ -249,6 +254,7 @@ class RegistrationController extends Controller
                 case 'yes': // Yes, and I still have it.
                     $details = array_merge($request->step_1, $request->step_3);
 
+                    $uuid = is_null($details['found']['oldAwtaCardNumber']) ? UUID::issue() : $details['awtaCardNumber'];
                     $email = $details['email'];
                     $firstname = $details['found']['firstName'];
                     $lastname = $details['found']['lastName'];
@@ -266,8 +272,6 @@ class RegistrationController extends Controller
                     $can_book_days = $details['found']['canBookDays'];
                     break;
             }
-
-            $uuid = UUID::issue();
 
             $registration = Registration::create([
                 'uuid' => $uuid,
@@ -294,12 +298,16 @@ class RegistrationController extends Controller
 
             // checking if the member is in the master list
             if ($lookup) {
+                $update = [
+                    'is_registered' => true
+                ];
+
+                if (is_null($lookup['old_lamp_card_number'])) {
+                    $update['lamp_card_number'] =  $registration->uuid;
+                    $update['old_lamp_card_number'] = $lookup->lamp_card_number;
+                }
                 // setting new awta card number
-                $lookup->update([
-                    'lamp_card_number' => $registration->uuid,
-                    'old_lamp_card_number' => $lookup->lamp_card_number,
-                    'is_registered' => true,
-                ]);
+                $lookup->update($update);
             } else {
                 // insert member to master list if not existing
                 LookUp::create([

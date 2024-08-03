@@ -6,7 +6,7 @@ class UUID
 {
     public static function issue()
     {
-        $range = AvailableUuid::where('year', config('settings.year'))->first();
+        $range = AvailableUuid::available();
 
         return $range->next();
     }

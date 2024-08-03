@@ -7885,7 +7885,7 @@ var render = function render() {
       staticClass: "col-md-12"
     }, [_c("small", [_vm._v("Email Address")]), _vm._v(" "), _c("span", {
       staticClass: "text-md font-bold d-block text-break"
-    }, [_vm._v(_vm._s(registration.email))])])]), _vm._v(" "), _c("div", {
+    }, [_vm._v(_vm._s(registration.email || "--"))])])]), _vm._v(" "), _c("div", {
       staticClass: "row mb-3"
     }, [_c("div", {
       staticClass: "col-md-12"
@@ -7934,7 +7934,7 @@ var render = function render() {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
-    }, [_c("small", [_vm._v("***Please screenshot this ticket. This will be your virtual LAMP ID number, in case you opted not to avail the physical card. To be use in future LAMP church events/activities.")])])]) : _vm._e()])])], 1);
+    }, [_c("small", [_vm._v("***Please screenshot this ticket. This will be your virtual LAMP ID number, in case you opted not to avail the physical card. This will be used in the future LAMP church events and activities.")])])]) : _vm._e()])])], 1);
   }), 0);
 };
 

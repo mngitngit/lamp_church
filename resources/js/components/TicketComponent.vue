@@ -25,7 +25,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <small>Email Address</small>
-                                    <span class="text-md font-bold d-block text-break">{{ registration.email }}</span>
+                                    <span class="text-md font-bold d-block text-break">{{ registration.email || '--' }}</span>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -66,7 +66,7 @@
 
                     <div v-if="registration.attending_option === 'Hybrid'" class="row">
                         <div class="col-md-12">
-                            <small>***Please screenshot this ticket. This will be your virtual LAMP ID number, in case you opted not to avail the physical card. To be use in future LAMP church events/activities.</small>
+                            <small>***Please screenshot this ticket. This will be your virtual LAMP ID number, in case you opted not to avail the physical card. This will be used in the future LAMP church events and activities.</small>
                         </div>
                     </div>
                 </div>

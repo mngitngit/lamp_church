@@ -279,27 +279,20 @@ export default {
                         this.ruleForm.found.email = response.data.email;
                         this.ruleForm.found.firstName = response.data.firstname;
                         this.ruleForm.found.lastName = response.data.lastname;
-                        this.ruleForm.found.facebookName =
-                            response.data.facebook_name;
-                        this.ruleForm.found.registrationType =
-                            response.data.registration_type;
+                        this.ruleForm.found.facebookName = response.data.facebook_name;
+                        this.ruleForm.found.registrationType = response.data.registration_type;
                         this.ruleForm.found.country = response.data.country;
-                        this.ruleForm.found.awtaCardNumber =
-                            response.data.lamp_card_number;
+                        this.ruleForm.found.awtaCardNumber = response.data.lamp_card_number;
+                        this.ruleForm.found.oldAwtaCardNumber = response.data.old_lamp_card_number;
                         this.ruleForm.found.category = response.data.category;
-                        this.ruleForm.found.attendingOption =
-                            this.ruleForm.attendingOption;
+                        this.ruleForm.found.attendingOption = this.ruleForm.attendingOption;
                         this.ruleForm.found.withAwtaCard = "yes";
-                        this.ruleForm.found.localChurch =
-                            response.data.local_church;
-                        this.ruleForm.found.canBookDays =
-                            response.data.can_book_days;
-                        this.ruleForm.email =
-                            this.ruleForm.email === ""
+                        this.ruleForm.found.localChurch = response.data.local_church;
+                        this.ruleForm.found.canBookDays = response.data.can_book_days;
+                        this.ruleForm.email = this.ruleForm.email === ""
                                 ? response.data.email
                                 : this.ruleForm.email;
-                        this.options =
-                            this.assignments[response.data.local_church];
+                        this.options = this.assignments[response.data.local_church];
                         this.isLoading = false;
                         callback();
                     })
