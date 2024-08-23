@@ -44,6 +44,7 @@ class CreateRegistrationsTable extends Migration
             $table->text('notes');
             $table->text('activities');
             $table->text('booking_activities');
+            $table->timestamp('booked_date')->nullable();
             $table->timestamps();
         });
     }

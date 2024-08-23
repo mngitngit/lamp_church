@@ -19,6 +19,7 @@ class CreateAttendancesTable extends Migration
             $table->bigInteger('slot_id')->unsigned();
             $table->string('local_church');
             $table->string('registration_type');
+            $table->text('notes')->nullable();
             $table->foreign('registration_uuid')->references('uuid')->on('registrations')->onDelete('cascade');
             $table->foreign('slot_id')->references('id')->on('slots')->onDelete('cascade');
             $table->timestamps();
