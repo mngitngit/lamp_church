@@ -16,7 +16,7 @@ class AvailableUUIDsTableSeeder extends Seeder
             'prefix' => 'LAMP',
             'start' => 1,
             'end' => 10000,
-            'cursor' => 1
+            'cursor' => 1555
         ]);
     }
 }
