@@ -294,6 +294,10 @@ class RegistrationController extends Controller
                 'booking_activities' => []
             ]);
 
+            $registration->additional_data()->create([
+                'has_viewed_ticket' => NULL
+            ]);
+
             $lookup = LookUp::where('lamp_card_number', $awta_card_number)->first();
 
             // checking if the member is in the master list
@@ -416,16 +420,18 @@ class RegistrationController extends Controller
     {
         $uuid = explode(',', $request->id);
 
-        $registration = (array) Registration::with('bookings', 'bookings.slot')->whereIn('uuid', $uuid)->get()->toArray();
+        $registration = (array) Registration::with('bookings', 'bookings.slot', 'additional_data', 'lookup')->whereIn('uuid', $uuid)->get()->toArray();
 
         $registration = array_map(function ($data) {
             $data['booked_dates'] = array_map(function ($dates) {
                 return $dates['slot']['event_date'];
             }, $data['bookings']);
+            $data['avail_new_lamp_id'] = $data['lookup']['avail_new_lamp_id'] ?? NULL;
+            $data['has_viewed_ticket'] = $data['additional_data']['has_viewed_ticket'] ?? NULL;
 
             return $data;
         }, $registration);
-
+        
         return view('registration.show', [
             'registration' => $registration
         ]);
@@ -435,9 +441,20 @@ class RegistrationController extends Controller
     {
         $registration = Registration::where('uuid', $uuid)->first();
 
-        if (isset($request->avail_new_lamp_id)) {
-            $registration->update([
+        if (isset($request->avail_new_lamp_id)) { // save answer for newly registered members
+            $registration->lookup()->update([
+                'lamp_card_number' => $uuid,
                 'avail_new_lamp_id' => $request->avail_new_lamp_id,
+            ]);
+
+            $registration->additional_data()->update([
+                'registration_uuid' => $uuid,
+                'has_viewed_ticket' => NOW(),
+            ]);
+        } elseif (isset($request->mark_as_viewed)) { // mark as viewed for guests
+            $registration->additional_data()->updateOrCreate([
+                'registration_uuid' => $uuid,
+                'has_viewed_ticket' => NOW(),
             ]);
         } else {
             $registration->update([
@@ -456,7 +473,11 @@ class RegistrationController extends Controller
                 'rate' => $request->rate,
                 'rebooking_limit' => $request->rebookingLimit,
                 'visitor_to_member' => $request->visitorToMember ? date('Y-m-d', strtotime($request->visitorToMember)) : NULL,
-                'avail_new_lamp_id' => $request->availNewLAMPID
+            ]);
+
+            $registration->lookup()->updateOrCreate([
+                'lamp_card_number' => $uuid,
+                'avail_new_lamp_id' => $request->availNewLAMPID,
             ]);
         }
 

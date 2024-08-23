@@ -29,6 +29,7 @@ class LookUp extends Model
         'country',
         'is_registered',
         'local_church',
-        'can_book_days'
+        'can_book_days',
+        'avail_new_lamp_id'
     ];
 }

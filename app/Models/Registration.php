@@ -33,7 +33,6 @@ class Registration extends MyModel
         'notes',
         'activities',
         'booking_activities',
-        'avail_new_lamp_id',
         'medical_assistance_needed',
         'booked_date',
         'is_received_hg'
@@ -104,6 +103,14 @@ class Registration extends MyModel
         return $this->hasMany(Booking::class, 'registration_uuid', 'uuid');
     }
 
+    /**
+     * Get the booking for the delegate.
+     */
+    public function additional_data()
+    {
+        return $this->hasOne(RegistrationAdditionalData::class, 'registration_uuid', 'uuid');
+    }
+
     public function available_bookings($id) {
         return $this->bookings()->where('id', $id);
     }
@@ -114,6 +121,11 @@ class Registration extends MyModel
     public function attendances()
     {
         return $this->hasMany(Attendance::class, 'registration_uuid', 'uuid');
+    }
+
+    public function lookup()
+    {
+        return $this->hasOne(lookup::class, 'lamp_card_number', 'uuid');
     }
 
     private static function logActivity($description, $delegate_name)

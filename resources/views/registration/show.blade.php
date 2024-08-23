@@ -7,7 +7,7 @@
             <el-link type="primary" class="float-end" href="/registration">Register Another Delegate</el-link>
         </div>
     </div>
-
+    
     <div class="row justify-content-center mb-4">
         <ticket-component :registrations="{{ json_encode($registration) }}" :congratulate="true"/>
     </div>
