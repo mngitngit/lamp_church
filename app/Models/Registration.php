@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\RegistrationType;
+use App\Models\LookUp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Registration extends MyModel
@@ -125,7 +126,7 @@ class Registration extends MyModel
 
     public function lookup()
     {
-        return $this->hasOne(lookup::class, 'lamp_card_number', 'uuid');
+        return $this->hasOne(LookUp::class, 'lamp_card_number', 'uuid');
     }
 
     private static function logActivity($description, $delegate_name)
