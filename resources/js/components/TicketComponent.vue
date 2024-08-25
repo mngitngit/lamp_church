@@ -121,7 +121,7 @@ export default {
                 msg += '<br /><br /><small style="line-height: 0px;">To watch the live broadcast, join our FB Group <br/><a href="https://www.facebook.com/groups/446318280091482">https://www.facebook.com/groups/446318280091482</a></small>'
             
             if (this.registrations[0].registration_type === 'Member' && this.registrations[0].avail_new_lamp_id == null)
-                msg += '<br /><br /><small style="line-height: 0px;">Note: <i>A new LAMP ID Number is issued for you.</i> If you wish to replace your old AWTA card, an additional Php 35.00 will be required. Kindly reach out to your local AWTA Registrars for payment and issuance.</small><br/><img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><small>Would you like to avail the new LAMP ID?</small>';
+                msg += '<br /><br /><small style="line-height: 0px;">Note: <i>A new LAMP ID Number is issued for you.</i> If you want to avail the physical card, an additional Php 35.00 will be required. Kindly reach out to your local AWTA Registrars for payment and issuance.</small><br/><img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><small>Would you like to avail the new LAMP ID?</small>';
 
             
             this.$confirm(msg, 'You did it!', {

@@ -138,7 +138,7 @@
                         >
                             <el-form-item
                                 class="transform-uppercase"
-                                label="What is your AWTA card number?"
+                                label="What is your LAMP ID number?"
                                 prop="awtaCardNumber"
                                 :required="ruleForm.withAwtaCard === 'yes'"
                             >

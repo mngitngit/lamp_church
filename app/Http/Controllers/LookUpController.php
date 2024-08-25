@@ -95,7 +95,7 @@ class LookUpController extends Controller
         $isRegistered = Registration::where('uuid', $lookUp->lamp_card_number)->first();
 
         if ($isRegistered) {
-            return response()->json(['error' => 'Sorry, this AWTA Card number is already registered.'], 500);
+            return response()->json(['error' => 'Sorry, this LAMP ID number is already registered.'], 500);
         }
 
         return $lookUp;
