@@ -3,6 +3,7 @@
 return [
     'guest_booking_code' => env('GUEST_BOOKING_CODE'),
     'year' => env('YEAR'),
+    'theme' => env('THEME'),
     'guest_booking_limit' => env('GUEST_BOOKING_LIMIT'),
     'member_booking_limit' => env('MEMBER_BOOKING_LIMIT'),
     'guest_slot_today' => env('SLOT_ID_TODAY_GUEST'),

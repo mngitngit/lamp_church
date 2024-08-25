@@ -1,9 +1,9 @@
 <template>
     <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid rgb(60 189 181)">
-        <h2>LAMP WORLDWIDE AWTA 2023</h2>
+        <h2>LAMP WORLDWIDE AWTA {{year}}</h2>
         <p class="text-sm">
             BE BLESSED PHYSICALLY, MATERIALLY, & SPIRITUALLY <br/>
-            Event Date: DECEMBER 27-30, 2023 <br/>
+            Event Date: DECEMBER 27-30, {{year}} <br/>
             Event Place: Calamba Tent <br/>
             Theme: Year of Clustering
         </p>
@@ -15,6 +15,16 @@
         </p>
     </el-card>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            year: window.env.year
+        }
+    }
+}
+</script>
 
 <style scoped>
 .text-sm {

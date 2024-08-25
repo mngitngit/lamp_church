@@ -51,14 +51,14 @@ class Registered extends Notification
 
         if ($this->registration->booking_status === BookingStatus::Pending) {
             $markup = 'mail.registration.pending';
-            $subject = 'Booking on-hold for Annual Worship and Thanksgiving 2023';
+            $subject = 'Booking on-hold for Annual Worship and Thanksgiving ' . env('YEAR');
         } else if ($this->registration->booking_status === BookingStatus::Cancelled) {
             $markup = 'mail.registration.cancelled';
-            $subject = 'Booking cancelled for Annual Worship and Thanksgiving 2023';
+            $subject = 'Booking cancelled for Annual Worship and Thanksgiving ' . env('YEAR');
             $url = url('/booking/');
         } else if ($this->registration->booking_status === BookingStatus::Confirmed) {
             $markup = 'mail.registration.confirmed';
-            $subject = 'Booking confirmed for Annual Worship and Thanksgiving 2023';
+            $subject = 'Booking confirmed for Annual Worship and Thanksgiving ' . env('YEAR');
         }
 
         // $this->registration->booking_status === BookingStatus::Confirmed && 
@@ -68,13 +68,13 @@ class Registered extends Notification
             // member paid = confirmation
             if ($this->registration->payment_status === PaymentStatus::Paid || $this->registration->registration_type === RegistrationType::Guest) {
                 $markup = 'mail.registration.online.confirmed';
-                $subject = 'Registration completed for Annual Worship and Thanksgiving 2023';
+                $subject = 'Registration completed for Annual Worship and Thanksgiving ' . env('YEAR');
                 $url = 'https://www.facebook.com/groups/446318280091482';
             }
 
             if ($this->registration->registration_type === RegistrationType::Member && ($this->registration->payment_status === PaymentStatus::Unsettled || $this->registration->payment_status === PaymentStatus::Partial)) {
                 $markup = 'mail.registration.online.pending';
-                $subject = 'Registration pending payment for Annual Worship and Thanksgiving 2023';
+                $subject = 'Registration pending payment for Annual Worship and Thanksgiving ' . env('YEAR');
             }
         }
 
