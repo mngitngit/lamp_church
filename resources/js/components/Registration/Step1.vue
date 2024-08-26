@@ -263,11 +263,11 @@ export default {
         var checkAwtaCardNumber = async (rule, value, callback) => {
             if (value.length === 9) {
                 if (value.length > 9)
-                    return callback(new Error("Invalid AWTA Card Number"));
+                    return callback(new Error("Invalid LAMP ID Number"));
 
                 if (!value && this.ruleForm.withAwtaCard === "yes") {
                     return callback(
-                        new Error("Please input your AWTA Card Number")
+                        new Error("Please input your LAMP ID Number")
                     );
                 }
 
@@ -354,7 +354,7 @@ export default {
                                 this.options = [];
                                 this.ruleForm.clusterGroup = "";
                                 return callback(
-                                    new Error("Invalid AWTA Card Number")
+                                    new Error("Invalid LAMP ID Number")
                                 );
                             }
                         },
@@ -362,7 +362,7 @@ export default {
                     },
                     {
                         required: true,
-                        message: "Please input your AWTA Card Number",
+                        message: "Please input your LAMP ID Number",
                         trigger: ["blur", "change"],
                     },
                 ],
