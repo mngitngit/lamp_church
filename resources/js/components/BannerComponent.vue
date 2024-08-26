@@ -20,7 +20,8 @@
 export default {
     data() {
         return {
-            year: window.env.year
+            year: window.env.year,
+            theme: window.env.theme
         }
     }
 }

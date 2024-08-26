@@ -28,7 +28,9 @@
 
     <script>
         window.env = {
-            cluster_groups: {!! json_encode(config('clustergroups')) !!}
+            cluster_groups: {!! json_encode(config('clustergroups')) !!},
+            year:'{{ config('settings.year') }}',
+            theme:'{{ config('settings.theme') }}'
         };
     </script>
 </head>
