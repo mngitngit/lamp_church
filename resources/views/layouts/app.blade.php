@@ -24,7 +24,8 @@
             member_booking_limit: '{{ config('settings.member_booking_limit') }}',
             cluster_groups: {!! json_encode(config('clustergroups')) !!},
             year:'{{ config('settings.year') }}',
-            theme:'{{ config('settings.theme') }}'
+            theme:'{{ config('settings.theme') }}',
+            fb_group_url: '{{ config('settings.fb_group_url') }}'
         };
     </script>
     @endif

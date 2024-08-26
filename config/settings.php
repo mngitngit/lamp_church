@@ -15,6 +15,7 @@ return [
     'event_date' => env('EVENT_DATE'),
     'rebooking_deadline' => env('REBOOKING_DEADLINE'),
     'hybrid_registration_deadline' => env('HYBRID_REGISTRATION_DEADLINE'),
+    'fb_group_url' => env('FB_GROUP_URL'),
     'slots_allotment' => [
         'Day 1' => [1, 5],
         'Day 2' => [2, 6],

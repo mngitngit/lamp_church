@@ -27,7 +27,7 @@ Passcode: {{ $zoom['passcode'] }} <br />
 <br /><br />
 We will be sending a reminder before the event starts too!
 
-For more updates, please join our facebook group: <a href="https://www.facebook.com/groups/446318280091482">https://www.facebook.com/groups/446318280091482</a>
+For more updates, please join our facebook group: <a href="{{ $fb_group_url }}">{{ $fb_group_url }}</a>
 
 See you there! 
 @component('mail::subcopy')

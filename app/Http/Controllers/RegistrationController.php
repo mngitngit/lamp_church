@@ -475,10 +475,12 @@ class RegistrationController extends Controller
                 'visitor_to_member' => $request->visitorToMember ? date('Y-m-d', strtotime($request->visitorToMember)) : NULL,
             ]);
 
-            $registration->lookup()->updateOrCreate([
-                'lamp_card_number' => $uuid,
-                'avail_new_lamp_id' => $request->availNewLAMPID,
-            ]);
+            if ($registration->registration_type === 'Member') {
+                $registration->lookup()->updateOrCreate([
+                    'lamp_card_number' => $uuid,
+                    'avail_new_lamp_id' => $request->availNewLAMPID,
+                ]);
+            }
         }
 
         if ($request->notes) {

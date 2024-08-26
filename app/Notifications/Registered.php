@@ -69,7 +69,7 @@ class Registered extends Notification
             if ($this->registration->payment_status === PaymentStatus::Paid || $this->registration->registration_type === RegistrationType::Guest) {
                 $markup = 'mail.registration.online.confirmed';
                 $subject = 'Registration completed for Annual Worship and Thanksgiving ' . env('YEAR');
-                $url = 'https://www.facebook.com/groups/446318280091482';
+                $url = config('settings.fb_group_url');
             }
 
             if ($this->registration->registration_type === RegistrationType::Member && ($this->registration->payment_status === PaymentStatus::Unsettled || $this->registration->payment_status === PaymentStatus::Partial)) {
@@ -98,6 +98,7 @@ class Registered extends Notification
                 'event_date' => config('settings.event_date'),
                 'rebooking_deadline' => config('settings.rebooking_deadline'),
                 'theme' => config('settings.theme'),
+                'fb_group_url' => config('settings.fb_group_url'),
                 'zoom' => [
                     'link' => config('settings.zoom_details.link'),
                     'id' => config('settings.zoom_details.id'),

@@ -29,7 +29,8 @@
     <script>
         window.env = {
             awta_day: '{{ config('settings.awta_day') }}',
-            cluster_groups: {!! json_encode(config('clustergroups')) !!}
+            cluster_groups: {!! json_encode(config('clustergroups')) !!},
+            fb_group_url: '{{ config('settings.fb_group_url') }}'
         };
     </script>
 </head>

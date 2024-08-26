@@ -25,7 +25,8 @@
             year:'{{ config('settings.year') }}',
             theme:'{{ config('settings.theme') }}',
             event_date:'{{ config('settings.event_date') }}',
-            hybrid_registration_deadline: '{{ config('settings.hybrid_registration_deadline') }}'
+            hybrid_registration_deadline: '{{ config('settings.hybrid_registration_deadline') }}',
+            fb_group_url: '{{ config('settings.fb_group_url') }}'
         };
     </script>
     <!-- Scripts -->
