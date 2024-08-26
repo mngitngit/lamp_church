@@ -23,7 +23,7 @@
             guest_booking_limit: '{{ config('settings.guest_booking_limit') }}',
             member_booking_limit: '{{ config('settings.member_booking_limit') }}',
             cluster_groups: {!! json_encode(config('clustergroups')) !!},
-            year:'{{ config('settings.year') }}'
+            year:'{{ config('settings.year') }}',
             theme:'{{ config('settings.theme') }}'
         };
     </script>
