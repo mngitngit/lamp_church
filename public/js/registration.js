@@ -7859,7 +7859,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: false
     }
   },
+  data: function data() {
+    return {
+      year: null
+    };
+  },
   mounted: function mounted() {
+    this.year = window.env.year;
     if (this.congratulate && this.registrations[0].has_viewed_ticket == null) this.open();
   },
   methods: {
@@ -10065,7 +10071,7 @@ var render = function render() {
         slot: "header"
       },
       slot: "header"
-    }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA 2023")]), _vm._v(" "), _c("el-button", {
+    }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA " + _vm._s(_vm.year))]), _vm._v(" "), _c("el-button", {
       staticClass: "float-end p-1 mx-0",
       attrs: {
         icon: "el-icon-download",

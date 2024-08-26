@@ -49,7 +49,7 @@
         :destroy-on-close="false">
         <span class="content">
             <div class="m-0">
-                <el-checkbox v-model="isAllowing"/>&nbsp;&nbsp;I authorize LAMP Church to collect, use, and retain the personal information in this form for the purpose of attending AWTA 2023  (Annual Worship and Thanksgiving Assembly) and in the pursuit of any legal interests of the church.
+                <el-checkbox v-model="isAllowing"/>&nbsp;&nbsp;I authorize LAMP Church to collect, use, and retain the personal information in this form for the purpose of attending AWTA {{year}}  (Annual Worship and Thanksgiving Assembly) and in the pursuit of any legal interests of the church.
                 <span v-if="display" class="error">
                     Please check if you want to continue
                 </span>
@@ -75,8 +75,7 @@
         },
         props: {
             slots: {
-                required: false,
-                type: Array
+                required: false
             },
         },
         data() {
@@ -92,7 +91,8 @@
                 },
                 isAllowing: false,
                 dialogVisible: window.env.display_disclosure_prompt === 'yes',
-                display: false
+                display: false,
+                year: window.env.year
             }
         },
         created() {

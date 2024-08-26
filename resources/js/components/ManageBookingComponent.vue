@@ -6,7 +6,7 @@
                 <div class="col-md-6 mb-3">
                     <el-card shadow="always" class="mb-3 p-1" style="border-top: 10px solid rgb(60 189 181); height: 100% !important;">
                         <div class="text-black">
-                            <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2023</h6>
+                            <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA {{ year }}</h6>
                             <small>
                             Timeline: {{ event_date }}<br/>
                             Venue: Calamba Tent<br/>
@@ -89,7 +89,7 @@
                         <el-tab-pane label="Ticket">
                             <el-alert
                                 class="mb-3"
-                                title="Congratulations! You are already booked for the AWTA 2023."
+                                :title="`Congratulations! You are already booked for the AWTA ${year}.`"
                                 type="success"
                                 description="Please do screenshot this ticket if your AWTA card is lost, this will be your gate pass to the event place."
                                 :closable="false"
@@ -166,7 +166,8 @@ export default {
         event_date: window.env.event_date,
         assignments: window.env.cluster_groups,
         theme: window.env.theme,
-        rebooking_deadline: window.env.rebooking_deadline
+        rebooking_deadline: window.env.rebooking_deadline,
+        year: window.env.year
       }
     },
     mounted() {

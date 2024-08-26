@@ -29,7 +29,8 @@
     <script>
         window.env = {
             cluster_groups: {!! json_encode(config('clustergroups')) !!},
-            fb_group_url: '{{ config('settings.fb_group_url') }}'
+            fb_group_url: '{{ config('settings.fb_group_url') }}',
+            year:'{{ config('settings.year') }}',
         };
     </script>
 </head>

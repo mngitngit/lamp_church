@@ -7209,7 +7209,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       event_date: window.env.event_date,
       assignments: window.env.cluster_groups,
       theme: window.env.theme,
-      rebooking_deadline: window.env.rebooking_deadline
+      rebooking_deadline: window.env.rebooking_deadline,
+      year: window.env.year
     };
   },
   mounted: function mounted() {
@@ -7336,7 +7337,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: false
     }
   },
+  data: function data() {
+    return {
+      year: null
+    };
+  },
   mounted: function mounted() {
+    this.year = window.env.year;
     if (this.congratulate && this.registrations[0].has_viewed_ticket == null) this.open();
   },
   methods: {
@@ -7618,7 +7625,7 @@ var render = function render() {
     staticClass: "text-black"
   }, [_c("h6", {
     staticClass: "fw-bolder text-muted"
-  }, [_vm._v("LAMP WORLDWIDE AWTA 2023")]), _vm._v(" "), _c("small", [_vm._v("\n                            Timeline: " + _vm._s(_vm.event_date)), _c("br"), _vm._v("\n                            Venue: Calamba Tent"), _c("br"), _vm._v("\n                            Theme: " + _vm._s(_vm.theme)), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
+  }, [_vm._v("LAMP WORLDWIDE AWTA " + _vm._s(_vm.year))]), _vm._v(" "), _c("small", [_vm._v("\n                            Timeline: " + _vm._s(_vm.event_date)), _c("br"), _vm._v("\n                            Venue: Calamba Tent"), _c("br"), _vm._v("\n                            Theme: " + _vm._s(_vm.theme)), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
     staticClass: "fw-bolder text-muted"
   }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                            Both members and visitors will be able to start booking their seats on October 1 until " + _vm._s(_vm.rebooking_deadline) + " for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                            Hybrid Attendees should book for intended AWTA days only. Visitors will need to coordinate with their cluster local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                            Rebooking is until " + _vm._s(_vm.rebooking_deadline) + " only. "), _c("br"), _c("br"), _vm._v("\n                            For any booking issues/concerns, kindly reach out to your local AWTA Registrars."), _c("br"), _c("br"), _vm._v("\n\n                            Book now — hurry while seats last!\n                            ")])])])], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
@@ -7765,7 +7772,7 @@ var render = function render() {
   }, [_c("el-alert", {
     staticClass: "mb-3",
     attrs: {
-      title: "Congratulations! You are already booked for the AWTA 2023.",
+      title: "Congratulations! You are already booked for the AWTA ".concat(_vm.year, "."),
       type: "success",
       description: "Please do screenshot this ticket if your AWTA card is lost, this will be your gate pass to the event place.",
       closable: false,
@@ -7865,7 +7872,7 @@ var render = function render() {
         slot: "header"
       },
       slot: "header"
-    }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA 2023")]), _vm._v(" "), _c("el-button", {
+    }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA " + _vm._s(_vm.year))]), _vm._v(" "), _c("el-button", {
       staticClass: "float-end p-1 mx-0",
       attrs: {
         icon: "el-icon-download",
