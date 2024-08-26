@@ -33,7 +33,8 @@
             theme:'{{ config('settings.theme') }}',
             event_date:'{{ config('settings.event_date') }}',
             rebooking_deadline: '{{ config('settings.rebooking_deadline') }}',
-            fb_group_url: '{{ config('settings.fb_group_url') }}'
+            fb_group_url: '{{ config('settings.fb_group_url') }}',
+            zoom: {!! json_encode(config('settings.zoom_details')) !!},
         };
     </script>
 </head>

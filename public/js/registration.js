@@ -7861,11 +7861,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      year: null
+      year: null,
+      zoom: {
+        link: null,
+        id: null,
+        passcode: null
+      }
     };
   },
   mounted: function mounted() {
     this.year = window.env.year;
+    this.zoom.link = window.env.zoom.link;
+    this.zoom.id = window.env.zoom.id;
+    this.zoom.passcode = window.env.zoom.passcode;
     if (this.congratulate && this.registrations[0].has_viewed_ticket == null) this.open();
   },
   methods: {
@@ -7883,7 +7891,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var msg = '<strong>Congratulations!</strong> Your registration has been accepted. ';
       if (this.registrations[0].registration_type === 'Guest' && this.registrations[0].attending_option === 'Hybrid' && this.registrations[0].email != '') msg += '<br /><br /><small style="line-height: 0px;">We have sent an email to <i>' + this.registrations[0].email + '</i>. <br />Please check to see the details.</small>';
       if (this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid') msg += '<br /><br /><small style="line-height: 0px;">Please settle your balance or at least pay partially to confirm your booking. It will automatically expire after 7 days.<br />For cancellations, please contact your local AWTA Registrars for help.</small>';
-      if (this.registrations[0].attending_option === 'Online') msg += "<br /><br /><small style=\"line-height: 0px;\">To watch the live broadcast, join our FB Group <br/><a href=\"".concat(window.env.fb_group_url, "\">").concat(window.env.fb_group_url, "</a></small>");
+
+      if (this.registrations[0].attending_option === 'Online') {
+        msg += "<br /><br /><small style=\"line-height: 0px;\">To watch the live broadcast, join our FB Group <br/><a href=\"".concat(window.env.fb_group_url, "\">").concat(window.env.fb_group_url, "</a></small>");
+        msg += "<br /><br /><small style=\"line-height: 0px;\">You may also join us via <b>Zoom</b>:<br />\n                        <a href=\"".concat(this.zoom.link, "\">").concat(this.zoom.link, "</a><br /><br />\n                        Meeting ID: ").concat(this.zoom.id, " <br />\n                        Passcode:").concat(this.zoom.passcode, "</small> <br /><br />");
+      }
+
       if (this.registrations[0].registration_type === 'Member' && this.registrations[0].avail_new_lamp_id == null) msg += '<br /><br /><small style="line-height: 0px;">Note: <i>A new LAMP ID Number is issued for you.</i> If you want to avail the physical card, an additional Php 35.00 will be required. Kindly reach out to your local AWTA Registrars for payment and issuance.</small><br/><img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><small>Would you like to avail the new LAMP ID?</small>';
       this.$confirm(msg, 'You did it!', {
         confirmButtonText: this.registrations[0].registration_type === 'Member' && this.registrations[0].avail_new_lamp_id == null ? 'Yes' : 'Continue',
