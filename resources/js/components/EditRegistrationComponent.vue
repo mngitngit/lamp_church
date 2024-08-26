@@ -98,7 +98,7 @@
                     class="col-md-3"
                 >
                     <el-form-item
-                        label="Do you have an AWTA card?"
+                        label="Do you have LAMP ID?"
                         prop="withAwtaCard"
                         required
                     >
