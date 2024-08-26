@@ -5,8 +5,8 @@
 We're so glad you are joining us to offer worship & thanksgiving to the Lord of lords!
 
 Here are the details:<br /><br />
-<b>Event Date:</b> December 27 - 30, 2023 <br />
-<b>Theme:</b> Year of Clustering <br />
+<b>Event Date:</b> {{ $event_date }} <br />
+<b>Theme:</b> {{ $theme }} <br />
 <b>Live Broadcast:</b> via Zoom & Facebook Live
 <br /><br />
 Join our FB Group to watch the live broadcast
@@ -16,10 +16,9 @@ Join Facebook Group
 
 You may also join us via Zoom: 
 @component('mail::panel')
-<a href="https://us02web.zoom.us/j/81934498358?pwd=MDhGcXpiMitiT1JYU0V2dGhWZy91dz09">https://us02web.zoom.us/j/81934498358?pwd=MDhGcXpiMitiT1JYU0V2dGhWZy91dz09</a>
-
-Meeting ID: 819 3449 8358<br />
-Passcode: AWTA2023
+<a href="{{ $zoom['link'] }}">{{ $zoom['link'] }}</a><br /><br />
+Meeting ID: {{ $zoom['id'] }} <br />
+Passcode: {{ $zoom['passcode'] }} <br />
 @endcomponent
 
 We will be sending a reminder before the event starts too!

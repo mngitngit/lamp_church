@@ -64,7 +64,13 @@ class Reminder extends Notification
             ->subject('Reminder: Upcoming Annual Worship and Thanksgiving Assembly TOMORROW!')
             ->markdown($markdown, [
                 'url' => $url,
-                'name' => $this->registration->fullname
+                'name' => $this->registration->fullname,
+                'event_date' => config('settings.event_date'),
+                'zoom' => [
+                    'link' => config('settings.zoom_details.link'),
+                    'id' => config('settings.zoom_details.id'),
+                    'passcode' => config('settings.zoom_details.passcode'),
+                ]
             ])
             ->attach($file, [
                 'as' => 'event_details.pdf',

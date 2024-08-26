@@ -13,7 +13,7 @@ Congratulations, your booking is already confirmed!
 <b>Booked Dates:</b> {{ $booked_dates }}<br />
 <b>Location:</b> Calamba Tent, CMC Avenue, Crossing, Calamba City, Laguna  <a href="https://goo.gl/maps/avYUt5rPss9HDtDo7">View Location</a> <br />
 <b>Event Time:</b> 4PM<br />
-<b>Theme:</b> Year of Clustering<br />
+<b>Theme:</b> {{ $theme }}<br />
 @endcomponent
 
 @component('mail::button', ['url' => $url])
@@ -21,10 +21,9 @@ View Ticket
 @endcomponent
 
 You may also join us via Zoom: <br />
-<a href="https://us02web.zoom.us/j/81934498358?pwd=MDhGcXpiMitiT1JYU0V2dGhWZy91dz09">https://us02web.zoom.us/j/81934498358?pwd=MDhGcXpiMitiT1JYU0V2dGhWZy91dz09</a><br />
-<br />
-Meeting ID: 819 3449 8358<br />
-Passcode: AWTA2023
+<a href="{{ $zoom['link'] }}">{{ $zoom['link'] }}</a><br /><br />
+Meeting ID: {{ $zoom['id'] }} <br />
+Passcode: {{ $zoom['passcode'] }} <br />
 <br /><br />
 We will be sending a reminder before the event starts too!
 

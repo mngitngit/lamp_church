@@ -11,7 +11,7 @@ Please settle your balance to confirm your registration.<br />
 
 @component('mail::panel')
 <b>Balance:</b> Php {{ $balance }}<br />
-<b>Due Date:</b> December 24, 2023<br />
+<b>Due Date:</b> {{ $payment_due_date }}<br />
 @endcomponent
 
 To settle it, please reach out to your local AWTA Registrars.

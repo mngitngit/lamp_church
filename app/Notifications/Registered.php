@@ -93,7 +93,16 @@ class Registered extends Notification
                 'minimum_due' => number_format($this->registration->can_book_rate),
                 'minimum_payment_due_date' => date('M d, Y', strtotime($this->registration->booked_date . ' + 7 days')),
                 'booked_dates' => implode(', ', $booked_dates),
-                'registration' => $this->registration
+                'registration' => $this->registration,
+                'payment_due_date' => config('settings.payment_due_date'),
+                'event_date' => config('settings.event_date'),
+                'rebooking_deadline' => config('settings.rebooking_deadline'),
+                'theme' => config('settings.theme'),
+                'zoom' => [
+                    'link' => config('settings.zoom_details.link'),
+                    'id' => config('settings.zoom_details.id'),
+                    'passcode' => config('settings.zoom_details.passcode'),
+                ]
             ]);
     }
 

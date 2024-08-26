@@ -9,9 +9,9 @@ We're excited to celebrate God's faithfulness and share our gratitude together, 
 Here's how you can join:<br />
 @component('mail::panel')
 <b>Zoom Meeting:</b><br />
-<a href="https://us02web.zoom.us/j/81934498358?pwd=MDhGcXpiMitiT1JYU0V2dGhWZy91dz09">https://us02web.zoom.us/j/81934498358?pwd=MDhGcXpiMitiT1JYU0V2dGhWZy91dz09</a><br /><br />
-Meeting ID: 819 3449 8358 <br />
-Passcode: AWTA2023 <br />
+<a href="{{ $zoom['link'] }}">{{ $zoom['link'] }}</a><br /><br />
+Meeting ID: {{ $zoom['id'] }} <br />
+Passcode: {{ $zoom['passcode'] }} <br />
 <br /><br />
 <b>Facebook Live:</b><br />
 Join the LAMP Church Facebook Group:  <a href="{{ $url }}">Click to Join Group</a><br /><br />

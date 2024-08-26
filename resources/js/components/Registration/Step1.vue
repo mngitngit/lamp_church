@@ -70,7 +70,7 @@
                 >
                     <div class="px-2 row">
                         <el-alert
-                            title="All registration after December 17, 2023 is considered online. For further inquiries, please reach out to your local AWTA Registrars."
+                            :title="`All registration after ${hybrid_registration_deadline} is considered online. For further inquiries, please reach out to your local AWTA Registrars.`"
                             type="warning"
                             show-icon
                         >
@@ -385,6 +385,7 @@ export default {
             guest_booking_code: window.env.guest_booking_code,
             assignments: window.env.cluster_groups,
             options: [],
+            hybrid_registration_deadline: window.env.hybrid_registration_deadline
         };
     },
     watch: {

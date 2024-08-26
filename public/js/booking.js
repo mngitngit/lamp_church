@@ -7206,7 +7206,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         details: {},
         can_book_days: null
       },
-      assignments: window.env.cluster_groups
+      event_date: window.env.event_date,
+      assignments: window.env.cluster_groups,
+      theme: window.env.theme,
+      rebooking_deadline: window.env.rebooking_deadline
     };
   },
   mounted: function mounted() {
@@ -7613,9 +7616,9 @@ var render = function render() {
     staticClass: "text-black"
   }, [_c("h6", {
     staticClass: "fw-bolder text-muted"
-  }, [_vm._v("LAMP WORLDWIDE AWTA 2023")]), _vm._v(" "), _c("small", [_vm._v("\n                            Timeline: December 27, 28, 29 and 30"), _c("br"), _vm._v("\n                            Venue: Calamba Tent"), _c("br"), _vm._v("\n                            Theme: Year of Clustering"), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
+  }, [_vm._v("LAMP WORLDWIDE AWTA 2023")]), _vm._v(" "), _c("small", [_vm._v("\n                            Timeline: " + _vm._s(_vm.event_date)), _c("br"), _vm._v("\n                            Venue: Calamba Tent"), _c("br"), _vm._v("\n                            Theme: " + _vm._s(_vm.theme)), _c("br"), _vm._v(" "), _c("br")]), _vm._v(" "), _c("h6", {
     staticClass: "fw-bolder text-muted"
-  }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                            Both members and visitors will be able to start booking their seats on October 1 until November 30, 2023 for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                            Hybrid Attendees should book for intended AWTA days only. Visitors will need to coordinate with their cluster local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                            Rebooking is until December 24, 2023 only. "), _c("br"), _c("br"), _vm._v("\n                            For any booking issues/concerns, kindly reach out to your local AWTA Registrars."), _c("br"), _c("br"), _vm._v("\n\n                            Book now — hurry while seats last!\n                            ")])])])], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("GUIDELINES: ")]), _vm._v(" "), _c("small", [_vm._v("\n                            Both members and visitors will be able to start booking their seats on October 1 until " + _vm._s(_vm.rebooking_deadline) + " for Hybrid Attendees."), _c("br"), _c("br"), _vm._v("\n\n                            Hybrid Attendees should book for intended AWTA days only. Visitors will need to coordinate with their cluster local coordinators for their bookings."), _c("br"), _c("br"), _vm._v("\n\n                            Rebooking is until " + _vm._s(_vm.rebooking_deadline) + " only. "), _c("br"), _c("br"), _vm._v("\n                            For any booking issues/concerns, kindly reach out to your local AWTA Registrars."), _c("br"), _c("br"), _vm._v("\n\n                            Book now — hurry while seats last!\n                            ")])])])], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",

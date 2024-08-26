@@ -8,19 +8,19 @@
                         <div class="text-black">
                             <h6 class="fw-bolder text-muted">LAMP WORLDWIDE AWTA 2023</h6>
                             <small>
-                            Timeline: December 27, 28, 29 and 30<br/>
+                            Timeline: {{ event_date }}<br/>
                             Venue: Calamba Tent<br/>
-                            Theme: Year of Clustering<br/>
+                            Theme: {{ theme }}<br/>
                             <br/>
                             </small>
 
                             <h6 class="fw-bolder text-muted">GUIDELINES: </h6>
                             <small>
-                            Both members and visitors will be able to start booking their seats on October 1 until November 30, 2023 for Hybrid Attendees.<br/><br/>
+                            Both members and visitors will be able to start booking their seats on October 1 until {{rebooking_deadline}} for Hybrid Attendees.<br/><br/>
 
                             Hybrid Attendees should book for intended AWTA days only. Visitors will need to coordinate with their cluster local coordinators for their bookings.<br/><br/>
 
-                            Rebooking is until December 24, 2023 only. <br/><br/>
+                            Rebooking is until {{rebooking_deadline}} only. <br/><br/>
                             For any booking issues/concerns, kindly reach out to your local AWTA Registrars.<br/><br/>
 
                             Book now — hurry while seats last!
@@ -163,7 +163,10 @@ export default {
             details: {},
             can_book_days: null
         },
+        event_date: window.env.event_date,
         assignments: window.env.cluster_groups,
+        theme: window.env.theme,
+        rebooking_deadline: window.env.rebooking_deadline
       }
     },
     mounted() {

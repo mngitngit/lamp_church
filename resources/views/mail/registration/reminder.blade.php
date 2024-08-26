@@ -7,7 +7,7 @@ We are reaching out to remind you about our highly anticipated Annual Worship an
 Here are the important details you need to mark on your calendar:
 @component('mail::panel')
 <b>Event:</b> Annual Worship and Thanksgiving Assembly<br />
-<b>Event Date:</b> December 27 - 30, 2023<br />
+<b>Event Date:</b> {{ $event_date }}<br />
 <b>Event Timing:</b> 4pm<br />
 <b>Venue:</b> Calamba Tent<br />
 @endcomponent

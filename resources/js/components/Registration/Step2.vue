@@ -4,7 +4,7 @@
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                 <!-- display bulk registration if registrant is a guest attending hybrid -->
                 <el-card v-if="data.step_1.registrationType === 'Guest' && data.step_1.attendingOption === 'Hybrid'" shadow="always" class="mb-3">
-                    <el-form-item prop="guests" required>
+                    <el-form-item prop="guests" class="mb-0" required>
                         <template slot-scope="label">
                             <label class="el-form-item__label"><span class="text-danger">*</span> Please Input the Guest Details. <br/><small class="text-sm">To add more guests, click add row in the bottom right (for a maximum of {{maxBulk}} guests per registration).</small></label>
                         </template>

@@ -3,9 +3,9 @@
         <h2>LAMP WORLDWIDE AWTA {{year}}</h2>
         <p class="text-sm">
             BE BLESSED PHYSICALLY, MATERIALLY, & SPIRITUALLY <br/>
-            Event Date: DECEMBER 27-30, {{year}} <br/>
+            Event Date: {{ event_date }} <br/>
             Event Place: Calamba Tent <br/>
-            Theme: Year of Clustering
+            Theme: {{ theme }}
         </p>
 
         <p class="text-sm mb-0">
@@ -21,7 +21,8 @@ export default {
     data() {
         return {
             year: window.env.year,
-            theme: window.env.theme
+            theme: window.env.theme,
+            event_date: window.env.event_date
         }
     }
 }

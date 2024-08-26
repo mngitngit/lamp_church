@@ -10,8 +10,8 @@
     <meta property="og:image" content="https://online.lampawta.com/images/registration_banner.jpeg" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://online.lampawta.com/registration"/>
-    <meta property="og:title" content="Annual Worship and Thanksgiving 2023" />
-    <meta property="og:description" content="Year of Clustering"/>
+    <meta property="og:title" content="Annual Worship and Thanksgiving {{ config('settings.year') }}" />
+    <meta property="og:description" content="{{ config('settings.theme') }}"/>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -23,7 +23,9 @@
             cluster_groups: {!! json_encode(config('clustergroups')) !!},
             display_disclosure_prompt: '{{ config('settings.display_disclosure_prompt') }}',
             year:'{{ config('settings.year') }}',
-            theme:'{{ config('settings.theme') }}'
+            theme:'{{ config('settings.theme') }}',
+            event_date:'{{ config('settings.event_date') }}',
+            hybrid_registration_deadline: '{{ config('settings.hybrid_registration_deadline') }}'
         };
     </script>
     <!-- Scripts -->
