@@ -107,7 +107,7 @@ class AttendanceController extends Controller
     public function show($uuid, Request $request)
     {
         if (!$uuid) {
-            return response()->json(['error' => 'Please enter AWTA Card/Guest number.'], 500);
+            return response()->json(['error' => 'Please enter LAMP ID/Guest number.'], 500);
         }
 
         $registration = Registration::where('uuid', $uuid)->first();

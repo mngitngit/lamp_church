@@ -215,7 +215,7 @@ export default {
       this.retrieved = null
 
       if (! this.input)
-        this.error = 'Please enter AWTA Card/Guest number.'
+        this.error = 'Please enter LAMP ID/Guest number.'
 
       await axios.get(`/attendance/` + this.input)
       .then(async (response) => {

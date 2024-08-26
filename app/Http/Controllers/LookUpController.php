@@ -190,7 +190,7 @@ class LookUpController extends Controller
         $lookUp = LookUp::where('lamp_card_number', $request->awtaCardNumber)->first();
 
         if ($lookUp) {
-            return response()->json(['error' => 'AWTA Card number already exists.'], 422);
+            return response()->json(['error' => 'LAMP ID number already exists.'], 422);
         }
 
         $lookUp = LookUp::where('fullname', $request->firstName . ' ' . $request->lastName)->first();

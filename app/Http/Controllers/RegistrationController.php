@@ -310,7 +310,7 @@ class RegistrationController extends Controller
                     $update['lamp_card_number'] =  $registration->uuid;
                     $update['old_lamp_card_number'] = $lookup->lamp_card_number;
                 }
-                // setting new awta card number
+                // setting new LAMP ID number
                 $lookup->update($update);
             } else {
                 // insert member to master list if not existing

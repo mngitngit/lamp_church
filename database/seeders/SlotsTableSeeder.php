@@ -15,7 +15,7 @@ class SlotsTableSeeder extends Seeder
 
         Slots::insert([
             [
-                'event_date' => date("Y-m-d", strtotime("12/27/2024")),
+                'event_date' => date("Y-m-d", strtotime("12/26/2024")),
                 'seat_count' => 600,
                 'registration_type' => 'Member',
                 'updated_at' => NOW(),
@@ -23,6 +23,13 @@ class SlotsTableSeeder extends Seeder
             ],
 
             [
+                'event_date' => date("Y-m-d", strtotime("12/27/2024")),
+                'seat_count' => 600,
+                'registration_type' => 'Member',
+                'updated_at' => NOW(),
+                'created_at' => NOW()
+            ],
+            [
                 'event_date' => date("Y-m-d", strtotime("12/28/2024")),
                 'seat_count' => 600,
                 'registration_type' => 'Member',
@@ -30,16 +37,16 @@ class SlotsTableSeeder extends Seeder
                 'created_at' => NOW()
             ],
             [
-                'event_date' => date("Y-m-d", strtotime("12/29/2024")),
+                'event_date' => date("Y-m-d", strtotime("12/39/2024")),
                 'seat_count' => 600,
                 'registration_type' => 'Member',
                 'updated_at' => NOW(),
                 'created_at' => NOW()
             ],
             [
-                'event_date' => date("Y-m-d", strtotime("12/30/2024")),
-                'seat_count' => 600,
-                'registration_type' => 'Member',
+                'event_date' => date("Y-m-d", strtotime("12/26/2024")),
+                'seat_count' => 175,
+                'registration_type' => 'Guest',
                 'updated_at' => NOW(),
                 'created_at' => NOW()
             ],
@@ -58,14 +65,7 @@ class SlotsTableSeeder extends Seeder
                 'created_at' => NOW()
             ],
             [
-                'event_date' => date("Y-m-d", strtotime("12/29/2024")),
-                'seat_count' => 175,
-                'registration_type' => 'Guest',
-                'updated_at' => NOW(),
-                'created_at' => NOW()
-            ],
-            [
-                'event_date' => date("Y-m-d", strtotime("12/30/2024")),
+                'event_date' => date("Y-m-d", strtotime("12/39/2024")),
                 'seat_count' => 175,
                 'registration_type' => 'Guest',
                 'updated_at' => NOW(),

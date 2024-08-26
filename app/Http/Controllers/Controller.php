@@ -176,7 +176,7 @@ class Controller extends BaseController
             ->first();
 
         if ($lookup) {
-            return ['error' => 'This delegate from ' . $request->localChurch . ' has already been issued with an AWTA card number.'];
+            return ['error' => 'This delegate from ' . $request->localChurch . ' has already been issued with a LAMP ID number.'];
         }
 
         return [];

@@ -7011,7 +7011,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.error = null;
                 _this2.loading = true;
                 _this2.retrieved = null;
-                if (!_this2.input) _this2.error = 'Please enter AWTA Card/Guest number.';
+                if (!_this2.input) _this2.error = 'Please enter LAMP ID/Guest number.';
                 _context2.next = 6;
                 return axios.get("/attendance/" + _this2.input).then( /*#__PURE__*/function () {
                   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(response) {

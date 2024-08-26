@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RatesTableSeeder::class,
-            AvailableUUIDsTableSeeder::class,
             UserTableSeeder::class,
             PermissionsTableSeeder::class,
             SlotsTableSeeder::class,
