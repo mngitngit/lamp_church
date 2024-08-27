@@ -228,7 +228,7 @@ class RegistrationController extends Controller
                     $awta_card_number = '--';
                     break;
 
-                case 'lost': // Yes, but I lost it.
+                case 'lost': // Yes, but I don’t have it.
                     $details = array_merge($request->step_1, $request->step_2, $request->step_3);
 
                     $lookup = LookUp::where('lamp_card_number', $details['selected'])->first();

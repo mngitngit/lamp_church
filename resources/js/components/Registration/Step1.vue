@@ -50,7 +50,11 @@
                                         value="none"
                                     ></el-option>
                                     <el-option
-                                        label="Yes, but I lost it."
+                                        label="None, but I have the old AWTA Card"
+                                        value="old"
+                                    ></el-option>
+                                    <el-option
+                                        label="Yes, but I don’t have it."
                                         value="lost"
                                     ></el-option>
                                     <el-option
@@ -126,7 +130,7 @@
                 <el-card
                     v-if="
                         ruleForm.registrationType === 'Member' &&
-                        ruleForm.withAwtaCard === 'yes'
+                        (ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'old')
                     "
                     shadow="always"
                     class="mb-3"
@@ -134,13 +138,13 @@
                     <div class="row">
                         <div
                             class="col-md-6"
-                            v-if="ruleForm.withAwtaCard === 'yes'"
+                            v-if="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'old')"
                         >
                             <el-form-item
                                 class="transform-uppercase"
                                 label="What is your LAMP ID number?"
                                 prop="awtaCardNumber"
-                                :required="ruleForm.withAwtaCard === 'yes'"
+                                :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'old')"
                             >
                                 <el-input
                                     v-model="ruleForm.awtaCardNumber"

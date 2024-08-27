@@ -111,7 +111,7 @@
                                 value="none"
                             ></el-option>
                             <el-option
-                                label="Yes, but I lost it."
+                                label="Yes, but I don’t have it."
                                 value="lost"
                             ></el-option>
                             <el-option

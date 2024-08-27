@@ -131,7 +131,7 @@ export default {
                 msg += '<br /><br /><small style="line-height: 0px;">We have sent an email to <i>' + this.registrations[0].email + '</i>. <br />Please check to see the details.</small>';
 
             if (this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid')
-                msg += '<br /><br /><small style="line-height: 0px;">Please settle your balance or at least pay partially to confirm your booking. It will automatically expire after 7 days.<br />For cancellations, please contact your local AWTA Registrars for help.</small>';
+                msg += '<br /><br /><small style="line-height: 0px;">Please settle your balance or at least half of the registration fee to confirm your booking. It will automatically expire after 7 days.<br />For cancellations, please contact your local AWTA Registrars for help.</small>';
             
             if (this.registrations[0].attending_option === 'Online') {
                 msg += `<br /><br /><small style="line-height: 0px;">To watch the live broadcast, join our FB Group <br/><a href="${window.env.fb_group_url}">${window.env.fb_group_url}</a></small>`
