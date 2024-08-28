@@ -178,8 +178,9 @@
                         </div>
                         
                         <div v-if="data.step_1.withAwtaCard === 'none'|| data.step_1.registrationType === 'Guest'" class="col-md-12">
-                            <el-form-item label="Facebook Name" prop="facebookName">
-                                <el-input v-model="ruleForm.facebookName" placeholder="If none, kindly type in the Facebook name of your event companion"></el-input>
+                            <el-form-item label="Facebook Name" class="rm-margin" prop="facebookName" required>
+                                <small class="text-sm">If none, kindly type in "None"</small>
+                                <el-input v-model="ruleForm.facebookName" placeholder="You can type in the Facebook name of your event companion"></el-input>
                             </el-form-item>
                         </div>
 
@@ -386,6 +387,9 @@
                     localChurch: [
                         { required: true, message: 'Please select Local Church', trigger: 'change'},
                         { validator: checkLastname, trigger: ['change'] },
+                    ],
+                    facebookName: [
+                        { required: true, message: 'Please input Facebook Name', trigger: ['blur', 'change']},
                     ],
                     country: [
                         { required: true, message: 'Please select Country', trigger: 'change'}

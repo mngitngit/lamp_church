@@ -20,6 +20,7 @@ display zoom details on success page for online attendees - done
 create seeder for lookup data - done (sql dump)
 update the design for registration site - done
 change deadline of registration to Nov 30 from Dec 17 - done
+lamp id generation adjustment - done
 
 pending:
 update cluster groups
@@ -27,4 +28,3 @@ make the fb name mandatory field
 unrequire the cluster group field
 investigate the manage booking (not working) - unreplicable on my end
 group registration for online guests
-add option for old members without LAMP ID
