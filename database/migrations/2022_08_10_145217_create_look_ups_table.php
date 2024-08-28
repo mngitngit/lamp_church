@@ -16,7 +16,7 @@ class CreateLookUpsTable extends Migration
         $member_booking_limit = env('MEMBER_BOOKING_LIMIT');
 
         Schema::create('look_ups', function (Blueprint $table) use ($member_booking_limit) {
-            $table->string('lamp_card_number')->primary();
+            $table->string('lamp_id')->primary();
             $table->string('old_lamp_card_number')->nullable();
             $table->string('email')->nullable();
             $table->string('firstname');
