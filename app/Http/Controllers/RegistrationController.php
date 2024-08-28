@@ -101,6 +101,10 @@ class RegistrationController extends Controller
                     $errors[$key]['lastName'] = 'Last Name is required.';
                 }
 
+                if (!$value->facebookName) {
+                    $errors[$key]['facebookName'] = 'Facebook Name is required.';
+                }
+
                 if (!$value->clusterGroup) {
                     $errors[$key]['clusterGroup'] = 'Cluster Group is required.';
                 }

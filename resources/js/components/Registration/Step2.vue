@@ -22,7 +22,7 @@
                                             :class="{'has-error' : (errors[i] && errors[i]['firstName']) || (errors[i] && errors[i]['invalid'])}"
                                             v-model="guest.firstName">
                                         </el-input>
-                                        <small v-if="errors[i] && (errors[i]['firstName'] || errors[i]['lastName'])" class="text-error">
+                                        <small v-if="errors[i] && (errors[i]['firstName'] || errors[i]['lastName'] || errors[i]['facebookName'])" class="text-error">
                                             <span v-if="errors[i]['firstName']">{{ errors[i]['firstName'] }}</span>&nbsp;
                                         </small>
                                     </td>
@@ -34,7 +34,7 @@
                                             :class="{'has-error' : (errors[i] && errors[i]['lastName']) || (errors[i] && errors[i]['invalid'])}"
                                             v-model="guest.lastName">
                                         </el-input>
-                                        <small v-if="errors[i] && (errors[i]['firstName'] || errors[i]['lastName'])" class="text-error">
+                                        <small v-if="errors[i] && (errors[i]['firstName'] || errors[i]['lastName'] || errors[i]['facebookName'])" class="text-error">
                                             <span v-if="errors[i].lastName">{{ errors[i].lastName }}</span>&nbsp;
                                         </small>
                                     </td>
@@ -42,10 +42,11 @@
                                         <label class="text-sm">Facebook Name</label>
                                         <el-input
                                             size="mini"
-                                            placeholder="Facebook Name"
+                                            placeholder='Type "None", if no facebook.'
+                                            :class="{'has-error' : (errors[i] && errors[i]['facebookName']) || (errors[i] && errors[i]['invalid'])}"
                                             v-model="guest.facebookName">
                                         </el-input>
-                                        <small v-if="errors[i] && (errors[i]['firstName'] || errors[i]['lastName'])" class="text-error">
+                                        <small v-if="errors[i] && (errors[i]['firstName'] || errors[i]['lastName'] || errors[i]['facebookName'])" class="text-error">
                                             <span v-if="errors[i].facebookName">{{ errors[i].facebookName }}</span>&nbsp;
                                         </small>
                                     </td>
