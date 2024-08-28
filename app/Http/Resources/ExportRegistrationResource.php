@@ -40,7 +40,7 @@ class ExportRegistrationResource extends JsonResource
             'category' => $this->category,
             'attending_option' => $this->attending_option,
             'with_awta_card' => $this->with_awta_card,
-            'avail_new_lamp_id' => $this->avail_new_lamp_id,
+            'avail_new_lamp_id' => $this->lookup->avail_new_lamp_id ?? NULL,
             'booked_dates' => implode(', ', $booked_dates),
             'booking_status' => $this->booking_status,
             'attended_dates' => implode(',', $attended_dates),

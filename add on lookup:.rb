@@ -21,10 +21,13 @@ create seeder for lookup data - done (sql dump)
 update the design for registration site - done
 change deadline of registration to Nov 30 from Dec 17 - done
 lamp id generation adjustment - done
+require the cluster group field - done
+investigate the manage booking (not working) - unreplicable on my end
+make the fb name mandatory field - done
+prompt request by alex - done
+
 
 pending:
 update cluster groups
-make the fb name mandatory field
-unrequire the cluster group field
-investigate the manage booking (not working) - unreplicable on my end
 group registration for online guests
+remove avail new lamp id on registration table
