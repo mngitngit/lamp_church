@@ -107,7 +107,7 @@
                             placeholder="Choose"
                         >
                             <el-option
-                                label="None, I’m a new member."
+                                label="None"
                                 value="none"
                             ></el-option>
                             <el-option
@@ -115,7 +115,7 @@
                                 value="lost"
                             ></el-option>
                             <el-option
-                                label="Yes, and I still have it."
+                                label="Yes, I still have it."
                                 value="yes"
                             ></el-option>
                         </el-select>
@@ -295,7 +295,7 @@ export default {
                 registrationType: "Member",
                 localChurch: "",
                 country: "Philippines",
-                awtaCardNumber: "",
+                lampIDNumber: "",
                 category: "Adult",
                 attendingOption: "",
                 withAwtaCard: "",
@@ -337,7 +337,7 @@ export default {
                         trigger: ["blur", "change"],
                     },
                 ],
-                awtaCardNumber: [
+                lampIDNumber: [
                     {
                         required: true,
                         message: "Please input AWTA Card Number",

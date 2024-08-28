@@ -43,7 +43,7 @@ class LookUpController extends Controller
 
         if ($search->keyword) {
             $lookUp = $lookUp->where('fullname', 'LIKE', "%$search->keyword%")
-                ->orWhere('lamp_card_number', 'LIKE', "%$search->keyword%");
+                ->orWhere('lamp_id', 'LIKE', "%$search->keyword%");
         }
 
         $lookUp = $lookUp->paginate(10);
@@ -86,13 +86,13 @@ class LookUpController extends Controller
      */
     public function show($awtaNumber)
     {
-        $lookUp = LookUp::where('lamp_card_number', $awtaNumber)->orWhere('old_lamp_card_number', $awtaNumber)->first();
+        $lookUp = LookUp::where('lamp_id', $awtaNumber)->first();
 
         if (!$lookUp) {
             return response()->json(['error' => 'Data not found. Please reach out to your local coordinator.'], 404);
         }
 
-        $isRegistered = Registration::where('uuid', $lookUp->lamp_card_number)->first();
+        $isRegistered = Registration::where('uuid', $lookUp->lamp_id)->first();
 
         if ($isRegistered) {
             return response()->json(['error' => 'Sorry, this LAMP ID number is already registered.'], 500);
@@ -136,7 +136,7 @@ class LookUpController extends Controller
     public function edit($awtaNumber)
     {
         return view('lookup.edit', [
-            'lookup' => LookUp::where('lamp_card_number', $awtaNumber)->first()
+            'lookup' => LookUp::where('lamp_id', $awtaNumber)->first()
         ]);
     }
 
@@ -149,7 +149,7 @@ class LookUpController extends Controller
      */
     public function update($awtaNumber, Request $request)
     {
-        $lookup = LookUp::where('lamp_card_number', $awtaNumber)->first();
+        $lookup = LookUp::where('lamp_id', $awtaNumber)->first();
 
         $lookup->update([
             'email' => $request->email,
@@ -187,7 +187,7 @@ class LookUpController extends Controller
      */
     public function store(Request $request)
     {
-        $lookUp = LookUp::where('lamp_card_number', $request->awtaCardNumber)->first();
+        $lookUp = LookUp::where('lamp_id', $request->lampIDNumber)->first();
 
         if ($lookUp) {
             return response()->json(['error' => 'LAMP ID number already exists.'], 422);
@@ -200,7 +200,7 @@ class LookUpController extends Controller
         }
 
         $lookUp = LookUp::create([
-            'lamp_card_number' => $request->awtaCardNumber,
+            'lamp_id' => $request->lampIDNumber,
             'email' => $request->email,
             'firstname' => $request->firstName,
             'lastname' => $request->lastName,

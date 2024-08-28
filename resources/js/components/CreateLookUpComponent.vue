@@ -3,8 +3,8 @@
         <el-card shadow="hover" class="mb-4">
             <div class="row">
                 <div class="col-md-3">
-                    <el-form-item label="AWTA Card Number" prop="awtaCardNumber" required>
-                        <el-input v-model="ruleForm.awtaCardNumber"></el-input>
+                    <el-form-item label="AWTA Card Number" prop="lampIDNumber" required>
+                        <el-input v-model="ruleForm.lampIDNumber"></el-input>
                     </el-form-item>
                 </div>
                 <div class="col-md-6">
@@ -86,7 +86,7 @@ export default {
                 registrationType: 'Member',
                 localChurch: '',
                 country: 'Philippines',
-                awtaCardNumber: '',
+                lampIDNumber: '',
                 category: 'Adult',
                 canBookDays: parseInt(window.env.member_booking_limit || 0),
             },
@@ -106,7 +106,7 @@ export default {
                 category: [
                     { required: true, message: 'Please select Category', trigger: ['blur', 'change']}
                 ],
-                awtaCardNumber: [
+                lampIDNumber: [
                     { required: true, message: 'Please input AWTA Card Number', trigger: ['blur', 'change']},
                     { min: 9, max: 9, message: 'Length should be 9 characters', trigger: 'blur'}
                 ],

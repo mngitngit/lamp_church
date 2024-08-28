@@ -46,19 +46,15 @@
                                     placeholder="Choose"
                                 >
                                     <el-option
-                                        label="None, I’m a new member."
+                                        label="None"
                                         value="none"
-                                    ></el-option>
-                                    <el-option
-                                        label="None, but I have the old AWTA Card"
-                                        value="old"
                                     ></el-option>
                                     <el-option
                                         label="Yes, but I don’t have it."
                                         value="lost"
                                     ></el-option>
                                     <el-option
-                                        label="Yes, and I still have it."
+                                        label="Yes, I still have it."
                                         value="yes"
                                     ></el-option>
                                 </el-select>
@@ -143,11 +139,11 @@
                             <el-form-item
                                 class="transform-uppercase"
                                 label="What is your LAMP ID number?"
-                                prop="awtaCardNumber"
+                                prop="lampIDNumber"
                                 :required="(ruleForm.withAwtaCard === 'yes' || ruleForm.withAwtaCard === 'old')"
                             >
                                 <el-input
-                                    v-model="ruleForm.awtaCardNumber"
+                                    v-model="ruleForm.lampIDNumber"
                                     @clear="resetData('awta-card')"
                                     :clearable="true"
                                 ></el-input>
@@ -264,7 +260,7 @@ export default {
         },
     },
     data() {
-        var checkAwtaCardNumber = async (rule, value, callback) => {
+        var checklampIDNumber = async (rule, value, callback) => {
             if (value.length === 9) {
                 if (value.length > 9)
                     return callback(new Error("Invalid LAMP ID Number"));
@@ -278,7 +274,7 @@ export default {
                 this.isLoading = true;
 
                 await axios
-                    .get(`/lookup/${this.ruleForm.awtaCardNumber}`)
+                    .get(`/lookup/${this.ruleForm.lampIDNumber}`)
                     .then(async (response) => {
                         this.ruleForm.found.email = response.data.email;
                         this.ruleForm.found.firstName = response.data.firstname;
@@ -286,8 +282,8 @@ export default {
                         this.ruleForm.found.facebookName = response.data.facebook_name;
                         this.ruleForm.found.registrationType = response.data.registration_type;
                         this.ruleForm.found.country = response.data.country;
-                        this.ruleForm.found.awtaCardNumber = response.data.lamp_card_number;
-                        this.ruleForm.found.oldAwtaCardNumber = response.data.old_lamp_card_number;
+                        this.ruleForm.found.lampIDNumber = response.data.lamp_id;
+                        this.ruleForm.found.oldlampIDNumber = response.data.old_lamp_card_number;
                         this.ruleForm.found.category = response.data.category;
                         this.ruleForm.found.attendingOption = this.ruleForm.attendingOption;
                         this.ruleForm.found.withAwtaCard = "yes";
@@ -317,7 +313,7 @@ export default {
                 registrationType: "",
                 withAwtaCard: "",
                 attendingOption: "",
-                awtaCardNumber: "",
+                lampIDNumber: "",
                 clusterGroup: "",
                 bookingCode: "",
                 email: "",
@@ -347,13 +343,13 @@ export default {
                         trigger: ["blur", "change"],
                     },
                 ],
-                awtaCardNumber: [
-                    { validator: checkAwtaCardNumber, trigger: ["change"] },
+                lampIDNumber: [
+                    { validator: checklampIDNumber, trigger: ["change"] },
                     {
                         validator: async (rule, value, callback) => {
                             if (
-                                this.ruleForm.awtaCardNumber.length > 9 ||
-                                this.ruleForm.awtaCardNumber.length < 9
+                                this.ruleForm.lampIDNumber.length > 9 ||
+                                this.ruleForm.lampIDNumber.length < 9
                             ) {
                                 this.options = [];
                                 this.ruleForm.clusterGroup = "";
@@ -402,7 +398,7 @@ export default {
         "ruleForm.attendingOption"(data, old) {
             if (old) this.resetData("attending-option");
         },
-        "ruleForm.awtaCardNumber"(data, old) {
+        "ruleForm.lampIDNumber"(data, old) {
             if (old) this.resetData("awta-card");
         },
         options(data, old) {
@@ -460,12 +456,12 @@ export default {
             } else if (scope === "reg-type") {
                 this.ruleForm.withAwtaCard = "";
                 this.ruleForm.attendingOption = "";
-                this.ruleForm.awtaCardNumber = "";
+                this.ruleForm.lampIDNumber = "";
                 this.ruleForm.bookingCode = "";
                 this.ruleForm.found = {};
                 this.$emit("reset");
             } else if (scope === "with-awta-card") {
-                this.ruleForm.awtaCardNumber = "";
+                this.ruleForm.lampIDNumber = "";
                 this.ruleForm.found = {};
                 this.$emit("reset");
             } else if (scope === "attending-option") {

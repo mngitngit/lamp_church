@@ -221,7 +221,7 @@
 
                         <div class="col-md-12" v-if="data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0">
                             <el-form-item label="Please choose your name (If your name cannot be clicked, you have already registered)" prop="selected" required>
-                                <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_card_number" :disabled="data.is_registered === 1" @change="selectName()" border>
+                                <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_id" :disabled="data.is_registered === 1" @change="selectName()" border>
                                     <span>{{ data.firstname }} {{ data.lastname }}</span>
                                 </el-radio>
                             </el-form-item>
@@ -510,7 +510,7 @@
             },
             selectName() {
                 var selected = this.ruleForm.lookUp.filter(function (el) {
-                    return el.lamp_card_number === this.ruleForm.selected;
+                    return el.lamp_id === this.ruleForm.selected;
                 }.bind(this));
 
                 this.ruleForm.canBookDays = selected[0].can_book_days;

@@ -9,14 +9,14 @@ class LookUp extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'lamp_card_number';
+    protected $primaryKey = 'lamp_id';
 
     public $incrementing = false;
 
     protected $keyType = 'string';
 
     protected $fillable = [
-        'lamp_card_number',
+        'lamp_id',
         'old_lamp_card_number',
         'email',
         'firstname',

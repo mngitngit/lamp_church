@@ -52,7 +52,7 @@ class Registration extends MyModel
 
     public function getOldUuidAttribute()
     {
-        $old = LookUp::where('lamp_card_number', $this->uuid)->first();
+        $old = LookUp::where('lamp_id', $this->uuid)->first();
         return $this->registration_type == 'Member' ?
             ($old ? $old->old_lamp_card_number : '--')
             : '--';
@@ -126,7 +126,7 @@ class Registration extends MyModel
 
     public function lookup()
     {
-        return $this->hasOne(LookUp::class, 'lamp_card_number', 'uuid');
+        return $this->hasOne(LookUp::class, 'lamp_id', 'uuid');
     }
 
     private static function logActivity($description, $delegate_name)

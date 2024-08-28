@@ -26,7 +26,7 @@ class LookUpImport implements ToModel, WithStartRow, WithValidation
     public function model(array $row)
     {
         return new LookUp([
-            'lamp_card_number' => $row[0],
+            'lamp_id' => $row[0],
             'email' => $row[1],
             'firstname' => $row[2],
             'lastname' => $row[3],
@@ -42,7 +42,7 @@ class LookUpImport implements ToModel, WithStartRow, WithValidation
     public function rules(): array
     {
         return [
-            '0' => 'unique:look_ups,lamp_card_number'
+            '0' => 'unique:look_ups,lamp_id'
         ];
     }
 }

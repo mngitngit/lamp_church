@@ -207,7 +207,7 @@ class RegistrationController extends Controller
             $uuid = null;
 
             switch ($request->step_1['withAwtaCard']) {
-                case 'none': // None, I’m a new member.
+                case 'none': // None
                     $details = array_merge($request->step_1, $request->step_2, $request->step_3);
 
                     $uuid = UUID::issue();
@@ -231,9 +231,9 @@ class RegistrationController extends Controller
                 case 'lost': // Yes, but I don’t have it.
                     $details = array_merge($request->step_1, $request->step_2, $request->step_3);
 
-                    $lookup = LookUp::where('lamp_card_number', $details['selected'])->first();
+                    $lookup = LookUp::where('lamp_id', $details['selected'])->first();
 
-                    $uuid = is_null($lookup['old_lamp_card_number']) ? UUID::issue() : $lookup['lamp_card_number'];
+                    $uuid = is_null($lookup['old_lamp_card_number']) ? UUID::issue() : $lookup['lamp_id'];
                     $email = $details['email'];
                     $firstname = $lookup['firstname'];
                     $lastname = $lookup['lastname'];
@@ -251,10 +251,10 @@ class RegistrationController extends Controller
                     $can_book_days = $lookup['can_book_days'];
                     break;
 
-                case 'yes': // Yes, and I still have it.
+                case 'yes': // Yes, I still have it.
                     $details = array_merge($request->step_1, $request->step_3);
 
-                    $uuid = is_null($details['found']['oldAwtaCardNumber']) ? UUID::issue() : $details['awtaCardNumber'];
+                    $uuid = is_null($details['found']['oldlampIDNumber']) ? UUID::issue() : $details['lampIDNumber'];
                     $email = $details['email'];
                     $firstname = $details['found']['firstName'];
                     $lastname = $details['found']['lastName'];
@@ -267,7 +267,7 @@ class RegistrationController extends Controller
                     $attending_option = $details['attendingOption'];
                     $with_awta_card = $details['withAwtaCard'];
                     $cluster_group = $details['clusterGroup'];
-                    $awta_card_number = $details['awtaCardNumber'];
+                    $awta_card_number = $details['lampIDNumber'];
                     $assistance = $details['specificMedicalAssistance'];
                     $can_book_days = $details['found']['canBookDays'];
                     break;
@@ -298,7 +298,7 @@ class RegistrationController extends Controller
                 'has_viewed_ticket' => NULL
             ]);
 
-            $lookup = LookUp::where('lamp_card_number', $awta_card_number)->first();
+            $lookup = LookUp::where('lamp_id', $awta_card_number)->first();
 
             // checking if the member is in the master list
             if ($lookup) {
@@ -307,15 +307,15 @@ class RegistrationController extends Controller
                 ];
 
                 if (is_null($lookup['old_lamp_card_number'])) {
-                    $update['lamp_card_number'] =  $registration->uuid;
-                    $update['old_lamp_card_number'] = $lookup->lamp_card_number;
+                    $update['lamp_id'] =  $registration->uuid;
+                    $update['old_lamp_card_number'] = $lookup->lamp_id;
                 }
                 // setting new LAMP ID number
                 $lookup->update($update);
             } else {
                 // insert member to master list if not existing
                 LookUp::create([
-                    'lamp_card_number' => $registration->uuid,
+                    'lamp_id' => $registration->uuid,
                     'old_lamp_card_number' => $awta_card_number,
                     'email' => $email,
                     'firstname' => $firstname,
@@ -443,7 +443,7 @@ class RegistrationController extends Controller
 
         if (isset($request->avail_new_lamp_id)) { // save answer for newly registered members
             $registration->lookup()->update([
-                'lamp_card_number' => $uuid,
+                'lamp_id' => $uuid,
                 'avail_new_lamp_id' => $request->avail_new_lamp_id,
             ]);
 
@@ -477,7 +477,7 @@ class RegistrationController extends Controller
 
             if ($registration->registration_type === 'Member') {
                 $registration->lookup()->updateOrCreate([
-                    'lamp_card_number' => $uuid,
+                    'lamp_id' => $uuid,
                     'avail_new_lamp_id' => $request->availNewLAMPID,
                 ]);
             }
@@ -504,7 +504,7 @@ class RegistrationController extends Controller
 
     public function destroy($uuid)
     {
-        $lookup = LookUp::where('lamp_card_number', $uuid)->first();
+        $lookup = LookUp::where('lamp_id', $uuid)->first();
 
         if ($lookup) {
             $lookup->update([

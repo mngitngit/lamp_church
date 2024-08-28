@@ -87,7 +87,7 @@ export default {
                 registrationType: 'Member',
                 localChurch: '',
                 country: 'Philippines',
-                awtaCardNumber: '',
+                lampIDNumber: '',
                 category: 'Adult',
                 canBookDays: parseInt(window.env.member_booking_limit || 0)
             },
@@ -104,7 +104,7 @@ export default {
                 country: [
                     { required: true, message: 'Please select Country', trigger: ['blur', 'change']}
                 ],
-                awtaCardNumber: [
+                lampIDNumber: [
                     { required: true, message: 'Please input AWTA Card Number', trigger: ['blur', 'change']},
                 ],
                 category: [
@@ -128,7 +128,7 @@ export default {
             registrationType: this.lookup.registration_type,
             localChurch: this.lookup.local_church,
             country: this.lookup.country,
-            awtaCardNumber: this.lookup.lamp_card_number,
+            lampIDNumber: this.lookup.lamp_id,
             category: this.lookup.category,
             canBookDays: this.lookup.can_book_days
         }
@@ -144,7 +144,7 @@ export default {
                     });
 
                     setTimeout(async () => {
-                        await axios.post(`/lookup/${this.lookup.lamp_card_number}/update`, this.ruleForm)
+                        await axios.post(`/lookup/${this.lookup.lamp_id}/update`, this.ruleForm)
                         .then(async (response) => {
                             loading.close()
 

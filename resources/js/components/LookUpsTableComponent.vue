@@ -61,13 +61,13 @@
           </template>
         </el-table-column>
         <el-table-column
-          prop="lamp_card_number"
+          prop="lamp_id"
           label="AWTA Card #"
           fixed="left"
           align="center"
           sortable>
           <template slot-scope="scope">
-              {{ scope.row.lamp_card_number }}
+              {{ scope.row.lamp_id }}
           </template>
         </el-table-column>
         <el-table-column
@@ -126,7 +126,7 @@
           align="center"
           width="120">
           <template slot-scope="scope">
-            <a :href="`/lookup/${scope.row.lamp_card_number}/edit`"><el-button type="text" size="small">View Details</el-button></a>
+            <a :href="`/lookup/${scope.row.lamp_id}/edit`"><el-button type="text" size="small">View Details</el-button></a>
           </template>
         </el-table-column>
       </el-table-column>

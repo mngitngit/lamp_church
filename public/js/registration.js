@@ -8878,7 +8878,7 @@ var render = function render() {
     }])
   }), _vm._v(" "), _c("el-table-column", {
     attrs: {
-      prop: "lamp_card_number",
+      prop: "lamp_id",
       label: "AWTA Card #",
       fixed: "left",
       align: "center",
@@ -8887,7 +8887,7 @@ var render = function render() {
     scopedSlots: _vm._u([{
       key: "default",
       fn: function fn(scope) {
-        return [_vm._v("\n            " + _vm._s(scope.row.lamp_card_number) + "\n        ")];
+        return [_vm._v("\n            " + _vm._s(scope.row.lamp_id) + "\n        ")];
       }
     }])
   }), _vm._v(" "), _c("el-table-column", {
@@ -8975,7 +8975,7 @@ var render = function render() {
       fn: function fn(scope) {
         return [_c("a", {
           attrs: {
-            href: "/lookup/".concat(scope.row.lamp_card_number, "/edit")
+            href: "/lookup/".concat(scope.row.lamp_id, "/edit")
           }
         }, [_c("el-button", {
           attrs: {
