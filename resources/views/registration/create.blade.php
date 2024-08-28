@@ -10,7 +10,7 @@
 <footer class="footer shadow">
     <div class="container py-2">
         <center>
-            <span class="text-muted">Already registered? &nbsp;<el-link type="theme" href="/booking">Manage Booking</el-link></span>
+            <span class="text-muted">Already registered? &nbsp;<el-link type="success" href="/booking">Manage Booking</el-link></span>
         </center>
     </div>
 </footer>

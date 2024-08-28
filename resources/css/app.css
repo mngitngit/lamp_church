@@ -22,7 +22,8 @@
     width: 100%;
 }
 
-.page-link.active, .active > .page-link {
+.page-link.active,
+.active>.page-link {
     background-color: #409eff !important;
     border-color: #409eff !important;
 }
@@ -155,16 +156,17 @@
 
 .el-button--theme {
     color: #FFF !important;
-    background-color: #3abdb5 !important;
-    border-color: #3abdb5 !important;
+    background-color: #6a9322 !important;
+    border-color: #6a9322 !important;
 }
 
 .el-link.el-link--theme:hover {
-    color: #00c4a3 !important;
+    color: #6a9322 !important;
 }
 
 .el-link.el-link--theme {
-    color: #3cbdb5 !important;
+    color: #86ba2c !important;
+    text-decoration: none !important;
 }
 
 .el-progress-bar {
@@ -206,6 +208,7 @@ ul.pagination button {
     font-size: 12px;
     border-radius: 3px;
 }
+
 /* .pagination li {
     margin-right: 10px;
     border-radius: 20px;
