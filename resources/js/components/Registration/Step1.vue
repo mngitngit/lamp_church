@@ -46,12 +46,16 @@
                                     placeholder="Choose"
                                 >
                                     <el-option
-                                        label="None"
+                                        label="None, I have never been issued yet"
                                         value="none"
                                     ></el-option>
                                     <el-option
-                                        label="Yes, but I don’t have it."
+                                        label="Yes, but I lost it."
                                         value="lost"
+                                    ></el-option>
+                                    <el-option
+                                        label="Yes, but I don't have it at the moment."
+                                        value="mislaid"
                                     ></el-option>
                                     <el-option
                                         label="Yes, I still have it."

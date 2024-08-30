@@ -255,6 +255,29 @@ class RegistrationController extends Controller
                     $can_book_days = $lookup['can_book_days'];
                     break;
 
+                    case 'mislaid': // Yes, but I don’t have it.
+                        $details = array_merge($request->step_1, $request->step_2, $request->step_3);
+    
+                        $lookup = LookUp::where('lamp_id', $details['selected'])->first();
+    
+                        $uuid = is_null($lookup['old_lamp_card_number']) ? UUID::issue() : $lookup['lamp_id'];
+                        $email = $details['email'];
+                        $firstname = $lookup['firstname'];
+                        $lastname = $lookup['lastname'];
+                        $fullname = $lookup['firstname'] . ' ' . $lookup['lastname'];
+                        $facebook = $lookup['facebook_name'];
+                        $registration_type = $details['registrationType'];
+                        $local_church = $details['localChurch'];
+                        $country = $details['country'];
+                        $category = $details['category'];
+                        $attending_option = $details['attendingOption'];
+                        $with_awta_card = $details['withAwtaCard'];
+                        $cluster_group = $details['clusterGroup'];
+                        $awta_card_number = $details['selected'];
+                        $assistance = $details['specificMedicalAssistance'];
+                        $can_book_days = $lookup['can_book_days'];
+                        break;
+
                 case 'yes': // Yes, I still have it.
                     $details = array_merge($request->step_1, $request->step_3);
 

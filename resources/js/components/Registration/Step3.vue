@@ -75,7 +75,7 @@
 
             if (this.data.step_1.withAwtaCard === 'none') 
                 this.max = this.data.step_1.canBookDays
-            if (this.data.step_1.withAwtaCard === 'lost')
+            if (['lost', 'mislaid'].includes(this.data.step_1.withAwtaCard))
                 this.max = this.data.step_2.canBookDays
             if (this.data.step_1.withAwtaCard === 'yes')
                 this.max = this.data.step_1.found.canBookDays

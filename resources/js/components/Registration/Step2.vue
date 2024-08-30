@@ -172,7 +172,7 @@
                             </el-form-item>
                         </div>
 
-                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.withAwtaCard === 'lost'|| data.step_1.registrationType === 'Guest'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none' || ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) || data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item class="check-name" label="Last Name" prop="lastName" required>
                                 <el-input v-model="ruleForm.lastName"></el-input>
                             </el-form-item>
@@ -185,7 +185,7 @@
                             </el-form-item>
                         </div>
 
-                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.withAwtaCard === 'lost' || data.step_1.registrationType === 'Guest'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none' || ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) || data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item label="Local Church" prop="localChurch" required>
                                 <el-select v-model="ruleForm.localChurch" placeholder="Choose">
                                     <el-option v-for="(value, local_church) in assignments" :key="local_church" :label="local_church" :value="local_church"></el-option>
@@ -221,7 +221,7 @@
                             </el-form-item>
                         </div>
 
-                        <div class="col-md-12" v-if="data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0">
+                        <div class="col-md-12" v-if="['lost', 'mislaid'].includes(data.step_1.withAwtaCard) && ruleForm.lookUp.length > 0">
                             <el-form-item label="Please choose your name (If your name cannot be clicked, you have already registered)" prop="selected" required>
                                 <el-radio v-for="data in ruleForm.lookUp" :key="data.id" v-model="ruleForm.selected" :label="data.lamp_id" :disabled="data.is_registered === 1" @change="selectName()" border>
                                     <span>{{ data.firstname }} {{ data.lastname }}</span>
@@ -231,7 +231,7 @@
                     </div>
                 </el-card>
 
-                <el-card v-if="data.step_1.registrationType === 'Member' && data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0" shadow="always" class="mb-3"> 
+                <el-card v-if="data.step_1.registrationType === 'Member' && ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) && ruleForm.lookUp.length > 0" shadow="always" class="mb-3"> 
                     <div class="row">
                         <div class="col-md-12">
                             <el-form-item label="Email Address (Optional)" class="rm-margin" prop="email">
@@ -242,7 +242,7 @@
                     </div>   
                 </el-card>
 
-                <el-card v-if="((data.step_1.registrationType === 'Member' && data.step_1.withAwtaCard === 'lost' && ruleForm.lookUp.length > 0) || data.step_1.withAwtaCard === 'none') && data.step_1.attendingOption === 'Hybrid'" shadow="always" class="mb-3"> 
+                <el-card v-if="((data.step_1.registrationType === 'Member' && ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) && ruleForm.lookUp.length > 0) || data.step_1.withAwtaCard === 'none') && data.step_1.attendingOption === 'Hybrid'" shadow="always" class="mb-3"> 
                     <el-form-item label="Do you need any medical assistance during the event?" class="rm-margin">
                         <small class="text-sm">If YES, kindly specify below. If NO, kindly put N/A.</small>
                         <el-input v-model="ruleForm.specificMedicalAssistance" placeholder="Please specify..." :clearable="true"></el-input>
@@ -267,7 +267,7 @@
         },
         data() {
             var checkLastname = async (rule, value, callback) => {
-                if (this.data.step_1.withAwtaCard === 'lost' && this.ruleForm.lastName != '' && this.ruleForm.localChurch != '' && this.ruleForm.clusterGroup != '') {
+                if (['lost', 'mislaid'].includes(this.data.step_1.withAwtaCard) && this.ruleForm.lastName != '' && this.ruleForm.localChurch != '' && this.ruleForm.clusterGroup != '') {
                     this.isLoading = true
                     this.tableData = []
 
