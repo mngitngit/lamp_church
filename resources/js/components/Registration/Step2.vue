@@ -138,7 +138,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="p-1">
-                                        <label class="text-sm">Do you need any medical assistance during the event? If YES, kindly specify below. If NO, kindly put N/A.</label>
+                                        <label class="text-sm">Do you need any medical assistance during the event? If YES, kindly specify below. If NO, leave it empty.</label>
                                         <el-input
                                             size="mini"
                                             placeholder="Please specify..."
@@ -193,26 +193,6 @@
                             </el-form-item>
                         </div>
 
-                        <div class="col-md-6">
-                            <el-form-item label="Cluster Group" prop="clusterGroup">
-                                <el-select v-model="ruleForm.clusterGroup" placeholder="Select">
-                                    <el-option v-if="ruleForm.localChurch != '' || data.step_1.registrationType === 'Guest'" label="No Cluster Group" value="No Cluster">
-                                    </el-option>
-                                    <el-option-group
-                                    v-for="group in assignments[ruleForm.localChurch]"
-                                    :key="group.label"
-                                    :label="group.label">
-                                    <el-option
-                                        v-for="item in group.options"
-                                        :key="item"
-                                        :label="item"
-                                        :value="item">
-                                    </el-option>
-                                    </el-option-group>
-                                </el-select>
-                            </el-form-item>
-                        </div>
-
                         <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.registrationType === 'Guest'" class="col-md-6">
                             <el-form-item label="Country" prop="country" required>
                                 <el-select v-model="ruleForm.country" placeholder="Choose">
@@ -231,6 +211,32 @@
                     </div>
                 </el-card>
 
+                <el-card v-if="(data.step_1.registrationType === 'Member' && ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) && ruleForm.lookUp.length > 0) || data.step_1.withAwtaCard === 'none'" shadow="always" class="mb-3"> 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <el-form-item label="Cluster Group" class="rm-margin" prop="clusterGroup" required>
+                                <small v-if="data.step_1.registrationType === 'Member' && ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) && ruleForm.lookUp.length > 0" class="text-sm">Please update if this is not your your active cluster.</small>
+                                <small class="text-sm" v-else>Please specify your active cluster. If none, select "No Cluster Group".</small>
+                                <el-select v-model="ruleForm.clusterGroup" placeholder="Select">
+                                    <el-option v-if="ruleForm.localChurch != '' || data.step_1.registrationType === 'Guest'" label="No Cluster Group" value="No Cluster">
+                                    </el-option>
+                                    <el-option-group
+                                    v-for="group in assignments[ruleForm.localChurch]"
+                                    :key="group.label"
+                                    :label="group.label">
+                                    <el-option
+                                        v-for="item in group.options"
+                                        :key="item"
+                                        :label="item"
+                                        :value="item">
+                                    </el-option>
+                                    </el-option-group>
+                                </el-select>
+                            </el-form-item>
+                        </div>
+                    </div>
+                </el-card>
+
                 <el-card v-if="data.step_1.registrationType === 'Member' && ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) && ruleForm.lookUp.length > 0" shadow="always" class="mb-3"> 
                     <div class="row">
                         <div class="col-md-12">
@@ -244,7 +250,7 @@
 
                 <el-card v-if="((data.step_1.registrationType === 'Member' && ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) && ruleForm.lookUp.length > 0) || data.step_1.withAwtaCard === 'none') && data.step_1.attendingOption === 'Hybrid'" shadow="always" class="mb-3"> 
                     <el-form-item label="Do you need any medical assistance during the event?" class="rm-margin">
-                        <small class="text-sm">If YES, kindly specify below. If NO, kindly put N/A.</small>
+                        <small class="text-sm">If YES, kindly specify below. If NO, leave it empty.</small>
                         <el-input v-model="ruleForm.specificMedicalAssistance" placeholder="Please specify..." :clearable="true"></el-input>
                     </el-form-item>
                 </el-card>
@@ -267,7 +273,7 @@
         },
         data() {
             var checkLastname = async (rule, value, callback) => {
-                if (['lost', 'mislaid'].includes(this.data.step_1.withAwtaCard) && this.ruleForm.lastName != '' && this.ruleForm.localChurch != '' && this.ruleForm.clusterGroup != '') {
+                if (['lost', 'mislaid'].includes(this.data.step_1.withAwtaCard) && this.ruleForm.lastName != '' && this.ruleForm.localChurch != '') {
                     this.isLoading = true
                     this.tableData = []
 
@@ -520,6 +526,7 @@
 
                 this.ruleForm.canBookDays = selected[0].can_book_days;
                 this.ruleForm.email = selected[0].email;
+                this.ruleForm.clusterGroup = selected[0].cluster_group;
             }
         }
    }

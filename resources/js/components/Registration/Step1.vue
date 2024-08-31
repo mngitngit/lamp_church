@@ -153,41 +153,52 @@
                                 ></el-input>
                             </el-form-item>
                         </div>
-                        <div
-                            class="col-md-6"
-                            v-if="ruleForm.withAwtaCard === 'yes'"
+                    </div>
+                </el-card>
+
+                <el-card
+                    v-if="
+                        ruleForm.registrationType === 'Member' &&
+                        ruleForm.withAwtaCard === 'yes'
+                    "
+                    shadow="always"
+                    class="mb-3"
+                >
+                    <div class="row">
+                        <el-form-item
+                            label="Cluster Group"
+                            prop="clusterGroup"
+                            class="rm-margin"
+                            required
                         >
-                            <el-form-item
-                                label="Cluster Group"
-                                prop="clusterGroup"
-                                required
+                            <small class="text-sm"
+                                >Please update if this is not your your active cluster.</small
                             >
-                                <el-select
-                                    v-model="ruleForm.clusterGroup"
-                                    placeholder="Select"
+                            <el-select
+                                v-model="ruleForm.clusterGroup"
+                                placeholder="Select"
+                            >
+                                <el-option
+                                    v-if="options.length > 0"
+                                    label="No Cluster Group"
+                                    value="No Cluster"
+                                >
+                                </el-option>
+                                <el-option-group
+                                    v-for="group in options"
+                                    :key="group.label"
+                                    :label="group.label"
                                 >
                                     <el-option
-                                        v-if="options.length > 0"
-                                        label="No Cluster Group"
-                                        value="No Cluster"
+                                        v-for="item in group.options"
+                                        :key="item"
+                                        :label="item"
+                                        :value="item"
                                     >
                                     </el-option>
-                                    <el-option-group
-                                        v-for="group in options"
-                                        :key="group.label"
-                                        :label="group.label"
-                                    >
-                                        <el-option
-                                            v-for="item in group.options"
-                                            :key="item"
-                                            :label="item"
-                                            :value="item"
-                                        >
-                                        </el-option>
-                                    </el-option-group>
-                                </el-select>
-                            </el-form-item>
-                        </div>
+                                </el-option-group>
+                            </el-select>
+                        </el-form-item>
                     </div>
                 </el-card>
 
@@ -236,8 +247,7 @@
                         class="rm-margin"
                     >
                         <small class="text-sm"
-                            >If YES, kindly specify below. If NO, kindly put
-                            N/A.</small
+                            >If YES, kindly specify below. If NO, leave it empty.</small
                         >
                         <el-input
                             v-model="ruleForm.specificMedicalAssistance"
@@ -293,9 +303,11 @@ export default {
                         this.ruleForm.found.withAwtaCard = "yes";
                         this.ruleForm.found.localChurch = response.data.local_church;
                         this.ruleForm.found.canBookDays = response.data.can_book_days;
+                        this.ruleForm.found.clusterGroup = response.data.cluster_group;
                         this.ruleForm.email = this.ruleForm.email === ""
                                 ? response.data.email
                                 : this.ruleForm.email;
+                        this.ruleForm.clusterGroup = response.data.cluster_group;
                         this.options = this.assignments[response.data.local_church];
                         this.isLoading = false;
                         callback();
