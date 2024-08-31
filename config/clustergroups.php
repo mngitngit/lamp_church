@@ -3,29 +3,21 @@
 return [
     "Bacolod" => [
         [
-            "label" =>  "Online",
+            "label" =>  "Online/Physical",
             "options" => [
-                "Ortiz, Iloilo"
-            ]
-        ],
-        [
-            "label" =>  "Physical",
-            "options" => [
-                "Abada Escay",
-                "Baseline",
-                "Cauayan",
-                "Gonzaga",
-                "Greenbeach. Pulupandan",
-                "Greenplains",
-                "La Salle",
-                "Ma-ao",
-                "Mansilingan",
-                "Pahanocoy",
-                "Pontevedra ",
-                "San Enrique",
-                "Tapong, Pulupandan",
-                "Villa fe",
+                "Baseline/Marex",
+                "Brgy. 40",
+                "Buro-Buro",
+                "Donesa DLC",
+                "Entierro",
+                "Lumina",
+                "Mansilingan- East Homes",
+                "Mansilingan- Hermelinda",
+                "Pontevedra",
+                "Pulupandan",
+                "Saudi- Negros",
                 "Villamar",
+                "Youth",
             ]
         ],
     ],
@@ -35,12 +27,16 @@ return [
             "options" => [
                 "Batangas Cluster",
                 "Binan Cluster",
-                "Carmona Cluster",
+                "Carmona East Cluster",
+                "Carmona West Cluster",
                 "Dasmarinas Cluster",
                 "Estrella Cluster",
                 "Langgam Cluster",
                 "Mindanao Cluster",
-                "Sta. Rosa Cluster",
+                "Sta. Rosa North Cluster",
+                "Sta. Rosa South Cluster",
+                "Muntinlupa Cluster",
+                "Fly 4 Chris Clustert"
             ]
         ]
     ],
@@ -48,6 +44,7 @@ return [
         [
             "label" =>  "Online/Physical",
             "options" => [
+                "Abroad",
                 "Amaia",
                 "Asia 2",
                 "Bay",
@@ -55,50 +52,44 @@ return [
                 "Cabuyao 2",
                 "Cavite 1",
                 "Cavite 2",
-                "Cogeo",
-                "Dita",
-                "IloIlo",
+                "Ilo-ilo",
                 "Lipa",
                 "Luyos",
                 "Majada",
                 "Major Homes",
                 "Malvar",
+                "Manfil",
                 "MCDC 1",
                 "MCDC 2",
                 "Nasugbu",
-                "Oogong",
-                "Palao/Manfil",
                 "Pansol",
                 "Pilar 1",
                 "Pilar 2",
-                "Real/Lumina",
+                "Real",
                 "San Jose",
                 "San Juan 1",
                 "San Juan 2",
-                "St. Joseph",
-                "Sta Rosa 1/Bataan",
-                "Sta Rosa 2"
+                "St. Joseph/Maresco",
+                "Sta Rosa Laguna",
+                "Sto. Tomas"
             ]
         ]
     ],
     "Dasmarinas" => [
         [
-            "label" => "Online",
+            "label" => "Online/Physical",
             "options" => [
-                "Cluster A",
-                "Cluster B",
-                "Cluster C",
-                "Imus cluster"
-            ]
-        ],
-        [
-            "label" => "Physical",
-            "options" => [
-                "Tanza cluster",
-                "Gen.Tri cluster",
-                "Bucandala cluster",
-                "Greengate cluster",
-                "Selina Homes cluster"
+                "Binakayan (Kawit)",
+                "Imus",
+                "Jarger Homes Munti",
+                "Las Pinas",
+                "Mabuhay 2000 Dasma",
+                "Manggahan GenTri",
+                "Paliparan Site",
+                "Pasong Kawayan GenTri",
+                "San Marino Dasma",
+                "Tanza (Carissa Homes)",
+                "Tinungan GenTri"
             ]
         ]
     ],
@@ -106,29 +97,19 @@ return [
         [
             "label" =>  "Online/Physical",
             "options" => [
-                "Lamirez Cluster 1",
-                "Lamirez Cluster 2",
-                "Diocson Cluster",
-                "Lanozo Cluster",
-                "Vista Cluster"
+                "Lamirez",
+                "Prk. Tumpok"
             ]
         ]
     ],
     "Hinigaran" => [
         [
-            "label" =>  "Online",
-            "options" => [
-                "Japan Cluster"
-            ]
-        ],
-        [
             "label" =>  "Physical",
             "options" => [
-                "Ambacan Cluster",
-                "Hinigaran (Center) Cluster",
-                "Nabuswang Cluster",
-                "Lugway Cluster",
-                "Oton, Iloilo"
+                "Ambacan",
+                "Hinigaran (Center)",
+                "Nabuswang",
+                "Lugway"
             ]
         ],
     ],
@@ -136,11 +117,14 @@ return [
         [
             "label" =>  "Online/Physical",
             "options" => [
-                "Centro Cluster",
-                "Baligatan Cluster",
-                "Alibagu Cluster",
-                "Tangcul Cluster",
-                "Cauayan Cluster"
+                "Alibagu",
+                "Baligatan",
+                "Bigao",
+                "Cauayan",
+                "Centro",
+                "Mabini",
+                "San Antonio",
+                "Tangcul"
             ]
         ]
     ],
@@ -149,8 +133,7 @@ return [
             "label" =>  "Online/Physical",
             "options" => [
                 "Angono",
-                "B1 (San Juan)",
-                "BGC",
+                "SJB (San Juan Batangas)",
                 "C3C4 (Dasma/Imus/Bacoor)",
                 "Campus Ministry",
                 "Canada",
@@ -159,7 +142,6 @@ return [
                 "LTB (Buraeun)",
                 "M1 (Soldiers/Bicutan)",
                 "M2 (Sta. Rosa)",
-                "M3 (Manggahan)",
                 "M5 (Liberty Homes)",
                 "M6 (Cupang)",
                 "M7 (Sucat)",
@@ -169,7 +151,9 @@ return [
                 "QC (Quezon City)",
                 "SP1 (Langgam/NHA/Batangas)",
                 "SP2 (Brgy. UB)",
-                "SP4 (Bacoor/Paranaque)"
+                "SP4MC (San Pedro/ Landco)",
+                "VAL Valenzuela",
+                "CLB Calamba"
             ]
         ]
     ],
@@ -189,41 +173,28 @@ return [
         [
             "label" => "Online",
             "options" => [
-                "Asturias",
-                "Balanti",
-                "Balete",
-                "Buenavista",
-                "Cabiao Nueva Ecija",
-                "Capas",
-                "Dela Paz",
-                "Dolores",
-                "Fiesta",
-                "Homesite ",
-                "Muricia",
-                "Northern Hills",
-                "Parang",
-                "Pasaldacan",
-                "San Rafael"
+                "UK, Africa, & Isabela",
+                "Canada"
             ]
         ],
         [
             "label" => "Physical",
             "options" => [
-                "Arizona & Italy",
+                "Asturias",
+                "Balanti",
+                "Balete",
+                "Buenavista",
+                "Capas",
+                "Dela Paz",
+                "Dolores",
+                "Homesite ",
                 "Ilocos",
+                "Murcia",
+                "Northern Hills",
+                "Parang",
+                "Pasaldacan",
+                "San Rafael",
                 "Suizo",
-            ]
-        ]
-    ],
-    "Valenzuela" => [
-        [
-            "label" =>  "Online/Physical",
-            "options" => [
-                "Niugan Cluster",
-                "Obando Cluster",
-                "Online Cluster",
-                "Palasan Cluster",
-                "TGIF cluster (yp)"
             ]
         ]
     ]
