@@ -46,7 +46,7 @@
                                     placeholder="Choose"
                                 >
                                     <el-option
-                                        label="None, I have never been issued yet."
+                                        label="None, I have never been issued one."
                                         value="none"
                                     ></el-option>
                                     <el-option
