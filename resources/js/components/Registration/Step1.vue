@@ -304,9 +304,7 @@ export default {
                         this.ruleForm.found.localChurch = response.data.local_church;
                         this.ruleForm.found.canBookDays = response.data.can_book_days;
                         this.ruleForm.found.clusterGroup = response.data.cluster_group;
-                        this.ruleForm.email = this.ruleForm.email === ""
-                                ? response.data.email
-                                : this.ruleForm.email;
+                        this.ruleForm.email = response.data.email;
                         this.ruleForm.clusterGroup = response.data.cluster_group;
                         this.options = this.assignments[response.data.local_church];
                         this.isLoading = false;
