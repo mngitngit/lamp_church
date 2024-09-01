@@ -301,7 +301,7 @@ class RegistrationController extends Controller
             }
 
             $registration = Registration::create([
-                'uuid' => $uuid,
+                'uuid' => strtoupper($uuid),
                 'email' => $email,
                 'firstname' => $firstname,
                 'lastname' => $lastname,
@@ -334,16 +334,16 @@ class RegistrationController extends Controller
                 ];
 
                 if (is_null($lookup['old_lamp_card_number'])) {
-                    $update['lamp_id'] =  $registration->uuid;
-                    $update['old_lamp_card_number'] = $lookup->lamp_id;
+                    $update['lamp_id'] =  strtoupper($registration->uuid);
+                    $update['old_lamp_card_number'] = strtoupper($lookup->lamp_id);
                 }
                 // setting new LAMP ID number
                 $lookup->update($update);
             } else {
                 // insert member to master list if not existing
                 LookUp::create([
-                    'lamp_id' => $registration->uuid,
-                    'old_lamp_card_number' => $awta_card_number,
+                    'lamp_id' => strtoupper($registration->uuid),
+                    'old_lamp_card_number' => strtoupper($awta_card_number),
                     'email' => $email,
                     'firstname' => $firstname,
                     'lastname' => $lastname,
