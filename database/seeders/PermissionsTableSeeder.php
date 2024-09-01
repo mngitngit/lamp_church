@@ -30,7 +30,6 @@ class PermissionsTableSeeder extends Seeder
             'Ann Jose',
             'Jake Patrick Imperial',
             'John Michael Robles',
-            'Klaud-Cuasay Laureano',
             'Bryan Sta Rosa'
         ];
 
