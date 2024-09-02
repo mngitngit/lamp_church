@@ -284,6 +284,15 @@ export default {
                         new Error("Please input your LAMP ID Number")
                     );
                 }
+
+                await axios
+                    .get(`/lookup/${this.ruleForm.lampIDNumber}`)
+                    .then(async (response) => {
+                        callback();
+                    })
+                    .catch((error) => {
+                        callback(new Error(error.response.data.error));
+                    });
             }
         };
         var checkBookingCode = async (rule, value, callback) => {
