@@ -11,7 +11,7 @@ Here are the details:<br /><br />
 <br /><br />
 Join our FB Group to watch the live broadcast
 @component('mail::button', ['url' => $url])
-Join Facebook Group
+<center>Join Facebook Group</center>
 @endcomponent
 
 You may also join us via Zoom: 

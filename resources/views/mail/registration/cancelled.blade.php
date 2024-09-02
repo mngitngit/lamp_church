@@ -17,7 +17,7 @@ Please rebook and provide the following details:
 @endcomponent
  
 @component('mail::button', ['url' => $url])
-Manage Booking
+<center>Manage Booking</center>
 @endcomponent
  
 Thanks,<br>

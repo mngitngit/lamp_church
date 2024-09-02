@@ -17,9 +17,7 @@ We kindly request that you arrive a few minutes early to ensure a smooth start t
 Please make sure to have your LAMP ID/guest ticket ready, either in printed or digital format, for a smooth check-in process on the day of the event. Additionally, we kindly ask you to familiarize yourself with the event house rules and go through the provided schedule to prepare for the assembly.
 
 @component('mail::button', ['url' => $url])
-<center>
-View Ticket
-</center>
+<center>View Ticket</center>
 @endcomponent
 
 If you have any questions or require further information, please feel free to reach out to our local AWTA Registrars. They will be more than happy to assist you.

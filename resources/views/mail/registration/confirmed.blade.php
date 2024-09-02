@@ -17,7 +17,7 @@ Congratulations, your booking is already confirmed!
 @endcomponent
 
 @component('mail::button', ['url' => $url])
-View Ticket
+<center>View Ticket</center>
 @endcomponent
 
 You may also join us via Zoom: <br />

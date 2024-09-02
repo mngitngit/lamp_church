@@ -21,7 +21,7 @@ To settle it, please reach out to your local AWTA Registrars.
 We hope to see you there!
  
 @component('mail::button', ['url' => $url])
-View Ticket
+<center>View Ticket</center>
 @endcomponent
  
 Thanks,<br>
