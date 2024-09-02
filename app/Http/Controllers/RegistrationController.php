@@ -503,7 +503,7 @@ class RegistrationController extends Controller
             ]);
 
             if ($registration->registration_type === 'Member') {
-                $registration->lookup()->updateOrCreate([
+                $registration->lookup()->update([
                     'lamp_id' => $uuid,
                     'avail_new_lamp_id' => $request->availNewLAMPID,
                 ]);
