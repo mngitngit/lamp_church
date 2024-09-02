@@ -160,7 +160,7 @@ export default {
                 center: true,
                 dangerouslyUseHTMLString: true
             }).then(async () => {
-                if (this.registrations[0].registration_type === 'Member') {
+                if (this.registrations[0].registration_type === 'Member'&& (this.registrations[0].with_awta_card == 'none' || this.registrations[0].with_awta_card == 'lost')) {
                     await axios.post(`/registration/${this.registrations[0].uuid}/update`, {
                         avail_new_lamp_id: 'yes'
                     })

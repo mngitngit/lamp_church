@@ -7244,7 +7244,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.registrations[0].registration_type === 'Member')) {
+                if (!(_this.registrations[0].registration_type === 'Member' && (_this.registrations[0].with_awta_card == 'none' || _this.registrations[0].with_awta_card == 'lost'))) {
                   _context.next = 5;
                   break;
                 }

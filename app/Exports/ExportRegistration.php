@@ -36,7 +36,6 @@ class ExportRegistration implements FromCollection, WithHeadings
                 'category',
                 'attending_option',
                 'with_awta_card',
-                'avail_new_lamp_id',
                 'rate',
                 'payment_status',
                 'booking_status',
