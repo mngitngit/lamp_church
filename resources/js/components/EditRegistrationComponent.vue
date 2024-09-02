@@ -192,7 +192,7 @@
 
         <el-card class="mb-3" v-if="ruleForm.registrationType === 'Member'">
             <div class="col-md-3">
-                <el-form-item label="Will avail new LAMP ID?" required>
+                <el-form-item label="Will avail new LAMP ID?">
                     <el-select
                         v-model="ruleForm.availNewLAMPID"
                         placeholder="Choose"
@@ -352,13 +352,6 @@ export default {
                     {
                         required: true,
                         message: "Please select your attending option",
-                        trigger: ["blur", "change"],
-                    },
-                ],
-                availNewLAMPID: [
-                    {
-                        required: true,
-                        message: "Please select if will avail new LAMP ID",
                         trigger: ["blur", "change"],
                     },
                 ],
