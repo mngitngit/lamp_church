@@ -106,18 +106,22 @@
                             v-model="ruleForm.withAwtaCard"
                             placeholder="Choose"
                         >
-                            <el-option
-                                label="None"
-                                value="none"
-                            ></el-option>
-                            <el-option
-                                label="Yes, but I don’t have it."
-                                value="lost"
-                            ></el-option>
-                            <el-option
-                                label="Yes, I still have it."
-                                value="yes"
-                            ></el-option>
+                        <el-option
+                            label="None, I have never been issued one."
+                            value="none"
+                        ></el-option>
+                        <el-option
+                            label="Yes, but I lost it."
+                            value="lost"
+                        ></el-option>
+                        <el-option
+                            label="Yes, but I don't have it at the moment."
+                            value="mislaid"
+                        ></el-option>
+                        <el-option
+                            label="Yes, I still have it."
+                            value="yes"
+                        ></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
@@ -186,7 +190,7 @@
             </div>
         </el-card>
 
-        <el-card class="mb-3">
+        <el-card class="mb-3" v-if="ruleForm.registrationType === 'Member'">
             <div class="col-md-3">
                 <el-form-item label="Will avail new LAMP ID?" required>
                     <el-select
@@ -396,7 +400,7 @@ export default {
             bookingRate: this.registration.can_book_rate,
             rate: this.registration.rate,
             visitorToMember: this.registration.visitor_to_member,
-            availNewLAMPID: this.registration.avail_new_lamp_id,
+            availNewLAMPID: this.registration.lookup ? this.registration.lookup.avail_new_lamp_id : '',
         };
     },
     methods: {

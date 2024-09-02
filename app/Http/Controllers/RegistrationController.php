@@ -520,7 +520,7 @@ class RegistrationController extends Controller
     public function edit($uuid)
     {
         return view('registration.edit', [
-            'registration' => Registration::where('uuid', $uuid)->first()
+            'registration' => Registration::with('lookup')->where('uuid', $uuid)->first()
         ]);
     }
 
