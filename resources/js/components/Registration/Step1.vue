@@ -284,37 +284,6 @@ export default {
                         new Error("Please input your LAMP ID Number")
                     );
                 }
-
-                this.isLoading = true;
-
-                await axios
-                    .get(`/lookup/${this.ruleForm.lampIDNumber}`)
-                    .then(async (response) => {
-                        this.ruleForm.found.email = response.data.email;
-                        this.ruleForm.found.firstName = response.data.firstname;
-                        this.ruleForm.found.lastName = response.data.lastname;
-                        this.ruleForm.found.facebookName = response.data.facebook_name;
-                        this.ruleForm.found.registrationType = response.data.registration_type;
-                        this.ruleForm.found.country = response.data.country;
-                        this.ruleForm.found.lampIDNumber = response.data.lamp_id;
-                        this.ruleForm.found.oldlampIDNumber = response.data.old_lamp_card_number;
-                        this.ruleForm.found.category = response.data.category;
-                        this.ruleForm.found.attendingOption = this.ruleForm.attendingOption;
-                        this.ruleForm.found.withAwtaCard = "yes";
-                        this.ruleForm.found.localChurch = response.data.local_church;
-                        this.ruleForm.found.canBookDays = response.data.can_book_days;
-                        this.ruleForm.found.clusterGroup = response.data.cluster_group;
-                        this.ruleForm.email = response.data.email;
-                        this.ruleForm.clusterGroup = response.data.cluster_group;
-                        this.options = this.assignments[response.data.local_church];
-                        this.isLoading = false;
-                        callback();
-                    })
-                    .catch((error) => {
-                        this.resetData("awta-card");
-                        this.isLoading = false;
-                        callback(new Error(error.response.data.error));
-                    });
             }
         };
         var checkBookingCode = async (rule, value, callback) => {
@@ -412,12 +381,51 @@ export default {
         "ruleForm.attendingOption"(data, old) {
             if (old) this.resetData("attending-option");
         },
-        "ruleForm.lampIDNumber"(data, old) {
-            if (old) this.resetData("awta-card");
-        },
         options(data, old) {
             if (old.length > 0) this.ruleForm.clusterGroup = "";
         },
+        'ruleForm.lampIDNumber': {
+            handler: function (value, old) {
+                if (value.length < 9 && old.length == 9) {
+                    this.resetData("awta-card");
+                }
+
+                if (value.length === 9) {
+                    this.resetData("awta-card");
+
+                    this.isLoading = true;
+                    
+                    axios
+                    .get(`/lookup/${this.ruleForm.lampIDNumber}`)
+                    .then(async (response) => {
+                        this.ruleForm.found.email = response.data.email;
+                        this.ruleForm.found.firstName = response.data.firstname;
+                        this.ruleForm.found.lastName = response.data.lastname;
+                        this.ruleForm.found.facebookName = response.data.facebook_name;
+                        this.ruleForm.found.registrationType = response.data.registration_type;
+                        this.ruleForm.found.country = response.data.country;
+                        this.ruleForm.found.lampIDNumber = response.data.lamp_id;
+                        this.ruleForm.found.oldlampIDNumber = response.data.old_lamp_card_number;
+                        this.ruleForm.found.category = response.data.category;
+                        this.ruleForm.found.attendingOption = this.ruleForm.attendingOption;
+                        this.ruleForm.found.withAwtaCard = "yes";
+                        this.ruleForm.found.localChurch = response.data.local_church;
+                        this.ruleForm.found.canBookDays = response.data.can_book_days;
+                        this.ruleForm.found.clusterGroup = response.data.cluster_group;
+                        
+                        this.ruleForm.email = response.data.email;
+                        this.ruleForm.clusterGroup = response.data.cluster_group;  
+                        this.options = this.assignments[response.data.local_church];
+
+                        this.isLoading = false;
+                    })
+                    .catch((error) => {
+                        this.resetData("awta-card");
+                        this.isLoading = false;
+                    });
+                }
+            }
+        }
     },
     mounted() {
         if (Object.keys(this.data.step_1).length != 0) {
@@ -463,7 +471,6 @@ export default {
             });
         },
         resetData(scope) {
-            console.log(scope);
             if (scope === "all") {
                 this.$emit("reset");
                 this.ruleForm.found = {};
@@ -484,6 +491,7 @@ export default {
                 this.ruleForm.found = {};
             } else if (scope === "awta-card") {
                 this.$emit("reset");
+                this.ruleForm.email = "";
                 this.ruleForm.bookingCode = "";
                 this.ruleForm.found = {};
                 this.options = [];
