@@ -14,7 +14,7 @@ class BookingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['create', 'index', 'show', 'validation']]);
+        $this->middleware('auth', ['except' => ['create', 'index', 'show', 'validation', 'update']]);
     }
 
     public function create()
