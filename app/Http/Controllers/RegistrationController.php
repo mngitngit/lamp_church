@@ -370,7 +370,7 @@ class RegistrationController extends Controller
 
             return $registration->uuid;
         } else { // guest registration
-            if ($request->step_1['attendingOption'] === AttendingOption::Hybrid) {
+            if (true === env('ONLINE_GUESTS_GROUP_REGISTRATION', true)) {
                 $registered = [];
 
                 foreach ($request->step_2['guests'] as $key => $value) {
@@ -390,7 +390,7 @@ class RegistrationController extends Controller
                         'cluster_group' => $details->clusterGroup,
                         'country' => $details->country,
                         'category' => PaymentStatus::Free,
-                        'attending_option' => AttendingOption::Hybrid,
+                        'attending_option' => $request->step_1['attendingOption'],
                         'medical_assistance_needed' => $details->specificMedicalAssistance,
                         'with_awta_card' => 'none',
                         'notes' => [],

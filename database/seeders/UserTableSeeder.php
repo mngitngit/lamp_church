@@ -20,8 +20,8 @@ class UserTableSeeder extends Seeder
             ['name' => 'John Michael Robles', 'email' => 'jrobles@lampawta.com', 'password' => Hash::make('admin123')],
             ['name' => 'Bryan Sta Rosa', 'email' => 'bstarosa@lampawta.com', 'password' => Hash::make('admin123')],
             ['name' => 'Key Sarmiento Garcia', 'email' => 'keygarcia@lampawta.com', 'password' => Hash::make('admin123')],
-
             ['name' => 'Marj Frianeza', 'email' => 'mfrianeza@lampawta.com', 'password' => Hash::make('awta2024')],
+
             ['name' => 'Rose Dalawangbayan', 'email' => 'dalawangbayan@lampawta.com', 'password' => Hash::make('awta2024')],
             ['name' => 'Monica Castillo', 'email' => 'mcastillo@lampawta.com', 'password' => Hash::make('awta2024')],
             ['name' => 'Ma. Jerriper Oviedo', 'email' => 'joviedo@lampawta.com', 'password' => Hash::make('awta2024')],
@@ -31,7 +31,7 @@ class UserTableSeeder extends Seeder
             ['name' => 'Malou Benitez', 'email' => 'mbenitez@lampawta.com', 'password' => Hash::make('awta2024')],
             ['name' => 'Sharmane Pensol', 'email' => 'spensol@lampawta.com', 'password' => Hash::make('awta2024')],
             ['name' => 'Maila Gomez', 'email' => 'mgomez@lampawta.com', 'password' => Hash::make('awta2024')],
-            ['name' => 'Christine Francisco', 'email' => 'cfranciscog@lampawta.com', 'password' => Hash::make('awta2024')],
+            ['name' => 'Christine Francisco', 'email' => 'cfrancisco@lampawta.com', 'password' => Hash::make('awta2024')],
             ['name' => 'Gabriel James Meija', 'email' => 'gmejia@lampawta.com', 'password' => Hash::make('awta2024')],
             ['name' => 'Malou Elomina', 'email' => 'melomina@lampawta.com', 'password' => Hash::make('awta2024')],
             ['name' => 'Karen Alvarez', 'email' => 'kalvarez@lampawta.com', 'password' => Hash::make('awta2024')],
@@ -41,6 +41,11 @@ class UserTableSeeder extends Seeder
             ['name' => 'Evangeline Rose Montecillo', 'email' => 'emontecillo@lampawta.com', 'password' => Hash::make('awta2024')],
             ['name' => 'Nanchee Bibal', 'email' => 'nbibal@lampawta.com', 'password' => Hash::make('awta2024')],
             ['name' => 'Stephanie Lamirez', 'email' => 'slamirez@lampawta.com', 'password' => Hash::make('awta2024')],
+
+            // additional users as of 2024
+            ['name' => 'Victorie Cabero', 'email' => 'vcabero@lampawta.com', 'password' => Hash::make('awta2024')],
+            ['name' => 'April Balane', 'email' => 'abalane@lampawta.com', 'password' => Hash::make('awta2024')],
+            ['name' => 'Maegan Malayao', 'email' => 'mmalayao@lampawta.com', 'password' => Hash::make('awta2024')],
         ]);
     }
 }

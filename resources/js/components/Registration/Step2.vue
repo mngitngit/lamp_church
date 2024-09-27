@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="160px">
                 <!-- display bulk registration if registrant is a guest attending hybrid -->
-                <el-card v-if="data.step_1.registrationType === 'Guest' && data.step_1.attendingOption === 'Hybrid'" shadow="always" class="mb-3">
+                <el-card v-if="data.step_1.registrationType === 'Guest'" shadow="always" class="mb-3">
                     <el-form-item prop="guests" class="mb-0" required>
                         <template slot-scope="label">
                             <label class="el-form-item__label"><span class="text-danger">*</span> Please Input the Guest Details. <br/><small class="text-sm">To add more guests, click add row in the bottom right (for a maximum of {{maxBulk}} guests per registration).</small></label>
@@ -160,32 +160,32 @@
                 <!-- display if member attending online/hybrid & guests attending online only. -->
                 <el-card v-else shadow="always" class="mb-3">
                     <div class="row">
-                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.registrationType === 'Guest'" class="col-md-12">
+                        <div v-if="data.step_1.withAwtaCard === 'none'" class="col-md-12">
                             <el-form-item label="Email Address" prop="email">
                                 <el-input v-model="ruleForm.email"></el-input>
                             </el-form-item>
                         </div>
 
-                        <div v-if="data.step_1.withAwtaCard === 'none'|| data.step_1.registrationType === 'Guest'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none'" class="col-md-6">
                             <el-form-item class="check-name" label="First Name" prop="firstName" required>
                                 <el-input v-model="ruleForm.firstName"></el-input>
                             </el-form-item>
                         </div>
 
-                        <div v-if="data.step_1.withAwtaCard === 'none' || ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) || data.step_1.registrationType === 'Guest'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none' || ['lost', 'mislaid'].includes(data.step_1.withAwtaCard)" class="col-md-6">
                             <el-form-item class="check-name" label="Last Name" prop="lastName" required>
                                 <el-input v-model="ruleForm.lastName"></el-input>
                             </el-form-item>
                         </div>
                         
-                        <div v-if="data.step_1.withAwtaCard === 'none'|| data.step_1.registrationType === 'Guest'" class="col-md-12">
+                        <div v-if="data.step_1.withAwtaCard === 'none'" class="col-md-12">
                             <el-form-item label="Facebook Name" class="rm-margin" prop="facebookName" required>
                                 <small class="text-sm">If none, kindly type in "None"</small>
                                 <el-input v-model="ruleForm.facebookName" placeholder="You can type in the Facebook name of your event companion"></el-input>
                             </el-form-item>
                         </div>
 
-                        <div v-if="data.step_1.withAwtaCard === 'none' || ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) || data.step_1.registrationType === 'Guest'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none' || ['lost', 'mislaid'].includes(data.step_1.withAwtaCard)" class="col-md-6">
                             <el-form-item label="Local Church" prop="localChurch" required>
                                 <el-select v-model="ruleForm.localChurch" placeholder="Choose">
                                     <el-option v-for="(value, local_church) in assignments" :key="local_church" :label="local_church" :value="local_church"></el-option>
@@ -193,7 +193,7 @@
                             </el-form-item>
                         </div>
 
-                        <div v-if="data.step_1.withAwtaCard === 'none' || data.step_1.registrationType === 'Guest'" class="col-md-6">
+                        <div v-if="data.step_1.withAwtaCard === 'none'" class="col-md-6">
                             <el-form-item label="Country" prop="country" required>
                                 <el-select v-model="ruleForm.country" placeholder="Choose">
                                     <el-option v-for="country in countries" v-bind:key="country" :label="country" :value="country"></el-option>
@@ -218,7 +218,7 @@
                                 <small v-if="data.step_1.registrationType === 'Member' && ['lost', 'mislaid'].includes(data.step_1.withAwtaCard) && ruleForm.lookUp.length > 0" class="text-sm">Please update if this is not your your active cluster.</small>
                                 <small class="text-sm" v-else>Please specify your active cluster. If none, select "No Cluster Group".</small>
                                 <el-select v-model="ruleForm.clusterGroup" placeholder="Select">
-                                    <el-option v-if="ruleForm.localChurch != '' || data.step_1.registrationType === 'Guest'" label="No Cluster Group" value="No Cluster">
+                                    <el-option v-if="ruleForm.localChurch != ''" label="No Cluster Group" value="No Cluster">
                                     </el-option>
                                     <el-option-group
                                     v-for="group in assignments[ruleForm.localChurch]"
@@ -333,7 +333,7 @@
             var checkGuests = async (rule, value, callback) => {
                 this.errors = [];
 
-                if (this.data.step_1.registrationType === 'Guest' && this.data.step_1.attendingOption === 'Hybrid') {
+                if (this.data.step_1.registrationType === 'Guest') {
                     const loading = this.$loading({
                             lock: true,
                             text: 'Loading',

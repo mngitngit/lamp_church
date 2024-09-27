@@ -30,7 +30,8 @@ class PermissionsTableSeeder extends Seeder
             'Ann Jose',
             'Jake Patrick Imperial',
             'John Michael Robles',
-            'Bryan Sta Rosa'
+            'Bryan Sta Rosa',
+            'Marj Frianeza'
         ];
 
         foreach ($users as $user) {
