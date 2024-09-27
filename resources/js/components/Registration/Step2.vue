@@ -100,6 +100,7 @@
                                             :class="{'has-error' : (errors[i] && errors[i]['clusterGroup'])}"
                                             v-model="guest.clusterGroup" 
                                             placeholder="Cluster Group">
+                                            <el-option v-if="guest.country != ''" label="No Cluster Group" value="No Cluster"></el-option>
                                             <el-option-group
                                             v-for="group in assignments[ruleForm.guests[i].localChurch]"
                                                 :key="group.label"
