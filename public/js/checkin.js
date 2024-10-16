@@ -7380,7 +7380,7 @@ var staticRenderFns = [function () {
     staticClass: "mb-3 rounded shadow",
     attrs: {
       width: "100%",
-      src: "/images/2024_banner.PNG"
+      src: "/images/2024_banner_B.jpeg"
     }
   })]);
 }];

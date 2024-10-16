@@ -2,7 +2,7 @@
 <div>
     <div v-if="!validated" class="row justify-content-center">
         <div class="col-md-3">
-            <img width="100%" class="mb-3 rounded shadow" src="/images/2024_banner.PNG">
+            <img width="100%" class="mb-3 rounded shadow" src="/images/2024_banner_B.jpeg">
         </div>
     </div>
 
