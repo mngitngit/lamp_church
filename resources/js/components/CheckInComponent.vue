@@ -27,7 +27,7 @@
 
     <div v-else class="row justify-content-center mb-4">
         <div class="col-md-3">
-            <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid rgb(106 147 34)">
+            <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid rgb(45 122 95)">
                 <h3>Online Check In</h3>
                 <p class="mt-2 c-booking-subheader">Type in your details to check in.</p>
 
