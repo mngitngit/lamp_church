@@ -2,11 +2,11 @@
  
 <b>Hi {{ $name }},</b>
 
-We are reaching out to remind you about our highly anticipated Annual Worship and Thanksgiving Assembly, which is only 2 days away!
+We are reaching out to remind you about our highly anticipated LAMP Church 38th Anniversary, which is only 2 days away!
 
 Here are the important details you need to mark on your calendar:
 @component('mail::panel')
-<b>Event:</b> Annual Worship and Thanksgiving Assembly<br />
+<b>Event:</b> LAMP Church 38th Anniversary<br />
 <b>Event Date:</b> {{ $event_date }}<br />
 <b>Event Timing:</b> 4pm<br />
 <b>Venue:</b> Calamba Tent<br />

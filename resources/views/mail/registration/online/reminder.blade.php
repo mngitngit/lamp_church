@@ -2,7 +2,7 @@
  
 <b>Hi {{ $name }},</b>
 
-We are reaching out to remind you about our highly anticipated Annual Worship and Thanksgiving Assembly, which is happening TOMORROW!
+We are reaching out to remind you about our highly anticipated LAMP Church 38th Anniversary, which is happening TOMORROW!
 
 We're excited to celebrate God's faithfulness and share our gratitude together, get ready to raise your voice and hands for the Lord of lords!
 
