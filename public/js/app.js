@@ -9344,10 +9344,8 @@ var render = function render() {
       shadow: "always"
     }
   }, [_c("h2", [_vm._v("LAMP Church 38th Anniversary")]), _vm._v(" "), _c("p", {
-    staticClass: "text-sm"
-  }, [_vm._v("\n        BE BLESSED PHYSICALLY, MATERIALLY, & SPIRITUALLY "), _c("br"), _vm._v("\n        Event Date: " + _vm._s(_vm.event_date) + " "), _c("br"), _vm._v("\n        Event Place: CCT Tagaytay Retreat And Training Center "), _c("br"), _vm._v("\n        Theme: " + _vm._s(_vm.theme) + "\n    ")]), _vm._v(" "), _c("p", {
-    staticClass: "text-sm mb-0"
-  }, [_vm._v('\n        Chosen people of God in the Old Testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where "offering made by fire unto the Lord" are given to celebrate God. But with Christ\'s death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. '), _c("br"), _c("br"), _vm._v("\n\n        Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!\n    ")])]);
+    staticClass: "text-sm pb-0 mb-0"
+  }, [_vm._v("\n        BE BLESSED PHYSICALLY, MATERIALLY, & SPIRITUALLY "), _c("br"), _vm._v("\n        Event Date: " + _vm._s(_vm.event_date) + " "), _c("br"), _vm._v("\n        Event Place: CCT Tagaytay Retreat And Training Center\n    ")])]);
 };
 
 var staticRenderFns = [];
