@@ -8,8 +8,7 @@ Here are the important details you need to mark on your calendar:
 @component('mail::panel')
 <b>Event:</b> LAMP Church 38th Anniversary<br />
 <b>Event Date:</b> {{ $event_date }}<br />
-<b>Event Timing:</b> 4pm<br />
-<b>Venue:</b> Calamba Tent<br />
+<b>Venue:</b> CCT Tagaytay Retreat And Training Center<br />
 @endcomponent
 
 We kindly request that you arrive a few minutes early to ensure a smooth start to the event. 
