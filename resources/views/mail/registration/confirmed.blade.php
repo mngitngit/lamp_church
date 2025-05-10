@@ -11,8 +11,7 @@ Congratulations, your booking is already confirmed!
 
 @component('mail::panel')
 <b>Booked Dates:</b> {{ $booked_dates }}<br />
-<b>Location:</b> Calamba Tent, CMC Avenue, Crossing, Calamba City, Laguna  <a href="https://goo.gl/maps/avYUt5rPss9HDtDo7">View Location</a> <br />
-<b>Event Time:</b> 4PM<br />
+<b>Location:</b> CCT Tagaytay Retreat And Training Center  <a href="https://maps.app.goo.gl/Mk7wr4t7X9DaaAfS7">View Location</a> <br />
 <b>Theme:</b> {{ $theme }}<br />
 @endcomponent
 

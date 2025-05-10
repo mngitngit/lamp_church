@@ -9,7 +9,7 @@
                             <h6 class="fw-bolder text-muted">LAMP CHURCH 38TH ANNIVERSARY</h6>
                             <small>
                             Timeline: {{ event_date }}<br/>
-                            Venue: Calamba Tent<br/>
+                            Venue: CCT Tagaytay Retreat And Training Center<br/>
                             Theme: {{ theme }}<br/>
                             <br/>
                             </small>
