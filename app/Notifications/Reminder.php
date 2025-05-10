@@ -61,7 +61,7 @@ class Reminder extends Notification
         }
 
         return (new MailMessage)
-            ->subject('Reminder: Upcoming Annual Worship and Thanksgiving Assembly TOMORROW!')
+            ->subject('Reminder: Upcoming LAMP Church 38th Anniversary TOMORROW!')
             ->markdown($markdown, [
                 'url' => $url,
                 'name' => $this->registration->fullname,

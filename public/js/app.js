@@ -11804,7 +11804,7 @@ var render = function render() {
       },
       expression: "isAllowing"
     }
-  }), _vm._v("  I authorize LAMP Church to collect, use, and retain the personal information in this form for the purpose of attending AWTA " + _vm._s(_vm.year) + "  (Annual Worship and Thanksgiving Assembly) and in the pursuit of any legal interests of the church.\n            "), _vm.display ? _c("span", {
+  }), _vm._v("  I authorize LAMP Church to collect, use, and retain the personal information in this form for the purpose of attending LAMP Church 38th Anniversary and in the pursuit of any legal interests of the church.\n            "), _vm.display ? _c("span", {
     staticClass: "error"
   }, [_vm._v("\n                Please check if you want to continue\n            ")]) : _vm._e()], 1)]), _vm._v(" "), _c("span", {
     staticClass: "dialog-footer",
