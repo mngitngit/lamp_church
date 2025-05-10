@@ -148,7 +148,7 @@
 
                 <div class="col-md-3">
                     <el-form-item
-                        label="How will you attend the AWTA?"
+                        label="How will you attend the event?"
                         prop="attendingOption"
                         :required="ruleForm.registrationType === 'Member'"
                     >

@@ -38,7 +38,6 @@
             },
             slots: {
                 required: false,
-                type: Array
             }
         },
         data() {
@@ -79,8 +78,6 @@
                 this.max = this.data.step_2.canBookDays
             if (this.data.step_1.withAwtaCard === 'yes')
                 this.max = this.data.step_1.found.canBookDays
-
-            console.log(this.data.step_1.withAwtaCard)
         },
         methods: {
             submitForm(action) {

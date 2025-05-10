@@ -8102,10 +8102,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       ruleForm: {
         registrationType: "",
         withAwtaCard: "",
-        attendingOption: "",
+        attendingOption: "Hybrid",
         lampIDNumber: "",
         clusterGroup: "",
         bookingCode: "",
+        withAccommodation: "",
         email: "",
         specificMedicalAssistance: "",
         canBookDays: parseInt(window.env.member_booking_limit || 0),
@@ -8123,6 +8124,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           trigger: ["blur", "change"]
         }],
         attendingOption: [{
+          required: true,
+          message: "Please select your attending option",
+          trigger: ["blur", "change"]
+        }],
+        withAccommodation: [{
           required: true,
           message: "Please select your attending option",
           trigger: ["blur", "change"]
@@ -8372,8 +8378,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       type: Object
     },
     slots: {
-      required: false,
-      type: Array
+      required: false
+    },
+    withBooking: {
+      required: true
     }
   },
   data: function data() {
@@ -8717,6 +8725,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return date;
       });
     });
+
+    if (this.withBooking === false) {
+      this.ruleForm.guests[0].booked = this.slots.guest.map(function (item) {
+        return item.id;
+      });
+    }
   },
   methods: {
     submitForm: function submitForm(action) {
@@ -8733,7 +8747,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.$refs['ruleForm'].validate(function (valid) {
         if (valid) {
-          if (_this3.data.step_1.registrationType === 'Guest' || _this3.data.step_1.registrationType === 'Member' && _this3.data.step_1.attendingOption === "Online") {
+          if (_this3.data.step_1.registrationType === 'Guest' || _this3.data.step_1.registrationType === 'Member' && _this3.data.step_1.attendingOption === "Online" || false == _this3.withBooking) {
             _this3.$emit('submit', _this3.ruleForm);
           } else {
             _this3.$emit('change-step', {
@@ -8761,7 +8775,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         localChurch: '',
         country: 'Philippines',
         category: 'Free',
-        booked: [],
+        booked: this.withBooking ? [] : this.slots.guest.map(function (item) {
+          return item.id;
+        }),
         specificMedicalAssistance: '',
         attendingOption: this.data.step_1.attendingOption
       });
@@ -8808,8 +8824,7 @@ __webpack_require__.r(__webpack_exports__);
       type: Object
     },
     slots: {
-      required: false,
-      type: Array
+      required: false
     }
   },
   data: function data() {
@@ -8848,7 +8863,6 @@ __webpack_require__.r(__webpack_exports__);
     if (this.data.step_1.withAwtaCard === 'none') this.max = this.data.step_1.canBookDays;
     if (['lost', 'mislaid'].includes(this.data.step_1.withAwtaCard)) this.max = this.data.step_2.canBookDays;
     if (this.data.step_1.withAwtaCard === 'yes') this.max = this.data.step_1.found.canBookDays;
-    console.log(this.data.step_1.withAwtaCard);
   },
   methods: {
     submitForm: function submitForm(action) {
@@ -8942,7 +8956,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isAllowing: false,
       dialogVisible: window.env.display_disclosure_prompt === 'yes',
       display: false,
-      year: window.env.year
+      year: window.env.year,
+      withBooking: false
     };
   },
   created: function created() {
@@ -8961,7 +8976,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.currentTabData = this.data;
     },
     format: function format() {
-      return "Page ".concat(this.currentStep, " of 3");
+      return "Page ".concat(this.currentStep, " of 2");
     },
     changeStep: function changeStep(_ref) {
       var _this = this;
@@ -9004,6 +9019,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.currentStep === 2) {
         this.data.step_2 = data;
         this.data.step_3 = {};
+
+        if (false == this.withBooking) {
+          this.data.step_3 = {
+            booked: this.data.step_1.registrationType === 'Member' ? this.slots.member.map(function (item) {
+              return item.id;
+            }) : this.slots.guest.map(function (item) {
+              return item.id;
+            })
+          };
+        }
       }
 
       if (this.currentStep === 1) {
@@ -9139,14 +9164,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var msg = '<strong>Congratulations!</strong> Your registration has been accepted. ';
       if (this.registrations[0].registration_type === 'Guest' && this.registrations[0].attending_option === 'Hybrid' && this.registrations[0].email != '') msg += '<br /><br /><small style="line-height: 0px;">We have sent an email to <i>' + this.registrations[0].email + '</i>. <br />Please check to see the details.</small>';
-      if (this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid') msg += '<br /><br /><small style="line-height: 0px;">Please settle your balance or at least half of the registration fee to confirm your booking. It will automatically expire after 7 days.<br />For cancellations, please contact your local AWTA Registrars for help.</small>';
+      if (this.registrations[0].registration_type === 'Member' && this.registrations[0].attending_option === 'Hybrid') msg += '<br />'; // msg += '<br /><br /><small style="line-height: 0px;">Please settle your balance or at least half of the registration fee to confirm your booking. It will automatically expire after 7 days.<br />For cancellations, please contact your local Registrars for help.</small>';
 
       if (this.registrations[0].attending_option === 'Online') {
         msg += "<br /><br /><small style=\"line-height: 0px;\">To watch the live broadcast, join our FB Group <br/><a href=\"".concat(window.env.fb_group_url, "\">").concat(window.env.fb_group_url, "</a></small>");
         msg += "<br /><br /><small style=\"line-height: 0px;\">You may also join us via <b>Zoom</b>:<br />\n                        <a href=\"".concat(this.zoom.link, "\">").concat(this.zoom.link, "</a><br /><br />\n                        Meeting ID: ").concat(this.zoom.id, " <br />\n                        Passcode:").concat(this.zoom.passcode, "</small> <br /><br />");
       }
 
-      if (this.registrations[0].registration_type === 'Member' && this.registrations[0].with_awta_card == 'none') msg += '<br /><br /><small style="line-height: 0px;">Note: <i>A new LAMP ID Number is issued for you.</i> If you want to avail the physical card, an additional Php 35.00 will be required. Kindly reach out to your local AWTA Registrars for payment and issuance.</small><br/><img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><small>Would you like to avail the new LAMP ID?</small>';else if (this.registrations[0].registration_type === 'Member' && this.registrations[0].with_awta_card == 'lost') msg += '<br /><br/><small style="line-height: 0px;">Note: For payment and issuance, kindly reach out to you local AWTA Registrars</small><br/><img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><small>Would you like to report your card lost and get <br/>a replacement for PHP 35.00?</small>';
+      if (this.registrations[0].registration_type === 'Member' && this.registrations[0].with_awta_card == 'none') msg += '<br /><br /><small style="line-height: 0px;">Note: <i>A new LAMP ID Number is issued for you.</i> If you want to avail the physical card, an additional Php 35.00 will be required. Kindly reach out to your local Registrars for payment and issuance.</small><br/><img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><small>Would you like to avail the new LAMP ID?</small>';else if (this.registrations[0].registration_type === 'Member' && this.registrations[0].with_awta_card == 'lost') msg += '<br /><br/><small style="line-height: 0px;">Note: For payment and issuance, kindly reach out to you local Registrars</small><br/><img width="130" height="80" class="mx-2 mt-3 rounded shadow" src="/images/new_id.jpg"><br/><small style="font-size: 8px;font-style: italic;color: gray;">sample ID only</small><br /><small>Would you like to report your card lost and get <br/>a replacement for PHP 35.00?</small>';
       this.$confirm(msg, 'You did it!', {
         confirmButtonText: this.registrations[0].registration_type === 'Member' && (this.registrations[0].with_awta_card == 'none' || this.registrations[0].with_awta_card == 'lost') ? 'Yes' : 'Continue',
         cancelButtonText: 'No',
@@ -9313,14 +9338,14 @@ var render = function render() {
   return _c("el-card", {
     staticClass: "mb-3 pb-0",
     staticStyle: {
-      "border-top": "10px solid rgb(45 122 95)"
+      "border-top": "10px solid rgb(218 98 9)"
     },
     attrs: {
       shadow: "always"
     }
-  }, [_c("h2", [_vm._v("LAMP WORLDWIDE AWTA " + _vm._s(_vm.year))]), _vm._v(" "), _c("p", {
+  }, [_c("h2", [_vm._v("LAMP Church 38th Anniversary")]), _vm._v(" "), _c("p", {
     staticClass: "text-sm"
-  }, [_vm._v("\n        BE BLESSED PHYSICALLY, MATERIALLY, & SPIRITUALLY "), _c("br"), _vm._v("\n        Event Date: " + _vm._s(_vm.event_date) + " "), _c("br"), _vm._v("\n        Event Place: Calamba Tent "), _c("br"), _vm._v("\n        Theme: " + _vm._s(_vm.theme) + "\n    ")]), _vm._v(" "), _c("p", {
+  }, [_vm._v("\n        BE BLESSED PHYSICALLY, MATERIALLY, & SPIRITUALLY "), _c("br"), _vm._v("\n        Event Date: " + _vm._s(_vm.event_date) + " "), _c("br"), _vm._v("\n        Event Place: CCT Tagaytay Retreat And Training Center "), _c("br"), _vm._v("\n        Theme: " + _vm._s(_vm.theme) + "\n    ")]), _vm._v(" "), _c("p", {
     staticClass: "text-sm mb-0"
   }, [_vm._v('\n        Chosen people of God in the Old Testament gather for a so-called solemn assembly (Leviticus 23:36, Joel 1:14) where "offering made by fire unto the Lord" are given to celebrate God. But with Christ\'s death as ultimate sacrifice for all, today, animal sacrifices are no longer offered. Yet true worshipers of God continue to offer & make fire in the form of praise, worship & thanksgiving. '), _c("br"), _c("br"), _vm._v("\n\n        Annually, LAMP Church gathers & invites every one to congregate for one purpose -- offer worship & thanksgiving to the Lord of lords!\n    ")])]);
 };
@@ -10444,7 +10469,7 @@ var render = function render() {
     staticClass: "col-md-3"
   }, [_c("el-form-item", {
     attrs: {
-      label: "How will you attend the AWTA?",
+      label: "How will you attend the event?",
       prop: "attendingOption",
       required: _vm.ruleForm.registrationType === "Member"
     }
@@ -10747,20 +10772,12 @@ var render = function render() {
       shadow: "always"
     }
   }, [_c("div", {
-    staticClass: "px-2 row"
-  }, [_c("el-alert", {
-    attrs: {
-      title: "All registration after ".concat(_vm.hybrid_registration_deadline, " is considered online. For further inquiries, please reach out to your local AWTA Registrars."),
-      type: "warning",
-      "show-icon": ""
-    }
-  })], 1), _vm._v(" "), _c("div", {
     staticClass: "row"
-  }, [_c("div", {
+  }, [_vm.withBooking ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     attrs: {
-      label: "How will you attend the AWTA?",
+      label: "How will you attend the event?",
       prop: "attendingOption",
       required: ""
     }
@@ -10785,14 +10802,14 @@ var render = function render() {
       value: "Online",
       label: "Online"
     }
-  })], 1)], 1)], 1), _vm._v(" "), _vm.ruleForm.attendingOption === "Hybrid" && _vm.ruleForm.registrationType === "Guest" ? _c("div", {
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _vm.ruleForm.attendingOption === "Hybrid" && _vm.ruleForm.registrationType === "Guest" && _vm.withBooking === true ? _c("div", {
     staticClass: "col-md-6"
   }, [_c("el-form-item", {
     staticClass: "transform-uppercase",
     attrs: {
       label: "Booking Code",
       prop: "bookingCode",
-      required: _vm.ruleForm.attendingOption === "Hybrid" && _vm.ruleForm.registrationType === "Guest"
+      required: _vm.ruleForm.attendingOption === "Hybrid" && _vm.ruleForm.registrationType === "Guest" && _vm.withBooking === true
     }
   }, [_c("el-input", {
     attrs: {
@@ -10805,7 +10822,37 @@ var render = function render() {
       },
       expression: "ruleForm.bookingCode"
     }
-  })], 1)], 1) : _vm._e()])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType === "Member" && (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "old") ? _c("el-card", {
+  })], 1)], 1) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("el-form-item", {
+    staticClass: "transform-uppercase",
+    attrs: {
+      label: "How will you attend the event?",
+      prop: "withAccommodation",
+      required: ""
+    }
+  }, [_c("el-select", {
+    attrs: {
+      placeholder: "Choose"
+    },
+    model: {
+      value: _vm.ruleForm.withAccommodation,
+      callback: function callback($$v) {
+        _vm.$set(_vm.ruleForm, "withAccommodation", $$v);
+      },
+      expression: "ruleForm.withAccommodation"
+    }
+  }, [_c("el-option", {
+    attrs: {
+      value: "With Accommodation",
+      label: "With Accommodation"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "Without Accommodation",
+      label: "Without Accommodation"
+    }
+  })], 1)], 1)], 1)])]) : _vm._e(), _vm._v(" "), _vm.ruleForm.registrationType === "Member" && (_vm.ruleForm.withAwtaCard === "yes" || _vm.ruleForm.withAwtaCard === "old") ? _c("el-card", {
     staticClass: "mb-3",
     attrs: {
       shadow: "always"
@@ -11679,6 +11726,7 @@ var render = function render() {
     attrs: {
       data: _vm.currentTabData,
       slots: _vm.slots,
+      withBooking: _vm.withBooking,
       closeRegForMember: false
     },
     on: {
@@ -11699,7 +11747,7 @@ var render = function render() {
         return _vm.$refs.myChild.submitForm("back");
       }
     }
-  }, [_vm._v("Back")]) : _vm._e(), _vm._v(" "), this.currentStep === 1 && this.data.step_1.withAwtaCard === "yes" && this.data.step_1.attendingOption === "Online" || this.currentStep === 2 && (this.data.step_1.registrationType === "Guest" || this.data.step_1.registrationType === "Member" && this.data.step_1.attendingOption === "Online") || this.currentStep === 3 ? _c("el-button", {
+  }, [_vm._v("Back")]) : _vm._e(), _vm._v(" "), this.currentStep === 1 && this.data.step_1.withAwtaCard === "yes" && this.data.step_1.attendingOption === "Online" || this.currentStep === 2 && (this.data.step_1.registrationType === "Guest" || this.data.step_1.registrationType === "Member" && this.data.step_1.attendingOption === "Online") || this.currentStep === 3 || this.currentStep === 2 && false == _vm.withBooking ? _c("el-button", {
     attrs: {
       type: "theme"
     },
@@ -11727,7 +11775,7 @@ var render = function render() {
       "stroke-width": 5,
       "define-back-color": "#595353",
       color: _vm.customColorMethod,
-      percentage: 100 * _vm.currentStep / 3,
+      percentage: 100 * _vm.currentStep / 2,
       format: _vm.format
     }
   })], 1)]), _vm._v(" "), _c("el-dialog", {
@@ -11785,7 +11833,7 @@ var staticRenderFns = [function () {
     staticClass: "mb-3 rounded shadow",
     attrs: {
       width: "100%",
-      src: "/images/2024_banner_B.jpeg"
+      src: "/images/anniversary/2025.png"
     }
   })])]);
 }];
@@ -11830,7 +11878,7 @@ var render = function render() {
         slot: "header"
       },
       slot: "header"
-    }, [_c("span", [_vm._v("LAMP WORLDWIDE AWTA " + _vm._s(_vm.year))]), _vm._v(" "), _c("el-button", {
+    }, [_c("span", [_vm._v("LAMP CHURCH 38TH ANNIVERSARY")]), _vm._v(" "), _c("el-button", {
       staticClass: "block el-button el-button--primary float-end is-plain md:hidden mx-0 p-1 sm:hidden xs:hidden",
       attrs: {
         icon: "el-icon-download",

@@ -230,6 +230,7 @@ class RegistrationController extends Controller
                     $assistance = $details['specificMedicalAssistance'];
                     $can_book_days = config('settings.member_booking_limit');
                     $awta_card_number = '--';
+                    $with_accommodation = $details['withAccommodation'] == 'With Accommodation' ? 'yes' : 'no';
                     break;
 
                 case 'lost': // Yes, but I don’t have it.
@@ -253,6 +254,7 @@ class RegistrationController extends Controller
                     $awta_card_number = $details['selected'];
                     $assistance = $details['specificMedicalAssistance'];
                     $can_book_days = $lookup['can_book_days'];
+                    $with_accommodation = $details['withAccommodation'] == 'With Accommodation' ? 'yes' : 'no';
                     break;
 
                     case 'mislaid': // Yes, but I don’t have it.
@@ -276,6 +278,7 @@ class RegistrationController extends Controller
                         $awta_card_number = $details['selected'];
                         $assistance = $details['specificMedicalAssistance'];
                         $can_book_days = $lookup['can_book_days'];
+                        $with_accommodation = $details['withAccommodation'] == 'With Accommodation' ? 'yes' : 'no';
                         break;
 
                 case 'yes': // Yes, I still have it.
@@ -297,6 +300,7 @@ class RegistrationController extends Controller
                     $awta_card_number = $details['lampIDNumber'];
                     $assistance = $details['specificMedicalAssistance'];
                     $can_book_days = $details['found']['canBookDays'];
+                    $with_accommodation = $details['withAccommodation'] == 'With Accommodation' ? 'yes' : 'no';
                     break;
             }
 
@@ -316,6 +320,7 @@ class RegistrationController extends Controller
                 'with_awta_card' => $with_awta_card,
                 'medical_assistance_needed' => $assistance,
                 'can_book_days' => $can_book_days,
+                'with_accommodation' => $with_accommodation,
                 'notes' => [],
                 'activities' => [],
                 'booking_activities' => []

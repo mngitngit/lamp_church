@@ -269,8 +269,10 @@
             },
             slots: {
                 required: false,
-                type: Array
             },
+            withBooking: {
+                required: true
+            }
         },
         data() {
             var checkLastname = async (rule, value, callback) => {
@@ -472,6 +474,10 @@
                     return date;
                 });
             });
+
+            if (this.withBooking === false) {
+                this.ruleForm.guests[0].booked = this.slots.guest.map(item => item.id);
+            }
         },
         methods: {
             submitForm(action) {
@@ -482,7 +488,7 @@
 
                 this.$refs['ruleForm'].validate((valid) => {
                     if (valid) {
-                        if (this.data.step_1.registrationType === 'Guest' || (this.data.step_1.registrationType === 'Member' && this.data.step_1.attendingOption === "Online")) {
+                        if (this.data.step_1.registrationType === 'Guest' || (this.data.step_1.registrationType === 'Member' && this.data.step_1.attendingOption === "Online") || false == this.withBooking) {
                             this.$emit('submit', this.ruleForm);
                         } else {
                             this.$emit('change-step', {destination: 'step_3', current: 'step_2', data: this.ruleForm});
@@ -506,7 +512,7 @@
                     localChurch: '',
                     country: 'Philippines',
                     category: 'Free',
-                    booked: [],
+                    booked: this.withBooking ? [] : this.slots.guest.map(item => item.id),
                     specificMedicalAssistance: '',
                     attendingOption: this.data.step_1.attendingOption
                 });

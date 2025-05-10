@@ -72,18 +72,18 @@
                     shadow="always"
                     class="mb-3"
                 >
-                    <div class="px-2 row">
+                    <!-- <div class="px-2 row">
                         <el-alert
-                            :title="`All registration after ${hybrid_registration_deadline} is considered online. For further inquiries, please reach out to your local AWTA Registrars.`"
+                            :title="`All registration after ${hybrid_registration_deadline} is considered online. For further inquiries, please reach out to your local Registrars.`"
                             type="warning"
                             show-icon
                         >
                         </el-alert>
-                    </div>
+                    </div> -->
                     <div class="row">
-                        <div class="col-md-6">
+                        <div v-if="withBooking" class="col-md-6">
                             <el-form-item
-                                label="How will you attend the AWTA?"
+                                label="How will you attend the event?"
                                 prop="attendingOption"
                                 required
                             >
@@ -106,7 +106,8 @@
                             class="col-md-6"
                             v-if="
                                 ruleForm.attendingOption === 'Hybrid' &&
-                                ruleForm.registrationType === 'Guest'
+                                ruleForm.registrationType === 'Guest' &&
+                                withBooking === true
                             "
                         >
                             <el-form-item
@@ -115,13 +116,36 @@
                                 prop="bookingCode"
                                 :required="
                                     ruleForm.attendingOption === 'Hybrid' &&
-                                    ruleForm.registrationType === 'Guest'
+                                    ruleForm.registrationType === 'Guest' &&
+                                    withBooking === true
                                 "
                             >
                                 <el-input
                                     v-model="ruleForm.bookingCode"
                                     :clearable="true"
                                 ></el-input>
+                            </el-form-item>
+                        </div>
+                        <div class="col-md-6">
+                            <el-form-item
+                                class="transform-uppercase"
+                                label="How will you attend the event?"
+                                prop="withAccommodation"
+                                required
+                            >
+                                <el-select
+                                    v-model="ruleForm.withAccommodation"
+                                    placeholder="Choose"
+                                >
+                                    <el-option
+                                        value="With Accommodation"
+                                        label="With Accommodation"
+                                    ></el-option>
+                                    <el-option
+                                        value="Without Accommodation"
+                                        label="Without Accommodation"
+                                    ></el-option>
+                                </el-select>
                             </el-form-item>
                         </div>
                     </div>
@@ -305,10 +329,11 @@ export default {
             ruleForm: {
                 registrationType: "",
                 withAwtaCard: "",
-                attendingOption: "",
+                attendingOption: "Hybrid",
                 lampIDNumber: "",
                 clusterGroup: "",
                 bookingCode: "",
+                withAccommodation: "",
                 email: "",
                 specificMedicalAssistance: "",
                 canBookDays: parseInt(window.env.member_booking_limit || 0),
@@ -330,6 +355,13 @@ export default {
                     },
                 ],
                 attendingOption: [
+                    {
+                        required: true,
+                        message: "Please select your attending option",
+                        trigger: ["blur", "change"],
+                    },
+                ],
+                withAccommodation: [
                     {
                         required: true,
                         message: "Please select your attending option",

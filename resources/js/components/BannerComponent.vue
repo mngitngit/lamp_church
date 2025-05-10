@@ -1,10 +1,10 @@
 <template>
-    <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid rgb(45 122 95)">
-        <h2>LAMP WORLDWIDE AWTA {{year}}</h2>
+    <el-card shadow="always" class="mb-3 pb-0" style="border-top: 10px solid rgb(218 98 9)">
+        <h2>LAMP Church 38th Anniversary</h2>
         <p class="text-sm">
             BE BLESSED PHYSICALLY, MATERIALLY, & SPIRITUALLY <br/>
             Event Date: {{ event_date }} <br/>
-            Event Place: Calamba Tent <br/>
+            Event Place: CCT Tagaytay Retreat And Training Center <br/>
             Theme: {{ theme }}
         </p>
 

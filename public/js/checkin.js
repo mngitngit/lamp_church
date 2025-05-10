@@ -7243,7 +7243,7 @@ var render = function render() {
   }, [_c("el-card", {
     staticClass: "mb-3 pb-0",
     staticStyle: {
-      "border-top": "10px solid rgb(45 122 95)"
+      "border-top": "10px solid rgb(218 98 9)"
     },
     attrs: {
       shadow: "always"

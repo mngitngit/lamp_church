@@ -2,7 +2,7 @@
     <div>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <img width="100%" class="mb-3 rounded shadow" src="/images/2024_banner_B.jpeg">
+                <img width="100%" class="mb-3 rounded shadow" src="/images/anniversary/2025.png">
             </div>
         </div>
         <div class="row justify-content-center">
@@ -12,7 +12,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <component ref="myChild" v-bind:is="currentTabComponent" v-bind:data="currentTabData" :slots="slots" @change-step="changeStep" :closeRegForMember="false" @reset="reset" @submit="submit"/>
+                <component ref="myChild" v-bind:is="currentTabComponent" v-bind:data="currentTabData" :slots="slots" :withBooking="withBooking" @change-step="changeStep" :closeRegForMember="false" @reset="reset" @submit="submit"/>
             </div>
         </div>
         <div class="row justify-content-center mb-5">
@@ -23,7 +23,8 @@
                         (this.currentStep === 1 && this.data.step_1.withAwtaCard === 'yes' && this.data.step_1.attendingOption === 'Online') ||
                         (this.currentStep === 2 && 
                             (this.data.step_1.registrationType === 'Guest' || (this.data.step_1.registrationType === 'Member' && this.data.step_1.attendingOption === 'Online'))) ||
-                        this.currentStep === 3
+                        this.currentStep === 3 ||
+                        this.currentStep === 2 && false == withBooking
                     "
                     type="theme" 
                     @click="$refs.myChild.submitForm('next')">
@@ -35,7 +36,7 @@
                     @click="$refs.myChild.submitForm('next')">
                     Next
                 </el-button>
-                <el-progress :stroke-width="5" style="width:fit-content;display: inline;" define-back-color="#595353" class="m-2 float-end" :color="customColorMethod" :percentage="(100 * currentStep) / 3" :format="format"></el-progress>
+                <el-progress :stroke-width="5" style="width:fit-content;display: inline;" define-back-color="#595353" class="m-2 float-end" :color="customColorMethod" :percentage="(100 * currentStep) / 2" :format="format"></el-progress>
                 <!-- <el-button v-bind:type="(currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'primary' : ''" v-bind:plain="currentStep < 3" @click="$refs.myChild.submitForm('next')">{{ (currentStep === 3 || (currentStep === 2 && data.step_1.registrationType === 'Guest')) ? 'Submit' : 'Next' }}</el-button> -->
             </div>
         </div>
@@ -92,7 +93,8 @@
                 isAllowing: false,
                 dialogVisible: window.env.display_disclosure_prompt === 'yes',
                 display: false,
-                year: window.env.year
+                year: window.env.year,
+                withBooking: false
             }
         },
         created() {
@@ -117,7 +119,7 @@
                 this.currentTabData = this.data
             },
             format() {
-                return `Page ${this.currentStep} of 3`;
+                return `Page ${this.currentStep} of 2`;
             },
             async changeStep({destination, current, data}) {
                 if (destination === 'step_1') this.currentStep = 1
@@ -142,6 +144,12 @@
                 if (this.currentStep === 2) {
                     this.data.step_2 = data;
                     this.data.step_3 = {};
+
+                    if (false == this.withBooking) {
+                        this.data.step_3 = {
+                            booked: this.data.step_1.registrationType === 'Member' ? this.slots.member.map(item => item.id) : this.slots.guest.map(item => item.id)
+                        }
+                    }
                 }
 
                 if (this.currentStep === 1) {

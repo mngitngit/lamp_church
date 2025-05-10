@@ -156,7 +156,7 @@
           <el-table-column
             label="Booked dates"
             align="center"
-            width="305">
+            width="350">
             <template slot-scope="scope">
               <el-alert
                   v-if="scope.row.is_booking_bypassed"
@@ -166,7 +166,8 @@
                   :closable="false">
               </el-alert>
 
-              <el-descriptions :labelStyle="{'width': '120px'}" v-else-if="scope.row.booked_dates.length > 0" class="margin-top" :column="1" size="mini" border>
+              <el-descriptions :labelStyle="{'width': '150px'}" v-else-if="scope.row.booked_dates.length > 0" class="margin-top" :column="1" size="mini" border>
+                <el-descriptions-item label="With Accommodation" contentClassName="text-center">{{ scope.row.with_accommodation }}</el-descriptions-item>
                 <el-descriptions-item label="Date Booked" contentClassName="text-center">{{ $func.formatToDateTime(scope.row.booked_date) }}</el-descriptions-item>
 
                 <el-descriptions-item label="Booking Status" contentClassName="text-center">

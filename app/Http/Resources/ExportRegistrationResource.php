@@ -50,7 +50,8 @@ class ExportRegistrationResource extends JsonResource
             'payments_sum_amount' => $this->payments_sum_amount,
             'medical_assistance_needed' => $this->medical_assistance_needed,
             'visitor_to_member' => $this->visitor_to_member,
-            'old_uuid' => $this->old_uuid
+            'old_uuid' => $this->old_uuid,
+            'with_accommodation' => $this->with_accommodation
         ];
     }
 }
