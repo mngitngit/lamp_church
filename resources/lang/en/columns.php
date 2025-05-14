@@ -22,5 +22,6 @@ return [
     'visitor_to_member' => 'Visitor to Member details',
     'avail_new_lamp_id' => 'Will avail new LAMP ID',
     'notes' => 'Notes',
-    'activities' => 'Activities'
+    'activities' => 'Activities',
+    'with_accommodation' => 'Accommodation Status'
 ];
