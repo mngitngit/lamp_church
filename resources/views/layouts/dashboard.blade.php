@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta property="og:image" content="https://lampawta.com/images/anniversary/meta_banner.png" />
+    <meta property="og:image" content="https://lampawta.com/images/meta_banner_2025.png" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lampawta.com/registration"/>
     <meta property="og:title" content="LAMP Church 38th Anniversary" />
