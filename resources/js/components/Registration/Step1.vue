@@ -296,6 +296,9 @@ export default {
             required: true,
             type: Object,
         },
+        withBooking: {
+            required: true,
+        },
     },
     data() {
         var checklampIDNumber = async (rule, value, callback) => {
@@ -494,7 +497,7 @@ export default {
                                 customClass: "prompt-message",
                             }
                         ).then(async () => {
-                            if (this.ruleForm.attendingOption === "Online") {
+                            if (this.ruleForm.attendingOption === "Online" || false == this.withBooking) {
                                 this.$emit("submit", this.ruleForm);
                             } else {
                                 this.$emit("change-step", {

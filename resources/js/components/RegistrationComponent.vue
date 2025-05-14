@@ -144,18 +144,18 @@
                 if (this.currentStep === 2) {
                     this.data.step_2 = data;
                     this.data.step_3 = {};
-
-                    if (false == this.withBooking) {
-                        this.data.step_3 = {
-                            booked: this.data.step_1.registrationType === 'Member' ? this.slots.member.map(item => item.id) : this.slots.guest.map(item => item.id)
-                        }
-                    }
                 }
 
                 if (this.currentStep === 1) {
                     this.data.step_1 = data;
                     this.data.step_2 = {};
                     this.data.step_3 = {};
+                }
+
+                if (false == this.withBooking) {
+                    this.data.step_3 = {
+                        booked: this.data.step_1.registrationType === 'Member' ? this.slots.member.map(item => item.id) : this.slots.guest.map(item => item.id)
+                    }
                 }
 
                 const loading = this.$loading({
