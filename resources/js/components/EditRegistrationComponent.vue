@@ -167,6 +167,26 @@
                         </el-select>
                     </el-form-item>
                 </div>
+                <div class="col-md-3">
+                    <el-form-item
+                        label="with accommodation?"
+                        prop="withAccommodation"
+                    >
+                        <el-select
+                            v-model="ruleForm.withAccommodation"
+                            placeholder="Choose"
+                        >
+                            <el-option
+                                value="no"
+                                label="No"
+                            ></el-option>
+                            <el-option
+                                value="yes"
+                                label="Yes"
+                            ></el-option>
+                        </el-select>
+                    </el-form-item>
+                </div>
             </div>
         </el-card>
 
@@ -322,6 +342,7 @@ export default {
                 lampIDNumber: "",
                 category: "Adult",
                 attendingOption: "",
+                withAccommodation: "no",
                 withAwtaCard: "",
                 canBookDays: 0,
                 rebookingLimit: 0,
@@ -376,6 +397,13 @@ export default {
                         trigger: ["blur", "change"],
                     },
                 ],
+                withAccommodation: [
+                    {
+                        required: true,
+                        message: "Please select accommodation status",
+                        trigger: ["blur", "change"],
+                    },
+                ],
                 rate: [
                     {
                         required: true,
@@ -411,6 +439,7 @@ export default {
             country: this.registration.country,
             category: this.registration.category,
             attendingOption: this.registration.attending_option,
+            withAccommodation: this.registration.with_accommodation,
             withAwtaCard: this.registration.with_awta_card,
             category: this.registration.category,
             canBookDays: this.registration.can_book_days,
