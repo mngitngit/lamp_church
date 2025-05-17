@@ -26,7 +26,8 @@ class MyModel extends Model
         'cluster_group',
         'visitor_to_member',
         'avail_new_lamp_id',
-        'with_accommodation'
+        'with_accommodation',
+        'participation_option'
     ];
 
     function getTrackable()

@@ -167,6 +167,7 @@
               </el-alert>
 
               <el-descriptions :labelStyle="{'width': '150px'}" v-else-if="scope.row.booked_dates.length > 0" class="margin-top" :column="1" size="mini" border>
+                <el-descriptions-item label="Participation Option" contentClassName="text-center">{{ scope.row.participation_option }}</el-descriptions-item>
                 <el-descriptions-item label="With Accommodation" contentClassName="text-center">{{ scope.row.with_accommodation }}</el-descriptions-item>
                 <el-descriptions-item label="Date Booked" contentClassName="text-center">{{ $func.formatToDateTime(scope.row.booked_date) }}</el-descriptions-item>
 

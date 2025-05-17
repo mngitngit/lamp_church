@@ -146,11 +146,11 @@
                     </el-form-item>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3" v-if="false">
                     <el-form-item
                         label="How will you attend the event?"
                         prop="attendingOption"
-                        :required="ruleForm.registrationType === 'Member'"
+                        :required="ruleForm.registrationType === 'Member' && false"
                     >
                         <el-select
                             v-model="ruleForm.attendingOption"
@@ -164,6 +164,30 @@
                                 value="Online"
                                 label="Online"
                             ></el-option>
+                        </el-select>
+                    </el-form-item>
+                </div>
+                <div class="col-md-3">
+                    <el-form-item
+                        label="How will you attend the event?"
+                        prop="participationOption"
+                    >
+                        <el-select
+                            v-model="ruleForm.participationOption"
+                            placeholder="Choose"
+                        >
+                        <el-option
+                            value="CCT"
+                            label="CCT"
+                        ></el-option>
+                        <el-option
+                            value="HQ F2F"
+                            label="HQ F2F"
+                        ></el-option>
+                        <el-option
+                            value="Online"
+                            label="Online"
+                        ></el-option>
                         </el-select>
                     </el-form-item>
                 </div>
@@ -343,6 +367,7 @@ export default {
                 category: "Adult",
                 attendingOption: "",
                 withAccommodation: "no",
+                participationOption: "",
                 withAwtaCard: "",
                 canBookDays: 0,
                 rebookingLimit: 0,
@@ -404,6 +429,13 @@ export default {
                         trigger: ["blur", "change"],
                     },
                 ],
+                participationOption: [
+                    {
+                        required: true,
+                        message: "Please select participation option",
+                        trigger: ["blur", "change"],
+                    },
+                ],
                 rate: [
                     {
                         required: true,
@@ -440,6 +472,7 @@ export default {
             category: this.registration.category,
             attendingOption: this.registration.attending_option,
             withAccommodation: this.registration.with_accommodation,
+            participationOption: this.registration.participation_option,
             withAwtaCard: this.registration.with_awta_card,
             category: this.registration.category,
             canBookDays: this.registration.can_book_days,
