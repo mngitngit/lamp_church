@@ -37,7 +37,8 @@ class Registration extends MyModel
         'medical_assistance_needed',
         'booked_date',
         'is_received_hg',
-        'with_accommodation'
+        'with_accommodation',
+        'participation_option'
     ];
 
     protected $casts = [

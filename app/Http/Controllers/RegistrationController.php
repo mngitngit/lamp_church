@@ -231,6 +231,7 @@ class RegistrationController extends Controller
                     $can_book_days = config('settings.member_booking_limit');
                     $awta_card_number = '--';
                     $with_accommodation = $details['withAccommodation'] == 'With Accommodation' ? 'yes' : 'no';
+                    $participation_option = $details['participationOption'];
                     break;
 
                 case 'lost': // Yes, but I don’t have it.
@@ -255,6 +256,7 @@ class RegistrationController extends Controller
                     $assistance = $details['specificMedicalAssistance'];
                     $can_book_days = $lookup['can_book_days'];
                     $with_accommodation = $details['withAccommodation'] == 'With Accommodation' ? 'yes' : 'no';
+                    $participation_option = $details['participationOption'];
                     break;
 
                     case 'mislaid': // Yes, but I don’t have it.
@@ -279,6 +281,7 @@ class RegistrationController extends Controller
                         $assistance = $details['specificMedicalAssistance'];
                         $can_book_days = $lookup['can_book_days'];
                         $with_accommodation = $details['withAccommodation'] == 'With Accommodation' ? 'yes' : 'no';
+                        $participation_option = $details['participationOption'];
                         break;
 
                 case 'yes': // Yes, I still have it.
@@ -301,6 +304,7 @@ class RegistrationController extends Controller
                     $assistance = $details['specificMedicalAssistance'];
                     $can_book_days = $details['found']['canBookDays'];
                     $with_accommodation = $details['withAccommodation'] == 'With Accommodation' ? 'yes' : 'no';
+                    $participation_option = $details['participationOption'];
                     break;
             }
 
@@ -321,6 +325,7 @@ class RegistrationController extends Controller
                 'medical_assistance_needed' => $assistance,
                 'can_book_days' => $can_book_days,
                 'with_accommodation' => $with_accommodation,
+                'participation_option' => $participation_option, 
                 'notes' => [],
                 'activities' => [],
                 'booking_activities' => []
@@ -395,9 +400,10 @@ class RegistrationController extends Controller
                         'cluster_group' => $details->clusterGroup,
                         'country' => $details->country,
                         'category' => PaymentStatus::Free,
-                        'attending_option' => 'Hybrid',
+                        'attending_option' => $request->step_1['attendingOption'],
                         'medical_assistance_needed' => $details->specificMedicalAssistance,
                         'with_accommodation' => $request->step_1['withAccommodation'] === 'With Accommodation' ? 'yes' : 'no',
+                        'participation_option' => $request->step_1['participationOption'], 
                         'with_awta_card' => 'none',
                         'notes' => [],
                         'activities' => [],
@@ -430,6 +436,8 @@ class RegistrationController extends Controller
                     'country' => $details->country,
                     'category' => PaymentStatus::Free,
                     'attending_option' => AttendingOption::Online,
+                    'with_accommodation' => $details->withAccommodation === 'With Accommodation' ? 'yes' : 'no',
+                    'participation_option' => $details->participationOption, 
                     'with_awta_card' => 'none',
                     'notes' => [],
                     'activities' => [],
