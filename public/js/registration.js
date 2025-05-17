@@ -9817,6 +9817,11 @@ var render = function render() {
           }
         }, [_c("el-descriptions-item", {
           attrs: {
+            label: "Participation Option",
+            contentClassName: "text-center"
+          }
+        }, [_vm._v(_vm._s(scope.row.participation_option))]), _vm._v(" "), _c("el-descriptions-item", {
+          attrs: {
             label: "With Accommodation",
             contentClassName: "text-center"
           }

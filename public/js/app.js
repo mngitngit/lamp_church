@@ -7813,6 +7813,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         category: "Adult",
         attendingOption: "",
         withAccommodation: "no",
+        participationOption: "",
         withAwtaCard: "",
         canBookDays: 0,
         rebookingLimit: 0
@@ -7853,6 +7854,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           message: "Please select accommodation status",
           trigger: ["blur", "change"]
         }],
+        participationOption: [{
+          required: true,
+          message: "Please select participation option",
+          trigger: ["blur", "change"]
+        }],
         rate: [{
           required: true,
           message: "Please input rate",
@@ -7889,6 +7895,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       category: this.registration.category,
       attendingOption: this.registration.attending_option,
       withAccommodation: this.registration.with_accommodation,
+      participationOption: this.registration.participation_option,
       withAwtaCard: this.registration.with_awta_card
     }, _defineProperty(_this$ruleForm, "category", this.registration.category), _defineProperty(_this$ruleForm, "canBookDays", this.registration.can_book_days), _defineProperty(_this$ruleForm, "rebookingLimit", this.registration.rebooking_limit), _defineProperty(_this$ruleForm, "bookingRate", this.registration.can_book_rate), _defineProperty(_this$ruleForm, "rate", this.registration.rate), _defineProperty(_this$ruleForm, "visitorToMember", this.registration.visitor_to_member), _defineProperty(_this$ruleForm, "availNewLAMPID", this.registration.lookup ? this.registration.lookup.avail_new_lamp_id : ''), _defineProperty(_this$ruleForm, "clusterGroup", this.registration.cluster_group), _this$ruleForm);
   },
@@ -10489,29 +10496,33 @@ var render = function render() {
       label: "Yes, I still have it.",
       value: "yes"
     }
-  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "), _c("div", {
+  })], 1)], 1)], 1) : _vm._e(), _vm._v(" "),  false ? 0 : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("el-form-item", {
     attrs: {
       label: "How will you attend the event?",
-      prop: "attendingOption",
-      required: _vm.ruleForm.registrationType === "Member"
+      prop: "participationOption"
     }
   }, [_c("el-select", {
     attrs: {
       placeholder: "Choose"
     },
     model: {
-      value: _vm.ruleForm.attendingOption,
+      value: _vm.ruleForm.participationOption,
       callback: function callback($$v) {
-        _vm.$set(_vm.ruleForm, "attendingOption", $$v);
+        _vm.$set(_vm.ruleForm, "participationOption", $$v);
       },
-      expression: "ruleForm.attendingOption"
+      expression: "ruleForm.participationOption"
     }
   }, [_c("el-option", {
     attrs: {
-      value: "Hybrid",
-      label: "Hybrid"
+      value: "CCT",
+      label: "CCT"
+    }
+  }), _vm._v(" "), _c("el-option", {
+    attrs: {
+      value: "HQ F2F",
+      label: "HQ F2F"
     }
   }), _vm._v(" "), _c("el-option", {
     attrs: {

@@ -515,7 +515,8 @@ class RegistrationController extends Controller
                 'rate' => $request->rate,
                 'rebooking_limit' => $request->rebookingLimit,
                 'visitor_to_member' => $request->visitorToMember ? date('Y-m-d', strtotime($request->visitorToMember)) : NULL,
-                'with_accommodation' => $request->withAccommodation
+                'with_accommodation' => $request->withAccommodation,
+                'participation_option' => $request->participationOption
             ]);
 
             $lookup = LookUp::where('lamp_id', $uuid)->first();

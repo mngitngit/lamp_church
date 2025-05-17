@@ -23,5 +23,6 @@ return [
     'avail_new_lamp_id' => 'Will avail new LAMP ID',
     'notes' => 'Notes',
     'activities' => 'Activities',
-    'with_accommodation' => 'Accommodation Status'
+    'with_accommodation' => 'Accommodation Status',
+    'participation_option' => 'Participation Option'
 ];
