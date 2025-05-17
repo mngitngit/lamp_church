@@ -129,9 +129,36 @@
                         <div class="col-md-6">
                             <el-form-item
                                 class="transform-uppercase"
-                                label="How will you attend the event?"
-                                prop="withAccommodation"
+                                label="How will you attend the anniversary?"
+                                prop="participationOption"
                                 required
+                            >
+                                <el-select
+                                    v-model="ruleForm.participationOption"
+                                    placeholder="Choose"
+                                >
+                                    <el-option
+                                        value="CCT"
+                                        label="CCT"
+                                    ></el-option>
+                                    <el-option
+                                        value="HQ F2F"
+                                        label="HQ F2F"
+                                    ></el-option>
+                                    <el-option
+                                        value="Online"
+                                        label="Online"
+                                    ></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </div>
+                        <div class="col-md-6">
+                            <el-form-item
+                                v-if="'CCT' === ruleForm.participationOption"
+                                class="transform-uppercase"
+                                label="with accommodation?"
+                                prop="withAccommodation"
+                                :required="'CCT' === ruleForm.participationOption"
                             >
                                 <el-select
                                     v-model="ruleForm.withAccommodation"
@@ -333,6 +360,7 @@ export default {
                 registrationType: "",
                 withAwtaCard: "",
                 attendingOption: "Hybrid",
+                participationOption: "",
                 lampIDNumber: "",
                 clusterGroup: "",
                 bookingCode: "",
@@ -361,6 +389,13 @@ export default {
                     {
                         required: true,
                         message: "Please select your attending option",
+                        trigger: ["blur", "change"],
+                    },
+                ],
+                participationOption: [
+                    {
+                        required: true,
+                        message: "Please select your participation option",
                         trigger: ["blur", "change"],
                     },
                 ],
@@ -425,6 +460,9 @@ export default {
         },
         "ruleForm.attendingOption"(data, old) {
             if (old) this.resetData("attending-option");
+        },
+        "ruleForm.participationOption"(data, old) {
+            if (old) this.resetData("participation-option");
         },
         options(data, old) {
             if (old.length > 0) this.ruleForm.clusterGroup = "";
@@ -527,6 +565,7 @@ export default {
             } else if (scope === "reg-type") {
                 this.ruleForm.withAwtaCard = "";
                 this.ruleForm.attendingOption = "";
+                this.ruleForm.participationOption = "";
                 this.ruleForm.lampIDNumber = "";
                 this.ruleForm.bookingCode = "";
                 this.ruleForm.found = {};
@@ -539,6 +578,11 @@ export default {
                 this.$emit("reset");
                 this.ruleForm.bookingCode = "";
                 this.ruleForm.found = {};
+            } else if (scope === "participation-option") {
+                this.$emit("reset");
+                this.ruleForm.bookingCode = "";
+                this.ruleForm.found = {};
+                this.ruleForm.withAccommodation = "";
             } else if (scope === "awta-card") {
                 this.$emit("reset");
                 this.ruleForm.email = "";
