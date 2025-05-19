@@ -340,7 +340,9 @@ class RegistrationController extends Controller
             // checking if the member is in the master list
             if ($lookup) {
                 $update = [
-                    'is_registered' => true
+                    'is_registered' => true,
+                    'email' => $email,
+                    'cluster_group' => $cluster_group
                 ];
 
                 if (is_null($lookup['old_lamp_card_number'])) {
@@ -362,6 +364,7 @@ class RegistrationController extends Controller
                     'registration_type' => 'Member',
                     'category' => $category,
                     'local_church' => $local_church,
+                    'cluster_group' => $cluster_group,
                     'country' => $country,
                     'can_book_days' => config('settings.member_booking_limit'),
                     'is_registered' => true

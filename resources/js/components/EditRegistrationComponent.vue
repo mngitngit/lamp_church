@@ -181,10 +181,6 @@
                             label="CCT"
                         ></el-option>
                         <el-option
-                            value="HQ F2F"
-                            label="HQ F2F"
-                        ></el-option>
-                        <el-option
                             value="Online"
                             label="Online"
                         ></el-option>
