@@ -286,7 +286,7 @@
                         return callback(new Error('Please input your Last Name'));
                     }
 
-                    await axios.get(`/lookup/validate`, {
+                    await axios.get(`/${this.event.slug}/lookup/validate`, {
                         params: {
                             'lastname': this.ruleForm.lastName,
                             'localChurch': this.ruleForm.localChurch

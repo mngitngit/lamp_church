@@ -181,7 +181,17 @@ class Registration2Controller extends Controller
                 case 'lost': // Yes, but I don’t have it.
                     $details = array_merge($request->step_1, $request->step_2, $request->step_3);
 
-                    $lookup = LookUp::where('lamp_id', $details['selected'])->first();
+                    if ('Y' === env('ENABLE_INTEGRATION')) {
+                        $lookup = [];
+                        foreach ($details['lookUp'] as $data) {
+                            if ($data['lamp_id'] == $details['selected']) {
+                                $lookup = $data;
+                                break;
+                            }
+                        }
+                    } else {
+                        $lookup = LookUp::where('lamp_id', $details['selected'])->first();
+                    }
 
                     $uuid = is_null($lookup['old_lamp_card_number']) ? UUID::issue() : $lookup['lamp_id'];
                     $email = $details['email'];
@@ -204,7 +214,17 @@ class Registration2Controller extends Controller
                     case 'mislaid': // Yes, but I don’t have it.
                         $details = array_merge($request->step_1, $request->step_2, $request->step_3);
     
-                        $lookup = LookUp::where('lamp_id', $details['selected'])->first();
+                        if ('Y' === env('ENABLE_INTEGRATION')) {
+                            $lookup = [];
+                            foreach ($details['lookUp'] as $data) {
+                                if ($data['lamp_id'] == $details['selected']) {
+                                    $lookup = $data;
+                                    break;
+                                }
+                            }
+                        } else {
+                            $lookup = LookUp::where('lamp_id', $details['selected'])->first();
+                        }
     
                         $uuid = is_null($lookup['old_lamp_card_number']) ? UUID::issue() : $lookup['lamp_id'];
                         $email = $details['email'];
@@ -273,42 +293,44 @@ class Registration2Controller extends Controller
                 'has_viewed_ticket' => NULL
             ]);
 
-            $lookup = LookUp::where('lamp_id', $awta_card_number)->first();
+            if ('N' === env('ENABLE_INTEGRATION')) {
+                $lookup = LookUp::where('lamp_id', $awta_card_number)->first();
 
-            // checking if the member is in the master list
-            if ($lookup) {
-                $update = [
-                    'cluster_group' => $cluster_group,
-                    'email' => $email,
-                ];
+                // checking if the member is in the master list
+                if ($lookup) {
+                    $update = [
+                        'cluster_group' => $cluster_group,
+                        'email' => $email,
+                    ];
 
-                if (is_null($lookup['old_lamp_card_number'])) {
-                    $update['lamp_id'] =  strtoupper($registration->uuid);
-                    $update['old_lamp_card_number'] = strtoupper($lookup->lamp_id);
+                    if (is_null($lookup['old_lamp_card_number'])) {
+                        $update['lamp_id'] =  strtoupper($registration->uuid);
+                        $update['old_lamp_card_number'] = strtoupper($lookup->lamp_id);
+                    }
+                    // setting new LAMP ID number
+                    $lookup->update($update);
+                } else {
+                    // insert member to master list if not existing
+                    LookUp::create([
+                        'lamp_id' => strtoupper($registration->uuid),
+                        'old_lamp_card_number' => strtoupper($awta_card_number),
+                        'email' => $email,
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'fullname' => $firstname . ' ' . $lastname,
+                        'facebook_name' => $facebook,
+                        'registration_type' => 'Member',
+                        'category' => $category,
+                        'local_church' => $local_church,
+                        'country' => $country,
+                        'can_book_days' => $event->member_booking_limit,
+                        'cluster_group' => $cluster_group
+                    ]);
                 }
-                // setting new LAMP ID number
-                $lookup->update($update);
-            } else {
-                // insert member to master list if not existing
-                LookUp::create([
-                    'lamp_id' => strtoupper($registration->uuid),
-                    'old_lamp_card_number' => strtoupper($awta_card_number),
-                    'email' => $email,
-                    'firstname' => $firstname,
-                    'lastname' => $lastname,
-                    'fullname' => $firstname . ' ' . $lastname,
-                    'facebook_name' => $facebook,
-                    'registration_type' => 'Member',
-                    'category' => $category,
-                    'local_church' => $local_church,
-                    'country' => $country,
-                    'can_book_days' => $event->member_booking_limit,
-                    'cluster_group' => $cluster_group
-                ]);
-            }
 
-            if ($attending_option === AttendingOption::Hybrid) {
-                $this->book($registration, $request->step_3['booked']);
+                if ($attending_option === AttendingOption::Hybrid) {
+                    $this->book($registration, $request->step_3['booked']);
+                }
             }
 
             $registration = $this->updatePaymentStatus($registration->id, true);

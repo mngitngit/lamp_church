@@ -8,6 +8,7 @@ use App\Models\LookUp;
 use App\Models\Booking;
 use App\Models\Registration;
 use App\Models\Event;
+use App\Models\ChurchCRM\Finder;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
@@ -62,24 +63,63 @@ class LookUpController extends Controller
      * @param  Request $request
      * @return \App\Models\LookUp
      */
-    public function validation(Request $request)
+    public function validation(Event $event, Request $request)
     {
-        $lookUp = LookUp::select();
+        if ('Y' === env('ENABLE_INTEGRATION')) {
+            $col_local_church = env('CHURCHCRM_LOCAL_CHURCH_COL');
+            $lookUps = Finder::with('person')
+                ->where($col_local_church, $request->localChurch)
+                ->whereHas('person', function ($query) use ($request) {
+                    $query->where('per_LastName', 'LIKE', "%{$request->lastname}%");
+                })
+                ->get();
+        } else {
+            $lookUps = LookUp::select();
 
-        if ($request->lastname) {
-            $lookUp = $lookUp->where('lastname', 'LIKE', "%$request->lastname%");
+            if ($request->lastname) {
+                $lookUps = $lookUps->where('lastname', 'LIKE', "%$request->lastname%");
+            }
+    
+            if ($request->localChurch) {
+                $lookUps = $lookUps->where('local_church', $request->localChurch);
+            }
+
+            $lookUps = $lookUps->orderBy('firstname', 'ASC')->get();
         }
 
-        if ($request->localChurch) {
-            $lookUp = $lookUp->where('local_church', $request->localChurch);
-        }
-
-        if ($lookUp->count() === 0) {
+        if ($lookUps->count() === 0) {
             return response()->json(['error' => 'Data not found. Please reach out to your local coordinator.'], 500);
         }
 
+        if ('Y' === env('ENABLE_INTEGRATION')) {
+            $data = [];
+            $col_lamp_id = env('CHURCHCRM_LAMP_ID_COL');
+            $col_local_church = env('CHURCHCRM_LOCAL_CHURCH_COL');
+            $col_cluster_group = env('CHURCHCRM_CLUSTER_GROUP_COL');
+            foreach ($lookUps as $lookUp) {
+                $data[] = [
+                    "lamp_id" => $lookUp->$col_lamp_id,
+                    "old_lamp_card_number" => $lookUp->$col_lamp_id,
+                    "email" => $lookUp->per_Email,
+                    "firstname" => $lookUp->person->per_FirstName,
+                    "lastname" => $lookUp->person->per_LastName,
+                    "fullname" => $lookUp->person->per_FirstName .' '. $lookUp->person->per_LastName,
+                    "facebook_name" => "",
+                    "registration_type" => "Member",
+                    "local_church" => $lookUp->$col_local_church,
+                    "cluster_group" => $lookUp->$col_cluster_group,
+                    "country" => $lookUp->person->per_Country,
+                    "category" => "Adult",
+                    "can_book_days" => $event->member_booking_limit,
+                    "avail_new_lamp_id" => null,
+                    "is_registered" => is_null(Registration::where('event_id', $event->id)->where('uuid', $lookUp->$col_lamp_id)->first()) ? 0 : 1
+                ];
+            }
 
-        return $lookUp->orderBy('firstname', 'ASC')->get();
+            return $data;
+        }
+
+        return $lookUps;
     }
 
     /**
@@ -90,16 +130,44 @@ class LookUpController extends Controller
      */
     public function show(Event $event, $awtaNumber)
     {
-        $lookUp = LookUp::where('lamp_id', $awtaNumber)->first();
-
+        if ('Y' === env('ENABLE_INTEGRATION')) {
+            $lookUp = Finder::where(env('CHURCHCRM_LAMP_ID_COL'), $awtaNumber)->with('person')->first();
+        } else {
+            $lookUp = LookUp::where('lamp_id', $awtaNumber)->first();
+        }
+        
         if (!$lookUp) {
             return response()->json(['error' => 'Data not found. Please reach out to your local coordinator.'], 404);
         }
 
-        $isRegistered = Registration::where('event_id', $event->id)->where('uuid', $lookUp->lamp_id)->first();
+        $isRegistered = Registration::where('event_id', $event->id)->where('uuid', $awtaNumber)->first();
 
         if ($isRegistered) {
             return response()->json(['error' => 'Sorry, this LAMP ID number is already registered.'], 500);
+        }
+
+        if ('Y' === env('ENABLE_INTEGRATION')) {
+            $col_lamp_id = env('CHURCHCRM_LAMP_ID_COL');
+            $col_local_church = env('CHURCHCRM_LOCAL_CHURCH_COL');
+            $col_cluster_group = env('CHURCHCRM_CLUSTER_GROUP_COL');
+            $data = [
+                "lamp_id" => $lookUp->$col_lamp_id,
+                "old_lamp_card_number" => $lookUp->$col_lamp_id,
+                "email" => $lookUp->per_Email,
+                "firstname" => $lookUp->person->per_FirstName,
+                "lastname" => $lookUp->person->per_LastName,
+                "fullname" => $lookUp->person->per_FirstName .' '. $lookUp->person->per_LastName,
+                "facebook_name" => "",
+                "registration_type" => "Member",
+                "local_church" => $lookUp->$col_local_church,
+                "cluster_group" => $lookUp->$col_cluster_group,
+                "country" => $lookUp->person->per_Country,
+                "category" => "Adult",
+                "can_book_days" => $event->member_booking_limit,
+                "avail_new_lamp_id" => null
+            ];
+    
+            return $data;
         }
 
         return $lookUp;
