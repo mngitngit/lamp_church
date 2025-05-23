@@ -142,6 +142,10 @@
                                         label="CCT"
                                     ></el-option>
                                     <el-option
+                                        value="HQ"
+                                        label="HQ"
+                                    ></el-option>
+                                    <el-option
                                         value="Online"
                                         label="Online"
                                     ></el-option>
