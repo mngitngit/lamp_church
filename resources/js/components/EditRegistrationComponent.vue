@@ -185,6 +185,10 @@
                             label="HQ"
                         ></el-option>
                         <el-option
+                            value="Local Church"
+                            label="Local Church"
+                        ></el-option>
+                        <el-option
                             value="Online"
                             label="Online"
                         ></el-option>

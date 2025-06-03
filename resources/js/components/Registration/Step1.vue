@@ -142,8 +142,8 @@
                                         label="CCT"
                                     ></el-option>
                                     <el-option
-                                        value="HQ"
-                                        label="HQ"
+                                        value="Local Church"
+                                        label="Local Church"
                                     ></el-option>
                                     <el-option
                                         value="Online"
